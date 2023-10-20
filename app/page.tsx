@@ -1,95 +1,42 @@
-import Image from 'next/image'
+'use client'
+import { useState } from 'react'
+import { Htag } from './components/htag/Htag'
+import { Input } from './components/input/Input'
 import styles from './page.module.css'
+import Image from 'next/image'
+import Link from 'next/link'
+
 
 export default function Home() {
+  const [currentUser, SetCurrentUser] = useState<string>('dashboard')
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <Htag tag='h1'>Дастурга кириш</Htag>
+        <Htag tag='h3'>{`Иштихон тумани 'Шавкат Нон' хусусий корхонасида ишлаб чикариш ва савдо фаолиятини автоматизация килувчи веб-дастур`}</Htag>
+        {/* <Input placeholder='Фойдаланувчи исми' /> */}
+        <select
+          name="users"
+          id="users"
+          className={styles.users}
+          onChange={(e) => SetCurrentUser(e.target.value)}
+        >
+          <option value="dashboard" selected>Бош хисобчи</option>
+          <option value="gild">Цехдаги сотувчи</option>
+          <option value="delivery">Дамасчи</option>
+        </select>
+        <Input placeholder='Калит' type='password' />
+        <Link href={`/${currentUser}`} className={styles.login}>Кириш</Link>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <Image
+        src={'/images/bread.jpg'}
+        layout='responsive'
+        width={448}
+        height={300}
+        alt='Рисунок главной страницы'
+        className={styles.image}
+      />
+    </div>
   )
 }
