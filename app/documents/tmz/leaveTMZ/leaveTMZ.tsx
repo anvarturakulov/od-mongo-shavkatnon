@@ -1,5 +1,5 @@
 import { LeaveTMZProps } from './leaveTMZ.props';
-import styles from './leaveTmz.module.css';
+import styles from './leaveTMZ.module.css';
 import cn from 'classnames';
 
 export const LeaveTMZ = ({document, className, ...props}:LeaveTMZProps) :JSX.Element => {

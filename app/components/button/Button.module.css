@@ -1,7 +1,7 @@
 .button{
     display: inline-block;
-    padding: 10px;
-    width: 100%;
+    padding: 10px 0px;
+    width: 150px;
     text-align: center;
     border: none;
     border-radius: 5px;
@@ -23,4 +23,10 @@
     color: var(--black-800);
     background: none;
     border: 1px solid var(--black-600);
+}
+
+.ghost:hover {
+    color: var(--white);
+    background: red;
+    border: 1px solid var(--white);
 }

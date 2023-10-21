@@ -1,6 +1,6 @@
 import { Button, Htag } from '@/app/components'
 import styles from './page.module.css'
-import { LeaveTMZ } from '@/app/documents/tmz/leaveTMZ/leaveTMZ'
+import { QuickSaleTMZ } from '@/app/documents/tmz/quickSaleTMZ/quickSaleTMZ'
 
 export default function Gild() {
   return (
@@ -8,9 +8,8 @@ export default function Gild() {
       <div className={styles.container}>
         <Htag tag='h1'>Цех сотувчиси ойнаси</Htag>
         <div className={styles.actionBox}>
-          <Htag tag='h2'>Янги амал киритиш</Htag>
           {/* <LeaveTMZ/> */}
-          <LeaveTMZ/>
+          <QuickSaleTMZ/>
         </div>
         <table className={styles.table}>
           <thead className={styles.thead}>

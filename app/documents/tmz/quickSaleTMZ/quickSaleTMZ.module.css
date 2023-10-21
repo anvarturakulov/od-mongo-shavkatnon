@@ -1,0 +1,96 @@
+.select {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 10px 0;
+    /* width: 300px; */
+    /* width: 250px; */
+    width: 100%;
+    /* border: 0.6px dotted var(--black-300); */
+    border: 1px dotted var(--primary);
+    /* background-color: rgba(41, 97, 9, 0.1); */
+    background-color: #fff;
+}
+
+.selectBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr 2fr 2fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.TMZ{
+    border: 0.6px dotted var(--black-300);
+    padding: 20px 10px;
+}
+
+.boxTMZ{
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+.input {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 10px 0;
+    width: 100%;
+    border: 0.6px dotted var(--black-300);
+    /* border: 1px dotted var(--primary); */
+}
+
+.button{
+    display: inline-block;
+}
+
+.boxBtn{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: left;
+}
+
+.btn{
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+    width: 40px;
+    color: red;
+    font-weight: 700;
+    /* height: 40px; */
+}
+
+.docBox{
+    border: 0.6px dotted var(--black-300);
+    padding: 10px;
+}
+
+.ico{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.ico:hover{
+    fill: red;
+}
+
+.paybox{
+    display: grid;
+    grid-template-columns: 2fr 5fr auto;
+    gap: 20px;
+    align-items: center;
+}
+
+.add{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: blue;
+    fill: red;
+}
