@@ -1,13 +1,13 @@
 'use client'
 
-import { QuickSaleTMZProps } from './quickSaleTMZ.props';
-import styles from './quickSaleTMZ.module.css';
+import { DocumentProps } from './document.props';
+import styles from './document.module.css';
 import cn from 'classnames';
 import { Button, Htag, Input } from '@/app/components';
-import TrashIco from './trash.svg';
-import AddIco from './add.svg'
+import TrashIco from './ico/trash.svg';
+import AddIco from './ico/add.svg'
 
-export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.Element => {
+export const Document = ({ className, ...props }: DocumentProps) :JSX.Element => {
     
     return (
         <div className={styles.docBox}>
@@ -26,7 +26,13 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                     <Htag tag='h2'>Сана</Htag>
                     <input value='15/10/2023' disabled className={styles.input}/>
                 </div>
-                <div></div>
+                <div>
+                    <Htag tag='h2'>Муаллиф</Htag>
+                    <input value='Шаршара цех Гулсум опа' disabled className={styles.input} />
+                </div>
+            </div>
+
+            <div className={styles.taminotchiBox}>
                 <div>
                     <Htag tag='h2'>Жунатувчи</Htag>
                     <select
@@ -37,7 +43,6 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                         <option value="delivery">Цех Иштихон</option>
                     </select>
                 </div>
-                
                 <div>
                     <Htag tag='h2'>Олувчи</Htag>
                     <select
@@ -48,12 +53,23 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                         <option value="delivery">Дукон Шаходат опа</option>
                     </select>
                 </div>
-                
+                <div>
+                    <Htag tag='h2'>Мижоздан олинган сумма</Htag>
+                    <input className={styles.input} type='number' />
+                </div>
+                <div>
+                    <Htag tag='h2'>Кушимча</Htag>
+                    <input className={styles.input} type='number' />
+                </div>
+                <div></div>
             </div>
             {/* <Htag tag='h2'>Махсулот таснифи</Htag> */}
             
-            <div className={styles.TMZ}>
+            <div className={cn(styles.TMZ, {
+                [styles.notView]: false == false
+            })} >
                 <div className={styles.boxTMZ}>
+                    <Htag tag='h2'>Ходимга</Htag>
                     <Htag tag='h2'>Махсулот номи</Htag>
                     <Htag tag='h2'>Сони</Htag>
                     <Htag tag='h2'>Нархи</Htag>
@@ -64,6 +80,9 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                     </div>
                 </div>
                 <div className={styles.boxTMZ}>
+                    <div className={styles.checkbox}>
+                        <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter" />
+                    </div>
                     <select
                         className={styles.select}
                     >
@@ -78,7 +97,10 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                         <TrashIco />
                     </div>
                 </div>
-                {/* <div className={styles.boxTMZ}>
+                <div className={styles.boxTMZ}>
+                    <div className={styles.checkbox}>
+                        <input  type="checkbox" id="subscribeNews" name="subscribe" value="newsletter" />
+                    </div>
                     <select
                         className={styles.select}
                     >
@@ -90,30 +112,15 @@ export const QuickSaleTMZ = ({ className, ...props }: QuickSaleTMZProps) :JSX.El
                     <input className={styles.input} type='number' />
                     <input className={styles.input} type='number' />
                     <div className={styles.ico}>
-                        <TrashIco className={styles.ico} />
+                        <TrashIco />
                     </div>
                 </div>
-                <div className={styles.boxTMZ}>
-                    <select
-                        className={styles.select}
-                    >
-                        <option value="dashboard" selected>Бозор Нон</option>
-                        <option value="gild">Буханка</option>
-                        <option value="delivery">Патир</option>
-                    </select>
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <div className={styles.ico}>
-                        <TrashIco className={styles.ico} />
-                    </div>
-                </div> */}
-                                
             </div>
             <div className={styles.paybox}>
-                <input className={styles.input} type='number' placeholder='мижоздан олинган сумма' />
                 <Input placeholder='Кушимча изох'/>
-                <div className={styles.add}>
+                <div className={cn(styles.add, {
+                    [styles.notView] : false == false
+                })}>
                     <AddIco/>
                 </div>
             </div>

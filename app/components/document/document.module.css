@@ -15,7 +15,7 @@
 
 .selectBox{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.2fr 2fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 10px;
 }
@@ -27,7 +27,7 @@
 
 .boxTMZ{
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr 1fr auto;
+    grid-template-columns: 0.5fr 4fr 1fr 1fr 1fr auto;
     gap: 10px;
     align-items: center;
     text-align: center;
@@ -82,7 +82,7 @@
 
 .paybox{
     display: grid;
-    grid-template-columns: 2fr 5fr auto;
+    grid-template-columns: 1fr auto;
     gap: 20px;
     align-items: center;
 }
@@ -93,4 +93,21 @@
     cursor: pointer;
     color: blue;
     fill: red;
+}
+
+.taminotchiBox{
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.notView{
+    /* display: none; */
+}
+
+.checkbox{
+    border: 1px dotted blue;
+    padding: 10px;
+    cursor: pointer;
 }
