@@ -8,17 +8,18 @@
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #f9f9f9;
+    margin-bottom: 10px;
 }
 
 .table td,
 .table th {
     border-left: 1px solid #ddd;
     text-align: left;
-    padding: 10px;
+    padding: 10px 7px;
 }
 
 .table tr:nth-child(even) {
-    background-color: #fff;
+    background-color: #f3f3f3;
 }
 
 .table th {
@@ -43,6 +44,7 @@
     display: block;
     max-height: 400px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .table thead th:last-child:after {
@@ -50,7 +52,73 @@
     position: absolute;
     background-color: #337ab7;
     width: 1.1em;
-    height: 39px;
+    height: 40px;
     right: -1.1em;
     top: 0;
+}
+
+.rowId{
+    width: 80px;
+}
+
+.rowDate{
+    width: 100px;
+}
+
+.rowAction{
+    width: 50px;
+}
+
+.rowSumma{
+    width: 120px;
+}
+
+.tdSumma{
+    text-align: right!important;
+}
+
+.trRow{
+    cursor: zoom-in;
+    /* cursor: ; */
+}
+
+.btns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 5px;
+}
+
+.deleted{
+    color: red;
+}
+
+.saved{
+    color: #000;
+    background-color: rgba(236, 236, 11, 0.3)!important;
+}
+
+.error{
+    color: #fff;
+    background-color: red!important;
+}
+
+.icoTrash{
+    width: 20px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.icoShow {
+    width: 20px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.icoTrash:hover{
+    fill: red;
+}
+
+.icoShow:hover{
+    fill: blue;
 }

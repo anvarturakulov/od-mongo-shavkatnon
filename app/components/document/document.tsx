@@ -1,5 +1,4 @@
 'use client'
-
 import { DocumentProps } from './document.props';
 import styles from './document.module.css';
 import cn from 'classnames';
@@ -37,8 +36,9 @@ export const Document = ({ className, ...props }: DocumentProps) :JSX.Element =>
                     <Htag tag='h2'>Жунатувчи</Htag>
                     <select
                         className={styles.select}
+                        defaultValue={'dashboard'}
                     >
-                        <option value="dashboard" selected>Цех Дарё</option>
+                        <option value="dashboard">Цех Дарё</option>
                         <option value="gild">Цех Халкобод</option>
                         <option value="delivery">Цех Иштихон</option>
                     </select>
@@ -47,8 +47,9 @@ export const Document = ({ className, ...props }: DocumentProps) :JSX.Element =>
                     <Htag tag='h2'>Олувчи</Htag>
                     <select
                         className={styles.select}
+                        defaultValue={'dashboard'}
                     >
-                        <option value="dashboard" selected>Саломат</option>
+                        <option value="dashboard">Саломат</option>
                         <option value="gild">Шукрона Маркет</option>
                         <option value="delivery">Дукон Шаходат опа</option>
                     </select>
@@ -85,8 +86,9 @@ export const Document = ({ className, ...props }: DocumentProps) :JSX.Element =>
                     </div>
                     <select
                         className={styles.select}
+                        defaultValue={'dashboard'}
                     >
-                        <option value="dashboard" selected>Бозор Нон</option>
+                        <option value="dashboard">Бозор Нон</option>
                         <option value="gild">Буханка</option>
                         <option value="delivery">Патир</option>
                     </select>
@@ -103,8 +105,10 @@ export const Document = ({ className, ...props }: DocumentProps) :JSX.Element =>
                     </div>
                     <select
                         className={styles.select}
+                        defaultValue={'dashboard'}
+                        value={'gild'}
                     >
-                        <option value="dashboard" selected>Бозор Нон</option>
+                        <option value="dashboard">Бозор Нон</option>
                         <option value="gild">Буханка</option>
                         <option value="delivery">Патир</option>
                     </select>

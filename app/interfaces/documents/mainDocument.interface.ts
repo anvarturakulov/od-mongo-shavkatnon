@@ -1,48 +1,51 @@
 export enum DocumentState {
-    Proveden,
-    Saved,
-    Deleted
-}
-
-export enum GeneralDocTypes{
-    ComeTMZ,
-    LeaveTMZ,
-    MoveTMZ,
-    ComeCash,
-    LeaveCash,
-    MoveCash,
-    ZpCalculate
+    Proveden = 'Ок',
+    Saved = 'Хис. кушилмаган',
+    Deleted = 'Учирилган',
+    Error = 'Хатолик бор'
 }
 
 export enum DocumentType {
-    
-    ComeMaterial = GeneralDocTypes.ComeTMZ,
-    ComeProduct = GeneralDocTypes.ComeTMZ,
-    ComeHalfstuff = GeneralDocTypes.ComeTMZ,
-    
-    SaleProd = GeneralDocTypes.LeaveTMZ,
-    SaleMaterial = GeneralDocTypes.LeaveTMZ,
-    
-    LeaveProd = GeneralDocTypes.LeaveTMZ,
-    LeaveMaterial = GeneralDocTypes.LeaveTMZ,
-    LeaveHalfstuff = GeneralDocTypes.LeaveTMZ,
 
-    MoveProd = GeneralDocTypes.MoveTMZ,
-    MoveMaterial = GeneralDocTypes.MoveTMZ,
-    MoveHalfstuff = GeneralDocTypes.MoveTMZ,
+    ComeMaterial = 'Хом ашё кирими',
+    ComeProduct = 'Махсулот кирими',
+    ComeHalfstuff = 'Я.Т.М кирими',
 
-    ComeCash=GeneralDocTypes.ComeCash,
-    MoveCash=GeneralDocTypes.MoveCash,
-    LeaveCash=GeneralDocTypes.LeaveCash,
-    ZpCalculate=GeneralDocTypes.ZpCalculate,
+    SaleProd = 'Махсулот сотуви',
+    SaleMaterial = 'Хом ашё сотуви',
+
+    LeaveProd = 'Махсулот чикими',
+    LeaveMaterial = 'Материал чикими',
+    LeaveHalfstuff = 'Я.Т.М чикими',
+
+    MoveProd = 'Махсулот силжиши',
+    MoveMaterial = 'Хом ашё силжиши',
+    MoveHalfstuff = 'Я.Т.М силжиши',
+
+    ComeCash = 'Пул кирми',
+    MoveCash = 'Пул силжиши',
+    LeaveCash = 'Пул харажати',
+    ZpCalculate = 'Иш хаки хисоби',
+
+    Error = 'Хатолик бор'
 }
 
 export interface DocumentModel {
     _id: string
-    date: Date
+    date: string
     state: DocumentState
     senderId: string,
     receiverId: string,
-    tableData: string,
+    tableData: {},
     documentType: DocumentType,
+}
+
+export interface DocumentModelOnDataBase {
+    _id: string
+    date: string
+    state: string
+    senderId: string,
+    receiverId: string,
+    tableData: string,
+    documentType: string,
 }

@@ -3,6 +3,8 @@ import styles from './page.module.css'
 import cn from 'classnames';
 import { Document } from '@/app/components/document/document';
 import Journal from '@/app/components/journal/journal';
+import { DocumentsData } from '@/app/data/documents';
+import { ConvertDocuments } from '@/app/utils/converters';
 
 export default function Gild() {
   return (
@@ -20,7 +22,7 @@ export default function Gild() {
         <div className={styles.actionBox}>
           <Document/>
         </div>
-        <Journal/>
+        <Journal documents={ConvertDocuments(DocumentsData)}/>
       </div>
     </>
   )

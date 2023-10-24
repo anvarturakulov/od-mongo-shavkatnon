@@ -21,8 +21,9 @@ export default function Home() {
           id="users"
           className={styles.users}
           onChange={(e) => SetCurrentUser(e.target.value)}
+          defaultValue={'dashboard'}
         >
-          <option value="dashboard" selected>Бош хисобчи</option>
+          <option value="dashboard">Бош хисобчи</option>
           <option value="gild">Цехдаги сотувчи</option>
           <option value="delivery">Дамасчи</option>
         </select>

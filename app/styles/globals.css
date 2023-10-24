@@ -15,10 +15,10 @@ body {
     margin: 0;
     color: var(--black);
     font-family: var(--font-family);
-    background: #F5F5F5;
+    background: #fff;
     color: var(--black-800);
     font-size: 16px;
-    line-height: ;
+    line-height: 20px;
 }
 
 a {
