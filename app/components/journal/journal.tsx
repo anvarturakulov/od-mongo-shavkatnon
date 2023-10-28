@@ -7,12 +7,14 @@ import classNames from 'classnames';
 import { DocumentState, DocumentType } from '@/app/interfaces/documents/mainDocument.interface';
 import IcoTrash from './ico/trash.svg'
 import ShowIco from './ico/view.svg'
+import Header from '../header/header';
 
 
-export default function Journal({ documents, className, ...props}:JournalProps):JSX.Element {
+export default function Journal({ documents, contentTitle, contentType, className, ...props}:JournalProps):JSX.Element {
 
     return (
         <>
+            <Header contentType={contentType} contentTitle={contentTitle}/>  
             <div className={styles.container}>
                 <table className={styles.table}>
                     <thead className={styles.thead}>
@@ -67,10 +69,6 @@ export default function Journal({ documents, className, ...props}:JournalProps):
                     </tbody>
                 </table>
             </div>
-
-
-
-
         </>
     )
 }

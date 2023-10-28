@@ -1,4 +1,5 @@
 import { DocumentType } from "../interfaces/documents/mainDocument.interface";
+import { ReportsType, ServiceType } from "../interfaces/general.interface";
 import { MenuItem } from "../interfaces/menu.interface";
 import { ReferenceType } from "../interfaces/references/mainReference.interface";
 
@@ -37,12 +38,22 @@ export const MenuData:Array<MenuItem> = [
         ]
     },
     {
+        title: 'Хисоботлар',
+        isOpened: false,
+        subMenu: [
+            { title: ReportsType.MatOborot, type: 'report', active: false },
+            { title: ReportsType.CashObotot, type: 'report', active: false },
+            { title: ReportsType.ExpenceOborot, type: 'report', active: false },
+            { title: ReportsType.ZpOborot, type: 'report', active: false },
+        ]
+    },
+    {
         title: 'Дастур',
         isOpened: false,
         subMenu: [
-            { title: 'Хужжатларни учириши', type: 'servis', active: false },
-            { title: 'Фойдаланувчилар руйхати', type: 'servis',active: false },
-            { title: 'Кушимча хусусиятлар', type: 'servis', active: false },
+            { title: ServiceType.DeleteDocs, type: 'servis', active: false },
+            { title: ServiceType.Users, type: 'servis', active: false },
+            { title: ServiceType.Options, type: 'servis', active: false },
         ]
     }
 ]

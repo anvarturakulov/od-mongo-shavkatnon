@@ -22,7 +22,7 @@ export enum DocumentType {
     MoveMaterial = 'Хом ашё силжиши',
     MoveHalfstuff = 'Я.Т.М силжиши',
 
-    ComeCash = 'Пул кирми',
+    ComeCash = 'Пул кирими',
     MoveCash = 'Пул силжиши',
     LeaveCash = 'Пул харажати',
     ZpCalculate = 'Иш хаки хисоби',

@@ -2,16 +2,16 @@
 import styles from './menu.module.css'
 import cn from 'classnames';
 import {MenuProps} from './menu.props'
-import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { MenuItem } from '@/app/interfaces/menu.interface';
+import { getKeyEnum } from '@/app/utils/getKeyEnum';
+import { ContentType } from '@/app/interfaces/general.interface';
 
-export default function Menu({menuData, className, ...props}:MenuProps):JSX.Element {
+export default function Menu({menuData, changeSettings,className, ...props}:MenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
-    
+
     const onClickItem = (e:any,currentTitle:string) => {
-        console.log(e.target)
         let newMenu = [...menu]
         newMenu.map(item => {
             if (item.title == currentTitle) {
@@ -21,14 +21,9 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
         setMenu(newMenu)
     }
 
-    const onClickSubItem = (currentTitle: string) => {
-        let newMenu = [...menu]
-        newMenu.map(item => {
-            if (item.title == currentTitle) {
-                return item.isOpened = !item.isOpened
-            }
-        })
-        setMenu(newMenu)
+    const onClickSubItem = (titleItem: string, contentType: ContentType) => {
+        const keyItem = getKeyEnum(titleItem, contentType)
+        changeSettings(keyItem, titleItem, contentType)
     }
 
 
@@ -45,6 +40,7 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
                             className={cn(styles.item)}
                             onClick={(e)=>onClickItem(e,item.title)}
                             key={i}
+                            data-type = {'firstLevel'}
                         >
                             {item.title}
                         </li>
@@ -56,7 +52,7 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
                                             [styles.isOpened]: item.isOpened
                                         })
                                     }
-                                        onClick={() => onClickSubItem(item.title)}
+                                        onClick={() => onClickSubItem(elem.title, elem.type)}
                                         key={k}
                                     >
                                         {elem.title}

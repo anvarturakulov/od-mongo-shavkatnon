@@ -19,10 +19,6 @@
     list-style-type: none;
 }
 
-.logo{
-    margin-bottom: 30px;
-}
-
 .content {
     padding: 20px 40px;
     margin-left: 15%;
@@ -30,6 +26,7 @@
 
 .header{
     margin-bottom: 20px;
+    text-align: right;
 }
 
 .container{
@@ -53,6 +50,25 @@
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.13);
 }
 
-.journalBox{
+.bottomBox{
     margin-top: 20px;
+}
+
+.logo{
+    margin-top: 20px;
+    padding: 10px 0px;
+    border-bottom: 1px dotted var(--primary);
+    border-top: 1px dotted var(--primary);
+    color: var(--primary);
+}
+
+.logoTitle{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.logoComment{
+    font-size: 14px;
+    font-weight: 400;
 }

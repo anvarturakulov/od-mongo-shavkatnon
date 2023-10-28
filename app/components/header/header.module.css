@@ -1,0 +1,26 @@
+.title{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.ico{
+    width: 25px;
+    height: 25px;
+    margin-right: 30px;
+}
+
+.ico:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.box{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    border-bottom: 1px dotted #000;
+    border-top: 1px dotted #000;
+    padding: 10px 0px;
+}

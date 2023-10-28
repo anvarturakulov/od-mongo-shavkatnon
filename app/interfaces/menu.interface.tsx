@@ -1,9 +1,10 @@
 import { ReferenceType } from "./references/mainReference.interface"
 import { DocumentType } from "./documents/mainDocument.interface"
+import { ContentType, ReportsType, ServiceType } from "./general.interface"
 
 interface MenuSubItem {
-    title: string,
-    type: 'document' | 'reference' | 'servis',
+    title: DocumentType | ReferenceType | ServiceType | ReportsType,
+    type: ContentType,
     active:boolean
 }
 
