@@ -6,5 +6,5 @@ export enum TypePartners {
 }
 
 export interface Partners extends Reference {
-    type: TypePartners
+    typePartner: TypePartners
 }

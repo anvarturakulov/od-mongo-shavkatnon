@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Htag } from './components/htag/Htag'
-import { Input } from './components/input/Input'
+import { Input } from './components/input/input'
 import styles from './page.module.css'
 import Image from 'next/image'
 import Link from 'next/link'

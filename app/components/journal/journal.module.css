@@ -2,6 +2,7 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    user-select: none;
 }
 
 .table {
@@ -131,4 +132,8 @@
 .header{
     display: flex;
     justify-content: space-between;
+}
+
+.newElement{
+    margin-bottom: 20px;
 }

@@ -8,13 +8,23 @@ import { DocumentState, DocumentType } from '@/app/interfaces/documents/mainDocu
 import IcoTrash from './ico/trash.svg'
 import ShowIco from './ico/view.svg'
 import Header from '../header/header';
+import { useEffect, useState } from 'react';
+import { Document } from '../document/document';
 
 
 export default function Journal({ documents, contentTitle, contentType, className, ...props}:JournalProps):JSX.Element {
-
+    
+    const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
+    useEffect(()=> {
+        setVisibilityNewElement(false)
+    }, [contentTitle])
     return (
         <>
-            <Header contentType={contentType} contentTitle={contentTitle}/>  
+            <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
+            <div className={styles.newElement}>
+                {visibilityNewElement && <Document documentType={contentTitle}/>}
+            </div>
+
             <div className={styles.container}>
                 <table className={styles.table}>
                     <thead className={styles.thead}>
@@ -35,7 +45,7 @@ export default function Journal({ documents, contentTitle, contentType, classNam
                             <>
                                 <tr 
                                     key={key} 
-                                    onDoubleClick={() => {alert(item._id)}} 
+                                    onDoubleClick={() => {alert(item.receiverId)}} 
                                     className={styles.trRow}    
                                 >
                                     <td className={styles.rowId}>{item._id}</td>
@@ -58,10 +68,7 @@ export default function Journal({ documents, contentTitle, contentType, classNam
                                     <td>{item.receiverId}</td>
                                     <td>Изох</td>
                                     <td className={styles.rowAction}>
-                                        {/* <div className={styles.btns}> */}
-                                            {/* <ShowIco className={styles.icoShow} /> */}
-                                            <IcoTrash className={styles.icoTrash}/>
-                                        {/* </div> */}
+                                        <IcoTrash className={styles.icoTrash}/>
                                     </td>
                                 </tr>
                             </>    

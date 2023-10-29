@@ -10,5 +10,5 @@ export enum ReferenceType {
 export interface Reference {
     _id: string
     name: string
-    fullName: string
+    referenceType: ReferenceType
 }

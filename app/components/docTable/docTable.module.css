@@ -1,0 +1,30 @@
+
+.box {
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0px;
+    border-top: 0.3px dotted #000;
+    border-bottom: 0.3px dotted #000;
+}
+
+.boxWithWorkers {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr auto;
+}
+
+.add {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: blue;
+    fill: red;
+}
+
+.checkbox {
+    border: 1px dotted blue;
+    padding: 10px;
+    cursor: pointer;
+}

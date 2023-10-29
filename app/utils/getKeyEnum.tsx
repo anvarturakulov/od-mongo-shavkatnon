@@ -15,7 +15,5 @@ export const getKeyEnum = (val:string, contentType: ContentType):string =>{
         default:
             return 'Error'
     }
-
-    
 }
 

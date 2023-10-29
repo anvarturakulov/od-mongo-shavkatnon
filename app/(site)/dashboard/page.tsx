@@ -15,7 +15,7 @@ const defaultSettingsDashboard: DashboardSettings = {
   activeMenuKey: '',
   activeMenuTitle: '',
   activeMenuType: 'document',
-  userId: '',
+  userId: ''
 }
 
 export default function Dashboard() {
@@ -29,6 +29,8 @@ export default function Dashboard() {
       activeMenuTitle: titleItem,
       activeMenuType: contentType,
       userId: 'Шавкат ака',
+      visibilityNewElement: false
+
     }
     setSettingsDashboard(newSettings)
   }
@@ -60,6 +62,7 @@ export default function Dashboard() {
       </div>
     </>
   )
+
 
   const logo = (
     <div
@@ -93,7 +96,12 @@ export default function Dashboard() {
         <div className={styles.journalBox}>
           {
             activeMenuType=='document' && 
-            <Journal documents={ConvertDocuments(DocumentsData)} contentTitle={activeMenuTitle} contentType={activeMenuType}/>
+            <Journal 
+              documents={ConvertDocuments(DocumentsData)} 
+              contentTitle={activeMenuTitle} 
+              contentType={activeMenuType}
+              
+              />
           }
                   
         </div>

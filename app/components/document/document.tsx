@@ -1,127 +1,54 @@
 'use client'
+import { useState } from 'react';
 import { DocumentProps } from './document.props';
 import styles from './document.module.css';
 import cn from 'classnames';
-import { Button, Htag, Input } from '@/app/components';
+import { Button, Htag, Info, Input, Select, DocTable } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
+import { DocumentTableItem, DocumentType } from '@/app/interfaces/documents/mainDocument.interface';
+import { ReferenceType } from '@/app/interfaces/references/mainReference.interface';
 
-export const Document = ({ className, ...props }: DocumentProps) :JSX.Element => {
+
+
+export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {
+
+    const defaultDocumentTableItem = {
+        itemId: '',
+        referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.Charges : ReferenceType.Charges,
+        quantity: 0,
+        price: 0,
+        total: 0
+    }
+
+    const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
     
+    let dateNow = new Date()
+    let hasWorkers = (documentType == DocumentType.LeaveCash || documentType == DocumentType.ZpCalculate)
+
     return (
-        <div className={styles.docBox}>
-            <div className={styles.selectBox}>
-                <div>
-                    <Htag tag='h2'>Хужжат тури</Htag>
-                    <input value='Юк чикими' disabled className={styles.input} />
+            <div className={styles.docBox}>
+                <div className={styles.infoBox}>
+                    <Info content={documentType} label='Хужжат тури'/>
+                    <Info content={'005599'} label='Номер'/>
+                    <Info content={dateNow.toISOString().split('T')[0]} label='Сана' />
                 </div>
 
-                <div>
-                    <Htag tag='h2'>Номер</Htag>
-                    <input value='000569' disabled className={styles.input} />
+                <div className={styles.partnersBox}>
+                    <Select label='Жунатувчи' referenceType={ReferenceType.Storages}/>
+                    <Select label='Олувчи' referenceType={ReferenceType.Partners} />
+                    <Input label='Мижоздан олинган сумма' type='number'/>
                 </div>
-
-                <div>
-                    <Htag tag='h2'>Сана</Htag>
-                    <input value='15/10/2023' disabled className={styles.input}/>
-                </div>
-                <div>
-                    <Htag tag='h2'>Муаллиф</Htag>
-                    <input value='Шаршара цех Гулсум опа' disabled className={styles.input} />
-                </div>
-            </div>
-
-            <div className={styles.taminotchiBox}>
-                <div>
-                    <Htag tag='h2'>Жунатувчи</Htag>
-                    <select
-                        className={styles.select}
-                        defaultValue={'dashboard'}
-                    >
-                        <option value="dashboard">Цех Дарё</option>
-                        <option value="gild">Цех Халкобод</option>
-                        <option value="delivery">Цех Иштихон</option>
-                    </select>
-                </div>
-                <div>
-                    <Htag tag='h2'>Олувчи</Htag>
-                    <select
-                        className={styles.select}
-                        defaultValue={'dashboard'}
-                    >
-                        <option value="dashboard">Саломат</option>
-                        <option value="gild">Шукрона Маркет</option>
-                        <option value="delivery">Дукон Шаходат опа</option>
-                    </select>
-                </div>
-                <div>
-                    <Htag tag='h2'>Мижоздан олинган сумма</Htag>
-                    <input className={styles.input} type='number' />
-                </div>
-                <div>
-                    <Htag tag='h2'>Кушимча</Htag>
-                    <input className={styles.input} type='number' />
-                </div>
-                <div></div>
-            </div>
-            {/* <Htag tag='h2'>Махсулот таснифи</Htag> */}
+                
+            <DocTable 
+                referenceType={ReferenceType.TMZ}
+                hasWorkers={hasWorkers} 
+                tableArray={tableArray}
+                setTableArray={setTableArray} 
+            />
             
-            <div className={cn(styles.TMZ, {
-                [styles.notView]: false == false
-            })} >
-                <div className={styles.boxTMZ}>
-                    <Htag tag='h2'>Ходимга</Htag>
-                    <Htag tag='h2'>Махсулот номи</Htag>
-                    <Htag tag='h2'>Сони</Htag>
-                    <Htag tag='h2'>Нархи</Htag>
-                    <Htag tag='h2'>Суммаси</Htag>
-                    {/* <Htag tag='h2'>Уч.</Htag> */}
-                    <div className={styles.ico}>
-                        {/* <TrashIco className={styles.ico} /> */}
-                    </div>
-                </div>
-                <div className={styles.boxTMZ}>
-                    <div className={styles.checkbox}>
-                        <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter" />
-                    </div>
-                    <select
-                        className={styles.select}
-                        defaultValue={'dashboard'}
-                    >
-                        <option value="dashboard">Бозор Нон</option>
-                        <option value="gild">Буханка</option>
-                        <option value="delivery">Патир</option>
-                    </select>
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <div className={styles.ico}>
-                        <TrashIco />
-                    </div>
-                </div>
-                <div className={styles.boxTMZ}>
-                    <div className={styles.checkbox}>
-                        <input  type="checkbox" id="subscribeNews" name="subscribe" value="newsletter" />
-                    </div>
-                    <select
-                        className={styles.select}
-                        defaultValue={'dashboard'}
-                        value={'gild'}
-                    >
-                        <option value="dashboard">Бозор Нон</option>
-                        <option value="gild">Буханка</option>
-                        <option value="delivery">Патир</option>
-                    </select>
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <input className={styles.input} type='number' />
-                    <div className={styles.ico}>
-                        <TrashIco />
-                    </div>
-                </div>
-            </div>
             <div className={styles.paybox}>
-                <Input placeholder='Кушимча изох'/>
+                <Input placeholder='Кушимча изох' label={''}/>
                 <div className={cn(styles.add, {
                     [styles.notView] : false == false
                 })}>

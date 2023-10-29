@@ -8,7 +8,7 @@ export interface DashboardSettings {
     activeMenuKey: string,
     activeMenuTitle: string,
     activeMenuType: ContentType,
-    userId: string,
+    userId: string
 }
 
 export enum ServiceType {
@@ -23,4 +23,5 @@ export enum ReportsType {
     ExpenceOborot = 'Харажатлар хисоби',
     ZpOborot = 'Иш хаки хисоби'
 }
+
 

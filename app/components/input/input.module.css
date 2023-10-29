@@ -11,3 +11,8 @@
 .input:placeholder {
    font-weight: 300; 
 }
+
+.label {
+    font-size: 16px;
+    line-height: 24px;
+}

@@ -1,3 +1,5 @@
+import { ReferenceType } from "../references/mainReference.interface"
+
 export enum DocumentState {
     Proveden = 'Ок',
     Saved = 'Хис. кушилмаган',
@@ -48,4 +50,12 @@ export interface DocumentModelOnDataBase {
     receiverId: string,
     tableData: string,
     documentType: string,
+}
+
+export interface DocumentTableItem {
+    itemId: string,
+    referenceType: ReferenceType,
+    quantity: number,
+    price: number,
+    total: number
 }

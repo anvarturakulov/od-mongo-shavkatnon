@@ -9,9 +9,9 @@
     background-color: #fff;
 }
 
-.selectBox{
+.infoBox{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 10px;
 }
@@ -28,6 +28,15 @@
     align-items: center;
     text-align: center;
 }
+
+.boxTMZwithWorkers {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+
 .input {
     display: inline-block;
     padding: 10px 15px;
@@ -36,7 +45,6 @@
     margin: 10px 0;
     width: 100%;
     border: 0.6px dotted var(--black-300);
-    /* border: 1px dotted var(--primary); */
 }
 
 .button{
@@ -92,15 +100,11 @@
     fill: red;
 }
 
-.taminotchiBox{
+.partnersBox{
     margin: 20px 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
-}
-
-.notView{
-    /* display: none; */
 }
 
 .checkbox{
