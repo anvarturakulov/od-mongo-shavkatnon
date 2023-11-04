@@ -1,7 +1,8 @@
 import { DocumentType } from "../interfaces/documents/mainDocument.interface";
-import { ReportsType, ServiceType } from "../interfaces/general.interface";
+import {ServiceType } from "../interfaces/general.interface";
 import { MenuItem } from "../interfaces/menu.interface";
 import { ReferenceType } from "../interfaces/references/mainReference.interface";
+import { ReportsType } from "../interfaces/report.interface";
 
 export const MenuData:Array<MenuItem> = [
     {
@@ -19,7 +20,7 @@ export const MenuData:Array<MenuItem> = [
             { title: DocumentType.MoveProd, type: 'document', active: false },
             { title: DocumentType.LeaveProd, type: 'document', active: false },
             { title: DocumentType.SaleProd, type: 'document', active: false },
-            { title: DocumentType.ComeCash, type: 'document', active: false },
+            { title: DocumentType.ComeCashFromPartners, type: 'document', active: false },
             { title: DocumentType.MoveCash, type: 'document', active: false },
             { title: DocumentType.LeaveCash, type: 'document', active: false },
             { title: DocumentType.ZpCalculate, type: 'document', active: false },
@@ -42,8 +43,10 @@ export const MenuData:Array<MenuItem> = [
         isOpened: false,
         subMenu: [
             { title: ReportsType.MatOborot, type: 'report', active: false },
+            { title: ReportsType.DebitorKreditor, type: 'report', active: false },
+            { title: ReportsType.AktSverka, type: 'report', active: false },
             { title: ReportsType.CashObotot, type: 'report', active: false },
-            { title: ReportsType.ExpenceOborot, type: 'report', active: false },
+            { title: ReportsType.ChargesOborot, type: 'report', active: false },
             { title: ReportsType.ZpOborot, type: 'report', active: false },
         ]
     },

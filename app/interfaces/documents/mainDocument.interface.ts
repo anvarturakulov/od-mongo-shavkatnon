@@ -24,7 +24,7 @@ export enum DocumentType {
     MoveMaterial = 'Хом ашё силжиши',
     MoveHalfstuff = 'Я.Т.М силжиши',
 
-    ComeCash = 'Пул кирими',
+    ComeCashFromPartners = 'Пул кирими (м/т)',
     MoveCash = 'Пул силжиши',
     LeaveCash = 'Пул харажати',
     ZpCalculate = 'Иш хаки хисоби',
@@ -59,3 +59,19 @@ export interface DocumentTableItem {
     price: number,
     total: number
 }
+
+export interface OptionDocumentElements {
+    senderReferenceType: ReferenceType,
+    senderLabel: string,
+    senderVisible: boolean,
+    
+    receiveReferenceType: ReferenceType,
+    receiveLabel: string,
+    recieveVisible: boolean
+    
+    paymentLabel: string,
+    paymentVisible: boolean,
+    
+    tableVisible: boolean,
+}
+

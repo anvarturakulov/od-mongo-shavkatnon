@@ -6,20 +6,21 @@ import cn from 'classnames';
 import { Button, Htag, Info, Input, Select, DocTable } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
-import { DocumentTableItem, DocumentType } from '@/app/interfaces/documents/mainDocument.interface';
+import { DocumentTableItem, DocumentType, OptionDocumentElements } from '@/app/interfaces/documents/mainDocument.interface';
 import { ReferenceType } from '@/app/interfaces/references/mainReference.interface';
-
-
+import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 
 export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {
 
     const defaultDocumentTableItem = {
         itemId: '',
-        referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.Charges : ReferenceType.Charges,
+        referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.Charges : ReferenceType.TMZ,
         quantity: 0,
         price: 0,
         total: 0
     }
+
+    let options: OptionDocumentElements = getOptionOfDocumentElements(documentType)
 
     const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
     
@@ -35,25 +36,39 @@ export const Document = ({document, documentType, documentTableArray, className,
                 </div>
 
                 <div className={styles.partnersBox}>
-                    <Select label='Жунатувчи' referenceType={ReferenceType.Storages}/>
-                    <Select label='Олувчи' referenceType={ReferenceType.Partners} />
-                    <Input label='Мижоздан олинган сумма' type='number'/>
+                    <Select 
+                        label={options.receiveLabel} 
+                        referenceType={options.receiveReferenceType}
+                        visibile={options.recieveVisible}
+                    />
+                    
+                    <Select 
+                        label={options.senderLabel} 
+                        referenceType={options.senderReferenceType}
+                        visibile={options.senderVisible}
+                    />
+                    
+                    <Input 
+                        label={options.paymentLabel} 
+                        type='number'
+                        visible={options.paymentVisible}
+                    />
                 </div>
                 
-            <DocTable 
-                referenceType={ReferenceType.TMZ}
+            {options.tableVisible && <DocTable 
+                referenceType={documentType == DocumentType.LeaveCash ? ReferenceType.Charges : ReferenceType.TMZ}
                 hasWorkers={hasWorkers} 
                 tableArray={tableArray}
                 setTableArray={setTableArray} 
-            />
+            />}
             
             <div className={styles.paybox}>
                 <Input placeholder='Кушимча изох' label={''}/>
-                <div className={cn(styles.add, {
-                    [styles.notView] : false == false
-                })}>
-                    <AddIco/>
-                </div>
+                {options.tableVisible && 
+                    <div className={cn(styles.add, {[styles.notView] : false == false})}>
+                        <AddIco/>
+                    </div>
+                }
             </div>
 
             <div className={styles.boxBtn}>

@@ -5,26 +5,31 @@ import {Input, Select } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import { ReferenceType } from '@/app/interfaces/references/mainReference.interface';
 
-export const DocTable = ({ hasWorkers,referenceType, className, ...props }: DocTableProps): JSX.Element => {
-
+export const DocTable = ({ hasWorkers, referenceType, tableArray, setTableArray, className, ...props }: DocTableProps): JSX.Element => {
+    
     return (
-
-        
-        <div className={cn(styles.box, {
-            [styles.boxWithWorkers]: !hasWorkers,
-        })}>
-            {
-                hasWorkers &&
-                <Input label='Ходим' type='checkbox'/>
-            }
-            <Select referenceType={ReferenceType.TMZ} label='ТМЗ'/>
-            <Input label='Сони' type='number'/>
-            <Input label='Нархи' type='number' />
-            <Input label='Суммаси' type='number' />
-            <div className={styles.ico}>
-                <TrashIco />
+        <>
+            <div className={cn(styles.box, {[styles.boxWithWorkers]: !hasWorkers})}>
+                { hasWorkers && <div>Ходим</div> }
+                <div>{referenceType}</div>
+                <div>Сони</div>
+                <div>Нархи</div>
+                <div>Суммаси</div>
+                <div></div>
             </div>
-        </div>
+            {tableArray.map(item => (
+                <>
+                    <div className={cn(styles.box, {[styles.boxWithWorkers]: !hasWorkers})}>
+                        { hasWorkers && <Input label='' type='checkbox'/> }
+                        <Select referenceType={referenceType} label='' />
+                        <Input label='' type='number'/>
+                        <Input label='' type='number' />
+                        <Input label='' type='number' />
+                        <div className={styles.ico}> <TrashIco /> </div>
+                    </div>
+                </>
+            ))}
+        </>
     )
 }
 

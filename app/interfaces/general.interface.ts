@@ -1,4 +1,4 @@
-import { ReferenceType } from "./references/mainReference.interface";
+import { Reference, ReferenceType } from "./references/mainReference.interface";
 import { DocumentType } from "./documents/mainDocument.interface";
 
 export type ContentType = 'document' | 'reference' | 'servis' | 'report'
@@ -16,12 +16,3 @@ export enum ServiceType {
     Options = 'Дастур хусусиятлари',
     DeleteDocs = 'Хужжатларни учириш',
 }
-
-export enum ReportsType {
-    MatOborot = 'ТМБ харакати',
-    CashObotot = 'Пул маблаг харакати',
-    ExpenceOborot = 'Харажатлар хисоби',
-    ZpOborot = 'Иш хаки хисоби'
-}
-
-

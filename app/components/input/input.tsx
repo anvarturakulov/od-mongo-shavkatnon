@@ -3,9 +3,9 @@ import styles from './input.module.css';
 import cn from 'classnames';
 
 
-export const Input = ({ label, notVisible, className, ...props }: InputProps): JSX.Element => {
+export const Input = ({ label, visible=true, className, ...props }: InputProps): JSX.Element => {
     
-    if (notVisible) return <></>
+    if (visible == false) return <></>
 
     return (
         <div className={styles.box}>

@@ -8,7 +8,7 @@ import { DocumentState, DocumentType } from '@/app/interfaces/documents/mainDocu
 import IcoTrash from './ico/trash.svg'
 import ShowIco from './ico/view.svg'
 import Header from '../header/header';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Document } from '../document/document';
 
 
@@ -18,14 +18,14 @@ export default function Journal({ documents, contentTitle, contentType, classNam
     useEffect(()=> {
         setVisibilityNewElement(false)
     }, [contentTitle])
+
     return (
         <>
             <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
             <div className={styles.newElement}>
                 {visibilityNewElement && <Document documentType={contentTitle}/>}
             </div>
-
-            <div className={styles.container}>
+            <div className={styles.container} >
                 <table className={styles.table}>
                     <thead className={styles.thead}>
                         <tr>

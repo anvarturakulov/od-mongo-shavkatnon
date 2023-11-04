@@ -7,8 +7,9 @@
     text-align: center;
     padding: 10px 0px;
     border-top: 0.3px dotted #000;
-    border-bottom: 0.3px dotted #000;
+    
 }
+
 
 .boxWithWorkers {
     display: grid;

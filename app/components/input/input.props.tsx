@@ -2,5 +2,5 @@ import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
 export interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     label: string,
-    notVisible?: boolean
+    visible?: boolean
 }

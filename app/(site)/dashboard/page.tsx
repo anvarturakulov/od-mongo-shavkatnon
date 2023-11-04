@@ -6,9 +6,12 @@ import styles from './page.module.css'
 import { DocumentsData } from '@/app/data/documents'
 import { ConvertDocuments } from '@/app/utils/converters'
 import Journal from '@/app/components/journal/journal'
+import Report from '@/app/components/report/report'
 import { ContentType, DashboardSettings } from '@/app/interfaces/general.interface'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import ReportWindow from '@/app/components/reportWindow/reportWindow'
+import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
 
 const defaultSettingsDashboard: DashboardSettings = {
   mainPage: true,
@@ -100,11 +103,18 @@ export default function Dashboard() {
               documents={ConvertDocuments(DocumentsData)} 
               contentTitle={activeMenuTitle} 
               contentType={activeMenuType}
-              
               />
           }
                   
         </div>
+
+        <div className={styles.journalBox}>
+          {
+            activeMenuType == 'report' &&
+            <ReportWindow reportsType={getReportTypeByTitle(activeMenuTitle)} />
+          }
+        </div>
+
 
       </div>
     </div>

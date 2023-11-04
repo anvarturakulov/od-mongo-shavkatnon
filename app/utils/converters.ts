@@ -35,3 +35,5 @@ export const ConvertDocuments = (data: Array<DocumentModelOnDataBase>):Array<Doc
     return d
     
 }
+
+export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
