@@ -3,7 +3,7 @@ import OptionsBox from '../optionsBox/optionsBox'
 import Report from '../report/report'
 import styles from './reportWindow.module.css'
 import { ReportWindowProps } from './reportWindow.props'
-import { OptionsToGenerateReport, ReportsType } from '@/app/interfaces/report.interface'
+import { OptionsToGenerateReport, ReportsType } from '../../interfaces/report.interface'
 
 const defaultOptionsToReport: OptionsToGenerateReport = {
     startDate: new Date(),

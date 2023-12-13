@@ -2,7 +2,7 @@ import { DocumentType, OptionDocumentElements } from "../interfaces/documents/ma
 import { ReferenceType } from "../interfaces/references/mainReference.interface";
 
 export const getOptionOfDocumentElements = (documentType: string): OptionDocumentElements => {
-    
+
     let senderReferenceType = ReferenceType.Storages
     let senderLabel = ''
     let receiveReferenceType = ReferenceType.Partners
@@ -11,8 +11,8 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     let paymentVisible = true
     let tableVisible = true
     let senderVisible = true
-    let recieveVisible = true 
-    
+    let recieveVisible = true
+
     const documentsForComeMaterial = [
         `${DocumentType.ComeMaterial}`,
     ]
@@ -134,7 +134,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     const documentsForCashLeave = [
         `${DocumentType.LeaveCash}`,
     ]
-    
+
     if (documentsForCashLeave.includes(documentType)) {
         senderReferenceType = ReferenceType.Storages
         senderLabel = '-----'

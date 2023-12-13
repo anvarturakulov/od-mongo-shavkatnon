@@ -18,22 +18,22 @@ export function convertDocumentType(value: string): DocumentType {
 }
 
 
-export const ConvertDocuments = (data: Array<DocumentModelOnDataBase>):Array<DocumentModel> => {
-    let d:Array<DocumentModel> = []
+export const ConvertDocuments = (data: Array<DocumentModelOnDataBase>): Array<DocumentModel> => {
+    let d: Array<DocumentModel> = []
     data.forEach(item => {
-        let obj:DocumentModel = {
+        let obj: DocumentModel = {
             _id: item._id,
             date: item.date,
             state: convertDocumentState(item.state),
             senderId: item.senderId,
             receiverId: item.receiverId,
             tableData: {},
-            documentType: convertDocumentType(item.documentType),    
+            documentType: convertDocumentType(item.documentType),
         }
         d.push(obj)
     })
     return d
-    
+
 }
 
 export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');

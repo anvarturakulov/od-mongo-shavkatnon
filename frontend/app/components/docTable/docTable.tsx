@@ -3,7 +3,7 @@ import styles from './docTable.module.css';
 import cn from 'classnames';
 import {Input, Select } from '@/app/components';
 import TrashIco from './ico/trash.svg';
-import { ReferenceType } from '@/app/interfaces/references/mainReference.interface';
+import { ReferenceType } from '../../interfaces/references/mainReference.interface';
 
 export const DocTable = ({ hasWorkers, referenceType, tableArray, setTableArray, className, ...props }: DocTableProps): JSX.Element => {
     

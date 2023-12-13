@@ -3,9 +3,9 @@ import styles from './menu.module.css'
 import cn from 'classnames';
 import {MenuProps} from './menu.props'
 import { useEffect, useState } from 'react';
-import { MenuItem } from '@/app/interfaces/menu.interface';
+import { MenuItem } from '../../interfaces/menu.interface';
 import { getKeyEnum } from '@/app/utils/getKeyEnum';
-import { ContentType } from '@/app/interfaces/general.interface';
+import { ContentType } from '../../interfaces/general.interface';
 
 export default function Menu({menuData, changeSettings,className, ...props}:MenuProps):JSX.Element {
     

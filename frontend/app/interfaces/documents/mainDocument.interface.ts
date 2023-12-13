@@ -1,4 +1,5 @@
-import { ReferenceType } from "../references/mainReference.interface"
+import { ReferenceType } from '../references/mainReference.interface'
+
 
 export enum DocumentState {
     Proveden = 'Ок',

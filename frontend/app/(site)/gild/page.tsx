@@ -6,7 +6,7 @@ import { Document } from '@/app/components/document/document';
 import Journal from '@/app/components/journal/journal';
 import { DocumentsData } from '@/app/data/documents';
 import { ConvertDocuments } from '@/app/utils/converters';
-import { DocumentType } from '@/app/interfaces/documents/mainDocument.interface';
+import { DocumentType } from '../../interfaces/documents/mainDocument.interface';
 
 export default function Gild() {
   return (

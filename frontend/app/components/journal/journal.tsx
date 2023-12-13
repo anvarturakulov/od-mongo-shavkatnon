@@ -4,7 +4,7 @@ import styles from './journal.module.css'
 import cn from 'classnames';
 import {JournalProps} from './journal.props'
 import classNames from 'classnames';
-import { DocumentState, DocumentType } from '@/app/interfaces/documents/mainDocument.interface';
+import { DocumentState, DocumentType } from '../../interfaces/documents/mainDocument.interface';
 import IcoTrash from './ico/trash.svg'
 import ShowIco from './ico/view.svg'
 import Header from '../header/header';

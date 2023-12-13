@@ -1,6 +1,3 @@
-import { Reference, ReferenceType } from "./references/mainReference.interface";
-import { DocumentType } from "./documents/mainDocument.interface";
-
 export type ContentType = 'document' | 'reference' | 'servis' | 'report'
 
 export interface DashboardSettings {
