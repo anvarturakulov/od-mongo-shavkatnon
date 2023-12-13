@@ -1,4 +1,4 @@
-import { ReferenceType } from "./references/mainReference.interface"
+import { ReferenceType } from "./reference.interface"
 import { DocumentType } from "./documents/mainDocument.interface"
 import { ContentType, ServiceType } from "./general.interface"
 import { ReportsType } from './report.interface'

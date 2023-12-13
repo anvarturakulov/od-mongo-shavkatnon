@@ -7,7 +7,7 @@ import { Button, Htag, Info, Input, Select, DocTable } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
 import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
-import { ReferenceType } from '../../interfaces/references/mainReference.interface';
+import { ReferenceType } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 
 export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {

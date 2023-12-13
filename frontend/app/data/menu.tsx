@@ -1,7 +1,7 @@
 import { DocumentType } from "../interfaces/documents/mainDocument.interface";
 import {ServiceType } from "../interfaces/general.interface";
 import { MenuItem } from "../interfaces/menu.interface";
-import { ReferenceType } from "../interfaces/references/mainReference.interface";
+import { ReferenceType } from "../interfaces/reference.interface";
 import { ReportsType } from "../interfaces/report.interface";
 
 export const MenuData:Array<MenuItem> = [

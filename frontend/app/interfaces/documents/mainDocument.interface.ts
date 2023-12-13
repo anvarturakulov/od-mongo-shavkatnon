@@ -1,4 +1,4 @@
-import { ReferenceType } from '../references/mainReference.interface'
+import { ReferenceType } from '../reference.interface'
 
 
 export enum DocumentState {
@@ -65,14 +65,14 @@ export interface OptionDocumentElements {
     senderReferenceType: ReferenceType,
     senderLabel: string,
     senderVisible: boolean,
-    
+
     receiveReferenceType: ReferenceType,
     receiveLabel: string,
     recieveVisible: boolean
-    
+
     paymentLabel: string,
     paymentVisible: boolean,
-    
+
     tableVisible: boolean,
 }
 

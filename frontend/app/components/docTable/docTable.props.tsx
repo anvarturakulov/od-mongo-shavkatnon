@@ -1,5 +1,5 @@
 import { DocumentTableItem } from "../../interfaces/documents/mainDocument.interface";
-import { ReferenceType } from "../../interfaces/references/mainReference.interface";
+import { ReferenceType } from "../../interfaces/reference.interface";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface DocTableProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

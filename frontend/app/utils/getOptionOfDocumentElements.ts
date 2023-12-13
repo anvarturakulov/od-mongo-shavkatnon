@@ -1,5 +1,5 @@
 import { DocumentType, OptionDocumentElements } from "../interfaces/documents/mainDocument.interface";
-import { ReferenceType } from "../interfaces/references/mainReference.interface";
+import { ReferenceType } from "../interfaces/reference.interface";
 
 export const getOptionOfDocumentElements = (documentType: string): OptionDocumentElements => {
 

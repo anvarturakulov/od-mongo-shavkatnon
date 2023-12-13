@@ -1,7 +1,7 @@
 import { OptionsBoxProps } from './optionsBox.props';
 import styles from './optionsBox.module.css';
 import { Input, Select } from '@/app/components';
-import { ReferenceType } from '../../interfaces/references/mainReference.interface';
+import { ReferenceType } from '../../interfaces/reference.interface';
 import { OptionsToGenerateReport, ReportsType } from '../../interfaces/report.interface';
 import { useState } from 'react';
 import { getOptionsByReportType } from '@/app/utils/getOptionsByReportType';

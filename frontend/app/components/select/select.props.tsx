@@ -1,4 +1,4 @@
-import { ReferenceType } from "../../interfaces/references/mainReference.interface";
+import { ReferenceType } from "../../interfaces/reference.interface";
 import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 
 export interface SelectProps extends DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
