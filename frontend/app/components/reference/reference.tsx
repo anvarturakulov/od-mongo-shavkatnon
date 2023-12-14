@@ -1,35 +1,30 @@
 'use client'
 import { useState } from 'react';
-import { DocumentProps } from './document.props';
-import styles from './document.module.css';
+import { ReferenceProps } from './reference.props';
+import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button, Htag, Info, Input, Select, DocTable } from '@/app/components';
-import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
-import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
 import { ReferenceType } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 
-export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {
+export const Reference = ({reference, referenceType, className, ...props }: ReferenceProps) :JSX.Element => {
 
-    const defaultDocumentTableItem = {
-        itemId: '',
-        referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.CHARGES : ReferenceType.TMZ,
-        quantity: 0,
-        price: 0,
-        total: 0
-    }
+    // const defaultDocumentTableItem = {
+    //     itemId: '',
+    //     referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.CHARGES : ReferenceType.TMZ,
+    //     quantity: 0,
+    //     price: 0,
+    //     total: 0
+    // }
 
-    let options: OptionDocumentElements = getOptionOfDocumentElements(documentType)
-
-    const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
     
     let dateNow = new Date()
-    let hasWorkers = (documentType == DocumentType.LeaveCash || documentType == DocumentType.ZpCalculate)
+    // let hasWorkers = (documentType == DocumentType.LeaveCash || documentType == DocumentType.ZpCalculate)
 
     return (
             <div className={styles.docBox}>
-                <div className={styles.infoBox}>
+                {/* <div className={styles.infoBox}>
                     <Info content={documentType} label='Хужжат тури'/>
                     <Info content={'005599'} label='Номер'/>
                     <Info content={dateNow.toISOString().split('T')[0]} label='Сана' />
@@ -74,7 +69,7 @@ export const Document = ({document, documentType, documentTableArray, className,
             <div className={styles.boxBtn}>
                 <Button appearance='primary'>Жунатиш</Button>
                 <Button appearance='ghost'>Бекор килиш</Button>
-            </div>
+            </div> */}
         </div>   
     )
 } 

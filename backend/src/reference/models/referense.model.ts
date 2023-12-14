@@ -2,23 +2,23 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types, Schema as MSchema } from 'mongoose';
 
 export enum ReferenceType {
-  Charges = 'Харажатлар',
-  Partners = 'Хамкорлар',
-  Prices = 'Нархлар',
-  Storages = 'Омборхоналар',
-  TMZ = 'Товар моддий бойликлар',
-  Workers = 'Ходимлар'
+  CHARGES ='CHARGES',
+  PARTNERS ='PARTNERS',
+  PRICES ='PRICES',
+  STORAGES ='STORAGES',
+  TMZ ='TMZ',
+  WORKERS ='WORKERS'
 }
 
 export enum TypePartners {
-  Clients,
-  Suppliers
+  CLIENTS ='CLIENTS',
+  SUPPLIERS ='SUPPLIERS'
 }
 
 export enum TypeTMZ {
-  Material,
-  Product,
-  Halfstuff
+  MATERIAL='MATERIAL',
+  PRODUCT='PRODUCT',
+  HALFSTUFF ='HALFSTUFF'
 }
 
 export type ReferenceDocument = HydratedDocument<Reference>;
@@ -27,13 +27,13 @@ export type ReferenceDocument = HydratedDocument<Reference>;
 export class Reference {
   @Prop({ required: true })
   name: string;
-
+  
+  @Prop()
+  deleted?: boolean
+  
   @Prop({enum: ReferenceType, required: true})
   referencyType: ReferenceType
   
-  @Prop()
-  fullName?: string;
-
   @Prop({ enum: TypePartners })
   typePartners?: TypePartners
 
@@ -41,10 +41,11 @@ export class Reference {
   typeTMZ?: TypeTMZ
 
   @Prop()
-  location?: string;
+  unit?: string;
 
   @Prop()
-  unit?: string;
+  comment?: string;
+
 }
 
-export const ReviewSchema = SchemaFactory.createForClass(Reference);
+export const ReferenceSchema = SchemaFactory.createForClass(Reference);

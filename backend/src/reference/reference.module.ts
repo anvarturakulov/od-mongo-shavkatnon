@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ReferenceController } from './reference.controller';
 import { ReferenceService } from './reference.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Reference, ReferenceSchema } from './models/referense.model';
 
 @Module({
   controllers: [ReferenceController],
-  providers: [ReferenceService]
+  providers: [ReferenceService],
+  imports: [MongooseModule.forFeature([{ name: Reference.name, schema: ReferenceSchema }])]
 })
 export class ReferenceModule {}

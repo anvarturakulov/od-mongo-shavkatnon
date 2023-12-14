@@ -52,10 +52,10 @@ export default function Menu({menuData, changeSettings,className, ...props}:Menu
                                             [styles.isOpened]: item.isOpened
                                         })
                                     }
-                                        onClick={() => onClickSubItem(elem.title, elem.type)}
+                                        onClick={() => onClickSubItem(elem.description, elem.type)}
                                         key={k}
                                     >
-                                        {elem.title}
+                                        {elem.description? elem.description : elem.title}
                                     </li>
                                 </>
                             ))

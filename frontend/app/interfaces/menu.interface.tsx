@@ -5,6 +5,7 @@ import { ReportsType } from './report.interface'
 
 interface MenuSubItem {
     title: DocumentType | ReferenceType | ServiceType | ReportsType,
+    description: string,
     type: ContentType,
     active:boolean
 }

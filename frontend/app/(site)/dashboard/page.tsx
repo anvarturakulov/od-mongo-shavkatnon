@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ReportWindow from '@/app/components/reportWindow/reportWindow'
 import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
+import { ReferencesData } from '@/app/data/references'
+import ReferenceWindow from '@/app/components/referenceWindow/referenceWindow'
 
 const defaultSettingsDashboard: DashboardSettings = {
   mainPage: true,
@@ -105,7 +107,16 @@ export default function Dashboard() {
               contentType={activeMenuType}
               />
           }
-                  
+        </div>
+
+        <div className={styles.journalBox}>
+          {
+            activeMenuType=='reference' && 
+            <ReferenceWindow
+              contentTitle={activeMenuTitle} 
+              contentType={activeMenuType}
+              />
+          }
         </div>
 
         <div className={styles.journalBox}>

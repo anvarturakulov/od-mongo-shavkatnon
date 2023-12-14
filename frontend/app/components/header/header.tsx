@@ -4,13 +4,15 @@ import AddIco from './add.svg'
 import CloseIco from './close.svg'
 
 export default function Header({ contentType, contentTitle, visibilityNewElement, setVisibilityNewElement, className, ...props }: HeaderProps): JSX.Element {
-
+    
+    const strFirst =  contentType == 'document' ? 'буйича янги хужжат тузиш' : 'буйича янги элемент очиш'
+    const strSecond =  contentType == 'document' ? 'буйича хужжатлар руйхати' : 'руйхати'
     return (
         <>
             {
                 contentTitle ?
                 <div className={styles.box}>
-                        <div className={styles.title}>{contentTitle} {visibilityNewElement ? 'буйича янги хужжат тузиш' : 'буйича хужжатлар руйхати'}</div>
+                        <div className={styles.title}>{contentTitle} {visibilityNewElement ? strFirst : strSecond }</div>
                     {visibilityNewElement ? 
                     <CloseIco 
                         className={styles.ico}

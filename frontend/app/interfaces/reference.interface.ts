@@ -1,29 +1,30 @@
 export enum ReferenceType {
-    Charges='Харажатлар',
-    Partners='Хамкорлар',
-    Prices='Нархлар',
-    Storages='Омборхоналар',
-    TMZ='Товар моддий бойликлар',
-    Workers='Ходимлар'
+    CHARGES = 'CHARGES',
+    PARTNERS = 'PARTNERS',
+    PRICES = 'PRICES',
+    STORAGES = 'STORAGES',
+    TMZ = 'TMZ',
+    WORKERS = 'WORKERS'
 }
 
 export enum TypePartners {
-    Clients,
-    Suppliers
+    CLIENTS = 'CLIENTS',
+    SUPPLIERS = 'SUPPLIERS'
 }
 
 export enum TypeTMZ {
-    Material,
-    Product,
-    Halfstuff
+    MATERIAL = 'MATERIAL',
+    PRODUCT = 'PRODUCT',
+    HALFSTUFF = 'HALFSTUFF'
 }
 
-export interface Reference {
+export interface ReferenceModel {
+    _id?: string;
     name: string;
     referenceType: ReferenceType;
-    fullName?: string;
     typePartners?: TypePartners;
     typeTMZ?: TypeTMZ;
-    location?: string;
     unit?: string;
+    comment?: string;
+    deleted?: boolean;
 }
