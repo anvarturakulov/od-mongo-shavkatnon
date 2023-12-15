@@ -8,7 +8,7 @@ import { ReferenceType } from './models/referense.model';
 export class ReferenceController {
   constructor(private readonly referenceService: ReferenceService){}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateReferenceDto) {
@@ -16,7 +16,7 @@ export class ReferenceController {
   };
 
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('byType/:referenceType')
   async getByProductId(@Param('referenceType',) referenceType: ReferenceType) {
     return this.referenceService.getByTypeReference(referenceType)

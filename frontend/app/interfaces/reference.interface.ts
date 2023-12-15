@@ -28,3 +28,13 @@ export interface ReferenceModel {
     comment?: string;
     deleted?: boolean;
 }
+
+export interface ReferenceRequestModel {
+    name: string;
+    referenceType: ReferenceType;
+    typePartners: string;
+    typeTMZ: string;
+    unit: string;
+    comment: string;
+}
+

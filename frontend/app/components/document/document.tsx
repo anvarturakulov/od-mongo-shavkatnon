@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { DocumentProps } from './document.props';
 import styles from './document.module.css';
 import cn from 'classnames';
-import { Button, Htag, Info, Input, Select, DocTable } from '@/app/components';
+import { Button, Htag, Info, Input, DocTable, SelectForReference } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
 import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
 import { ReferenceType } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
+import { Select } from '../select/select';
 
 export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {
 
@@ -36,13 +37,13 @@ export const Document = ({document, documentType, documentTableArray, className,
                 </div>
 
                 <div className={styles.partnersBox}>
-                    <Select 
+                    <SelectForReference 
                         label={options.receiveLabel} 
                         referenceType={options.receiveReferenceType}
                         visibile={options.recieveVisible}
                     />
                     
-                    <Select 
+                    <SelectForReference 
                         label={options.senderLabel} 
                         referenceType={options.senderReferenceType}
                         visibile={options.senderVisible}

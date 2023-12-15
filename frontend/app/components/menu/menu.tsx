@@ -53,7 +53,7 @@ export default function Menu({menuData, changeSettings,className, ...props}:Menu
                                         })
                                     }
                                         onClick={() => onClickSubItem(elem.description, elem.type)}
-                                        key={k}
+                                        key={elem.title}
                                     >
                                         {elem.description? elem.description : elem.title}
                                     </li>

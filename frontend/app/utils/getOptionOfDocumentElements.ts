@@ -3,9 +3,9 @@ import { ReferenceType } from "../interfaces/reference.interface";
 
 export const getOptionOfDocumentElements = (documentType: string): OptionDocumentElements => {
 
-    let senderReferenceType = ReferenceType.Storages
+    let senderReferenceType = ReferenceType.STORAGES
     let senderLabel = ''
-    let receiveReferenceType = ReferenceType.Partners
+    let receiveReferenceType = ReferenceType.PARTNERS
     let receiveLabel = ''
     let paymentLabel = ''
     let paymentVisible = true
@@ -18,9 +18,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForComeMaterial.includes(documentType)) {
-        senderReferenceType = ReferenceType.Partners
+        senderReferenceType = ReferenceType.PARTNERS
         senderLabel = 'Таъминотчи'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Омборхона'
         paymentLabel = '----'
         paymentVisible = false
@@ -35,9 +35,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForComeProductHalfstuff.includes(documentType)) {
-        senderReferenceType = ReferenceType.Storages
+        senderReferenceType = ReferenceType.STORAGES
         senderLabel = 'Жунатувчи'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Кабул килувчи'
         paymentLabel = '----'
         paymentVisible = false
@@ -52,9 +52,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documetsForSaleTMZ.includes(documentType)) {
-        senderReferenceType = ReferenceType.Partners
+        senderReferenceType = ReferenceType.PARTNERS
         senderLabel = 'Мижоз'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Жунатувчи'
         paymentLabel = 'Мижоздан олинган пул'
         paymentVisible = true
@@ -70,9 +70,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForLeaveTMZ.includes(documentType)) {
-        senderReferenceType = ReferenceType.Charges
+        senderReferenceType = ReferenceType.CHARGES
         senderLabel = 'Харажат тури'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Жунатувчи'
         paymentLabel = '----'
         paymentVisible = false
@@ -88,9 +88,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForMoveTMZ.includes(documentType)) {
-        senderReferenceType = ReferenceType.Storages
+        senderReferenceType = ReferenceType.STORAGES
         senderLabel = 'Кабул килувчи'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Жунатувчи'
         paymentLabel = '----'
         paymentVisible = false
@@ -104,9 +104,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForCashFromPartners.includes(documentType)) {
-        senderReferenceType = ReferenceType.Partners
+        senderReferenceType = ReferenceType.PARTNERS
         senderLabel = 'Хамкор'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Кабул килувчи'
         paymentLabel = 'Хамкордан олинган пул'
         paymentVisible = true
@@ -120,9 +120,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForCashMove.includes(documentType)) {
-        senderReferenceType = ReferenceType.Storages
+        senderReferenceType = ReferenceType.STORAGES
         senderLabel = 'Жунатувчи'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Кабул килувчи'
         paymentLabel = 'Кабул олинган пул'
         paymentVisible = true
@@ -136,9 +136,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForCashLeave.includes(documentType)) {
-        senderReferenceType = ReferenceType.Storages
+        senderReferenceType = ReferenceType.STORAGES
         senderLabel = '-----'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Харажат килувчи'
         paymentLabel = '-----'
         paymentVisible = false
@@ -152,9 +152,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionDocumen
     ]
 
     if (documentsForZp.includes(documentType)) {
-        senderReferenceType = ReferenceType.Storages
+        senderReferenceType = ReferenceType.STORAGES
         senderLabel = '-----'
-        receiveReferenceType = ReferenceType.Storages
+        receiveReferenceType = ReferenceType.STORAGES
         receiveLabel = 'Булим'
         paymentLabel = '------'
         paymentVisible = false

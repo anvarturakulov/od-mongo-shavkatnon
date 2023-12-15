@@ -9,18 +9,18 @@ interface Result {
 export const getOptionsByReportType = (reportsType:ReportsType):Result => {
     switch (reportsType) {
         case ReportsType.AktSverka:
-            return {label:'Корхона', referenceType: ReferenceType.Partners}
+            return {label:'Корхона', referenceType: ReferenceType.PARTNERS}
         case ReportsType.DebitorKreditor:
-            return { label: 'Корхона', referenceType: ReferenceType.Partners }
+            return { label: 'Корхона', referenceType: ReferenceType.PARTNERS }
         case ReportsType.CashObotot:
-            return { label: 'Харажат', referenceType: ReferenceType.Charges }
+            return { label: 'Харажат', referenceType: ReferenceType.CHARGES }
         case ReportsType.ChargesOborot:
-            return { label: 'Харажат', referenceType: ReferenceType.Charges }
+            return { label: 'Харажат', referenceType: ReferenceType.CHARGES }
         case ReportsType.MatOborot:
             return { label: 'Товар моддий бойлик', referenceType: ReferenceType.TMZ }
         case ReportsType.ZpOborot:
-            return { label: 'Ходим', referenceType: ReferenceType.Workers }
+            return { label: 'Ходим', referenceType: ReferenceType.WORKERS }
         default:
-            return { label: 'Корхона', referenceType: ReferenceType.Partners }
+            return { label: 'Корхона', referenceType: ReferenceType.PARTNERS }
     }
 }

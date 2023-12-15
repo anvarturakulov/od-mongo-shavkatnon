@@ -13,3 +13,8 @@ export enum ServiceType {
     Options = 'Дастур хусусиятлари',
     DeleteDocs = 'Хужжатларни учириш',
 }
+
+export interface DataForSelect {
+    name: string,
+    title: string
+}

@@ -1,12 +1,7 @@
 import { SelectProps } from './select.props';
 import styles from './select.module.css';
-import cn from 'classnames';
-import { ReferencesData } from '@/app/data';
 
-
-export const Select = ({ label, referenceType, visibile=true , className, ...props }: SelectProps): JSX.Element => {
-    
-    if (visibile == false) return <></>
+export const Select = ({ label, data, className, ...props }: SelectProps): JSX.Element => {
     
     return (
         <div className={styles.box}>
@@ -15,9 +10,9 @@ export const Select = ({ label, referenceType, visibile=true , className, ...pro
                 className={styles.select}
                 {...props}
             >
-                {ReferencesData.filter(item => item.referenceType == referenceType).map(elem => (
+                {data.map(elem => (
                     <>
-                        <option value={elem.name} data-type={elem.referenceType}>{elem.name}</option>
+                       <option value={elem.name}>{elem.title}</option>
                     </>
                 ))}
             </select>

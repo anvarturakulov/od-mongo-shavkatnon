@@ -28,16 +28,16 @@ export default function Journal({ documents, contentTitle, contentType, classNam
             <div className={styles.container} >
                 <table className={styles.table}>
                     <thead className={styles.thead}>
-                        <tr>
-                            <th className={styles.rowId}>_id </th>
-                            <th className={styles.rowDate}>Сана</th>
-                            <th>Хужжат холати</th>
-                            <th>Хужжат тури</th>
-                            <th className={styles.rowSumma}>Сумма</th>
-                            <th>Олувчи</th>
-                            <th>Берувчи</th>
-                            <th>Изох 2</th>
-                            <th className={styles.rowAction}>Амал</th>
+                        <tr key='0'>
+                            <th key='1' className={styles.rowId}>_id </th>
+                            <th key='2' className={styles.rowDate}>Сана</th>
+                            <th key='3'>Хужжат холати</th>
+                            <th key='4'>Хужжат тури</th>
+                            <th key='5' className={styles.rowSumma}>Сумма</th>
+                            <th key='6'>Олувчи</th>
+                            <th key='7'>Берувчи</th>
+                            <th key='8'>Изох 2</th>
+                            <th key='9' className={styles.rowAction}>Амал</th>
                         </tr>
                     </thead>
                     <tbody className={styles.tbody}>

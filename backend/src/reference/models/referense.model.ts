@@ -32,7 +32,7 @@ export class Reference {
   deleted?: boolean
   
   @Prop({enum: ReferenceType, required: true})
-  referencyType: ReferenceType
+  referenceType: ReferenceType
   
   @Prop({ enum: TypePartners })
   typePartners?: TypePartners

@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
+    "axios": "^1.6.2",
     "chart.js": "^4.4.0",
     "classnames": "^2.3.2",
     "next": "13.5.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-to-print": "^2.14.15"
+    "react-to-print": "^2.14.15",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

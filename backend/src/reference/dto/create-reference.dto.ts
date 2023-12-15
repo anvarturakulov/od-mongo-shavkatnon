@@ -6,7 +6,7 @@ export class CreateReferenceDto {
   name: string;
 
   @IsEnum(ReferenceType)
-  referencyType: ReferenceType;
+  referenceType: ReferenceType;
   
   @IsOptional()
   @IsEnum(TypePartners)

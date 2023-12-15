@@ -8,6 +8,7 @@
 
 #env
 .env
+/frontend/.env
 docker-compose.yml
 
 # Logs

@@ -1,6 +1,6 @@
 import { OptionsBoxProps } from './optionsBox.props';
 import styles from './optionsBox.module.css';
-import { Input, Select } from '@/app/components';
+import { Input, SelectForReference } from '@/app/components';
 import { ReferenceType } from '../../interfaces/reference.interface';
 import { OptionsToGenerateReport, ReportsType } from '../../interfaces/report.interface';
 import { useState } from 'react';
@@ -48,7 +48,7 @@ export default function OptionsBox({ reportsType, showReport, className, ...prop
             <div className={styles.dataBox}>
                 <Input label='Бошлангич сана' type='date' id='startDate' onChange={(e)=> onChangeInput(e)}/>
                 <Input label='Бошлангич сана' type='date' id='endDate' onChange={(e) => onChangeInput(e)} />
-                <Select
+                <SelectForReference
                     label={optionForReference.label}
                     referenceType={optionForReference.referenceType}
                     visibile={true}
