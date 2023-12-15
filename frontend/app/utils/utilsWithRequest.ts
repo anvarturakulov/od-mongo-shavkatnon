@@ -1,40 +1,38 @@
 import { ReferenceRequestModel, ReferenceType } from '../interfaces/reference.interface';
 
 export const getBodyForReferenceRequest = (state: ReferenceRequestModel, referenceType: ReferenceType) => {
-
+ let newReq = {
+   name: state.name,
+   comment: state.comment,
+   referenceType
+ }
   switch (referenceType) {
     case ReferenceType.CHARGES:
       return {
-        name: state.name,
-        commment: state.comment
+        ...newReq
       };
     case ReferenceType.PARTNERS:
       return {
-        name: state.name,
-        commment: state.comment,
+        ...newReq,
         typePartners: state.typePartners
       };;
     case ReferenceType.PRICES:
       return {
-        name: state.name,
-        commment: state.comment,
+        ...newReq,
       };
     case ReferenceType.STORAGES:
       return {
-        name: state.name,
-        commment: state.comment,
+        ...newReq,
       };
     case ReferenceType.TMZ:
       return {
-        name: state.name,
-        commment: state.comment,
+        ...newReq,
         typeTMZ: state.typeTMZ,
         unit: state.unit
       };
     case ReferenceType.WORKERS:
       return {
-        name: state.name,
-        commment: state.comment,
+        ...newReq,
       };
     default:
       return {};

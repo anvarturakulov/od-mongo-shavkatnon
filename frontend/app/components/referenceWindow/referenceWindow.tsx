@@ -33,7 +33,7 @@ export default function ReferenceWindow({ contentTitle, contentType, className, 
         <>  
             <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
             <div className={styles.newElement}>
-                {visibilityNewElement && <Reference referenceTitle={contentTitle} newReference={true}/>}
+                {visibilityNewElement && <Reference referenceTitle={contentTitle} isNewReference={true}/>}
             </div>
             <div className={styles.container} >
                 <table className={styles.table}>

@@ -13,8 +13,8 @@ export class ReferenceService {
     return newReference.save()
   }
 
-  async getByTypeReference(referencyType: ReferenceType): Promise<Reference[]> {
-    return this.referenceModel.find({ referencyType }).exec()
+  async getByTypeReference(referenceType: ReferenceType): Promise<Reference[]> {
+    return this.referenceModel.find({ referenceType }).exec()
   }
 
 

@@ -1,4 +1,4 @@
-export enum ReferenceType {
+export enum TypeReference {
     CHARGES = 'CHARGES',
     PARTNERS = 'PARTNERS',
     PRICES = 'PRICES',
@@ -21,7 +21,7 @@ export enum TypeTMZ {
 export interface ReferenceModel {
     _id?: string;
     name: string;
-    referenceType: ReferenceType;
+    typeReference: TypeReference;
     typePartners?: TypePartners;
     typeTMZ?: TypeTMZ;
     unit?: string;
@@ -29,9 +29,9 @@ export interface ReferenceModel {
     deleted?: boolean;
 }
 
-export interface ReferenceRequestModel {
+export interface ReferenceBody {
     name: string;
-    referenceType: ReferenceType;
+    typeReference: TypeReference;
     typePartners: string;
     typeTMZ: string;
     unit: string;

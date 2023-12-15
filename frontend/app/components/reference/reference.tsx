@@ -4,11 +4,12 @@ import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
-import { ReferenceRequestModel, ReferenceType, TypePartners, TypeTMZ } from '../../interfaces/reference.interface';
+import { ReferenceBody, TypePartners, TypeReference, TypeTMZ } from '../../interfaces/reference.interface';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { DataForSelect } from '@/app/interfaces/general.interface';
 import axios from 'axios';
 import { getBodyForReferenceRequest } from '@/app/utils/utilsWithRequest';
+import { updateCreateReference } from '@/app/service/references.service';
 
 const Select = (list:Array<DataForSelect>, label: string, typeString: string, changeElement: Function) => {
     return (
@@ -31,13 +32,13 @@ const Select = (list:Array<DataForSelect>, label: string, typeString: string, ch
 
 export const Reference = ({reference, referenceTitle, isNewReference, className, ...props }: ReferenceProps) :JSX.Element => {
 
-    const referenceType = getTypeReference(referenceTitle);
+    const typeReference = getTypeReference(referenceTitle);
     
-    const defaultReferenceRequestModel: ReferenceRequestModel = {
+    const defaultBody: ReferenceBody = {
         name: '',
-        referenceType,
+        typeReference,
         typePartners: '',
-        typeTMZ: '',
+        typeTMZ: typeReference == TypeReference.TMZ ? TypeTMZ.MATERIAL : '',
         unit: '',
         comment: ''
     }
@@ -53,30 +54,16 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
         {name: TypeTMZ.HALFSTUFF, title: 'Ярим тайёр махсулот'}
     ]
 
-    const [stateRequest, setStateRequest] = useState<ReferenceRequestModel>(defaultReferenceRequestModel) 
+    const [body, setBody] = useState<ReferenceBody>(defaultBody) 
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, select?:boolean) => {
         let target = e.currentTarget
-        setStateRequest(state => {
+        setBody(state => {
             return {
                 ...state,
                 [target.id]: target.value
             }
         })
-    }
-
-    const updateCreateReference = (body: ReferenceRequestModel, referenceType: ReferenceType, isNewReference: boolean) => {
-        const uri = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/create';
-        if (isNewReference) {
-            axios.post(uri, getBodyForReferenceRequest(body, referenceType))
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-                prompt(error);
-            });
-        }
     }
 
     return (
@@ -87,12 +74,12 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
                 </div>
                 
                 {
-                    referenceType == ReferenceType.PARTNERS && 
+                    typeReference == TypeReference.PARTNERS && 
                     Select(typePartnersList, 'Хамкор тури', 'typePartners', changeElements)
                 }
 
                 {
-                    referenceType == ReferenceType.TMZ && 
+                    typeReference == TypeReference.TMZ && 
                     <div className={styles.box}> 
                         {
                             Select(typeTMZList, 'ТМБ тури', 'typeTMZ', changeElements)
@@ -110,7 +97,7 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
                 </div>
                
             <div className={styles.boxBtn}>
-                <Button appearance='primary' onClick={() => updateCreateReference(stateRequest, referenceType, isNewReference)}>Саклаш</Button>
+                <Button appearance='primary' onClick={() => updateCreateReference(body, typeReference, isNewReference)}>Саклаш</Button>
                 <Button appearance='ghost'>Бекор килиш</Button>
             </div> 
         </div>   
