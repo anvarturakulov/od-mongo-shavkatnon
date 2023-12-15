@@ -1,7 +1,6 @@
 'use client'
 import styles from './referenceWindow.module.css'
 import cn from 'classnames';
-import {ReferenceWindowProps} from './referenceWindow.props'
 import { DocumentState, DocumentType } from '../../interfaces/documents/mainDocument.interface';
 import IcoTrash from './ico/trash.svg'
 import Header from '../header/header';
@@ -11,13 +10,14 @@ import { ReferencesData } from '@/app/data';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';
+import { ReferenceJournalProps } from './referenceJournal.props';
 
-export default function ReferenceWindow({ contentTitle, contentType, className, ...props}:ReferenceWindowProps):JSX.Element {
+export default function ReferenceJournal({ contentTitle, contentType, className, ...props}:ReferenceJournalProps):JSX.Element {
     
-    const endpoint = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+getTypeReference(contentTitle);
+    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+getTypeReference(contentTitle);
 
-    const getData = async () => {
-        const response = await fetch(endpoint);
+    const getData = async (url:string) => {
+        const response = await fetch(url);
         return await response.json();
     };
     
@@ -27,7 +27,7 @@ export default function ReferenceWindow({ contentTitle, contentType, className, 
         setVisibilityNewElement(false)
     }, [contentTitle])
 
-    const { data, error } = useSWR(endpoint, getData);
+    const { data, error } = useSWR(url, (url) => getData(url));
     
     return (
         <>  

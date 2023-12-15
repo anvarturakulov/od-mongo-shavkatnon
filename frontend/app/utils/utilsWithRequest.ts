@@ -1,36 +1,36 @@
-import { ReferenceRequestModel, ReferenceType } from '../interfaces/reference.interface';
+import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
 
-export const getBodyForReferenceRequest = (state: ReferenceRequestModel, referenceType: ReferenceType) => {
+export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: TypeReference) => {
  let newReq = {
    name: state.name,
    comment: state.comment,
-   referenceType
+   typeReference
  }
-  switch (referenceType) {
-    case ReferenceType.CHARGES:
+  switch (typeReference) {
+    case TypeReference.CHARGES:
       return {
         ...newReq
       };
-    case ReferenceType.PARTNERS:
+    case TypeReference.PARTNERS:
       return {
         ...newReq,
         typePartners: state.typePartners
       };;
-    case ReferenceType.PRICES:
+    case TypeReference.PRICES:
       return {
         ...newReq,
       };
-    case ReferenceType.STORAGES:
+    case TypeReference.STORAGES:
       return {
         ...newReq,
       };
-    case ReferenceType.TMZ:
+    case TypeReference.TMZ:
       return {
         ...newReq,
         typeTMZ: state.typeTMZ,
         unit: state.unit
       };
-    case ReferenceType.WORKERS:
+    case TypeReference.WORKERS:
       return {
         ...newReq,
       };

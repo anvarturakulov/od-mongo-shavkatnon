@@ -7,7 +7,7 @@ import { Button, Htag, Info, Input, DocTable, SelectForReference } from '@/app/c
 import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
 import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
-import { ReferenceType } from '../../interfaces/reference.interface';
+import { typeReference } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 import { Select } from '../select/select';
 
@@ -15,7 +15,7 @@ export const Document = ({document, documentType, documentTableArray, className,
 
     const defaultDocumentTableItem = {
         itemId: '',
-        referenceType: documentType == DocumentType.LeaveCash ? ReferenceType.CHARGES : ReferenceType.TMZ,
+        typeReference: documentType == DocumentType.LeaveCash ? typeReference.CHARGES : typeReference.TMZ,
         quantity: 0,
         price: 0,
         total: 0
@@ -39,13 +39,13 @@ export const Document = ({document, documentType, documentTableArray, className,
                 <div className={styles.partnersBox}>
                     <SelectForReference 
                         label={options.receiveLabel} 
-                        referenceType={options.receiveReferenceType}
+                        typeReference={options.receivetypeReference}
                         visibile={options.recieveVisible}
                     />
                     
                     <SelectForReference 
                         label={options.senderLabel} 
-                        referenceType={options.senderReferenceType}
+                        typeReference={options.sendertypeReference}
                         visibile={options.senderVisible}
                     />
                     
@@ -57,7 +57,7 @@ export const Document = ({document, documentType, documentTableArray, className,
                 </div>
                 
             {options.tableVisible && <DocTable 
-                referenceType={documentType == DocumentType.LeaveCash ? ReferenceType.CHARGES : ReferenceType.TMZ}
+                typeReference={documentType == DocumentType.LeaveCash ? typeReference.CHARGES : typeReference.TMZ}
                 hasWorkers={hasWorkers} 
                 tableArray={tableArray}
                 setTableArray={setTableArray} 

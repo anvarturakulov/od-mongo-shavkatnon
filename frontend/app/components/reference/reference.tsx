@@ -6,12 +6,10 @@ import cn from 'classnames';
 import { Button} from '@/app/components';
 import { ReferenceBody, TypePartners, TypeReference, TypeTMZ } from '../../interfaces/reference.interface';
 import { getTypeReference } from '@/app/utils/getTypeReference';
-import { DataForSelect } from '@/app/interfaces/general.interface';
-import axios from 'axios';
-import { getBodyForReferenceRequest } from '@/app/utils/utilsWithRequest';
 import { updateCreateReference } from '@/app/service/references.service';
+import { DataForSelect, typePartnersList, typeTMZList } from './reference.constants';
 
-const Select = (list:Array<DataForSelect>, label: string, typeString: string, changeElement: Function) => {
+const Select = (list: Array<DataForSelect>, label: string, typeString: string, changeElement: Function) => {
     return (
         <div>
             <div className={styles.label}>{label}</div>
@@ -43,17 +41,6 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
         comment: ''
     }
 
-    const typePartnersList = [
-        {name: TypePartners.CLIENTS, title: 'Мижоз'},
-        {name: TypePartners.SUPPLIERS, title: 'Таъминотчи'}
-    ]
-
-    const typeTMZList = [
-        {name: TypeTMZ.MATERIAL, title: 'Материал'},
-        {name: TypeTMZ.PRODUCT, title: 'Тайёр махсулот'},
-        {name: TypeTMZ.HALFSTUFF, title: 'Ярим тайёр махсулот'}
-    ]
-
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, select?:boolean) => {
@@ -64,6 +51,10 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
                 [target.id]: target.value
             }
         })
+    }
+
+    const onSubmit = (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean) => {
+        updateCreateReference(body, typeReference, isNewReference)
     }
 
     return (
@@ -97,7 +88,7 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
                 </div>
                
             <div className={styles.boxBtn}>
-                <Button appearance='primary' onClick={() => updateCreateReference(body, typeReference, isNewReference)}>Саклаш</Button>
+                <Button appearance='primary' onClick={() => onSubmit(body, typeReference, isNewReference)}>Саклаш</Button>
                 <Button appearance='ghost'>Бекор килиш</Button>
             </div> 
         </div>   

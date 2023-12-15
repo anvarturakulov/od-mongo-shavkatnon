@@ -13,7 +13,7 @@ import Image from 'next/image'
 import ReportWindow from '@/app/components/reportWindow/reportWindow'
 import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
 import { ReferencesData } from '@/app/data/references'
-import ReferenceWindow from '@/app/components/referenceWindow/referenceWindow'
+import ReferenceWindow from '@/app/components/referenceJournal/referenceWindow'
 
 const defaultSettingsDashboard: DashboardSettings = {
   mainPage: true,

@@ -2,11 +2,11 @@ import { Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe
 import { ReferenceService } from './reference.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { CreateReferenceDto } from './dto/create-reference.dto';
-import { ReferenceType } from './models/referense.model';
+import { TypeReference } from './models/referense.model';
 
 @Controller('reference')
 export class ReferenceController {
-  constructor(private readonly referenceService: ReferenceService){}
+  constructor(private readonly referenceService: ReferenceService) { }
 
   // @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -17,8 +17,8 @@ export class ReferenceController {
 
 
   // @UseGuards(JwtAuthGuard)
-  @Get('byType/:referenceType')
-  async getByProductId(@Param('referenceType',) referenceType: ReferenceType) {
-    return this.referenceService.getByTypeReference(referenceType)
+  @Get('byType/:typeReference')
+  async getByProductId(@Param('typeReference',) typeReference: TypeReference) {
+    return this.referenceService.getByTypeReference(typeReference)
   }
 };

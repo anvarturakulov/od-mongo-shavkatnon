@@ -1,4 +1,4 @@
-import { ReferenceType } from '../reference.interface'
+import { typeReference } from '../reference.interface'
 
 
 export enum DocumentState {
@@ -55,18 +55,18 @@ export interface DocumentModelOnDataBase {
 
 export interface DocumentTableItem {
     itemId: string,
-    referenceType: ReferenceType,
+    typeReference: typeReference,
     quantity: number,
     price: number,
     total: number
 }
 
 export interface OptionDocumentElements {
-    senderReferenceType: ReferenceType,
+    sendertypeReference: typeReference,
     senderLabel: string,
     senderVisible: boolean,
 
-    receiveReferenceType: ReferenceType,
+    receivetypeReference: typeReference,
     receiveLabel: string,
     recieveVisible: boolean
 

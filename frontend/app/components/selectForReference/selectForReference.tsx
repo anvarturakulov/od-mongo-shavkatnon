@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { ReferencesData } from '@/app/data';
 
 
-export const SelectForReference = ({ label, referenceType, visibile=true , className, ...props }: SelectForReferenceProps): JSX.Element => {
+export const SelectForReference = ({ label, typeReference, visibile=true , className, ...props }: SelectForReferenceProps): JSX.Element => {
     
     if (visibile == false) return <></>
     
@@ -15,9 +15,9 @@ export const SelectForReference = ({ label, referenceType, visibile=true , class
                 className={styles.select}
                 {...props}
             >
-                {ReferencesData.filter(item => item.referenceType == referenceType).map(elem => (
+                {ReferencesData.filter(item => item.typeReference == typeReference).map(elem => (
                     <>
-                        <option value={elem.name} data-type={elem.referenceType}>{elem.name}</option>
+                        <option value={elem.name} data-type={elem.typeReference}>{elem.name}</option>
                     </>
                 ))}
             </select>

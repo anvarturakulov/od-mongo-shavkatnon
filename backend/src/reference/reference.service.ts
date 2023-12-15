@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Reference, ReferenceDocument, ReferenceType } from './models/referense.model';
+import { Reference, ReferenceDocument, TypeReference } from './models/referense.model';
 import { Model } from 'mongoose';
 import { CreateReferenceDto } from './dto/create-reference.dto';
 
@@ -13,8 +13,8 @@ export class ReferenceService {
     return newReference.save()
   }
 
-  async getByTypeReference(referenceType: ReferenceType): Promise<Reference[]> {
-    return this.referenceModel.find({ referenceType }).exec()
+  async getByTypeReference(typeReference: TypeReference): Promise<Reference[]> {
+    return this.referenceModel.find({ typeReference }).exec()
   }
 
 
