@@ -5,7 +5,6 @@ import cn from 'classnames';
 import { Document } from '@/app/components/document/document';
 import Journal from '@/app/components/journal/journal';
 import { DocumentsData } from '@/app/data/documents';
-import { ConvertDocuments } from '@/app/utils/converters';
 import { DocumentType } from '../../interfaces/documents/mainDocument.interface';
 
 export default function Gild() {
@@ -24,11 +23,9 @@ export default function Gild() {
         <div className={styles.actionBox}>
           <Document documentType={DocumentType.SaleProd}/>
         </div>
-        <Journal
+        {/* <Journal
           documents={ConvertDocuments(DocumentsData)}
-          contentTitle={DocumentType.SaleProd}
-          contentType={'document'}
-        />
+        /> */}
 
 
       </div>

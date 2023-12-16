@@ -53,8 +53,10 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
         })
     }
 
-    const onSubmit = (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean) => {
-        updateCreateReference(body, typeReference, isNewReference)
+    const onSubmit = async (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean) => {
+        let result = await updateCreateReference(body, typeReference, isNewReference);
+        console.log(result)
+        
     }
 
     return (

@@ -1,26 +1,26 @@
-import { typeReference } from "../interfaces/reference.interface"
+import { TypeReference } from '../interfaces/reference.interface'
 import { ReportsType } from "../interfaces/report.interface"
 
 interface Result {
     label: string,
-    typeReference: typeReference
+    typeReference: TypeReference
 }
 
 export const getOptionsByReportType = (reportsType:ReportsType):Result => {
     switch (reportsType) {
         case ReportsType.AktSverka:
-            return {label:'Корхона', typeReference: typeReference.PARTNERS}
+            return {label:'Корхона', typeReference: TypeReference.PARTNERS}
         case ReportsType.DebitorKreditor:
-            return { label: 'Корхона', typeReference: typeReference.PARTNERS }
+            return { label: 'Корхона', typeReference: TypeReference.PARTNERS }
         case ReportsType.CashObotot:
-            return { label: 'Харажат', typeReference: typeReference.CHARGES }
+            return { label: 'Харажат', typeReference: TypeReference.CHARGES }
         case ReportsType.ChargesOborot:
-            return { label: 'Харажат', typeReference: typeReference.CHARGES }
+            return { label: 'Харажат', typeReference: TypeReference.CHARGES }
         case ReportsType.MatOborot:
-            return { label: 'Товар моддий бойлик', typeReference: typeReference.TMZ }
+            return { label: 'Товар моддий бойлик', typeReference: TypeReference.TMZ }
         case ReportsType.ZpOborot:
-            return { label: 'Ходим', typeReference: typeReference.WORKERS }
+            return { label: 'Ходим', typeReference: TypeReference.WORKERS }
         default:
-            return { label: 'Корхона', typeReference: typeReference.PARTNERS }
+            return { label: 'Корхона', typeReference: TypeReference.PARTNERS }
     }
 }

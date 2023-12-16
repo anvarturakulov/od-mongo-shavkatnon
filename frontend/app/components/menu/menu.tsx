@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react';
 import { MenuItem } from '../../interfaces/menu.interface';
 import { getKeyEnum } from '@/app/utils/getKeyEnum';
 import { ContentType } from '../../interfaces/general.interface';
+import { Maindata, useAppContext } from '@/app/context/app.context';
 
-export default function Menu({menuData, changeSettings,className, ...props}:MenuProps):JSX.Element {
+export default function Menu({menuData, className, ...props}:MenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
+    
+    const {mainData, setMainData} = useAppContext()
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -18,12 +21,22 @@ export default function Menu({menuData, changeSettings,className, ...props}:Menu
                 return item.isOpened = !item.isOpened
             }
         })
+        
         setMenu(newMenu)
     }
 
     const onClickSubItem = (titleItem: string, contentType: ContentType) => {
         const keyItem = getKeyEnum(titleItem, contentType)
-        changeSettings(keyItem, titleItem, contentType)
+        let newMainData:Maindata = {
+            ...mainData,
+            menu: {
+                activeMenuKey: keyItem,
+                contentType: contentType,
+                contentTitle: titleItem
+            },
+        }
+        setMainData(newMainData);
+        console.log(mainData)
     }
 
 

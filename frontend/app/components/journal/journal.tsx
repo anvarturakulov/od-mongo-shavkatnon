@@ -10,22 +10,29 @@ import ShowIco from './ico/view.svg'
 import Header from '../header/header';
 import { useEffect, useRef, useState } from 'react';
 import { Document } from '../document/document';
+import { useAppContext } from '@/app/context/app.context';
 
 
-export default function Journal({ documents, contentTitle, contentType, className, ...props}:JournalProps):JSX.Element {
+export default function Journal({ documents, className, ...props}:JournalProps):JSX.Element {
     
     const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
+
+    const {mainData, setMainData} = useAppContext()
+    
     useEffect(()=> {
-        setVisibilityNewElement(false)
-    }, [contentTitle])
+        console.log(mainData)
+    }, [mainData.menu.contentType])
+
+    console.log(mainData)
 
     return (
         <>
-            <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
+            {/* <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
             <div className={styles.newElement}>
                 {visibilityNewElement && <Document documentType={contentTitle}/>}
-            </div>
+            </div> */}
             <div className={styles.container} >
+                <div>{mainData.menu.contentType}</div>
                 <table className={styles.table}>
                     <thead className={styles.thead}>
                         <tr key='0'>

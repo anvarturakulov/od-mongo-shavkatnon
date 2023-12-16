@@ -1,10 +1,10 @@
-import { typeReference } from "./reference.interface"
 import { DocumentType } from "./documents/mainDocument.interface"
 import { ContentType, ServiceType } from "./general.interface"
+import { TypeReference } from './reference.interface'
 import { ReportsType } from './report.interface'
 
 interface MenuSubItem {
-    title: DocumentType | typeReference | ServiceType | ReportsType,
+    title: DocumentType | TypeReference | ServiceType | ReportsType,
     description: string,
     type: ContentType,
     active:boolean

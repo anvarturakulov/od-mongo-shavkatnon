@@ -1,7 +1,7 @@
 import { DocumentType } from "../interfaces/documents/mainDocument.interface";
 import {ServiceType } from "../interfaces/general.interface";
 import { MenuItem } from "../interfaces/menu.interface";
-import { typeReference } from "../interfaces/reference.interface";
+import { TypeReference } from "../interfaces/reference.interface";
 import { ReportsType } from "../interfaces/report.interface";
 
 export const MenuData:Array<MenuItem> = [
@@ -30,12 +30,12 @@ export const MenuData:Array<MenuItem> = [
         title: 'Руйхатлар',
         isOpened: false,
         subMenu: [
-            { title: typeReference.TMZ, description:'Товар моддий бойликлар', type: 'reference', active:false },
-            { title: typeReference.STORAGES, description:'Омборхонлар', type: 'reference', active: false },
-            { title: typeReference.PARTNERS, description:'Хамкорлар', type: 'reference', active: false },
-            { title: typeReference.WORKERS, description:'Ходимлар', type: 'reference', active: false },
-            { title: typeReference.CHARGES, description:'Харажатлар', type: 'reference', active: false },
-            { title: typeReference.PRICES, description:'Нархлар', type: 'reference', active: false },
+            { title: TypeReference.TMZ, description:'Товар моддий бойликлар', type: 'reference', active:false },
+            { title: TypeReference.STORAGES, description:'Омборхонлар', type: 'reference', active: false },
+            { title: TypeReference.PARTNERS, description:'Хамкорлар', type: 'reference', active: false },
+            { title: TypeReference.WORKERS, description:'Ходимлар', type: 'reference', active: false },
+            { title: TypeReference.CHARGES, description:'Харажатлар', type: 'reference', active: false },
+            { title: TypeReference.PRICES, description:'Нархлар', type: 'reference', active: false },
         ]
     },
     {

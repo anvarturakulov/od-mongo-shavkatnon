@@ -1,12 +1,10 @@
 'use client'
-import styles from './referenceWindow.module.css'
+import styles from './referenceJournal.module.css'
 import cn from 'classnames';
-import { DocumentState, DocumentType } from '../../interfaces/documents/mainDocument.interface';
 import IcoTrash from './ico/trash.svg'
 import Header from '../header/header';
 import { useEffect, useRef, useState } from 'react';
 import { Reference } from '../reference/reference';
-import { ReferencesData } from '@/app/data';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';

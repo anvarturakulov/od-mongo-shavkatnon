@@ -1,23 +1,23 @@
 import { MenuData } from '../data/menu';
-import { typeReference } from '../interfaces/reference.interface';
+import { TypeReference } from '../interfaces/reference.interface';
 
-export const getTypeReference = (description: string): typeReference => {
+export const getTypeReference = (description: string): TypeReference => {
   const title = MenuData.filter(item => item.title == 'Руйхатлар')[0].subMenu.filter(el => el.description == description)[0].title
 
   switch (title) {
-    case typeReference.PARTNERS:
-      return typeReference.PARTNERS;
-    case typeReference.CHARGES:
-      return typeReference.CHARGES
-    case typeReference.PRICES:
-      return typeReference.PRICES;
-    case typeReference.STORAGES:
-      return typeReference.STORAGES;
-    case typeReference.TMZ:
-      return typeReference.TMZ;
-    case typeReference.WORKERS:
-      return typeReference.WORKERS;
+    case TypeReference.PARTNERS:
+      return TypeReference.PARTNERS;
+    case TypeReference.CHARGES:
+      return TypeReference.CHARGES
+    case TypeReference.PRICES:
+      return TypeReference.PRICES;
+    case TypeReference.STORAGES:
+      return TypeReference.STORAGES;
+    case TypeReference.TMZ:
+      return TypeReference.TMZ;
+    case TypeReference.WORKERS:
+      return TypeReference.WORKERS;
     default:
-      return typeReference.PARTNERS
+      return TypeReference.PARTNERS
   }
 }

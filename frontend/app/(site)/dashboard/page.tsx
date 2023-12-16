@@ -4,16 +4,13 @@ import { MenuData } from '@/app/data/menu'
 import Menu from '@/app/components/menu/menu'
 import styles from './page.module.css'
 import { DocumentsData } from '@/app/data/documents'
-import { ConvertDocuments } from '@/app/utils/converters'
 import Journal from '@/app/components/journal/journal'
-import Report from '@/app/components/report/report'
 import { ContentType, DashboardSettings } from '../../interfaces/general.interface'
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import ReportWindow from '@/app/components/reportWindow/reportWindow'
 import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
-import { ReferencesData } from '@/app/data/references'
-import ReferenceWindow from '@/app/components/referenceJournal/referenceWindow'
+import ReferenceJournal from '@/app/components/referenceJournal/referenceJournal'
+import { useAppContext } from '@/app/context/app.context'
 
 const defaultSettingsDashboard: DashboardSettings = {
   mainPage: true,
@@ -23,26 +20,8 @@ const defaultSettingsDashboard: DashboardSettings = {
   userId: ''
 }
 
-export default function Dashboard() {
-
-  const [settingsDashboard, setSettingsDashboard] = useState<DashboardSettings>(defaultSettingsDashboard) 
-
-  const changeSettings = (keyItem: string, titleItem:string, contentType: ContentType) =>{
-    let newSettings = {
-      mainPage: false,
-      activeMenuKey: keyItem,
-      activeMenuTitle: titleItem,
-      activeMenuType: contentType,
-      userId: 'Шавкат ака',
-      visibilityNewElement: false
-
-    }
-    setSettingsDashboard(newSettings)
-  }
-
-  const infoBlock = (
+const infoBlock = (
     <>
-      
       <div className={styles.container}>
         <div className={styles.box}>
           <Htag tag='h1'>89,935</Htag>
@@ -72,7 +51,7 @@ export default function Dashboard() {
   const logo = (
     <div
       className={styles.logo}
-      onClick={() => setSettingsDashboard(defaultSettingsDashboard)}
+      // onClick={() => setSettingsDashboard(defaultSettingsDashboard)}
     >
       <div className={styles.logoTitle}>
         Карандаш v 1.0
@@ -83,12 +62,31 @@ export default function Dashboard() {
     </div>
   )
 
-  const {mainPage, activeMenuKey, activeMenuTitle, activeMenuType, userId} = settingsDashboard
+
+export default function Dashboard() {
+
+  // const [settingsDashboard, setSettingsDashboard] = useState<DashboardSettings>(defaultSettingsDashboard) 
   
+  const {mainData, setMainData} = useAppContext()
+
+  // const changeSettings = (keyItem: string, titleItem:string, contentType: ContentType) =>{
+  //   let newSettings = {
+  //     mainPage: false,
+  //     activeMenuKey: keyItem,
+  //     activeMenuTitle: titleItem,
+  //     activeMenuType: contentType,
+  //     userId: 'Шавкат ака',
+  //     visibilityNewElement: false
+  //   }
+  //   setSettingsDashboard(newSettings)
+  // }
+
+  // const {mainPage, activeMenuKey, activeMenuTitle, activeMenuType, userId} = settingsDashboard
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.menu}>
-        <Menu menuData={MenuData} changeSettings={changeSettings}/>
+        <Menu menuData={MenuData}/>
         {logo}
       </div>
       <div className={styles.content}>
@@ -96,33 +94,28 @@ export default function Dashboard() {
           <Htag tag='h2'>Ассалому алайкум, Шавкат Ака</Htag>
         </div>  
 
-        {mainPage && infoBlock}
+        {mainData.mainPage && infoBlock}
  
         <div className={styles.journalBox}>
+          {/* {
+            <Journal documents={ConvertDocuments(DocumentsData)}/>
+          } */}
+        </div>
+
+        <div className={styles.journalBox}>
           {
-            activeMenuType=='document' && 
-            <Journal 
-              documents={ConvertDocuments(DocumentsData)} 
-              contentTitle={activeMenuTitle} 
-              contentType={activeMenuType}
+            mainData.menu.contentType=='reference' && 
+            <ReferenceJournal
+              contentTitle={mainData.menu.contentTitle} 
+              contentType={mainData.menu.contentType}
               />
           }
         </div>
 
         <div className={styles.journalBox}>
           {
-            activeMenuType=='reference' && 
-            <ReferenceWindow
-              contentTitle={activeMenuTitle} 
-              contentType={activeMenuType}
-              />
-          }
-        </div>
-
-        <div className={styles.journalBox}>
-          {
-            activeMenuType == 'report' &&
-            <ReportWindow reportsType={getReportTypeByTitle(activeMenuTitle)} />
+            mainData.menu.contentType == 'report' &&
+            <ReportWindow reportsType={getReportTypeByTitle(mainData.menu.contentTitle)} />
           }
         </div>
 
