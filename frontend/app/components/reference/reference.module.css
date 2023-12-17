@@ -3,6 +3,12 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 10px;
+    transition: all 5s;
+    display: block;
+}
+
+.boxClose{
+    display: none;
 }
 
 .input {

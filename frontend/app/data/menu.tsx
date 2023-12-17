@@ -31,7 +31,7 @@ export const MenuData:Array<MenuItem> = [
         isOpened: false,
         subMenu: [
             { title: TypeReference.TMZ, description:'Товар моддий бойликлар', type: 'reference', active:false },
-            { title: TypeReference.STORAGES, description:'Омборхонлар', type: 'reference', active: false },
+            { title: TypeReference.STORAGES, description:'Цех ва омборхоналар', type: 'reference', active: false },
             { title: TypeReference.PARTNERS, description:'Хамкорлар', type: 'reference', active: false },
             { title: TypeReference.WORKERS, description:'Ходимлар', type: 'reference', active: false },
             { title: TypeReference.CHARGES, description:'Харажатлар', type: 'reference', active: false },

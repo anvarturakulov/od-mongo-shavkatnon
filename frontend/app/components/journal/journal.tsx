@@ -1,38 +1,32 @@
 'use client'
 import { Button, Htag } from '@/app/components'
 import styles from './journal.module.css'
-import cn from 'classnames';
 import {JournalProps} from './journal.props'
-import classNames from 'classnames';
-import { DocumentState, DocumentType } from '../../interfaces/documents/mainDocument.interface';
-import IcoTrash from './ico/trash.svg'
-import ShowIco from './ico/view.svg'
 import Header from '../header/header';
 import { useEffect, useRef, useState } from 'react';
-import { Document } from '../document/document';
 import { useAppContext } from '@/app/context/app.context';
 
 
-export default function Journal({ documents, className, ...props}:JournalProps):JSX.Element {
+export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
     const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
 
     const {mainData, setMainData} = useAppContext()
     
-    useEffect(()=> {
-        console.log(mainData)
-    }, [mainData.menu.contentType])
+    // useEffect(()=> {
+    //     console.log(mainData)
+    // }, [mainData.menu.contentType])
 
-    console.log(mainData)
+    // console.log(mainData)
 
     return (
         <>
-            {/* <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
-            <div className={styles.newElement}>
+            <Header/>  
+            {/* <div className={styles.newElement}>
                 {visibilityNewElement && <Document documentType={contentTitle}/>}
             </div> */}
             <div className={styles.container} >
-                <div>{mainData.menu.contentType}</div>
+                {/* <div>{mainData.menu.contentType}</div> */}
                 <table className={styles.table}>
                     <thead className={styles.thead}>
                         <tr key='0'>
@@ -47,7 +41,7 @@ export default function Journal({ documents, className, ...props}:JournalProps):
                             <th key='9' className={styles.rowAction}>Амал</th>
                         </tr>
                     </thead>
-                    <tbody className={styles.tbody}>
+                    {/* <tbody className={styles.tbody}>
                         {documents?.map((item, key) => (
                             <>
                                 <tr 
@@ -80,7 +74,7 @@ export default function Journal({ documents, className, ...props}:JournalProps):
                                 </tr>
                             </>    
                         ))}
-                    </tbody>
+                    </tbody> */}
                 </table>
             </div>
         </>

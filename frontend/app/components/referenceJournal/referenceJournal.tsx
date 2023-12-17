@@ -9,29 +9,31 @@ import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { ReferenceJournalProps } from './referenceJournal.props';
+import { useAppContext } from '@/app/context/app.context';
 
-export default function ReferenceJournal({ contentTitle, contentType, className, ...props}:ReferenceJournalProps):JSX.Element {
+export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
-    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+getTypeReference(contentTitle);
+    const {mainData, setMainData} = useAppContext();
+    const { showReferenceWindow, contentTitle } = mainData;
+    const referenceType = getTypeReference(contentTitle);
+
+    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+referenceType;
 
     const getData = async (url:string) => {
         const response = await fetch(url);
         return await response.json();
     };
     
-    const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
+    const { data, mutate } = useSWR(url, (url) => getData(url));
 
-    useEffect(()=> {
-        setVisibilityNewElement(false)
-    }, [contentTitle])
-
-    const { data, error } = useSWR(url, (url) => getData(url));
-    
+    useEffect(() => {
+        mutate()
+    }, [mainData.showReferenceWindow])
     return (
         <>  
-            <Header contentType={contentType} contentTitle={contentTitle} setVisibilityNewElement={setVisibilityNewElement} visibilityNewElement={visibilityNewElement}/>  
+            <Header/>  
             <div className={styles.newElement}>
-                {visibilityNewElement && <Reference referenceTitle={contentTitle} isNewReference={true}/>}
+                <Reference isNewReference={true}/>
             </div>
             <div className={styles.container} >
                 <table className={styles.table}>
@@ -39,9 +41,17 @@ export default function ReferenceJournal({ contentTitle, contentType, className,
                         <tr key='0'>
                             <th className={styles.rowId} key='1'>№</th>
                             <th className={styles.name} key='2'>Номи</th>
-                            <th className={styles.types} key='3'>Ул. бир.</th>
-                            <th className={styles.types} key='4'>Хамкор тури</th>
-                            <th className={styles.types} key='5'>ТМБ тури</th>
+                            {
+                                referenceType == 'TMZ' &&
+                                <>
+                                    <th className={styles.types} key='3'>Ул. бир.</th>
+                                    <th className={styles.types} key='5'>ТМБ тури</th>
+                                </>
+                            }
+                            {
+                                referenceType == 'PARTNERS' &&
+                                <th className={styles.types} key='4'>Хамкор тури</th>
+                            }
                             <th className={styles.comment} key='6'>Изох</th>
                             <th className={styles.rowAction} key='7'>Амал</th>
                         </tr>
@@ -60,9 +70,17 @@ export default function ReferenceJournal({ contentTitle, contentType, className,
                                             [styles.name]: 1,
                                         })}
                                     >{item.name}</td>
-                                    <td key={key+3} className={styles.types}>{item.unit}</td>
-                                    <td key={key+4} className={styles.types}>{item.typePartners}</td>
-                                    <td key={key+5} className={styles.types}>{item.typeTMZ}</td>
+                                    {
+                                        referenceType == 'TMZ' &&
+                                        <>
+                                            <td key={key+3} className={styles.types}>{item.unit}</td>
+                                            <td key={key+5} className={styles.types}>{item.typeTMZ}</td>
+                                        </>
+                                    }
+                                    {
+                                        referenceType == 'PARTNERS' &&
+                                        <td key={key+4} className={styles.types}>{item.typePartners}</td>
+                                    }
                                     <td key={key+6} className={styles.comment}>{item.comment}</td>
                                     <td key={key+7} className={styles.rowAction}>
                                         <IcoTrash className={styles.icoTrash}/>

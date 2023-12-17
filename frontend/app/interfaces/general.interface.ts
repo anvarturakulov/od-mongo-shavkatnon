@@ -14,3 +14,4 @@ export enum ServiceType {
     DeleteDocs = 'Хужжатларни учириш',
 }
 
+export type MessageType = 'success' | 'error' | 'warm'

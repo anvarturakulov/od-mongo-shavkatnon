@@ -1,0 +1,51 @@
+.messageBox{
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    transform: translateX(300px);
+    right: 0;
+    bottom: 10px;
+    transition: all 2s;
+    border-radius: 10px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    gap: 10px;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.showBox{
+    transform: translateX(-10px);
+    opacity: 100%;
+}
+
+.success{
+    background-color: rgb(130, 229, 130);
+}
+
+.error{
+    background-color: #EE6C53;
+}
+
+.label{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.content{
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+.icon{
+    width: 50px;
+    height: 50px;
+}
+
+.error .content,
+.error .label {
+    color: white;
+}

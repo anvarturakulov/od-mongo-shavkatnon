@@ -12,7 +12,6 @@ export default function Home() {
   const [currentUser, SetCurrentUser] = useState<string>('dashboard')
 
   return (
-    <AppProvider>
       <div className={styles.container}>
         <div className={styles.content}>
           <Htag tag='h1'>Дастурга кириш</Htag>
@@ -41,6 +40,5 @@ export default function Home() {
           className={styles.image}
         />
       </div>
-    </AppProvider>
   )
 }

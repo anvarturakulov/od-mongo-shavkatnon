@@ -1,46 +1,40 @@
-import { PropsWithChildren, ReactNode, createContext, useContext, useState } from "react";
-import { ContentType } from '../interfaces/general.interface';
+"use client"
+import { ReactNode, createContext, useContext, useState } from "react";
+import { ContentType, MessageType } from '../interfaces/general.interface';
 
 export interface Maindata {
-  menu: {
-    activeMenuKey: string,
-    contentType?: ContentType,
-    contentTitle: string,
-  }
-  window: {
-    show: boolean;
-  }
-  user: {
-    name: string,
-    role: string
-  },
-  mainPage: boolean
+  activeMenuKey: string,
+  contentType?: ContentType,
+  contentTitle: string,
+  showReferenceWindow: boolean,
+  showDocumentWindow: boolean,
+  user: string,
+  mainPage: boolean,
+  showMessageWindow: boolean,
+  message: string,
+  messageType: MessageType,
 }
 
 export interface IAppContext {
   mainData: Maindata,
-  setMainData : (state:Maindata) => void;
+  setMainData? : (key: string, value: any) => void;
 };
 
 const defaultMainData: Maindata = {
-    menu: {
-      activeMenuKey: '',
-      contentType: 'document',
-      contentTitle: '',
-    },
-    window: {
-      show: false
-    },
-    user: {
-      name: 'Шавкат',
-      role: 'Admin'
-    },
-    mainPage: true
+    activeMenuKey: '',
+    contentType: 'document',
+    contentTitle: '',
+    showReferenceWindow: false,
+    showDocumentWindow: false,
+    user: 'Шавкат',
+    mainPage: true,
+    showMessageWindow: false,
+    message: 'Маълумотлар сакланди',
+    messageType: 'error',
   }
 
 const appContextDefaultValues: IAppContext = {
   mainData: {...defaultMainData},
-  setMainData: (state:Maindata) => {}
 };
 const AppContext = createContext<IAppContext>(appContextDefaultValues);
 
@@ -56,9 +50,11 @@ export function AppProvider({ children }: Props) {
     
     const [data, setData] = useState<Maindata>(defaultMainData);
 
-    const setMainData = (state:Maindata):void => {
-      console.log('Anvar');  
-      setData(state);
+    const setMainData = (key: string, value: any ):void => {
+      setData((data) => ({
+        ...data,
+        [key]: value
+      }));
     };
 
     const value = {

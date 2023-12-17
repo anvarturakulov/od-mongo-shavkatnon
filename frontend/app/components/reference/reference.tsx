@@ -8,6 +8,8 @@ import { ReferenceBody, TypePartners, TypeReference, TypeTMZ } from '../../inter
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { updateCreateReference } from '@/app/service/references.service';
 import { DataForSelect, typePartnersList, typeTMZList } from './reference.constants';
+import { useAppContext } from '@/app/context/app.context';
+import { showMessage } from '@/app/utils/showMessage';
 
 const Select = (list: Array<DataForSelect>, label: string, typeString: string, changeElement: Function) => {
     return (
@@ -28,14 +30,16 @@ const Select = (list: Array<DataForSelect>, label: string, typeString: string, c
     )
 }
 
-export const Reference = ({reference, referenceTitle, isNewReference, className, ...props }: ReferenceProps) :JSX.Element => {
+export const Reference = ({ isNewReference, className, ...props }: ReferenceProps) :JSX.Element => {
 
-    const typeReference = getTypeReference(referenceTitle);
+    const {mainData, setMainData} = useAppContext();
+    const { contentTitle } = mainData;
+    const typeReference = getTypeReference( contentTitle );
     
     const defaultBody: ReferenceBody = {
         name: '',
         typeReference,
-        typePartners: '',
+        typePartners: typeReference == TypeReference.PARTNERS ? TypePartners.CLIENTS : '',
         typeTMZ: typeReference == TypeReference.TMZ ? TypeTMZ.MATERIAL : '',
         unit: '',
         comment: ''
@@ -54,13 +58,17 @@ export const Reference = ({reference, referenceTitle, isNewReference, className,
     }
 
     const onSubmit = async (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean) => {
-        let result = await updateCreateReference(body, typeReference, isNewReference);
-        console.log(result)
-        
+        if (body.name.trim().length != 0) {
+            updateCreateReference(body, typeReference, isNewReference, setMainData);
+        } else {
+            showMessage('Номини тулдиринг', 'error', setMainData);
+        }
     }
 
     return (
-            <div className={cn(styles.referenceBox, {[styles.newReference] : isNewReference})}>
+            <div className={cn(styles.referenceBox, 
+                {[styles.newReference] : isNewReference},
+                {[styles.boxClose] : !mainData.showReferenceWindow})}>
                 <div>
                     <div>Номи</div>
                     <input type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
