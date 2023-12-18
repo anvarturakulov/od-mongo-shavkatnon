@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { getBodyForReferenceRequest } from '../utils/utilsWithRequest';
 import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
-import { useAppContext } from '../context/app.context';
 import { showMessage } from '../utils/showMessage';
 
 export const updateCreateReference = (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean, setMainData: Function | undefined) => {
@@ -13,6 +12,7 @@ export const updateCreateReference = (body: ReferenceBody, typeReference: TypeRe
         if (setMainData) {
           showMessage(`${body.name} - ${typeReference} - янги элемент киритилди`, 'success', setMainData )
           setMainData('showReferenceWindow', false);
+          setMainData('clearControlElements', true);
         }
       })
       .catch(function (error) {

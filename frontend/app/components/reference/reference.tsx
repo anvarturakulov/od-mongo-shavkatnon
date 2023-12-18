@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
@@ -57,11 +57,25 @@ export const Reference = ({ isNewReference, className, ...props }: ReferenceProp
         })
     }
 
+
     const onSubmit = async (body: ReferenceBody, typeReference: TypeReference, isNewReference: boolean) => {
         if (body.name.trim().length != 0) {
             updateCreateReference(body, typeReference, isNewReference, setMainData);
         } else {
             showMessage('Номини тулдиринг', 'error', setMainData);
+        }
+    }
+
+    useEffect(()=> {
+        if (mainData.clearControlElements) {
+            setBody(defaultBody);
+        }
+    }, [mainData.clearControlElements])
+
+    const cancelSubmit = () => {
+        if (setMainData) {
+            setMainData('showReferenceWindow', false);
+            setMainData('clearControlElements', true);
         }
     }
 
@@ -71,7 +85,7 @@ export const Reference = ({ isNewReference, className, ...props }: ReferenceProp
                 {[styles.boxClose] : !mainData.showReferenceWindow})}>
                 <div>
                     <div>Номи</div>
-                    <input type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                    <input value={body.name} type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
                 </div>
                 
                 {
@@ -87,19 +101,19 @@ export const Reference = ({ isNewReference, className, ...props }: ReferenceProp
                         }
                         <div>
                             <div>Улчов бирлиги</div>
-                            <input type="text" id='unit' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                            <input value={body.unit} type="text" id='unit' className={styles.input} onChange={(e)=>changeElements(e)}/>
                         </div>
                     </div>
                 }
 
                 <div>
                     <div>Изох</div>
-                    <input type="text" id='comment' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                    <input value={body.comment} type="text" id='comment' className={styles.input} onChange={(e)=>changeElements(e)}/>
                 </div>
                
             <div className={styles.boxBtn}>
                 <Button appearance='primary' onClick={() => onSubmit(body, typeReference, isNewReference)}>Саклаш</Button>
-                <Button appearance='ghost'>Бекор килиш</Button>
+                <Button appearance='ghost' onClick={cancelSubmit}>Бекор килиш</Button>
             </div> 
         </div>   
     )

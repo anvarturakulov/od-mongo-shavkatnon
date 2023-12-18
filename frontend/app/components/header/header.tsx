@@ -21,13 +21,23 @@ export default function Header({ className, ...props }: HeaderProps): JSX.Elemen
                     
                     <CloseIco 
                         className={styles.ico}
-                        onClick={() => setMainData && setMainData('showReferenceWindow', false)}
+                        onClick={() => {
+                            if (setMainData) {
+                                   setMainData('showReferenceWindow', false);
+                                   setMainData('clearControlElements', true);
+                                }
+                            }}
                             
                     />
                     :
                     <AddIco 
                         className={styles.ico}
-                        onClick={() => setMainData && setMainData('showReferenceWindow', true)}    
+                        onClick={() => {
+                            if (setMainData) {
+                                   setMainData('showReferenceWindow', true);
+                                   setMainData('clearControlElements', false);
+                                }
+                            }} 
                     />
                     }
                 </div>

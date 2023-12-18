@@ -13,6 +13,7 @@ export interface Maindata {
   showMessageWindow: boolean,
   message: string,
   messageType: MessageType,
+  clearControlElements: boolean
 }
 
 export interface IAppContext {
@@ -31,6 +32,7 @@ const defaultMainData: Maindata = {
     showMessageWindow: false,
     message: 'Маълумотлар сакланди',
     messageType: 'error',
+    clearControlElements: false,
   }
 
 const appContextDefaultValues: IAppContext = {
