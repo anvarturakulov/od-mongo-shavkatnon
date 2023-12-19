@@ -72,6 +72,22 @@ export const Reference = ({ isNewReference, className, ...props }: ReferenceProp
         }
     }, [mainData.clearControlElements])
 
+    useEffect(() => {
+        const {currentReferencyForShow} = mainData
+        
+        if (currentReferencyForShow != undefined) {
+            let newBody = {
+                name: currentReferencyForShow.name,
+                typeReference,
+                typePartners: typeReference == TypeReference.PARTNERS ? TypePartners.CLIENTS : '',
+                typeTMZ: typeReference == TypeReference.TMZ ? TypeTMZ.MATERIAL : '',
+                unit: currentReferencyForShow.unit ? currentReferencyForShow.unit : '',
+                comment: currentReferencyForShow.comment ? currentReferencyForShow.comment : '' 
+            }
+            setBody(newBody)
+        }
+    }, [mainData.currentReferencyForShow])
+
     const cancelSubmit = () => {
         if (setMainData) {
             setMainData('showReferenceWindow', false);
@@ -87,7 +103,7 @@ export const Reference = ({ isNewReference, className, ...props }: ReferenceProp
                     <div>Номи</div>
                     <input value={body.name} type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
                 </div>
-                
+
                 {
                     typeReference == TypeReference.PARTNERS && 
                     Select(typePartnersList, 'Хамкор тури', 'typePartners', changeElements)

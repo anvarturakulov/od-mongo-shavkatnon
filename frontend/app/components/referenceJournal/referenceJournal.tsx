@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { ReferenceJournalProps } from './referenceJournal.props';
 import { useAppContext } from '@/app/context/app.context';
+import { getReferenceById, markToDeleteReference } from '@/app/service/references.service';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
@@ -28,62 +29,80 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
 
     useEffect(() => {
         mutate()
-    }, [mainData.showReferenceWindow])
+        setMainData && setMainData('updateDataForRefenceJournal', false);
+    }, [mainData.showReferenceWindow, mainData.updateDataForRefenceJournal])
+
+    const deleteItem = (id: string | undefined, name: string) => {
+        markToDeleteReference(id, name,setMainData )
+    }
+
+    const getReference = async (id: string | undefined, setMainData: Function | undefined) => {
+        if (id) {
+            const reference = await getReferenceById(id, setMainData);
+            setMainData && setMainData('showReferenceJournalWindow', false);
+        }
+    }
+
     return (
         <>  
-            <Header/>  
+            <Header/>
             <div className={styles.newElement}>
                 <Reference isNewReference={true}/>
             </div>
             <div className={styles.container} >
                 <table className={styles.table}>
-                    <thead className={styles.thead} key='22333'>
-                        <tr key='0'>
-                            <th className={styles.rowId} key='1'>№</th>
-                            <th className={styles.name} key='2'>Номи</th>
+                    <thead className={styles.thead}>
+                        <tr>
+                            <th className={styles.rowId}>№</th>
+                            <th className={styles.name}>Номи</th>
                             {
                                 referenceType == 'TMZ' &&
                                 <>
-                                    <th className={styles.types} key='3'>Ул. бир.</th>
-                                    <th className={styles.types} key='5'>ТМБ тури</th>
+                                    <th className={styles.types}>Ул. бир.</th>
+                                    <th className={styles.types}>ТМБ тури</th>
                                 </>
                             }
                             {
                                 referenceType == 'PARTNERS' &&
-                                <th className={styles.types} key='4'>Хамкор тури</th>
+                                <th className={styles.types}>Хамкор тури</th>
                             }
-                            <th className={styles.comment} key='6'>Изох</th>
-                            <th className={styles.rowAction} key='7'>Амал</th>
+                            <th className={styles.comment}>Изох</th>
+                            <th className={styles.rowAction}>Амал</th>
                         </tr>
                     </thead>
-                    <tbody className={styles.tbody} key='ssss'>
+                    <tbody className={styles.tbody}>
                         {data && data.length>0 && data.map((item:ReferenceModel, key:number) => (
                             <>
                                 <tr 
                                     key={key+0} 
-                                    onDoubleClick={() => {alert(item._id)}} 
-                                    className={styles.trRow}    
-                                >
-                                    <td key={key+1} className={styles.rowId}>{key+1}</td>
-                                    <td key={key+2} className={cn(className, {
+                                    onDoubleClick={() => {getReference(item._id, setMainData)}} 
+                                    className={cn(className, {
                                             [styles.deleted]: item.deleted,
+                                            [styles.trRow]: 1,
+                                        })}   
+                                >
+                                    <td className={styles.rowId}>{key+1}</td>
+                                    <td className={cn(className, {
                                             [styles.name]: 1,
                                         })}
                                     >{item.name}</td>
                                     {
                                         referenceType == 'TMZ' &&
                                         <>
-                                            <td key={key+3} className={styles.types}>{item.unit}</td>
-                                            <td key={key+5} className={styles.types}>{item.typeTMZ}</td>
+                                            <td className={styles.types}>{item.unit}</td>
+                                            <td className={styles.types}>{item.typeTMZ}</td>
                                         </>
                                     }
                                     {
                                         referenceType == 'PARTNERS' &&
-                                        <td key={key+4} className={styles.types}>{item.typePartners}</td>
+                                        <td className={styles.types}>{item.typePartners}</td>
                                     }
-                                    <td key={key+6} className={styles.comment}>{item.comment}</td>
-                                    <td key={key+7} className={styles.rowAction}>
-                                        <IcoTrash className={styles.icoTrash}/>
+                                    <td className={styles.comment}>{item.comment}</td>
+                                    <td className={styles.rowAction}>
+                                        <IcoTrash 
+                                            className={styles.icoTrash}
+                                            onClick = {() => deleteItem(item._id, item.name)}
+                                            />
                                     </td>
                                 </tr>
                             </>    

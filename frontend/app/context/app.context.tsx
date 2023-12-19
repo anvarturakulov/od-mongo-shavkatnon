@@ -1,6 +1,7 @@
 "use client"
 import { ReactNode, createContext, useContext, useState } from "react";
 import { ContentType, MessageType } from '../interfaces/general.interface';
+import { ReferenceModel } from '../interfaces/reference.interface';
 
 export interface Maindata {
   activeMenuKey: string,
@@ -13,7 +14,9 @@ export interface Maindata {
   showMessageWindow: boolean,
   message: string,
   messageType: MessageType,
-  clearControlElements: boolean
+  clearControlElements: boolean,
+  updateDataForRefenceJournal: boolean,
+  currentReferencyForShow: ReferenceModel | undefined,
 }
 
 export interface IAppContext {
@@ -33,6 +36,8 @@ const defaultMainData: Maindata = {
     message: 'Маълумотлар сакланди',
     messageType: 'error',
     clearControlElements: false,
+    updateDataForRefenceJournal: false,
+    currentReferencyForShow: undefined,
   }
 
 const appContextDefaultValues: IAppContext = {
@@ -53,9 +58,10 @@ export function AppProvider({ children }: Props) {
     const [data, setData] = useState<Maindata>(defaultMainData);
 
     const setMainData = (key: string, value: any ):void => {
+      // console.log(value)
       setData((data) => ({
         ...data,
-        [key]: value
+        [key]: typeof key != 'object' ? value : {...value}
       }));
     };
 
