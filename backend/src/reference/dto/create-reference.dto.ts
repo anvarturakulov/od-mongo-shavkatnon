@@ -1,5 +1,5 @@
 import { IsString, IsEnum, IsOptional, IsBoolean } from 'class-validator'
-import { TypeReference, TypePartners, TypeTMZ } from '../models/referense.model';
+import { TypeReference, TypePartners, TypeTMZ } from '../../../../interfaces/reference.interface';
 
 export class CreateReferenceDto {
   @IsString()

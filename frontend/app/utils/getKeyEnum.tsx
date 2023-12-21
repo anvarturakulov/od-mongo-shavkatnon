@@ -1,7 +1,7 @@
-import { DocumentType } from "../interfaces/documents/mainDocument.interface";
-import { ContentType, ServiceType } from "../interfaces/general.interface";
-import { TypeReference } from '../interfaces/reference.interface';
-import { ReportsType} from "../interfaces/report.interface";
+import { DocumentType } from "../../../interfaces/document.interface";
+import { ContentType, ServiceType } from "../../../interfaces/general.interface";
+import { TypeReference } from '../../../interfaces/reference.interface';
+import { ReportsType} from "../../../interfaces/report.interface";
 
 export const getKeyEnum = (val:string, contentType: ContentType):string =>{
     switch (contentType) {

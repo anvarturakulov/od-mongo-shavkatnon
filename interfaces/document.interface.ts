@@ -1,11 +1,4 @@
-import { TypeReference } from '../reference.interface'
-
-export enum DocumentState {
-    Proveden = 'Ок',
-    Saved = 'Хис. кушилмаган',
-    Deleted = 'Учирилган',
-    Error = 'Хатолик бор'
-}
+import { TypeReference } from './reference.interface'
 
 export enum DocumentType {
 
@@ -34,44 +27,29 @@ export enum DocumentType {
 
 export interface DocumentModel {
     _id: string
-    date: string
-    state: DocumentState
-    senderId: string,
-    receiverId: string,
+    date: Date,
+    senderReferenceId: string,
+    receiverReferenceId: string,
     tableData: {},
     documentType: DocumentType,
 }
 
-export interface DocumentModelOnDataBase {
-    _id: string
-    date: string
-    state: string
-    senderId: string,
-    receiverId: string,
-    tableData: string,
-    documentType: string,
-}
-
 export interface DocumentTableItem {
-    itemId: string,
-    typeReference: TypeReference,
+    referenceId: string,
     quantity: number,
     price: number,
     total: number
 }
 
-export interface OptionDocumentElements {
+export interface OptionsForDocument {
     sendertypeReference: TypeReference,
     senderLabel: string,
     senderVisible: boolean,
-
     receivetypeReference: TypeReference,
     receiveLabel: string,
     recieveVisible: boolean
-
     paymentLabel: string,
     paymentVisible: boolean,
-
     tableVisible: boolean,
 }
 

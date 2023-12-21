@@ -1,7 +1,7 @@
-import { DocumentType, OptionDocumentElements } from "../interfaces/documents/mainDocument.interface";
-import { TypeReference } from '../interfaces/reference.interface';
+import { DocumentType, OptionsForDocument } from "../../../interfaces/document.interface";
+import { TypeReference } from '../../../interfaces/reference.interface';
 
-export const getOptionOfDocumentElements = (documentType: string): OptionDocumentElements => {
+export const getOptionOfDocumentElements = (documentType: string): OptionsForDocument => {
 
     let sendertypeReference = TypeReference.STORAGES
     let senderLabel = ''

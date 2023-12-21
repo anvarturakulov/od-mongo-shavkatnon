@@ -1,4 +1,4 @@
-import { DocumentModel } from "../../interfaces/documents/mainDocument.interface";
+import { DocumentModel } from "../../interfaces/document.interface";
 import { ContentType } from "../../interfaces/general.interface";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 

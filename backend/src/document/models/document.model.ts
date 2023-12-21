@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types, Schema as MSchema } from 'mongoose';
+import { HydratedDocument, Schema as MSchema } from 'mongoose';
 import { TypeReference, TypePartners, TypeTMZ } from '../../../../interfaces/reference.interface';
 
 export type ReferenceDocument = HydratedDocument<Reference>;

@@ -1,23 +1,56 @@
 'use client'
-import { Button, Htag } from '@/app/components'
 import styles from './journal.module.css'
 import {JournalProps} from './journal.props'
 import Header from '../header/header';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
+import { Doc } from '../doc/doc';
+import useSWR from 'swr';
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
-    
-    const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
 
-    const {mainData, setMainData} = useAppContext()
+    const {mainData, setMainData} = useAppContext();
+    const { contentName, user } = mainData;
+    const referenceType = getTypeReference(contentName);
+    const token = user?.access_token;
+    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+referenceType;
+
+    const getData = async (url:string, token: string | undefined) => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        const response = await fetch(url, config);
+        return await response.json();
+    };
+    
+    const { data, mutate } = useSWR(url, (url) => getData(url, token));
+
+    useEffect(() => {
+        mutate()
+        setMainData && setMainData('updateDataForRefenceJournal', false);
+    }, [mainData.showReferenceWindow, mainData.updateDataForRefenceJournal])
+
+    const deleteItem = (id: string | undefined, name: string, token: string | undefined) => {
+        markToDeleteReference(id, name,setMainData, token)
+    }
+
+    const getReference = async (
+                                id: string | undefined,
+                                setMainData: Function | undefined,
+                                token: string | undefined
+                            ) => {
+        if (id) {
+            const reference = await getReferenceById(id, setMainData, token);
+        }
+        setMainData && setMainData('isNewReference', false);
+    }
 
     return (
         <>
             <Header/>  
             <div className={styles.newElement}>
-                <Document/>
+                <Doc/>
             </div>
             <div className={styles.container} >
                 {/* <div>{mainData.menu.contentType}</div> */}

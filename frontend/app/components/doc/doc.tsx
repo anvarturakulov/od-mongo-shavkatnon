@@ -1,17 +1,16 @@
 'use client'
 import { useState } from 'react';
-import { DocumentProps } from './document.props';
-import styles from './document.module.css';
+import { DocProps } from './doc.props';
+import styles from './doc.module.css';
 import cn from 'classnames';
 import { Button, Htag, Info, Input, DocTable, SelectForReference } from '@/app/components';
-import TrashIco from './ico/trash.svg';
 import AddIco from './ico/add.svg'
-import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
+import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/document.interface';
 import { TypeReference } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 import { useAppContext } from '@/app/context/app.context';
 
-export const Document = ({className, ...props }: DocumentProps) :JSX.Element => {
+export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const {user, contentName, contentType} = mainData;
@@ -24,17 +23,18 @@ export const Document = ({className, ...props }: DocumentProps) :JSX.Element => 
         total: 0
     }
 
-    let options: OptionDocumentElements = getOptionOfDocumentElements(documentType)
+    let options: OptionDocumentElements = getOptionOfDocumentElements(contentName)
 
-    const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
+    // const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
+    const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>([defaultDocumentTableItem])
     
     let dateNow = new Date()
-    let hasWorkers = (documentType == DocumentType.LeaveCash || documentType == DocumentType.ZpCalculate)
+    let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
 
     return (
             <div className={styles.docBox}>
                 <div className={styles.infoBox}>
-                    <Info content={documentType} label='Хужжат тури'/>
+                    <Info content={contentName} label='Хужжат тури'/>
                     <Info content={'005599'} label='Номер'/>
                     <Info content={dateNow.toISOString().split('T')[0]} label='Сана' />
                 </div>
@@ -60,7 +60,7 @@ export const Document = ({className, ...props }: DocumentProps) :JSX.Element => 
                 </div>
                 
             {options.tableVisible && <DocTable 
-                typeReference={documentType == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
+                typeReference={contentName == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
                 hasWorkers={hasWorkers} 
                 tableArray={tableArray}
                 setTableArray={setTableArray} 

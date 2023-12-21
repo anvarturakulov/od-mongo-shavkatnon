@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getBodyForReferenceRequest } from '../utils/utilsWithRequest';
-import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
+import { ReferenceBody, TypeReference } from '../../../interfaces/reference.interface';
 import { showMessage } from '../utils/showMessage';
-import { BodyForLogin } from '../interfaces/general.interface';
+import { BodyForLogin } from '../../../interfaces/general.interface';
 
 export const updateCreateReference = (
                                       body: ReferenceBody, 

@@ -1,4 +1,4 @@
-import { TypeReference } from '../interfaces/reference.interface';
+import { TypeReference } from '../../../interfaces/reference.interface';
 
 export const getTypeReferenceByTitle = (title: string): TypeReference => {
   switch (title) {

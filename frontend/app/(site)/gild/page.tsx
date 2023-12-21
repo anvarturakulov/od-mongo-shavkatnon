@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { Document } from '@/app/components/document/document';
 import Journal from '@/app/components/journal/journal';
 import { DocumentsData } from '@/app/data/documents';
-import { DocumentType } from '../../interfaces/documents/mainDocument.interface';
+import { DocumentType } from '../../interfaces/document.interface';
 
 export default function Gild() {
   return (

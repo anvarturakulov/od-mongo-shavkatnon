@@ -5,7 +5,7 @@ import IcoTrash from './ico/trash.svg'
 import Header from '../header/header';
 import { useEffect, useRef, useState } from 'react';
 import { Reference } from '../reference/reference';
-import { ReferenceModel } from '@/app/interfaces/reference.interface';
+import { ReferenceModel } from '../../../../interfaces/reference.interface';
 import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { ReferenceJournalProps } from './referenceJournal.props';
@@ -15,7 +15,7 @@ import { getReferenceById, markToDeleteReference } from '@/app/service/reference
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
-    const { showReferenceWindow, contentName, user } = mainData;
+    const { contentName, user } = mainData;
     const referenceType = getTypeReference(contentName);
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+referenceType;
