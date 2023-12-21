@@ -1,7 +1,13 @@
 .title{
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     line-height: 20px;
+}
+
+.newWindow{
+    background-color: chartreuse;
+    padding:10px;
+    font-weight: 400;
 }
 
 .ico{

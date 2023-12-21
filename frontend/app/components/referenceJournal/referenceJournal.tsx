@@ -15,39 +15,46 @@ import { getReferenceById, markToDeleteReference } from '@/app/service/reference
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
-    const { showReferenceWindow, contentTitle } = mainData;
-    const referenceType = getTypeReference(contentTitle);
-
+    const { showReferenceWindow, contentName, user } = mainData;
+    const referenceType = getTypeReference(contentName);
+    const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+referenceType;
 
-    const getData = async (url:string) => {
-        const response = await fetch(url);
+    const getData = async (url:string, token: string | undefined) => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        const response = await fetch(url, config);
         return await response.json();
     };
     
-    const { data, mutate } = useSWR(url, (url) => getData(url));
+    const { data, mutate } = useSWR(url, (url) => getData(url, token));
 
     useEffect(() => {
         mutate()
         setMainData && setMainData('updateDataForRefenceJournal', false);
     }, [mainData.showReferenceWindow, mainData.updateDataForRefenceJournal])
 
-    const deleteItem = (id: string | undefined, name: string) => {
-        markToDeleteReference(id, name,setMainData )
+    const deleteItem = (id: string | undefined, name: string, token: string | undefined) => {
+        markToDeleteReference(id, name,setMainData, token)
     }
 
-    const getReference = async (id: string | undefined, setMainData: Function | undefined) => {
+    const getReference = async (
+                                id: string | undefined,
+                                setMainData: Function | undefined,
+                                token: string | undefined
+                            ) => {
         if (id) {
-            const reference = await getReferenceById(id, setMainData);
-            setMainData && setMainData('showReferenceJournalWindow', false);
+            const reference = await getReferenceById(id, setMainData, token);
         }
+        setMainData && setMainData('isNewReference', false);
     }
 
     return (
         <>  
             <Header/>
             <div className={styles.newElement}>
-                <Reference isNewReference={true}/>
+                <Reference/>
             </div>
             <div className={styles.container} >
                 <table className={styles.table}>
@@ -75,7 +82,7 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                             <>
                                 <tr 
                                     key={key+0} 
-                                    onDoubleClick={() => {getReference(item._id, setMainData)}} 
+                                    onDoubleClick={() => {getReference(item._id, setMainData, token)}} 
                                     className={cn(className, {
                                             [styles.deleted]: item.deleted,
                                             [styles.trRow]: 1,
@@ -101,7 +108,7 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                                     <td className={styles.rowAction}>
                                         <IcoTrash 
                                             className={styles.icoTrash}
-                                            onClick = {() => deleteItem(item._id, item.name)}
+                                            onClick = {() => deleteItem(item._id, item.name, token)}
                                             />
                                     </td>
                                 </tr>

@@ -1,22 +1,23 @@
 "use client"
 import { ReactNode, createContext, useContext, useState } from "react";
-import { ContentType, MessageType } from '../interfaces/general.interface';
+import { ContentType, MessageType, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 
 export interface Maindata {
   activeMenuKey: string,
   contentType?: ContentType,
-  contentTitle: string,
-  showReferenceWindow: boolean,
-  showDocumentWindow: boolean,
-  user: string,
+  contentName: string,
+  user: User | undefined,
   mainPage: boolean,
   showMessageWindow: boolean,
   message: string,
   messageType: MessageType,
+  showDocumentWindow: boolean,
   clearControlElements: boolean,
+  showReferenceWindow: boolean,
+  isNewReference: boolean;
   updateDataForRefenceJournal: boolean,
-  currentReferencyForShow: ReferenceModel | undefined,
+  currentReferenceForShow: ReferenceModel | undefined,
 }
 
 export interface IAppContext {
@@ -27,17 +28,18 @@ export interface IAppContext {
 const defaultMainData: Maindata = {
     activeMenuKey: '',
     contentType: 'document',
-    contentTitle: '',
-    showReferenceWindow: false,
-    showDocumentWindow: false,
-    user: 'Шавкат',
+    contentName: '',
+    user: undefined,
     mainPage: true,
     showMessageWindow: false,
     message: 'Маълумотлар сакланди',
     messageType: 'error',
+    showDocumentWindow: false,
     clearControlElements: false,
+    showReferenceWindow: false,
+    isNewReference: false,
     updateDataForRefenceJournal: false,
-    currentReferencyForShow: undefined,
+    currentReferenceForShow: undefined,
   }
 
 const appContextDefaultValues: IAppContext = {

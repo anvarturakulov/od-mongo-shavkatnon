@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { CreateReferenceDto } from './dto/create-reference.dto';
 import { REFERENCE_NOT_FOUND_ERROR } from './reference.constants';
 
+
 @Injectable()
 export class ReferenceService {
   constructor(@InjectModel(Reference.name) private referenceModel: Model<ReferenceDocument>) { }
@@ -32,5 +33,9 @@ export class ReferenceService {
     }
     const state = reference.deleted ? false : true
     return this.referenceModel.updateOne({ _id: id }, { $set: { deleted: state} })
+  }
+
+  async updateById(id: string, dto: Reference) {
+    return this.referenceModel.updateOne({ _id: id }, { $set: dto })
   }
 }

@@ -9,12 +9,16 @@ import AddIco from './ico/add.svg'
 import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/documents/mainDocument.interface';
 import { TypeReference } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
+import { useAppContext } from '@/app/context/app.context';
 
-export const Document = ({document, documentType, documentTableArray, className, ...props }: DocumentProps) :JSX.Element => {
+export const Document = ({className, ...props }: DocumentProps) :JSX.Element => {
+
+    const {mainData, setMainData} = useAppContext();
+    const {user, contentName, contentType} = mainData;
 
     const defaultDocumentTableItem = {
         itemId: '',
-        typeReference: documentType == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ,
+        typeReference: (contentName == DocumentType.LeaveCash) ? TypeReference.CHARGES : TypeReference.TMZ,
         quantity: 0,
         price: 0,
         total: 0

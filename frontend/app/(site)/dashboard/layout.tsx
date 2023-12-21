@@ -1,4 +1,7 @@
+import { useAppContext } from '@/app/context/app.context';
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation';
+import { useEffect } from 'react'
 
 // export const metadata: Metadata = {
 //   title: 'Карандаш',
@@ -10,6 +13,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
+  
   return (
     <>
       {children}

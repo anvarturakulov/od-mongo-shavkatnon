@@ -1,0 +1,16 @@
+.container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  margin-top: 200px;
+  width: 900px;
+  /* height: 430px; */
+  /* background-color: #ebe9e9; */
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.14);
+  position: relative;
+}
+
+.content{
+  padding: 10px 30px;
+}

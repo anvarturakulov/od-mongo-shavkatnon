@@ -1,4 +1,4 @@
-import { IsString, IsNumber, Min, Max, IsEnum, IsOptional, IsBoolean } from 'class-validator'
+import { IsString, IsEnum, IsOptional, IsBoolean } from 'class-validator'
 import { TypeReference, TypePartners, TypeTMZ } from '../models/referense.model';
 
 export class CreateReferenceDto {

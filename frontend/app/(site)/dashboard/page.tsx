@@ -9,6 +9,8 @@ import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
 import ReferenceJournal from '@/app/components/referenceJournal/referenceJournal'
 import { useAppContext } from '@/app/context/app.context'
 import { Message } from '@/app/components/message/message'
+import { useEffect } from 'react'
+import { redirect } from 'next/navigation'
 
 const infoBlock = (
     <>
@@ -56,7 +58,13 @@ const infoBlock = (
 export default function Dashboard() {
 
   const {mainData} = useAppContext()
-  const {contentTitle, contentType} = mainData
+  const {contentName, contentType} = mainData
+  
+  useEffect(() => {
+    if (mainData.user == undefined) {
+      redirect('/');
+    }
+  }, [mainData.user]);
 
   return (
     
@@ -68,7 +76,7 @@ export default function Dashboard() {
       </div>
       <div className={styles.content}>
         <div className={styles.header}>
-          <Htag tag='h2'>{`Ассалому алайкум, ${mainData.user}`}</Htag>
+          <Htag tag='h2'>{`Ассалому алайкум, ${mainData.user?.email}`}</Htag>
         </div>  
         
         {mainData.mainPage && infoBlock}
@@ -83,7 +91,7 @@ export default function Dashboard() {
         <div className={styles.journalBox}>
           { 
             contentType == 'report' &&
-            <ReportWindow reportsType={getReportTypeByTitle(contentTitle)} />
+            <ReportWindow reportsType={getReportTypeByTitle(contentName)} />
           }
         </div>
       </div>

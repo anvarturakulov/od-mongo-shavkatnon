@@ -25,14 +25,17 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
         setMenu(newMenu)
     }
 
-    const onClickSubItem = (titleItem: string, contentType: ContentType) => {
-        const keyItem = getKeyEnum(titleItem, contentType)
+    const onClickSubItem = (contentName: string, contentType: ContentType) => {
+        const keyItem = getKeyEnum(contentName, contentType)
         
         if (setMainData) {
             setMainData('activeMenuKey', keyItem);
             setMainData('contentType', contentType);
-            setMainData('contentTitle', titleItem);
+            setMainData('contentName', contentName);
             setMainData('mainPage', false);
+            setMainData('showReferenceWindow', false);
+            setMainData('isNewReference', false);
+            setMainData('clearControlElements', true);
         };
     }
 

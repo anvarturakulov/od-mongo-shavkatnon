@@ -12,19 +12,13 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     const [visibilityNewElement, setVisibilityNewElement] = useState<boolean>(false)
 
     const {mainData, setMainData} = useAppContext()
-    
-    // useEffect(()=> {
-    //     console.log(mainData)
-    // }, [mainData.menu.contentType])
-
-    // console.log(mainData)
 
     return (
         <>
             <Header/>  
-            {/* <div className={styles.newElement}>
-                {visibilityNewElement && <Document documentType={contentTitle}/>}
-            </div> */}
+            <div className={styles.newElement}>
+                <Document/>
+            </div>
             <div className={styles.container} >
                 {/* <div>{mainData.menu.contentType}</div> */}
                 <table className={styles.table}>

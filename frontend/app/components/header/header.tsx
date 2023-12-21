@@ -2,29 +2,40 @@ import styles from './header.module.css'
 import { HeaderProps } from './header.props'
 import AddIco from './add.svg'
 import CloseIco from './close.svg'
-import { useAppContext } from '@/app/context/app.context'
+import { Maindata, useAppContext } from '@/app/context/app.context';
+import cn from 'classnames';
 
 export default function Header({ className, ...props }: HeaderProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext()
-    const {contentType, contentTitle, showReferenceWindow } = mainData
-    const strFirst =  contentType == 'document' ? 'буйича янги хужжат тузиш' : 'буйича янги элемент очиш'
+    const {contentType, contentName, showReferenceWindow, isNewReference } = mainData 
+    const strFirst =  
+        contentType == 'document' ? 
+        'буйича янги хужжат тузиш' : 
+            isNewReference ? 'буйича янги элемент очиш':
+                             'буйича элементни куриш';
+
     const strSecond =  contentType == 'document' ? 'буйича хужжатлар руйхати' : 'руйхати'
     
     return (
         <>
             {
-                contentTitle ?
+                contentName ?
                 <div className={styles.box}>
-                        <div className={styles.title}>{contentTitle} { showReferenceWindow ? strFirst : strSecond }</div>
+                    <div className={cn(styles.title, 
+                                    {[styles.newWindow] : isNewReference})}
+                        >{contentName} { showReferenceWindow ? strFirst : strSecond }
+                    </div>
+                    
                     {mainData.showReferenceWindow ? 
                     
                     <CloseIco 
                         className={styles.ico}
                         onClick={() => {
                             if (setMainData) {
-                                   setMainData('showReferenceWindow', false);
                                    setMainData('clearControlElements', true);
+                                   setMainData('showReferenceWindow', false);
+                                   setMainData('isNewReference', false);
                                 }
                             }}
                             
@@ -32,10 +43,13 @@ export default function Header({ className, ...props }: HeaderProps): JSX.Elemen
                     :
                     <AddIco 
                         className={styles.ico}
-                        onClick={() => {
+                        onClick={(mainData: Maindata) => {
                             if (setMainData) {
-                                   setMainData('showReferenceWindow', true);
                                    setMainData('clearControlElements', false);
+                                   if (!mainData.clearControlElements) {
+                                       setMainData('showReferenceWindow', true);
+                                       setMainData('isNewReference', true);
+                                   }
                                 }
                             }} 
                     />
