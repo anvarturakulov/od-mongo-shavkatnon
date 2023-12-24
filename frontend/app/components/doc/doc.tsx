@@ -5,7 +5,7 @@ import styles from './doc.module.css';
 import cn from 'classnames';
 import { Button, Htag, Info, Input, DocTable, SelectForReference } from '@/app/components';
 import AddIco from './ico/add.svg'
-import { DocumentTableItem, DocumentType, OptionDocumentElements } from '../../interfaces/document.interface';
+import { DocTableItem, DocumentType, OptionsForDocument } from '../../interfaces/document.interface';
 import { TypeReference } from '../../interfaces/reference.interface';
 import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 import { useAppContext } from '@/app/context/app.context';
@@ -16,17 +16,16 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     const {user, contentName, contentType} = mainData;
 
     const defaultDocumentTableItem = {
-        itemId: '',
-        typeReference: (contentName == DocumentType.LeaveCash) ? TypeReference.CHARGES : TypeReference.TMZ,
+        referenceId: '',
         quantity: 0,
         price: 0,
         total: 0
     }
 
-    let options: OptionDocumentElements = getOptionOfDocumentElements(contentName)
+    let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
 
     // const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>(documentTableArray ? documentTableArray:[defaultDocumentTableItem])
-    const [tableArray, setTableArray] = useState<Array<DocumentTableItem>>([defaultDocumentTableItem])
+    const [tableArray, setTableArray] = useState<Array<DocTableItem>>([defaultDocumentTableItem])
     
     let dateNow = new Date()
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
@@ -41,25 +40,25 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
 
                 <div className={styles.partnersBox}>
                     <SelectForReference 
-                        label={options.receiveLabel} 
-                        typeReference={options.receivetypeReference}
-                        visibile={options.recieveVisible}
+                        label={options.receiverLabel} 
+                        typeReference={options.receiverType}
+                        visibile={options.recieverIsVisible}
                     />
                     
                     <SelectForReference 
                         label={options.senderLabel} 
-                        typeReference={options.sendertypeReference}
-                        visibile={options.senderVisible}
+                        typeReference={options.senderType}
+                        visibile={options.senderIsVisible}
                     />
                     
                     <Input 
                         label={options.paymentLabel} 
                         type='number'
-                        visible={options.paymentVisible}
+                        visible={options.paymentIsVisible}
                     />
                 </div>
                 
-            {options.tableVisible && <DocTable 
+            {options.tableIsVisible && <DocTable 
                 typeReference={contentName == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
                 hasWorkers={hasWorkers} 
                 tableArray={tableArray}
@@ -68,7 +67,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             
             <div className={styles.paybox}>
                 <Input placeholder='Кушимча изох' label={''}/>
-                {options.tableVisible && 
+                {options.tableIsVisible && 
                     <div className={cn(styles.add, {[styles.notView] : false == false})}>
                         <AddIco/>
                     </div>

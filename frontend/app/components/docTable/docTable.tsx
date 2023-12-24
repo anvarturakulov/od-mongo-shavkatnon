@@ -22,9 +22,10 @@ export const DocTable = ({ hasWorkers, typeReference, tableArray, setTableArray,
                         { hasWorkers && <Input label='' type='checkbox'/> }
                         {/* <Select typeReference={typeReference} label='' /> */}
                         <Input label='' type='number'/>
+                        <Input label='' type='number'/>
                         <Input label='' type='number' />
                         <Input label='' type='number' />
-                        <div className={styles.ico}> <TrashIco /> </div>
+                        <div className={styles.ico}> <TrashIco/> </div>
                     </div>
                 </>
             ))}

@@ -16,9 +16,9 @@
     grid-template-columns: 4fr 1fr 1fr 1fr auto;
 }
 
-.add {
-    width: 30px;
-    height: 30px;
+.ico {
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     color: blue;
     fill: red;

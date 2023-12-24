@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { DocumentController } from './document.controller';
 import { DocumentService } from './document.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Document, DocumentSchema } from './models/document.model';
 
 @Module({
   controllers: [DocumentController],
-  providers: [DocumentService]
+  providers: [DocumentService],
+  imports: [MongooseModule.forFeature([{ name: Document.name, schema: DocumentSchema }])]
 })
 export class DocumentModule {}

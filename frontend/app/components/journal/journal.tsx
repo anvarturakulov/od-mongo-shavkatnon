@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
 import { Doc } from '../doc/doc';
 import useSWR from 'swr';
+import { getTypeReference } from '@/app/utils/getTypeReference';
+import { getReferenceById, markToDeleteReference } from '@/app/service/references.service';
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {

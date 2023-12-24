@@ -1,32 +1,43 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Schema as MSchema } from 'mongoose';
-import { TypeReference, TypePartners, TypeTMZ } from '../../../../interfaces/reference.interface';
+import { HydratedDocument, Schema as MSchema, Types } from 'mongoose';
+import { DocumentType } from '../../interfaces/document.interface';
 
-export type ReferenceDocument = HydratedDocument<Reference>;
+export type DocDocument = HydratedDocument<Document>;
+
+class DocTableItem{
+  @Prop()
+  referenceId: Types.ObjectId;
+
+  @Prop()
+  quantity: number;
+  
+  @Prop()
+  price: number;
+
+  @Prop()
+  total: number;
+}
 
 @Schema()
-export class Reference {
+export class Document {
   @Prop({ required: true })
-  name: string;
+  date: Date;
+
+  @Prop({ enum: DocumentType })
+  documentType: DocumentType;
 
   @Prop()
-  deleted?: boolean
-
-  @Prop({ enum: TypeReference, required: true })
-  typeReference: TypeReference
-
-  @Prop({ enum: TypePartners })
-  typePartners?: TypePartners
-
-  @Prop({ enum: TypeTMZ })
-  typeTMZ?: TypeTMZ
+  senderId: Types.ObjectId;
 
   @Prop()
-  unit?: string;
+  receiverId: Types.ObjectId;
+  
+  @Prop({ type: () => [DocTableItem], _id: false })
+  tableItems?: DocTableItem[];
 
   @Prop()
-  comment?: string;
+  payValue?: number;
 
 }
 
-export const ReferenceSchema = SchemaFactory.createForClass(Reference);
+export const DocumentSchema = SchemaFactory.createForClass(Document);

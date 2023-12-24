@@ -10,7 +10,7 @@ export enum DocumentType {
     SaleMaterial = 'Хом ашё сотуви',
 
     LeaveProd = 'Махсулот чикими',
-    LeaveMaterial = 'Материал чикими',
+    LeaveMaterial = 'Хом ашё чикими',
     LeaveHalfstuff = 'Я.Т.М чикими',
 
     MoveProd = 'Махсулот силжиши',
@@ -25,31 +25,31 @@ export enum DocumentType {
     Error = 'Хатолик бор'
 }
 
-export interface DocumentModel {
-    _id: string
-    date: Date,
-    senderReferenceId: string,
-    receiverReferenceId: string,
-    tableData: {},
-    documentType: DocumentType,
-}
-
-export interface DocumentTableItem {
+export interface DocTableItem {
     referenceId: string,
     quantity: number,
     price: number,
     total: number
 }
 
-export interface OptionsForDocument {
-    sendertypeReference: TypeReference,
-    senderLabel: string,
-    senderVisible: boolean,
-    receivetypeReference: TypeReference,
-    receiveLabel: string,
-    recieveVisible: boolean
-    paymentLabel: string,
-    paymentVisible: boolean,
-    tableVisible: boolean,
-}
+export interface DocumentModel {
+    _id: string,
+    date: Date,
+    senderId: string,
+    receiverId: string,
+    tableItems: Array<DocTableItem> | undefined,
+    documentType: DocumentType,
+    payValue: number,
+};
 
+export interface OptionsForDocument {
+    senderType: TypeReference,
+    senderLabel: string,
+    senderIsVisible: boolean,
+    receiverType: TypeReference,
+    receiverLabel: string,
+    recieverIsVisible: boolean
+    paymentLabel: string,
+    paymentIsVisible: boolean,
+    tableIsVisible: boolean,
+}

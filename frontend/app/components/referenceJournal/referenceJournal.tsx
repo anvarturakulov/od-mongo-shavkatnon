@@ -5,7 +5,7 @@ import IcoTrash from './ico/trash.svg'
 import Header from '../header/header';
 import { useEffect, useRef, useState } from 'react';
 import { Reference } from '../reference/reference';
-import { ReferenceModel } from '../../../../interfaces/reference.interface';
+import { ReferenceModel } from '../../interfaces/reference.interface';
 import useSWR from 'swr';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { ReferenceJournalProps } from './referenceJournal.props';

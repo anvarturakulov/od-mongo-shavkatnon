@@ -1,4 +1,4 @@
-import { ReportsType } from "../../../interfaces/report.interface"
+import { ReportsType } from "../interfaces/report.interface"
 
 export const getReportTypeByTitle = (title: string): ReportsType => {
     switch (title) {

@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Reference, ReferenceDocument, TypeReference } from './models/referense.model';
+import { Reference, ReferenceDocument } from './models/referense.model';
 import { Model } from 'mongoose';
 import { CreateReferenceDto } from './dto/create-reference.dto';
 import { REFERENCE_NOT_FOUND_ERROR } from './reference.constants';
+import { TypeReference } from '../interfaces/reference.interface';
 
 
 @Injectable()

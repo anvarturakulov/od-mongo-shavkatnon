@@ -4,7 +4,7 @@ import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
-import { ReferenceBody, TypeReference } from '../../../../interfaces/reference.interface';
+import { ReferenceBody, TypeReference } from '../../interfaces/reference.interface';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { updateCreateReference } from '@/app/service/references.service';
 import { typePartnersList, typeTMZList } from './reference.constants';

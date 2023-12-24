@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { getBodyForReferenceRequest } from '../utils/utilsWithRequest';
-import { ReferenceBody, TypeReference } from '../../../interfaces/reference.interface';
+import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
 import { showMessage } from '../utils/showMessage';
-import { BodyForLogin } from '../../../interfaces/general.interface';
+import { BodyForLogin } from '../interfaces/general.interface';
 
 export const updateCreateReference = (
-                                      body: ReferenceBody, 
-                                      id: string | undefined, 
-                                      typeReference: TypeReference, 
-                                      isNewReference: boolean, 
-                                      setMainData: Function | undefined, 
-                                      token: string | undefined 
-                                    ) => {
+  body: ReferenceBody,
+  id: string | undefined,
+  typeReference: TypeReference,
+  isNewReference: boolean,
+  setMainData: Function | undefined,
+  token: string | undefined
+) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
@@ -24,14 +24,14 @@ export const updateCreateReference = (
       setMainData('isNewReference', false);
     }
   }
-  
+
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/create';
-  const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/'+id;
+  const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/' + id;
 
   if (isNewReference) {
     axios.post(uriPost, getBodyForReferenceRequest(body, typeReference), config)
       .then(function () {
-        actionWithMainData('янги элемент киритилди')     
+        actionWithMainData('янги элемент киритилди')
       })
       .catch(function (error) {
         if (setMainData) {
@@ -49,22 +49,22 @@ export const updateCreateReference = (
             showMessage(error.message, 'error', setMainData)
           }
         });
-     };
+    };
   }
 }
 
 export const markToDeleteReference = (
-                                      id: string | undefined,
-                                      name: string, setMainData: Function | undefined,
-                                      token: string | undefined
-                                    ) => {
+  id: string | undefined,
+  name: string, setMainData: Function | undefined,
+  token: string | undefined
+) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
 
   if (id) {
     const uri = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/markToDelete/' + id;
-    axios.delete(uri,config)
+    axios.delete(uri, config)
       .then(function () {
         if (setMainData) {
           showMessage(`${name} - холати узгартирилди`, 'success', setMainData);
@@ -80,10 +80,10 @@ export const markToDeleteReference = (
 }
 
 export const getReferenceById = (
-                                id: string | undefined,
-                                setMainData: Function | undefined,
-                                token: string | undefined
-                              ) => {
+  id: string | undefined,
+  setMainData: Function | undefined,
+  token: string | undefined
+) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
@@ -111,7 +111,7 @@ export const loginToApp = (body: BodyForLogin, setMainData: Function | undefined
     .catch(function (error) {
       if (setMainData) {
         if (error.response.status == 401) {
-          showMessage('Фойдаланувчи маълумотлари хато киритилди', 'error', setMainData)  
+          showMessage('Фойдаланувчи маълумотлари хато киритилди', 'error', setMainData)
         } else {
           showMessage(error.message, 'error', setMainData)
         }

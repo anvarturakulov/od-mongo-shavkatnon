@@ -11,7 +11,7 @@ export const MenuData:Array<MenuItem> = [
         subMenu: [
             { title: DocumentType.ComeMaterial, description:'Хом ашё кирими', type: 'document', active: false},
             { title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', type: 'document', active: false },
-            { title: DocumentType.LeaveMaterial, description:'Материал чикими',  type: 'document', active: false },
+            { title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',  type: 'document', active: false },
             { title: DocumentType.SaleMaterial, description:'Хом ашё сотуви', type: 'document', active: false },
             { title: DocumentType.ComeHalfstuff, description:'Я.Т.М кирими', type: 'document', active: false },
             { title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши', type: 'document', active: false },
@@ -23,7 +23,7 @@ export const MenuData:Array<MenuItem> = [
             { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (м/т)', type: 'document', active: false },
             { title: DocumentType.MoveCash, description:'Пул силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveCash, description:'Пул харажати', type: 'document', active: false },
-            { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },
+            // { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },
         ]
     },
     {

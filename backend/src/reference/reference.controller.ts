@@ -2,10 +2,11 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundExcep
 import { ReferenceService } from './reference.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { CreateReferenceDto } from './dto/create-reference.dto';
-import { Reference, TypeReference } from './models/referense.model';
+import { Reference } from './models/referense.model';
 import { IdValidationPipe } from 'src/pipes/ad-validation.pipe';
 import { REFERENCE_NOT_FOUND_ERROR } from './reference.constants';
 import { ReferenceModule } from './reference.module';
+import { TypeReference } from '../interfaces/reference.interface';
 
 @Controller('reference')
 export class ReferenceController {

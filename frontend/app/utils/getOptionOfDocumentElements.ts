@@ -1,32 +1,32 @@
-import { DocumentType, OptionsForDocument } from "../../../interfaces/document.interface";
-import { TypeReference } from '../../../interfaces/reference.interface';
+import { DocumentType, OptionsForDocument } from "../interfaces/document.interface";
+import { TypeReference } from '../interfaces/reference.interface';
 
 export const getOptionOfDocumentElements = (documentType: string): OptionsForDocument => {
 
-    let sendertypeReference = TypeReference.STORAGES
+    let senderType = TypeReference.STORAGES
     let senderLabel = ''
-    let receivetypeReference = TypeReference.PARTNERS
-    let receiveLabel = ''
+    let receiverType = TypeReference.PARTNERS
+    let receiverLabel = ''
     let paymentLabel = ''
-    let paymentVisible = true
-    let tableVisible = true
-    let senderVisible = true
-    let recieveVisible = true
+    let paymentIsVisible = true
+    let tableIsVisible = true
+    let senderIsVisible = true
+    let recieverIsVisible = true
 
     const documentsForComeMaterial = [
         `${DocumentType.ComeMaterial}`,
     ]
 
     if (documentsForComeMaterial.includes(documentType)) {
-        sendertypeReference = TypeReference.PARTNERS
+        senderType = TypeReference.PARTNERS
         senderLabel = 'Таъминотчи'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Омборхона'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Омборхона'
         paymentLabel = '----'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForComeProductHalfstuff = [
@@ -35,15 +35,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForComeProductHalfstuff.includes(documentType)) {
-        sendertypeReference = TypeReference.STORAGES
+        senderType = TypeReference.STORAGES
         senderLabel = 'Жунатувчи'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Кабул килувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи'
         paymentLabel = '----'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documetsForSaleTMZ = [
@@ -52,15 +52,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documetsForSaleTMZ.includes(documentType)) {
-        sendertypeReference = TypeReference.PARTNERS
+        senderType = TypeReference.PARTNERS
         senderLabel = 'Мижоз'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Жунатувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Жунатувчи'
         paymentLabel = 'Мижоздан олинган пул'
-        paymentVisible = true
-        tableVisible = true
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = true
+        tableIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForLeaveTMZ = [
@@ -70,15 +70,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForLeaveTMZ.includes(documentType)) {
-        sendertypeReference = TypeReference.CHARGES
+        senderType = TypeReference.CHARGES
         senderLabel = 'Харажат тури'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Жунатувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Жунатувчи'
         paymentLabel = '----'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForMoveTMZ = [
@@ -88,15 +88,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForMoveTMZ.includes(documentType)) {
-        sendertypeReference = TypeReference.STORAGES
+        senderType = TypeReference.STORAGES
         senderLabel = 'Кабул килувчи'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Жунатувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Жунатувчи'
         paymentLabel = '----'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForCashFromPartners = [
@@ -104,15 +104,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForCashFromPartners.includes(documentType)) {
-        sendertypeReference = TypeReference.PARTNERS
+        senderType = TypeReference.PARTNERS
         senderLabel = 'Хамкор'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Кабул килувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи'
         paymentLabel = 'Хамкордан олинган пул'
-        paymentVisible = true
-        tableVisible = false
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = true
+        tableIsVisible = false
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForCashMove = [
@@ -120,15 +120,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForCashMove.includes(documentType)) {
-        sendertypeReference = TypeReference.STORAGES
+        senderType = TypeReference.STORAGES
         senderLabel = 'Жунатувчи'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Кабул килувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи'
         paymentLabel = 'Кабул олинган пул'
-        paymentVisible = true
-        tableVisible = false
-        senderVisible = true
-        recieveVisible = true
+        paymentIsVisible = true
+        tableIsVisible = false
+        senderIsVisible = true
+        recieverIsVisible = true
     }
 
     const documentsForCashLeave = [
@@ -136,15 +136,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForCashLeave.includes(documentType)) {
-        sendertypeReference = TypeReference.STORAGES
+        senderType = TypeReference.STORAGES
         senderLabel = '-----'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Харажат килувчи'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Харажат килувчи'
         paymentLabel = '-----'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = false
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = false
+        recieverIsVisible = true
     }
 
     const documentsForZp = [
@@ -152,26 +152,26 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForZp.includes(documentType)) {
-        sendertypeReference = TypeReference.STORAGES
+        senderType = TypeReference.STORAGES
         senderLabel = '-----'
-        receivetypeReference = TypeReference.STORAGES
-        receiveLabel = 'Булим'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Булим'
         paymentLabel = '------'
-        paymentVisible = false
-        tableVisible = true
-        senderVisible = false
-        recieveVisible = true
+        paymentIsVisible = false
+        tableIsVisible = true
+        senderIsVisible = false
+        recieverIsVisible = true
     }
 
     return {
-        sendertypeReference,
+        senderType,
         senderLabel,
-        receivetypeReference,
-        receiveLabel,
+        receiverType,
+        receiverLabel,
         paymentLabel,
-        paymentVisible,
-        tableVisible,
-        senderVisible,
-        recieveVisible
+        paymentIsVisible,
+        tableIsVisible,
+        senderIsVisible,
+        recieverIsVisible
     }
 }
