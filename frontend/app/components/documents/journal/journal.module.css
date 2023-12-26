@@ -36,9 +36,9 @@
 }
 
 .table th {
-    background-color: #337ab7;
-    color: #fff;
-    font-weight: normal;
+    /* background-color: #337ab7;
+    color: #fff; */
+    font-weight: bold;
 }
 
 .table thead,
@@ -63,7 +63,7 @@
 .table thead th:last-child:after {
     content: ' ';
     position: absolute;
-    background-color: #337ab7;
+    /* background-color: #337ab7; */
     width: 1.1em;
     height: 40px;
     right: -1.1em;

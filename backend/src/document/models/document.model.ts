@@ -12,7 +12,7 @@ class DocTableItem{
   referenceName?: string;
 
   @Prop()
-  quantity: number;
+  count: number;
   
   @Prop()
   price: number;

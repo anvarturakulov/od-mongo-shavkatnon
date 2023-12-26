@@ -2,7 +2,7 @@
 
 .item{
     font-weight: 600;
-    border: 0.2px dotted #111;
+    border-bottom: 0.2px dotted #111;
     padding: 5px;
     user-select: none;
     width: 100%;
@@ -11,7 +11,8 @@
 .subItem{
     margin-left: 5px;
     display: none;
-    border: 1px solid rgb(139, 136, 136);
+    border-bottom: 0.1px dotted rgb(139, 136, 136);
+    /* border-bottom: 1px solid f5f5f5; */
     border-top: none;
     padding: 5px 10px;
     padding-left: 15px;

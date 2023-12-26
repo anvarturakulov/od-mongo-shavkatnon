@@ -1,11 +1,12 @@
 import { SelectReferenceInFormProps } from './selectReferenceInForm.props';
-import styles from './selectForReference.module.css';
+import styles from './selectReferenceInForm.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/references.service';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
-export const SelectReferenceInForm = ({ label, typeReference, visibile=true , className, ...props }: SelectReferenceInFormProps): JSX.Element => {
+export const SelectReferenceInForm = ({ label, typeReference, visibile=true , currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
     if (visibile == false) return <></>
 
@@ -16,6 +17,21 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , cl
 
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: string) => {
+        let target = e.currentTarget;
+        let id = target[target.selectedIndex].getAttribute('data-id')
+        let value = target.value;
+        let {currentDocument} = mainData;
+        let key = type =='sender' ? 'senderId' : 'receiverId'; 
+        let newObj = {
+            ...currentDocument,
+            [key] : id,
+        }
+
+        if ( setMainData ) {
+            setMainData('currentDocument', {...newObj})
+        }
+    }
     
     return (
         <div className={styles.box}>
@@ -23,10 +39,26 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , cl
             <select
                 className={styles.select}
                 {...props}
-            >
+                onChange={(e) => changeElements(e, setMainData, mainData, type)}
+            >   
+                <>
+                    <option 
+                        value={'NotSelected'} 
+                        data-type={null} 
+                        data-id={null}
+                        className={styles.chooseMe}
+                        >{'Тангланг =>>>>'}</option>
+                </>
                 {data && data.length>0  && data?.map((item:ReferenceModel, key:number) => (
                     <>
-                        <option value={item.name} data-type={item.typeReference} data-id={item._id}>{item.name}</option>
+                        <option 
+                            value={item.name}
+                            data-type={item.typeReference} 
+                            data-id={item._id}
+                            selected={item._id == currentItemId}    
+                            >
+                                {item.name}
+                        </option>
                     </>
                 ))}
             </select>

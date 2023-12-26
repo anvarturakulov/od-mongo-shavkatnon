@@ -2,12 +2,14 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;
+    font-weight: 500;
 }
 
 .newWindow{
-    background-color: chartreuse;
+    background-color: #337ab7;
     padding:10px;
-    font-weight: 400;
+    color: #fff;
+    /* font-weight: 400; */
 }
 
 .ico{

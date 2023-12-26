@@ -2,8 +2,10 @@ import styles from './header.module.css'
 import { HeaderProps } from './header.props'
 import AddIco from './add.svg'
 import CloseIco from './close.svg'
-import { Maindata, useAppContext } from '@/app/context/app.context';
+import { useAppContext } from '@/app/context/app.context';
 import cn from 'classnames';
+import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
 export default function Header({ windowFor ,className, ...props }: HeaderProps): JSX.Element {
     
@@ -39,6 +41,11 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
                                    setMainData('clearControlElements', true);
                                    setMainData(windowFor == 'reference' ? 'showReferenceWindow':'showDocumentWindow', false);
                                    setMainData(windowFor == 'reference' ? 'isNewReference': 'isNewDocument' , false);
+                                   if (windowFor != 'reference') {
+                                    let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
+                                    setMainData('docTable', {...defaultTableItemsObj});
+                                   }
+                                   
                                 }
                             }}
                             

@@ -11,7 +11,7 @@ class DocTableItemDto {
   referenceName: string;
 
   @IsNumber()
-  quantity: number;
+  count: number;
 
   @IsNumber()
   price: number;

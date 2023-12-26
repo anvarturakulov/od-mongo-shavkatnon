@@ -1,9 +1,10 @@
+import { DocumentType } from '../interfaces/document.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
     referenceId: '',
     referenceName: '',
-    quantity: 0,
+    count: 0,
     price: 0,
     total: 0
 }
@@ -21,9 +22,20 @@ export const defaultMainData: Maindata = {
     showDocumentWindow: false,
     isNewDocument: false,
     docTable: {items: [defaultDocumentTableItem]},
+    currentDocument: {
+        _id: '',
+        date: new Date(Date.UTC(0, 0, 0, 0, 0, 0)),
+        docNumber: 0,
+        senderId: '',
+        receiverId: '',
+        tableItems: [defaultDocumentTableItem], // не пользуемся им
+        documentType: DocumentType.ComeMaterial,
+        payValue: 0,
+    },
     clearControlElements: false,
     showReferenceWindow: false,
     isNewReference: false,
     updateDataForRefenceJournal: false,
-    currentReferenceForShow: undefined,
+    currentReference: undefined,
+    
   }

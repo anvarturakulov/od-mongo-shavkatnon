@@ -13,7 +13,6 @@ export const  Select = (list: Array<DataForSelect>, body: ReferenceBody,label: s
     currentValue = body.typePartners
   }
   
-  // console.log(typeString+' '+currentValue)
   return (
     <div>
       <div className={styles.label}>{label}</div>

@@ -29,7 +29,7 @@ export enum DocumentType {
 export interface DocTableItem {
     referenceId: string,
     referenceName: string,
-    quantity: number,
+    count: number,
     price: number,
     total: number
 }

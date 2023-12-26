@@ -31,7 +31,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
 
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
 
-    const changeElements = (e: React.FormEvent<HTMLInputElement>, select?:boolean) => {
+    const changeElements = (e: React.FormEvent<HTMLInputElement>) => {
         let target = e.currentTarget
         setBody(state => {
             return {
@@ -73,13 +73,13 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     }, [mainData.clearControlElements])
 
     useEffect(() => {
-        const {currentReferenceForShow} = mainData
+        const {currentReference} = mainData
         
-        if (currentReferenceForShow != undefined) {
-            const { typePartners, typeTMZ, unit, comment } = currentReferenceForShow
+        if (currentReference != undefined) {
+            const { typePartners, typeTMZ, unit, comment } = currentReference
             let newBody = {
-                name: currentReferenceForShow.name,
-                typeReference: getTypeReferenceByTitle(currentReferenceForShow.typeReference),
+                name: currentReference.name,
+                typeReference: getTypeReferenceByTitle(currentReference.typeReference),
                 typePartners: typePartners ? typePartners: '',
                 typeTMZ: typeTMZ ? typeTMZ : '',
                 unit: unit ? unit : '',
@@ -87,7 +87,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
             }
             setBody(newBody)
         }
-    }, [mainData.currentReferenceForShow])
+    }, [mainData.currentReference])
 
     const {isNewReference, showReferenceWindow, user} = mainData
 
@@ -125,7 +125,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
             <div className={styles.boxBtn}>
                 <Button appearance='primary' onClick={() => 
                     onSubmit(body, 
-                             mainData.currentReferenceForShow?._id, 
+                             mainData.currentReference?._id, 
                              typeReference, 
                              isNewReference,
                              setMainData,

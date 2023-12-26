@@ -1,32 +1,70 @@
 import { SelectReferenceInTableProps } from './selectReferenceInTable.props';
-import styles from './selectForReference.module.css';
-import cn from 'classnames';
-import { ReferencesData } from '@/app/data';
+import styles from './selectReferenceInTable.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/references.service';
+import { DocTableItem } from '@/app/interfaces/document.interface';
 
 
-export const SelectReferenceInTable = ({ label, typeReference, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
+export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
-    const { user } = mainData;
+    const { user, docTable } = mainData;
+    
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
+        let target = e.currentTarget;
+        let currentItem = {...items[itemIndex]}
+        let id = target[target.selectedIndex].getAttribute('data-id')
+        let value = target.value
+        
+        if (id != null) {
+            currentItem.referenceId = id
+        }
+
+        if (value != null) {
+            currentItem.referenceName = value
+        }
+        
+        let newItems = [...items]
+        newItems[itemIndex] = {...currentItem}
+        if ( setMainData ) {
+            setMainData('docTable', {items: [...newItems]})
+        }
+    }
+
     return (
         <div className={styles.box}>
-            {label !='' && <div className={styles.label}>{label}</div>}
             <select
                 className={styles.select}
+                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, docTable.items)}
                 {...props}
             >
-                {data && data.length>0  && data?.map((item:ReferenceModel, key:number) => (
+                <option 
+                    value={'NotSelected'}
+                    data-type={null}
+                    data-id={null}
+                    selected={true}
+                    className={styles.chooseMe}
+                >
+                    {'Тангланг =>>>>'}
+                </option>
+
+                {data && data.length>0 && data?.map((item:ReferenceModel, key:number) => (
                     <>
-                        <option value={item.name} data-type={item.typeReference} data-id={item._id}>{item.name}</option>
+                        <option 
+                            value={item.name}
+                            data-type={item.typeReference}
+                            data-id={item._id}
+                            selected={item._id == currentItemId}
+                            >
+                                {item.name}
+                        </option>
                     </>
                 ))}
             </select>

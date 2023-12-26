@@ -1,4 +1,4 @@
-import { DocTableItem } from '../interfaces/document.interface';
+import { DocTableItem, DocumentModel } from '../interfaces/document.interface';
 import { ContentType, MessageType, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 
@@ -19,11 +19,12 @@ export interface Maindata {
   showDocumentWindow: boolean,
   isNewDocument: boolean,
   docTable: DocTable,
+  currentDocument: DocumentModel,
   clearControlElements: boolean,
   showReferenceWindow: boolean,
   isNewReference: boolean;
   updateDataForRefenceJournal: boolean,
-  currentReferenceForShow: ReferenceModel | undefined,
+  currentReference: ReferenceModel | undefined,
 }
 
 export interface IAppContext {
