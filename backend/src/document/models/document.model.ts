@@ -9,6 +9,9 @@ class DocTableItem{
   referenceId: Types.ObjectId;
 
   @Prop()
+  referenceName?: string;
+
+  @Prop()
   quantity: number;
   
   @Prop()

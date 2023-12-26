@@ -1,11 +1,11 @@
 
 export enum ReportsType {
-    MatOborot = 'ТМБ харакати',
-    DebitorKreditor = 'Дебитор ва кредитор',
-    AktSverka = 'Хамкор билан солиштирма',
-    CashObotot = 'Пул маблаг харакати',
-    ChargesOborot = 'Харажатлар хисоби',
-    ZpOborot = 'Иш хаки хисоби',
+    MatOborot = 'MatOborot',
+    DebitorKreditor = 'DebitorKreditor',
+    AktSverka = 'AktSverka',
+    CashObotot = 'CashObotot',
+    ChargesOborot = 'ChargesOborot',
+    ZpOborot = 'ZpOborot',
 }
 
 export interface OptionsToGenerateReport {

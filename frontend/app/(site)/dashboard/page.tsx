@@ -1,16 +1,16 @@
 'use client'
-import { Htag } from '@/app/components'
-import { MenuData } from '@/app/data/menu'
-import Menu from '@/app/components/menu/menu'
-import styles from './page.module.css'
-import Journal from '@/app/components/journal/journal'
-import ReportWindow from '@/app/components/reportWindow/reportWindow'
-import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle'
-import ReferenceJournal from '@/app/components/referenceJournal/referenceJournal'
-import { useAppContext } from '@/app/context/app.context'
-import { Message } from '@/app/components/message/message'
-import { useEffect } from 'react'
-import { redirect } from 'next/navigation'
+import { Htag } from '@/app/components';
+import { MenuData } from '@/app/data/menu';
+import Menu from '@/app/components/menu/menu';
+import styles from './page.module.css';
+import ReportWindow from '@/app/components/reports/reportWindow/reportWindow';
+import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle';
+import ReferenceJournal from '@/app/components/references/referenceJournal/referenceJournal';
+import { useAppContext } from '@/app/context/app.context';
+import { Message } from '@/app/components/common/message/message';
+import { useEffect } from 'react';
+import { redirect } from 'next/navigation';
+import Journal from '@/app/components/documents/journal/journal';
 
 const infoBlock = (
     <>
@@ -58,7 +58,7 @@ const infoBlock = (
 export default function Dashboard() {
 
   const {mainData} = useAppContext()
-  const {contentName, contentType} = mainData
+  const {contentName, contentType, contentTitle} = mainData
   
   useEffect(() => {
     if (mainData.user == undefined) {
@@ -91,7 +91,7 @@ export default function Dashboard() {
         <div className={styles.journalBox}>
           { 
             contentType == 'report' &&
-            <ReportWindow reportsType={getReportTypeByTitle(contentName)} />
+            <ReportWindow reportsType={getReportTypeByTitle(contentTitle)} />
           }
         </div>
       </div>

@@ -6,11 +6,11 @@ import { redirect } from 'next/navigation'
 import { BodyForLogin, UserRoles } from '@/app/interfaces/general.interface'
 import { useAppContext } from '@/app/context/app.context'
 import { loginToApp } from '@/app/service/references.service'
-import { Htag } from '../htag/Htag'
-import { Input } from '../input/input'
-import { Button } from '../button/Button'
+import { Htag } from '../common/htag/Htag'
+import { Input } from '../common/input/input'
+import { Button } from '../common/button/Button'
 import { showMessage } from '@/app/utils/showMessage'
-import { Message } from '../message/message'
+import { Message } from '../common/message/message'
 
 const defaultBody: BodyForLogin = {
   login: '',

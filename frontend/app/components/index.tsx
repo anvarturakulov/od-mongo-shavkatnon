@@ -1,13 +1,10 @@
-export * from './htag/Htag';
-export * from './button/Button';
-export * from './input/input';
+export * from './common/htag/Htag';
+export * from './common/button/Button';
+export * from './common/input/input';
 export * from './menu/menu'
-export * from './info/info'
-export * from './selectForReference/selectForReference'
-export * from './docTable/docTable'
-export * from './header/header'
-export * from './optionsBox/optionsBox'
-export * from './report/report'
-export * from './reportWindow/reportWindow'
+export * from './common/info/info'
+export * from './documents/selects/selectReferenceInForm/selectReferenceInForm'
+export * from './documents/docTable/docTable'
+export * from './reports/reportWindow/reportWindow'
 // export * from './document/document'
 

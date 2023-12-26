@@ -1,0 +1,33 @@
+
+.box {
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.titleBox{
+    border-bottom: 0.3px dotted #000;
+    padding-bottom: 10px;
+}
+
+
+.boxWithWorkers {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr auto;
+}
+
+.ico {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: blue;
+    fill: red;
+}
+
+.checkbox {
+    border: 1px dotted blue;
+    padding: 10px;
+    cursor: pointer;
+}

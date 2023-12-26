@@ -25,16 +25,19 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
         setMenu(newMenu)
     }
 
-    const onClickSubItem = (contentName: string, contentType: ContentType) => {
+    const onClickSubItem = (contentName: string, contentTitle: string, contentType: ContentType) => {
         const keyItem = getKeyEnum(contentName, contentType)
         
         if (setMainData) {
             setMainData('activeMenuKey', keyItem);
             setMainData('contentType', contentType);
+            setMainData('contentTitle', contentTitle);
             setMainData('contentName', contentName);
             setMainData('mainPage', false);
             setMainData('showReferenceWindow', false);
             setMainData('isNewReference', false);
+            setMainData('showDocumentWindow', false);
+            setMainData('isNewDocument', false);
             setMainData('clearControlElements', true);
         };
     }
@@ -64,7 +67,7 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
                                             [styles.isOpened]: item.isOpened
                                         })
                                     }
-                                        onClick={() => onClickSubItem(elem.description, elem.type)}
+                                        onClick={() => onClickSubItem(elem.title, elem.description, elem.type)}
                                         key={elem.title}
                                     >
                                         {elem.description? elem.description : elem.title}

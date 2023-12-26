@@ -6,6 +6,10 @@ class DocTableItemDto {
   @IsString()
   referenceId: string;
 
+  @IsOptional()
+  @IsString()
+  referenceName: string;
+
   @IsNumber()
   quantity: number;
 

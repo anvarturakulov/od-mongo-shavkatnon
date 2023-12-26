@@ -2,31 +2,33 @@ import { TypeReference } from './reference.interface'
 
 export enum DocumentType {
 
-    ComeMaterial = 'Хом ашё кирими',
-    ComeProduct = 'Махсулот кирими',
-    ComeHalfstuff = 'Я.Т.М кирими',
+    ComeMaterial = 'ComeMaterial',
+    ComeProduct = 'ComeProduct',
+    ComeHalfstuff = 'ComeHalfstuff',
 
-    SaleProd = 'Махсулот сотуви',
-    SaleMaterial = 'Хом ашё сотуви',
+    SaleProd = 'SaleProd',
+    SaleMaterial = 'SaleMaterial',
 
-    LeaveProd = 'Махсулот чикими',
-    LeaveMaterial = 'Хом ашё чикими',
-    LeaveHalfstuff = 'Я.Т.М чикими',
+    LeaveProd = 'LeaveProd',
+    LeaveMaterial = 'LeaveMaterial',
+    LeaveHalfstuff = 'LeaveHalfstuff',
 
-    MoveProd = 'Махсулот силжиши',
-    MoveMaterial = 'Хом ашё силжиши',
-    MoveHalfstuff = 'Я.Т.М силжиши',
+    MoveProd = 'MoveProd',
+    MoveMaterial = 'MoveMaterial',
+    MoveHalfstuff = 'MoveHalfstuff',
 
-    ComeCashFromPartners = 'Пул кирими (м/т)',
-    MoveCash = 'Пул силжиши',
-    LeaveCash = 'Пул харажати',
-    ZpCalculate = 'Иш хаки хисоби',
+    ComeCashFromPartners = 'ComeCashFromPartners',
+    MoveCash = 'MoveCash',
+    LeaveCash = 'LeaveCash',
+    ZpCalculate = 'ZpCalculate',
 
-    Error = 'Хатолик бор'
+    Error = 'Error'
 }
+
 
 export interface DocTableItem {
     referenceId: string,
+    referenceName: string,
     quantity: number,
     price: number,
     total: number
@@ -35,6 +37,7 @@ export interface DocTableItem {
 export interface DocumentModel {
     _id: string,
     date: Date,
+    docNumber: number,
     senderId: string,
     receiverId: string,
     tableItems: Array<DocTableItem> | undefined,

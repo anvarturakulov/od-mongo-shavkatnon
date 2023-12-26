@@ -2,10 +2,6 @@
 import { Button, Htag } from '@/app/components'
 import styles from './page.module.css'
 import cn from 'classnames';
-// import { Document } from '@/app/components/document/document';
-import Journal from '@/app/components/journal/journal';
-import { DocumentsData } from '@/app/data/documents';
-import { DocumentType } from '../../interfaces/document.interface';
 
 export default function Gild() {
   return (
@@ -19,15 +15,6 @@ export default function Gild() {
           <div className={styles.box}>Пул чикими</div>
           <div className={styles.box}>Пул кирими</div>
         </div>
-        
-        {/* <div className={styles.actionBox}>
-          <Document documentType={DocumentType.SaleProd}/>
-        </div> */}
-        {/* <Journal
-          documents={ConvertDocuments(DocumentsData)}
-        /> */}
-
-
       </div>
     </>
   )

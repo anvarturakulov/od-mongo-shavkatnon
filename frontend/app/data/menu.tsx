@@ -20,7 +20,7 @@ export const MenuData:Array<MenuItem> = [
             { title: DocumentType.MoveProd, description:'Махсулот силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveProd, description:'Махсулот чикими', type: 'document', active: false },
             { title: DocumentType.SaleProd, description:'Махсулот сотуви', type: 'document', active: false },
-            { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (м/т)', type: 'document', active: false },
+            { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчилардан)', type: 'document', active: false },
             { title: DocumentType.MoveCash, description:'Пул силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveCash, description:'Пул харажати', type: 'document', active: false },
             // { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },

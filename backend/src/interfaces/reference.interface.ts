@@ -17,24 +17,3 @@ export enum TypeTMZ {
     PRODUCT = 'PRODUCT',
     HALFSTUFF = 'HALFSTUFF'
 }
-
-export interface ReferenceModel {
-    _id?: string;
-    name: string;
-    typeReference: TypeReference;
-    typePartners?: TypePartners;
-    typeTMZ?: TypeTMZ;
-    unit?: string;
-    comment?: string;
-    deleted?: boolean;
-}
-
-export interface ReferenceBody {
-    name: string;
-    typeReference: TypeReference;
-    typePartners: string;
-    typeTMZ: string;
-    unit: string;
-    comment: string;
-}
-
