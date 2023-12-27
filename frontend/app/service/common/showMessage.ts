@@ -1,4 +1,4 @@
-import { MessageType } from '../interfaces/general.interface'
+import { MessageType } from '../../interfaces/general.interface'
 
 export const showMessage = (
   message: string,

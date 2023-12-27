@@ -9,7 +9,7 @@ import { loginToApp } from '@/app/service/references.service'
 import { Htag } from '../common/htag/Htag'
 import { Input } from '../common/input/input'
 import { Button } from '../common/button/Button'
-import { showMessage } from '@/app/utils/showMessage'
+import { showMessage } from '@/app/service/showMessage'
 import { Message } from '../common/message/message'
 
 const defaultBody: BodyForLogin = {

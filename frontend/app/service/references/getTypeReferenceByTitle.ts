@@ -1,9 +1,6 @@
-import { MenuData } from '../data/menu';
-import { TypeReference } from '../interfaces/reference.interface';
+import { TypeReference } from '../../interfaces/reference.interface';
 
-export const getTypeReference = (description: string): TypeReference => {
-  const title = MenuData.filter(item => item.title == 'Руйхатлар')[0].subMenu.filter(el => el.title == description)[0]?.title
-
+export const getTypeReferenceByTitle = (title: string): TypeReference => {
   switch (title) {
     case TypeReference.PARTNERS:
       return TypeReference.PARTNERS;

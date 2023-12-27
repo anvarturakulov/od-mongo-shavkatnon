@@ -1,11 +1,11 @@
-import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
+import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
 
 export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: TypeReference) => {
- let newReq = {
-   name: state.name,
-   comment: state.comment,
-   typeReference
- }
+  let newReq = {
+    name: state.name,
+    comment: state.comment,
+    typeReference
+  }
   switch (typeReference) {
     case TypeReference.CHARGES:
       return {

@@ -1,6 +1,6 @@
 import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
 import { updateCreateReference } from '@/app/service/references.service';
-import { showMessage } from '@/app/utils/showMessage';
+import { showMessage } from '@/app/service/showMessage';
 
 export const cancelSubmit = (setMainData: Function | undefined) => {
     if (setMainData) {

@@ -9,8 +9,8 @@ import { getTypeReference } from '@/app/utils/getTypeReference';
 import { updateCreateReference } from '@/app/service/references.service';
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
-import { showMessage } from '@/app/utils/showMessage';
-import { getTypeReferenceByTitle } from '@/app/utils/getTypeReferenceByTitle';
+import { showMessage } from '@/app/service/showMessage';
+import { getTypeReferenceByTitle } from '@/app/service/getTypeReferenceByTitle';
 import { Select } from './helpers/reference.components';
 import { cancelSubmit, onSubmit } from './helpers/reference.functions';
 

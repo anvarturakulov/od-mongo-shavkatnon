@@ -1,5 +1,5 @@
-import { TypeReference } from '../interfaces/reference.interface'
-import { ReportsType } from "../interfaces/report.interface"
+import { TypeReference } from '../../interfaces/reference.interface'
+import { ReportsType } from "../../interfaces/report.interface"
 
 interface Result {
     label: string,

@@ -1,8 +1,8 @@
 import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocTableItem } from '@/app/interfaces/document.interface';
+import { DocTableItem, DocumentBody } from '@/app/interfaces/document.interface';
 import { getRandomID } from '@/app/utils/getRandomID';
-import { showMessage } from '@/app/utils/showMessage';
+import { showMessage } from '@/app/service/showMessage';
 
 export const addItems = (setMainData: Function | undefined, newItem: DocTableItem, items: Array<DocTableItem>) => {
   let newItems = [...items, newItem];
@@ -38,10 +38,10 @@ export const cancelSubmit = (setMainData: Function | undefined) => {
 }
 
 export const onSubmit = (
-    body: ReferenceBody, 
+    body: DocumentBody, 
     id: string | undefined, 
-    typeReference: TypeReference, 
-    isNewReference: boolean, 
+    documentType: string, 
+    isNewDocument: boolean, 
     setMainData: Function| undefined,
     token: string | undefined) => {
     
