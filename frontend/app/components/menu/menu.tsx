@@ -7,7 +7,7 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { getKeyEnum } from '@/app/utils/getKeyEnum';
 import { ContentType } from '../../interfaces/general.interface';
 import { useAppContext } from '@/app/context/app.context';
-import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { defaultDocumentTableItem, defaultDocumentFormItems } from '@/app/context/app.context.constants';
 
 export default function Menu({menuData, className, ...props}:MenuProps):JSX.Element {
     
@@ -42,6 +42,12 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
             setMainData('clearControlElements', true);
             let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
             setMainData('docTable', {...defaultTableItemsObj});
+
+            if (contentType = 'document') {
+                let defValue = {...defaultDocumentFormItems} 
+                defValue.documentType = contentName
+                setMainData('currentDocument', {...defValue});
+            }
         };
     }
 

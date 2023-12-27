@@ -6,7 +6,7 @@ import TrashIco from './ico/trash.svg';
 import { useAppContext } from '@/app/context/app.context';
 import { SelectReferenceInTable } from '../selects/selectReferenceInTable/selectReferenceInTable';
 import { DocTableItem } from '@/app/interfaces/document.interface';
-import { InputInTable } from '../inputInTable/inputInTable';
+import { InputInTable } from '../inputs/inputInTable/inputInTable';
 import { useState } from 'react';
 
 export const DocTable = ({ hasWorkers, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {

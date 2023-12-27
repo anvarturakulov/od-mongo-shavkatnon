@@ -36,13 +36,25 @@ export interface DocTableItem {
 
 export interface DocumentModel {
     _id: string,
-    date: Date,
+    date: number,
     docNumber: number,
     senderId: string,
     receiverId: string,
     tableItems: Array<DocTableItem> | undefined,
-    documentType: DocumentType,
+    documentType: string,
     payValue: number,
+    deleted?: boolean;
+};
+
+export interface DocumentBody {
+    date: number,
+    docNumber: number,
+    senderId: string,
+    receiverId: string,
+    tableItems: Array<DocTableItem> | undefined,
+    documentType: string,
+    payValue: number,
+    deleted?: boolean;
 };
 
 export interface OptionsForDocument {

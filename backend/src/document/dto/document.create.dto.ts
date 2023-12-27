@@ -21,8 +21,8 @@ class DocTableItemDto {
 }
 
 export class CreateDocumentDto {
-  @IsDateString()
-  date: Date;
+  @IsNumber()
+  date: number;
 
   @IsEnum(DocumentType)
   documentType: DocumentType;

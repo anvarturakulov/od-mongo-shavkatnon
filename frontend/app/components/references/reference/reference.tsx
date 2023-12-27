@@ -7,11 +7,12 @@ import { Button} from '@/app/components';
 import { ReferenceBody, TypeReference } from '../../../interfaces/reference.interface';
 import { getTypeReference } from '@/app/utils/getTypeReference';
 import { updateCreateReference } from '@/app/service/references.service';
-import { typePartnersList, typeTMZList } from './reference.constants';
+import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
 import { showMessage } from '@/app/utils/showMessage';
 import { getTypeReferenceByTitle } from '@/app/utils/getTypeReferenceByTitle';
-import { Select } from './reference.components';
+import { Select } from './helpers/reference.components';
+import { cancelSubmit, onSubmit } from './helpers/reference.functions';
 
 export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element => {
 
@@ -39,33 +40,6 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 [target.id]: target.value
             }
         })
-    }
-
-    const onSubmit = (
-        body: ReferenceBody, 
-        id: string | undefined, 
-        typeReference: TypeReference, 
-        isNewReference: boolean, 
-        setMainData: Function| undefined,
-        token: string | undefined) => {
-        if (typeReference == TypeReference.TMZ && body.typeTMZ == '') {
-            showMessage('ТМБ турини танланг', 'error', setMainData);
-            return
-        }
-        
-        if (body.name.trim().length != 0) {
-            updateCreateReference(body, id, typeReference, isNewReference, setMainData, token);
-        } else {
-            showMessage('Номини тулдиринг', 'error', setMainData);
-        }
-    }
-
-    const cancelSubmit = () => {
-        if (setMainData) {
-            setMainData('clearControlElements', true);
-            setMainData('showReferenceWindow', false);
-            setMainData('isNewReference', false);
-        }
     }
 
     useEffect(()=> {
@@ -131,7 +105,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                              setMainData,
                              user?.access_token)}
                     >Саклаш</Button>
-                <Button appearance='ghost' onClick={cancelSubmit}>Бекор килиш</Button>
+                <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
             </div> 
         </div>   
     )

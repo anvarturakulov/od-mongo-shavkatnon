@@ -1,3 +1,8 @@
+.referenceBox{
+    /* background-color: #eff5e3; */
+    padding: 30px;
+}
+
 .box{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -20,7 +25,7 @@
     margin: 10px 0;
     width: 100%;
     border: 1px dotted var(--black-300);
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
 }
 
 .button{
@@ -52,7 +57,9 @@
     margin: 10px 0;
     width: 100%;
     border: 0.6px dotted var(--black-300);
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
+    /* background-color: blue; */
+    background-color: #fff;
 }
 
 .label {
@@ -60,6 +67,3 @@
     line-height: 24px;
 }
 
-.referenceBox{
-    padding: 10px;
-}

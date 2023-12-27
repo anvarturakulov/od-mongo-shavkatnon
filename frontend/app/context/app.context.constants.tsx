@@ -9,6 +9,17 @@ export const defaultDocumentTableItem = {
     total: 0
 }
 
+export const defaultDocumentFormItems = {
+    _id: '',
+    date: 0,
+    docNumber: 0,
+    senderId: '',
+    receiverId: '',
+    tableItems: [defaultDocumentTableItem], // не пользуемся им
+    documentType: '',
+    payValue: 0,
+}
+
 export const defaultMainData: Maindata = {
     activeMenuKey: '',
     contentType: 'document',
@@ -22,16 +33,7 @@ export const defaultMainData: Maindata = {
     showDocumentWindow: false,
     isNewDocument: false,
     docTable: {items: [defaultDocumentTableItem]},
-    currentDocument: {
-        _id: '',
-        date: new Date(Date.UTC(0, 0, 0, 0, 0, 0)),
-        docNumber: 0,
-        senderId: '',
-        receiverId: '',
-        tableItems: [defaultDocumentTableItem], // не пользуемся им
-        documentType: DocumentType.ComeMaterial,
-        payValue: 0,
-    },
+    currentDocument: {...defaultDocumentFormItems},
     clearControlElements: false,
     showReferenceWindow: false,
     isNewReference: false,

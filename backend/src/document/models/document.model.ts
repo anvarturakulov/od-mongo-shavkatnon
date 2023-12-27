@@ -24,7 +24,7 @@ class DocTableItem{
 @Schema()
 export class Document {
   @Prop({ required: true })
-  date: Date;
+  date: number;
 
   @Prop({ enum: DocumentType })
   documentType: DocumentType;
@@ -40,6 +40,9 @@ export class Document {
 
   @Prop()
   payValue?: number;
+
+  @Prop()
+  deleted?: boolean;
 
 }
 
