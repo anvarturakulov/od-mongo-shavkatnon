@@ -58,9 +58,15 @@
     display: grid;
     grid-template-columns: 1fr 4fr;
     align-items: center;
-
 }
 
+.logo:hover{
+    color: red;
+}
+
+.logo:hover .ico{
+    fill: red;
+}
 .logoTitle{
     font-weight: 600;
     font-size: 20px;
@@ -81,4 +87,5 @@
 .ico{
     width: 45px;
     height: 45px;
+    fill:#134563;
 }

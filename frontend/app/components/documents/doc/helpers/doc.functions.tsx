@@ -16,11 +16,15 @@ export const addItems = (setMainData: Function | undefined, newItem: DocTableIte
 export const saveNumber = (setNumberDoc: Function, setMainData: Function | undefined, mainData: Maindata) => {
   let num = getRandomID()
   setNumberDoc(num);
+  let dateDoc = new Date();
+  let dateStr = dateDoc.toISOString().split('T')[0]
   
   let {currentDocument} = mainData;
   let newObj = {
       ...currentDocument,
       docNumber: num,
+      date: Date.parse(dateStr)
+
   }
 
   if ( setMainData ) {
@@ -47,11 +51,8 @@ export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined )
         tableItems: [...docTable.items]
     }
     
-    console.log('Array');
-    console.log(body)
-        
     if (!validateBody(body)) {
-        showMessage('Хужжатни тулдиришда хатолик бор. Шу ердан кайтаяпти*', 'error', setMainData);
+        showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
     } else {
         updateCreateDocument(mainData, setMainData);
     }

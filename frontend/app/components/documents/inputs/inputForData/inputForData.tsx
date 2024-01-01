@@ -3,6 +3,10 @@ import styles from './inputForData.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { useEffect } from 'react';
+import { setDateForDocument } from '@/app/service/documents/setDateForDocument';
+
+
 
 export const InputForData = ({label, className, ...props }: InputForDataProps): JSX.Element => {
     

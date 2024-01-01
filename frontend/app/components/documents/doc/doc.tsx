@@ -39,6 +39,8 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
         }
     },[currentDocument.docNumber])
 
+    
+
     return (
             <div className={styles.docBox}>
                 <div className={styles.infoBox}>

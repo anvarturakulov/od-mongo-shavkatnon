@@ -35,8 +35,8 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/' + id;
 
   if (isNewDocument) {
-    console.log('jr')
-    console.log(JSON.stringify(body))
+    // console.log('jr')
+    // console.log(JSON.stringify(body))
     axios.post(uriPost, body, config)
       .then(function () {
         actionWithMainData('янги хужжати киритилди')
