@@ -20,8 +20,7 @@ export const InputInForm = ({visible, label, className, ...props }: InputInFormP
         let {currentDocument} = mainData;
         let newObj = {
             ...currentDocument,
-            payValue: value,
-
+            payValue: +value,
         }
 
         if ( setMainData ) {

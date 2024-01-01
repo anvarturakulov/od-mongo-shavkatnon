@@ -24,6 +24,9 @@ export class CreateDocumentDto {
   @IsNumber()
   date: number;
 
+  @IsNumber()
+  docNumber: number;
+
   @IsEnum(DocumentType)
   documentType: DocumentType;
 
@@ -35,7 +38,7 @@ export class CreateDocumentDto {
   
   @IsOptional()
   @IsArray()
-  @ValidateNested()
+  // @ValidateNested()
   @Type(() => DocTableItemDto)
   tableItems?: DocTableItemDto[];
 

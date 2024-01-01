@@ -7,13 +7,12 @@ import { Button, Info, Input, DocTable, SelectReferenceInForm } from '@/app/comp
 import AddIco from './ico/add.svg'
 import { DocTableItem, DocumentBody, DocumentType, OptionsForDocument } from '../../../interfaces/document.interface';
 import { TypeReference } from '../../../interfaces/reference.interface';
-import { getOptionOfDocumentElements } from '@/app/utils/getOptionOfDocumentElements';
 import { useAppContext } from '@/app/context/app.context';
-import { getRandomID } from '@/app/utils/getRandomID';
 import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { InputForData } from '../inputs/inputForData/inputForData';
 import { addItems, cancelSubmit, onSubmit, saveNumber } from './helpers/doc.functions';
+import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
@@ -25,18 +24,6 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
     let defaultNewItemForTable = {...defaultDocumentTableItem}
-
-    const defaultBody: DocumentBody = {
-        date: 0,
-        docNumber: 0,
-        senderId: '',
-        receiverId: '',
-        tableItems: [{...defaultDocumentTableItem}],
-        documentType: '',
-        payValue: 0,
-    }
-
-    const [body, setBody] = useState<DocumentBody>(defaultBody) 
 
     useEffect(() => {
         if (currentDocument.docNumber == 0) {
@@ -98,15 +85,14 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
 
             <div className={styles.boxBtn}>
                 <Button appearance='primary' onClick={() => 
-                    onSubmit(body, 
-                             mainData.currentReference?._id, 
-                             typeReference, 
-                             isNewReference,
-                             setMainData,
-                             user?.access_token)}
+                    onSubmit( mainData, setMainData )}
                     >Саклаш</Button>
                 <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
-                <Button appearance='ghost' onClick={()=> console.log(mainData.currentDocument)}>Show</Button>
+                <Button appearance='ghost' onClick={()=> {
+                    console.log(mainData.currentDocument)
+                    console.log(mainData)
+                }
+                }>Show</Button>
             </div>
         </div>   
     )

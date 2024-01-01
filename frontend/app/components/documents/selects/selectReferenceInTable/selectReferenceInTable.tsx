@@ -3,8 +3,8 @@ import styles from './selectReferenceInTable.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
-import { getDataForSwr } from '@/app/service/references.service';
 import { DocTableItem } from '@/app/interfaces/document.interface';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
 
 export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {

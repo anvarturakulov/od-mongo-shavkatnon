@@ -5,14 +5,12 @@ import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
 import { ReferenceBody, TypeReference } from '../../../interfaces/reference.interface';
-import { getTypeReference } from '@/app/utils/getTypeReference';
-import { updateCreateReference } from '@/app/service/references.service';
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
-import { showMessage } from '@/app/service/showMessage';
-import { getTypeReferenceByTitle } from '@/app/service/getTypeReferenceByTitle';
 import { Select } from './helpers/reference.components';
 import { cancelSubmit, onSubmit } from './helpers/reference.functions';
+import { getTypeReference } from '@/app/service/references/getTypeReference';
+import { getTypeReferenceByTitle } from '@/app/service/references/getTypeReferenceByTitle';
 
 export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element => {
 

@@ -1,6 +1,6 @@
 import { ReferenceBody } from '@/app/interfaces/reference.interface';
 import { DataForSelect } from './reference.constants'
-import styles from './reference.module.css';
+import styles from '../reference.module.css';
 
 export const  Select = (list: Array<DataForSelect>, body: ReferenceBody,label: string, typeString: string, changeElement: Function) => {
     

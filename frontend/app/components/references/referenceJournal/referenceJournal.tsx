@@ -6,11 +6,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Reference } from '../reference/reference';
 import { ReferenceModel } from '../../../interfaces/reference.interface';
 import useSWR from 'swr';
-import { getTypeReference } from '@/app/utils/getTypeReference';
 import { ReferenceJournalProps } from './referenceJournal.props';
 import { useAppContext } from '@/app/context/app.context';
-import { getReferenceById, markToDeleteReference } from '@/app/service/references.service';
 import Header from '../../common/header/header';
+import { getTypeReference } from '@/app/service/references/getTypeReference';
+import { markToDeleteReference } from '@/app/service/references/markToDeleteReference';
+import { getReferenceById } from '@/app/service/references/getReferenceById';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     

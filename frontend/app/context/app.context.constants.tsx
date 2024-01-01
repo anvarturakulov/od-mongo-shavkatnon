@@ -10,7 +10,6 @@ export const defaultDocumentTableItem = {
 }
 
 export const defaultDocumentFormItems = {
-    _id: '',
     date: 0,
     docNumber: 0,
     senderId: '',

@@ -1,8 +1,10 @@
 import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { DocTableItem, DocumentBody } from '@/app/interfaces/document.interface';
-import { getRandomID } from '@/app/utils/getRandomID';
-import { showMessage } from '@/app/service/showMessage';
+import { showMessage } from '@/app/service/common/showMessage';
+import { getRandomID } from '@/app/service/documents/getRandomID';
+import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
+import { validateBody } from '@/app/service/documents/validateBody';
 
 export const addItems = (setMainData: Function | undefined, newItem: DocTableItem, items: Array<DocTableItem>) => {
   let newItems = [...items, newItem];
@@ -37,22 +39,18 @@ export const cancelSubmit = (setMainData: Function | undefined) => {
     }
 }
 
-export const onSubmit = (
-    body: DocumentBody, 
-    id: string | undefined, 
-    documentType: string, 
-    isNewDocument: boolean, 
-    setMainData: Function| undefined,
-    token: string | undefined) => {
-    
-    if (typeReference == TypeReference.TMZ && body.typeTMZ == '') {
-        showMessage('ТМБ турини танланг', 'error', setMainData);
-        return
+export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
+    const {user, currentDocument, isNewDocument, docTable} = mainData;
+    let body: DocumentBody = {
+        ...currentDocument,
+        tableItems: [...docTable.items]
     }
     
-    if (body.name.trim().length != 0) {
-        updateCreateReference(body, id, typeReference, isNewReference, setMainData, token);
+        
+    if (!validateBody(body)) {
+        showMessage('Хужжатни тулдиришда хатолик бор', 'error', setMainData);
     } else {
-        showMessage('Номини тулдиринг', 'error', setMainData);
+        updateCreateDocument(mainData, setMainData);
     }
+    
 }

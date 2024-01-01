@@ -5,12 +5,12 @@ import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { BodyForLogin, UserRoles } from '@/app/interfaces/general.interface'
 import { useAppContext } from '@/app/context/app.context'
-import { loginToApp } from '@/app/service/references.service'
 import { Htag } from '../common/htag/Htag'
 import { Input } from '../common/input/input'
-import { Button } from '../common/button/Button'
-import { showMessage } from '@/app/service/showMessage'
+import { Button } from '../common/button/Button';
 import { Message } from '../common/message/message'
+import { loginToApp } from '@/app/service/common/loginToApp'
+import { showMessage } from '@/app/service/common/showMessage'
 
 const defaultBody: BodyForLogin = {
   login: '',

@@ -4,13 +4,13 @@ import { MenuData } from '@/app/data/menu';
 import Menu from '@/app/components/menu/menu';
 import styles from './page.module.css';
 import ReportWindow from '@/app/components/reports/reportWindow/reportWindow';
-import { getReportTypeByTitle } from '@/app/utils/getReportTypeByTitle';
 import ReferenceJournal from '@/app/components/references/referenceJournal/referenceJournal';
 import { useAppContext } from '@/app/context/app.context';
 import { Message } from '@/app/components/common/message/message';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import Journal from '@/app/components/documents/journal/journal';
+import { getReportTypeByTitle } from '@/app/service/reports/getReportTypeByTitle';
 
 const infoBlock = (
     <>

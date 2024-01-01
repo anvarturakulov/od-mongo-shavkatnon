@@ -35,7 +35,6 @@ export interface DocTableItem {
 }
 
 export interface DocumentModel {
-    _id: string,
     date: number,
     docNumber: number,
     senderId: string,

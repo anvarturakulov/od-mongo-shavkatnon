@@ -11,6 +11,7 @@ export class DocumentController {
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
+    console.log(dto)
     this.documentService.createReference(dto);
   };
 

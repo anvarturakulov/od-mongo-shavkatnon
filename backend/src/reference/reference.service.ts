@@ -28,7 +28,6 @@ export class ReferenceService {
     // db.movies.findOne({ _id: ObjectId("1") }) - найти фильмы по переданному "id"
     // db.movies.updateOne({ _id: ObjectId('1') }, { $set: { rating: 10, year: 1995 } }) - обновить фильм с переданным id, обновляются поля "rating" И "year"
     const reference: CreateReferenceDto = await this.referenceModel.findOne({_id: id})
-    console.log(' ref deleted ',reference.deleted+'  '+reference.name);
     if (!reference.name) {
       throw new NotFoundException(REFERENCE_NOT_FOUND_ERROR);
     }

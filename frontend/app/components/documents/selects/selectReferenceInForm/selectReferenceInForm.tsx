@@ -3,8 +3,8 @@ import styles from './selectReferenceInForm.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
-import { getDataForSwr } from '@/app/service/references.service';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     

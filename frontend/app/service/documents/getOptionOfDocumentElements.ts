@@ -137,14 +137,14 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForCashLeave.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = '-----'
+        senderLabel = 'Харажат килувчи'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Харажат килувчи'
+        receiverLabel = '-----'
         paymentLabel = '-----'
         paymentIsVisible = false
         tableIsVisible = true
-        senderIsVisible = false
-        recieverIsVisible = true
+        senderIsVisible = true
+        recieverIsVisible = false
     }
 
     const documentsForZp = [

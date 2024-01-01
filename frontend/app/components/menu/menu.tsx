@@ -4,10 +4,10 @@ import cn from 'classnames';
 import {MenuProps} from './menu.props'
 import { useEffect, useState } from 'react';
 import { MenuItem } from '../../interfaces/menu.interface';
-import { getKeyEnum } from '@/app/utils/getKeyEnum';
 import { ContentType } from '../../interfaces/general.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { defaultDocumentTableItem, defaultDocumentFormItems } from '@/app/context/app.context.constants';
+import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 
 export default function Menu({menuData, className, ...props}:MenuProps):JSX.Element {
     

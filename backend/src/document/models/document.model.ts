@@ -26,6 +26,9 @@ export class Document {
   @Prop({ required: true })
   date: number;
 
+  @Prop()
+  docNumber: number;
+
   @Prop({ enum: DocumentType })
   documentType: DocumentType;
 
