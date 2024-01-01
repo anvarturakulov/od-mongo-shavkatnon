@@ -2,17 +2,17 @@ import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interfa
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocumentBody } from '@/app/interfaces/document.interface';
-import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { DocumentModel } from '@/app/interfaces/document.interface';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {
   
   const { user, currentDocument, isNewDocument, docTable } = mainData
   const id = 'asasasa879797987'
   
-  let body: DocumentBody = {
+  let body: DocumentModel = {
     ...currentDocument,
-    tableItems: { ...docTable.items }
+    tableItems: [ ...docTable.items ]
   }
   
   const config = {
@@ -22,9 +22,11 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   const actionWithMainData = (mes: string) => {
     if (setMainData) {
       showMessage(`${body.docNumber} ракамли - ${body.documentType} - ${mes}`, 'success', setMainData)
-      setMainData('showDocumentWindow', false);
       setMainData('clearControlElements', true);
+      setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);
+      let defaultTableItemsObj = { items: [defaultDocumentTableItem] }
+      setMainData('docTable', { ...defaultTableItemsObj });
       setMainData('currentDocument', { ...defaultDocumentFormItems });
     }
   }

@@ -30,8 +30,14 @@ export class ReferenceController {
 
   @UseGuards(JwtAuthGuard)
   @Get('byType/:typeReference')
-  async getByProductId(@Param('typeReference',) typeReference: TypeReference) {
+  async getByTypeReference(@Param('typeReference',) typeReference: TypeReference) {
     return this.referenceService.getByTypeReference(typeReference)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('getAll')
+  async getAllReferences() {
+    return this.referenceService.getAllReferences()
   }
 
   @UseGuards(JwtAuthGuard)

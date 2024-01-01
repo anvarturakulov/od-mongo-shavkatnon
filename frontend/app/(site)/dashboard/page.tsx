@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import Journal from '@/app/components/documents/journal/journal';
 import { getReportTypeByTitle } from '@/app/service/reports/getReportTypeByTitle';
+import IcoQalam from './ico/qalam.svg';
 
 const infoBlock = (
     <>
@@ -42,15 +43,14 @@ const infoBlock = (
 
   const logo = (
     <div
-      className={styles.logo}
-      // onClick={() => setSettingsDashboard(defaultSettingsDashboard)}
-    >
-      <div className={styles.logoTitle}>
-        Карандаш v 1.0
-      </div>
-      <div className={styles.logoComment}>
-        онлайн учет
-      </div>
+      className={styles.logo}>
+        <IcoQalam className={styles.ico}/>
+        <div className={styles.logoTitle}>
+          <div> Qalam </div>
+          <div className={styles.logoComment}>
+            online hisob
+          </div>
+        </div>
     </div>
   )
 
@@ -58,7 +58,7 @@ const infoBlock = (
 export default function Dashboard() {
 
   const {mainData} = useAppContext()
-  const {contentName, contentType, contentTitle} = mainData
+  const {contentType, contentTitle} = mainData
   
   useEffect(() => {
     if (mainData.user == undefined) {

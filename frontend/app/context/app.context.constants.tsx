@@ -6,7 +6,8 @@ export const defaultDocumentTableItem = {
     referenceName: '',
     count: 0,
     price: 0,
-    total: 0
+    total: 0,
+    comment: ''
 }
 
 export const defaultDocumentFormItems = {
@@ -32,6 +33,7 @@ export const defaultMainData: Maindata = {
     showDocumentWindow: false,
     isNewDocument: false,
     docTable: {items: [defaultDocumentTableItem]},
+    updateDataForDocumentJournal: false,
     currentDocument: {...defaultDocumentFormItems},
     clearControlElements: false,
     showReferenceWindow: false,

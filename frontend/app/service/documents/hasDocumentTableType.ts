@@ -1,12 +1,8 @@
-import { DocumentModel, DocumentType, OptionsForDocument } from "../../interfaces/document.interface";
-import { TypeReference } from '../../interfaces/reference.interface';
+import { DocumentType, OptionsForDocument } from "../../interfaces/document.interface";
 
-export const validateBody = (body: DocumentModel): Boolean => {
-  let {date, docNumber, documentType, receiverId, senderId, tableItems, payValue } = body
-
-  if (!date || !docNumber || !documentType) return false
-
-  const documentsForComeMaterial = [
+export const hasDocumentTablePart = (documentType: string): Boolean => {
+  
+  const documentsWithTableItems = [
     `${DocumentType.ComeMaterial}`,
     `${DocumentType.ComeProduct}`,
     `${DocumentType.ComeHalfstuff}`,
@@ -18,28 +14,25 @@ export const validateBody = (body: DocumentModel): Boolean => {
     `${DocumentType.MoveProd}`,
     `${DocumentType.MoveMaterial}`,
     `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.LeaveCash}`,
   ]
 
-  if (documentsForComeMaterial.includes(documentType)) {
-    if (!receiverId || !senderId || tableItems?.length == 0) return false
+  if (documentsWithTableItems.includes(documentType)) {
+    return true
   }
 
-  const documentsForCashFromPartners = [
+  const documentsWithOutTableItems = [
     `${DocumentType.ComeCashFromPartners}`,
     `${DocumentType.MoveCash}`,
   ]
 
-  if (documentsForCashFromPartners.includes(documentType)) {
-    if (!receiverId || !senderId || !payValue) return false
+  if (documentsWithTableItems.includes(documentType)) {
+    return false
   }
 
-  const documentsForCashLeave = [
-    `${DocumentType.LeaveCash}`,
-  ]
+  return false
 
-  if (documentsForCashLeave.includes(documentType)) {
-    if (!senderId || !tableItems?.length) return false
-  }
+
 
   // const documentsForZp = [
   //   `${DocumentType.ZpCalculate}`,

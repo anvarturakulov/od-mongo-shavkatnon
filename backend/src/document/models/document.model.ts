@@ -47,6 +47,8 @@ export class Document {
   @Prop()
   deleted?: boolean;
 
+  @Prop()
+  comment?: string;
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

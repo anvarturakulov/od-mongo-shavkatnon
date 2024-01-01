@@ -5,13 +5,13 @@ import styles from './doc.module.css';
 import cn from 'classnames';
 import { Button, Info, Input, DocTable, SelectReferenceInForm } from '@/app/components';
 import AddIco from './ico/add.svg'
-import { DocTableItem, DocumentBody, DocumentType, OptionsForDocument } from '../../../interfaces/document.interface';
+import { DocumentType, OptionsForDocument } from '../../../interfaces/document.interface';
 import { TypeReference } from '../../../interfaces/reference.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { addItems, cancelSubmit, onSubmit, saveNumber } from './helpers/doc.functions';
+import { addItems, cancelSubmit, onSubmit, saveDocumentType, saveNumber } from './helpers/doc.functions';
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 
 
@@ -19,7 +19,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const [numberDoc, setNumberDoc] = useState<number>(0);
-    const {user, contentName, contentType, contentTitle, docTable, currentDocument} = mainData;
+    const {contentName, contentTitle, docTable, currentDocument} = mainData;
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
@@ -32,6 +32,12 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             setNumberDoc(currentDocument.docNumber);
         }
     },[])
+
+    useEffect(() => {
+        if (currentDocument.docNumber != 0) {
+            saveDocumentType(setMainData, mainData);
+        }
+    },[currentDocument.docNumber])
 
     return (
             <div className={styles.docBox}>

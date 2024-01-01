@@ -12,6 +12,8 @@ import Header from '../../common/header/header';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { markToDeleteReference } from '@/app/service/references/markToDeleteReference';
 import { getReferenceById } from '@/app/service/references/getReferenceById';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { deleteItemReference, getReference } from './helpers/reference.functions';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
@@ -20,36 +22,12 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
     const referenceType = getTypeReference(contentName);
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+referenceType;
-
-    const getData = async (url:string, token: string | undefined) => {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-        const response = await fetch(url, config);
-        return await response.json();
-    };
-    
-    const { data, mutate } = useSWR(url, (url) => getData(url, token));
+    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     useEffect(() => {
         mutate()
         setMainData && setMainData('updateDataForRefenceJournal', false);
     }, [mainData.showReferenceWindow, mainData.updateDataForRefenceJournal])
-
-    const deleteItem = (id: string | undefined, name: string, token: string | undefined) => {
-        markToDeleteReference(id, name,setMainData, token)
-    }
-
-    const getReference = async (
-                                id: string | undefined,
-                                setMainData: Function | undefined,
-                                token: string | undefined
-                            ) => {
-        if (id) {
-            const reference = await getReferenceById(id, setMainData, token);
-        }
-        setMainData && setMainData('isNewReference', false);
-    }
 
     return (
         <>  
@@ -112,7 +90,7 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                                             className={cn(className,styles.icoTrash, {
                                                 [styles.deleted]: item.deleted,
                                             })}  
-                                            onClick = {() => deleteItem(item._id, item.name, token)}
+                                            onClick = {() => deleteItemReference(item._id, item.name, token, setMainData)}
                                             />
                                     </td>
                                 </tr>

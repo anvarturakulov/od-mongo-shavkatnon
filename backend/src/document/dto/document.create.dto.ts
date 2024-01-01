@@ -45,4 +45,12 @@ export class CreateDocumentDto {
   @IsOptional()
   @IsNumber()
   payValue?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  deleted: boolean = false;
+
+  @IsOptional()
+  @IsString()
+  comment: string;
 }

@@ -1,6 +1,6 @@
 import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocTableItem, DocumentBody } from '@/app/interfaces/document.interface';
+import { DocTableItem, DocumentModel } from '@/app/interfaces/document.interface';
 import { showMessage } from '@/app/service/common/showMessage';
 import { getRandomID } from '@/app/service/documents/getRandomID';
 import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
@@ -41,16 +41,36 @@ export const cancelSubmit = (setMainData: Function | undefined) => {
 
 export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
     const {user, currentDocument, isNewDocument, docTable} = mainData;
-    let body: DocumentBody = {
+    
+    let body: DocumentModel = {
         ...currentDocument,
         tableItems: [...docTable.items]
     }
     
+    console.log('Array');
+    console.log(body)
         
     if (!validateBody(body)) {
-        showMessage('Хужжатни тулдиришда хатолик бор', 'error', setMainData);
+        showMessage('Хужжатни тулдиришда хатолик бор. Шу ердан кайтаяпти*', 'error', setMainData);
     } else {
         updateCreateDocument(mainData, setMainData);
     }
     
+}
+
+export const secondsToDateString = (seconds: number): String => {
+    return new Date(seconds).toISOString().split('T')[0]
+}
+
+export const saveDocumentType = (setMainData: Function | undefined, mainData: Maindata) => {
+  
+  let {currentDocument, contentName} = mainData;
+  let newObj = {
+      ...currentDocument,
+      documentType: contentName,
+  }
+
+  if ( setMainData ) {
+      setMainData('currentDocument', {...newObj})
+  }
 }

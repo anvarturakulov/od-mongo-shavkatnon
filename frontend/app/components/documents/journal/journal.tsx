@@ -1,53 +1,42 @@
 'use client'
 import styles from './journal.module.css'
+import IcoTrash from './ico/trash.svg'
 import {JournalProps} from './journal.props'
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
+import cn from 'classnames';
 import Header from '../../common/header/header';
 import { Doc } from '../doc/doc';
-import { getTypeReference } from '@/app/service/references/getTypeReference';
-import { markToDeleteReference } from '@/app/service/references/markToDeleteReference';
-import { getReferenceById } from '@/app/service/references/getReferenceById';
+import { DocumentModelFromServer } from '@/app/interfaces/document.interface';
+import { secondsToDateString } from '../doc/helpers/doc.functions';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { deleteItemDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
+import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
 
     const {mainData, setMainData} = useAppContext();
     const { contentName, user, showDocumentWindow } = mainData;
-    const referenceType = getTypeReference(contentName);
     const token = user?.access_token;
-    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+referenceType;
-
-    const getData = async (url:string, token: string | undefined) => {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-        const response = await fetch(url, config);
-        return await response.json();
-    };
+    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
-    const { data, mutate } = useSWR(url, (url) => getData(url, token));
+    if (!contentName) {
+        url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
+    }
 
+    const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
+
+    const { data : documents, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    const { data : references, mutate: mutateReferences } = useSWR(urlReferences, (urlReferences) => getDataForSwr(urlReferences, token));
+
+    
     useEffect(() => {
         mutate()
-        setMainData && setMainData('updateDataForRefenceJournal', false);
-    }, [mainData.showReferenceWindow, mainData.updateDataForRefenceJournal])
-
-    const deleteItem = (id: string | undefined, name: string, token: string | undefined) => {
-        markToDeleteReference(id, name,setMainData, token)
-    }
-
-    const getReference = async (
-                                id: string | undefined,
-                                setMainData: Function | undefined,
-                                token: string | undefined
-                            ) => {
-        if (id) {
-            const reference = await getReferenceById(id, setMainData, token);
-        }
-        setMainData && setMainData('isNewReference', false);
-    }
+        mutateReferences()
+        setMainData && setMainData('updateDataForDocumentJournal', false);
+    }, [mainData.showDocumentWindow, mainData.updateDataForDocumentJournal])
 
     return (
         <>
@@ -56,13 +45,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                 {showDocumentWindow && <Doc/>}
             </div>
             <div className={styles.container} >
-                {/* <div>{mainData.menu.contentType}</div> */}
                 <table className={styles.table}>
                     <thead className={styles.thead}>
                         <tr key='0'>
-                            <th key='1' className={styles.rowId}>_id </th>
+                            <th key='1' className={styles.rowId}>Раками </th>
                             <th key='2' className={styles.rowDate}>Сана</th>
-                            <th key='3'>Хужжат холати</th>
                             <th key='4'>Хужжат тури</th>
                             <th key='5' className={styles.rowSumma}>Сумма</th>
                             <th key='6'>Олувчи</th>
@@ -71,40 +58,35 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             <th key='9' className={styles.rowAction}>Амал</th>
                         </tr>
                     </thead>
-                    {/* <tbody className={styles.tbody}>
-                        {documents?.map((item, key) => (
+                    <tbody className={styles.tbody}>
+                        {documents && documents.length>0 && 
+                        documents
+                        .sort((a:DocumentModelFromServer, b:DocumentModelFromServer) => a.date - b.date)
+                        .map((item:DocumentModelFromServer, key: number) => (
                             <>
                                 <tr 
                                     key={key} 
-                                    onDoubleClick={() => {alert(item.receiverId)}} 
-                                    className={styles.trRow}    
+                                    className={cn(className, {
+                                            [styles.deleted]: item.deleted,
+                                            [styles.trRow]: 1,
+                                        })}     
                                 >
-                                    <td className={styles.rowId}>{item._id}</td>
-                                    <td className={styles.rowDate}>{item.date}</td>
-                                    <td
-                                        className={cn(className, {
-                                            [styles.deleted]: item.state == DocumentState.Deleted,
-                                            [styles.proveden]: item.state == DocumentState.Proveden,
-                                            [styles.error]: item.state == DocumentState.Error,
-                                            [styles.saved]: item.state == DocumentState.Saved,
-                                        })}
-                                    >{item.state}</td>
-                                    <td
-                                        className={cn(className, {
-                                            [styles.error]: item.documentType == DocumentType.Error,
-                                        })}
-                                    >{item.documentType}</td>
-                                    <td className={cn(styles.rowSumma, styles.tdSumma)}>1.200.000</td>
-                                    <td>{item.senderId}</td>
-                                    <td>{item.receiverId}</td>
-                                    <td>Изох</td>
+                                    <td className={styles.rowId}>{item.docNumber}</td>
+                                    <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
+                                    <td>{getDescriptionDocument(item.documentType)}</td>
+                                    <td className={cn(styles.rowSumma, styles.tdSumma)}>{getTotalValueForDocument(item)}</td>
+                                    <td>{getNameReference(references,item.receiverId)}</td>
+                                    <td>{getNameReference(references,item.senderId)}</td>
+                                    <td>{item.comment}</td>
                                     <td className={styles.rowAction}>
-                                        <IcoTrash className={styles.icoTrash}/>
+                                        <IcoTrash className={styles.icoTrash}
+                                        onClick = {() => deleteItemDocument(item._id, token, setMainData)}
+                                        />
                                     </td>
                                 </tr>
                             </>    
                         ))}
-                    </tbody> */}
+                    </tbody>
                 </table>
             </div>
         </>

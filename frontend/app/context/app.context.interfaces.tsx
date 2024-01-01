@@ -20,6 +20,7 @@ export interface Maindata {
   isNewDocument: boolean,
   docTable: DocTable,
   currentDocument: DocumentModel,
+  updateDataForDocumentJournal: boolean,
   clearControlElements: boolean,
   showReferenceWindow: boolean,
   isNewReference: boolean;

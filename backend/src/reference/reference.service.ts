@@ -20,6 +20,10 @@ export class ReferenceService {
     return this.referenceModel.find({ typeReference }).exec()
   }
 
+  async getAllReferences(): Promise<Reference[]> {
+    return this.referenceModel.find().exec()
+  }
+
   async findById(id: string) {
     return this.referenceModel.findById(id).exec();
   }
