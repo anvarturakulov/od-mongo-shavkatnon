@@ -2,32 +2,46 @@ import { InputInTableProps } from './inputInTable.props';
 import styles from './inputInTable.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
-import { DocTableItem } from '@/app/interfaces/document.interface';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
 export const InputInTable = ({ className, nameControl, itemIndexInTable, ...props }: InputInTableProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { user, docTable } = mainData;
-    let currentVal = docTable.items[itemIndexInTable][nameControl]
+    const { user, currentDocument } = mainData;
+    let currentVal;
+    if (currentDocument.tableItems) {
+        currentVal = currentDocument.tableItems[itemIndexInTable][nameControl]
+    }
 
-    const changeElements = (e: React.FormEvent<HTMLInputElement>, nameControl:string, itemIndex: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
+    const changeElements = (e: React.FormEvent<HTMLInputElement>, nameControl:string, itemIndex: number, setMainData: Function | undefined, mainData: Maindata) => {
         let target = e.currentTarget;
-        let currentItem = {...items[itemIndex]}
-        let value = target.value
+        let {currentDocument} = mainData;
 
-        if (value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total')) {
-            currentItem[nameControl] = +value
-        }
+        if (currentDocument && currentDocument.tableItems) {
+            
+            let currentItem = {...currentDocument.tableItems[itemIndex]}
+            let value = target.value
 
-        if (value != null && (nameControl=='count' || nameControl=='price')) {
-            currentItem.total = currentItem.count * currentItem.price
-        }
+            if (currentItem && value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total')) {
+                currentItem[nameControl] = +value
+            }
 
-        let newItems = [...items]
-        newItems[itemIndex] = {...currentItem}
-        if ( setMainData ) {
-            setMainData('docTable', {items: [...newItems]})
+            if (currentItem && value != null && (nameControl=='count' || nameControl=='price')) {
+                currentItem.total = currentItem.count * currentItem.price
+            }
+
+            let newItems = [...currentDocument.tableItems]
+            newItems[itemIndex] = {...currentItem}
+            let newObj = {
+                ...currentDocument,
+                tableItems: [...newItems]
+            }
+            
+            if ( setMainData ) {
+                setMainData('currentDocument', {...newObj})
+            }
         }
+        
     }
 
     return (
@@ -35,7 +49,7 @@ export const InputInTable = ({ className, nameControl, itemIndexInTable, ...prop
             <input
                 className={cn(className, styles.input)}
                 {...props}
-                onChange={(e) => changeElements(e, nameControl, itemIndexInTable, setMainData, docTable.items)}
+                onChange={(e) => changeElements(e, nameControl, itemIndexInTable, setMainData, mainData)}
                 type='number'
                 value={currentVal}
             />

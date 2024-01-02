@@ -31,7 +31,7 @@ export const DocTable = ({ hasWorkers, typeReference, items,  className, ...prop
                 <div>Суммаси</div>
                 <div></div>
             </div>
-            {items.map((item: DocTableItem, index)  => (
+            {items && items.map((item: DocTableItem, index)  => (
                 <div key = {index} className={cn(styles.box, {[styles.boxWithWorkers]: !hasWorkers})}>
                     
                     { 

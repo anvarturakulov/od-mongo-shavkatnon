@@ -38,4 +38,8 @@ export class DocumentService {
     const state = document.deleted ? false : true
     return this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
   }
+
+  async updateById(id: string, dto: CreateDocumentDto) {
+    return this.documentModel.updateOne({ _id: id }, { $set: dto })
+  }
 }

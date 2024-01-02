@@ -19,7 +19,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const [numberDoc, setNumberDoc] = useState<number>(0);
-    const {contentName, contentTitle, docTable, currentDocument} = mainData;
+    const {contentName, contentTitle, currentDocument} = mainData;
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
@@ -79,14 +79,14 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                 <DocTable 
                     typeReference={contentName == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
                     hasWorkers={hasWorkers}
-                    items={docTable.items} 
+                    items={currentDocument.tableItems} 
             />}
             
             <div className={styles.paybox}>
                 <Input placeholder='Кушимча изох' label={''}/>
                 {options.tableIsVisible && 
                     <div className={cn(styles.add, {[styles.notView] : false == false})}>
-                        <AddIco onClick={() => addItems(setMainData, defaultNewItemForTable, docTable.items)}/>
+                        <AddIco onClick={() => addItems(setMainData, mainData ,defaultNewItemForTable)}/>
                     </div>
                 }
             </div>

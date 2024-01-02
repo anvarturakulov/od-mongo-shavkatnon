@@ -1,4 +1,3 @@
-import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
@@ -6,14 +5,13 @@ import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/contex
 import { DocumentModel } from '@/app/interfaces/document.interface';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {
-  
-  const { user, currentDocument, isNewDocument, docTable } = mainData
-  const id = 'asasasa879797987'
-  
+  const { user, currentDocument, isNewDocument } = mainData
+
   let body: DocumentModel = {
     ...currentDocument,
-    tableItems: [ ...docTable.items ]
   }
+
+  delete body._id;
   
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
@@ -25,18 +23,15 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('clearControlElements', true);
       setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);
-      let defaultTableItemsObj = { items: [defaultDocumentTableItem] }
-      setMainData('docTable', { ...defaultTableItemsObj });
       setMainData('currentDocument', { ...defaultDocumentFormItems });
     }
   }
 
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/create';
-  const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/' + id;
+  const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/' + currentDocument._id;
 
   if (isNewDocument) {
-    // console.log('jr')
-    // console.log(JSON.stringify(body))
+
     axios.post(uriPost, body, config)
       .then(function () {
         actionWithMainData('янги хужжати киритилди')
@@ -47,7 +42,7 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
         }
       });
   } else {
-    if (id) {
+    if (currentDocument._id) {
       axios.patch(uriPatch, body, config)
         .then(function () {
           actionWithMainData('хужжат янгиланди')

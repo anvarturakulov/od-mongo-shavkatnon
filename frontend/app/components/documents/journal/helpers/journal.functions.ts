@@ -1,4 +1,4 @@
-import { DocumentModel, DocumentModelFromServer } from '@/app/interfaces/document.interface';
+import { DocumentModel } from '@/app/interfaces/document.interface';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { getDocumentById } from '@/app/service/documents/getDocumentById';
 import { hasDocumentTablePart } from '@/app/service/documents/hasDocumentTableType';
@@ -32,7 +32,7 @@ export const deleteItemDocument = (id: string | undefined, token: string | undef
   markToDeleteDocument(id, setMainData, token)
 }
 
-export const getTotalValueForDocument = (document: DocumentModelFromServer): number => {
+export const getTotalValueForDocument = (document: DocumentModel): number => {
   let hasTablePart = hasDocumentTablePart(document.documentType);
   let total:number = 0;
   if (hasTablePart && document.tableItems) {

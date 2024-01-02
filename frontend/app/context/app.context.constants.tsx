@@ -12,6 +12,7 @@ export const defaultDocumentTableItem = {
 }
 
 export const defaultDocumentFormItems = {
+    _id: '',
     date: 0,
     docNumber: 0,
     senderId: '',
@@ -33,7 +34,6 @@ export const defaultMainData: Maindata = {
     messageType: 'error',
     showDocumentWindow: false,
     isNewDocument: false,
-    docTable: {items: [defaultDocumentTableItem]},
     updateDataForDocumentJournal: false,
     currentDocument: {...defaultDocumentFormItems},
     clearControlElements: false,

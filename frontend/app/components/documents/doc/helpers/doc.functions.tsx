@@ -6,11 +6,14 @@ import { getRandomID } from '@/app/service/documents/getRandomID';
 import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
 import { validateBody } from '@/app/service/documents/validateBody';
 
-export const addItems = (setMainData: Function | undefined, newItem: DocTableItem, items: Array<DocTableItem>) => {
-  let newItems = [...items, newItem];
-  if (setMainData) {
-      setMainData('docTable', {items: newItems})
-  }
+export const addItems = (setMainData: Function | undefined, mainData: Maindata, newItem: DocTableItem) => {
+  
+    let newObj = {...mainData.currentDocument};
+    newObj.tableItems?.push(newItem) 
+
+    if (setMainData) {
+        setMainData('currentDocument', {...newObj})
+    }
 }
 
 export const saveNumber = (setNumberDoc: Function, setMainData: Function | undefined, mainData: Maindata) => {
@@ -44,11 +47,10 @@ export const cancelSubmit = (setMainData: Function | undefined) => {
 }
 
 export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
-    const {user, currentDocument, isNewDocument, docTable} = mainData;
+    const {currentDocument} = mainData;
     
     let body: DocumentModel = {
         ...currentDocument,
-        tableItems: [...docTable.items]
     }
     
     if (!validateBody(body)) {

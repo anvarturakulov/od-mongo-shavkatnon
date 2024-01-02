@@ -36,6 +36,7 @@ export interface DocTableItem {
 }
 
 export interface DocumentModel {
+    _id?: string,
     date: number,
     docNumber: number,
     senderId: string,
@@ -46,10 +47,6 @@ export interface DocumentModel {
     deleted?: boolean,
     comment?: string,
 };
-
-export interface DocumentModelFromServer extends DocumentModel {
-    _id: string;
-}
 
 export interface OptionsForDocument {
     senderType: TypeReference,

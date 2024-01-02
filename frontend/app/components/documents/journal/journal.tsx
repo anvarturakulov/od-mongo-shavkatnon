@@ -8,11 +8,11 @@ import useSWR from 'swr';
 import cn from 'classnames';
 import Header from '../../common/header/header';
 import { Doc } from '../doc/doc';
-import { DocumentModelFromServer } from '@/app/interfaces/document.interface';
 import { secondsToDateString } from '../doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemDocument, getDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
+import { DocumentModel } from '@/app/interfaces/document.interface';
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
@@ -61,8 +61,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                     <tbody className={styles.tbody}>
                         {documents && documents.length>0 && 
                         documents
-                        .sort((a:DocumentModelFromServer, b:DocumentModelFromServer) => a.date - b.date)
-                        .map((item:DocumentModelFromServer, key: number) => (
+                        .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
+                        .map((item:DocumentModel, key: number) => (
                             <>
                                 <tr 
                                     key={key} 

@@ -18,7 +18,6 @@ export interface Maindata {
   messageType: MessageType,
   showDocumentWindow: boolean,
   isNewDocument: boolean,
-  docTable: DocTable,
   currentDocument: DocumentModel,
   updateDataForDocumentJournal: boolean,
   clearControlElements: boolean,
