@@ -1,6 +1,7 @@
 import { DocTableItem, DocumentModel } from '../interfaces/document.interface';
 import { ContentType, MessageType, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
+import { ReportOptions } from '../interfaces/report.interface';
 
 export interface DocTable {
   items: Array<DocTableItem>
@@ -25,6 +26,7 @@ export interface Maindata {
   isNewReference: boolean;
   updateDataForRefenceJournal: boolean,
   currentReference: ReferenceModel | undefined,
+  reportOption: ReportOptions,
 }
 
 export interface IAppContext {

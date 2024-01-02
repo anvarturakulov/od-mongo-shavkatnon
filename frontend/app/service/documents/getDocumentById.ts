@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
+import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 
 export const getDocumentById = (
   id: string | undefined,
@@ -10,6 +11,14 @@ export const getDocumentById = (
     headers: { Authorization: `Bearer ${token}` }
   };
   if (id) {
+
+    if (setMainData) {
+      setMainData('clearControlElements', true);
+      setMainData('showDocumentWindow', false);
+      setMainData('isNewDocument', false);
+      setMainData('currentDocument', { ...defaultDocumentFormItems });
+    }
+    
     const uri = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/' + id;
     axios.get(uri, config)
       .then(function (response) {

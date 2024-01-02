@@ -8,9 +8,10 @@ export enum ReportsType {
     ZpOborot = 'ZpOborot',
 }
 
-export interface OptionsToGenerateReport {
-    startDate: Date,
-    endDate: Date,
-    reportsType: ReportsType
-    referenceId: string
+export interface ReportOptions {
+    startDate: number,
+    endDate: number,
+    firstReferenceId: string,
+    secondReferenceId?: string,
+    showReport: boolean
 }

@@ -18,7 +18,7 @@ export const getDocument = async (
   if (id) {
     const reference = await getDocumentById(id, setMainData, token);
   }
-  setMainData && setMainData('isNewDocument', false);
+  
 }
 
 export const getNameReference = (references: any, id: string): String => {

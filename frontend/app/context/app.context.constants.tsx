@@ -1,4 +1,5 @@
 import { DocumentType } from '../interfaces/document.interface'
+import { ReportsType } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
@@ -22,6 +23,14 @@ export const defaultDocumentFormItems = {
     payValue: 0,
 }
 
+export const defaultReportOptions =  {
+    startDate: 0,
+    endDate: 0,
+    firstReferenceId: '',
+    secondReferenceId: '',
+    showReport: false,
+}
+
 export const defaultMainData: Maindata = {
     activeMenuKey: '',
     contentType: 'document',
@@ -41,4 +50,5 @@ export const defaultMainData: Maindata = {
     isNewReference: false,
     updateDataForRefenceJournal: false,
     currentReference: undefined,
+    reportOption: {...defaultReportOptions}
   }
