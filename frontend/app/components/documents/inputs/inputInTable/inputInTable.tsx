@@ -3,8 +3,6 @@ import styles from './inputInTable.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { DocTableItem } from '@/app/interfaces/document.interface';
-import { useState } from 'react';
-
 
 export const InputInTable = ({ className, nameControl, itemIndexInTable, ...props }: InputInTableProps): JSX.Element => {
     

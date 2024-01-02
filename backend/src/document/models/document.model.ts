@@ -6,6 +6,9 @@ export type DocDocument = HydratedDocument<Document>;
 
 class DocTableItem{
   @Prop()
+  isWorker: boolean;
+  
+  @Prop()
   referenceId: Types.ObjectId;
 
   @Prop()
@@ -19,6 +22,7 @@ class DocTableItem{
 
   @Prop()
   total: number;
+  
 }
 
 @Schema()

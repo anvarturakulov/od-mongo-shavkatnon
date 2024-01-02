@@ -1,5 +1,6 @@
 import { DocumentModel, DocumentModelFromServer } from '@/app/interfaces/document.interface';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
+import { getDocumentById } from '@/app/service/documents/getDocumentById';
 import { hasDocumentTablePart } from '@/app/service/documents/hasDocumentTableType';
 import { markToDeleteDocument } from '@/app/service/documents/markToDeleteDocument';
 import { getReferenceById } from '@/app/service/references/getReferenceById';
@@ -9,20 +10,20 @@ const deleteItem = (id: string | undefined, name: string, token: string | undefi
   markToDeleteReference(id, name, setMainData, token)
 }
 
-const getReference = async (
+export const getDocument = async (
   id: string | undefined,
   setMainData: Function | undefined,
   token: string | undefined
 ) => {
   if (id) {
-    const reference = await getReferenceById(id, setMainData, token);
+    const reference = await getDocumentById(id, setMainData, token);
   }
-  setMainData && setMainData('isNewReference', false);
+  setMainData && setMainData('isNewDocument', false);
 }
 
 export const getNameReference = (references: any, id: string): String => {
   if (references && references.length > 0) {
-    return references.filter((item: ReferenceModel) => item._id == id)[0].name
+    return references.filter((item: ReferenceModel) => item._id == id)[0]?.name
   }
   return 'Аникланмади'
 }

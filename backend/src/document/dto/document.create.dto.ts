@@ -3,6 +3,10 @@ import { IsString, IsEnum, IsOptional, IsBoolean, IsNumber, IsDateString, IsArra
 import { DocumentType } from '../../interfaces/document.interface';
 
 class DocTableItemDto {
+  
+  @IsBoolean()
+  isWorker: boolean;
+
   @IsString()
   referenceId: string;
 
@@ -18,6 +22,8 @@ class DocTableItemDto {
 
   @IsNumber()
   total: number;
+
+  
 }
 
 export class CreateDocumentDto {

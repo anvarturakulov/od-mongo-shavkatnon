@@ -27,11 +27,12 @@ export enum DocumentType {
 
 
 export interface DocTableItem {
+    isWorker: boolean,
     referenceId: string,
     referenceName: string,
     count: number,
     price: number,
-    total: number
+    total: number,
 }
 
 export interface DocumentModel {

@@ -2,6 +2,7 @@ import { DocumentType } from '../interfaces/document.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
+    isWorker: false,
     referenceId: '',
     referenceName: '',
     count: 0,
@@ -40,5 +41,4 @@ export const defaultMainData: Maindata = {
     isNewReference: false,
     updateDataForRefenceJournal: false,
     currentReference: undefined,
-    
   }

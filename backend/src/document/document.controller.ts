@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { CreateDocumentDto } from './dto/document.create.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -37,6 +37,16 @@ export class DocumentController {
     if (!markedDoc) {
       throw new HttpException(DOCUMENT_NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async get(@Param('id', IdValidationPipe) id: string) {
+    const document = await this.documentService.findById(id);
+    if (!document) {
+      throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
+    }
+    return document;
   }
 
 }

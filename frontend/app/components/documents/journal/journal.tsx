@@ -11,7 +11,7 @@ import { Doc } from '../doc/doc';
 import { DocumentModelFromServer } from '@/app/interfaces/document.interface';
 import { secondsToDateString } from '../doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { deleteItemDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
+import { deleteItemDocument, getDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 
 
@@ -69,7 +69,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                     className={cn(className, {
                                             [styles.deleted]: item.deleted,
                                             [styles.trRow]: 1,
-                                        })}     
+                                        })}
+                                    onDoubleClick={() => {getDocument(item._id, setMainData, token)}}    
                                 >
                                     <td className={styles.rowId}>{item.docNumber}</td>
                                     <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>

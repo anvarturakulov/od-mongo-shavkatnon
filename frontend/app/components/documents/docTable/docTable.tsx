@@ -8,6 +8,7 @@ import { SelectReferenceInTable } from '../selects/selectReferenceInTable/select
 import { DocTableItem } from '@/app/interfaces/document.interface';
 import { InputInTable } from '../inputs/inputInTable/inputInTable';
 import { useState } from 'react';
+import { CheckBoxInTable } from '../inputs/checkBoxInTable/checkBoxInTable';
 
 export const DocTable = ({ hasWorkers, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
     
@@ -32,12 +33,18 @@ export const DocTable = ({ hasWorkers, typeReference, items,  className, ...prop
             </div>
             {items.map((item: DocTableItem, index)  => (
                 <div key = {index} className={cn(styles.box, {[styles.boxWithWorkers]: !hasWorkers})}>
-                    { hasWorkers && <Input label='' type='checkbox'/> }
+                    
+                    { 
+                        hasWorkers &&                   
+                        <CheckBoxInTable itemIndexInTable={index}/> 
+                    }
+                    
                     <SelectReferenceInTable 
                         itemIndexInTable={index}
                         typeReference={typeReference}
                         currentItemId={item.referenceId}
                     />
+
                     <InputInTable nameControl='count' itemIndexInTable={index}/>
                     <InputInTable nameControl='price' itemIndexInTable={index}/>
                     <InputInTable nameControl='total' itemIndexInTable={index}/>

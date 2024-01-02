@@ -24,6 +24,10 @@ export class DocumentService {
     return this.documentModel.find().exec()
   }
 
+  async findById(id: string) {
+    return this.documentModel.findById(id).exec();
+  }
+
   async markToDelete(id: string) {
     // db.movies.findOne({ _id: ObjectId("1") }) - найти фильмы по переданному "id"
     // db.movies.updateOne({ _id: ObjectId('1') }, { $set: { rating: 10, year: 1995 } }) - обновить фильм с переданным id, обновляются поля "rating" И "year"

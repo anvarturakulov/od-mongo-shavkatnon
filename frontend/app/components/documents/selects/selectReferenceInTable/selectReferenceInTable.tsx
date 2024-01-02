@@ -2,7 +2,7 @@ import { SelectReferenceInTableProps } from './selectReferenceInTable.props';
 import styles from './selectReferenceInTable.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
-import { ReferenceModel } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { DocTableItem } from '@/app/interfaces/document.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
@@ -11,7 +11,10 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
 
     const {mainData, setMainData} = useAppContext();
     const { user, docTable } = mainData;
-    
+    if (docTable.items[itemIndexInTable].isWorker) {
+        typeReference = TypeReference.WORKERS
+    }
+
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     
