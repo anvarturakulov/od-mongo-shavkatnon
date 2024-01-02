@@ -10,7 +10,6 @@ import { Message } from '@/app/components/common/message/message';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import Journal from '@/app/components/documents/journal/journal';
-import { getReportTypeByTitle } from '@/app/service/reports/getReportTypeByTitle';
 import IcoQalam from './ico/qalam.svg';
 
 const infoBlock = (
@@ -91,7 +90,7 @@ export default function Dashboard() {
         <div className={styles.journalBox}>
           { 
             contentType == 'report' &&
-            <ReportWindow reportsType={getReportTypeByTitle(contentTitle)} />
+            <ReportWindow />
           }
         </div>
       </div>

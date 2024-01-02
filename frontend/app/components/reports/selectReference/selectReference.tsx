@@ -6,8 +6,8 @@ import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
-export const SelectReference = ({ label, typeReference , className, ...props }: SelectReferenceProps): JSX.Element => {
-    
+export const SelectReference = ({ label, visible, typeReference , className, ...props }: SelectReferenceProps): JSX.Element => {
+    if (visible == false) return <></>
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
     const token = user?.access_token;
@@ -17,14 +17,21 @@ export const SelectReference = ({ label, typeReference , className, ...props }: 
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
+        
         let target = e.currentTarget;
         let id = target[target.selectedIndex].getAttribute('data-id')
-        let value = target.value;
-        let {currentDocument} = mainData;
-        
-        // if ( setMainData ) {
-        //     setMainData('currentDocument', {...newObj})
-        // }
+
+        let {reportOption} = mainData;
+
+        let newObj = {
+            ...reportOption,
+            [target.id]: id,
+        }
+
+        if (setMainData) {
+            setMainData('reportOption', {...newObj})
+        }
+
     }
     
     return (

@@ -6,18 +6,18 @@ interface Result {
     typeReference: TypeReference
 }
 
-export const getOptionsByReportType = (reportsType:ReportsType):Result => {
+export const getOptionsByReportType = (reportsType:string):Result => {
     switch (reportsType) {
         case ReportsType.AktSverka:
             return {label:'Корхона', typeReference: TypeReference.PARTNERS}
         case ReportsType.DebitorKreditor:
             return { label: 'Корхона', typeReference: TypeReference.PARTNERS }
         case ReportsType.CashObotot:
-            return { label: 'Харажат', typeReference: TypeReference.CHARGES }
+            return { label: 'Булим', typeReference: TypeReference.STORAGES }
         case ReportsType.ChargesOborot:
-            return { label: 'Харажат', typeReference: TypeReference.CHARGES }
+            return { label: 'Булим', typeReference: TypeReference.STORAGES }
         case ReportsType.MatOborot:
-            return { label: 'Товар моддий бойлик', typeReference: TypeReference.TMZ }
+            return { label: 'Булим ёки цех', typeReference: TypeReference.STORAGES }
         case ReportsType.ZpOborot:
             return { label: 'Ходим', typeReference: TypeReference.WORKERS }
         default:
