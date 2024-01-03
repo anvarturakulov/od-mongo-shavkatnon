@@ -4,9 +4,12 @@ import { DocumentType } from '../../interfaces/document.interface';
 
 export type DocDocument = HydratedDocument<Document>;
 
-class DocTableItem{
+export class DocTableItem{
   @Prop()
   isWorker: boolean;
+
+  @Prop()
+  isPartner: boolean;
   
   @Prop()
   referenceId: Types.ObjectId;

@@ -14,6 +14,10 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
         typeReference = TypeReference.WORKERS
     }
 
+    if (currentDocument.tableItems && currentDocument.tableItems[itemIndexInTable].isPartner) {
+        typeReference = TypeReference.PARTNERS
+    }
+
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     

@@ -1,14 +1,12 @@
 import { OptionsBoxProps } from './optionsBox.props';
 import styles from './optionsBox.module.css';
 import { Input } from '@/app/components';
-import { useState } from 'react';
-import { ReportsType } from '@/app/interfaces/report.interface';
 import { getOptionsByReportType } from '@/app/service/reports/getOptionsByReportType';
 import { SelectReference } from '../selectReference/selectReference';
 import { TypeReference } from '@/app/interfaces/reference.interface';
 import { useAppContext } from '@/app/context/app.context';
-import { Maindata } from '@/app/context/app.context.interfaces';
-import { getReport, onChangeInputOptionsBox } from './helpers/optionsBox.functions';
+import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
+import { getReport } from '@/app/service/reports/getReport';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {

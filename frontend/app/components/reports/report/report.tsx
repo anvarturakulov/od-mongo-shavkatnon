@@ -1,22 +1,23 @@
 import styles from './report.module.css'
 import {ReportProps} from './report.props'
 import { ReportsData as reportsData } from '@/app/data/report';
-import { getOptionsByReportType } from '@/app/utils/getOptionsByReportType';
 import { useRef } from 'react';
 import {useReactToPrint} from 'react-to-print'
 import PrintIco from './print.svg'
-import { numberValue } from '@/app/utils/converters';
+import { numberValue } from '@/app/service/common/converters';
+import { getOptionsByReportType } from '@/app/service/reports/getOptionsByReportType';
+
 
 
 export default function Report({ options, className, ...props}:ReportProps):JSX.Element {
     
     const componentRef = useRef<HTMLInputElement>(null)
-    const { reportsType, startDate, endDate, referenceId } = options
-    const label = getOptionsByReportType(options.reportsType).label
+    const { reportType, startDate, endDate, referenceId } = options
+    const label = getOptionsByReportType(options.reportType).label
 
     const handlePrint = useReactToPrint({
         content : () => componentRef.current,
-        documentTitle: options.reportsType
+        documentTitle: options.reportType
     })
 
     return (
@@ -24,7 +25,7 @@ export default function Report({ options, className, ...props}:ReportProps):JSX.
             <div className={styles.container} ref={componentRef} >
                 <div className={styles.titleBox}>
                     <div className={styles.organization}>{`'Шавкат Нон' хусусий корхонаси`}</div>
-                    <div className={styles.title}>{`${reportsType} буйича хисобот`}</div>
+                    <div className={styles.title}>{`${reportType} буйича хисобот`}</div>
                     <div>{`Хисобот даври: ${startDate} дан ${endDate}`}</div>
                     {/* <div>{`${label}: ${referenceId}`}</div> */}
                 </div>

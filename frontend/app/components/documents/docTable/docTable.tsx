@@ -10,7 +10,7 @@ import { InputInTable } from '../inputs/inputInTable/inputInTable';
 import { useState } from 'react';
 import { CheckBoxInTable } from '../inputs/checkBoxInTable/checkBoxInTable';
 
-export const DocTable = ({ hasWorkers, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
+export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const deleteItem = (index: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
@@ -25,6 +25,7 @@ export const DocTable = ({ hasWorkers, typeReference, items,  className, ...prop
         <>
             <div className={cn(styles.box,styles.titleBox, {[styles.boxWithWorkers]: !hasWorkers})}>
                 { hasWorkers && <div>Ходим</div> }
+                { hasPartners && <div>Хамкор</div> }
                 <div>Номи</div>
                 <div>Сони</div>
                 <div>Нархи</div>
@@ -36,7 +37,18 @@ export const DocTable = ({ hasWorkers, typeReference, items,  className, ...prop
                     
                     { 
                         hasWorkers &&                   
-                        <CheckBoxInTable itemIndexInTable={index}/> 
+                        <CheckBoxInTable 
+                            itemIndexInTable={index}
+                            isPartner={false}
+                        /> 
+                    }
+
+                    { 
+                        hasPartners &&                   
+                        <CheckBoxInTable 
+                            itemIndexInTable={index}
+                            isPartner={true}
+                        /> 
                     }
                     
                     <SelectReferenceInTable 

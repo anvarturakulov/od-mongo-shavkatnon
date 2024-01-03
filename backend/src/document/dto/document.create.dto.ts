@@ -7,6 +7,9 @@ class DocTableItemDto {
   @IsBoolean()
   isWorker: boolean;
 
+  @IsBoolean()
+  isPartner: boolean;
+
   @IsString()
   referenceId: string;
 

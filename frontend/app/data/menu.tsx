@@ -2,7 +2,7 @@ import { DocumentType } from "../interfaces/document.interface";
 import {ServiceType } from "../interfaces/general.interface";
 import { MenuItem } from "../interfaces/menu.interface";
 import { TypeReference } from "../interfaces/reference.interface";
-import { ReportsType } from "../interfaces/report.interface";
+import { ReportType } from "../interfaces/report.interface";
 
 export const MenuData:Array<MenuItem> = [
     {
@@ -42,12 +42,12 @@ export const MenuData:Array<MenuItem> = [
         title: 'Хисоботлар',
         isOpened: false,
         subMenu: [
-            { title: ReportsType.MatOborot, description:'ТМБ харакати', type: 'report', active: false },
-            { title: ReportsType.DebitorKreditor, description:'Дебитор ва кредитор', type: 'report', active: false },
-            { title: ReportsType.AktSverka, description:'Хамкор билан солиштирма', type: 'report', active: false },
-            { title: ReportsType.CashObotot, description:'Пул маблаг харакати', type: 'report', active: false },
-            { title: ReportsType.ChargesOborot, description:'Харажатлар хисоби', type: 'report', active: false },
-            { title: ReportsType.ZpOborot, description:'Иш хаки хисоби', type: 'report', active: false },
+            { title: ReportType.MatOborot, description:'ТМБ харакати', type: 'report', active: false },
+            { title: ReportType.DebitorKreditor, description:'Дебитор ва кредитор', type: 'report', active: false },
+            { title: ReportType.AktSverka, description:'Хамкор билан солиштирма', type: 'report', active: false },
+            { title: ReportType.CashOborot, description:'Пул маблаг харакати', type: 'report', active: false },
+            { title: ReportType.ChargesOborot, description:'Харажатлар хисоби', type: 'report', active: false },
+            { title: ReportType.ZpOborot, description:'Иш хаки хисоби', type: 'report', active: false },
         ]
     },
     {

@@ -1,9 +1,9 @@
 
-export enum ReportsType {
+export enum ReportType {
     MatOborot = 'MatOborot',
     DebitorKreditor = 'DebitorKreditor',
     AktSverka = 'AktSverka',
-    CashObotot = 'CashObotot',
+    CashOborot = 'CashOborot',
     ChargesOborot = 'ChargesOborot',
     ZpOborot = 'ZpOborot',
 }

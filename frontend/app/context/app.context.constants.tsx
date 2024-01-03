@@ -1,9 +1,8 @@
-import { DocumentType } from '../interfaces/document.interface'
-import { ReportsType } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
     isWorker: false,
+    isPartner: false,
     referenceId: '',
     referenceName: '',
     count: 0,
@@ -18,7 +17,7 @@ export const defaultDocumentFormItems = {
     docNumber: 0,
     senderId: '',
     receiverId: '',
-    tableItems: [defaultDocumentTableItem], // не пользуемся им
+    tableItems: [defaultDocumentTableItem], 
     documentType: '',
     payValue: 0,
 }

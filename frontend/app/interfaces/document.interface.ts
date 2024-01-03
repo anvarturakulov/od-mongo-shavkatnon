@@ -28,6 +28,7 @@ export enum DocumentType {
 
 export interface DocTableItem {
     isWorker: boolean,
+    isPartner: boolean,
     referenceId: string,
     referenceName: string,
     count: number,

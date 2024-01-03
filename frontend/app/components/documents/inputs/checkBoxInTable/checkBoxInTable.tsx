@@ -3,25 +3,45 @@ import styles from './checkBoxInTable.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { DocTableItem } from '@/app/interfaces/document.interface';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
-export const CheckBoxInTable = ({ className, itemIndexInTable, ...props }: checkBoxInTableProps): JSX.Element => {
+export const CheckBoxInTable = ({ className, isPartner, itemIndexInTable, ...props }: checkBoxInTableProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
     let currentVal
     if (currentDocument.tableItems) {
-        currentVal = currentDocument.tableItems[itemIndexInTable]['isWorker']
+        if (isPartner) {
+            currentVal = currentDocument.tableItems[itemIndexInTable]['isPartner']
+        } else {
+            currentVal = currentDocument.tableItems[itemIndexInTable]['isWorker']
+        }
     }
 
-    const changeElements = (e: React.FormEvent<HTMLInputElement>, itemIndex: number, setMainData: Function | undefined, items: Array<DocTableItem> | undefined) => {
+    const changeElements = (e: React.FormEvent<HTMLInputElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, isPartner: boolean) => {
         let target = e.currentTarget;
-        if (items) {
-            let currentItem = {...items[itemIndex]}
-            currentItem.isWorker = target.checked
-            let newItems = [...items]
+        if (currentDocument && currentDocument.tableItems) {
+            let currentItem = {...currentDocument.tableItems[itemIndex]}
+            if (isPartner) {
+                currentItem.isPartner = target.checked
+                if (target.checked) {
+                    currentItem.isWorker = false
+                }
+            } else {
+                currentItem.isWorker = target.checked
+                if (target.checked) {
+                    currentItem.isPartner = false
+                }
+            }
+            let newItems = [...currentDocument.tableItems]
             newItems[itemIndex] = {...currentItem}
+            let newObj = {
+                ...currentDocument,
+                tableItems: [...newItems]
+            }
+            
             if ( setMainData ) {
-                setMainData('docTable', {items: [...newItems]})
+                setMainData('currentDocument', {...newObj})
             }
         }
     }
@@ -31,7 +51,7 @@ export const CheckBoxInTable = ({ className, itemIndexInTable, ...props }: check
             <input
                 className={cn(className, styles.input)}
                 {...props}
-                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, currentDocument.tableItems)}
+                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, isPartner)}
                 type='checkbox'
                 checked={currentVal}
             />

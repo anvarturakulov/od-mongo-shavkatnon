@@ -7,6 +7,7 @@ import { Document, DocumentSchema } from './models/document.model';
 @Module({
   controllers: [DocumentController],
   providers: [DocumentService],
-  imports: [MongooseModule.forFeature([{ name: Document.name, schema: DocumentSchema }])]
+  imports: [MongooseModule.forFeature([{ name: Document.name, schema: DocumentSchema }])],
+  exports: [DocumentService, MongooseModule]
 })
 export class DocumentModule {}

@@ -23,6 +23,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
+    let hasPartners = contentName == DocumentType.LeaveCash;
     let defaultNewItemForTable = {...defaultDocumentTableItem}
 
     useEffect(() => {
@@ -79,6 +80,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                 <DocTable 
                     typeReference={contentName == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
                     hasWorkers={hasWorkers}
+                    hasPartners={hasPartners}
                     items={currentDocument.tableItems} 
             />}
             
@@ -96,11 +98,11 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                     onSubmit( mainData, setMainData )}
                     >Саклаш</Button>
                 <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
-                {/* <Button appearance='ghost' onClick={()=> {
+                <Button appearance='ghost' onClick={()=> {
                     console.log(mainData.currentDocument)
                     console.log(mainData)
                 }
-                }>Show</Button> */}
+                }>Show</Button>
             </div>
         </div>   
     )
