@@ -4,13 +4,9 @@ import { defaultReportOptions } from '@/app/context/app.context.constants';
 import axios from 'axios';
 import { Maindata } from '@/app/context/app.context.interfaces';
 
-export const getReport = (setMainData: Function | undefined, mainData: Maindata) => {
+export const getEntrysJournal = (setMainData: Function | undefined, mainData: Maindata) => {
 
-  const { user, reportOption, contentName } = mainData
-
-  let body: ReportOptions = {
-    ...reportOption,
-  }
+  const { user, contentName } = mainData
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
@@ -18,17 +14,26 @@ export const getReport = (setMainData: Function | undefined, mainData: Maindata)
 
   const actionWithMainData = (mes: string) => {
     if (setMainData) {
-      setMainData('reportOption', { ...defaultReportOptions });
+      
       showMessage(`${contentName} буйича - ${mes}`, 'success', setMainData)
     }
   }
 
-  const url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/' + contentName;
+  const url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
 
-  axios.post(url, body, config)
+  axios.get(url, config)
     .then(function (response) {
-      console.log(response.data)
-      actionWithMainData('хисобот сервердан келди')
+      if (setMainData) {
+        const { reportOption } = mainData;
+        const newEntrys = [...response.data];
+        const newReportOptions:ReportOptions = {
+          ...reportOption,
+          entrys: [...newEntrys],
+          startReport: true,
+        }
+        setMainData('reportOption', { ...newReportOptions });
+      }
+      actionWithMainData('Журнал сервердан келди')
     })
     .catch(function (error) {
       if (setMainData) {

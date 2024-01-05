@@ -1,8 +1,6 @@
 .container {
-    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    /* user-select: none; */
     position: relative;
     padding: 20px;
 }
@@ -55,6 +53,10 @@
     margin-bottom: 20px;
 }
 
+.titleBox span{
+    font-weight: 500;
+}
+
 .title{
     font-size: 18px;
     font-weight: 600;
@@ -75,7 +77,7 @@
     width: 30px;
     height: 30px;
     position: absolute;
-    top: 40%;
+    top: 15%;
     right: 5%;
     cursor: pointer;
     fill: blue;
@@ -86,11 +88,8 @@
     padding-right: 2px;
 }
 
-.table .numberValue{
-    text-align: right;
-}
-
 .titleBox .organization{
     font-size: 14px;
     text-align: left;
 }
+

@@ -7,7 +7,7 @@ export interface DocumentWithId extends Document {
   _id: string
 }
 
-export const getEntryJournal = (allDocuments: Array<Document>): Array<EntryItem> => {
+export const prepareEntrysJournal = (allDocuments: Array<Document>): Array<EntryItem> => {
   let documents = [...allDocuments]
   let results = []
   documents.forEach((item: Document) => {

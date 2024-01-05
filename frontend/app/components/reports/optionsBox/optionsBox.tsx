@@ -2,11 +2,11 @@ import { OptionsBoxProps } from './optionsBox.props';
 import styles from './optionsBox.module.css';
 import { Input } from '@/app/components';
 import { getOptionsByReportType } from '@/app/service/reports/getOptionsByReportType';
-import { SelectReference } from '../selectReference/selectReference';
+import { SelectReference } from './components/selectReference/selectReference';
 import { TypeReference } from '@/app/interfaces/reference.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
-import { getReport } from '@/app/service/reports/getReport';
+import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {
@@ -44,7 +44,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
             
             <button 
                 className={styles.button}
-                onClick={()=> getReport(setMainData, mainData)}>
+                onClick={()=> getEntrysJournal(setMainData, mainData)}>
                 Хисоботни шакллантириш
             </button>
 

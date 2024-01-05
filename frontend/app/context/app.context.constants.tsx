@@ -1,3 +1,4 @@
+import { ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
@@ -22,12 +23,14 @@ export const defaultDocumentFormItems = {
     payValue: 0,
 }
 
-export const defaultReportOptions =  {
+export const defaultReportOptions: ReportOptions =  {
     startDate: 0,
     endDate: 0,
     firstReferenceId: '',
     secondReferenceId: '',
     showReport: false,
+    entrys: [],
+    startReport: false
 }
 
 export const defaultMainData: Maindata = {

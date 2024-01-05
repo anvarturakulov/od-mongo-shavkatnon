@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react';
 import { MenuItem } from '../../interfaces/menu.interface';
 import { ContentType } from '../../interfaces/general.interface';
 import { useAppContext } from '@/app/context/app.context';
-import { defaultDocumentTableItem, defaultDocumentFormItems } from '@/app/context/app.context.constants';
+import { defaultDocumentTableItem, defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
+import { ReportOptions } from '@/app/interfaces/report.interface';
 
 export default function Menu({menuData, className, ...props}:MenuProps):JSX.Element {
     
@@ -43,10 +44,20 @@ export default function Menu({menuData, className, ...props}:MenuProps):JSX.Elem
             let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
             setMainData('docTable', {...defaultTableItemsObj});
 
-            if (contentType = 'document') {
+            if (contentType == 'document') {
                 let defValue = {...defaultDocumentFormItems} 
                 defValue.documentType = contentName
                 setMainData('currentDocument', {...defValue});
+            }
+
+            if (contentType == 'report') {
+                let defValue = {...defaultReportOptions};
+                const newReportOptions:ReportOptions = {
+                    ...defValue,
+                    startReport: false,
+                }
+                setMainData('reportOption', { ...newReportOptions });
+
             }
         };
     }

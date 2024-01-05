@@ -1,4 +1,4 @@
-import { Body, Controller, NotFoundException, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ReportService } from './report.service';
 import { ReportOptionsDto } from './dto/report.options.dto';
 import { REPORT_NOT_PREPARE } from './report.constants';
@@ -10,9 +10,9 @@ export class ReportController {
   
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
-  @Post(':reportType')
-  async post(reportType: string, @Body() dto: ReportOptionsDto) {
-    const report = await this.reportService.prepareReport(reportType, dto);
+  @Get('/entrys')
+  async get() {
+    const report = await this.reportService.getEntrysJournal();
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);
     }

@@ -26,20 +26,29 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     summa: tableItem?.total,
   }
 
-  let leaveCashObj = {
-    debetFirstSubcontoId: tableItem?.referenceId.toString(),
-    debetSecondSubcontoId: '',
+  let leaveCashObj20106710 = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: tableItem?.referenceId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
-    kreditSecondSubcontoId: '',
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
+    count: 0,
+    summa: tableItem?.total,
+  }
+
+  let leaveCashObj4010 = {
+    debetFirstSubcontoId: tableItem?.referenceId.toString(),
+    debetSecondSubcontoId: item.senderId.toString(),
+    kreditFirstSubcontoId: item.senderId.toString(),
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
     count: 0,
     summa: tableItem?.total,
   }
 
   let MoveCashObj = {
     debetFirstSubcontoId: item.receiverId.toString(),
-    debetSecondSubcontoId: '',
+    debetSecondSubcontoId: item.senderId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
-    kreditSecondSubcontoId: '',
+    kreditSecondSubcontoId: item.receiverId.toString(),
     count: 0,
     summa: item.payValue,
   }
@@ -74,20 +83,20 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
         return {
           debet: Schet.S4010,
           kredit: Schet.S5010,
-          ...leaveCashObj
+          ...leaveCashObj4010
         };  
       }
       if (tableItem.isWorker) {
         return {
           debet: Schet.S6710,
           kredit: Schet.S5010,
-          ...leaveCashObj,
+          ...leaveCashObj20106710,
         };
       }  
       return {
         debet: Schet.S2010,
         kredit: Schet.S5010,
-        ...leaveCashObj,
+        ...leaveCashObj20106710,
       };
     case DocumentType.LeaveHalfstuff:
       return {
