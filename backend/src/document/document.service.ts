@@ -21,7 +21,7 @@ export class DocumentService {
   }
 
   async getAllDocuments(): Promise<Document[]> {
-    return this.documentModel.find().exec()
+    return this.documentModel.find({deleted: !true}).exec()
   }
 
   async findById(id: string) {

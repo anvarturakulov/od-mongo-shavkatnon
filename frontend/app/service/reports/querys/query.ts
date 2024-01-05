@@ -10,16 +10,18 @@ export const query = (
 
   const { reportOption } = mainData;
   const { startDate, endDate, entrys, firstReferenceId } = reportOption;
-
+  // console.log(`first ref id ${firstReferenceId}`)
+  // if (firstReferenceId == undefined ) console.log('noeniq')
+  console.log(typeof firstReferenceId)
+  let flag = (firstReferenceId == null || firstReferenceId.length == 0)
   let newEntrys = [...entrys]
-  console.log(newEntrys)
   
   switch (typequery) {
     case TypeQuery.PDKOL:
       return newEntrys.filter((item: EntryItem) => {
                         return (
                           item.debet == schet &&
-                          item.debetFirstSubcontoId == firstReferenceId && 
+                          (flag || item.debetFirstSubcontoId == firstReferenceId) && 
                           item.debetSecondSubcontoId == secondSubcontoId &&
                           item.date < startDate
                         )
@@ -30,7 +32,7 @@ export const query = (
       return newEntrys.filter((item: EntryItem) => {
                         return (
                           item.debet == schet &&
-                          item.debetFirstSubcontoId == firstReferenceId &&
+                          (flag || item.debetFirstSubcontoId == firstReferenceId) &&
                           item.debetSecondSubcontoId == secondSubcontoId &&
                           item.date < startDate
                         )
@@ -41,7 +43,7 @@ export const query = (
                         return newEntrys.filter((item: EntryItem) => {
                           return (
                             item.kredit == schet &&
-                            item.kreditFirstSubcontoId == firstReferenceId &&
+                            (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
                             item.kreditSecondSubcontoId == secondSubcontoId &&
                             item.date < startDate
                           )
@@ -52,7 +54,7 @@ export const query = (
                         return newEntrys.filter((item: EntryItem) => {
                           return (
                             item.kredit == schet &&
-                            item.kreditFirstSubcontoId == firstReferenceId &&
+                            (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
                             item.kreditSecondSubcontoId == secondSubcontoId &&
                             item.date < startDate
                           )
@@ -63,7 +65,7 @@ export const query = (
       return newEntrys.filter((item: EntryItem) => {
                         return (
                           item.debet == schet &&
-                          item.debetFirstSubcontoId == firstReferenceId &&
+                          (flag || item.debetFirstSubcontoId == firstReferenceId) &&
                           item.debetSecondSubcontoId == secondSubcontoId &&
                           item.date >= startDate &&
                           item.date <= endDate
@@ -75,7 +77,7 @@ export const query = (
         return newEntrys.filter((item: EntryItem) => {
                           return (
                             item.debet == schet &&
-                            item.debetFirstSubcontoId == firstReferenceId &&
+                            (flag || item.debetFirstSubcontoId == firstReferenceId) &&
                             item.debetSecondSubcontoId == secondSubcontoId &&
                             item.date >= startDate &&
                             item.date <= endDate
@@ -87,7 +89,7 @@ export const query = (
       return newEntrys.filter((item: EntryItem) => {
                           return (
                             item.kredit == schet &&
-                            item.kreditFirstSubcontoId == firstReferenceId &&
+                            (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
                             item.kreditSecondSubcontoId == secondSubcontoId &&
                             item.date >= startDate &&
                             item.date <= endDate
@@ -99,7 +101,7 @@ export const query = (
       return newEntrys.filter((item: EntryItem) => {
                           return (
                             item.kredit == schet &&
-                            item.kreditFirstSubcontoId == firstReferenceId &&
+                            (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
                             item.kreditSecondSubcontoId == secondSubcontoId &&
                             item.date >= startDate &&
                             item.date <= endDate

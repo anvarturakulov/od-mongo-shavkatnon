@@ -45,7 +45,7 @@ export interface DocumentModel {
     tableItems: Array<DocTableItem> | undefined,
     documentType: string,
     payValue: number,
-    deleted?: boolean,
+    deleted: boolean,
     comment?: string,
 };
 

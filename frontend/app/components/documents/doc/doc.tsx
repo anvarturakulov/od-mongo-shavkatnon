@@ -98,11 +98,11 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                     onSubmit( mainData, setMainData )}
                     >Саклаш</Button>
                 <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
-                <Button appearance='ghost' onClick={()=> {
+                {/* <Button appearance='ghost' onClick={()=> {
                     console.log(mainData.currentDocument)
                     console.log(mainData)
                 }
-                }>Show</Button>
+                }>Show</Button> */}
             </div>
         </div>   
     )

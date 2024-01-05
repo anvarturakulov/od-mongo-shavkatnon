@@ -21,7 +21,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         senderType = TypeReference.PARTNERS
         senderLabel = 'Таъминотчи'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Омборхона'
+        receiverLabel = 'Кабул килувчи булим'
         paymentLabel = '----'
         paymentIsVisible = false
         tableIsVisible = true
@@ -36,9 +36,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForComeProductHalfstuff.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Жунатувчи'
+        senderLabel = 'Ишлаб чикарувчи булим'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Кабул килувчи'
+        receiverLabel = 'Кабул килувчи булим'
         paymentLabel = '----'
         paymentIsVisible = false
         tableIsVisible = true
@@ -52,10 +52,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documetsForSaleTMZ.includes(documentType)) {
-        senderType = TypeReference.PARTNERS
-        senderLabel = 'Мижоз'
-        receiverType = TypeReference.STORAGES
-        receiverLabel = 'Жунатувчи'
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        receiverType = TypeReference.PARTNERS
+        receiverLabel = 'Олувчи мижоз'
         paymentLabel = 'Мижоздан олинган пул'
         paymentIsVisible = true
         tableIsVisible = true
@@ -70,10 +70,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     ]
 
     if (documentsForLeaveTMZ.includes(documentType)) {
-        senderType = TypeReference.CHARGES
-        senderLabel = 'Харажат тури'
-        receiverType = TypeReference.STORAGES
-        receiverLabel = 'Жунатувчи'
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Берувчи булим'
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Чиким учун харажат тури'
         paymentLabel = '----'
         paymentIsVisible = false
         tableIsVisible = true
@@ -89,9 +89,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForMoveTMZ.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Кабул килувчи'
+        senderLabel = 'Жунатувчи булим'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Жунатувчи'
+        receiverLabel = 'Кабул килувчи булим'
         paymentLabel = '----'
         paymentIsVisible = false
         tableIsVisible = true
@@ -105,9 +105,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForCashFromPartners.includes(documentType)) {
         senderType = TypeReference.PARTNERS
-        senderLabel = 'Хамкор'
+        senderLabel = 'Пулни берган хамкор'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Кабул килувчи'
+        receiverLabel = 'Пулни кабул килувчи булим'
         paymentLabel = 'Хамкордан олинган пул'
         paymentIsVisible = true
         tableIsVisible = false
@@ -121,10 +121,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForCashMove.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Жунатувчи'
+        senderLabel = 'Пулни берувчи булим'
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Кабул килувчи'
-        paymentLabel = 'Кабул олинган пул'
+        receiverLabel = 'Пулни кабул килувчи булим'
+        paymentLabel = 'Кабул килиб олинган пул'
         paymentIsVisible = true
         tableIsVisible = false
         senderIsVisible = true
@@ -137,7 +137,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     if (documentsForCashLeave.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Харажат килувчи'
+        senderLabel = 'Пулни харажат килувчи булим'
         receiverType = TypeReference.STORAGES
         receiverLabel = '-----'
         paymentLabel = '-----'

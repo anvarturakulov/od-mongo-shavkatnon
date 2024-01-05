@@ -7,13 +7,27 @@ import { TypeReference } from '@/app/interfaces/reference.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { Maindata } from '@/app/context/app.context.interfaces';
+import { showMessage } from '@/app/service/common/showMessage';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const {contentName, contentTitle} = mainData;
-    const result = getOptionsByReportType(contentName)
+    const result = getOptionsByReportType(contentName);
+
+    const showReport = ( setMainData: Function | undefined, mainData: Maindata ) => {
+        
+        const { reportOption } = mainData;
+        const { startDate, endDate } = reportOption;
+
+        if ( startDate != 0 && endDate != 0 ) {
+            getEntrysJournal(setMainData, mainData);
+        } else {
+            showMessage('Санани тулдиринг', 'error', setMainData);
+        }
+    }
 
     return (
 
@@ -44,7 +58,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
             
             <button 
                 className={styles.button}
-                onClick={()=> getEntrysJournal(setMainData, mainData)}>
+                onClick={()=> showReport(setMainData, mainData)}>
                 Хисоботни шакллантириш
             </button>
 

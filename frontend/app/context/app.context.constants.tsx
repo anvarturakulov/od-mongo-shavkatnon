@@ -21,6 +21,7 @@ export const defaultDocumentFormItems = {
     tableItems: [defaultDocumentTableItem], 
     documentType: '',
     payValue: 0,
+    deleted: false,
 }
 
 export const defaultReportOptions: ReportOptions =  {

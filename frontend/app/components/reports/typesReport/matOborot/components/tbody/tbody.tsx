@@ -11,7 +11,6 @@ export function TBody ({ listSecondSubconts, data, schet, className, ...props}:T
   
   const { mainData } = useAppContext();
   const { reportOption } = mainData;
-
   return (
     <>
       <div className={styles.title}>{getTitleBySchet(schet)}</div>

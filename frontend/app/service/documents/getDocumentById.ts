@@ -24,7 +24,7 @@ export const getDocumentById = (
       .then(function (response) {
         setMainData && setMainData('currentDocument', response.data);
         // table items loading ...
-        console.log(response.data)
+        
         setMainData && setMainData('showDocumentWindow', true);
       })
       .catch(function (error) {

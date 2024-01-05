@@ -1,13 +1,11 @@
 import styles from './matOborot.module.css'
-import {MatOborotProps} from './matOborot.props'
-import { useEffect, useRef } from 'react';
+import { MatOborotProps } from './matOborot.props'
+import { useRef } from 'react';
 import {useReactToPrint} from 'react-to-print'
 import PrintIco from './ico/print.svg'
-import { numberValue } from '@/app/service/common/converters';
 import { useAppContext } from '@/app/context/app.context';
-import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
+import { Schet } from '@/app/interfaces/report.interface';
 import { getListSecondSubconts } from '@/app/service/reports/getListSecondSubconts';
-import { query } from '@/app/service/reports/querys/query';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Thead } from './components/thead/thead';
@@ -29,25 +27,33 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const componentRef = useRef<HTMLInputElement>(null)
+    
     const handlePrint = useReactToPrint({
         content : () => componentRef.current,
         documentTitle: contentTitle
     })
-    
-    const listSecondSubconts = getListSecondSubconts(entrys, [Schet.S1010, Schet.S2110, Schet.S2810], firstReferenceId);
-    
-    // useEffect(()=>{console.log(startReport)}, [startReport])
-    
+
+    let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, [Schet.S1010, Schet.S2110, Schet.S2810], firstReferenceId);;
+
     if (!startReport) return <></>
+    console.log(typeof firstReferenceId)
+
+    let titleV = (firstReferenceId != null && firstReferenceId != '') ? 
+        ( <div>
+            <span>{getPropertySubconto(data,firstReferenceId).name}</span> буйича
+        </div> ) 
+        :
+        (<span>умумий корхона буйича</span>)
+
 
     return (
         <>
             <div className={styles.container} ref={componentRef} >
                 <div className={styles.titleBox}>
                     <div className={styles.organization}>{`'Шавкат Нон' хусусий корхонаси`}</div>
-                    <div className={styles.title}>{`${contentTitle} буйича хисобот`}</div>
+                    <div className={styles.title}>{`${contentTitle} хисоботи`}</div>
                     <div>{`Хисобот даври: ${startDate} дан ${endDate}`}</div>
-                    <div><span>{getPropertySubconto(data,firstReferenceId).name}</span> буйича</div>
+                    <div>{titleV}</div>
                 </div>
                 <table className={styles.table}>
                     <Thead/>

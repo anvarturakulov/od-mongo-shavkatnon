@@ -26,6 +26,7 @@ export const getEntrysJournal = (setMainData: Function | undefined, mainData: Ma
       if (setMainData) {
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
+        console.log(newEntrys);
         const newReportOptions:ReportOptions = {
           ...reportOption,
           entrys: [...newEntrys],
