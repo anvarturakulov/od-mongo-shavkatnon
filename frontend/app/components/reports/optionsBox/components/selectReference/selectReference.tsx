@@ -7,32 +7,33 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
 export const SelectReference = ({ label, visible, typeReference , className, ...props }: SelectReferenceProps): JSX.Element => {
-    if (visible == false) return <></>
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
     const token = user?.access_token;
-
+    
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
-
+    
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-
+    
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
         
         let target = e.currentTarget;
         let id = target[target.selectedIndex].getAttribute('data-id')
-
+        
         let {reportOption} = mainData;
-
+        
         let newObj = {
             ...reportOption,
             [target.id]: id,
         }
-
+        
         if (setMainData) {
             setMainData('reportOption', {...newObj})
         }
-
+        
     }
+    
+    if (visible == false) return <></>
     
     return (
         <div className={styles.box}>

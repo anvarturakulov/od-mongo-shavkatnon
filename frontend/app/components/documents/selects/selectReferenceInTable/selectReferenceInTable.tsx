@@ -10,6 +10,7 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
 
     const {mainData, setMainData} = useAppContext();
     const { user, currentDocument } = mainData;
+    
     if (currentDocument.tableItems && currentDocument.tableItems[itemIndexInTable].isWorker) {
         typeReference = TypeReference.WORKERS
     }

@@ -3,7 +3,8 @@ import { MongooseModuleOptions } from '@nestjs/mongoose';
 
 export const getMongoConfig = async (configService: ConfigService): Promise<MongooseModuleOptions> => {
   return {
-    uri: getMongoString(configService),
+    // uri: getMongoString(configService),
+    uri: 'mongodb + srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/?retryWrites=true&w=majority',
     // uri: 'mongodb://localhost:27017',
     ...getMongoOptions()
   };

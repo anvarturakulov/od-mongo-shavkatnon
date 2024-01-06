@@ -8,15 +8,14 @@ import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
-    if (visibile == false) return <></>
-
+    
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
-
+    
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-
+    
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: string) => {
         let target = e.currentTarget;
         let id = target[target.selectedIndex].getAttribute('data-id')
@@ -27,11 +26,13 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , cu
             ...currentDocument,
             [key] : id,
         }
-
+        
         if ( setMainData ) {
             setMainData('currentDocument', {...newObj})
         }
     }
+    
+    if (visibile == false) return <></>
     
     return (
         <div className={styles.box}>

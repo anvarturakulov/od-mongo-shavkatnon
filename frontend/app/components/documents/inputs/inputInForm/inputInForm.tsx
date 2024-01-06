@@ -8,8 +8,9 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 
 export const InputInForm = ({visible, label, className, ...props }: InputInFormProps): JSX.Element => {
     
-    if (visible == false) return <></>;
     const {mainData, setMainData} = useAppContext();
+    
+    if (visible == false) return <></>;
     
     const { currentDocument } = mainData;
     let currentVal = currentDocument.payValue;

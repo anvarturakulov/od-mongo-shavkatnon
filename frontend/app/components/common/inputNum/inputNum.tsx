@@ -6,8 +6,9 @@ import { useState } from 'react';
 
 export const InputNum = ({ label, visible=true, className, ...props }: InputNumProps): JSX.Element => {
     
-    if (visible == false) return <></>
     const [val, setVal] = useState<string>('')
+   
+    if (visible == false) return <></>
     
     const triadaFunc = (e: React.FormEvent<HTMLInputElement>) => {
         let target = e.currentTarget
