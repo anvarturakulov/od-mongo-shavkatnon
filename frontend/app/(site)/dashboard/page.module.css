@@ -7,7 +7,7 @@
     width: 15%;
     border-right: 1px solid #f5f5f5;
     cursor: pointer;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .menu li{

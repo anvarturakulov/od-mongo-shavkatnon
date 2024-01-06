@@ -5,11 +5,16 @@ import useSWR from 'swr';
 import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
+import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
+import { query } from '@/app/service/reports/querys/query';
+import { ReportOptions, Schet, TypeQuery } from '@/app/interfaces/report.interface';
+import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 
 export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
-    const { user, currentDocument } = mainData;
+    const { user, currentDocument, contentName } = mainData;
     
     if (currentDocument.tableItems && currentDocument.tableItems[itemIndexInTable].isWorker) {
         typeReference = TypeReference.WORKERS
@@ -23,17 +28,18 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    let typeDocumentForReference = getTypeDocumentForReference(contentName);
     
-    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata) => {
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
         let target = e.currentTarget;
-        let {currentDocument} = mainData;
+        let {currentDocument, contentName} = mainData;
 
         if (currentDocument && currentDocument.tableItems) {
             
-            let currentItem = {...currentDocument.tableItems[itemIndex]}
-            let id = target[target.selectedIndex].getAttribute('data-id')
-            let value = target.value
-            
+            let currentItem = {...currentDocument.tableItems[itemIndex]};
+            let id = target[target.selectedIndex].getAttribute('data-id');
+            let value = target.value;
+
             if (id != null) {
                 currentItem.referenceId = id
             }
@@ -41,7 +47,29 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
             if (value != null) {
                 currentItem.referenceName = value
             }
+            
+            if (typeDocumentForReference != 'OTHER' && id) {
+                
+                getEntrysJournal(setMainData, mainData, currentDocument.date);
+                let schet
 
+                if (typeDocumentForReference == 'MATERIAL') {
+                    schet = Schet.S1010
+                }
+
+                if (typeDocumentForReference == 'HALFSTUFF') {
+                    schet = Schet.S2110;
+                }
+
+                if (typeDocumentForReference == 'PRODUCT') {
+                    schet = Schet.S2810    
+                }
+                
+                if (schet) {
+                    currentItem.price = query(schet, TypeQuery.MPRICE, id, mainData);
+                    currentItem.balance = query(schet, TypeQuery.BALANCE, id, mainData);
+                }
+            }
 
             let newItems = [...currentDocument.tableItems]
             newItems[itemIndex] = {...currentItem}
@@ -60,7 +88,7 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
         <div className={styles.box}>
             <select
                 className={styles.select}
-                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData)}
+                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, typeDocumentForReference)}
                 {...props}
             >
                 <option 
@@ -73,7 +101,20 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
                     {'Тангланг =>>>>'}
                 </option>
 
-                {data && data.length>0 && data?.map((item:ReferenceModel, key:number) => (
+                {data && data.length>0 && 
+                data?.filter((item:ReferenceModel) => {
+                    switch (typeDocumentForReference) {
+                        case 'MATERIAL':
+                            return item.typeTMZ == 'MATERIAL'
+                        case 'PRODUCT':
+                            return item.typeTMZ == 'PRODUCT'
+                        case 'HALFSTUFF':
+                            return item.typeTMZ == 'HALFSTUFF'
+                        case 'OTHER':
+                            return true
+                    }
+                })
+                .map((item:ReferenceModel, key:number) => (
                     <>
                         <option 
                             value={item.name}

@@ -10,9 +10,7 @@ export const query = (
 
   const { reportOption } = mainData;
   const { startDate, endDate, entrys, firstReferenceId } = reportOption;
-  // console.log(`first ref id ${firstReferenceId}`)
-  // if (firstReferenceId == undefined ) console.log('noeniq')
-  console.log(typeof firstReferenceId)
+
   let flag = (firstReferenceId == null || firstReferenceId.length == 0)
   let newEntrys = [...entrys]
   
@@ -131,7 +129,27 @@ export const query = (
                                   )
                                 })
                               .reduce((acc, item: EntryItem) => acc + item.count, 0)
-      return totalCount ? +(totalSumma / totalCount).toFixed(2) : 0
+      return totalCount ? +(totalSumma / totalCount).toFixed(2) : 0;
+    case TypeQuery.BALANCE:
+      let countLeave = newEntrys.filter((item: EntryItem) => {
+                                    return (
+                                      item.kredit == schet &&
+                                      (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
+                                      item.kreditSecondSubcontoId == secondSubcontoId &&
+                                      item.date < endDate
+                                    )
+                                  })
+                                  .reduce((acc, item: EntryItem) => acc + item.count, 0)
+      let countCome = newEntrys.filter((item: EntryItem) => {
+                                  return (
+                                    item.debet == schet &&
+                                    (flag || item.debetFirstSubcontoId == firstReferenceId) &&
+                                    item.debetSecondSubcontoId == secondSubcontoId &&
+                                    item.date < endDate
+                                  )
+                                })
+                                .reduce((acc, item: EntryItem) => acc + item.count, 0)
+      return countCome - countLeave;
     }
   
   return 0

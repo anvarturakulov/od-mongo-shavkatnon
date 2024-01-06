@@ -34,6 +34,7 @@ export interface DocTableItem {
     count: number,
     price: number,
     total: number,
+    balance?: number,
 }
 
 export interface DocumentModel {
@@ -60,3 +61,5 @@ export interface OptionsForDocument {
     paymentIsVisible: boolean,
     tableIsVisible: boolean,
 }
+
+export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'

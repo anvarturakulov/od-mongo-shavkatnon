@@ -27,6 +27,7 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                 { hasWorkers && <div>Ходим</div> }
                 { hasPartners && <div>Хамкор</div> }
                 <div>Номи</div>
+                { !hasPartners && <div>Колдик</div> }
                 <div>Сони</div>
                 <div>Нархи</div>
                 <div>Суммаси</div>
@@ -56,7 +57,10 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                         typeReference={typeReference}
                         currentItemId={item.referenceId}
                     />
-
+                    { 
+                        !hasPartners &&                   
+                        <div>{item.balance}</div>
+                    }
                     <InputInTable nameControl='count' itemIndexInTable={index}/>
                     <InputInTable nameControl='price' itemIndexInTable={index}/>
                     <InputInTable nameControl='total' itemIndexInTable={index}/>

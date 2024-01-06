@@ -4,7 +4,7 @@ import { defaultReportOptions } from '@/app/context/app.context.constants';
 import axios from 'axios';
 import { Maindata } from '@/app/context/app.context.interfaces';
 
-export const getEntrysJournal = (setMainData: Function | undefined, mainData: Maindata) => {
+export const getEntrysJournal = (setMainData: Function | undefined, mainData: Maindata, endDate?: number) => {
 
   const { user, contentName } = mainData
 
@@ -26,15 +26,19 @@ export const getEntrysJournal = (setMainData: Function | undefined, mainData: Ma
       if (setMainData) {
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
-        console.log(newEntrys);
         const newReportOptions:ReportOptions = {
           ...reportOption,
           entrys: [...newEntrys],
           startReport: true,
         }
+
+        if (endDate && endDate>=0) {
+          newReportOptions.endDate = endDate;
+        }
+
         setMainData('reportOption', { ...newReportOptions });
       }
-      actionWithMainData('Журнал сервердан келди')
+      // actionWithMainData('Журнал сервердан келди')
     })
     .catch(function (error) {
       if (setMainData) {

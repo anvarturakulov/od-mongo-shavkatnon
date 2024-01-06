@@ -9,7 +9,8 @@ export const defaultDocumentTableItem = {
     count: 0,
     price: 0,
     total: 0,
-    comment: ''
+    comment: '',
+    balance: 0,
 }
 
 export const defaultDocumentFormItems = {

@@ -17,7 +17,6 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
     const {mainData, setMainData} = useAppContext();
     const {reportOption, contentName, contentTitle} = mainData;
     const {startDate, startReport, endDate, entrys, firstReferenceId} = reportOption;
-
     const schet = Schet.S1010;
     
     const { user } = mainData;
@@ -36,7 +35,6 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, [Schet.S1010, Schet.S2110, Schet.S2810], firstReferenceId);;
 
     if (!startReport) return <></>
-    console.log(typeof firstReferenceId)
 
     let titleV = (firstReferenceId != null && firstReferenceId != '') ? 
         ( <div>

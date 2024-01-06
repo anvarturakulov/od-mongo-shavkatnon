@@ -62,11 +62,6 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
                 Хисоботни шакллантириш
             </button>
 
-            <button 
-                className={styles.button}
-                onClick={()=> console.log(mainData.reportOption)}>
-                Холатни куриш
-            </button>
         </div>
     )
 } 

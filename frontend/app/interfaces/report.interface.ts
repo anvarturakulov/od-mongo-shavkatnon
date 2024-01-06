@@ -57,4 +57,5 @@ export enum TypeQuery {
     TKSUM = 'TKSUM',
     TKKOL = 'TKKOL',
     MPRICE = 'MPRICE',
+    BALANCE = 'BALANCE',
 }

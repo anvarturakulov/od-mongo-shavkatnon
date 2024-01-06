@@ -56,7 +56,7 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
   switch (documentType) {
     case DocumentType.ComeCashFromPartners:
       return {
-        debet: Schet.S5010,
+        debet: item.date > 86400000 ? Schet.S5010 : Schet.S0000 ,
         kredit: Schet.S4010,
         ...MoveCashObj
       };
@@ -67,15 +67,15 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
         ...leaveComeTMZObj
       };
     case DocumentType.ComeMaterial:
-      return {
+    return {
         debet: Schet.S1010,
-        kredit: Schet.S4010,
+        kredit: item.date > 86400000 ? Schet.S4010 : Schet.S0000,
         ...leaveComeTMZObj
       };
     case DocumentType.ComeProduct:
       return {
         debet: Schet.S2810,
-        kredit: Schet.S2010,
+        kredit: item.date > 86400000 ? Schet.S2010 : Schet.S0000,
         ...leaveComeTMZObj,
       };
     case DocumentType.LeaveCash:
