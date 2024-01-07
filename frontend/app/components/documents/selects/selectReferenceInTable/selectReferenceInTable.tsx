@@ -54,15 +54,15 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
                 let schet
 
                 if (typeDocumentForReference == 'MATERIAL') {
-                    schet = Schet.S1010
+                    schet = Schet.S10
                 }
 
                 if (typeDocumentForReference == 'HALFSTUFF') {
-                    schet = Schet.S2110;
+                    schet = Schet.S21;
                 }
 
                 if (typeDocumentForReference == 'PRODUCT') {
-                    schet = Schet.S2810    
+                    schet = Schet.S28    
                 }
                 
                 if (schet) {

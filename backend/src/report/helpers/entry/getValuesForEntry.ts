@@ -26,7 +26,7 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     summa: tableItem?.total,
   }
 
-  let leaveCashObj20106710 = {
+  let leaveCashObj2050 = {
     debetFirstSubcontoId: item.senderId.toString(),
     debetSecondSubcontoId: tableItem?.referenceId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
@@ -35,7 +35,7 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     summa: tableItem?.total,
   }
 
-  let leaveCashObj4010 = {
+  let leaveCashObj40 = {
     debetFirstSubcontoId: tableItem?.referenceId.toString(),
     debetSecondSubcontoId: item.senderId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
@@ -56,107 +56,100 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
   switch (documentType) {
     case DocumentType.ComeCashFromPartners:
       return {
-        debet: item.date > 86400000 ? Schet.S5010 : Schet.S0000 ,
-        kredit: Schet.S4010,
+        debet: item.date > 86400000 ? Schet.S50 : Schet.S00 ,
+        kredit: Schet.S40,
         ...MoveCashObj
       };
     case DocumentType.ComeHalfstuff:
       return {
-        debet: Schet.S2110,
-        kredit: Schet.S2010,
+        debet: Schet.S21,
+        kredit: Schet.S20,
         ...leaveComeTMZObj
       };
     case DocumentType.ComeMaterial:
     return {
-        debet: Schet.S1010,
-        kredit: item.date > 86400000 ? Schet.S4010 : Schet.S0000,
+        debet: Schet.S10,
+        kredit: item.date > 86400000 ? Schet.S40 : Schet.S00,
         ...leaveComeTMZObj
       };
     case DocumentType.ComeProduct:
       return {
-        debet: Schet.S2810,
-        kredit: item.date > 86400000 ? Schet.S2010 : Schet.S0000,
+        debet: Schet.S28,
+        kredit: item.date > 86400000 ? Schet.S20 : Schet.S00,
         ...leaveComeTMZObj,
       };
     case DocumentType.LeaveCash:
       if (tableItem.isPartner) {
         return {
-          debet: Schet.S4010,
-          kredit: Schet.S5010,
-          ...leaveCashObj4010
+          debet: Schet.S40,
+          kredit: Schet.S50,
+          ...leaveCashObj40
         };  
       }
-      if (tableItem.isWorker) {
-        return {
-          debet: Schet.S6710,
-          kredit: Schet.S5010,
-          ...leaveCashObj20106710,
-        };
-      }  
       return {
-        debet: Schet.S2010,
-        kredit: Schet.S5010,
-        ...leaveCashObj20106710,
+        debet: Schet.S20,
+        kredit: Schet.S50,
+        ...leaveCashObj2050,
       };
     case DocumentType.LeaveHalfstuff:
       return {
-        debet: Schet.S2010,
-        kredit: Schet.S2110,
+        debet: Schet.S20,
+        kredit: Schet.S21,
         ...leaveComeTMZObj,
       };
     case DocumentType.LeaveMaterial:
       return {
-        debet: Schet.S2010,
-        kredit: Schet.S1010,
+        debet: Schet.S20,
+        kredit: Schet.S10,
         ...leaveComeTMZObj,
       };
     case DocumentType.LeaveProd:
       return {
-        debet: Schet.S2010,
-        kredit: Schet.S2810,
+        debet: Schet.S20,
+        kredit: Schet.S28,
         ...leaveComeTMZObj,
       };
     case DocumentType.MoveCash:
       return {
-        debet: Schet.S5010,
-        kredit: Schet.S5010,
+        debet: Schet.S50,
+        kredit: Schet.S50,
         ...MoveCashObj,
       };
     case DocumentType.MoveHalfstuff:
       return {
-        debet: Schet.S2110,
-        kredit: Schet.S2110,
+        debet: Schet.S21,
+        kredit: Schet.S21,
         ...leaveComeTMZObj,
       };
     case DocumentType.MoveMaterial:
       return {
-        debet: Schet.S1010,
-        kredit: Schet.S1010,
+        debet: Schet.S10,
+        kredit: Schet.S10,
         ...leaveComeTMZObj
       };
     case DocumentType.MoveProd:
       return {
-        debet: Schet.S2810,
-        kredit: Schet.S2810,
+        debet: Schet.S28,
+        kredit: Schet.S28,
         ...leaveComeTMZObj
       };
     case DocumentType.SaleMaterial:
       return {
-        debet: Schet.S4010,
-        kredit: Schet.S1010,
+        debet: Schet.S40,
+        kredit: Schet.S10,
         ...leaveComeTMZObj
       };
     case DocumentType.SaleProd:
       return {
-        debet: Schet.S4010,
-        kredit: Schet.S2810,
+        debet: Schet.S40,
+        kredit: Schet.S28,
         ...leaveComeTMZObj
       };
     case DocumentType.ZpCalculate:
       // шу хужжатни проводкаси хакида кайта бир уйлаб куриш керак
       return {
-        debet: Schet.S2010,
-        kredit: Schet.S6710,
+        debet: Schet.S20,
+        kredit: Schet.S00,
         ...leaveComeTMZObj
       };
   }

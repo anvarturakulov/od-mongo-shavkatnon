@@ -17,7 +17,7 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
     const {mainData, setMainData} = useAppContext();
     const {reportOption, contentName, contentTitle} = mainData;
     const {startDate, startReport, endDate, entrys, firstReferenceId} = reportOption;
-    const schet = Schet.S1010;
+    const schet = Schet.S10;
     
     const { user } = mainData;
     const token = user?.access_token;
@@ -32,7 +32,7 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
         documentTitle: contentTitle
     })
 
-    let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, [Schet.S1010, Schet.S2110, Schet.S2810], firstReferenceId);;
+    let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, [Schet.S10, Schet.S21, Schet.S28], firstReferenceId);;
 
     if (!startReport) return <></>
 
@@ -56,9 +56,9 @@ export default function MatOborot({ className, ...props}:MatOborotProps):JSX.Ele
                 <table className={styles.table}>
                     <Thead/>
                     <tbody className={styles.tbody}>
-                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S1010}/>
-                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S2110}/>
-                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S2810}/>
+                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S10}/>
+                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S21}/>
+                        <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S28}/>
                     </tbody>
                 </table>
             </div>
