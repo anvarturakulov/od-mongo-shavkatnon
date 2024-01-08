@@ -4,7 +4,7 @@ import { DocTableItem, Document } from 'src/document/models/document.model';
 import { hasDocumentTablePart } from '../hasDocumentTableType';
 import { getValuesForEntry } from './getValuesForEntry';
 
-export const prepareEntry = (item: Document, tableItem?: DocTableItem ) => {
+export const prepareEntry = ( item: Document, tableItem?: DocTableItem ) => {
   // let hasTableItems = hasDocumentTablePart(item.documentType);
   return {
     date: item.date,
