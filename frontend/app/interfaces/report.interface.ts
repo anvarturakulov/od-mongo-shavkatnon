@@ -1,11 +1,8 @@
 
 export enum ReportType {
     MatOborot = 'MatOborot',
-    DebitorKreditor = 'DebitorKreditor',
+    Oborotka = 'Oborotka',
     AktSverka = 'AktSverka',
-    CashOborot = 'CashOborot',
-    ChargesOborot = 'ChargesOborot',
-    ZpOborot = 'ZpOborot',
 }
 
 export interface ReportOptions {
@@ -16,10 +13,11 @@ export interface ReportOptions {
     showReport: boolean,
     entrys: Array<EntryItem>,
     startReport: boolean,
+    oborotType: OborotType
 }
 
 export enum Schet {
-    S00 = 'S00', // СЧЕТА ДЛЯ ВВОДА ОСТАТКОВ
+    S00 = 'S00', // СЧЕТА ДЛЯ ВВОДА ОСТАТКОВ И ЗАКРЫТИЯ ЗП
     S10 = 'S10', // СЧЕТА УЧЕТА МАТЕРИАЛОВ
     S20 = 'S20', // СЧЕТА УЧЕТА ОСНОВНОГО ПРОИЗВОДСТВА И СЧЕТА УЧЕТА РАСХОДОВ ПЕРИОДА
     S21 = 'S21', // СЧЕТА УЧЕТА ПОЛУФАБРИКАТОВ СОБСТВЕННОГО ПРОИЗВОДСТВА
@@ -58,3 +56,10 @@ export enum TypeQuery {
     MPRICE = 'MPRICE',
     BALANCE = 'BALANCE',
 }
+
+export enum OborotType {
+    S20 = 'Харажатлар', // СЧЕТА УЧЕТА ОСНОВНОГО ПРОИЗВОДСТВА И СЧЕТА УЧЕТА РАСХОДОВ ПЕРИОДА
+    S40 = 'Хамкорлар', // СЧЕТА К ПОЛУЧЕНИЮ И СЧЕТА К ОПЛАТЕ ПОСТАВЩИКАМ И ПОДРЯДЧИКАМ
+    S50 = 'Касса', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ В КАССЕ
+} 
+

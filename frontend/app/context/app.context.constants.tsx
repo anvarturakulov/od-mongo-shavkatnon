@@ -1,4 +1,4 @@
-import { ReportOptions } from '../interfaces/report.interface'
+import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
@@ -32,7 +32,8 @@ export const defaultReportOptions: ReportOptions =  {
     secondReferenceId: '',
     showReport: false,
     entrys: [],
-    startReport: false
+    startReport: false,
+    oborotType: OborotType.S20,
 }
 
 export const defaultMainData: Maindata = {

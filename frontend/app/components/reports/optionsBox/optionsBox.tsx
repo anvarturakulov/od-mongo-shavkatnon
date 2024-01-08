@@ -9,13 +9,15 @@ import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { showMessage } from '@/app/service/common/showMessage';
+import { ReportType } from '@/app/interfaces/report.interface';
+import { SelectOborot } from './components/selectOborot/selectOborot';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
-    const {contentName, contentTitle} = mainData;
-    const result = getOptionsByReportType(contentName);
+    const {contentName, contentTitle, reportOption} = mainData;
+    const result = getOptionsByReportType(contentName, reportOption.oborotType);
 
     const showReport = ( setMainData: Function | undefined, mainData: Maindata ) => {
         
@@ -37,7 +39,10 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
                 <Input label='Бошлангич сана' type='date' id='startDate' onChange={(e)=> onChangeInputOptionsBox(e, setMainData, mainData)}/>
                 <Input label='Охирги сана' type='date' id='endDate' onChange={(e) => onChangeInputOptionsBox(e, setMainData, mainData)} />
             </div>
-            
+
+            <div className={styles.dataBoxBottom}>
+                <SelectOborot label='Айланма тури' visible={contentName == ReportType.Oborotka}/>
+            </div>
             <div className={styles.dataBoxBottom}>
                 <SelectReference 
                     label={result.label} 

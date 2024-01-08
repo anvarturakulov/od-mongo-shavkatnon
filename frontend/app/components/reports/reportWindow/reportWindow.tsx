@@ -1,21 +1,17 @@
 import { ReportWindowProps } from './reportWindow.props'
 import OptionsBox from '../optionsBox/optionsBox'
 import { useAppContext } from '@/app/context/app.context'
-import { ReportType } from '@/app/interfaces/report.interface'
-import MatOborot from '../typesReport/matOborot/matOborot'
+import ReportTable from '../reportTable/reportTable'
 
 export default function ReportWindow({ className, ...props }: ReportWindowProps):JSX.Element {
     const {mainData, setMainData} = useAppContext()
-    const { contentName, reportOption } = mainData;
-    const { startReport } = reportOption;
+    const { startReport } = mainData.reportOption;
 
+    const content = !startReport ? <OptionsBox/> : <ReportTable/>;
+    
     return (
         <>
-            {!startReport && <OptionsBox/>}
-            {
-                contentName == ReportType.MatOborot && 
-                <MatOborot/>
-            }
+            {content}
         </>
     )
 }

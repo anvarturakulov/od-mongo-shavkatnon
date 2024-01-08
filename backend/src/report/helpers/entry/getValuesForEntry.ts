@@ -26,6 +26,15 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     summa: tableItem?.total,
   }
 
+  const leaveTMZ = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: item.receiverId.toString(),
+    kreditFirstSubcontoId: item.senderId.toString(),
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
+    count: tableItem?.count,
+    summa: tableItem?.total,
+  }
+
   let leaveCashObj2050 = {
     debetFirstSubcontoId: item.senderId.toString(),
     debetSecondSubcontoId: tableItem?.referenceId.toString(),
@@ -95,19 +104,19 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
       return {
         debet: Schet.S20,
         kredit: Schet.S21,
-        ...leaveComeTMZObj,
+        ...leaveTMZ,
       };
     case DocumentType.LeaveMaterial:
       return {
         debet: Schet.S20,
         kredit: Schet.S10,
-        ...leaveComeTMZObj,
+        ...leaveTMZ,
       };
     case DocumentType.LeaveProd:
       return {
         debet: Schet.S20,
         kredit: Schet.S28,
-        ...leaveComeTMZObj,
+        ...leaveTMZ,
       };
     case DocumentType.MoveCash:
       return {

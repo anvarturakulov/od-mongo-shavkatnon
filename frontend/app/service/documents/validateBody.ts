@@ -1,4 +1,4 @@
-import { DocumentModel, DocumentType, OptionsForDocument } from "../../interfaces/document.interface";
+import { DocTableItem, DocumentModel, DocumentType, OptionsForDocument } from "../../interfaces/document.interface";
 import { TypeReference } from '../../interfaces/reference.interface';
 
 export const validateBody = (body: DocumentModel): Boolean => {
@@ -40,6 +40,13 @@ export const validateBody = (body: DocumentModel): Boolean => {
   if (documentsForCashLeave.includes(documentType)) {
     if (!senderId || !tableItems?.length) return false
   }
+
+  let flag: boolean = true;
+  body.tableItems?.forEach((item: DocTableItem) => {
+    if ( item.referenceId == '' || item.count <= 0 ) flag = false
+  } )
+
+  if (!flag) return false
 
   // const documentsForZp = [
   //   `${DocumentType.ZpCalculate}`,

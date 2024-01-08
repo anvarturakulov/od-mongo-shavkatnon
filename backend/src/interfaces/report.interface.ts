@@ -2,15 +2,12 @@ import { DocumentType } from './document.interface';
 
 export enum ReportType {
     MatOborot = 'MatOborot',
-    DebitorKreditor = 'DebitorKreditor',
+    Oborotka = 'Oborotka',
     AktSverka = 'AktSverka',
-    CashOborot = 'CashOborot',
-    ChargesOborot = 'ChargesOborot',
-    ZpOborot = 'ZpOborot',
 }
 
 export enum Schet{
-    S00 = 'S00', // СЧЕТА ДЛЯ ВВОДА ОСТАТКОВ
+    S00 = 'S00', // СЧЕТА ДЛЯ ВВОДА ОСТАТКОВ И ЗАКРЫТИЯ ЗП
     S10 = 'S10', // СЧЕТА УЧЕТА МАТЕРИАЛОВ
     S20 = 'S20', // СЧЕТА УЧЕТА ОСНОВНОГО ПРОИЗВОДСТВА И СЧЕТА УЧЕТА РАСХОДОВ ПЕРИОДА
     S21 = 'S21', // СЧЕТА УЧЕТА ПОЛУФАБРИКАТОВ СОБСТВЕННОГО ПРОИЗВОДСТВА

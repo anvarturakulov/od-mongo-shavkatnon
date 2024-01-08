@@ -1,6 +1,5 @@
 import { ReportOptions } from '@/app/interfaces/report.interface';
 import { showMessage } from '../common/showMessage';
-import { defaultReportOptions } from '@/app/context/app.context.constants';
 import axios from 'axios';
 import { Maindata } from '@/app/context/app.context.interfaces';
 

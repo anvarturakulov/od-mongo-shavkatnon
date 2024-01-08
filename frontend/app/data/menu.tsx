@@ -20,7 +20,7 @@ export const MenuData:Array<MenuItem> = [
             { title: DocumentType.MoveProd, description:'Махсулот силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveProd, description:'Махсулот чикими', type: 'document', active: false },
             { title: DocumentType.SaleProd, description:'Махсулот сотуви', type: 'document', active: false },
-            { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчилардан)', type: 'document', active: false },
+            { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)', type: 'document', active: false },
             { title: DocumentType.MoveCash, description:'Пул силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveCash, description:'Пул харажати', type: 'document', active: false },
             // { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },
@@ -43,11 +43,8 @@ export const MenuData:Array<MenuItem> = [
         isOpened: false,
         subMenu: [
             { title: ReportType.MatOborot, description:'ТМБ харакати', type: 'report', active: false },
-            { title: ReportType.DebitorKreditor, description:'Дебитор ва кредитор', type: 'report', active: false },
+            { title: ReportType.Oborotka, description:'Умумий айланма', type: 'report', active: false },
             { title: ReportType.AktSverka, description:'Хамкор билан солиштирма', type: 'report', active: false },
-            { title: ReportType.CashOborot, description:'Пул маблаг харакати', type: 'report', active: false },
-            { title: ReportType.ChargesOborot, description:'Харажатлар хисоби', type: 'report', active: false },
-            { title: ReportType.ZpOborot, description:'Иш хаки хисоби', type: 'report', active: false },
         ]
     },
     {

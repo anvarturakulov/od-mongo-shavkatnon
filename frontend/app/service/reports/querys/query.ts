@@ -4,14 +4,22 @@ import { EntryItem, Schet, TypeQuery } from '@/app/interfaces/report.interface';
 export const query = (
     schet: Schet,
     typequery: TypeQuery, 
-    secondSubcontoId: string,
-    mainData: Maindata
+    secondSubcontoId: string | null,
+    mainData: Maindata,
+    bodyByFirstSunconto?: boolean,
+    fixedReferencyId?: string
   ): number => {
 
   const { reportOption } = mainData;
-  const { startDate, endDate, entrys, firstReferenceId } = reportOption;
+  const { startDate, endDate, entrys } = reportOption;
+  let { firstReferenceId } = reportOption;
+
+  if (bodyByFirstSunconto && fixedReferencyId) {
+    firstReferenceId = fixedReferencyId;
+  }
 
   let flag = (firstReferenceId == null || firstReferenceId.length == 0)
+  let flagSubconto2 = (secondSubcontoId == null)
   let newEntrys = [...entrys]
   
   switch (typequery) {
@@ -20,7 +28,7 @@ export const query = (
                         return (
                           item.debet == schet &&
                           (flag || item.debetFirstSubcontoId == firstReferenceId) && 
-                          item.debetSecondSubcontoId == secondSubcontoId &&
+                          (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
                           item.date < startDate
                         )
                     })
@@ -31,7 +39,7 @@ export const query = (
                         return (
                           item.debet == schet &&
                           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
-                          item.debetSecondSubcontoId == secondSubcontoId &&
+                          (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
                           item.date < startDate
                         )
                       })
@@ -42,7 +50,7 @@ export const query = (
                           return (
                             item.kredit == schet &&
                             (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
-                            item.kreditSecondSubcontoId == secondSubcontoId &&
+                            (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
                             item.date < startDate
                           )
                         })
@@ -53,7 +61,7 @@ export const query = (
                           return (
                             item.kredit == schet &&
                             (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
-                            item.kreditSecondSubcontoId == secondSubcontoId &&
+                            (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
                             item.date < startDate
                           )
                         })
@@ -64,7 +72,7 @@ export const query = (
                         return (
                           item.debet == schet &&
                           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
-                          item.debetSecondSubcontoId == secondSubcontoId &&
+                          (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
                           item.date >= startDate &&
                           item.date <= endDate
                         )
@@ -76,7 +84,7 @@ export const query = (
                           return (
                             item.debet == schet &&
                             (flag || item.debetFirstSubcontoId == firstReferenceId) &&
-                            item.debetSecondSubcontoId == secondSubcontoId &&
+                            (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
                             item.date >= startDate &&
                             item.date <= endDate
                           )
@@ -88,7 +96,7 @@ export const query = (
                           return (
                             item.kredit == schet &&
                             (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
-                            item.kreditSecondSubcontoId == secondSubcontoId &&
+                            (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
                             item.date >= startDate &&
                             item.date <= endDate
                           )
@@ -100,7 +108,7 @@ export const query = (
                           return (
                             item.kredit == schet &&
                             (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
-                            item.kreditSecondSubcontoId == secondSubcontoId &&
+                            (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
                             item.date >= startDate &&
                             item.date <= endDate
                           )

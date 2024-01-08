@@ -62,7 +62,7 @@ export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined )
 }
 
 export const secondsToDateString = (seconds: number): String => {
-    return new Date(seconds).toISOString().split('T')[0]
+    return new Date(seconds).toLocaleDateString('ru-RU')
 }
 
 export const saveDocumentType = (setMainData: Function | undefined, mainData: Maindata) => {
