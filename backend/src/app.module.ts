@@ -19,6 +19,7 @@ import { ReportModule } from './report/report.module';
     // mongo atlas base
     MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash'),
     
+    
     // from net
     // MongooseModule.forRootAsync({
     //   imports: [ConfigModule],
