@@ -1,6 +1,7 @@
 import { DocTableItem, Document } from 'src/document/models/document.model';
 import { Schet } from 'src/interfaces/report.interface';
 import { DocumentType } from 'src/interfaces/document.interface';
+import { table } from 'console';
 
 export interface ResultgetValuesForEntry { 
   debet: Schet, 
@@ -58,6 +59,15 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     debetSecondSubcontoId: item.senderId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
     kreditSecondSubcontoId: item.receiverId.toString(),
+    count: 0,
+    summa: item.payValue,
+  }
+
+  let getPayFromSale = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: item.receiverId.toString(),
+    kreditFirstSubcontoId: item.receiverId.toString(),
+    kreditSecondSubcontoId: item.senderId.toString(),
     count: 0,
     summa: item.payValue,
   }
@@ -143,17 +153,35 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
         ...leaveComeTMZObj
       };
     case DocumentType.SaleMaterial:
-      return {
-        debet: Schet.S40,
-        kredit: Schet.S10,
-        ...leaveComeTMZObj
-      };
+      if (tableItem) {
+        return {
+          debet: Schet.S40,
+          kredit: Schet.S10,
+          ...leaveComeTMZObj
+        };
+      } else {
+        return {
+          debet: Schet.S50,
+          kredit: Schet.S40,
+          ...getPayFromSale
+        };
+      }
+      
+      
     case DocumentType.SaleProd:
-      return {
-        debet: Schet.S40,
-        kredit: Schet.S28,
-        ...leaveComeTMZObj
-      };
+      if (tableItem) {
+        return {
+          debet: Schet.S40,
+          kredit: Schet.S28,
+          ...leaveComeTMZObj
+        }
+      } else {
+        return {
+          debet: Schet.S50,
+          kredit: Schet.S40,
+          ...getPayFromSale
+        }
+      }
     case DocumentType.ZpCalculate:
       // шу хужжатни проводкаси хакида кайта бир уйлаб куриш керак
       return {

@@ -47,7 +47,8 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
             if (value != null) {
                 currentItem.referenceName = value
             }
-            
+            console.log(typeDocumentForReference)
+            console.log(id)
             if (typeDocumentForReference != 'OTHER' && id) {
                 
                 getEntrysJournal(setMainData, mainData, currentDocument.date);
@@ -66,6 +67,7 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
                 }
                 
                 if (schet) {
+                    console.log(schet)
                     currentItem.price = query(schet, TypeQuery.MPRICE, id, mainData);
                     currentItem.balance = query(schet, TypeQuery.BALANCE, id, mainData);
                 }
