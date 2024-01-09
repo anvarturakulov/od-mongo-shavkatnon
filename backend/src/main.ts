@@ -7,8 +7,8 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       "https://softhome.uz",
-      "http://localhost:3000/",
-      "http://localhost:3030/",
+      "http://localhost:3000",
+      "http://localhost:3030",
     ],
   });
   await app.listen(3030);

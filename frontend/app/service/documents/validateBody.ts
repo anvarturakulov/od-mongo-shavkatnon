@@ -1,5 +1,6 @@
 import { DocTableItem, DocumentModel, DocumentType, OptionsForDocument } from "../../interfaces/document.interface";
 import { TypeReference } from '../../interfaces/reference.interface';
+import { hasDocumentTablePart } from './hasDocumentTableType';
 
 export const validateBody = (body: DocumentModel): Boolean => {
   let {date, docNumber, documentType, receiverId, senderId, tableItems, payValue } = body
@@ -42,8 +43,9 @@ export const validateBody = (body: DocumentModel): Boolean => {
   }
 
   let flag: boolean = true;
+  let hasTablePart = hasDocumentTablePart(documentType)
   body.tableItems?.forEach((item: DocTableItem) => {
-    if ( item.referenceId == '' || item.count <= 0 ) flag = false
+    if (hasTablePart && ( item.referenceId == '' || item.count <= 0 )) flag = false
   } )
 
   if (!flag) return false

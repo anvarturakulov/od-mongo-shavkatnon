@@ -45,9 +45,9 @@ const infoBlock = (
       className={styles.logo}>
         <IcoQalam className={styles.ico}/>
         <div className={styles.logoTitle}>
-          <div> Qalam </div>
+          <div> Карандаш </div>
           <div className={styles.logoComment}>
-            online hisob
+            онлайн учет
           </div>
         </div>
     </div>
@@ -80,7 +80,7 @@ export default function Dashboard() {
         
         {mainData.mainPage && infoBlock}
         <div className={styles.journalBox}>
-          { contentType=='document' && <Journal/> }
+          { !mainData.mainPage && contentType=='document' && <Journal/> }
         </div>
 
         <div className={styles.journalBox}>

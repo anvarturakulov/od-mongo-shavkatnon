@@ -17,9 +17,7 @@ import { ReportModule } from './report/report.module';
     // MongooseModule.forRoot('mongodb://admin:admin@localhost:27017/karandash?authMechanism=DEFAULT&authSource=admin'),
    
     // mongo atlas base
-    
     MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash'),
-    // MongooseModule.forRoot('mongodb + srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/?retryWrites=true&w=majority'),
     
     // from net
     // MongooseModule.forRootAsync({
