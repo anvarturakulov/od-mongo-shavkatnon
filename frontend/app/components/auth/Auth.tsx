@@ -11,6 +11,7 @@ import { Button } from '../common/button/Button';
 import { Message } from '../common/message/message'
 import { loginToApp } from '@/app/service/common/loginToApp'
 import { showMessage } from '@/app/service/common/showMessage'
+import ImgBread from './bread.jpg';
 
 const defaultBody: BodyForLogin = {
   login: '',
@@ -62,7 +63,8 @@ export default function Auth() {
             <Button appearance='primary' onClick={() => onSubmit(body, setMainData)}>Кириш</Button>
             </div>
             <Image
-            src={'/images/bread.jpg'}
+            // src={'/images/bread.jpg'}
+            src={ImgBread}
             layout='responsive'
             width={448}
             height={300}
