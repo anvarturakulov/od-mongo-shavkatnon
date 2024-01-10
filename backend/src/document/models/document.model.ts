@@ -25,6 +25,9 @@ export class DocTableItem{
 
   @Prop()
   total: number;
+
+  @Prop()
+  comment?: number;
   
 }
 

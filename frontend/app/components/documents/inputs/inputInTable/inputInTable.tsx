@@ -30,6 +30,10 @@ export const InputInTable = ({ className, nameControl, itemIndexInTable, ...prop
                 currentItem.total = +(currentItem.count * currentItem.price).toFixed(2)
             }
 
+            if (currentItem && value != null && (nameControl=='comment')) {
+                currentItem.comment = value
+            }
+
             let newItems = [...currentDocument.tableItems]
             newItems[itemIndex] = {...currentItem}
             let newObj = {
@@ -50,7 +54,7 @@ export const InputInTable = ({ className, nameControl, itemIndexInTable, ...prop
                 className={cn(className, styles.input)}
                 {...props}
                 onChange={(e) => changeElements(e, nameControl, itemIndexInTable, setMainData, mainData)}
-                type='number'
+                
                 value={currentVal}
             />
         </div>

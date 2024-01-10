@@ -142,7 +142,7 @@ export const query = (
       let countLeave = newEntrys.filter((item: EntryItem) => {
                                     return (
                                       item.kredit == schet &&
-                                      (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
+                                      (item.kreditFirstSubcontoId == firstReferenceId) &&
                                       item.kreditSecondSubcontoId == secondSubcontoId &&
                                       item.date < endDate
                                     )
@@ -151,7 +151,7 @@ export const query = (
       let countCome = newEntrys.filter((item: EntryItem) => {
                                   return (
                                     item.debet == schet &&
-                                    (flag || item.debetFirstSubcontoId == firstReferenceId) &&
+                                    (item.debetFirstSubcontoId == firstReferenceId) &&
                                     item.debetSecondSubcontoId == secondSubcontoId &&
                                     item.date < endDate
                                   )

@@ -35,6 +35,7 @@ export interface DocTableItem {
     price: number,
     total: number,
     balance?: number,
+    comment?: string,
 }
 
 export interface DocumentModel {

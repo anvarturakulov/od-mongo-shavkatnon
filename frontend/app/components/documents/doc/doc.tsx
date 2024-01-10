@@ -13,18 +13,25 @@ import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { InputForData } from '../inputs/inputForData/inputForData';
 import { addItems, cancelSubmit, onSubmit, saveDocumentType, saveNumber } from './helpers/doc.functions';
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
+import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const [numberDoc, setNumberDoc] = useState<number>(0);
-    const {contentName, contentTitle, currentDocument} = mainData;
+    const {contentName, contentTitle, currentDocument, isNewDocument} = mainData;
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
     let hasPartners = contentName == DocumentType.LeaveCash;
     let defaultNewItemForTable = {...defaultDocumentTableItem}
+
+    useEffect(()=>{
+        if (isNewDocument) {
+            getEntrysJournal(setMainData, mainData, currentDocument.date);
+        }
+    },[currentDocument.date, currentDocument.senderId])
 
     useEffect(() => {
         if (currentDocument.docNumber == 0) {

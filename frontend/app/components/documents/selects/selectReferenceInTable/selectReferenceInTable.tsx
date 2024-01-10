@@ -10,6 +10,7 @@ import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { ReportOptions, Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 
 export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
@@ -47,11 +48,10 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
             if (value != null) {
                 currentItem.referenceName = value
             }
-            console.log(typeDocumentForReference)
-            console.log(id)
-            if (typeDocumentForReference != 'OTHER' && id) {
+
+            if ( typeDocumentForLeaveTMZ(contentName) && id) {
                 
-                getEntrysJournal(setMainData, mainData, currentDocument.date);
+                
                 let schet
 
                 if (typeDocumentForReference == 'MATERIAL') {
@@ -67,9 +67,8 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
                 }
                 
                 if (schet) {
-                    console.log(schet)
                     currentItem.price = query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = query(schet, TypeQuery.BALANCE, id, mainData);
+                    currentItem.balance = query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }
 

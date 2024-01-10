@@ -5,14 +5,17 @@ import {Input } from '@/app/components';
 import TrashIco from './ico/trash.svg';
 import { useAppContext } from '@/app/context/app.context';
 import { SelectReferenceInTable } from '../selects/selectReferenceInTable/selectReferenceInTable';
-import { DocTableItem } from '@/app/interfaces/document.interface';
+import { DocTableItem, DocumentType } from '@/app/interfaces/document.interface';
 import { InputInTable } from '../inputs/inputInTable/inputInTable';
 import { useState } from 'react';
 import { CheckBoxInTable } from '../inputs/checkBoxInTable/checkBoxInTable';
+import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 
 export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
+    const {contentName} = mainData;
+
     const deleteItem = (index: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
 
         if ( setMainData && items.length>1 ) {
@@ -21,21 +24,40 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
         }
     }
 
+    let hasCommentInTable = (contentName == DocumentType.LeaveCash);
+    let showBalance = typeDocumentForLeaveTMZ(contentName)
+
     return (
         <>
-            <div className={cn(styles.box,styles.titleBox, {[styles.boxWithWorkers]: !hasWorkers})}>
+            <div className={cn(styles.box,styles.titleBox, 
+                {
+                    [styles.boxWithBalance]: showBalance,
+                    [styles.boxWithWorkers]: hasWorkers,
+                })}>
+                
                 { hasWorkers && <div>Ходим</div> }
                 { hasPartners && <div>Хамкор</div> }
+                
                 <div>Номи</div>
-                { !hasPartners && <div>Колдик</div> }
-                <div>Сони</div>
-                <div>Нархи</div>
+                
+                { showBalance && <div>Колдик</div> }
+                
+                { !hasCommentInTable && <div>Сони</div>}
+                { !hasCommentInTable && <div>Нархи</div>}
+                
                 <div>Суммаси</div>
-                <div></div>
+                
+                { hasCommentInTable && <div>Изох</div>}
+                <div className={styles.notColor}>____</div>
+
             </div>
             {items && items.map((item: DocTableItem, index)  => (
-                <div key = {index} className={cn(styles.box, {[styles.boxWithWorkers]: !hasWorkers})}>
-                    
+                <div key = {index} className={cn(styles.box, 
+                {
+                    [styles.boxWithBalance]: showBalance,
+                    [styles.boxWithWorkers]: hasWorkers,
+
+                })}>
                     { 
                         hasWorkers &&                   
                         <CheckBoxInTable 
@@ -58,12 +80,14 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                         currentItemId={item.referenceId}
                     />
                     { 
-                        !hasPartners &&                   
+                        showBalance &&                   
                         <div>{item.balance}</div>
                     }
-                    <InputInTable nameControl='count' itemIndexInTable={index}/>
-                    <InputInTable nameControl='price' itemIndexInTable={index}/>
-                    <InputInTable nameControl='total' itemIndexInTable={index}/>
+                    { !hasCommentInTable && <InputInTable nameControl='count' type='number' itemIndexInTable={index}/> }
+                    { !hasCommentInTable && <InputInTable nameControl='price' type='number' itemIndexInTable={index}/>}
+                    
+                    <InputInTable nameControl='total' type='number' itemIndexInTable={index}/>
+                    { hasCommentInTable && <InputInTable nameControl='comment' type='text' itemIndexInTable={index}/> }
                     <div className={styles.ico} onClick={() => deleteItem(index, setMainData, items)}> <TrashIco/> </div>
                 </div>
             ))}

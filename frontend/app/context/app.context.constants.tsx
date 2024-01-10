@@ -1,7 +1,8 @@
+import { DocTableItem } from '../interfaces/document.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
-export const defaultDocumentTableItem = {
+export const defaultDocumentTableItem: DocTableItem = {
     isWorker: false,
     isPartner: false,
     referenceId: '',

@@ -26,6 +26,8 @@ class DocTableItemDto {
   @IsNumber()
   total: number;
 
+  @IsString()
+  comment: string;
   
 }
 

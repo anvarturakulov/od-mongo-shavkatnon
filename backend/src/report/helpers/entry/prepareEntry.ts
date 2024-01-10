@@ -1,7 +1,4 @@
-import { EntryItem, Schet } from 'src/interfaces/report.interface';
-import { DocumentType } from 'src/interfaces/document.interface';
 import { DocTableItem, Document } from 'src/document/models/document.model';
-import { hasDocumentTablePart } from '../hasDocumentTableType';
 import { getValuesForEntry } from './getValuesForEntry';
 
 export const prepareEntry = ( item: Document, tableItem?: DocTableItem ) => {
