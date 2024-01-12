@@ -56,11 +56,14 @@ export enum TypeQuery {
     TKKOL = 'TKKOL',
     MPRICE = 'MPRICE',
     BALANCE = 'BALANCE',
+    TDSUMEntrys = 'TDSUMEntrys',
+    TKSUMEntrys = 'TKSUMEntrys'
 }
 
 export enum OborotType {
     S20 = 'Харажатлар', // СЧЕТА УЧЕТА ОСНОВНОГО ПРОИЗВОДСТВА И СЧЕТА УЧЕТА РАСХОДОВ ПЕРИОДА
     S40 = 'Хамкорлар', // СЧЕТА К ПОЛУЧЕНИЮ И СЧЕТА К ОПЛАТЕ ПОСТАВЩИКАМ И ПОДРЯДЧИКАМ
     S50 = 'Касса', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ В КАССЕ
+    S67 = 'Ходимлар иш хакиси'
 } 
 

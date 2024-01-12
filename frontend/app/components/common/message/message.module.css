@@ -2,7 +2,7 @@
     position: absolute;
     width: 300px;
     height: 100px;
-    transform: translateX(300px);
+    transform: translateX(600px);
     right: 0;
     bottom: 10px;
     transition: all 2s;
@@ -16,6 +16,17 @@
     cursor: pointer;
 }
 
+.longBox{
+   height: auto;
+   padding: 20px 30px; 
+   width: auto;
+   grid-template-columns: auto;
+   max-height:300px;
+   overflow-y: auto;
+   /* background: #f3f3f3 !important;
+   border: 1px solid #000; */
+   
+}
 .showBox{
     transform: translateX(-10px);
     opacity: 100%;
@@ -49,3 +60,4 @@
 .error .label {
     color: white;
 }
+

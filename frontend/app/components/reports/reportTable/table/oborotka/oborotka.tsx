@@ -2,8 +2,6 @@ import styles from './oborotka.module.css'
 import { Thead } from './thead/thead';
 import { TBody } from './tbody/tbody';
 import { OborotkaProps } from './oborotka.props';
-import { Schet } from '@/app/interfaces/report.interface';
-import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { useAppContext } from '@/app/context/app.context';
 import { getSchetForOborotType } from '@/app/service/reports/getSchetForOborotType';
 

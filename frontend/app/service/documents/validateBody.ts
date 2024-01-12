@@ -44,9 +44,9 @@ export const validateBody = (body: DocumentModel): Boolean => {
 
   let flag: boolean = true;
   let hasTablePart = hasDocumentTablePart(documentType)
-  body.tableItems?.forEach((item: DocTableItem) => {
-    if (hasTablePart && ( item.referenceId == '' || item.count <= 0 )) flag = false
-  } )
+  // body.tableItems?.forEach((item: DocTableItem) => {
+  //   if (hasTablePart && ( item.referenceId == '' || item.count <= 0 )) flag = false
+  // } )
 
   if (!flag) return false
 

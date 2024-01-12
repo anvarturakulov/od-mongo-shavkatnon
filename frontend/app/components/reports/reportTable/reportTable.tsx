@@ -40,7 +40,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     if (firstReferenceId == null || firstReferenceId == '') {
         listFirstSubconts = getListFirstSubconts(entrys, schetList);
     }
-    console.log(listFirstSubconts);
+    // console.log(listFirstSubconts);
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, schetList, firstReferenceId);
     if (!startReport) return <></>
 

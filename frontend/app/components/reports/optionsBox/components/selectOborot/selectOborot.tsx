@@ -12,6 +12,7 @@ export const SelectOborot = ({ label, visible , className, ...props }: SelectObo
         { title: OborotType.S20 },
         { title: OborotType.S40 },
         { title: OborotType.S50 },
+        { title: OborotType.S67 },
     ]
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
@@ -23,6 +24,7 @@ export const SelectOborot = ({ label, visible , className, ...props }: SelectObo
             ...reportOption,
             oborotType: dataType,
         }
+        
         if (setMainData) {
             setMainData('reportOption', {...newObj})
         }

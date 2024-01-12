@@ -14,7 +14,7 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): ResultgetValuesForEntry => {
+export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newEntryForCharges?: boolean): ResultgetValuesForEntry => {
   
   let documentType = item.documentType;
 
@@ -36,18 +36,36 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
     summa: tableItem?.total,
   }
 
-  let leaveCashObj2050 = {
+  let leaveCashZp2050 = {
     debetFirstSubcontoId: item.senderId.toString(),
-    debetSecondSubcontoId: tableItem?.referenceId.toString(),
+    debetSecondSubcontoId: '659e4610d738d99baa2fe4ef',
     kreditFirstSubcontoId: item.senderId.toString(),
     kreditSecondSubcontoId: tableItem?.referenceId.toString(),
     count: 0,
     summa: tableItem?.total,
   }
 
-  let leaveCashObj40 = {
+  let leaveCashZp6700 = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: tableItem?.referenceId.toString() ,
+    kreditFirstSubcontoId: item.senderId.toString(),
+    kreditSecondSubcontoId: '659e4610d738d99baa2fe4ef',
+    count: 0,
+    summa: tableItem?.total,
+  }
+
+  let leaveCashObj4050 = {
     debetFirstSubcontoId: tableItem?.referenceId.toString(),
     debetSecondSubcontoId: item.senderId.toString(),
+    kreditFirstSubcontoId: item.senderId.toString(),
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
+    count: 0,
+    summa: tableItem?.total,
+  }
+
+  let leaveCashOther = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: tableItem?.referenceId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
     kreditSecondSubcontoId: tableItem?.referenceId.toString(),
     count: 0,
@@ -98,17 +116,35 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem): Res
         ...leaveComeTMZObj,
       };
     case DocumentType.LeaveCash:
+      
       if (tableItem.isPartner) {
         return {
           debet: Schet.S40,
           kredit: Schet.S50,
-          ...leaveCashObj40
+          ...leaveCashObj4050
         };  
       }
+
+      if (tableItem.isWorker && !newEntryForCharges) {
+        return {
+          debet: Schet.S20,
+          kredit: Schet.S50,
+          ...leaveCashZp2050,
+        };  
+      }
+
+      if (tableItem.isWorker && newEntryForCharges) {
+        return {
+          debet: Schet.S67,
+          kredit: Schet.S00,
+          ...leaveCashZp6700,
+        }
+      }
+
       return {
         debet: Schet.S20,
         kredit: Schet.S50,
-        ...leaveCashObj2050,
+        ...leaveCashOther,
       };
     case DocumentType.LeaveHalfstuff:
       return {

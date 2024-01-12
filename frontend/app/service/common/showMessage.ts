@@ -1,13 +1,19 @@
+import { EntryItem } from '@/app/interfaces/report.interface';
 import { MessageType } from '../../interfaces/general.interface'
 
 export const showMessage = (
-  message: string,
+  message: string | Array<EntryItem>,
   messageType: MessageType,
   setMainData: Function | undefined) => {
 
   if (setMainData) {
     setMainData('showMessageWindow', true);
-    setMainData('message', message);
+    if (typeof message == 'string') {
+      setMainData('message', message);
+    } else {
+      console.log([...message])
+      setMainData('message', [...message]);
+    }
     setMainData('messageType', messageType);
   }
 }

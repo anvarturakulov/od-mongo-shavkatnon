@@ -17,6 +17,11 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>): Array<Entry
         item.tableItems.forEach((tableItem: DocTableItem) => {
           let newItemForResults = { ...prepareEntry(item, tableItem) }
           results.push(newItemForResults);
+
+          if (tableItem.isWorker) {
+            let newItemForResults = { ...prepareEntry(item, tableItem, true) }
+            results.push(newItemForResults);
+          }
         })
         if (item.documentType = DocumentType.SaleProd) {
           let newItemForResults = { ...prepareEntry(item) }

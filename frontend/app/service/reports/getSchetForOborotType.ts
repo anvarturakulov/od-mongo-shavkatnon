@@ -5,6 +5,7 @@ export const getSchetForOborotType = (oborotType: OborotType): Schet => {
     case OborotType.S20 : return Schet.S20;
     case OborotType.S40: return Schet.S40;
     case OborotType.S50: return Schet.S50;
+    case OborotType.S67: return Schet.S67;
     default: return Schet.S00;
   }
 

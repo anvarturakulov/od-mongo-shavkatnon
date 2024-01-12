@@ -8,8 +8,7 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
 import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
-import { ReportOptions, Schet, TypeQuery } from '@/app/interfaces/report.interface';
-import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 
 export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
@@ -50,8 +49,6 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
             }
 
             if ( typeDocumentForLeaveTMZ(contentName) && id) {
-                
-                
                 let schet
 
                 if (typeDocumentForReference == 'MATERIAL') {
@@ -67,8 +64,8 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
                 }
                 
                 if (schet) {
-                    currentItem.price = query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
+                    currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
+                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }
 
