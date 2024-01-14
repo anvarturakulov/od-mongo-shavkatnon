@@ -4,7 +4,5 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface DocTableProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     typeReference: TypeReference,
-    hasWorkers: boolean,
-    hasPartners: boolean,
     items: Array<DocTableItem> | undefined,
 }

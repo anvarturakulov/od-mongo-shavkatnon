@@ -12,6 +12,8 @@ export const defaultDocumentTableItem: DocTableItem = {
     total: 0,
     comment: '',
     balance: 0,
+    receiverId: '',
+    recieverPayment: 0,
 }
 
 export const defaultDocumentFormItems = {

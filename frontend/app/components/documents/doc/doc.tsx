@@ -23,8 +23,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     const {contentName, contentTitle, currentDocument, isNewDocument} = mainData;
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
-    let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
-    let hasPartners = contentName == DocumentType.LeaveCash;
+
     let defaultNewItemForTable = {...defaultDocumentTableItem}
 
     useEffect(()=>{
@@ -86,8 +85,6 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             {options.tableIsVisible && 
                 <DocTable 
                     typeReference={contentName == DocumentType.LeaveCash ? TypeReference.CHARGES : TypeReference.TMZ}
-                    hasWorkers={hasWorkers}
-                    hasPartners={hasPartners}
                     items={currentDocument.tableItems} 
             />}
             

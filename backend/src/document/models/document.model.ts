@@ -4,13 +4,13 @@ import { DocumentType } from '../../interfaces/document.interface';
 
 export type DocDocument = HydratedDocument<Document>;
 
-export class DocTableItem{
+export class DocTableItem {
   @Prop()
   isWorker: boolean;
 
   @Prop()
   isPartner: boolean;
-  
+
   @Prop()
   referenceId: Types.ObjectId;
 
@@ -19,7 +19,7 @@ export class DocTableItem{
 
   @Prop()
   count: number;
-  
+
   @Prop()
   price: number;
 
@@ -28,7 +28,13 @@ export class DocTableItem{
 
   @Prop()
   comment?: number;
-  
+
+  @Prop()
+  receiverId: string;
+
+  @Prop()
+  recieverPayment: number;
+
 }
 
 @Schema()
@@ -47,7 +53,7 @@ export class Document {
 
   @Prop()
   receiverId: Types.ObjectId;
-  
+
   @Prop({ type: () => [DocTableItem], _id: false })
   tableItems?: DocTableItem[];
 

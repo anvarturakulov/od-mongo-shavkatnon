@@ -14,19 +14,24 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>): Array<Entry
   documents.forEach((item: Document) => {
     if (!item.deleted) {
       if (hasDocumentTablePart(item.documentType)) {
+        
         item.tableItems.forEach((tableItem: DocTableItem) => {
+          
           let newItemForResults = { ...prepareEntry(item, tableItem) }
           results.push(newItemForResults);
 
-          if (tableItem.isWorker) {
+          if (tableItem.isWorker || tableItem.recieverPayment > 0) {
             let newItemForResults = { ...prepareEntry(item, tableItem, true) }
             results.push(newItemForResults);
           }
+          
         })
+        
         if (item.documentType = DocumentType.SaleProd) {
           let newItemForResults = { ...prepareEntry(item) }
           results.push(newItemForResults);
         }
+
       } else {
         let newItemForResults = { ...prepareEntry(item) }
         results.push(newItemForResults);

@@ -22,12 +22,12 @@ export const InputInTable = ({ className, nameControl, itemIndexInTable, ...prop
             let currentItem = {...currentDocument.tableItems[itemIndex]}
             let value = target.value
 
-            if (currentItem && value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total')) {
-                currentItem[nameControl] = +value
+            if (currentItem && value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total' || nameControl=='recieverPayment')) {
+                currentItem[nameControl] = parseFloat(value)
             }
 
             if (currentItem && value != null && (nameControl=='count' || nameControl=='price')) {
-                currentItem.total = +(currentItem.count * currentItem.price).toFixed(2)
+                currentItem.total = +(currentItem.count * currentItem.price)
             }
 
             if (currentItem && value != null && (nameControl=='comment')) {

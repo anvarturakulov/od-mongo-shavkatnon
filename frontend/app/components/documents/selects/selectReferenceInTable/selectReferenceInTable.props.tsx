@@ -5,4 +5,5 @@ export interface SelectReferenceInTableProps extends DetailedHTMLProps<SelectHTM
     typeReference: TypeReference,
     itemIndexInTable: number,
     currentItemId: string,
+    selectForReciever?: boolean,
 }

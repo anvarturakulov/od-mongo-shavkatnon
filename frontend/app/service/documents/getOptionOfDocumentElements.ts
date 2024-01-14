@@ -55,12 +55,12 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         senderType = TypeReference.STORAGES
         senderLabel = 'Жунатувчи булим'
         receiverType = TypeReference.PARTNERS
-        receiverLabel = 'Олувчи мижоз'
-        paymentLabel = 'Мижоздан олинган пул'
-        paymentIsVisible = true
+        receiverLabel = '-----'
+        paymentLabel = '-------'
+        paymentIsVisible = false
         tableIsVisible = true
         senderIsVisible = true
-        recieverIsVisible = true
+        recieverIsVisible = false
     }
 
     const documentsForLeaveTMZ = [

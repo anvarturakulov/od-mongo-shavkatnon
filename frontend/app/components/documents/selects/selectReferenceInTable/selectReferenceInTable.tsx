@@ -11,7 +11,7 @@ import { query } from '@/app/service/reports/querys/query';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 
-export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
+export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const { user, currentDocument, contentName } = mainData;
@@ -41,14 +41,23 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
             let value = target.value;
 
             if (id != null) {
-                currentItem.referenceId = id
+                if (selectForReciever) {
+                    currentItem.receiverId = id
+                } else {
+                    currentItem.referenceId = id
+                }
+            } else {
+                if (selectForReciever) {
+                    currentItem.receiverId = ''
+                } else {
+                    currentItem.referenceId = ''                }
             }
 
             if (value != null) {
                 currentItem.referenceName = value
             }
 
-            if ( typeDocumentForLeaveTMZ(contentName) && id) {
+            if ( typeDocumentForLeaveTMZ(contentName) && id && !selectForReciever) {
                 let schet
 
                 if (typeDocumentForReference == 'MATERIAL') {
@@ -101,16 +110,21 @@ export const SelectReferenceInTable = ({ typeReference, itemIndexInTable, curren
 
                 {data && data.length>0 && 
                 data?.filter((item:ReferenceModel) => {
-                    switch (typeDocumentForReference) {
-                        case 'MATERIAL':
-                            return item.typeTMZ == 'MATERIAL'
-                        case 'PRODUCT':
-                            return item.typeTMZ == 'PRODUCT'
-                        case 'HALFSTUFF':
-                            return item.typeTMZ == 'HALFSTUFF'
-                        case 'OTHER':
-                            return true
+                    if (typeReference != TypeReference.PARTNERS) {
+                        switch (typeDocumentForReference) {
+                            case 'MATERIAL':
+                                return item.typeTMZ == 'MATERIAL'
+                            case 'PRODUCT':
+                                return item.typeTMZ == 'PRODUCT'
+                            case 'HALFSTUFF':
+                                return item.typeTMZ == 'HALFSTUFF'
+                            case 'OTHER':
+                                return true
+                        }
+                    } else {
+                        return true
                     }
+                    
                 })
                 .map((item:ReferenceModel, key:number) => (
                     <>

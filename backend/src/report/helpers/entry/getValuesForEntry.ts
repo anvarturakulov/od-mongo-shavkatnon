@@ -1,12 +1,12 @@
 import { DocTableItem, Document } from 'src/document/models/document.model';
 import { Schet } from 'src/interfaces/report.interface';
 import { DocumentType } from 'src/interfaces/document.interface';
-import { table } from 'console';
 
-export interface ResultgetValuesForEntry { 
-  debet: Schet, 
+
+export interface ResultgetValuesForEntry {
+  debet: Schet,
   kredit: Schet,
-  debetFirstSubcontoId: string, 
+  debetFirstSubcontoId: string,
   debetSecondSubcontoId: string,
   kreditFirstSubcontoId: string,
   kreditSecondSubcontoId: string,
@@ -14,8 +14,8 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newEntryForCharges?: boolean): ResultgetValuesForEntry => {
-  
+export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newEntry?: boolean): ResultgetValuesForEntry => {
+
   let documentType = item.documentType;
 
   const leaveComeTMZObj = {
@@ -25,6 +25,24 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
     kreditSecondSubcontoId: tableItem?.referenceId.toString(),
     count: tableItem?.count,
     summa: tableItem?.total,
+  }
+
+  const saleTMZObj = {
+    debetFirstSubcontoId: tableItem?.receiverId?.toString(),
+    debetSecondSubcontoId: tableItem?.referenceId.toString(),
+    kreditFirstSubcontoId: item.senderId.toString(),
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
+    count: tableItem?.count,
+    summa: tableItem?.total,
+  }
+
+  const salePaymentObj = {
+    debetFirstSubcontoId: item.senderId.toString(),
+    debetSecondSubcontoId: tableItem?.referenceId.toString(),
+    kreditFirstSubcontoId: tableItem?.receiverId?.toString(),
+    kreditSecondSubcontoId: tableItem?.referenceId.toString(),
+    count: tableItem?.count,
+    summa: tableItem?.recieverPayment,
   }
 
   const leaveTMZ = {
@@ -47,7 +65,7 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
 
   let leaveCashZp6700 = {
     debetFirstSubcontoId: item.senderId.toString(),
-    debetSecondSubcontoId: tableItem?.referenceId.toString() ,
+    debetSecondSubcontoId: tableItem?.referenceId.toString(),
     kreditFirstSubcontoId: item.senderId.toString(),
     kreditSecondSubcontoId: '659e4610d738d99baa2fe4ef',
     count: 0,
@@ -81,59 +99,51 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
     summa: item.payValue,
   }
 
-  let getPayFromSale = {
-    debetFirstSubcontoId: item.senderId.toString(),
-    debetSecondSubcontoId: item.receiverId.toString(),
-    kreditFirstSubcontoId: item.receiverId.toString(),
-    kreditSecondSubcontoId: item.senderId.toString(),
-    count: 0,
-    summa: item.payValue,
-  }
-
   switch (documentType) {
     case DocumentType.ComeCashFromPartners:
       return {
-        debet: item.date > 86400000 ? Schet.S50 : Schet.S00 ,
+        debet: item.date > 86400000 ? Schet.S50 : Schet.S00,
         kredit: Schet.S40,
         ...MoveCashObj
       };
+
     case DocumentType.ComeHalfstuff:
       return {
         debet: Schet.S21,
         kredit: Schet.S20,
         ...leaveComeTMZObj
       };
+
     case DocumentType.ComeMaterial:
-    return {
+      return {
         debet: Schet.S10,
         kredit: item.date > 86400000 ? Schet.S40 : Schet.S00,
         ...leaveComeTMZObj
       };
+
     case DocumentType.ComeProduct:
       return {
         debet: Schet.S28,
         kredit: item.date > 86400000 ? Schet.S20 : Schet.S00,
         ...leaveComeTMZObj,
       };
+
     case DocumentType.LeaveCash:
-      
       if (tableItem.isPartner) {
         return {
           debet: Schet.S40,
           kredit: Schet.S50,
           ...leaveCashObj4050
-        };  
+        };
       }
-
-      if (tableItem.isWorker && !newEntryForCharges) {
+      if (tableItem.isWorker && !newEntry) {
         return {
           debet: Schet.S20,
           kredit: Schet.S50,
           ...leaveCashZp2050,
-        };  
+        };
       }
-
-      if (tableItem.isWorker && newEntryForCharges) {
+      if (tableItem.isWorker && newEntry) {
         return {
           debet: Schet.S67,
           kredit: Schet.S00,
@@ -146,78 +156,86 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
         kredit: Schet.S50,
         ...leaveCashOther,
       };
+
     case DocumentType.LeaveHalfstuff:
       return {
         debet: Schet.S20,
         kredit: Schet.S21,
         ...leaveTMZ,
       };
+
     case DocumentType.LeaveMaterial:
       return {
         debet: Schet.S20,
         kredit: Schet.S10,
         ...leaveTMZ,
       };
+
     case DocumentType.LeaveProd:
       return {
         debet: Schet.S20,
         kredit: Schet.S28,
         ...leaveTMZ,
       };
+
     case DocumentType.MoveCash:
       return {
         debet: Schet.S50,
         kredit: Schet.S50,
         ...MoveCashObj,
       };
+
     case DocumentType.MoveHalfstuff:
       return {
         debet: Schet.S21,
         kredit: Schet.S21,
         ...leaveComeTMZObj,
       };
+
     case DocumentType.MoveMaterial:
       return {
         debet: Schet.S10,
         kredit: Schet.S10,
         ...leaveComeTMZObj
       };
+
     case DocumentType.MoveProd:
       return {
         debet: Schet.S28,
         kredit: Schet.S28,
         ...leaveComeTMZObj
       };
+
     case DocumentType.SaleMaterial:
-      if (tableItem) {
+      if (tableItem && !newEntry) {
         return {
           debet: Schet.S40,
           kredit: Schet.S10,
-          ...leaveComeTMZObj
+          ...saleTMZObj
         };
-      } else {
+      } else if (tableItem && newEntry) {
         return {
           debet: Schet.S50,
           kredit: Schet.S40,
-          ...getPayFromSale
+          ...salePaymentObj
         };
       }
-      
-      
+
     case DocumentType.SaleProd:
-      if (tableItem) {
+      if (tableItem && !newEntry) {
         return {
           debet: Schet.S40,
           kredit: Schet.S28,
-          ...leaveComeTMZObj
-        }
-      } else {
+          ...saleTMZObj
+        };
+      } else if (tableItem && newEntry) {
         return {
           debet: Schet.S50,
           kredit: Schet.S40,
-          ...getPayFromSale
-        }
+          ...salePaymentObj
+        };
       }
+
     case DocumentType.ZpCalculate:
       // шу хужжатни проводкаси хакида кайта бир уйлаб куриш керак
       return {
@@ -226,5 +244,5 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
         ...leaveComeTMZObj
       };
   }
-  
+
 }

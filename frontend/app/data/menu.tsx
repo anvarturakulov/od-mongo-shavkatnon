@@ -12,7 +12,7 @@ export const MenuData:Array<MenuItem> = [
             { title: DocumentType.ComeMaterial, description:'Хом ашё кирими', type: 'document', active: false},
             { title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',  type: 'document', active: false },
-            // { title: DocumentType.SaleMaterial, description:'Хом ашё сотуви', type: 'document', active: false },
+            { title: DocumentType.SaleMaterial, description:'Хом ашё сотуви', type: 'document', active: false },
             { title: DocumentType.ComeHalfstuff, description:'Я.Т.М кирими', type: 'document', active: false },
             { title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши', type: 'document', active: false },
             { title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими', type: 'document', active: false },

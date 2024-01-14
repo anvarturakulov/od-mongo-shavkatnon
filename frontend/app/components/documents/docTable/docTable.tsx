@@ -9,23 +9,31 @@ import { DocTableItem, DocumentType } from '@/app/interfaces/document.interface'
 import { InputInTable } from '../inputs/inputInTable/inputInTable';
 import { useState } from 'react';
 import { CheckBoxInTable } from '../inputs/checkBoxInTable/checkBoxInTable';
+import { typeDocumentIsSale } from '@/app/service/documents/typeDocumentIsSale';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
+import { TypeReference } from '@/app/interfaces/reference.interface';
 
-export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
+export const DocTable = ({ typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const {contentName} = mainData;
+    const {contentName, currentDocument} = mainData;
 
     const deleteItem = (index: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
 
         if ( setMainData && items.length>1 ) {
             let newItems = [...items.slice(0, index),...items.slice(index+1)]
-            setMainData('docTable', {items: [...newItems]})
+            let newObj = {...mainData.currentDocument};
+            newObj.tableItems = [...newItems] 
+            setMainData('currentDocument', {...newObj})
         }
     }
 
     let hasCommentInTable = (contentName == DocumentType.LeaveCash);
-    let showBalance = typeDocumentForLeaveTMZ(contentName)
+    let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
+    let hasPartners = contentName == DocumentType.LeaveCash;
+    let documentIsSaleType = typeDocumentIsSale(contentName);
+    let showBalance = typeDocumentForLeaveTMZ(contentName);
+    
 
     return (
         <>
@@ -33,6 +41,7 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                 {
                     [styles.boxWithBalance]: showBalance,
                     [styles.boxWithWorkers]: hasWorkers,
+                    [styles.boxWithReciever]: documentIsSaleType,
                 })}>
                 
                 { hasWorkers && <div>Ходим</div> }
@@ -46,7 +55,11 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                 { !hasCommentInTable && <div>Нархи</div>}
                 
                 <div>Суммаси</div>
-                
+
+                { documentIsSaleType && <div>Олувчи</div>}
+
+                { documentIsSaleType && <div>Олинган пул</div>}
+
                 { hasCommentInTable && <div>Изох</div>}
                 <div className={styles.notColor}>____</div>
 
@@ -56,6 +69,7 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                 {
                     [styles.boxWithBalance]: showBalance,
                     [styles.boxWithWorkers]: hasWorkers,
+                    [styles.boxWithReciever]: documentIsSaleType,
 
                 })}>
                     { 
@@ -87,6 +101,22 @@ export const DocTable = ({ hasWorkers, hasPartners, typeReference, items,  class
                     { !hasCommentInTable && <InputInTable nameControl='price' type='number' itemIndexInTable={index}/>}
                     
                     <InputInTable nameControl='total' type='number' itemIndexInTable={index}/>
+                    {
+                        documentIsSaleType &&
+                            <SelectReferenceInTable 
+                                itemIndexInTable={index}
+                                typeReference={TypeReference.PARTNERS}
+                                currentItemId={item.receiverId}
+                                selectForReciever = {true}
+                            />
+                    }
+
+                    {
+                        documentIsSaleType &&
+                            <InputInTable nameControl='recieverPayment' type='number' itemIndexInTable={index}/>
+                    }
+                    
+
                     { hasCommentInTable && <InputInTable nameControl='comment' type='text' itemIndexInTable={index}/> }
                     <div className={styles.ico} onClick={() => deleteItem(index, setMainData, items)}> <TrashIco/> </div>
                 </div>

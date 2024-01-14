@@ -3,7 +3,7 @@ import { IsString, IsEnum, IsOptional, IsBoolean, IsNumber, IsDateString, IsArra
 import { DocumentType } from '../../interfaces/document.interface';
 
 class DocTableItemDto {
-  
+
   @IsBoolean()
   isWorker: boolean;
 
@@ -28,7 +28,13 @@ class DocTableItemDto {
 
   @IsString()
   comment: string;
-  
+
+  @IsString()
+  receiverId: string;
+
+  @IsNumber()
+  recieverPayment: number;
+
 }
 
 export class CreateDocumentDto {
@@ -46,7 +52,7 @@ export class CreateDocumentDto {
 
   @IsString()
   receiverId: string;
-  
+
   @IsOptional()
   @IsArray()
   // @ValidateNested()

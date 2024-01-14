@@ -36,6 +36,8 @@ export interface DocTableItem {
     total: number,
     balance?: number,
     comment?: string,
+    receiverId: string,
+    recieverPayment: number,
 }
 
 export interface DocumentModel {
