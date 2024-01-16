@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import Journal from '@/app/components/documents/journal/journal';
 import IcoQalam from './ico/qalam.svg';
+import { Interval } from '@/app/components/common/interval/interval';
 
 const infoBlock = (
     <>
@@ -95,6 +96,7 @@ export default function Dashboard() {
         </div>
       </div>
       <Message/>
+      <Interval/>
     </div>
   )
 }

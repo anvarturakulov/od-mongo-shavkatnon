@@ -27,7 +27,7 @@ export const InputInTable = ({ className, nameControl, itemIndexInTable, ...prop
             }
 
             if (currentItem && value != null && (nameControl=='count' || nameControl=='price')) {
-                currentItem.total = +(currentItem.count * currentItem.price)
+                currentItem.total = +(currentItem.count * currentItem.price).toFixed(2)
             }
 
             if (currentItem && value != null && (nameControl=='comment')) {

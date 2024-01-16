@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import {useReactToPrint} from 'react-to-print';
 import PrintIco from './ico/print.svg';
 import { useAppContext } from '@/app/context/app.context';
-import { ReportType, Schet } from '@/app/interfaces/report.interface';
+import { EntryItem, ReportType, Schet } from '@/app/interfaces/report.interface';
 import { getListSecondSubconts } from '@/app/service/reports/getListSecondSubconts';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
@@ -41,7 +41,19 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
         listFirstSubconts = getListFirstSubconts(entrys, schetList);
     }
     // console.log(listFirstSubconts);
+    if (entrys) {
+        entrys.forEach((item: EntryItem) => {
+            if (item.debetSecondSubcontoId == undefined || item.kreditSecondSubcontoId) {
+                console.log('mana')
+                console.log(item.debetSecondSubcontoId)
+                console.log(item.kreditSecondSubcontoId)
+                console.log(item)
+            }
+        })
+    }
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, schetList, firstReferenceId);
+    
+
     if (!startReport) return <></>
 
     let titleV = (firstReferenceId != null && firstReferenceId != '') ? 

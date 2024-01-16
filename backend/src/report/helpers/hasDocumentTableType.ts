@@ -32,24 +32,4 @@ export const hasDocumentTablePart = (documentType: string): Boolean => {
 
   return false
 
-
-
-  // const documentsForZp = [
-  //   `${DocumentType.ZpCalculate}`,
-  // ]
-
-  // if (documentsForZp.includes(documentType)) {
-  //   senderType = TypeReference.STORAGES
-  //   senderLabel = '-----'
-  //   receiverType = TypeReference.STORAGES
-  //   receiverLabel = 'Булим'
-  //   paymentLabel = '------'
-  //   paymentIsVisible = false
-  //   tableIsVisible = true
-  //   senderIsVisible = false
-  //   recieverIsVisible = true
-  // }
-
-  return true
-
 }

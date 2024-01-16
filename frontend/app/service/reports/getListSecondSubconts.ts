@@ -13,6 +13,14 @@ export const getListSecondSubconts = (entrys: Array<EntryItem>, arraySchet: Arra
     }
   })
 
+  // filteredArray.forEach((item: EntryItem) => {
+  //   if (item.debetSecondSubcontoId == undefined || item.kreditSecondSubcontoId == undefined) {
+  //     // console.log(item.docNumber)
+  //   } else {
+  //     console.log(item.docNumber)
+  //   }
+  // })
+
   const mappedTwinsArray = filteredArray.map((item: EntryItem) => [item.debetSecondSubcontoId, item.kreditSecondSubcontoId])
   const arraySecondSubconts: Array<string> = []
   mappedTwinsArray.forEach((item)=> {

@@ -1,0 +1,22 @@
+.box{
+  display: grid;
+  grid-template-columns: auto;
+  gap: 15px;
+  width: 350px;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  background: #e7e7e7;
+  padding: 20px;
+}
+
+.input {
+  font-size: 18px;
+}
+
+.btnBox{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  
+}
