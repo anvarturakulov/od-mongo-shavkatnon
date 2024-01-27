@@ -4,10 +4,12 @@
   gap: 15px;
   width: 350px;
   position: absolute;
-  top: 50%;
-  right: 50%;
-  background: #e7e7e7;
+  top: 30%;
+  right: 40%;
+  background: #fff;
   padding: 20px;
+  border: 1px solid #000;
+  text-align: center;
 }
 
 .input {

@@ -2,7 +2,6 @@ import { DocTableItem, Document } from 'src/document/models/document.model';
 import { Schet } from 'src/interfaces/report.interface';
 import { DocumentType } from 'src/interfaces/document.interface';
 
-
 export interface ResultgetValuesForEntry {
   debet: Schet,
   kredit: Schet,
@@ -17,7 +16,6 @@ export interface ResultgetValuesForEntry {
 export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newEntry?: boolean): ResultgetValuesForEntry => {
 
   let documentType = item.documentType;
-
   const leaveComeTMZObj = {
     debetFirstSubcontoId: item.receiverId.toString(),
     debetSecondSubcontoId: tableItem?.referenceId.toString(),
@@ -244,5 +242,4 @@ export const getValuesForEntry = (item: Document, tableItem?: DocTableItem, newE
         ...leaveComeTMZObj
       };
   }
-
 }

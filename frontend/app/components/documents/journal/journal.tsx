@@ -12,13 +12,20 @@ import { secondsToDateString } from '../doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemDocument, getDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
-import { DocumentModel } from '@/app/interfaces/document.interface';
+import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
+import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
-
+    
+    let dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
+    let dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
+    
     const {mainData, setMainData} = useAppContext();
     const { contentName, user, showDocumentWindow } = mainData;
+
+    // const [interval, setInterval] = useState<Interval>({dateStart, dateEnd})
+    
     const token = user?.access_token;
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
@@ -61,6 +68,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                     <tbody className={styles.tbody}>
                         {documents && documents.length>0 && 
                         documents
+                        .filter((item:DocumentModel, key: number) => (item.date >= Date.parse(dateStart) && item.date <= Date.parse(dateEnd)))
                         .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                         .map((item:DocumentModel, key: number) => (
                             <>
@@ -81,7 +89,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                     <td>{item.comment}</td>
                                     <td className={styles.rowAction}>
                                         <IcoTrash className={styles.icoTrash}
-                                        onClick = {() => deleteItemDocument(item._id, token, setMainData)}
+                                        onClick = {() => deleteItemDocument(item._id, token, setMainData, mainData)}
                                         />
                                     </td>
                                 </tr>

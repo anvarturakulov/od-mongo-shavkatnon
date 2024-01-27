@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
 export const markToDeleteDocument = (
   id: string | undefined,

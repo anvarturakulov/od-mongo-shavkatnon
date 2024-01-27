@@ -40,17 +40,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     if (firstReferenceId == null || firstReferenceId == '') {
         listFirstSubconts = getListFirstSubconts(entrys, schetList);
     }
-    // console.log(listFirstSubconts);
-    if (entrys) {
-        entrys.forEach((item: EntryItem) => {
-            if (item.debetSecondSubcontoId == undefined || item.kreditSecondSubcontoId) {
-                console.log('mana')
-                console.log(item.debetSecondSubcontoId)
-                console.log(item.kreditSecondSubcontoId)
-                console.log(item)
-            }
-        })
-    }
+
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, schetList, firstReferenceId);
     
 

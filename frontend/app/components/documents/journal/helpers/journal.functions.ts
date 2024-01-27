@@ -1,3 +1,4 @@
+import { Maindata } from '@/app/context/app.context.interfaces';
 import { DocumentModel } from '@/app/interfaces/document.interface';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { getDocumentById } from '@/app/service/documents/getDocumentById';
@@ -28,8 +29,8 @@ export const getNameReference = (references: any, id: string): String => {
   return 'Аникланмади'
 }
 
-export const deleteItemDocument = (id: string | undefined, token: string | undefined, setMainData: Function | undefined) => {
-  markToDeleteDocument(id, setMainData, token)
+export const deleteItemDocument = (id: string | undefined, token: string | undefined, setMainData: Function | undefined, mainData:Maindata) => {
+  markToDeleteDocument(id, setMainData, token, mainData)
 }
 
 export const getTotalValueForDocument = (document: DocumentModel): number => {

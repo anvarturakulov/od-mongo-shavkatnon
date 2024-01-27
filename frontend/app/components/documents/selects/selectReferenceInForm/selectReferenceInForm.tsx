@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
@@ -50,7 +51,11 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , cu
                         className={styles.chooseMe}
                         >{'Тангланг =>>>>'}</option>
                 </>
-                {data && data.length>0  && data?.map((item:ReferenceModel, key:number) => (
+                {data && data.length>0  &&
+                data
+                .sort(sortByName)
+                .filter(( item:ReferenceModel ) => !item.deleted )
+                .map(( item:ReferenceModel ) => (
                     <>
                         <option 
                             value={item.name}

@@ -12,6 +12,7 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
     
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
+    
     let dateDoc = currentDocument.date>0 ? new Date(currentDocument.date) : new Date();
     let currentVal = dateDoc.toISOString().split('T')[0]
 

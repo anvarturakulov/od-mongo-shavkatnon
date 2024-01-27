@@ -1,0 +1,27 @@
+.topBox{
+  display: grid;
+  grid-template-columns: auto 5fr 1fr;
+  /* height: 50px; */
+  border-bottom: 0.3px dotted #000;
+  border-top: 0.3px dotted #000;
+  align-items: top;
+  padding: 0px 0px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #F2F4F7;
+}
+
+.logo{
+  font-weight: 600;
+  font-size: 18px;
+  /* text-align: center; */
+  color: #267CB5;
+  /* color: #014624; */
+  padding-left: 20px;
+}
+
+.logo span {
+  color: #000;
+  font-weight: 500;
+}

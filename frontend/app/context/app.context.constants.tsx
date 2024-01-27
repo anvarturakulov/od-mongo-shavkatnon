@@ -58,5 +58,6 @@ export const defaultMainData: Maindata = {
     isNewReference: false,
     updateDataForRefenceJournal: false,
     currentReference: undefined,
-    reportOption: {...defaultReportOptions}
+    reportOption: {...defaultReportOptions},
+    showIntervalWindow: false,
   }

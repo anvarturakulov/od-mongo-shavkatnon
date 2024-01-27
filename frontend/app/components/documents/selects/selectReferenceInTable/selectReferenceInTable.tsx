@@ -10,6 +10,7 @@ import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
+import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
@@ -124,8 +125,9 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
                     } else {
                         return true
                     }
-                    
                 })
+                .sort(sortByName)
+                .filter((item:ReferenceModel) => !item.deleted)
                 .map((item:ReferenceModel, key:number) => (
                     <>
                         <option 

@@ -66,3 +66,8 @@ export interface OptionsForDocument {
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'
+
+export interface Interval {
+    dateStart: string,
+    dateEnd: string
+}

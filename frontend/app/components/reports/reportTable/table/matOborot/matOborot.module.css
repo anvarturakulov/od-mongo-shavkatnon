@@ -3,6 +3,7 @@
     width: 100%;
     border: 1px solid #f9f9f9;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .table td,
@@ -34,5 +35,6 @@
 }
 
 .table tbody {
-    display: block;
+  display: block;
 }
+

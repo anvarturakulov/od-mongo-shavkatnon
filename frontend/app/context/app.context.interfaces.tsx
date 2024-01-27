@@ -27,6 +27,7 @@ export interface Maindata {
   updateDataForRefenceJournal: boolean,
   currentReference: ReferenceModel | undefined,
   reportOption: ReportOptions,
+  showIntervalWindow: boolean,
 }
 
 export interface IAppContext {
