@@ -18,18 +18,20 @@ export type MessageType = 'success' | 'error' | 'warm'
 
 export enum UserRoles {
     ADMIN = 'ADMIN',
-    SUPERVIZER = 'SUPERVIZER',
-    OWNER = 'OWNER',
+    HEADCOMPANY = 'HEADCOMPANY',
     GLBUX = 'GLBUX',
-    KASSIR = 'KASSIR',
-    DOSTAVSHIK = 'DOSTAVSHIK',
-    GUEST = 'GUEST'
+    ELAKCHI = 'ELAKCHI',
+    QORUVCHI = 'QORUVCHI',
+    HAMIRCHI = 'HAMIRCHI',
+    HEADSECTION = 'HEADSECTION',
+    DELIVERY = 'DELIVERY',
+    GUEST = 'GUEST',
 }
 
 export interface User {
     email: string,
     access_token: string;
-    role : UserRoles
+    role: UserRoles
 }
 
 export interface BodyForLogin {

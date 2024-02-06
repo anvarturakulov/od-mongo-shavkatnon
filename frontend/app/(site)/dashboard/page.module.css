@@ -58,6 +58,7 @@
     margin: 20px 0px;
     font-weight: 700;
     background: green;
+    /* background-color: #EFEFEF; */
     color: #fff;
     padding: 10px 20px;
 }
@@ -86,8 +87,9 @@
     width: 28%;
 }
 
-.box h1{
+.savdoBox h2{
     background-color: rgb(201, 219, 201);
     /* color: #fff; */
-    padding-left: 15px;
+    /* padding-left: 15px; */
+    padding: 5px 0px 5px 15px;
 }

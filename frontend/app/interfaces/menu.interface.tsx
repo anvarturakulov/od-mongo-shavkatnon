@@ -1,5 +1,5 @@
 import { DocumentType } from "./document.interface"
-import { ContentType, ServiceType } from "./general.interface"
+import { ContentType, ServiceType, UserRoles } from "./general.interface"
 import { TypeReference } from './reference.interface'
 import { ReportType } from './report.interface'
 
@@ -7,7 +7,8 @@ interface MenuSubItem {
     title: DocumentType | TypeReference | ServiceType | ReportType,
     description: string,
     type: ContentType,
-    active:boolean
+    active:boolean,
+    roles: Array<UserRoles>
 }
 
 export interface MenuItem {

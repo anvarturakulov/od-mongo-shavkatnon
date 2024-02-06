@@ -155,7 +155,7 @@ const infoBlock = (
       <div className={styles.titleD}>Цехлардаги савдо</div>
       <div className={styles.savdoBox}>
         <div className={styles.box}>
-          <Htag tag='h1'>Халкобод</Htag>
+          <Htag tag='h2'>Халкобод</Htag>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -189,7 +189,7 @@ const infoBlock = (
         </div>
 
         <div className={styles.box}>
-          <Htag tag='h1'>Чашма</Htag>
+          <Htag tag='h2'>Чашма</Htag>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -222,7 +222,7 @@ const infoBlock = (
           </table>
         </div>
         <div className={styles.box}>
-          <Htag tag='h1'>Контейнер</Htag>
+          <Htag tag='h2'>Контейнер</Htag>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -255,7 +255,7 @@ const infoBlock = (
           </table>
         </div>
         <div className={styles.box}>
-          <Htag tag='h1'>Самарканд</Htag>
+          <Htag tag='h2'>Самарканд</Htag>
           <table className={styles.table}>
             <thead>
               <tr>

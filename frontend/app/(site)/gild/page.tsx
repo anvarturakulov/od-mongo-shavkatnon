@@ -8,7 +8,6 @@ export default function Gild() {
     <>
       <div className={styles.container}>
         <Htag tag='h1'>Цех сотувчиси ойнаси</Htag>
-        
         <div className={styles.docBox}>
           <div className={cn(styles.box,styles.boxbox)}>Махсулотлар чикими</div>
           <div className={styles.box }>Махсулотлар кирими</div>
