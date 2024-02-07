@@ -45,8 +45,11 @@ export default function Auth() {
 
   useEffect(() => {
     const {user} = mainData
-    if (user != undefined && user?.role == UserRoles.SUPERVIZER) {
+    if (user != undefined && user?.role == UserRoles.HEADCOMPANY) {
       redirect('/dashboard')
+    }
+    if (user != undefined) {
+      redirect('/users')
     }
 
 
