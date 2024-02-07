@@ -10,6 +10,8 @@ import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
 import { MenuItemsProps } from '../menu/menuItems/menuItems.props';
 
+const div = 1;
+
 export default function MenuItems({menuData, className, ...props}:MenuItemsProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
