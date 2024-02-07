@@ -52,3 +52,5 @@ export const ReportsData = [
         SKDS: 23970000
     }
 ]
+
+export const DeafultReportData = []
