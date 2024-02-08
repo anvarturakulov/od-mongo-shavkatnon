@@ -8,12 +8,18 @@ export type UserDocument = HydratedDocument<User>;
 export class User {
   @Prop({ unique: true })
   email: string;
-  
+
   @Prop()
   passwordHash: string;
-
+  
   @Prop({ enum: UserRoles})
   role: UserRoles;
+  
+  @Prop()
+  name: string;
+
+  @Prop()
+  storageId: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -15,6 +15,7 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
     const [menu, setMenu] = useState<Array<MenuItem>>([])
     
     const {mainData, setMainData} = useAppContext()
+    const role = mainData.user?.role;
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -82,6 +83,7 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
                         {item.subMenu.length && (
                             item.subMenu.map((elem,k)=> (
                                 <>
+                                {  role && elem.roles.includes(role) &&
                                     <li 
                                         className={cn(styles.subItem, {
                                             [styles.isOpened]: item.isOpened
@@ -92,6 +94,7 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
                                     >
                                         {elem.description? elem.description : elem.title}
                                     </li>
+                                }
                                 </>
                             ))
                         )}

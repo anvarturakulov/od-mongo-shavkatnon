@@ -21,8 +21,8 @@ export enum UserRoles {
     HEADCOMPANY = 'HEADCOMPANY',
     GLBUX = 'GLBUX',
     ELAKCHI = 'ELAKCHI',
-    QORUVCHI = 'QORUVCHI',
     HAMIRCHI = 'HAMIRCHI',
+    ZUVALACHI = 'ZUVALACHI',
     HEADSECTION = 'HEADSECTION',
     DELIVERY = 'DELIVERY',
     GUEST = 'GUEST',
@@ -31,10 +31,15 @@ export enum UserRoles {
 export interface User {
     email: string,
     access_token: string;
-    role: UserRoles
+    role: UserRoles,
+    name: string,
+    storageId: string
 }
 
 export interface BodyForLogin {
     login: string,
     password: string,
 }
+
+export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX];
+export const workersUsersList = [UserRoles.DELIVERY, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.ZUVALACHI] 

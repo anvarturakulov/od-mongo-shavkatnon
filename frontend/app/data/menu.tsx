@@ -25,13 +25,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.DELIVERY, UserRoles.HEADSECTION]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ComeHalfstuff, description:'Я.Т.М ишлаб чикариш', 
@@ -43,7 +43,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ELAKCHI, UserRoles.QORUVCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ELAKCHI, UserRoles.HAMIRCHI]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
@@ -61,10 +61,10 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.ZUVALACHI]
             },
             { 
-                title: DocumentType.LeaveProd, description:'Махсулот чикими', 
+                title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 
                 type: 'document', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION]

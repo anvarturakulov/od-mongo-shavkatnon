@@ -7,16 +7,21 @@ import UserIco from './ico/user.svg';
 
 export default function User({className, ...props}:UserProps):JSX.Element {
     
-  const {mainData} = useAppContext()
+  const {mainData, setMainData} = useAppContext()
+  const exit = ( setMaindata: Function | undefined ) => {
+    setMainData && setMainData('user', undefined);
+    setMainData && setMainData('mainPage', true);
+  }
 
   return (
-    <div className={styles.user}>
+    <div className={styles.user}
+      onClick={() => exit(setMainData)}
+      >
       <div className={styles.ico}>
         <UserIco/>
       </div>
       <div className={styles.title}>
-        Shavkat       
-        {/* {mainData.user?.email} */}
+        {mainData.user?.name}
       </div>
     </div> 
   )

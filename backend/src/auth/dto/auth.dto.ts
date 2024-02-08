@@ -1,13 +1,15 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export enum UserRoles {
-  ADMIN ='ADMIN',
-  SUPERVIZER ='SUPERVIZER',
-  OWNER ='OWNER',
-  GLBUX ='GLBUX',
-  KASSIR ='KASSIR',
-  DOSTAVSHIK ='DOSTAVSHIK',
-  GUEST = 'GUEST'
+  ADMIN = 'ADMIN',
+  HEADCOMPANY = 'HEADCOMPANY',
+  GLBUX = 'GLBUX',
+  ELAKCHI = 'ELAKCHI',
+  HAMIRCHI = 'HAMIRCHI',
+  ZUVALACHI = 'ZUVALACHI',
+  HEADSECTION = 'HEADSECTION',
+  DELIVERY = 'DELIVERY',
+  GUEST = 'GUEST',
 }
 
 export class AuthDto {
@@ -16,9 +18,16 @@ export class AuthDto {
 
   @IsString()
   password: string;
-  
-  @IsOptional()
+
   @IsEnum(UserRoles)
+  @IsOptional()
   role: UserRoles;
 
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  storageId: string;
 }

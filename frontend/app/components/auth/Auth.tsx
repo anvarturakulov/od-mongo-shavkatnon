@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import styles from './Auth.module.css'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { BodyForLogin, UserRoles } from '@/app/interfaces/general.interface'
+import { BodyForLogin, UserRoles, dashboardUsersList, workersUsersList } from '@/app/interfaces/general.interface'
 import { useAppContext } from '@/app/context/app.context'
 import { Htag } from '../common/htag/Htag'
 import { Input } from '../common/input/input'
@@ -43,15 +43,19 @@ export default function Auth() {
     }
   }
 
+  
   useEffect(() => {
     const {user} = mainData
-    if (user != undefined && user?.role == UserRoles.HEADCOMPANY) {
-      redirect('/dashboard')
-    }
+    
     if (user != undefined) {
-      redirect('/users')
+      if (dashboardUsersList.includes(user?.role)) {
+        redirect('/dashboard')
+      } else if (workersUsersList.includes(user?.role)) {
+        redirect('/workers')
+      } else {
+        redirect('/')
+      }
     }
-
 
   }, [mainData.user])
 

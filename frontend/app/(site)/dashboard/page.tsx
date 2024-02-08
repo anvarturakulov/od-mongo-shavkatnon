@@ -595,6 +595,8 @@ export default function Dashboard() {
         <div className={styles.content}>
           
           {mainData.mainPage && infoBlock}
+
+          {/* {infoBlock} */}
           
           <div className={styles.journalBox}>
             { !mainData.mainPage && contentType=='document' && <Journal/> }

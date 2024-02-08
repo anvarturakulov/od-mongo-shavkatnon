@@ -1,5 +1,5 @@
 'use client'
-import styles from './menuItems.module.css'
+import styles from './userMenu.module.css'
 import cn from 'classnames';
 import {UserMenuProps} from './userMenu.props'
 import { useEffect, useState } from 'react';
@@ -8,15 +8,16 @@ import { defaultDocumentTableItem, defaultDocumentFormItems, defaultReportOption
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
-import { MenuItemsProps } from '../menu/menuItems/menuItems.props';
+import { ContentType } from '@/app/interfaces/general.interface';
 
 const div = 1;
 
-export default function MenuItems({menuData, className, ...props}:MenuItemsProps):JSX.Element {
+export default function UserMenu({menuData, className, ...props}:UserMenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
     
     const {mainData, setMainData} = useAppContext()
+    const role = mainData.user?.role;
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -38,10 +39,8 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
             setMainData('contentTitle', contentTitle);
             setMainData('contentName', contentName);
             setMainData('mainPage', false);
-            setMainData('showReferenceWindow', false);
-            setMainData('isNewReference', false);
-            setMainData('showDocumentWindow', false);
-            setMainData('isNewDocument', false);
+            setMainData('showDocumentWindow', true);
+            setMainData('isNewDocument', true);
             setMainData('clearControlElements', true);
             let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
             setMainData('docTable', {...defaultTableItemsObj});
@@ -71,34 +70,25 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
     return (
         <>
             {menu.map((item, i) => (
-                <>
-                    <ul className={styles.ul}>
-                        <li
-                            className={cn(styles.item)}
-                            onClick={(e)=>onClickItem(e,item.title)}
-                            key={i}
-                            data-type = {'firstLevel'}
-                        >
-                            {item.title}
-                        </li>
-                        {item.subMenu.length && (
-                            item.subMenu.map((elem,k)=> (
-                                <>
-                                    <li 
-                                        className={cn(styles.subItem, {
-                                            [styles.isOpened]: item.isOpened
-                                        })
-                                    }
-                                        onClick={() => onClickSubItem(elem.title, elem.description, elem.type)}
-                                        key={elem.title}
-                                    >
-                                        {elem.description? elem.description : elem.title}
-                                    </li>
-                                </>
-                            ))
-                        )}
-                    </ul>
-                </>
+            <>
+            <ul className={styles.ul}>
+                {item.subMenu.length && (
+                    item.subMenu.map((elem,k)=> (
+                        <>
+                            {  role && elem.roles.includes(role) &&
+                                <li 
+                                    className={cn(styles.subItem)}
+                                    onClick={() => onClickSubItem(elem.title, elem.description, elem.type)}
+                                    key={elem.title}
+                                >
+                                    {elem.description? elem.description : elem.title}
+                                </li>
+                            }
+                        </>
+                    ))
+                )}
+            </ul>
+            </>
                 
             ))}
         </>

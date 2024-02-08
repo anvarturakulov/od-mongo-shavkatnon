@@ -19,7 +19,9 @@ export class AuthService {
     const newUser = new this.userModel({
       email: dto.login,
       passwordHash: await hash(dto.password, salt),
-      role: dto.role
+      role: dto.role,
+      name: dto.name,
+      storageId: dto.storageId
     })
 
     return newUser.save()
@@ -41,15 +43,17 @@ export class AuthService {
       throw new UnauthorizedException(WRONG_PASSWORD_ERROR);
     }
 
-    return { email: user.email, role: user.role }
+    return { email: user.email, role: user.role, name: user.name, storageId: user.storageId }
   }
 
-  async login(email: string, role: UserRoles) {
+  async login(email: string, role: UserRoles, name, storageId) {
     const payload = { email };
     return {
       email,
       role,
-      access_token: await this.jwtService.signAsync(payload)
+      access_token: await this.jwtService.signAsync(payload),
+      name,
+      storageId,
     }
   }
 }

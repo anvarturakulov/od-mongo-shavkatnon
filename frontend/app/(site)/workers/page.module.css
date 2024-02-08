@@ -2,25 +2,20 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding-top: 20px;
-}
-
-.actionBox{
-    margin: 20px 0;
+    padding: 10px;
 }
 
 .box{
     display: grid;
     grid-template-columns: 1fr;
     justify-content: left;
-    gap: 10px;
 }
 
 .box{
     border: 1px dotted #000;
     padding: 10px;
-    margin-top: 20px;
-    cursor: pointer;
+    margin-top: 10px;
+    /* cursor: pointer; */
 }
 
 .boxbox{
