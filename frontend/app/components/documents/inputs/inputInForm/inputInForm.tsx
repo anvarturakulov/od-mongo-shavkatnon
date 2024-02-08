@@ -2,7 +2,6 @@ import { InputInFormProps } from './inputInForm.props';
 import styles from './inputInForm.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
-import { DocTableItem } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 
 

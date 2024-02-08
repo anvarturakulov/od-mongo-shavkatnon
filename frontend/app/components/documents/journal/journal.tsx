@@ -89,8 +89,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
                                         <td>{getDescriptionDocument(item.documentType)}</td>
                                         <td className={cn(styles.rowSumma, styles.tdSumma)}>{getTotalValueForDocument(item)}</td>
-                                        <td>{getNameReference(references,item.receiverId)}</td>
-                                        <td>{getNameReference(references,item.senderId)}</td>
+                                        <td>{getNameReference(references,item.values.receiverId)}</td>
+                                        <td>{getNameReference(references,item.values.senderId)}</td>
                                         <td>{item.comment}</td>
                                         <td className={styles.rowAction}>
                                             <IcoTrash className={styles.icoTrash}

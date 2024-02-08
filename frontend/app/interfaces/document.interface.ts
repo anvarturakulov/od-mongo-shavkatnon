@@ -26,30 +26,28 @@ export enum DocumentType {
 }
 
 
-export interface DocTableItem {
+export interface DocValues {
+    senderId: string,
+    receiverId: string,
+    payment: number,
     isWorker: boolean,
     isPartner: boolean,
     referenceId: string,
     referenceName: string,
     count: number,
+    balance?: number,
     price: number,
     total: number,
-    balance?: number,
     comment?: string,
-    receiverId: string,
-    recieverPayment: number,
 }
 
 export interface DocumentModel {
     _id?: string,
     date: number,
     docNumber: number,
-    senderId: string,
-    receiverId: string,
-    tableItems: Array<DocTableItem> | undefined,
     documentType: string,
-    payValue: number,
     deleted: boolean,
+    values: DocValues,
     comment?: string,
 };
 
@@ -62,7 +60,6 @@ export interface OptionsForDocument {
     recieverIsVisible: boolean
     paymentLabel: string,
     paymentIsVisible: boolean,
-    tableIsVisible: boolean,
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'

@@ -6,6 +6,12 @@
     gap: 5px;
 }
 
+.dataBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+}
+
 .TMZ{
     border: 0.6px dotted var(--black-300);
     padding: 20px 10px;
@@ -45,7 +51,7 @@
     display: grid;
     grid-template-columns: auto auto;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 40px;
     justify-content: left;
 }
 
@@ -62,44 +68,14 @@
     border: 1px dotted var(--black-300);
     background-color: #eff5e3;
     background-color: #EFEFEF;
-    padding: 30px;
+    padding: 15px 10px;
     box-shadow: 5px 3px 11px -3px rgba(0, 0, 0, 0.36);
 }
 
-.ico{
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
-.ico:hover{
-    fill: red;
-}
-
-.paybox{
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 20px;
-    align-items: center;
-}
-
-.add{
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    color: blue;
-    fill: red;
-}
-
 .partnersBox{
-    margin: 20px 0;
+    margin: 5px 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
 }
 
-.checkbox{
-    border: 1px dotted blue;
-    padding: 10px;
-    cursor: pointer;
-}

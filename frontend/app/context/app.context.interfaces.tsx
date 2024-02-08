@@ -1,11 +1,7 @@
-import { DocTableItem, DocumentModel } from '../interfaces/document.interface';
+import { DocumentModel } from '../interfaces/document.interface';
 import { ContentType, MessageType, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 import { EntryItem, ReportOptions } from '../interfaces/report.interface';
-
-export interface DocTable {
-  items: Array<DocTableItem>
-}
 
 export interface Maindata {
   activeMenuKey: string,

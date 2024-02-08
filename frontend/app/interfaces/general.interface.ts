@@ -43,3 +43,4 @@ export interface BodyForLogin {
 
 export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX];
 export const workersUsersList = [UserRoles.DELIVERY, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.ZUVALACHI] 
+export const adminAndHeadCompany = [UserRoles.ADMIN, UserRoles.HEADCOMPANY]

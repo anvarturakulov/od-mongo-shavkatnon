@@ -1,5 +1,5 @@
 
-.box {
+.valuesBox {
     display: grid;
     grid-template-columns: 2.5fr 1fr 1fr 1fr auto;
     gap: 10px;

@@ -9,7 +9,6 @@ import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
-    
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
     const token = user?.access_token;

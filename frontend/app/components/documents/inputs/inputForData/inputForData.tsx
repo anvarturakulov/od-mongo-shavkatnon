@@ -5,6 +5,7 @@ import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { useEffect } from 'react';
 import { setDateForDocument } from '@/app/service/documents/setDateForDocument';
+import { adminAndHeadCompany } from '@/app/interfaces/general.interface';
 
 
 
@@ -12,6 +13,8 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
     
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
+    const role = mainData.user?.role;
+    const isAdminOrHeadCompany = role && adminAndHeadCompany.includes(role)
     
     let dateDoc = currentDocument.date>0 ? new Date(currentDocument.date) : new Date();
     let currentVal = dateDoc.toISOString().split('T')[0]
@@ -39,6 +42,7 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
                 onChange={(e) => changeElements(e, setMainData, mainData)}
                 type='date'
                 value={currentVal}
+                disabled = {!isAdminOrHeadCompany}
             />
         </div>
     );
