@@ -1,31 +1,29 @@
-import { DocTableItem } from '../interfaces/document.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
-export const defaultDocumentTableItem: DocTableItem = {
+export const defaultDocValues =  {
+    senderId: '',
+    receiverId: '',
+    payment: 0,
     isWorker: false,
     isPartner: false,
     referenceId: '',
     referenceName: '',
     count: 0,
+    balance: 0,
     price: 0,
     total: 0,
     comment: '',
-    balance: 0,
-    receiverId: '',
-    recieverPayment: 0,
 }
 
 export const defaultDocumentFormItems = {
     _id: '',
     date: 0,
     docNumber: 0,
-    senderId: '',
-    receiverId: '',
-    tableItems: [defaultDocumentTableItem], 
     documentType: '',
-    payValue: 0,
     deleted: false,
+    values: defaultDocValues,
+    comment: '',
 }
 
 export const defaultReportOptions: ReportOptions =  {

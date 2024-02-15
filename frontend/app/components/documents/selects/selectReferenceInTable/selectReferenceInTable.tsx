@@ -12,16 +12,16 @@ import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { sortByName } from '@/app/service/references/sortByName';
 
-export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
+export const SelectReferenceInTable = ({  selectForReciever , typeReference, label, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const { user, currentDocument, contentName } = mainData;
     
-    if (currentDocument.tableItems && currentDocument.tableItems[itemIndexInTable].isWorker) {
+    if (currentDocument && currentDocument.values.isWorker) {
         typeReference = TypeReference.WORKERS
     }
 
-    if (currentDocument.tableItems && currentDocument.tableItems[itemIndexInTable].isPartner) {
+    if (currentDocument && currentDocument.values.isPartner) {
         typeReference = TypeReference.PARTNERS
     }
 
@@ -31,13 +31,13 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
     let typeDocumentForReference = getTypeDocumentForReference(contentName);
     
-    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
         let target = e.currentTarget;
         let {currentDocument, contentName} = mainData;
 
-        if (currentDocument && currentDocument.tableItems) {
+        if (currentDocument) {
             
-            let currentItem = {...currentDocument.tableItems[itemIndex]};
+            let currentItem = {...currentDocument.values};
             let id = target[target.selectedIndex].getAttribute('data-id');
             let value = target.value;
 
@@ -75,15 +75,13 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
                 
                 if (schet) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
+                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.values.senderId );
                 }
             }
 
-            let newItems = [...currentDocument.tableItems]
-            newItems[itemIndex] = {...currentItem}
             let newObj = {
                 ...currentDocument,
-                tableItems: [...newItems]
+                values: {...currentItem}
             }
             
             if ( setMainData ) {
@@ -94,9 +92,10 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
 
     return (
         <div className={styles.box}>
+            {label !='' && <div className={styles.label}>{label}</div>}
             <select
                 className={styles.select}
-                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, typeDocumentForReference)}
+                onChange={(e) => changeElements(e, setMainData, mainData, typeDocumentForReference)}
                 {...props}
             >
                 <option 
@@ -134,7 +133,7 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
                             value={item.name}
                             data-type={item.typeReference}
                             data-id={item._id}
-                            selected={item._id == currentItemId}
+                            selected={item._id == currentDocument.values.referenceId}
                             >
                                 {item.name}
                         </option>

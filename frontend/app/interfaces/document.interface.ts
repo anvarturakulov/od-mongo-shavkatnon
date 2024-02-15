@@ -68,3 +68,5 @@ export interface Interval {
     dateStart: string,
     dateEnd: string
 }
+
+export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'payment'

@@ -1,23 +1,10 @@
 
 .valuesBox {
     display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr;
     gap: 10px;
     align-items: center;
     text-align: center;
-}
-
-.boxWithBalance {
-    display: grid;
-    grid-template-columns: 2.5fr 0.5fr 1fr 1fr 1fr auto;
-    gap: 10px;
-    align-items: center;
-    text-align: center;
-}
-
-.boxWithWorkers {
-    display: grid;
-    grid-template-columns: 0.5fr 0.5fr 3fr 1.5fr 2fr auto;
 }
 
 .boxWithReciever{

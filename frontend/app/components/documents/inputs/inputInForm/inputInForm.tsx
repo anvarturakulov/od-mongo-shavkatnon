@@ -3,24 +3,50 @@ import styles from './inputInForm.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { DocumentModel, NameControl } from '@/app/interfaces/document.interface';
 
 
-export const InputInForm = ({visible, label, className, ...props }: InputInFormProps): JSX.Element => {
-    
-    const {mainData, setMainData} = useAppContext();
+export const InputInForm = ({visible, label, className, nameControl, ...props }: InputInFormProps): JSX.Element => {
     
     if (visible == false) return <></>;
-    
-    const { currentDocument } = mainData;
-    let currentVal = currentDocument.payValue;
 
-    const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata) => {
+    const {mainData, setMainData} = useAppContext();
+    const { currentDocument } = mainData;
+
+    let currentVal = currentDocument.values[nameControl]
+
+    const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata, nameControl: NameControl) => {
         let target = e.currentTarget;
         let value = target.value;
         let {currentDocument} = mainData;
-        let newObj = {
+        let newValues = {
+            ...currentDocument.values
+        }
+
+        if (value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total' || nameControl=='payment')) {
+                newValues = {
+                    ...currentDocument.values,
+                    [nameControl]: parseFloat(value)
+                }
+            }
+
+        if (value != null && (nameControl=='count' || nameControl=='price')) {
+            newValues = {
+                ...currentDocument.values,
+                total: +(currentDocument.values.count * currentDocument.values.price).toFixed(2)
+            }
+        }
+
+        if (value != null && (nameControl=='comment')) {
+            newValues = {
+                ...currentDocument.values,
+                [nameControl]: value
+            }
+        }
+        
+        let newObj:DocumentModel = {
             ...currentDocument,
-            payValue: +value,
+            values: {...newValues}
         }
 
         if ( setMainData ) {
@@ -34,7 +60,7 @@ export const InputInForm = ({visible, label, className, ...props }: InputInFormP
             <input
                 className={cn(className, styles.input)}
                 {...props}
-                onChange={(e) => changeElements(e, setMainData, mainData)}
+                onChange={(e) => changeElements(e, setMainData, mainData, nameControl)}
                 type='number'
                 value={currentVal}
             />
