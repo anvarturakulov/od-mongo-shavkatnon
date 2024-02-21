@@ -54,9 +54,6 @@ export class Document {
   @Prop()
   receiverId: Types.ObjectId;
 
-  @Prop({ type: () => [DocTableItem], _id: false })
-  tableItems?: DocTableItem[];
-
   @Prop()
   payValue?: number;
 

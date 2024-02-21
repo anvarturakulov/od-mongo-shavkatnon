@@ -29,15 +29,15 @@ export enum DocumentType {
 export interface DocValues {
     senderId: string,
     receiverId: string,
-    payment: number,
     isWorker: boolean,
     isPartner: boolean,
-    referenceId: string,
-    referenceName: string,
+    analiticId: string,
+    analiticName: string,
     count: number,
     balance?: number,
     price: number,
     total: number,
+    cashFromPartner: number,
     comment?: string,
 }
 
@@ -48,18 +48,23 @@ export interface DocumentModel {
     documentType: string,
     deleted: boolean,
     values: DocValues,
-    comment?: string,
 };
 
 export interface OptionsForDocument {
     senderType: TypeReference,
     senderLabel: string,
     senderIsVisible: boolean,
+    
     receiverType: TypeReference,
     receiverLabel: string,
     recieverIsVisible: boolean
-    paymentLabel: string,
-    paymentIsVisible: boolean,
+    
+    analiticType: TypeReference,
+    analiticLabel: string,
+    analiticIsVisible: boolean
+
+    cashFromPartnerLabel: string,
+    cashFromPartnerVisible: boolean
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'
@@ -69,4 +74,4 @@ export interface Interval {
     dateEnd: string
 }
 
-export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'payment'
+export type NameControl = 'count' | 'price' | 'total' | 'comment'

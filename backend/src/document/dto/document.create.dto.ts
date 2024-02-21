@@ -11,11 +11,11 @@ class DocTableItemDto {
   isPartner: boolean;
 
   @IsString()
-  referenceId: string;
+  analiticId: string;
 
   @IsOptional()
   @IsString()
-  referenceName: string;
+  analiticName: string;
 
   @IsNumber()
   count: number;

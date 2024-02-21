@@ -25,7 +25,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ELAKCHI]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
@@ -43,25 +43,25 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ELAKCHI, UserRoles.HAMIRCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ELAKCHI]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HAMIRCHI]
             },
             { 
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HAMIRCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ZUVALACHI]
             },
             { 
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.ZUVALACHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY]
             },
             { 
                 title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 

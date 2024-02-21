@@ -2,20 +2,23 @@ import { SelectReferenceInTableProps } from './selectReferenceInTable.props';
 import styles from './selectReferenceInTable.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
-import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypePartners, TypeReference } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
-import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
+import { DocumentType, DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { sortByName } from '@/app/service/references/sortByName';
+import { getTypeReference } from '@/app/service/references/getTypeReference';
 
-export const SelectReferenceInTable = ({  selectForReciever , typeReference, label, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
+export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const { user, currentDocument, contentName } = mainData;
+
+    let typeReference = TypeReference.TMZ;
     
     if (currentDocument && currentDocument.values.isWorker) {
         typeReference = TypeReference.WORKERS
@@ -23,6 +26,10 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, lab
 
     if (currentDocument && currentDocument.values.isPartner) {
         typeReference = TypeReference.PARTNERS
+    }
+
+    if (currentDocument && contentName == DocumentType.LeaveCash) {
+        typeReference = TypeReference.CHARGES
     }
 
     const token = user?.access_token;
@@ -42,23 +49,17 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, lab
             let value = target.value;
 
             if (id != null) {
-                if (selectForReciever) {
-                    currentItem.receiverId = id
-                } else {
-                    currentItem.referenceId = id
-                }
-            } else {
-                if (selectForReciever) {
-                    currentItem.receiverId = ''
-                } else {
-                    currentItem.referenceId = ''                }
+                currentItem.analiticId = id
+            }
+            else {
+                currentItem.analiticId = ''               
             }
 
             if (value != null) {
-                currentItem.referenceName = value
+                currentItem.analiticName = value
             }
 
-            if ( typeDocumentForLeaveTMZ(contentName) && id && !selectForReciever) {
+            if ( typeDocumentForLeaveTMZ(contentName) && id ) {
                 let schet
 
                 if (typeDocumentForReference == 'MATERIAL') {
@@ -89,6 +90,8 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, lab
             }
         }
     }
+
+    let label = 'Харажатлар'
 
     return (
         <div className={styles.box}>
@@ -133,7 +136,7 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, lab
                             value={item.name}
                             data-type={item.typeReference}
                             data-id={item._id}
-                            selected={item._id == currentDocument.values.referenceId}
+                            selected={item._id == currentDocument.values.analiticId}
                             >
                                 {item.name}
                         </option>

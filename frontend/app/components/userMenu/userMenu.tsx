@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {UserMenuProps} from './userMenu.props'
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
-import { defaultDocumentTableItem, defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
@@ -42,8 +42,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             setMainData('showDocumentWindow', true);
             setMainData('isNewDocument', true);
             setMainData('clearControlElements', true);
-            let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
-            setMainData('docTable', {...defaultTableItemsObj});
 
             if (contentType == 'document') {
                 let defValue = {...defaultDocumentFormItems} 

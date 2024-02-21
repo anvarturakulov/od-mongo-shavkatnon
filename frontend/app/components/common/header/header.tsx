@@ -5,7 +5,7 @@ import DateIco from './date.svg'
 import CloseIco from './close.svg'
 import { useAppContext } from '@/app/context/app.context';
 import cn from 'classnames';
-import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull'
 import { dateToStr } from '@/app/service/reports/dateToStr'
@@ -49,13 +49,7 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
 
                                     setMainData('clearControlElements', true);
                                     setMainData(windowFor == 'reference' ? 'showReferenceWindow':'showDocumentWindow', false);
-                                    setMainData(windowFor == 'reference' ? 'isNewReference': 'isNewDocument' , false);
-                                    if (windowFor != 'reference') {
-                                        let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
-                                        setMainData('docTable', {...defaultTableItemsObj});
-                                        setMainData('currentDocument', {...defaultDocumentFormItems});
-                                    }
-                                    
+                                    setMainData(windowFor == 'reference' ? 'isNewReference': 'isNewDocument' , false);                                    
                                     }
                                 }}
                                 

@@ -2,7 +2,8 @@ import { DocumentModel, DocumentType } from "../../interfaces/document.interface
 import { hasDocumentTablePart } from './hasDocumentTableType';
 
 export const validateBody = (body: DocumentModel): Boolean => {
-  let { date, docNumber, documentType, receiverId, senderId, tableItems, payValue } = body
+  let { date, docNumber, documentType } = body
+  let { analiticId, senderId } = body.values
 
   if (!date || !docNumber || !documentType) return false
 
@@ -20,13 +21,13 @@ export const validateBody = (body: DocumentModel): Boolean => {
 
   if (documentsForComeMaterial.includes(documentType)) {
     let flag = false;
-    tableItems?.forEach(item => {
-      if (!item.referenceId) {
-        flag = true;
-      }
-    })
+    // tableItems?.forEach(item => {
+    //   if (!item.analiticId) {
+    //     flag = true;
+    //   }
+    // })
 
-    if (!receiverId || !senderId || tableItems?.length == 0 || flag) {
+    if (!analiticId || !senderId || flag) {
       return false
     }
   }
@@ -38,12 +39,12 @@ export const validateBody = (body: DocumentModel): Boolean => {
 
   if (documentsForSale.includes(documentType)) {
     let flag = false;
-    tableItems?.forEach(item => {
-      if (!item.receiverId || !item.referenceId) {
-        flag = true;
-      }
-    })
-    if (!senderId || tableItems?.length == 0 || flag) return false
+    // tableItems?.forEach(item => {
+    //   if (!item.receiverId || !item.analiticId) {
+    //     flag = true;
+    //   }
+    // })
+    if (!senderId || flag) return false
   }
 
   const documentsForCashFromPartners = [
@@ -52,7 +53,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashFromPartners.includes(documentType)) {
-    if (!receiverId || !senderId || !payValue) return false
+    if (!analiticId || !senderId ) return false
   }
 
   const documentsForCashLeave = [
@@ -60,7 +61,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashLeave.includes(documentType)) {
-    if (!senderId || !tableItems?.length) return false
+    if (!senderId ) return false
   }
 
   let flag: boolean = true;

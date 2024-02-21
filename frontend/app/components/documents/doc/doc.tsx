@@ -14,8 +14,8 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const [numberDoc, setNumberDoc] = useState<number>(0);
-    const {contentName, contentTitle, currentDocument, isNewDocument} = mainData;
-    const role = mainData.user?.role;
+    const { contentTitle, currentDocument, isNewDocument } = mainData;
+    
     
     useEffect(()=>{
         if (isNewDocument) {
@@ -42,7 +42,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             <div className={styles.infoBox}>
                 <div className={styles.dataBox}>
                     <InputForData label={contentTitle}/>
-                    <Info content={numberDoc.toString()} label='№'/>
+                    <Info content={numberDoc.toString()} label='№' className={styles.docNumber}/>
                 </div>
             </div>
 

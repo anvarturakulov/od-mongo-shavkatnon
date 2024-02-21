@@ -7,10 +7,6 @@
     text-align: center;
 }
 
-.boxWithReciever{
-    grid-template-columns: 2.5fr 0.5fr 1fr 1fr 1fr 1fr 1fr auto;
-}
-
 .titleBox{
     border-bottom: 0.3px dotted #000;
     padding-bottom: 10px;
@@ -28,8 +24,13 @@
     fill: red;
 }
 
-.checkbox {
-    border: 1px dotted blue;
-    padding: 10px;
-    cursor: pointer;
+.checkBoxs{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+}
+
+.partnersBox{
+    display: grid;
+    gap: 10px;
 }

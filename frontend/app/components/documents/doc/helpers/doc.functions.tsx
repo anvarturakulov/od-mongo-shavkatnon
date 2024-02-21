@@ -1,20 +1,10 @@
-import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocTableItem, DocumentModel } from '@/app/interfaces/document.interface';
+import { DocumentModel } from '@/app/interfaces/document.interface';
 import { showMessage } from '@/app/service/common/showMessage';
 import { getRandomID } from '@/app/service/documents/getRandomID';
 import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
 import { validateBody } from '@/app/service/documents/validateBody';
-
-export const addItems = (setMainData: Function | undefined, mainData: Maindata, newItem: DocTableItem) => {
-  
-    let newObj = {...mainData.currentDocument};
-    newObj.tableItems?.push(newItem) 
-
-    if (setMainData) {
-        setMainData('currentDocument', {...newObj})
-    }
-}
 
 export const saveNumber = (setNumberDoc: Function, setMainData: Function | undefined, mainData: Maindata) => {
   let num = getRandomID()
@@ -40,9 +30,8 @@ export const cancelSubmit = (setMainData: Function | undefined) => {
         setMainData('clearControlElements', true);
         setMainData('showDocumentWindow', false);
         setMainData('isNewDocument', false);
-        let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
-        setMainData('docTable', {...defaultTableItemsObj});
         setMainData('currentDocument', {...defaultDocumentFormItems});
+        setMainData('mainPage', true)
     }
 }
 

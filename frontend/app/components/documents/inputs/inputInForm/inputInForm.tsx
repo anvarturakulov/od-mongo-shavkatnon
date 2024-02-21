@@ -23,21 +23,38 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
             ...currentDocument.values
         }
 
-        if (value != null && (nameControl=='count' || nameControl=='price' || nameControl=='total' || nameControl=='payment')) {
-                newValues = {
-                    ...currentDocument.values,
-                    [nameControl]: parseFloat(value)
-                }
-            }
-
-        if (value != null && (nameControl=='count' || nameControl=='price')) {
+        if ( nameControl=='count') {
             newValues = {
                 ...currentDocument.values,
-                total: +(currentDocument.values.count * currentDocument.values.price).toFixed(2)
+                [`${nameControl}`]: +value,
+                total : +(+value * currentDocument.values.price).toFixed(2)
             }
         }
 
-        if (value != null && (nameControl=='comment')) {
+        if ( nameControl=='price') {
+            newValues = {
+                ...currentDocument.values,
+                [`${nameControl}`]: value,
+                total : +(+value* currentDocument.values.count).toFixed(2)
+            }
+        }
+
+         if ( nameControl=='total') {
+            newValues = {
+                ...currentDocument.values,
+                total : +value
+            }
+        }
+
+        // if (nameControl=='count' || nameControl=='price') {
+        //     newValues = {
+        //         ...currentDocument.values,
+        //         [nameControl]: +value,
+        //         total: (currentDocument.values.count * currentDocument.values.price).toFixed(2)
+        //     }
+        // }
+
+        if (nameControl=='comment') {
             newValues = {
                 ...currentDocument.values,
                 [nameControl]: value
@@ -58,10 +75,11 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
         <div className={styles.box}>
             {label !='' && <div className={styles.label}>{label}</div>}
             <input
-                className={cn(className, styles.input)}
+                className={cn(className, styles.input, {
+                    [styles.comment]: nameControl=='comment'
+                })}
                 {...props}
                 onChange={(e) => changeElements(e, setMainData, mainData, nameControl)}
-                type='number'
                 value={currentVal}
             />
         </div>
