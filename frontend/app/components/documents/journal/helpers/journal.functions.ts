@@ -30,17 +30,18 @@ export const getNameReference = (references: any, id: string): String => {
 }
 
 export const deleteItemDocument = (id: string | undefined, token: string | undefined, setMainData: Function | undefined, mainData:Maindata) => {
-  markToDeleteDocument(id, setMainData, token, mainData)
+  markToDeleteDocument(id, setMainData, token)
 }
 
 export const getTotalValueForDocument = (document: DocumentModel): number => {
-  let hasTablePart = hasDocumentTablePart(document.documentType);
-  let total:number = 0;
-  if (hasTablePart && document.tableItems) {
-    total = document.tableItems.reduce((accum, currentValue) => accum + currentValue.total, 0);
-  } else {
-    total = document.payValue;
-  }
+  // if ()
+  // let hasTablePart = hasDocumentTablePart(document.documentType);
+  // let total:number = 0;
+  // if (hasTablePart && document.tableItems) {
+  //   total = document.tableItems.reduce((accum, currentValue) => accum + currentValue.total, 0);
+  // } else {
+  //   total = document.values.cashFromPartnerpayValue;
+  // }
   
-  return total;
+  return 0;
 }

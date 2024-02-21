@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { defaultDocumentFormItems, defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { DocumentModel } from '@/app/interfaces/document.interface';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {

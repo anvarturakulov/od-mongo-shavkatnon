@@ -8,13 +8,12 @@ import { DocumentModel, NameControl } from '@/app/interfaces/document.interface'
 
 export const InputInForm = ({visible, label, className, nameControl, ...props }: InputInFormProps): JSX.Element => {
     
-    if (visible == false) return <></>;
-
+    
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
-
+    
     let currentVal = currentDocument.values[nameControl]
-
+    
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata, nameControl: NameControl) => {
         let target = e.currentTarget;
         let value = target.value;
@@ -22,7 +21,7 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
         let newValues = {
             ...currentDocument.values
         }
-
+        
         if ( nameControl=='count') {
             newValues = {
                 ...currentDocument.values,
@@ -45,24 +44,24 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
                 total : +value
             }
         }
-
-        // if (nameControl=='count' || nameControl=='price') {
-        //     newValues = {
-        //         ...currentDocument.values,
-        //         [nameControl]: +value,
-        //         total: (currentDocument.values.count * currentDocument.values.price).toFixed(2)
-        //     }
-        // }
-
-        if (nameControl=='comment') {
-            newValues = {
-                ...currentDocument.values,
-                [nameControl]: value
-            }
-        }
         
-        let newObj:DocumentModel = {
-            ...currentDocument,
+        // if (nameControl=='count' || nameControl=='price') {
+            //     newValues = {
+                //         ...currentDocument.values,
+                //         [nameControl]: +value,
+                //         total: (currentDocument.values.count * currentDocument.values.price).toFixed(2)
+                //     }
+                // }
+                
+                if (nameControl=='comment') {
+                    newValues = {
+                        ...currentDocument.values,
+                        [nameControl]: value
+                    }
+                }
+                
+                let newObj:DocumentModel = {
+                    ...currentDocument,
             values: {...newValues}
         }
 
@@ -70,7 +69,9 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
             setMainData('currentDocument', {...newObj})
         }
     }
-
+    
+    if (visible == false) return <></>;
+    
     return (
         <div className={styles.box}>
             {label !='' && <div className={styles.label}>{label}</div>}

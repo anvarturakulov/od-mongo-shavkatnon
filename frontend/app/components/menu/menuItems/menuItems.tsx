@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { MenuItem } from '../../../interfaces/menu.interface';
 import { ContentType } from '../../../interfaces/general.interface';
 import { useAppContext } from '@/app/context/app.context';
-import { defaultDocumentTableItem, defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
+import { defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
 
@@ -42,8 +42,6 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
             setMainData('showDocumentWindow', false);
             setMainData('isNewDocument', false);
             setMainData('clearControlElements', true);
-            let defaultTableItemsObj = {items: [defaultDocumentTableItem]}
-            setMainData('docTable', {...defaultTableItemsObj});
 
             if (contentType == 'document') {
                 let defValue = {...defaultDocumentFormItems} 
