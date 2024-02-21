@@ -2,13 +2,11 @@
 import { useEffect, useState } from 'react';
 import { DocProps } from './doc.props';
 import styles from './doc.module.css';
-import cn from 'classnames';
 import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { cancelSubmit, onSubmit, saveDocumentType, saveNumber } from './helpers/doc.functions';
+import { cancelSubmit, onSubmit, saveDocumentType, saveNumber, saveUser } from './helpers/doc.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
-
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
@@ -29,6 +27,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
         } else {
             setNumberDoc(currentDocument.docNumber);
         }
+        saveUser(setMainData, mainData)
     },[])
 
     useEffect(() => {

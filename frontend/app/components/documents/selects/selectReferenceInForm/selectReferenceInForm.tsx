@@ -91,7 +91,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         className={styles.chooseMe}
                         selected = {true}
                         
-                        >{'Тангланг =>>>>'}</option>
+                        >{'=>'}</option>
                 </>
                 {data && data.length>0  &&
                 data
@@ -116,6 +116,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 .map(( item:ReferenceModel ) => (
                     <>
                         <option 
+                            className={styles.option}
                             key = {item._id}
                             value={item.name}
                             data-type={item.typeReference} 

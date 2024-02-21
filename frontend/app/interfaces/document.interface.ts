@@ -48,6 +48,7 @@ export interface DocumentModel {
     documentType: string,
     deleted: boolean,
     values: DocValues,
+    user: string
 };
 
 export interface OptionsForDocument {

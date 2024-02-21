@@ -24,6 +24,7 @@ export const defaultDocumentFormItems:DocumentModel = {
     documentType: '',
     deleted: false,
     values: {...defaultDocValues},
+    user: '',
 }
 
 export const defaultReportOptions: ReportOptions =  {

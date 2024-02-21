@@ -25,6 +25,18 @@ export const saveNumber = (setNumberDoc: Function, setMainData: Function | undef
   }
 }
 
+export const saveUser = (setMainData: Function | undefined, mainData: Maindata) => {
+  let {currentDocument} = mainData;
+  let newObj = {
+      ...currentDocument,
+      user: mainData.user?.name,
+  }
+
+  if ( setMainData ) {
+      setMainData('currentDocument', {...newObj})
+  }
+}
+
 export const cancelSubmit = (setMainData: Function | undefined) => {
     if (setMainData) {
         setMainData('clearControlElements', true);

@@ -1,14 +1,15 @@
 .topBox{
   display: grid;
   grid-template-columns: auto 5fr auto;
-  border-bottom: 0.3px dotted #000;
-  border-top: 0.3px dotted #000;
+  /* border-bottom: 0.1px dotted #000;
+  border-top: 0.1px dotted #000; */
   align-items: top;
   position: relative;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background-color: #F2F4F7;
   padding: 10px;
+  box-shadow: 5px 3px 5px -3px rgba(0, 0, 0, 0.36);
 }
 
 .topBoxMini{

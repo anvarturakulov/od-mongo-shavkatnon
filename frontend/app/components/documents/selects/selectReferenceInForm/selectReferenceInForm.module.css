@@ -1,22 +1,26 @@
 .select{
     display: block;
-    padding: 10px 15px;
-    font-size: 16px;
-    line-height: 1.2;
-    margin: 0px 0;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 18px;
     width: 100%;
     border: 0.6px dotted blue;
     background-color: #fff;
 }
+.option {
+    font-size: 14px;
+    color: blue;
+}
 
 .label {
     font-size: 16px;
-    line-height: 16px;
-    font-weight: 600;
-    margin: 10px 0px;
+    line-height: 18px;
+    font-weight: 500;
+    margin: 5px 0px;
     text-align: left;
 }
 
 .chooseMe{
     color: red;
+    font-size: 14px;
 }
