@@ -26,6 +26,9 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
   if (role && (role == UserRoles.ZUVALACHI || (role == UserRoles.ELAKCHI && contentName == DocumentType.ComeHalfstuff))) {
     return storageIdFromUser
   } 
+  if (role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
+    return storageIdFromUser
+  }
   if (role && role == UserRoles.HAMIRCHI) {
     return '659d1ff7523a48fdeb6ada6d' 
   }
@@ -33,7 +36,7 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
 }
 
 export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
-  if (role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY) {
+  if (role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName != DocumentType.ComeCashFromPartners) {
     return storageIdFromUser
   }
   return ''

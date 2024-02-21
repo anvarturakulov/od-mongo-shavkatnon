@@ -81,7 +81,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 className={cn(styles.select)}
                 {...props}
                 onChange={(e) => changeElements(e, setMainData, mainData, type)}
-                disabled = { Boolean(definedItemId) }
+                disabled = { Boolean(definedItemId?.length) }
             >   
                 <>
                     <option 

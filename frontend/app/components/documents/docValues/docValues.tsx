@@ -59,20 +59,12 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 <div className={styles.checkBoxs}>
                     { 
                         hasWorkers &&                   
-                        <CheckBoxInTable
-                            label = 'Ходим'
-                            itemIndexInTable={0}
-                            isPartner={false}
-                        /> 
+                        <CheckBoxInTable label = 'Ходим' itemIndexInTable={0} isPartner={false}/> 
                     }
 
                     { 
                         hasPartners &&                   
-                        <CheckBoxInTable
-                            label = 'Хамкор'
-                            itemIndexInTable={0}
-                            isPartner={true}
-                        /> 
+                        <CheckBoxInTable label = 'Хамкор' itemIndexInTable={0} isPartner={true}/> 
                     }
                 </div>
                 
@@ -90,7 +82,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 } */}
 
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
-                <InputInForm nameControl='price' type='number' label='Нарх' visible={docWithCash || !roleZuvalachiOrHamirchi}/>
+                <InputInForm nameControl='price' type='number' label='Нарх' visible={!docWithCash}/>
                 <InputInForm nameControl='total' type='number' label='Сумма' visible={!roleZuvalachiOrHamirchi}/>
                 <InputInForm nameControl='comment' type='text' label='Изох'/>
             </div>
