@@ -12,61 +12,55 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
     
-    let currentVal = currentDocument.values[nameControl]
+    let currentVal = currentDocument[nameControl]
     
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata, nameControl: NameControl) => {
         let target = e.currentTarget;
         let value = target.value;
         let {currentDocument} = mainData;
         let newValues = {
-            ...currentDocument.values
+            ...currentDocument
         }
         
         if ( nameControl=='count') {
             newValues = {
-                ...currentDocument.values,
+                ...currentDocument,
                 [`${nameControl}`]: +value,
-                total : +(+value * currentDocument.values.price).toFixed(2)
+                total : +(+value * currentDocument.price).toFixed(2)
             }
         }
 
         if ( nameControl=='price') {
             newValues = {
-                ...currentDocument.values,
-                [`${nameControl}`]: value,
-                total : +(+value* currentDocument.values.count).toFixed(2)
+                ...currentDocument,
+                [`${nameControl}`]: +value,
+                total : +(+value* currentDocument.count).toFixed(2)
             }
         }
 
-         if ( nameControl=='total') {
+        if ( nameControl=='total' ) {
             newValues = {
-                ...currentDocument.values,
+                ...currentDocument,
                 total : +value
             }
         }
         
-        // if (nameControl=='count' || nameControl=='price') {
-            //     newValues = {
-                //         ...currentDocument.values,
-                //         [nameControl]: +value,
-                //         total: (currentDocument.values.count * currentDocument.values.price).toFixed(2)
-                //     }
-                // }
-                
-                if (nameControl=='comment') {
-                    newValues = {
-                        ...currentDocument.values,
-                        [nameControl]: value
-                    }
-                }
-                
-                let newObj:DocumentModel = {
-                    ...currentDocument,
-            values: {...newValues}
+        if (nameControl=='comment') {
+            newValues = {
+                ...currentDocument,
+                [nameControl]: value
+            }
         }
 
+        if (nameControl=='cashFromPartner') {
+            newValues = {
+                ...currentDocument,
+                [nameControl]: +value
+            }
+        }
+                
         if ( setMainData ) {
-            setMainData('currentDocument', {...newObj})
+            setMainData('currentDocument', {...newValues})
         }
     }
     

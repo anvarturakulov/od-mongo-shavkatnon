@@ -66,8 +66,9 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                 <th key='5' className={styles.rowSumma}>Сумма</th>
                                 <th key='6'>Олувчи</th>
                                 <th key='7'>Берувчи</th>
-                                <th key='8'>Изох 2</th>
-                                <th key='9' className={styles.rowAction}>Амал</th>
+                                <th key='8'>Изох</th>
+                                <th key='9'>Фойдаланувчи</th>
+                                <th key='10' className={styles.rowAction}>Амал</th>
                             </tr>
                         </thead>
                         <tbody className={styles.tbody}>
@@ -88,10 +89,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         <td className={styles.rowId}>{item.docNumber}</td>
                                         <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
                                         <td>{getDescriptionDocument(item.documentType)}</td>
-                                        <td className={cn(styles.rowSumma, styles.tdSumma)}>{getTotalValueForDocument(item)}</td>
-                                        <td>{getNameReference(references,item.values.receiverId)}</td>
-                                        <td>{getNameReference(references,item.values.senderId)}</td>
-                                        <td>{item.values.comment}</td>
+                                        <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total}</td>
+                                        <td>{getNameReference(references,item.receiverId)}</td>
+                                        <td>{getNameReference(references,item.senderId)}</td>
+                                        <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.comment ? `(${item.comment})`: ''} ${item.count ? `(${item.count})`: ''}`}</td>
+                                        <td>{item.user}</td>
                                         <td className={styles.rowAction}>
                                             <IcoTrash className={styles.icoTrash}
                                             onClick = {() => deleteItemDocument(item._id, token, setMainData, mainData)}

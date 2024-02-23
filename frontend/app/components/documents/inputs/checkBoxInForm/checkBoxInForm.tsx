@@ -9,17 +9,17 @@ export const CheckBoxInTable = ({ className, isPartner, itemIndexInTable, label,
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
     let currentVal
-    if (currentDocument.values) {
+    if (currentDocument) {
         if (isPartner) {
-            currentVal = currentDocument.values['isPartner']
+            currentVal = currentDocument['isPartner']
         } else {
-            currentVal = currentDocument.values['isWorker']
+            currentVal = currentDocument['isWorker']
         }
     }
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, isPartner: boolean) => {
         let target = e.currentTarget;
-        let currentValues = {...currentDocument.values}
+        let currentValues = {...currentDocument}
         if (currentDocument) {
             if (isPartner) {
                 currentValues.isPartner = target.checked
@@ -33,13 +33,8 @@ export const CheckBoxInTable = ({ className, isPartner, itemIndexInTable, label,
                 }
             }
             
-            let newObj = {
-                ...currentDocument,
-                values: {...currentValues}
-            }
-            
             if ( setMainData ) {
-                setMainData('currentDocument', {...newObj})
+                setMainData('currentDocument', {...currentValues})
             }
         }
     }

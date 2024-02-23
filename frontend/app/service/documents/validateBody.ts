@@ -1,13 +1,13 @@
 import { DocumentModel, DocumentType } from "../../interfaces/document.interface";
-import { hasDocumentTablePart } from './hasDocumentTableType';
 
 export const validateBody = (body: DocumentModel): Boolean => {
   let { date, docNumber, documentType } = body
-  let { analiticId, senderId } = body.values
 
+  let { analiticId, senderId, receiverId, total, count } = body
+  // console.log(senderId)
   if (!date || !docNumber || !documentType) return false
 
-  const documentsForComeMaterial = [
+  const documentsWithAnalitic = [
     `${DocumentType.ComeMaterial}`,
     `${DocumentType.ComeProduct}`,
     `${DocumentType.ComeHalfstuff}`,
@@ -17,34 +17,14 @@ export const validateBody = (body: DocumentModel): Boolean => {
     `${DocumentType.MoveProd}`,
     `${DocumentType.MoveMaterial}`,
     `${DocumentType.MoveHalfstuff}`,
-  ]
-
-  if (documentsForComeMaterial.includes(documentType)) {
-    let flag = false;
-    // tableItems?.forEach(item => {
-    //   if (!item.analiticId) {
-    //     flag = true;
-    //   }
-    // })
-
-    if (!analiticId || !senderId || flag) {
-      return false
-    }
-  }
-
-  const documentsForSale = [
     `${DocumentType.SaleProd}`,
-    `${DocumentType.SaleMaterial}`,
+    `${DocumentType.SaleMaterial}`
   ]
 
-  if (documentsForSale.includes(documentType)) {
-    let flag = false;
-    // tableItems?.forEach(item => {
-    //   if (!item.receiverId || !item.analiticId) {
-    //     flag = true;
-    //   }
-    // })
-    if (!senderId || flag) return false
+  if (documentsWithAnalitic.includes(documentType)) {
+    if (!analiticId || !senderId || !receiverId || !count) {
+      return false
+    } 
   }
 
   const documentsForCashFromPartners = [
@@ -53,7 +33,8 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashFromPartners.includes(documentType)) {
-    if (!analiticId || !senderId ) return false
+    if (receiverId && senderId && total) return true 
+    else return false
   }
 
   const documentsForCashLeave = [
@@ -61,14 +42,8 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashLeave.includes(documentType)) {
-    if (!senderId ) return false
+    if (!senderId || !analiticId) return false
   }
-
-  let flag: boolean = true;
-  let hasTablePart = hasDocumentTablePart(documentType)
-
-  if (!flag) return false
-
 
   return true
 

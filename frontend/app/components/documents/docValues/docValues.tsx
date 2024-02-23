@@ -9,12 +9,12 @@ import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentFor
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { SelectReferenceInForm } from '../selects/selectReferenceInForm/selectReferenceInForm';
-import { TypeReference } from '@/app/interfaces/reference.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic } from './docValuesOptions';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId } from './docValuesOptions';
+import { useEffect } from 'react';
 
 
-export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
+export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const {contentName, currentDocument} = mainData;
@@ -30,7 +30,12 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     
     let documentIsSaleType = typeDocumentIsSale(contentName);
     let showBalance = typeDocumentForLeaveTMZ(contentName);
+
     let roleZuvalachiOrHamirchi = (role == UserRoles.HAMIRCHI || role == UserRoles.ZUVALACHI)
+    
+    let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
+    let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
+    
     return (
         <>
             <div className={styles.partnersBox}>
@@ -38,24 +43,22 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     label={options.receiverLabel} 
                     typeReference={options.receiverType}
                     visibile={options.recieverIsVisible}
-                    currentItemId={currentDocument?.values.receiverId}
+                    currentItemId={currentDocument?.receiverId}
                     type='receiver'
-                    definedItemId= {getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)}
+                    definedItemId= {definedItemIdForReceiver}
                 />
-                
                 <SelectReferenceInForm 
                     label={options.senderLabel} 
                     typeReference={options.senderType}
                     visibile={options.senderIsVisible}
-                    currentItemId={currentDocument?.values.senderId}
+                    currentItemId={currentDocument?.senderId}
                     type='sender'
-                    definedItemId= {getDefinedItemIdForSender(role, storageIdFromUser, contentName)}
+                    definedItemId= {definedItemIdForSender}
                 />
                 
             </div>
 
             <div className={cn(styles.valuesBox)}>
-                
                 <div className={styles.checkBoxs}>
                     { 
                         hasWorkers &&                   
@@ -72,7 +75,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     label={getLabelForAnalitic(currentDocument, options)} 
                     typeReference= {getTypeReferenceForAnalitic(currentDocument, options)}
                     visibile={options.analiticIsVisible}
-                    currentItemId={currentDocument?.values.analiticId}
+                    currentItemId={currentDocument?.analiticId}
                     type='analitic'
                 />
 
@@ -82,8 +85,9 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 } */}
 
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
-                <InputInForm nameControl='price' type='number' label='Нарх' visible={!docWithCash}/>
-                <InputInForm nameControl='total' type='number' label='Сумма' visible={!roleZuvalachiOrHamirchi}/>
+                <InputInForm nameControl='price' type='number' label='Нарх' visible={!docWithCash && !roleZuvalachiOrHamirchi}/>
+                <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={!roleZuvalachiOrHamirchi}/>
+                <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={contentName == DocumentType.SaleProd}/>
                 <InputInForm nameControl='comment' type='text' label='Изох'/>
             </div>
         </>

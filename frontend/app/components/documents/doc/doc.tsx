@@ -7,51 +7,47 @@ import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
 import { cancelSubmit, onSubmit, saveDocumentType, saveNumber, saveUser } from './helpers/doc.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { notAdmins } from '@/app/service/common/users';
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const [numberDoc, setNumberDoc] = useState<number>(0);
+    const [definedValues, setDefinedValues] = useState({receiverId:'',senderId:''})
     const { contentTitle, currentDocument, isNewDocument } = mainData;
-    
     
     useEffect(()=>{
         if (isNewDocument) {
             getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
-    },[currentDocument.date, currentDocument.values.senderId])
+    },[currentDocument.date, currentDocument.senderId])
 
     useEffect(() => {
-        if (currentDocument.docNumber == 0) {
-            saveNumber(setNumberDoc, setMainData, mainData)   
-        } else {
-            setNumberDoc(currentDocument.docNumber);
+        if (!currentDocument.user) {
+            saveUser(setMainData, mainData)
         }
-        saveUser(setMainData, mainData)
     },[])
-
-    useEffect(() => {
-        if (currentDocument.docNumber != 0) {
-            saveDocumentType(setMainData, mainData);
-        }
-    },[currentDocument.docNumber])
 
     return (
         <div className={styles.docBox}>
             <div className={styles.infoBox}>
                 <div className={styles.dataBox}>
                     <InputForData label={contentTitle}/>
-                    <Info content={numberDoc.toString()} label='№' className={styles.docNumber}/>
+                    <Info content={currentDocument.docNumber.toString()} label='№' className={styles.docNumber}/>
                 </div>
             </div>
 
-            <DocValues/>
-
+            <DocValues setDefinedValues={setDefinedValues}/>
             <div className={styles.boxBtn}>
-                <Button appearance='primary' onClick={() => 
-                    onSubmit( mainData, setMainData )}
-                    >Саклаш</Button>
-                <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
+                {
+                (currentDocument.deleted || notAdmins(mainData.user)) &&
+                   <>
+                    <Button appearance='primary' onClick={() => 
+                        onSubmit( mainData, setMainData, definedValues)}>
+                            Саклаш
+                    </Button>
+                    <Button appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
+                   </> 
+                }
             </div>
         </div>   
     )

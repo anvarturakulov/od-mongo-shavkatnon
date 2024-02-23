@@ -24,6 +24,7 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);
       setMainData('currentDocument', { ...defaultDocumentFormItems });
+      // if (mainData.user?.role != UserRoles.HEADCOMPANY && mainData.user?.role != UserRoles.ADMIN) setMainData('mainPage', true)
     }
   }
 

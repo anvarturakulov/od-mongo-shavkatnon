@@ -65,8 +65,6 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
         cashFromPartnerLabel = 'Хамкор берган пул'
         cashFromPartnerVisible = true
-
-
     }
 
     const documentsForLeaveTMZ = [

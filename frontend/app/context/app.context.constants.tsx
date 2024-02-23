@@ -1,21 +1,6 @@
-import { DocValues, DocumentModel, DocumentType } from '../interfaces/document.interface'
+import { DocumentModel, DocumentType } from '../interfaces/document.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
-
-export const defaultDocValues:DocValues =  {
-    senderId: '',
-    receiverId: '',
-    isWorker: false,
-    isPartner: false,
-    analiticId: '',
-    analiticName: '',
-    count: 0,
-    balance: 0,
-    price: 0,
-    total: 0,
-    cashFromPartner: 0,
-    comment: '',
-}
 
 export const defaultDocumentFormItems:DocumentModel = {
     _id: '',
@@ -23,8 +8,18 @@ export const defaultDocumentFormItems:DocumentModel = {
     docNumber: 0,
     documentType: '',
     deleted: false,
-    values: {...defaultDocValues},
     user: '',
+    senderId: '',
+    receiverId: '',
+    analiticId: '',
+    isWorker: false,
+    isPartner: false,
+    count: 0,
+    balance: 0,
+    price: 0,
+    total: 0,
+    cashFromPartner: 0,
+    comment: '',
 }
 
 export const defaultReportOptions: ReportOptions =  {

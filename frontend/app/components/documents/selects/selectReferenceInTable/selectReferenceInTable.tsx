@@ -20,11 +20,11 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
 
     let typeReference = TypeReference.TMZ;
     
-    if (currentDocument && currentDocument.values.isWorker) {
+    if (currentDocument && currentDocument.isWorker) {
         typeReference = TypeReference.WORKERS
     }
 
-    if (currentDocument && currentDocument.values.isPartner) {
+    if (currentDocument && currentDocument.isPartner) {
         typeReference = TypeReference.PARTNERS
     }
 
@@ -44,7 +44,7 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
 
         if (currentDocument) {
             
-            let currentItem = {...currentDocument.values};
+            let currentItem = {...currentDocument};
             let id = target[target.selectedIndex].getAttribute('data-id');
             let value = target.value;
 
@@ -55,9 +55,9 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
                 currentItem.analiticId = ''               
             }
 
-            if (value != null) {
-                currentItem.analiticName = value
-            }
+            // if (value != null) {
+            //     currentItem.analiticName = value
+            // }
 
             if ( typeDocumentForLeaveTMZ(contentName) && id ) {
                 let schet
@@ -76,17 +76,12 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
                 
                 if (schet) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.values.senderId );
+                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }
 
-            let newObj = {
-                ...currentDocument,
-                values: {...currentItem}
-            }
-            
             if ( setMainData ) {
-                setMainData('currentDocument', {...newObj})
+                setMainData('currentDocument', {...currentItem})
             }
         }
     }
@@ -136,7 +131,7 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
                             value={item.name}
                             data-type={item.typeReference}
                             data-id={item._id}
-                            selected={item._id == currentDocument.values.analiticId}
+                            selected={item._id == currentDocument.analiticId}
                             >
                                 {item.name}
                         </option>

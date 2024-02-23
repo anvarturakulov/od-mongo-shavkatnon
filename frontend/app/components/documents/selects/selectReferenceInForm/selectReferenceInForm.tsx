@@ -23,16 +23,12 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: TypeForSelectInForm) => {
 
-        
         let {currentDocument, contentName} = mainData;
         
         if (currentDocument) {
-            
             let target = e.currentTarget;
-            let currentItem = {...currentDocument.values};
+            let currentItem = {...currentDocument};
             let id = target[target.selectedIndex].getAttribute('data-id');
-            let value = target.value;
-            let key:string = `${type}+Id`
             let typeDocumentForReference = getTypeDocumentForReference(contentName);
         
             if ( typeDocumentForLeaveTMZ(contentName) && id ) {
@@ -52,7 +48,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 
                 if (schet) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.values.senderId );
+                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }
 
@@ -60,13 +56,8 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
             if (type == 'receiver' && id) currentItem.receiverId = id
             if (type == 'analitic' && id) currentItem.analiticId = id
 
-            let newObj = {
-                    ...currentDocument,
-                    values: {...currentItem}
-                }
-
             if ( setMainData ) {
-                setMainData('currentDocument', {...newObj})
+                setMainData('currentDocument', {...currentItem})
             }
         }
         

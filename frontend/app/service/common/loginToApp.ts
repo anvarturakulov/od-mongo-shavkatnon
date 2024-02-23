@@ -6,7 +6,7 @@ export const loginToApp = (body: BodyForLogin, setMainData: Function | undefined
   const uri = process.env.NEXT_PUBLIC_DOMAIN + '/api/auth/login';
   axios.post(uri, body)
     .then(function (response) {
-      console.log(response.data)
+      // console.log(response.data)
       setMainData && setMainData('user', response.data);
     })
     .catch(function (error) {

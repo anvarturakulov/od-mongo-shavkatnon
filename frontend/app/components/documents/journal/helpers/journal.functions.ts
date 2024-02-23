@@ -34,14 +34,5 @@ export const deleteItemDocument = (id: string | undefined, token: string | undef
 }
 
 export const getTotalValueForDocument = (document: DocumentModel): number => {
-  // if ()
-  // let hasTablePart = hasDocumentTablePart(document.documentType);
-  // let total:number = 0;
-  // if (hasTablePart && document.tableItems) {
-  //   total = document.tableItems.reduce((accum, currentValue) => accum + currentValue.total, 0);
-  // } else {
-  //   total = document.values.cashFromPartnerpayValue;
-  // }
-  
-  return 0;
+  return document.total;
 }

@@ -9,6 +9,8 @@ import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
 import { ContentType } from '@/app/interfaces/general.interface';
+import { getRandomID } from '@/app/service/documents/getRandomID';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../documents/docValues/docValuesOptions';
 
 const div = 1;
 
@@ -18,6 +20,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
     
     const {mainData, setMainData} = useAppContext()
     const role = mainData.user?.role;
+    let storageIdFromUser = mainData.user?.storageId
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -45,7 +48,18 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
 
             if (contentType == 'document') {
                 let defValue = {...defaultDocumentFormItems} 
+                let num = getRandomID()
+                let dateDoc = new Date();
+                let dateStr = dateDoc.toISOString().split('T')[0]
+                defValue.docNumber = num;
+                defValue.date = Date.parse(dateStr)
                 defValue.documentType = contentName
+
+                let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
+                let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
+                defValue.receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
+                defValue.senderId = definedItemIdForSender ? definedItemIdForSender : ''
+
                 setMainData('currentDocument', {...defValue});
             }
 

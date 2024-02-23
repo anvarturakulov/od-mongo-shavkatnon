@@ -25,41 +25,35 @@ export enum DocumentType {
     Error = 'Error'
 }
 
-
-export interface DocValues {
-    senderId: string,
-    receiverId: string,
-    isWorker: boolean,
-    isPartner: boolean,
-    analiticId: string,
-    analiticName: string,
-    count: number,
-    balance?: number,
-    price: number,
-    total: number,
-    cashFromPartner: number,
-    comment?: string,
-}
-
 export interface DocumentModel {
     _id?: string,
     date: number,
     docNumber: number,
     documentType: string,
     deleted: boolean,
-    values: DocValues,
-    user: string
+    user: string,
+    senderId: string,
+    receiverId: string,
+    isWorker: boolean,
+    isPartner: boolean,
+    analiticId: string,
+    count: number,
+    balance?: number,
+    price: number,
+    total: number,
+    cashFromPartner: number,
+    comment?: string,
 };
 
 export interface OptionsForDocument {
     senderType: TypeReference,
     senderLabel: string,
     senderIsVisible: boolean,
-    
+
     receiverType: TypeReference,
     receiverLabel: string,
     recieverIsVisible: boolean
-    
+
     analiticType: TypeReference,
     analiticLabel: string,
     analiticIsVisible: boolean
@@ -75,4 +69,4 @@ export interface Interval {
     dateEnd: string
 }
 
-export type NameControl = 'count' | 'price' | 'total' | 'comment'
+export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner'
