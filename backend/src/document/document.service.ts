@@ -11,10 +11,12 @@ export class DocumentService {
 
   constructor(@InjectModel(Document.name) private documentModel: Model<DocDocument>) { }
 
-  async createReference(dto: CreateDocumentDto): Promise<Document> {
+  async createDocument(dto: CreateDocumentDto): Promise<Document> {
     const newDocument = new this.documentModel(dto);
+    
     return newDocument.save()
   }
+
 
   async getByTypeDocument(documentType: DocumentType): Promise<Document[]> {
     return this.documentModel.find({ documentType }).exec()

@@ -3,6 +3,7 @@ import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { DocumentModel } from '@/app/interfaces/document.interface';
+import { sendMessageToChanel } from './telegramMessage';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {
   const { user, currentDocument, isNewDocument } = mainData
@@ -24,8 +25,10 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);
       setMainData('currentDocument', { ...defaultDocumentFormItems });
+      setMainData('mainPage', true);
       // if (mainData.user?.role != UserRoles.HEADCOMPANY && mainData.user?.role != UserRoles.ADMIN) setMainData('mainPage', true)
     }
+    
   }
 
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/create';
@@ -34,8 +37,9 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   if (isNewDocument) {
 
     axios.post(uriPost, body, config)
-      .then(function () {
+      .then(function (request) {
         actionWithMainData('янги хужжати киритилди')
+        sendMessageToChanel(body, mainData)
       })
       .catch(function (error) {
         if (setMainData) {

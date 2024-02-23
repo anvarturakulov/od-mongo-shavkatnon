@@ -1,6 +1,6 @@
 import { Maindata } from '@/app/context/app.context.interfaces'
 import { DocumentModel, DocumentType, OptionsForDocument } from '@/app/interfaces/document.interface'
-import { UserRoles } from '@/app/interfaces/general.interface'
+import { User, UserRoles } from '@/app/interfaces/general.interface'
 import { TypeReference } from '@/app/interfaces/reference.interface'
 
 export const getLabelForAnalitic = (currentDocument: DocumentModel, options: OptionsForDocument):string => {
@@ -57,4 +57,51 @@ export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageId
     ) return storageIdFromUser
   
   return ''
+}
+
+export const visibilityPriceValueInDocument = (contentName:string, user:User | undefined): boolean => {
+  const documents = [
+    `${DocumentType.ComeCashFromPartners}`,
+    `${DocumentType.LeaveCash}`,
+    `${DocumentType.MoveCash}`,
+  ]
+
+  if (user) {
+    if (documents.includes(contentName)) return false
+  }
+
+  return true
+}
+
+export const visibilityTotalValueInDocument = (contentName: string, user: User | undefined): boolean => {
+  const documents = [
+    `${DocumentType.ComeHalfstuff}`,
+    `${DocumentType.LeaveHalfstuff}`,
+    `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.ComeCashFromPartners}`
+  ]
+
+  if (user) {
+    if (user.role == UserRoles.HAMIRCHI || user.role == UserRoles.ZUVALACHI) return false
+    
+    if (documents.includes(contentName)) return false
+  }
+   
+
+  return true
+}
+
+
+export const visibilityCashFromPartnerValueInDocument = (contentName: string, user: User | undefined): boolean => {
+  const documents = [
+    `${DocumentType.SaleProd}`,
+    `${DocumentType.ComeCashFromPartners}`
+  ]
+
+  if (user) {
+    if (documents.includes(contentName)) return true
+  }
+
+  return false
 }

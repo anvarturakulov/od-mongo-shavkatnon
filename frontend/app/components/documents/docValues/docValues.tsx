@@ -9,10 +9,7 @@ import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentFor
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { SelectReferenceInForm } from '../selects/selectReferenceInForm/selectReferenceInForm';
-import { UserRoles } from '@/app/interfaces/general.interface';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId } from './docValuesOptions';
-import { useEffect } from 'react';
-
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './docValuesOptions';
 
 export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesProps): JSX.Element => {
     
@@ -30,8 +27,6 @@ export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesPro
     
     let documentIsSaleType = typeDocumentIsSale(contentName);
     let showBalance = typeDocumentForLeaveTMZ(contentName);
-
-    let roleZuvalachiOrHamirchi = (role == UserRoles.HAMIRCHI || role == UserRoles.ZUVALACHI)
     
     let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
     let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
@@ -85,9 +80,9 @@ export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesPro
                 } */}
 
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
-                <InputInForm nameControl='price' type='number' label='Нарх' visible={!docWithCash && !roleZuvalachiOrHamirchi}/>
-                <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={!roleZuvalachiOrHamirchi}/>
-                <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={contentName == DocumentType.SaleProd}/>
+                <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)}/>
+                <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
+                <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/>
                 <InputInForm nameControl='comment' type='text' label='Изох'/>
             </div>
         </>

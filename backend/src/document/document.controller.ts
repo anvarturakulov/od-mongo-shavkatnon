@@ -14,7 +14,7 @@ export class DocumentController {
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
-    this.documentService.createReference(dto);
+    this.documentService.createDocument(dto);
   };
 
   @UseGuards(JwtAuthGuard)
