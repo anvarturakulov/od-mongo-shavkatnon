@@ -20,6 +20,7 @@ export class User {
 
   @Prop()
   storageId: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -27,6 +27,7 @@ export interface ReferenceModel {
     unit?: string;
     comment?: string;
     deleted?: boolean;
+    delivery?: boolean; 
 }
 
 export interface ReferenceBody {
@@ -36,6 +37,7 @@ export interface ReferenceBody {
     typeTMZ: string;
     unit: string;
     comment: string;
+    delivery: boolean
 }
 
 

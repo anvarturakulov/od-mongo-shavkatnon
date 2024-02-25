@@ -10,7 +10,6 @@ import { getTitleBySchet } from '@/app/service/reports/getTitleBySchet';
 export function TBody ({ listSecondSubconts, data, schet, className, ...props}:TbodyProps):JSX.Element {
   
   const { mainData } = useAppContext();
-  const { reportOption } = mainData;
   return (
     <>
       <div className={styles.title}>{getTitleBySchet(schet)}</div>

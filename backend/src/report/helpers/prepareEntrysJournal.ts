@@ -24,5 +24,5 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
         // }
     }
   })
-  return documents
+  return results
 }

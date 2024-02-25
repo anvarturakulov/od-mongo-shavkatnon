@@ -27,6 +27,9 @@ export class Reference {
   @Prop()
   comment?: string;
 
+  @Prop()
+  delivery?: boolean
+
 }
 
 export const ReferenceSchema = SchemaFactory.createForClass(Reference);

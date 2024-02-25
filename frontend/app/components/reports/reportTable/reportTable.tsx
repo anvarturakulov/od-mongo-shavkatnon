@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import {useReactToPrint} from 'react-to-print';
 import PrintIco from './ico/print.svg';
 import { useAppContext } from '@/app/context/app.context';
-import { EntryItem, ReportType, Schet } from '@/app/interfaces/report.interface';
+import { ReportType, Schet } from '@/app/interfaces/report.interface';
 import { getListSecondSubconts } from '@/app/service/reports/getListSecondSubconts';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
@@ -42,7 +42,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     }
 
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, schetList, firstReferenceId);
-    
+    console.log(entrys)
 
     if (!startReport) return <></>
 

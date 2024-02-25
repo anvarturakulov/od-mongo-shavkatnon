@@ -34,6 +34,7 @@ export const getEntrysJournal = (setMainData: Function | undefined, mainData: Ma
         if (endDate && endDate>=0) {
           newReportOptions.endDate = endDate;
         }
+        // console.log(newReportOptions.entrys)
 
         setMainData('reportOption', { ...newReportOptions });
       }

@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 
 export enum UserRoles {
   ADMIN = 'ADMIN',
@@ -30,4 +30,5 @@ export class AuthDto {
   @IsString()
   @IsOptional()
   storageId: string;
+
 }

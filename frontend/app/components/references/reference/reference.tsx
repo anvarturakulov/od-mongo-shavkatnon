@@ -11,6 +11,8 @@ import { Select } from './helpers/reference.components';
 import { cancelSubmit, onSubmit } from './helpers/reference.functions';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getTypeReferenceByTitle } from '@/app/service/references/getTypeReferenceByTitle';
+import { UserRoles } from '@/app/interfaces/general.interface';
+import { CheckBoxForDelivery } from './checkBoxForDelivery/checkBoxForDelivery';
 
 export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element => {
 
@@ -25,7 +27,8 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         typePartners: '',
         typeTMZ: '',
         unit: '',
-        comment: ''
+        comment: '',
+        delivery: true
     }
 
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
@@ -40,6 +43,15 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         })
     }
 
+    const setCheckbox = (checked: boolean) => {
+        setBody(state => {
+            return {
+                ...state,
+                delivery: checked
+            }
+        })
+    }
+
     useEffect(()=> {
         setBody(defaultBody);
     }, [mainData.clearControlElements])
@@ -48,14 +60,15 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         const {currentReference} = mainData
         
         if (currentReference != undefined) {
-            const { typePartners, typeTMZ, unit, comment } = currentReference
+            const { typePartners, typeTMZ, unit, comment, delivery } = currentReference
             let newBody = {
                 name: currentReference.name,
                 typeReference: getTypeReferenceByTitle(currentReference.typeReference),
                 typePartners: typePartners ? typePartners: '',
                 typeTMZ: typeTMZ ? typeTMZ : '',
                 unit: unit ? unit : '',
-                comment: comment ? comment : '' 
+                comment: comment ? comment : '' ,
+                delivery: currentReference.delivery ? true : false
             }
             setBody(newBody)
         }
@@ -75,7 +88,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     typeReference == TypeReference.PARTNERS && 
                     Select(typePartnersList, body, 'Хамкор тури', 'typePartners', changeElements)
                 }
-
+ 
                 {
                     typeReference == TypeReference.TMZ && 
                     <div className={styles.box}> 
@@ -89,6 +102,10 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     </div>
                 }
 
+                {
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    <CheckBoxForDelivery label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery}/>
+                }
                 <div>
                     <div>Изох</div>
                     <input value={body.comment} type="text" id='comment' className={styles.input} onChange={(e)=>changeElements(e)}/>
