@@ -5,15 +5,18 @@ import { Model } from 'mongoose';
 import { CreateDocumentDto } from './dto/document.create.dto';
 import { DocumentType } from 'src/interfaces/document.interface';
 import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
+import { sendMessageToChanel } from './telegram/telegramMessage';
+import { User } from 'src/auth/models/user.model';
 
 @Injectable()
 export class DocumentService {
 
-  constructor(@InjectModel(Document.name) private documentModel: Model<DocDocument>) { }
+  constructor(
+    @InjectModel(Document.name) private documentModel: Model<DocDocument>
+  ) { }
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
     const newDocument = new this.documentModel(dto);
-    
     return newDocument.save()
   }
 

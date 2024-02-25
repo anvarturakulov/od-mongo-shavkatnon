@@ -1,4 +1,3 @@
-import { DocumentType } from '@/app/interfaces/document.interface';
 import { MenuData } from '../../data/menu';
 
 export const getDescriptionDocument = (name: string): string => {

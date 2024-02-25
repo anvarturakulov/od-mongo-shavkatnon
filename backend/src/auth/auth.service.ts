@@ -31,6 +31,10 @@ export class AuthService {
     return this.userModel.findOne({email}).exec();
   }
 
+  async findUserByName(name: string) {
+    return this.userModel.findOne({ name }).exec();
+  }
+
   // Promise<Pick<User, 'email' >>
   async validateUser(email: string, password: string) {
     const user = await this.findUser(email);

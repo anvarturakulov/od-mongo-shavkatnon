@@ -7,6 +7,7 @@ import { Reference, ReferenceSchema } from './models/referense.model';
 @Module({
   controllers: [ReferenceController],
   providers: [ReferenceService],
-  imports: [MongooseModule.forFeature([{ name: Reference.name, schema: ReferenceSchema }])]
+  imports: [MongooseModule.forFeature([{ name: Reference.name, schema: ReferenceSchema }])],
+  exports: [ReferenceService]
 })
 export class ReferenceModule {}
