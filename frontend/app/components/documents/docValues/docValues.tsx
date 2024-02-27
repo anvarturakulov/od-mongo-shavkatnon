@@ -82,7 +82,7 @@ export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesPro
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
                 <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)}/>
                 <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
-                <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/>
+                {/* <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/> */}
                 <InputInForm nameControl='comment' type='text' label='Изох'/>
             </div>
         </>

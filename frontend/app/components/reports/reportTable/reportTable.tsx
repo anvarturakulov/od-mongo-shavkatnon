@@ -28,7 +28,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const componentRef = useRef<HTMLInputElement>(null)
-    
+
     const handlePrint = useReactToPrint({
         content : () => componentRef.current,
         documentTitle: contentTitle
@@ -42,7 +42,6 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     }
 
     let listSecondSubconts: Array<string> = getListSecondSubconts(entrys, schetList, firstReferenceId);
-    console.log(entrys)
 
     if (!startReport) return <></>
 

@@ -78,8 +78,8 @@ export const MenuData:Array<MenuItem> = [
             { 
                 title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)',
                 type: 'document', active: false,
-                roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX]
+                roles: []
+                // [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.MoveCash, description:'Пул силжиши',

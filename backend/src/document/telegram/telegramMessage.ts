@@ -25,6 +25,8 @@ export type ReferencesForTelegramMessage = {
   analitic: Reference | undefined
 }
 
+export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegramMessage, newDocument: boolean) => {
   
   let title = newDocument ? 'ШАВКАТ НОН" - ЧЕК': 'УЗГАРТИРИЛГАН ЧЕК'
@@ -37,10 +39,10 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   let analitic = references.analitic?.name ? `Аналитика-- - ${references.analitic.name}` : ''
   let sender = references.sender?.name ? `Жунатувчи-- - ${ references.sender.name }` : ''
   
-  let count = body.count > 0 ? `Сон --- ${ body.count }`: ''
-  let price = body.price > 0 ? `Нарх --- ${body.price}` : ''
-  let total = body.total > 0 ? `Сумма --- ${body.total}` : ''
-  let cashFromPartner = body.cashFromPartner > 0 ? `Хамкордан олинган пул --- ${body.cashFromPartner}` : ''
+  let count = body.count > 0 ? `Сон --- ${ numberValue(body.count) }`: ''
+  let price = body.price > 0 ? `Нарх --- ${numberValue(body.price)}` : ''
+  let total = body.total > 0 ? `Сумма --- ${numberValue(body.total)}` : ''
+  let cashFromPartner = body.cashFromPartner > 0 ? `Хамкордан олинган пул --- ${numberValue(body.cashFromPartner)}` : ''
   let comment = body.comment ? `Изох: ${body.comment}`: ''
   
   
@@ -57,7 +59,6 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
    ${analitic}
    ${count} ${price}
    ${total} 
-   ${cashFromPartner}
    ${comment}
    ==========================
    МЕХНАТИНГИЗ УЧУН РАХМАТ!

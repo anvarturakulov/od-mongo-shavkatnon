@@ -8,10 +8,9 @@ import { Message } from '@/app/components/common/message/message';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import Journal from '@/app/components/documents/journal/journal';
-
 import { IntervalWindow } from '@/app/components/common/intervalWindow/intervalWindow';
 import TopBox from '@/app/components/common/topBox/topBox';
-import { Delivery } from '@/app/components/reports/dashboard/delivery/delivery';
+import { Information } from '@/app/components/information/information';
 
 const infoBlock = (
     <>
@@ -306,17 +305,12 @@ export default function Dashboard() {
   return (
     
     <div className={styles.dashboard}>
-      
-      
       <div className={styles.container}>
         <TopBox/>
         <div className={styles.content}>
-          
-          {mainData.mainPage && infoBlock}
-          
-          {mainData.mainPage && <Delivery/>}
 
-          {/* {infoBlock} */}
+          {mainData.mainPage && <Information/>}
+          {mainData.mainPage && infoBlock}
           
           <div className={styles.journalBox}>
             { !mainData.mainPage && contentType=='document' && <Journal/> }

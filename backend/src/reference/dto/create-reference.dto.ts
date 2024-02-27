@@ -28,7 +28,9 @@ export class CreateReferenceDto {
   @IsString()
   comment?: string;
 
-  @IsOptional()
   @IsBoolean()
-  delivery: boolean = false;
+  delivery: boolean;
+
+  @IsBoolean()
+  filial: boolean;
 }

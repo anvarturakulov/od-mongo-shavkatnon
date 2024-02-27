@@ -9,7 +9,6 @@ import { getSchetForOborotType } from '@/app/service/reports/getSchetForOborotTy
 export default function MatOborot({ className, listFirstSubconts, listSecondSubconts, data, ...props} : OborotkaProps):JSX.Element {
     const { setMainData, mainData } = useAppContext()
     const { oborotType } = mainData.reportOption;
-
     return (
         <>
           <table className={styles.table}>

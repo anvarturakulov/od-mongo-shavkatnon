@@ -41,7 +41,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       kreditFirstSubcontoId: receiverId?.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
       count: count,
-      summa: cashFromPartner,
+      summa: total,
     }
 
     const leaveTMZ = {

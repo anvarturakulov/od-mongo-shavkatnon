@@ -23,8 +23,8 @@ export const defaultDocumentFormItems:DocumentModel = {
 }
 
 export const defaultReportOptions: ReportOptions =  {
-    startDate: 0,
-    endDate: 0,
+    startDate: 1708905600000,
+    endDate: 1708905600000,
     firstReferenceId: '',
     secondReferenceId: '',
     showReport: false,

@@ -11,7 +11,6 @@ export const showMessage = (
     if (typeof message == 'string') {
       setMainData('message', message);
     } else {
-      console.log([...message])
       setMainData('message', [...message]);
     }
     setMainData('messageType', messageType);

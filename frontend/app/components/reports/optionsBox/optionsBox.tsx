@@ -43,6 +43,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
             <div className={styles.dataBoxBottom}>
                 <SelectOborot label='Айланма тури' visible={contentName == ReportType.Oborotka}/>
             </div>
+            
             <div className={styles.dataBoxBottom}>
                 <SelectReference 
                     label={result.label} 
@@ -64,7 +65,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
             <button 
                 className={styles.button}
                 onClick={()=> showReport(setMainData, mainData)}>
-                Хисоботни шакллантириш
+                Хисоботни шакллантириш +
             </button>
 
         </div>

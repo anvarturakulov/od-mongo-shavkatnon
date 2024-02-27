@@ -21,8 +21,7 @@ export function AppProvider({ children }: Props) {
     
     const [data, setData] = useState<Maindata>(defaultMainData);
     const setMainData = (key: string, value: any ) => {
-        // console.log('Set Main Data')
-        // console.log(key)
+
         setData((data) => ({
             ...data,
             [key]: typeof value != 'object' ? value : 

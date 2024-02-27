@@ -16,7 +16,6 @@ export class ReportController {
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);
     }
-    // console.log(report)
     return report;
   }
 

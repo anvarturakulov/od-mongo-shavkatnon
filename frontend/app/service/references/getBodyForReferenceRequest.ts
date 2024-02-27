@@ -4,7 +4,7 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
   let newReq = {
     name: state.name,
     comment: state.comment,
-    typeReference
+    typeReference,
   }
   switch (typeReference) {
     case TypeReference.CHARGES:
@@ -23,6 +23,8 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
     case TypeReference.STORAGES:
       return {
         ...newReq,
+        delivery: state.delivery,
+        filial: state.filial
       };
     case TypeReference.TMZ:
       return {

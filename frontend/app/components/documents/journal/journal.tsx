@@ -21,7 +21,9 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     
     let dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
     let dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
-    
+   
+    // console.log(Date.parse(dateStart))
+
     const {mainData, setMainData} = useAppContext();
     const { contentName, user, showDocumentWindow } = mainData;
     const role = mainData.user?.role;

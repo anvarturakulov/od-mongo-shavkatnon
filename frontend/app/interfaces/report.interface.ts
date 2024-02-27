@@ -12,8 +12,10 @@ export interface ReportOptions {
     secondReferenceId?: string,
     showReport: boolean,
     entrys: Array<EntryItem>,
+    dashboardEntrys: Array<EntryItem>,
     startReport: boolean,
-    oborotType: OborotType
+    oborotType: OborotType,
+
 }
 
 export enum Schet {
@@ -57,7 +59,11 @@ export enum TypeQuery {
     MPRICE = 'MPRICE',
     BALANCE = 'BALANCE',
     TDSUMEntrys = 'TDSUMEntrys',
-    TKSUMEntrys = 'TKSUMEntrys'
+    TKSUMEntrys = 'TKSUMEntrys',
+    ODS = 'ODS',
+    OKS = 'OKS',
+    ODK = 'ODK',
+    OKK = 'OKK',
 }
 
 export enum OborotType {
