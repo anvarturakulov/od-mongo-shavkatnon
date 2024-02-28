@@ -6,14 +6,14 @@ export const queryKor = (
   debetSchet: Schet,
   kreditSchet: Schet,
   typequery: TypeQuery,
-  firstSubconto: string | null,
-  secondSubconto: string | null,
+  firstSubconto: string | undefined,
+  secondSubconto: string | undefined,
   mainData: Maindata,
   forDashboard? : boolean
 ): number => {
 
   const { reportOption } = mainData;
-  let { startDate, endDate, entrys, dashboardEntrys } = reportOption;
+  let { startDate, endDate, entrys } = reportOption;
   
   let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval')));
   let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval')));
@@ -30,7 +30,6 @@ export const queryKor = (
   if (forDashboard) {
     startDate = startDateFromStorage;
     endDate = endDateFromStorage;
-    newEntrys = [...dashboardEntrys]
   }
 
   switch (typequery) {

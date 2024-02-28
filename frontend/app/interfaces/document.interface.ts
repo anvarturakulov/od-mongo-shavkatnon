@@ -36,6 +36,7 @@ export interface DocumentModel {
     receiverId: string,
     isWorker: boolean,
     isPartner: boolean,
+    isFounder: boolean,
     analiticId: string,
     count: number,
     balance?: number,

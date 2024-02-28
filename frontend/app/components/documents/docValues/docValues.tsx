@@ -24,6 +24,7 @@ export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesPro
     
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
     let hasPartners = contentName == DocumentType.LeaveCash;
+    let hasFounder = contentName == DocumentType.LeaveCash;
     
     let documentIsSaleType = typeDocumentIsSale(contentName);
     let showBalance = typeDocumentForLeaveTMZ(contentName);
@@ -57,12 +58,17 @@ export const DocValues = ({ className,setDefinedValues, ...props }: DocValuesPro
                 <div className={styles.checkBoxs}>
                     { 
                         hasWorkers &&                   
-                        <CheckBoxInTable label = 'Ходим' itemIndexInTable={0} isPartner={false}/> 
+                        <CheckBoxInTable label = 'Ходим' itemIndexInTable={0} id={'worker'}/> 
                     }
 
                     { 
                         hasPartners &&                   
-                        <CheckBoxInTable label = 'Хамкор' itemIndexInTable={0} isPartner={true}/> 
+                        <CheckBoxInTable label = 'Хамкор' itemIndexInTable={0} id={'partner'}/> 
+                    }
+
+                    { 
+                        hasFounder &&                   
+                        <CheckBoxInTable label = 'Таъсисчи' itemIndexInTable={0} id={'founder'}/> 
                     }
                 </div>
                 

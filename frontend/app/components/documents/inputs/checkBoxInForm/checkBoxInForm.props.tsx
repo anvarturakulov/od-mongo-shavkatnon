@@ -1,7 +1,8 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+export type CheckboxIdTypes = 'partner' | 'worker' | 'founder'
 
 export interface checkBoxInFormProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     itemIndexInTable: number,
-    isPartner: boolean,
+    id: CheckboxIdTypes,
     label: string,
 }

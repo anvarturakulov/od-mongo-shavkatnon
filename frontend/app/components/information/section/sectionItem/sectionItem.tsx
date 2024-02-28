@@ -1,28 +1,32 @@
 'use client'
-import { DeliveryItemProps } from './deliveryItem.props';
-import styles from './deliveryItem.module.css';
+import { SectionItemProps } from './sectionItem.props';
+import styles from './sectionItem.module.css';
 import cn from 'classnames';
 import { Htag } from '@/app/components';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { query } from '@/app/service/reports/querys/query';
 import { numberValue } from '@/app/service/common/converters';
+import { queryKor } from '@/app/service/reports/querys/queryKor';
 
-export const DeliveryItem = ({className, data, currentDeliveryId, title,  ...props }: DeliveryItemProps) :JSX.Element => {
+export const SectionItem = ({className, data, currentId, title, sectionType,  ...props }: SectionItemProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext()
-    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentDeliveryId, true);
-    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentDeliveryId, true);
+    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true);
+    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true);
 
-    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentDeliveryId, true);
-    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentDeliveryId, true);
+    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true);
+    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true);
 
-    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentDeliveryId, true);
-    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentDeliveryId, true);
+    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true);
+    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true);
 
-    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentDeliveryId, true);
-    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentDeliveryId, true);
+    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true);
+    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true);
 
+    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true);
+    
+    
     return (
        <>
           <div className={styles.item}>
@@ -61,11 +65,19 @@ export const DeliveryItem = ({className, data, currentDeliveryId, title,  ...pro
 
             <div className={styles.row}>
                 <div className={styles.title}>Пул топширди</div>
-                <div className={styles.value}>{numberValue(TKSUM)}</div>
+                <div className={styles.value}>{numberValue(MOVEOUT)}</div>
             </div>
+            {
+                sectionType == 'filial' &&
+                <div className={styles.row}>
+                    <div className={styles.title}>Пул сарфлади</div>
+                    <div className={styles.value}>{numberValue(TKSUM-MOVEOUT)}</div>
+                </div>
+            }
+            
             <div className={styles.row}>
                 <div className={styles.title}>Охирги карзи</div>
-                <div className={styles.value}>{numberValue(PDSUM-PDKOL+TDSUM-TKSUM)}</div>
+                <div className={styles.value}>{numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}</div>
             </div>
           </div>
       </>

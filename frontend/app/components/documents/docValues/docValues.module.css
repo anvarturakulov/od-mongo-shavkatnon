@@ -26,8 +26,9 @@
 
 .checkBoxs{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
+    padding: 20px 0px;
 }
 
 .partnersBox{

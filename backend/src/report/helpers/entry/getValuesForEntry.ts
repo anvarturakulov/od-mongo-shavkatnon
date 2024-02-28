@@ -16,7 +16,7 @@ export interface ResultgetValuesForEntry {
 export const getValuesForEntry = (item: Document, newEntry?: boolean): ResultgetValuesForEntry => {
   if (item) {
     let documentType = item.documentType;
-    let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker } = item
+    let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
     const leaveComeTMZObj = {
       debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
@@ -148,6 +148,23 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
             kredit: Schet.S00,
             ...leaveCashZp6700,
           }
+        }
+
+        if (isWorker && newEntry) {
+          return {
+            debet: Schet.S67,
+            kredit: Schet.S00,
+            ...leaveCashZp6700,
+          }
+        }
+
+        if (isFounder) {
+          // console.log(item.senderId)
+          return {
+            debet: Schet.S66,
+            kredit: Schet.S50,
+            ...leaveCashOther
+          };
         }
 
         return {

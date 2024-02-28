@@ -34,6 +34,9 @@ export class Document {
   isPartner: boolean
 
   @Prop()
+  isFounder: boolean
+
+  @Prop()
   analiticId: Types.ObjectId
 
   @Prop()

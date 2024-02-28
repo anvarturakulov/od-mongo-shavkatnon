@@ -12,7 +12,6 @@ export interface ReportOptions {
     secondReferenceId?: string,
     showReport: boolean,
     entrys: Array<EntryItem>,
-    dashboardEntrys: Array<EntryItem>,
     startReport: boolean,
     oborotType: OborotType,
 
@@ -28,6 +27,7 @@ export enum Schet {
     S40 = 'S40', // СЧЕТА К ПОЛУЧЕНИЮ И СЧЕТА К ОПЛАТЕ ПОСТАВЩИКАМ И ПОДРЯДЧИКАМ
     S50 = 'S50', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ В КАССЕ
     S51 = 'S51', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ НА РАСЧЕТНОМ СЧЕТЕ
+    S66 = 'S66', // СЧЕТА УЧЕТА ЗАРОБОТНОЙ ПЛАТЫ СОТРУДНИКОВ
     S67 = 'S67', // СЧЕТА УЧЕТА ЗАРОБОТНОЙ ПЛАТЫ СОТРУДНИКОВ
 }
 

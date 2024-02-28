@@ -31,6 +31,9 @@ export class CreateDocumentDto {
   @IsBoolean()
   isPartner: boolean
 
+  @IsBoolean()
+  isFounder: boolean
+
   @IsString()
   analiticId: string
 

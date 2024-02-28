@@ -25,3 +25,14 @@
 .bottomTitle{
     margin-top: 15px;
 }
+
+.title{
+    font-weight: 500 !important;
+    text-align: left !important;
+    padding-left: 10px !important;
+}
+
+.bold {
+    /* font-weight: 600 !important; */
+    color: blue;
+}

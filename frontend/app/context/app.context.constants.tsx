@@ -14,6 +14,7 @@ export const defaultDocumentFormItems:DocumentModel = {
     analiticId: '',
     isWorker: false,
     isPartner: false,
+    isFounder: false,
     count: 0,
     balance: 0,
     price: 0,
