@@ -16,8 +16,8 @@ export const Section = ({className, data, sectionType, ...props }: SectionProps)
                         if (sectionType == 'delivery') return item?.delivery
                         if (sectionType == 'filial') return item?.filial
                     })
-                    .map((item: ReferenceModel) => {
-                        return <SectionItem currentId= {item._id} data={data} title={item.name} sectionType = {sectionType}/>
+                    .map((item: ReferenceModel, key: number) => {
+                        return <SectionItem key={key} currentId= {item._id} data={data} title={item.name} sectionType = {sectionType}/>
                     })
                 }
             </div> 

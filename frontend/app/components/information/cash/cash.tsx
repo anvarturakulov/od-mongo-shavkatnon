@@ -78,8 +78,9 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
                 {
                     data && data.length > 0 &&
                     data.filter((item: any) => item?.typeReference == TypeReference.STORAGES  )
-                    .map((item: ReferenceModel) => {
+                    .map((item: ReferenceModel, key: number) => {
                         return <CashItem 
+                            key={key}
                             currentSectionId= {item._id} 
                             data={data} 
                             title={item.name}
