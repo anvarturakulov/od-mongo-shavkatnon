@@ -47,7 +47,6 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemain.toString().padStart(2, '0')}`;
     }
     
-
     return (
        <>
             <div className={styles.btnBox}>

@@ -9,11 +9,15 @@ export const query = (
   mainData: Maindata,
   bodyByFirstSunconto?: boolean,
   fixedReferencyId?: string,
-  forDashboard?: boolean
-): number => {
+  forDashboard?: boolean,
+  dateStartForDashboard?: string | null,
+  endStartForDashboard?: string | null,
 
-  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval')));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval')));
+): number => {
+  
+
+  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
+  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard));
 
   const { reportOption } = mainData;
   let { startDate, endDate, entrys } = reportOption;

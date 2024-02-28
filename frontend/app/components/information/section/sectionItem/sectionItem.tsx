@@ -12,19 +12,25 @@ import { queryKor } from '@/app/service/reports/querys/queryKor';
 export const SectionItem = ({className, data, currentId, title, sectionType,  ...props }: SectionItemProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext()
-    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true);
-    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true);
+    let startDateFromStorage, endDateFromStorage
+    if (typeof window !== 'undefined') {
+      startDateFromStorage = localStorage.getItem('dateStartToInterval');
+      endDateFromStorage = localStorage.getItem('dateEndToInterval');
+    }
 
-    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true);
-    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true);
+    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
-    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true);
-    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true);
+    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
-    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true);
-    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true);
+    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
-    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true);
+    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+
+    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
     
     
     return (

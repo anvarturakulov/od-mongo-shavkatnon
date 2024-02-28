@@ -9,14 +9,16 @@ export const queryKor = (
   firstSubconto: string | undefined,
   secondSubconto: string | undefined,
   mainData: Maindata,
-  forDashboard? : boolean
+  forDashboard? : boolean,
+  dateStartForDashboard?: string | null,
+  endStartForDashboard?: string | null,
 ): number => {
 
   const { reportOption } = mainData;
   let { startDate, endDate, entrys } = reportOption;
   
-  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval')));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval')));
+  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
+  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard));
 
 
   let flagFirstSubconoto = true

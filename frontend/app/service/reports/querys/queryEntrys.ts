@@ -7,7 +7,7 @@ export const queryEntrys = (
     secondSubcontoId: string | null,
     mainData: Maindata,
     bodyByFirstSunconto?: boolean,
-    fixedReferencyId?: string
+    fixedReferencyId?: string,
 ): Array<EntryItem> => {
 
   const { reportOption } = mainData;

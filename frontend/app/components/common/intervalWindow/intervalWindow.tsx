@@ -7,8 +7,11 @@ import { useAppContext } from '@/app/context/app.context';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 
 export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Element => {
-  let dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
-  let dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
+  let dateStart='', dateEnd=''
+  if (typeof window !== 'undefined') {
+    dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
+    dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
+  }
 
   const {mainData, setMainData} = useAppContext();
   

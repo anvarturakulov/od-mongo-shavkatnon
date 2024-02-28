@@ -5,7 +5,6 @@ import DateIco from './date.svg'
 import CloseIco from './close.svg'
 import { useAppContext } from '@/app/context/app.context';
 import cn from 'classnames';
-import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull'
 import { dateToStr } from '@/app/service/reports/dateToStr'

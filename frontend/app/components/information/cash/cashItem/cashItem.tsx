@@ -6,21 +6,27 @@ import { useAppContext } from '@/app/context/app.context';
 import { query } from '@/app/service/reports/querys/query';
 import { numberValue } from '@/app/service/common/converters';
 import { queryKor } from '@/app/service/reports/querys/queryKor';
+import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 
 export const CashItem = ({className, data, currentSectionId, title, ...props }: CashItemProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext()
+    let startDateFromStorage, endDateFromStorage
+    if (typeof window !== 'undefined') {
+      startDateFromStorage = localStorage.getItem('dateStartToInterval');
+      endDateFromStorage = localStorage.getItem('dateEndToInterval');
+    }
     
-    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentSectionId, true);
-    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentSectionId, true);
-    const TRADEINCOME = queryKor(Schet.S50, Schet.S40, TypeQuery.ODS, currentSectionId, undefined, mainData, true);
-    const MOVEINCOME = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentSectionId, undefined, mainData, true);
-    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true);
-    const CHARGES = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true);
-    const FORPARTNERS = queryKor(Schet.S40, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true);
-    const FORFOUNDER = queryKor(Schet.S66, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true);
-    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentSectionId, true);
-    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentSectionId, true);
+    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
+    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
+    const TRADEINCOME = queryKor(Schet.S50, Schet.S40, TypeQuery.ODS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const MOVEINCOME = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const CHARGES = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const FORPARTNERS = queryKor(Schet.S40, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const FORFOUNDER = queryKor(Schet.S66, Schet.S50, TypeQuery.OKS, currentSectionId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
+    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
 
     if ((PDSUM-PKSUM+TRADEINCOME+MOVEINCOME+CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER+
       PDSUM-PKSUM+TDSUM-TKSUM) == 0 ) return <></>
