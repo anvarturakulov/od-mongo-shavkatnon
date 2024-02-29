@@ -40,15 +40,15 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
             <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
             <div className={styles.row}>
                 <div className={styles.title}>Кун бошига колдик нони</div>
-                <div className={styles.value}>{PDKOL-PKKOL}</div>
+                <div className={styles.value}>{numberValue(PDKOL-PKKOL)}</div>
             </div>
             <div className={styles.row}>
                 <div className={styles.title}>Цехдан олинган нон</div>
-                <div className={styles.value}>{TDKOL}</div>
+                <div className={styles.value}>{numberValue(TDKOL)}</div>
             </div>
             <div className={styles.row}>
                 <div className={styles.title}>Сотилган ва кайтарилган нон</div>
-                <div className={styles.value}>{TKKOL}</div>
+                <div className={styles.value}>{numberValue(TKKOL)}</div>
             </div>
             {/* <div className={styles.row}>
                 <div className={styles.title}>Цехга кайтарилган нон</div>

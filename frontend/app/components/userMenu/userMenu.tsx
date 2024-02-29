@@ -8,19 +8,27 @@ import { defaultDocumentFormItems, defaultReportOptions } from '@/app/context/ap
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
-import { ContentType } from '@/app/interfaces/general.interface';
+import { ContentType, UserRoles } from '@/app/interfaces/general.interface';
 import { getRandomID } from '@/app/service/documents/getRandomID';
 import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../documents/docValues/docValuesOptions';
+import useSWR from 'swr';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { Section } from '../information/section/section';
+import { RefreshPanel } from '../information/refreshPanel/refreshPanel';
 
 const div = 1;
 
 export default function UserMenu({menuData, className, ...props}:UserMenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
-    
     const {mainData, setMainData} = useAppContext()
+    const { user } = mainData;
+    
     const role = mainData.user?.role;
     let storageIdFromUser = mainData.user?.storageId
+    const token = user?.access_token;
+    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
+    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -103,6 +111,23 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             </>
                 
             ))}
+            {
+                user?.role == UserRoles.HEADSECTION &&
+                <>
+                    <RefreshPanel/>
+                    <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
+                    <Section data={data} sectionType='delivery'/>
+                </>
+
+            }
+
+            {
+                user?.role == UserRoles.DELIVERY &&
+                <>
+                    <RefreshPanel/>
+                    <Section data={data} sectionType='delivery' currentSection ={storageIdFromUser}/>
+                </>
+            }
         </>
     )
 }

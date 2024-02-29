@@ -11,6 +11,7 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { Section } from './section/section';
 import { Cash } from './cash/cash';
 import DateIco from './date.svg'
+import { RefreshPanel } from './refreshPanel/refreshPanel';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -19,37 +20,37 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-    let interval: any;
-    const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
-        getEntrysJournal(setMainData, mainData);
-        clearInterval(interval);
-        setSeconts(0)
-    }
+    // let interval: any;
+    // const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
+    //     getEntrysJournal(setMainData, mainData);
+    //     clearInterval(interval);
+    //     setSeconts(0)
+    // }
     
-    const [seconds, setSeconts] = useState(0);
+    // const [seconds, setSeconts] = useState(0);
 
-    useEffect(() => {
-        const tick = (num: number) => setSeconts(seconds + num);
+    // useEffect(() => {
+    //     const tick = (num: number) => setSeconts(seconds + num);
 
-        interval = setInterval(() => tick(1), 1000);
+    //     interval = setInterval(() => tick(1), 1000);
 
-        const cleanup = () => {
-            clearInterval(interval);
-        };
-        return cleanup;
-    });
+    //     const cleanup = () => {
+    //         clearInterval(interval);
+    //     };
+    //     return cleanup;
+    // });
 
-    const getTime= () => {
-        let secondsRemain = seconds % 60
-        let minutes = (seconds-secondsRemain) / 60
-        let hoursRemain = seconds % 3600
-        let hours = (seconds - hoursRemain) / 3600
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemain.toString().padStart(2, '0')}`;
-    }
+    // const getTime= () => {
+    //     let secondsRemain = seconds % 60
+    //     let minutes = (seconds-secondsRemain) / 60
+    //     let hoursRemain = seconds % 3600
+    //     let hours = (seconds - hoursRemain) / 3600
+    //     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemain.toString().padStart(2, '0')}`;
+    // }
     
     return (
        <>
-            <div className={styles.btnBox}>
+            {/* <div className={styles.btnBox}>
                 <div className={styles.timer}>
                     {getTime()}
                 </div>
@@ -63,7 +64,8 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
                 />
                 <Button appearance='ghost' onClick={(e) => refreshReport(mainData, setMainData)}>Янгилаш</Button>
                 
-            </div>
+            </div> */}
+            <RefreshPanel/>
             <Cash data={data}/>
             <Section data={data} sectionType='delivery'/>
             <Section data={data} sectionType='filial'/>

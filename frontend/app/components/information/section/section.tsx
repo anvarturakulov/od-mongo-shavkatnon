@@ -4,7 +4,7 @@ import styles from './section.module.css';
 import { SectionItem } from './sectionItem/sectionItem';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 
-export const Section = ({className, data, sectionType, ...props }: SectionProps) :JSX.Element => {
+export const Section = ({className, data, sectionType, currentSection, ...props }: SectionProps) :JSX.Element => {
     let title = sectionType == 'delivery' ? 'ЮК ЕТКАЗУВЧИЛАР' : 'ФИЛИАЛ'  
     return (
        <>
@@ -15,6 +15,10 @@ export const Section = ({className, data, sectionType, ...props }: SectionProps)
                     data.filter((item: any) => {
                         if (sectionType == 'delivery') return item?.delivery
                         if (sectionType == 'filial') return item?.filial
+                    })
+                    .filter((item: ReferenceModel) => {
+                        if (currentSection) return item._id == currentSection
+                        else return true
                     })
                     .map((item: ReferenceModel, key: number) => {
                         return <SectionItem key={key} currentId= {item._id} data={data} title={item.name} sectionType = {sectionType}/>
