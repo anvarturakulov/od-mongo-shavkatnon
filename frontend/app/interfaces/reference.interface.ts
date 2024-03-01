@@ -30,7 +30,7 @@ export interface ReferenceModel {
     delivery?: boolean;
     filial?: boolean;
     sklad?: boolean;
-    un: boolean
+    un?: boolean
 }
 
 export interface ReferenceBody {
