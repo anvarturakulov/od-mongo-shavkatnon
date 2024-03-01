@@ -14,6 +14,7 @@
     gap: 10px;
     opacity: 50%;
     cursor: pointer;
+    display: none;
 }
 
 .longBox{
@@ -30,6 +31,8 @@
 .showBox{
     transform: translateX(-10px);
     opacity: 100%;
+    display: block;
+    color: #000;
 }
 
 .success{

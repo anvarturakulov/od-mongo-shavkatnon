@@ -34,11 +34,11 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                 {
                 (currentDocument.deleted || notAdmins(mainData.user)) &&
                    <>
-                    <Button appearance='primary' onClick={() => 
+                    <Button className={styles.button} appearance='primary' onClick={() => 
                         onSubmit( mainData, setMainData, definedValues)}>
                             Саклаш
                     </Button>
-                    <Button appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
+                    <Button className={styles.button} appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
                    </> 
                 }
             </div>
