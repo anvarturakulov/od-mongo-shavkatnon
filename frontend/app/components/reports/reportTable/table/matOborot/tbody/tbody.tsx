@@ -37,31 +37,31 @@ export function TBody ({ listSecondSubconts, data, schet, className, ...props}:T
                 <td className={styles.tdNumber}>{key + 1} </td>
                 <td className={styles.name}>{getPropertySubconto(data, item).name}</td>
                 <td className={styles.unit}>{getPropertySubconto(data, item).unit}</td>
-                <td className={styles.price}>{numberValue(MPRICE)}</td>
+                {/* <td className={styles.price}>{numberValue(MPRICE)}</td> */}
                 <td className={styles.numberValue}>
                     {numberValue(PDKOL-PKKOL)}
                 </td>
-                <td className={styles.numberValue}>
+                {/* <td className={styles.numberValue}>
                     {numberValue(PDSUM-PKSUM)}
-                </td>
+                </td> */}
                 <td className={styles.numberValue}>
                     {numberValue(TDKOL)}
                 </td>
-                <td className={styles.numberValue}>
+                {/* <td className={styles.numberValue}>
                     {numberValue(TDSUM)}
-                </td>
+                </td> */}
                 <td className={styles.numberValue}>
                     {numberValue(TKKOL)}
                 </td>
-                <td className={styles.numberValue}>
+                {/* <td className={styles.numberValue}>
                     {numberValue(TKSUM)}
-                </td>
+                </td> */}
                 <td className={styles.numberValue}>
                     {numberValue(PDKOL-PKKOL+TDKOL-TKKOL)}
                 </td>
-                <td className={styles.numberValue}>
+                {/* <td className={styles.numberValue}>
                     {numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}
-                </td>
+                </td> */}
               </tr>
             </tr>
           </>

@@ -5,8 +5,7 @@ import styles from './doc.module.css';
 import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { cancelSubmit, onSubmit, saveDocumentType, saveNumber, saveUser } from './helpers/doc.functions';
-import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { cancelSubmit, onSubmit, saveUser } from './helpers/doc.functions';
 import { notAdmins } from '@/app/service/common/users';
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
@@ -15,12 +14,6 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     const [definedValues, setDefinedValues] = useState({receiverId:'',senderId:''})
     const { contentTitle, currentDocument, isNewDocument } = mainData;
     
-    useEffect(()=>{
-        if (isNewDocument) {
-            getEntrysJournal(setMainData, mainData, currentDocument.date);
-        }
-    },[currentDocument.date, currentDocument.senderId])
-
     useEffect(() => {
         if (!currentDocument.user) {
             saveUser(setMainData, mainData)

@@ -29,7 +29,9 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         unit: '',
         comment: '',
         delivery: false,
-        filial: false
+        filial: false,
+        sklad: false,
+        un: false,
     }
 
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
@@ -62,7 +64,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         const {currentReference} = mainData
         
         if (currentReference != undefined) {
-            const { typePartners, typeTMZ, unit, comment, delivery } = currentReference
+            const { typePartners, typeTMZ, unit, comment } = currentReference
             let newBody = {
                 name: currentReference.name,
                 typeReference: getTypeReferenceByTitle(currentReference.typeReference),
@@ -72,6 +74,8 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 comment: comment ? comment : '' ,
                 delivery: currentReference.delivery ? true : false,
                 filial: currentReference.filial ? true : false,
+                sklad: currentReference.sklad ? true : false,
+                un: currentReference.un ? true : false,
             }
             setBody(newBody)
         }
@@ -105,16 +109,33 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     </div>
                 }
 
-                <div className={styles.checkBoxs}></div>
-                {
-                    mainData.user?.role == UserRoles.ADMIN && 
-                    <CheckBoxForReference label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery} id={'delivery'}/>
-                }
+                <div className={styles.checkBoxs}>
+                    {
+                        mainData.user?.role == UserRoles.ADMIN && 
+                        body.typeReference == TypeReference.STORAGES &&
+                        <CheckBoxForReference label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery} id={'delivery'}/>
+                    }
 
-                {
-                    mainData.user?.role == UserRoles.ADMIN && 
-                    <CheckBoxForReference label='Филиал' setCheckbox={setCheckbox} checked={body.filial} id={'filial'}/>
-                }
+                    {
+                        mainData.user?.role == UserRoles.ADMIN && 
+                        body.typeReference == TypeReference.STORAGES &&
+                        <CheckBoxForReference label='Филиал' setCheckbox={setCheckbox} checked={body.filial} id={'filial'}/>
+                    }
+
+                    {
+                        mainData.user?.role == UserRoles.ADMIN && 
+                        body.typeReference == TypeReference.STORAGES &&
+                        <CheckBoxForReference label='Склад' setCheckbox={setCheckbox} checked={body.sklad} id={'sklad'}/>
+                    }
+
+                    {
+                        ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                        body.typeReference == TypeReference.TMZ &&
+                        <CheckBoxForReference label='Ун' setCheckbox={setCheckbox} checked={body.un} id={'un'}/>
+                    }
+
+                </div>
+                
 
                 <div>
                     <div>Изох</div>

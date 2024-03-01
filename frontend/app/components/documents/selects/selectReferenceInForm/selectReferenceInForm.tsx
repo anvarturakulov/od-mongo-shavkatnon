@@ -3,7 +3,7 @@ import styles from './selectReferenceInForm.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import cn from 'classnames';
-import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypePartners, TypeReference } from '@/app/interfaces/reference.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
@@ -11,6 +11,8 @@ import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentFor
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { query } from '@/app/service/reports/querys/query';
+import { UserRoles } from '@/app/interfaces/general.interface';
+import { DocumentType } from '@/app/interfaces/document.interface';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
@@ -101,6 +103,29 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     } else {
                         return true
                     }
+                })
+                .filter((item: ReferenceModel)=> {
+                    if (user?.role == UserRoles.ELAKCHI) {
+                        if (item.typeReference == TypeReference.TMZ &&
+                            contentName == DocumentType.LeaveMaterial ) 
+                        {
+                            return item.un == true
+                        }
+                    } else if (user?.role == UserRoles.HEADSECTION) {
+                        if (item.typeTMZ == 'MATERIAL') return !item.un
+                    }
+                    return true
+                })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'receiver' && 
+                        ( contentName == DocumentType.MoveHalfstuff || 
+                          contentName == DocumentType.MoveMaterial ||
+                          contentName == DocumentType.MoveProd ||
+                          contentName == DocumentType.MoveCash ))
+                        {
+                            return (item.filial || item.sklad)
+                        }
+                    return true
                 })
                 .sort(sortByName)
                 .filter(( item:ReferenceModel ) => !item.deleted )

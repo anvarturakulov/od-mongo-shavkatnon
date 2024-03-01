@@ -3,7 +3,7 @@ import { DocumentModel, DocumentType, OptionsForDocument } from '@/app/interface
 import { User, UserRoles } from '@/app/interfaces/general.interface'
 import { TypeReference } from '@/app/interfaces/reference.interface'
 
-export const getLabelForAnalitic = (currentDocument: DocumentModel, options: OptionsForDocument):string => {
+export const getLabelForAnalitic = (currentDocument: DocumentModel, options: OptionsForDocument): string => {
   if (currentDocument && currentDocument.isPartner) {
     return 'Хамкор'
   }
@@ -18,7 +18,7 @@ export const getTypeReferenceForAnalitic = (currentDocument: DocumentModel, opti
     return TypeReference.PARTNERS
   }
   if (currentDocument && currentDocument.isWorker) {
-    return TypeReference.WORKERS 
+    return TypeReference.WORKERS
   }
   return options.analiticType
 }
@@ -37,38 +37,40 @@ export const saveItemId = (storageId: string | undefined, type: 'reciever' | 'se
 export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
   if (role && (role == UserRoles.ZUVALACHI || (role == UserRoles.ELAKCHI && contentName == DocumentType.ComeHalfstuff))) {
     return storageIdFromUser
-  } 
+  }
   if (storageIdFromUser && role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
     return storageIdFromUser
   }
   if (role && role == UserRoles.HAMIRCHI) {
-    return "659d1ff7523a48fdeb6ada6d" 
+    return "659d1ff7523a48fdeb6ada6d"
   }
   return ''
 }
 
 export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
   if (
-      storageIdFromUser && 
-      role && 
-      role !== UserRoles.ADMIN &&
-      role !== UserRoles.HEADCOMPANY &&
-      contentName != DocumentType.ComeCashFromPartners
-    ) return storageIdFromUser
-  
+    storageIdFromUser &&
+    role &&
+    role !== UserRoles.ADMIN &&
+    role !== UserRoles.HEADCOMPANY &&
+    contentName != DocumentType.ComeCashFromPartners
+  ) return storageIdFromUser
+
   return ''
 }
 
-export const visibilityPriceValueInDocument = (contentName:string, user:User | undefined): boolean => {
+export const visibilityPriceValueInDocument = (contentName: string, user: User | undefined): boolean => {
   const documents = [
     `${DocumentType.ComeCashFromPartners}`,
     `${DocumentType.LeaveCash}`,
     `${DocumentType.MoveCash}`,
     `${DocumentType.ComeHalfstuff}`,
-    `${DocumentType.MoveHalfstuff}`,
-    `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.ComeProduct}`,
+    `${DocumentType.MoveHalfstuff}`,
     `${DocumentType.MoveProd}`,
+    `${DocumentType.MoveMaterial}`,
+    `${DocumentType.LeaveMaterial}`,
+    `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.LeaveProd}`,
 
   ]
@@ -83,18 +85,21 @@ export const visibilityPriceValueInDocument = (contentName:string, user:User | u
 export const visibilityTotalValueInDocument = (contentName: string, user: User | undefined): boolean => {
   const documents = [
     `${DocumentType.ComeHalfstuff}`,
+    `${DocumentType.ComeCashFromPartners}`,
     `${DocumentType.LeaveHalfstuff}`,
+    `${DocumentType.LeaveProd}`,
+    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.MoveHalfstuff}`,
     `${DocumentType.MoveProd}`,
-    `${DocumentType.ComeCashFromPartners}`
+    `${DocumentType.MoveMaterial}`,
   ]
 
   if (user) {
     if (user.role == UserRoles.HAMIRCHI || user.role == UserRoles.ZUVALACHI) return false
-    
+
     if (documents.includes(contentName)) return false
   }
-   
+
 
   return true
 }

@@ -6,8 +6,6 @@ import { ReferenceBody } from '@/app/interfaces/reference.interface';
 
 export const CheckBoxForReference = ({ className, checked, setCheckbox, label, id, ...props }: checkBoxForReferenceProps): JSX.Element => {
     
-    const {mainData, setMainData} = useAppContext();
-    
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setCheckbox: Function, id: string) => {
         let target = e.currentTarget;
         setCheckbox(target.checked, id)

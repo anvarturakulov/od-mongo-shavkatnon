@@ -9,6 +9,7 @@ export enum UserRoles {
   ZUVALACHI = 'ZUVALACHI',
   HEADSECTION = 'HEADSECTION',
   DELIVERY = 'DELIVERY',
+  SELLER = 'SELLER',
   GUEST = 'GUEST',
 }
 

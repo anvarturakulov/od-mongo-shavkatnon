@@ -25,7 +25,10 @@ export default function Users() {
   return (
     <>
       <div className={styles.container}>
-        <TopBox/>
+        {
+          mainData.mainPage &&
+          <TopBox/>
+        }
         {
           mainData.mainPage &&
           <div className={styles.box}>

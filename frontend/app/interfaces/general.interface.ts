@@ -25,7 +25,9 @@ export enum UserRoles {
     ZUVALACHI = 'ZUVALACHI',
     HEADSECTION = 'HEADSECTION',
     DELIVERY = 'DELIVERY',
+    SELLER = 'SELLER',
     GUEST = 'GUEST',
+
 }
 
 export interface User {
@@ -41,6 +43,6 @@ export interface BodyForLogin {
     password: string,
 }
 
-export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX];
-export const workersUsersList = [UserRoles.DELIVERY, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.ZUVALACHI] 
+export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST];
+export const workersUsersList = [UserRoles.DELIVERY, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.ZUVALACHI, UserRoles.GLBUX] 
 export const adminAndHeadCompany = [UserRoles.ADMIN, UserRoles.HEADCOMPANY]

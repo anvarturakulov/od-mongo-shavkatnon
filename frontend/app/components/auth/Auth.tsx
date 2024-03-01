@@ -42,7 +42,7 @@ export default function Auth() {
     if (login.trim().length && password.trim().length) {
       loginToApp(body, setMainData )
     } else {
-         showMessage("Кириш учун маълумотларни киритинг", 'error', setMainData)
+      showMessage("Кириш учун маълумотларни киритинг", 'error', setMainData)
     }
   }
 

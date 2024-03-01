@@ -28,10 +28,16 @@ export class Reference {
   comment?: string;
 
   @Prop()
-  delivery: boolean
+  delivery?: boolean
 
   @Prop()
-  filial: boolean
+  filial?: boolean
+
+  @Prop()
+  sklad?: boolean
+
+  @Prop()
+  un?: boolean
 
 }
 

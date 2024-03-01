@@ -29,6 +29,8 @@ export interface ReferenceModel {
     deleted?: boolean;
     delivery?: boolean;
     filial?: boolean;
+    sklad?: boolean;
+    un: boolean
 }
 
 export interface ReferenceBody {
@@ -40,6 +42,8 @@ export interface ReferenceBody {
     comment: string;
     delivery: boolean,
     filial: boolean,
+    sklad: boolean,
+    un: boolean,
 }
 
 

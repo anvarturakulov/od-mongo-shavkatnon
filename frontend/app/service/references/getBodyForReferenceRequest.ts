@@ -24,13 +24,15 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
       return {
         ...newReq,
         delivery: state.delivery,
-        filial: state.filial
+        filial: state.filial,
+        sklad: state.sklad
       };
     case TypeReference.TMZ:
       return {
         ...newReq,
         typeTMZ: state.typeTMZ,
-        unit: state.unit
+        unit: state.unit,
+        un: state.un
       };
     case TypeReference.WORKERS:
       return {

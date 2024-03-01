@@ -29,8 +29,14 @@ export class CreateReferenceDto {
   comment?: string;
 
   @IsBoolean()
-  delivery: boolean;
+  delivery?: boolean;
 
   @IsBoolean()
-  filial: boolean;
+  filial?: boolean;
+
+  @IsBoolean()
+  sklad?: boolean;
+
+  @IsBoolean()
+  un?: boolean;
 }
