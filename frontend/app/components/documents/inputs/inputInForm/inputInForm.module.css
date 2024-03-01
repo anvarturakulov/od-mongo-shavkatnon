@@ -18,8 +18,8 @@
 }
 
 .label {
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 22px;
+    line-height: 22px;
     text-align: left;
     font-weight: 500;
 }
@@ -29,4 +29,5 @@
     grid-template-columns: 3fr 2fr;
     align-items: center;
     gap: 5px;
+    margin-bottom: 5px;
 }
