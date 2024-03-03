@@ -3,11 +3,9 @@ import styles from './inputInForm.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocumentModel, NameControl } from '@/app/interfaces/document.interface';
-
+import { NameControl } from '@/app/interfaces/document.interface';
 
 export const InputInForm = ({visible, label, className, nameControl, ...props }: InputInFormProps): JSX.Element => {
-    
     
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
@@ -22,7 +20,7 @@ export const InputInForm = ({visible, label, className, nameControl, ...props }:
             ...currentDocument
         }
         
-        if ( nameControl=='count') {
+        if ( nameControl=='count' && (+value>0)) {
             newValues = {
                 ...currentDocument,
                 [`${nameControl}`]: +value,

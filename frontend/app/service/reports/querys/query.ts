@@ -3,7 +3,7 @@ import { EntryItem, Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { getDateFromStorageExceptNull } from '../../documents/getDateFromStorageExceptNull';
 
 export const query = (
-  schet: Schet,
+  schet: Schet | Array<Schet>,
   typequery: TypeQuery,
   secondSubcontoId: string | null,
   mainData: Maindata,
@@ -41,7 +41,7 @@ export const query = (
     case TypeQuery.PDKOL:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
+          (item.debet == schet || schet.includes(item.debet)) &&
           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
           item.date < startDate
@@ -52,7 +52,7 @@ export const query = (
     case TypeQuery.PDSUM:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
+          (item.debet == schet || schet.includes(item.debet)) &&
           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
           item.date < startDate
@@ -63,7 +63,7 @@ export const query = (
     case TypeQuery.PKKOL:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.kredit == schet &&
+          ( item.kredit == schet || schet.includes(item.kredit )) && 
           (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
           item.date < startDate
@@ -74,7 +74,7 @@ export const query = (
     case TypeQuery.PKSUM:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.kredit == schet &&
+          ( item.kredit == schet || schet.includes(item.kredit) ) &&
           (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
           item.date < startDate
@@ -85,7 +85,7 @@ export const query = (
     case TypeQuery.TDKOL:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
+          ( item.debet == schet || schet.includes(item.debet) ) &&
           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
           item.date >= startDate &&
@@ -97,7 +97,7 @@ export const query = (
     case TypeQuery.TDSUM:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
+          ( item.debet == schet || schet.includes(item.debet) ) &&
           (flag || item.debetFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.debetSecondSubcontoId == secondSubcontoId) &&
           item.date >= startDate &&
@@ -109,7 +109,7 @@ export const query = (
     case TypeQuery.TKKOL:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.kredit == schet &&
+          ( item.kredit == schet || schet.includes(item.kredit) ) &&
           (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
           item.date >= startDate &&
@@ -121,7 +121,7 @@ export const query = (
     case TypeQuery.TKSUM:
       return newEntrys.filter((item: EntryItem) => {
         return (
-          item.kredit == schet &&
+          ( item.kredit == schet || schet.includes(item.kredit) ) &&
           (flag || item.kreditFirstSubcontoId == firstReferenceId) &&
           (flagSubconto2 || item.kreditSecondSubcontoId == secondSubcontoId) &&
           item.date >= startDate &&
@@ -133,8 +133,8 @@ export const query = (
     case TypeQuery.MPRICE:
       let totalSumma = newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
-          item.kredit != schet &&
+          ( item.debet == schet || schet.includes(item.debet) ) &&
+          ( item.kredit != schet || schet.includes(item.kredit) )&&
           // item.debetFirstSubcontoId == firstReferenceId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date <= endDate
@@ -144,8 +144,8 @@ export const query = (
 
       let totalCount = newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
-          item.kredit != schet &&
+          ( item.debet == schet || schet.includes(item.debet) ) &&
+          ( item.kredit != schet || schet.includes(item.kredit) ) &&
           // item.debetFirstSubcontoId == firstReferenceId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date <= endDate
@@ -157,7 +157,7 @@ export const query = (
     case TypeQuery.BALANCE:
       let countLeave = newEntrys.filter((item: EntryItem) => {
         return (
-          item.kredit == schet &&
+          ( item.kredit == schet || schet.includes(item.kredit) ) &&
           (item.kreditFirstSubcontoId == firstReferenceId) &&
           item.kreditSecondSubcontoId == secondSubcontoId &&
           item.date < endDate
@@ -166,7 +166,7 @@ export const query = (
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
       let countCome = newEntrys.filter((item: EntryItem) => {
         return (
-          item.debet == schet &&
+          ( item.debet == schet || schet.includes(item.debet) ) &&
           (item.debetFirstSubcontoId == firstReferenceId) &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date < endDate

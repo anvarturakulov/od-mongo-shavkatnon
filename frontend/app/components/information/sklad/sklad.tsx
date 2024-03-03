@@ -5,7 +5,7 @@ import { SkladItem } from './skladItem/skladItem';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 
 export const Sklad = ({className, data, sectionType, currentSection, ...props }: SkladProps) :JSX.Element => {
-    let title = sectionType == 'delivery' ? 'ЮК ЕТКАЗУВЧИЛАР' : 'ФИЛИАЛ'  
+    let title = sectionType == 'sklad' ? 'СКЛАД': ''  
     return (
        <>
             <div className={styles.title}>{title}</div>
@@ -13,8 +13,7 @@ export const Sklad = ({className, data, sectionType, currentSection, ...props }:
                 {
                     data && data.length > 0 &&
                     data.filter((item: any) => {
-                        if (sectionType == 'delivery') return item?.delivery
-                        if (sectionType == 'filial') return item?.filial
+                        if (sectionType == 'sklad') return item?.sklad
                     })
                     .filter((item: ReferenceModel) => {
                         if (currentSection) return item._id == currentSection

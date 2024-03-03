@@ -15,6 +15,8 @@ import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Section } from '../information/section/section';
 import { RefreshPanel } from '../information/refreshPanel/refreshPanel';
+import { Sklad } from '../information/sklad/sklad';
+import { IntervalWindow } from '../common/intervalWindow/intervalWindow';
 
 const div = 1;
 
@@ -80,6 +82,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 setMainData('reportOption', { ...newReportOptions });
 
             }
+
         };
     }
 
@@ -128,6 +131,15 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <Section data={data} sectionType='delivery' currentSection ={storageIdFromUser}/>
                 </>
             }
+
+            {
+                user?.role == UserRoles.ELAKCHI && 
+                <>
+                    <RefreshPanel/>
+                    <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
+                </>
+            }
+            <IntervalWindow/>
         </>
     )
 }

@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import { SectionType } from '../section.props';
+import { SectionType } from '../../information.props';
 
 export interface SectionItemProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   currentId: string | undefined,
