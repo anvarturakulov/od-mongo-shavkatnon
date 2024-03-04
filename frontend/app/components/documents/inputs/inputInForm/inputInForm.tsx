@@ -20,7 +20,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
             ...currentDocument
         }
         
-        if ( nameControl=='count' && (+value>0)) {
+        if ( nameControl=='count' && (+value>-1)) {
             
             newValues = {
                 ...currentDocument,
