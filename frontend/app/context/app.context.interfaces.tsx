@@ -24,6 +24,7 @@ export interface Maindata {
   currentReference: ReferenceModel | undefined,
   reportOption: ReportOptions,
   showIntervalWindow: boolean,
+  showMayda: boolean,
 }
 
 export interface IAppContext {

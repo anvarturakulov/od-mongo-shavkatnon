@@ -6,7 +6,6 @@ import { useAppContext } from '@/app/context/app.context';
 import { query } from '@/app/service/reports/querys/query';
 import { numberValue } from '@/app/service/common/converters';
 import { queryKor } from '@/app/service/reports/querys/queryKor';
-import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 
 export const CashItem = ({className, data, currentSectionId, title, ...props }: CashItemProps) :JSX.Element => {
     

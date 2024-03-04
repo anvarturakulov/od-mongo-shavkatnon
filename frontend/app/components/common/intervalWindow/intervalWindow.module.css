@@ -12,6 +12,17 @@
   text-align: center;
 }
 
+@media (max-width: 700px) {
+    .box {
+      /* top: 10px; */
+      right: 20px;
+    }
+}
+
+@media screen {
+  
+}
+
 .input {
   font-size: 18px;
 }
@@ -20,5 +31,4 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  
 }

@@ -56,7 +56,6 @@ export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined, 
     let body: DocumentModel = {
         ...currentDocument,
     }
-    console.log(body)
 
     if (!validateBody(body)) {
         showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);

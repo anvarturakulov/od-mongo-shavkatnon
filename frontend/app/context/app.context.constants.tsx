@@ -21,6 +21,7 @@ export const defaultDocumentFormItems:DocumentModel = {
     total: 0,
     cashFromPartner: 0,
     comment: '',
+    proveden: false
 }
 
 export const defaultReportOptions: ReportOptions =  {
@@ -55,4 +56,5 @@ export const defaultMainData: Maindata = {
     currentReference: undefined,
     reportOption: {...defaultReportOptions},
     showIntervalWindow: false,
+    showMayda: false
   }

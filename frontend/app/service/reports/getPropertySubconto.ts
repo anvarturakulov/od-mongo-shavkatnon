@@ -8,5 +8,6 @@ export const getPropertySubconto = (data: any, subcontoId: string) => {
   return {
     name: elem?.name,
     unit: elem?.unit,
+    sklad: elem?.sklad
   }
 }

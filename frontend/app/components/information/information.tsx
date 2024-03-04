@@ -12,6 +12,7 @@ import { Section } from './section/section';
 import { Cash } from './cash/cash';
 import DateIco from './date.svg'
 import { RefreshPanel } from './refreshPanel/refreshPanel';
+import { Sklad } from './sklad/sklad';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -25,6 +26,7 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
        <>
             <RefreshPanel/>
             <Cash data={data}/>
+            <Sklad data={data} sectionType='sklad'/>
             <Section data={data} sectionType='delivery'/>
             <Section data={data} sectionType='filial'/>
        </>

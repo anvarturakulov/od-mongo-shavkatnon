@@ -21,6 +21,13 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
     const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
+    const OBKOLD2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLD2820 = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+    
+    const OBKOLK2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLK4028 = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+   
     const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
@@ -42,18 +49,35 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                 <div className={styles.title}>Кун бошига колдик нони</div>
                 <div className={styles.value}>{numberValue(PDKOL-PKKOL)}</div>
             </div>
+            {
+                OBKOLD2820 != 0 &&
+                <div className={styles.row}>
+                    <div className={styles.title}>Ишлаб. чик. кирим</div>
+                    <div className={styles.value}>{numberValue(OBKOLD2820)}</div>
+                </div>
+            }
+            
             <div className={styles.row}>
-                <div className={styles.title}>Цехдан олинган нон</div>
-                <div className={styles.value}>{numberValue(TDKOL)}</div>
+                <div className={styles.title}>Ички силжиш. кирим</div>
+                <div className={styles.value}>{numberValue(OBKOLD2828)}</div>
             </div>
+            
             <div className={styles.row}>
-                <div className={styles.title}>Сотилган ва кайтарилган нон</div>
-                <div className={styles.value}>{numberValue(TKKOL)}</div>
+                <div className={styles.title}>Сотилган нон</div>
+                <div className={styles.value}>{numberValue(OBKOLK4028)}</div>
             </div>
-            {/* <div className={styles.row}>
-                <div className={styles.title}>Цехга кайтарилган нон</div>
-                <div className={styles.value}>10</div>
-            </div> */}
+            {
+                OBKOLK2028 != 0 &&
+                <div className={styles.row}>
+                    <div className={styles.title}>Брак(истем.) нон</div>
+                    <div className={styles.value}>{numberValue(OBKOLK2028)}</div>
+                </div>
+            }
+            <div className={styles.row}>
+                <div className={styles.title}>Ички сил. чиким</div>
+                <div className={styles.value}>{numberValue(OBKOLK2828)}</div>
+            </div>
+
             <div className={styles.row}>
                 <div className={styles.title}>Зиммасидаги колдик нон</div>
                 <div className={styles.value}>{numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}</div>
@@ -70,7 +94,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
             </div>
 
             <div className={styles.row}>
-                <div className={styles.title}>Пул топширди</div>
+                <div className={styles.title}>Пул силжиш</div>
                 <div className={styles.value}>{numberValue(MOVEOUT)}</div>
             </div>
             {

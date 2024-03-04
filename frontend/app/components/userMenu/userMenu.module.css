@@ -21,3 +21,11 @@
     color: var(--white);
     background-color: var(--primary);
 }
+
+.maydaBtn{
+    width: 100%;
+    padding: 15px 10px;
+    margin: 20px 0px;
+    font-weight: normal;
+    font-size: 16px;
+}

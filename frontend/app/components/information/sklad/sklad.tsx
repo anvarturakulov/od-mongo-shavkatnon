@@ -5,7 +5,7 @@ import { SkladItem } from './skladItem/skladItem';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 
 export const Sklad = ({className, data, sectionType, currentSection, ...props }: SkladProps) :JSX.Element => {
-    let title = sectionType == 'sklad' ? 'СКЛАД': ''  
+    let title = sectionType == 'sklad' ? 'ХОМ АШЁ КОЛДИГИ': ''  
     return (
        <>
             <div className={styles.title}>{title}</div>

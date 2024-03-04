@@ -17,6 +17,8 @@ import { Section } from '../information/section/section';
 import { RefreshPanel } from '../information/refreshPanel/refreshPanel';
 import { Sklad } from '../information/sklad/sklad';
 import { IntervalWindow } from '../common/intervalWindow/intervalWindow';
+import { Mayda } from '../documents/mayda/mayda';
+import { Button } from '..';
 
 const div = 1;
 
@@ -86,6 +88,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
         };
     }
 
+    const showMayda = (setMainData: Function | undefined) => {
+        setMainData && setMainData('showMayda', true)
+    }
+
     useEffect(()=> {
        setMenu(menuData) 
     },[menuData])
@@ -114,11 +120,46 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             </>
                 
             ))}
+
             {
-                user?.role == UserRoles.HEADSECTION &&
+                (
+                    user?.role == UserRoles.HEADSECTION ||
+                    user?.role == UserRoles.SELLER
+                ) 
+                && 
+                <>
+                    <Button appearance='primary' className={styles.maydaBtn} onClick={()=>showMayda(setMainData)}>Майда савдо</Button>
+                    <Mayda/>
+                </>
+            }
+
+            {
+                (
+                    user?.role == UserRoles.ELAKCHI ||
+                    user?.role == UserRoles.GLBUX ||
+                    user?.role == UserRoles.HEADSECTION ||
+                    user?.role == UserRoles.HAMIRCHI
+                ) 
+                && 
                 <>
                     <RefreshPanel/>
+                    <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
+                </>
+            }
+
+            {
+                    user?.role == UserRoles.HEADSECTION &&
+                <>
                     <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
+                    <Section data={data} sectionType='delivery'/>
+                </>
+
+            }
+
+            {
+                user?.role == UserRoles.GLBUX &&
+                <>
+                    <Section data={data} sectionType='filial'/>
                     <Section data={data} sectionType='delivery'/>
                 </>
 
@@ -132,13 +173,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 </>
             }
 
-            {
-                user?.role == UserRoles.ELAKCHI && 
-                <>
-                    <RefreshPanel/>
-                    <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
-                </>
-            }
+            
             <IntervalWindow/>
         </>
     )

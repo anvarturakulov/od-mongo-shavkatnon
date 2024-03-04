@@ -44,6 +44,7 @@ export interface DocumentModel {
     total: number,
     cashFromPartner: number,
     comment?: string,
+    proveden?: boolean
 };
 
 export interface OptionsForDocument {
