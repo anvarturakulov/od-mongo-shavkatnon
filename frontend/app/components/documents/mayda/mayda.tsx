@@ -57,7 +57,12 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     const setValue = (e: React.FormEvent<HTMLInputElement>) => {
         let target = e.currentTarget;
         let value = +target.value;
-        if (value > 0) setCount(value)
+        
+        if (value > -1 && value < 30) setCount(value) 
+        else {
+            alert('Ака сони куп эмасми')
+            // setCount(0)
+        }
     }
 
     const onSubmit = (newDocument: DocumentModel, count: number, mainData: Maindata, setMainData: Function | undefined) => {
@@ -72,7 +77,7 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
         const config = {
             headers: { Authorization: `Bearer ${user?.access_token}` }
         };
-
+        console.log(body.proveden)
         const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/create';
         
         axios.post(uriPost, body, config)

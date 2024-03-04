@@ -127,6 +127,18 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
                     return true
                 })
+                .filter ((item: ReferenceModel) => {
+                    if (
+                            contentName == DocumentType.SaleProd 
+                            && type == 'receiver'
+                            && user?.role != UserRoles.HEADCOMPANY
+                            && user?.role != UserRoles.ADMIN
+                        ) {
+                            return item.clientForDeliveryId == user?.storageId
+                        }
+
+                    return true
+                })
                 .sort(sortByName)
                 .filter(( item:ReferenceModel ) => !item.deleted )
                 .map(( item:ReferenceModel ) => (

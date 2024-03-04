@@ -10,10 +10,9 @@ import { ReferenceJournalProps } from './referenceJournal.props';
 import { useAppContext } from '@/app/context/app.context';
 import Header from '../../common/header/header';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
-import { markToDeleteReference } from '@/app/service/references/markToDeleteReference';
-import { getReferenceById } from '@/app/service/references/getReferenceById';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemReference, getReference } from './helpers/reference.functions';
+import { getNameReference } from '../../documents/journal/helpers/journal.functions';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
@@ -22,7 +21,11 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
     const referenceType = getTypeReference(contentName);
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+referenceType;
+    const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
+
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    const { data : references, mutate: mutateReferences } = useSWR(urlReferences, (urlReferences) => getDataForSwr(urlReferences, token));
+
 
     useEffect(() => {
         mutate()
@@ -50,7 +53,10 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                             }
                             {
                                 referenceType == 'PARTNERS' &&
-                                <th className={styles.types}>Хамкор тури</th>
+                                <>
+                                    <th className={styles.types}>Хамкор тури</th>
+                                    <th className={styles.types}>Сохиби</th>
+                                </>
                             }
                             <th className={styles.comment}>Изох</th>
                             <th className={styles.rowAction}>Амал</th>
@@ -81,7 +87,10 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                                     }
                                     {
                                         referenceType == 'PARTNERS' &&
-                                        <td className={styles.types}>{item.typePartners}</td>
+                                        <>
+                                            <td className={styles.types}>{item.typePartners}</td>
+                                             <td className={styles.types}>{getNameReference(references,item.clientForDeliveryId)}</td>
+                                        </>
                                     }
                                     <td className={styles.comment}>{item.comment}</td>
                                     <td className={styles.rowAction}>

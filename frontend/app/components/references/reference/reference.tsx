@@ -4,7 +4,7 @@ import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
-import { ReferenceBody, TypeReference } from '../../../interfaces/reference.interface';
+import { ReferenceBody, TypePartners, TypeReference } from '../../../interfaces/reference.interface';
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
 import { Select } from './helpers/reference.components';
@@ -13,6 +13,7 @@ import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getTypeReferenceByTitle } from '@/app/service/references/getTypeReferenceByTitle';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { CheckBoxForReference } from './checkBoxForDelivery/checkBoxForReference';
+import { SelectForReferences } from './selectForReferences/selectForReferences';
 
 export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element => {
 
@@ -56,6 +57,15 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         })
     }
 
+    const setClientForDeliveryId = (id: string) => {
+        setBody(state => {
+            return {
+                ...state,
+                clientForDeliveryId: id
+            }
+        })
+    }
+
     useEffect(()=> {
         setBody(defaultBody);
     }, [mainData.clearControlElements])
@@ -76,7 +86,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 filial: currentReference.filial ? true : false,
                 sklad: currentReference.sklad ? true : false,
                 un: currentReference.un ? true : false,
-                clientForDeliveryId: ''
+                clientForDeliveryId: currentReference.clientForDeliveryId ? currentReference.clientForDeliveryId : '' 
             }
             setBody(newBody)
         }
@@ -137,6 +147,11 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
 
                 </div>
                 
+                {
+                    ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                    (body.typePartners == TypePartners.CLIENTS) &&
+                    <SelectForReferences label='Клиент сохиби' typeReference={TypeReference.STORAGES} currentItemId={mainData.currentReference?.clientForDeliveryId} setClientForDeliveryId={setClientForDeliveryId}/>
+                }
 
                 <div>
                     <div>Изох</div>

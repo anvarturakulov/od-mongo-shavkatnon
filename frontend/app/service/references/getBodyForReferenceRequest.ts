@@ -14,7 +14,8 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
     case TypeReference.PARTNERS:
       return {
         ...newReq,
-        typePartners: state.typePartners
+        typePartners: state.typePartners,
+        clientForDeliveryId: state.clientForDeliveryId
       };;
     case TypeReference.PRICES:
       return {

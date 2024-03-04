@@ -8,7 +8,7 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
 
-export const SelectForReferences = ({ label, typeReference ,currentItemId, className, ...props }: SelectForReferencesProps): JSX.Element => {
+export const SelectForReferences = ({ label, typeReference ,currentItemId, setClientForDeliveryId, className, ...props }: SelectForReferencesProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
@@ -17,19 +17,9 @@ export const SelectForReferences = ({ label, typeReference ,currentItemId, class
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
-
-        let { currentDocument } = mainData;
-        
-        if (currentDocument) {
-            let target = e.currentTarget;
-            let currentItem = {...currentDocument};
-            let id = target[target.selectedIndex].getAttribute('data-id');
-
-            if ( setMainData ) {
-                setMainData('currentDocument', {...currentItem})
-            }
-        }
-        
+        let target = e.currentTarget;
+        let id = target[target.selectedIndex].getAttribute('data-id');
+        setClientForDeliveryId(id)
     }
     
     return (

@@ -22,7 +22,7 @@ export const getDocument = async (
 
 }
 
-export const getNameReference = (references: any, id: string): String => {
+export const getNameReference = (references: any, id: string | undefined): String => {
   if (references && references.length > 0) {
     return references.filter((item: ReferenceModel) => item._id == id)[0]?.name
   }
