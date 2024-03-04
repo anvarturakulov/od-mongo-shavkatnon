@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
 
-export const CheckBoxInTable = ({ className, id, itemIndexInTable, label, ...props }: checkBoxInFormProps): JSX.Element => {
+export const CheckBoxInTable = ({ className, id, label, ...props }: checkBoxInFormProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { currentDocument } = mainData;
@@ -20,9 +20,13 @@ export const CheckBoxInTable = ({ className, id, itemIndexInTable, label, ...pro
         if (id == 'founder') {
             currentVal = currentDocument['isFounder']
         }
+
+        if (id == 'proveden') {
+            currentVal = currentDocument['proveden']
+        }
     }
 
-    const changeElements = (e: React.FormEvent<HTMLInputElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, id: CheckboxIdTypes) => {
+    const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata, id: CheckboxIdTypes) => {
         let target = e.currentTarget;
         let currentValues = {...currentDocument}
         if (currentDocument) {
@@ -48,6 +52,10 @@ export const CheckBoxInTable = ({ className, id, itemIndexInTable, label, ...pro
                     currentValues.isWorker = false
                 }
             }
+
+            if (id == 'proveden') {
+                currentValues.proveden = target.checked
+            }
             
             
             if ( setMainData ) {
@@ -61,7 +69,7 @@ export const CheckBoxInTable = ({ className, id, itemIndexInTable, label, ...pro
             <input
                 className={cn(className, styles.input)}
                 {...props}
-                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, id)}
+                onChange={(e) => changeElements(e, setMainData, mainData, id)}
                 type='checkbox'
                 checked={currentVal}
                 id={id}

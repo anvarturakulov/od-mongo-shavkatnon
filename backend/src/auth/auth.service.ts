@@ -21,7 +21,8 @@ export class AuthService {
       passwordHash: await hash(dto.password, salt),
       role: dto.role,
       name: dto.name,
-      storageId: dto.storageId
+      storageId: dto.storageId,
+      provodkaUser: dto.provodkaUser
     })
 
     return newUser.save()
@@ -50,14 +51,14 @@ export class AuthService {
     return { email: user.email, role: user.role, name: user.name, storageId: user.storageId }
   }
 
-  async login(email: string, role: UserRoles, name, storageId) {
+  async login(email: string, role: UserRoles, name: string, storageId: string) {
     const payload = { email };
     return {
       email,
       role,
       access_token: await this.jwtService.signAsync(payload),
       name,
-      storageId,
+      storageId
     }
   }
 }

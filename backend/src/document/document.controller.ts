@@ -15,10 +15,10 @@ export class DocumentController {
     private readonly documentService: DocumentService,
     private readonly userService: AuthService,
     private readonly referenceService: ReferenceService,
-    ) { }
-  
+  ) { }
 
-  private sendMessage = async (dto:CreateDocumentDto, newDocument: boolean) => {
+
+  private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, messageInDeleting?: string) => {
     const user = await this.userService.findUserByName(dto.user);
 
     let sender, receiver, analitic
@@ -31,15 +31,16 @@ export class DocumentController {
       receiver,
       analitic
     }
-
-    sendMessageToChanel(dto, user, references, newDocument)
+    sendMessageToChanel(dto, user, references, newDocument, messageInDeleting)
   }
 
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
-    this.sendMessage(dto, true)
+    if (dto.proveden) {
+      this.sendMessage(dto, true)
+    }
     this.documentService.createDocument(dto);
   };
 
@@ -59,9 +60,14 @@ export class DocumentController {
   @Delete('markToDelete/:id')
   async delete(@Param('id', IdValidationPipe) id: string) {
     const markedDoc = await this.documentService.markToDelete(id);
+
     if (!markedDoc) {
       throw new HttpException(DOCUMENT_NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);
     }
+    const document = await this.documentService.findById(id);
+    let newDto = { ...JSON.parse(JSON.stringify(document)) }
+    let messageIndeleting = newDto.deleted ? 'ЧЕК УЧИРИЛДИ' : 'ЧЕК ТИКЛАНДИ'
+    this.sendMessage(newDto, false, messageIndeleting)
   }
 
   @UseGuards(JwtAuthGuard)
@@ -83,6 +89,22 @@ export class DocumentController {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
     }
     return updatedDocument;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('setProvodka/:id')
+  async patchSetProvodka(@Param('id', IdValidationPipe) id: string) {
+
+    const docForProvodka = await this.documentService.setProvodka(id);
+    const document = await this.documentService.findById(id);
+
+    let newDto = { ...JSON.parse(JSON.stringify(document)) }
+
+    if (!docForProvodka) {
+      throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
+    }
+    this.sendMessage(newDto, true)
+    return docForProvodka;
   }
 
 }

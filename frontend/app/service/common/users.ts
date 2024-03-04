@@ -1,6 +1,11 @@
 import { User, UserRoles } from '@/app/interfaces/general.interface';
 
-export const notAdmins = (user: User | undefined): boolean => {
-  if (user && user.role != UserRoles.ADMIN && user.role != UserRoles.HEADCOMPANY) return true
+export const isAdmins = (user: User | undefined): boolean => {
+  if (user && (user.role == UserRoles.ADMIN || user.role == UserRoles.HEADCOMPANY)) return true
+  return false
+}
+
+export const isGlBuxs = (user: User | undefined): boolean => {
+  if (user && user.role == UserRoles.GLBUX) return true
   return false
 }

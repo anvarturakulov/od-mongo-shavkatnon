@@ -1,6 +1,6 @@
 import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocumentModel } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { showMessage } from '@/app/service/common/showMessage';
 import { getRandomID } from '@/app/service/documents/getRandomID';
@@ -28,11 +28,29 @@ export const saveNumber = (setNumberDoc: Function, setMainData: Function | undef
 //   }
 }
 
-export const saveUser = (setMainData: Function | undefined, mainData: Maindata) => {
+export const saveUser = (setMainData: Function | undefined, mainData: Maindata): any => {
   let {currentDocument} = mainData;
   let newObj = {
       ...currentDocument,
       user: mainData.user?.name,
+  }
+
+  if ( setMainData ) {
+      setMainData('currentDocument', {...newObj})
+  }
+}
+
+export const saveProvodka = (setMainData: Function | undefined, mainData: Maindata) => {
+  let { currentDocument ,isNewDocument, contentName } = mainData;
+  let value = true
+  
+  if (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash) {
+    value = false
+  }
+
+  let newObj = {
+      ...currentDocument,
+      proveden: value,
   }
 
   if ( setMainData ) {
@@ -50,13 +68,13 @@ export const cancelSubmit = (setMainData: Function | undefined, mainData: Mainda
     }
 }
 
-export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined, definedValues: {receiverId:string,senderId:string} ) => {
-    const {currentDocument} = mainData;
+export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
+    const {currentDocument, } = mainData;
     
     let body: DocumentModel = {
         ...currentDocument,
     }
-
+    
     if (!validateBody(body)) {
         showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
     } else {

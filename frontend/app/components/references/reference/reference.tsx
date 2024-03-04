@@ -47,7 +47,6 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     }
 
     const setCheckbox = (checked: boolean, id: string) => {
-        console.log(id)
         setBody(state => {
             return {
                 ...state,

@@ -2,16 +2,19 @@ import axios from 'axios';
 import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
-import { DocumentModel } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {
-  const { user, currentDocument, isNewDocument } = mainData
+  const { user, currentDocument, isNewDocument, contentName } = mainData
 
   let body: DocumentModel = {
     ...currentDocument,
   }
 
   delete body._id;
+  if (isNewDocument && (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash)) {
+    body.proveden = false
+  } 
   
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
@@ -27,7 +30,6 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('mainPage', true);
       // if (mainData.user?.role != UserRoles.HEADCOMPANY && mainData.user?.role != UserRoles.ADMIN) setMainData('mainPage', true)
     }
-    
   }
 
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/create';

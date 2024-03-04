@@ -5,13 +5,13 @@ import styles from './doc.module.css';
 import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { cancelSubmit, onSubmit, saveUser } from './helpers/doc.functions';
-import { notAdmins } from '@/app/service/common/users';
+import { cancelSubmit, onSubmit, saveProvodka, saveUser } from './helpers/doc.functions';
+import { isAdmins, isGlBuxs } from '@/app/service/common/users';
+import { CheckBoxInTable } from '../inputs/checkBoxInForm/checkBoxInForm';
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const [definedValues, setDefinedValues] = useState({receiverId:'',senderId:''})
     const { contentTitle, currentDocument, isNewDocument } = mainData;
     
     useEffect(() => {
@@ -29,17 +29,22 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                 </div>
             </div>
 
-            <DocValues setDefinedValues={setDefinedValues}/>
+            <DocValues/>
             <div className={styles.boxBtn}>
                 {
-                (currentDocument.deleted || notAdmins(mainData.user)) &&
+                    ( 
+                        isNewDocument || 
+                        (currentDocument.deleted && isAdmins(mainData.user))  
+                    ) 
+                    &&
                    <>
                     <Button className={styles.button} appearance='primary' onClick={() => 
-                        onSubmit( mainData, setMainData, definedValues)}>
+                        onSubmit( mainData, setMainData)}>
                             Саклаш
                     </Button>
+                    
                     <Button className={styles.button} appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
-                   </> 
+                   </>
                 }
             </div>
         </div>   

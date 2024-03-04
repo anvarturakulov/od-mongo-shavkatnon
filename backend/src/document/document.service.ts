@@ -4,9 +4,8 @@ import { DocDocument, Document } from './models/document.model';
 import { Model } from 'mongoose';
 import { CreateDocumentDto } from './dto/document.create.dto';
 import { DocumentType } from 'src/interfaces/document.interface';
-import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
-import { sendMessageToChanel } from './telegram/telegramMessage';
-import { User } from 'src/auth/models/user.model';
+import { DOCUMENT_IS_PROVEDEN, DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
+
 
 @Injectable()
 export class DocumentService {
@@ -20,13 +19,12 @@ export class DocumentService {
     return newDocument.save()
   }
 
-
   async getByTypeDocument(documentType: DocumentType): Promise<Document[]> {
     return this.documentModel.find({ documentType }).exec()
   }
 
   async getAllDocuments(): Promise<Document[]> {
-    return this.documentModel.find({deleted: !true}).exec()
+    return this.documentModel.find({deleted: !true, proveden: true}).exec()
   }
 
   async findById(id: string) {
@@ -34,14 +32,21 @@ export class DocumentService {
   }
 
   async markToDelete(id: string) {
-    // db.movies.findOne({ _id: ObjectId("1") }) - найти фильмы по переданному "id"
-    // db.movies.updateOne({ _id: ObjectId('1') }, { $set: { rating: 10, year: 1995 } }) - обновить фильм с переданным id, обновляются поля "rating" И "year"
     const document: CreateDocumentDto = await this.documentModel.findOne({ _id: id })
     if (!document.date) {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
     }
     const state = document.deleted ? false : true
     return this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
+    
+  }
+
+  async setProvodka(id: string) {
+    const document: CreateDocumentDto = await this.documentModel.findOne({ _id: id })
+    if (document.proveden) {
+      throw new NotFoundException(DOCUMENT_IS_PROVEDEN);
+    }
+    return this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
   }
 
   async updateById(id: string, dto: CreateDocumentDto) {

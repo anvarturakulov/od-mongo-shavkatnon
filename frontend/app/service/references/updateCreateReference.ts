@@ -14,7 +14,7 @@ export const updateCreateReference = (
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
-
+  console.log(body)
   const actionWithMainData = (mes: string) => {
     if (setMainData) {
       showMessage(`${body.name} - ${typeReference} - ${mes}`, 'success', setMainData)

@@ -26,9 +26,9 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
        <>
             <RefreshPanel/>
             <Cash data={data}/>
-            <Sklad data={data} sectionType='sklad'/>
-            <Section data={data} sectionType='delivery'/>
             <Section data={data} sectionType='filial'/>
+            <Section data={data} sectionType='delivery'/>
+            <Sklad data={data} sectionType='sklad'/>
        </>
     )
 } 

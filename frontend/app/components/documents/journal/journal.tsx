@@ -1,6 +1,7 @@
 'use client'
 import styles from './journal.module.css'
 import IcoTrash from './ico/trash.svg'
+import IcoSave from './ico/save.svg'
 import {JournalProps} from './journal.props'
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
@@ -10,7 +11,7 @@ import Header from '../../common/header/header';
 import { Doc } from '../doc/doc';
 import { secondsToDateString } from '../doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { deleteItemDocument, getDocument, getNameReference, getTotalValueForDocument } from './helpers/journal.functions';
+import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
@@ -22,15 +23,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     let dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
     let dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
    
-    // console.log(Date.parse(dateStart))
-
     const {mainData, setMainData} = useAppContext();
     const { contentName, user, showDocumentWindow } = mainData;
     const role = mainData.user?.role;
-    const admins = role && dashboardUsersList.includes(role);
+    const dashboardUsers = role && dashboardUsersList.includes(role);
 
-    // const [interval, setInterval] = useState<Interval>({dateStart, dateEnd})
-    
     const token = user?.access_token;
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
@@ -52,12 +49,12 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
 
     return (
         <>
-            {admins && <Header windowFor='document'/>}  
+            {dashboardUsers && <Header windowFor='document'/>}  
             <div className={styles.newElement}>
                 {showDocumentWindow && <Doc/>}
             </div>
             {
-                admins && 
+                dashboardUsers && 
                 <div className={styles.container} >
                     <table className={styles.table}>
                         <thead className={styles.thead}>
@@ -71,6 +68,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                 <th key='8'>Изох</th>
                                 <th key='9'>Фойдаланувчи</th>
                                 <th key='10' className={styles.rowAction}>Амал</th>
+                                <th key='11' className={styles.rowAction}>Амал</th>
                             </tr>
                         </thead>
                         <tbody className={styles.tbody}>
@@ -90,7 +88,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                     >
                                         <td className={styles.rowId}>{item.docNumber}</td>
                                         <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
-                                        <td>{getDescriptionDocument(item.documentType)}</td>
+                                        <td className={cn(styles.documentType, {
+                                                [styles.proveden]: item.proveden
+                                            })}>
+                                                {getDescriptionDocument(item.documentType)}
+                                        </td>
                                         <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total}</td>
                                         <td>{getNameReference(references,item.receiverId)}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
@@ -99,6 +101,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         <td className={styles.rowAction}>
                                             <IcoTrash className={styles.icoTrash}
                                             onClick = {() => deleteItemDocument(item._id, token, setMainData, mainData)}
+                                            />
+                                        </td>
+                                        <td className={styles.rowAction}>
+                                            <IcoSave className={styles.icoSave}
+                                            onClick = {() => setProvodkaToDoc(item._id, token, item.proveden ,setMainData, mainData)}
                                             />
                                         </td>
                                     </tr>

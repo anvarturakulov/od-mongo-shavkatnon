@@ -21,7 +21,7 @@ export const defaultDocumentFormItems:DocumentModel = {
     total: 0,
     cashFromPartner: 0,
     comment: '',
-    proveden: false
+    proveden: true
 }
 
 export const defaultReportOptions: ReportOptions =  {

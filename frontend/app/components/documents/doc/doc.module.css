@@ -50,7 +50,7 @@
 
 .boxBtn{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     gap: 10px;
     margin-top: 20px;
     justify-content: left;
@@ -78,6 +78,10 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+}
+
+.checkbox{
+    margin-left: 20px;
 }
 
 

@@ -54,6 +54,9 @@ export class Document {
   @Prop()
   comment?: string
 
+  @Prop()
+  proveden?: boolean
+
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

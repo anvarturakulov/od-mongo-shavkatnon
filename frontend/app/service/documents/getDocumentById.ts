@@ -5,7 +5,8 @@ import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 export const getDocumentById = (
   id: string | undefined,
   setMainData: Function | undefined,
-  token: string | undefined
+  token: string | undefined,
+  showDocument : boolean = true
 ) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
@@ -23,9 +24,7 @@ export const getDocumentById = (
     axios.get(uri, config)
       .then(function (response) {
         setMainData && setMainData('currentDocument', response.data);
-        // table items loading ...
-        
-        setMainData && setMainData('showDocumentWindow', true);
+        setMainData && showDocument && setMainData('showDocumentWindow', true);
       })
       .catch(function (error) {
         if (setMainData) {

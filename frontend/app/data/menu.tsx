@@ -13,13 +13,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeMaterial, description:'Хом ашё кирими', 
                 type: 'document', active: false, 
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
@@ -85,13 +85,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveCash, description:'Пул силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.LeaveCash, description:'Пул харажати',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
             // { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },
         ]

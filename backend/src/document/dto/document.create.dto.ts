@@ -1,4 +1,3 @@
-import { Type } from 'class-transformer';
 import { IsString, IsEnum, IsOptional, IsBoolean, IsNumber, IsDateString, IsArray, ValidateNested } from 'class-validator';
 import { DocumentType } from '../../interfaces/document.interface';
 
@@ -52,4 +51,7 @@ export class CreateDocumentDto {
   @IsString()
   @IsOptional()
   comment?: string
+
+  @IsBoolean()
+  proveden?: boolean
 }

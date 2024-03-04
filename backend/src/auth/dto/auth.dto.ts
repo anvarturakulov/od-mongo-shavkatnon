@@ -32,4 +32,8 @@ export class AuthDto {
   @IsOptional()
   storageId: string;
 
+  @IsBoolean()
+  @IsOptional()
+  provodkaUser: boolean;
+
 }

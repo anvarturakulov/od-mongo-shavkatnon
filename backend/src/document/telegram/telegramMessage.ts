@@ -27,9 +27,10 @@ export type ReferencesForTelegramMessage = {
 
 export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
-const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegramMessage, newDocument: boolean) => {
+const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string) => {
   
-  let title = newDocument ? 'ШАВКАТ НОН" - ЧЕК': 'УЗГАРТИРИЛГАН ЧЕК'
+  let title = newDocument ? 'ШАВКАТ НОН" - ЧЕК': 'ЧЕК УЗГАРТИРИЛДИ'
+  if (messageInDeleting && messageInDeleting.length > 0) title = messageInDeleting
   let dateDoc = new Date(body.date).toLocaleDateString('ru-RU')
   let user = body.user ? `Ходим --- ${body.user}`: ''
   let date = dateDoc ? `Сана --- ${dateDoc}` : ''
@@ -67,18 +68,18 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   )
 }
 
-export const sendMessageToChanel = (body: CreateDocumentDto, user: User, references: ReferencesForTelegramMessage, newDocument: boolean) => {
+export const sendMessageToChanel = (body: CreateDocumentDto, user: User, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string) => {
   const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
   let firstChadId = ''
 
-  if (user && user.role == UserRoles.ZUVALACHI || user.role == UserRoles.HAMIRCHI ) {
+  if (user && user.role != null && user.role == UserRoles.ZUVALACHI || user.role == UserRoles.HAMIRCHI ) {
     firstChadId = TelegramChanelsIds.Production
   }
   
   if (user.role == UserRoles.ELAKCHI) {
     firstChadId = TelegramChanelsIds.MainSklad
   }
-
+  
   if (user.role == UserRoles.HEADSECTION) {
     if (user.storageId == '659ce07f523a48fdeb6ad8c3') firstChadId = TelegramChanelsIds.Chashma
     if (user.storageId == '659ce094523a48fdeb6ad8c7') firstChadId = TelegramChanelsIds.Halqobod
@@ -92,7 +93,7 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   
   let secondChatId = TelegramChanelsIds.All
   
-  bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument));
-  bot.sendMessage(secondChatId, prepareCheck(body, references, newDocument)); 
+  bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument, messageInDeleting));
+  bot.sendMessage(secondChatId, prepareCheck(body, references, newDocument, messageInDeleting)); 
   
 }

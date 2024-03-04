@@ -134,6 +134,15 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             }
 
             {
+                    user?.role == UserRoles.HEADSECTION &&
+                <>
+                    <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
+                    <Section data={data} sectionType='delivery'/>
+                </>
+
+            }
+
+            {
                 (
                     user?.role == UserRoles.ELAKCHI ||
                     user?.role == UserRoles.GLBUX ||
@@ -145,15 +154,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <RefreshPanel/>
                     <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
                 </>
-            }
-
-            {
-                    user?.role == UserRoles.HEADSECTION &&
-                <>
-                    <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
-                    <Section data={data} sectionType='delivery'/>
-                </>
-
             }
 
             {

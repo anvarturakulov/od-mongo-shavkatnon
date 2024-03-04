@@ -11,8 +11,6 @@ export class ReportService {
   constructor(@InjectModel(Document.name) private documentModel: Model<DocDocument>,
     private readonly documentService: DocumentService) { }
   
-  
-  
   async getEntrysJournal() {
     let result = await this.documentService.getAllDocuments()
     return prepareEntrysJournal(result);

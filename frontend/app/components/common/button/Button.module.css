@@ -23,3 +23,8 @@
     background: red;
     border: 1px solid var(--white);
 }
+
+.green {
+    background-color: green;
+    color: #fff;
+}

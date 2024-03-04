@@ -22,21 +22,25 @@ export class CreateReferenceDto {
 
   @IsOptional()
   @IsBoolean()
-  deleted: boolean = false;
+  deleted?: boolean = false;
 
   @IsOptional()
   @IsString()
   comment?: string;
-
+  
+  @IsOptional()
   @IsBoolean()
   delivery?: boolean;
 
+  @IsOptional()
   @IsBoolean()
   filial?: boolean;
 
+  @IsOptional()
   @IsBoolean()
   sklad?: boolean;
 
+  @IsOptional()
   @IsBoolean()
   un?: boolean;
 }

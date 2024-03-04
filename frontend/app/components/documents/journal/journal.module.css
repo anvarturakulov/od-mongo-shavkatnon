@@ -107,6 +107,15 @@
     text-decoration: line-through;
 }
 
+.documentType{
+    background: yellow;
+}
+
+.proveden {
+    background-color: green;
+    color: #fff;
+}
+
 .saved{
     color: #000;
     background-color: rgba(236, 236, 11, 0.3)!important;
@@ -127,6 +136,16 @@
     width: 20px;
     cursor: pointer;
     margin: 0 auto;
+}
+
+.icoSave{
+    width: 20px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.icoProveden{
+    fill: green;
 }
 
 .icoTrash:hover{

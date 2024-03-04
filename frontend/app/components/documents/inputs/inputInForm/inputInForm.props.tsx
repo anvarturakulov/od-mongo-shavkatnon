@@ -5,4 +5,5 @@ export interface InputInFormProps extends DetailedHTMLProps<InputHTMLAttributes<
     label: string,
     visible?: boolean,
     nameControl: NameControl,
+    isNewDocument?: boolean
 }
