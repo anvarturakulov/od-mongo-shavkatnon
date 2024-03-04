@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 import { TypeReference, TypePartners, TypeTMZ } from '../../interfaces/reference.interface';
 
 export type ReferenceDocument = HydratedDocument<Reference>;
@@ -38,6 +38,9 @@ export class Reference {
 
   @Prop()
   un?: boolean
+
+  @Prop()
+  clientForDeliveryId?: Types.ObjectId
 
 }
 

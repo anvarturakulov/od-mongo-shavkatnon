@@ -31,6 +31,7 @@ export interface ReferenceModel {
     filial?: boolean;
     sklad?: boolean;
     un?: boolean
+    clientForDeliveryId?: string
 }
 
 export interface ReferenceBody {
@@ -44,6 +45,7 @@ export interface ReferenceBody {
     filial: boolean,
     sklad: boolean,
     un: boolean,
+    clientForDeliveryId: string
 }
 
 

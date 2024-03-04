@@ -43,4 +43,8 @@ export class CreateReferenceDto {
   @IsOptional()
   @IsBoolean()
   un?: boolean;
+
+  @IsOptional()
+  @IsString()
+  clientForDeliveryId: string  
 }

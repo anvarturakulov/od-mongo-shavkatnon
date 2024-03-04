@@ -19,6 +19,8 @@ import { Sklad } from '../information/sklad/sklad';
 import { IntervalWindow } from '../common/intervalWindow/intervalWindow';
 import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
+import { DocumentType } from '@/app/interfaces/document.interface';
+import { Maindata } from '@/app/context/app.context.interfaces';
 
 const div = 1;
 
@@ -45,7 +47,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
         setMenu(newMenu)
     }
 
-    const onClickSubItem = (contentName: string, contentTitle: string, contentType: ContentType) => {
+    const onClickSubItem = (contentName: string, contentTitle: string, contentType: ContentType, mainData: Maindata) => {
         const keyItem = getKeyEnum(contentName, contentType)
         
         if (setMainData) {
@@ -59,6 +61,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             setMainData('clearControlElements', true);
 
             if (contentType == 'document') {
+                
                 let defValue = {...defaultDocumentFormItems} 
                 let num = getRandomID()
                 let dateDoc = new Date();
@@ -71,6 +74,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
                 defValue.receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
                 defValue.senderId = definedItemIdForSender ? definedItemIdForSender : ''
+
+                if (contentName == DocumentType.SaleProd && mainData.user?.role == UserRoles.DELIVERY) {
+                    defValue.price = 3500;
+                }
 
                 setMainData('currentDocument', {...defValue});
             }
@@ -107,7 +114,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                             {  role && elem.roles.includes(role) &&
                                 <li 
                                     className={cn(styles.subItem)}
-                                    onClick={() => onClickSubItem(elem.title, elem.description, elem.type)}
+                                    onClick={() => onClickSubItem(elem.title, elem.description, elem.type, mainData)}
                                     key={elem.title}
                                 >
                                     {elem.description? elem.description : elem.title}

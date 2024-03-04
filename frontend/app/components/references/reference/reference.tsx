@@ -32,6 +32,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         filial: false,
         sklad: false,
         un: false,
+        clientForDeliveryId: ''
     }
 
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
@@ -75,6 +76,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 filial: currentReference.filial ? true : false,
                 sklad: currentReference.sklad ? true : false,
                 un: currentReference.un ? true : false,
+                clientForDeliveryId: ''
             }
             setBody(newBody)
         }

@@ -3,9 +3,7 @@ import styles from './inputInForm.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocumentModel, NameControl } from '@/app/interfaces/document.interface';
-import { UserRoles } from '@/app/interfaces/general.interface';
-import { useEffect } from 'react';
+import { NameControl } from '@/app/interfaces/document.interface';
 
 export const InputInForm = ({visible, label, className, nameControl, isNewDocument, ...props }: InputInFormProps): JSX.Element => {
     
@@ -13,22 +11,6 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
     const { currentDocument, user } = mainData;
     
     let currentVal = currentDocument[nameControl]
-    console.log(currentVal)
-    useEffect(() => {
-        // console.log(isNewDocument)
-        // if ( nameControl == 'price' && isNewDocument) {
-        //     if (user?.role == UserRoles.DELIVERY) {
-        //         console.log(currentDocument.price)
-        //         currentVal = 3500
-        //         let newObj: DocumentModel = {
-        //             ... currentDocument,
-        //             price: currentVal
-        //         }
-
-        //         setMainData && setMainData('currentDocument', {...newObj})
-        //     }
-        // }
-    }, [])
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata, nameControl: NameControl) => {
         let target = e.currentTarget;
@@ -48,6 +30,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
         }
 
         if ( nameControl=='price') {
+            
             newValues = {
                 ...currentDocument,
                 [`${nameControl}`]: +value,

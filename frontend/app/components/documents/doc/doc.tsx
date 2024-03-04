@@ -1,13 +1,12 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DocProps } from './doc.props';
 import styles from './doc.module.css';
 import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { cancelSubmit, onSubmit, saveProvodka, saveUser } from './helpers/doc.functions';
-import { isAdmins, isGlBuxs } from '@/app/service/common/users';
-import { CheckBoxInTable } from '../inputs/checkBoxInForm/checkBoxInForm';
+import { cancelSubmit, onSubmit, saveUser } from './helpers/doc.functions';
+import { isAdmins } from '@/app/service/common/users';
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     

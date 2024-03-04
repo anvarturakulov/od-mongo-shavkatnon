@@ -48,7 +48,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     schet = Schet.S28    
                 }
                 
-                if (schet) {
+                if (schet && currentItem.documentType != DocumentType.SaleProd) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
                     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
