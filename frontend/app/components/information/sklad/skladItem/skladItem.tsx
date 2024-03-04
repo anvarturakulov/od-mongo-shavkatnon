@@ -38,7 +38,7 @@ export const SkladItem = ({className, data, currentId, title, sectionType,  ...p
             {
                 listSecondSubconts &&
                 listSecondSubconts.length &&
-                listSecondSubconts.map((item: string) => {
+                listSecondSubconts.map((item: string, key:number) => {
                     const PDKOL = query(schetList, TypeQuery.PDKOL, item, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
                     const PKKOL = query(schetList, TypeQuery.PKKOL, item, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
                     const TDKOL = query(schetList, TypeQuery.TDKOL, item, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
@@ -46,7 +46,7 @@ export const SkladItem = ({className, data, currentId, title, sectionType,  ...p
                     const value = PDKOL - PKKOL + TDKOL - TKKOL
                     if (value == 0) return <></>
                     return (
-                        <div className={styles.row}>
+                        <div className={styles.row} key={key}>
                             <div className={styles.title}>{getPropertySubconto(data, item).name}</div>
                             <div className={styles.value}>{numberValue(value)}</div>
                         </div>
