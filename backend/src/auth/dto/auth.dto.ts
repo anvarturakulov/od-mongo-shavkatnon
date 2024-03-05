@@ -3,6 +3,7 @@ import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 export enum UserRoles {
   ADMIN = 'ADMIN',
   HEADCOMPANY = 'HEADCOMPANY',
+  ZAMGLBUX = 'ZAMGLBUX',
   GLBUX = 'GLBUX',
   ELAKCHI = 'ELAKCHI',
   HAMIRCHI = 'HAMIRCHI',
@@ -31,9 +32,5 @@ export class AuthDto {
   @IsString()
   @IsOptional()
   storageId: string;
-
-  @IsBoolean()
-  @IsOptional()
-  provodkaUser: boolean;
 
 }

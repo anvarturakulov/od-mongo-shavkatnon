@@ -4,11 +4,14 @@ import cn from 'classnames';
 import {MenuItemsProps} from './menuItems.props'
 import { useEffect, useState } from 'react';
 import { MenuItem } from '../../../interfaces/menu.interface';
-import { ContentType } from '../../../interfaces/general.interface';
+import { ContentType, UserRoles } from '../../../interfaces/general.interface';
 import { useAppContext } from '@/app/context/app.context';
 import { defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../../documents/docValues/docValuesOptions';
+import { getRandomID } from '@/app/service/documents/getRandomID';
+import { DocumentType } from '@/app/interfaces/document.interface';
 
 export default function MenuItems({menuData, className, ...props}:MenuItemsProps):JSX.Element {
     
@@ -16,6 +19,7 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
     
     const {mainData, setMainData} = useAppContext()
     const role = mainData.user?.role;
+    let storageIdFromUser = mainData.user?.storageId
 
     const onClickItem = (e:any,currentTitle:string) => {
         let newMenu = [...menu]
@@ -44,8 +48,24 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
             setMainData('clearControlElements', true);
 
             if (contentType == 'document') {
+                
                 let defValue = {...defaultDocumentFormItems} 
+                let num = getRandomID()
+                let dateDoc = new Date();
+                let dateStr = dateDoc.toISOString().split('T')[0]
+                defValue.docNumber = num;
+                defValue.date = Date.parse(dateStr)
                 defValue.documentType = contentName
+
+                let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
+                let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
+                defValue.receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
+                defValue.senderId = definedItemIdForSender ? definedItemIdForSender : ''
+
+                if (contentName == DocumentType.SaleProd && mainData.user?.role == UserRoles.DELIVERY) {
+                    defValue.price = 3500;
+                }
+
                 setMainData('currentDocument', {...defValue});
             }
 

@@ -21,8 +21,7 @@ export class AuthService {
       passwordHash: await hash(dto.password, salt),
       role: dto.role,
       name: dto.name,
-      storageId: dto.storageId,
-      provodkaUser: dto.provodkaUser
+      storageId: dto.storageId
     })
 
     return newUser.save()
