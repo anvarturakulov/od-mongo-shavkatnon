@@ -141,13 +141,20 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             }
 
             {
-                    user?.role == UserRoles.HEADSECTION &&
+                (
+                    user?.role == UserRoles.HEADSECTION ||
+                    user?.role == UserRoles.ZAMGLBUX ||
+                    user?.role == UserRoles.SELLER
+                ) 
+                &&
                 <>
                     <RefreshPanel/>
                     <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
-                    <Section data={data} sectionType='delivery'/>
+                    {   
+                        user.role != UserRoles.SELLER &&
+                        <Section data={data} sectionType='delivery'/>
+                    }
                 </>
-
             }
 
             {
@@ -155,7 +162,8 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     user?.role == UserRoles.ELAKCHI ||
                     user?.role == UserRoles.GLBUX ||
                     user?.role == UserRoles.HEADSECTION ||
-                    user?.role == UserRoles.HAMIRCHI
+                    user?.role == UserRoles.HAMIRCHI ||
+                    user?.role == UserRoles.ZAMGLBUX
                 ) 
                 && 
                 <>
@@ -170,7 +178,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <Section data={data} sectionType='filial'/>
                     <Section data={data} sectionType='delivery'/>
                 </>
-
             }
 
             {
