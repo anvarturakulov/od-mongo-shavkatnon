@@ -159,7 +159,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 ) 
                 && 
                 <>
-                    
+                    <RefreshPanel/>
                     <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
                 </>
             }
