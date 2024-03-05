@@ -80,7 +80,7 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
     firstChadId = TelegramChanelsIds.MainSklad
   }
   
-  if (user.role == UserRoles.HEADSECTION) {
+  if (user.role == UserRoles.HEADSECTION || user.role == UserRoles.SELLER ) {
     if (user.storageId == '659ce07f523a48fdeb6ad8c3') firstChadId = TelegramChanelsIds.Chashma
     if (user.storageId == '659ce094523a48fdeb6ad8c7') firstChadId = TelegramChanelsIds.Halqobod
     if (user.storageId == '659ce0ab523a48fdeb6ad8cb') firstChadId = TelegramChanelsIds.Konteyner
@@ -89,7 +89,7 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
 
   if (user?.role == UserRoles.DELIVERY) firstChadId = TelegramChanelsIds.Delivery
 
-  if (user?.role == UserRoles.GLBUX) firstChadId = TelegramChanelsIds.GlBux
+  if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) firstChadId = TelegramChanelsIds.GlBux
   
   let secondChatId = TelegramChanelsIds.All
   
