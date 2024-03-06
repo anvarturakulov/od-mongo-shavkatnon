@@ -21,7 +21,10 @@ export const defaultDocumentFormItems:DocumentModel = {
     total: 0,
     cashFromPartner: 0,
     comment: '',
-    proveden: true
+    proveden: true,
+    firstWorkerId: '',
+    secondWorkerId: '',
+    thirdWorkerId: ''
 }
 
 export const defaultReportOptions: ReportOptions =  {

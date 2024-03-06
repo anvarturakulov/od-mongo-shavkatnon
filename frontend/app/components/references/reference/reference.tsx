@@ -4,7 +4,7 @@ import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
-import { ReferenceBody, TypePartners, TypeReference } from '../../../interfaces/reference.interface';
+import { ReferenceBody, TypePartners, TypeReference, TypeTMZ } from '../../../interfaces/reference.interface';
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
 import { Select } from './helpers/reference.components';
@@ -33,7 +33,10 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         filial: false,
         sklad: false,
         un: false,
-        clientForDeliveryId: ''
+        clientForDeliveryId: '',
+        firstPrice:0,
+        secondPrice:0,
+        thirdPrice:0
     }
 
     const [body, setBody] = useState<ReferenceBody>(defaultBody) 
@@ -86,7 +89,10 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 filial: currentReference.filial ? true : false,
                 sklad: currentReference.sklad ? true : false,
                 un: currentReference.un ? true : false,
-                clientForDeliveryId: currentReference.clientForDeliveryId ? currentReference.clientForDeliveryId : '' 
+                clientForDeliveryId: currentReference.clientForDeliveryId ? currentReference.clientForDeliveryId : '',
+                firstPrice: currentReference.firstPrice ? currentReference.firstPrice : 0,
+                secondPrice: currentReference.secondPrice ? currentReference.secondPrice : 0,
+                thirdPrice: currentReference.thirdPrice ? currentReference.thirdPrice : 0
             }
             setBody(newBody)
         }
@@ -145,7 +151,32 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                         <CheckBoxForReference label='Ун' setCheckbox={setCheckbox} checked={body.un} id={'un'}/>
                     }
 
+                    
                 </div>
+
+                {
+                        ( 
+                            mainData.user?.role == UserRoles.ADMIN || 
+                            mainData.user?.role == UserRoles.HEADCOMPANY 
+                        ) &&
+                        body.typeReference == TypeReference.TMZ &&
+                        body.typeTMZ == TypeTMZ.PRODUCT &&
+
+                        <div className={styles.priceBox}>
+                            <div>
+                                <div>Биринчи нарх</div>
+                                <input value={body.firstPrice} type="number" id='firstPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                            </div>
+                            <div>
+                                <div>Иккинчи нарх</div>
+                                <input value={body.secondPrice} type="number" id='secondPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                            </div>
+                            <div>
+                                <div>Учинчи нарх</div>
+                                <input value={body.thirdPrice} type="number" id='thirdPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                            </div>
+                        </div>
+                    }
                 
                 {
                     ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 

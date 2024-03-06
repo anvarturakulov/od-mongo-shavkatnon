@@ -2,20 +2,30 @@
 import { useEffect, useState } from 'react';
 import { MaydaProps } from './mayda.props';
 import styles from './mayda.module.css';
-import { Button } from '@/app/components';
+import { Button, SelectReferenceInForm } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
-import { saveUser } from '../doc/helpers/doc.functions';
 import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { getRandomID } from '@/app/service/documents/getRandomID';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../docValues/docValuesOptions';
+import { getDefinedItemIdForSender } from '../docValues/docValuesOptions';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import axios from 'axios';
 import { showMessage } from '@/app/service/common/showMessage';
+import { TypeReference } from '@/app/interfaces/reference.interface';
+import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
+import useSWR from 'swr';
+import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 
 export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const [count, setCount] = useState<number>(0)
+    const {currentDocument} = mainData
+
+    const { user } = mainData;
+    const token = user?.access_token;
+    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
+    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
 
     let num = getRandomID()
@@ -27,14 +37,14 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     let receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
     let senderId = definedItemIdForSender ? definedItemIdForSender : ''
     let analiticId = '659d2778630ca82ec3dcadf8'
-    let user = mainData.user?.name ? mainData.user?.name : '' 
+    let userName = mainData.user?.name ? mainData.user?.name : '' 
 
     let newDocument: DocumentModel = {
         date: Date.parse(dateStr),
         docNumber: num,
         documentType: DocumentType.SaleProd,
         deleted: false,
-        user: user,
+        user: userName,
         senderId: senderId,
         receiverId: receiverId,
         isWorker: false,
@@ -43,11 +53,14 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
         analiticId: analiticId,
         count: 0,
         balance: 0,
-        price: 4000,
+        price: 0,
         total: 0,
         cashFromPartner: 0,
         comment: '',
-        proveden: true
+        proveden: true,
+        firstWorkerId: '',
+        secondWorkerId: '',
+        thirdWorkerId: ''
     }   
     
     const cancelSubmit = (setMainData: Function | undefined) => {
@@ -66,23 +79,30 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     }
 
     const onSubmit = (newDocument: DocumentModel, count: number, mainData: Maindata, setMainData: Function | undefined) => {
+        let price = getPropertySubconto(data, mainData.currentDocument.analiticId).thirdPrice
+        let total = price ? price * count : 0
+
         let body:DocumentModel = {
             ...newDocument,
+            analiticId: mainData.currentDocument.analiticId,
             count,
-            total: count * newDocument.price
+            total
         }
+
         const { user } = mainData
         delete body._id;
   
         const config = {
             headers: { Authorization: `Bearer ${user?.access_token}` }
         };
-        console.log(body.proveden)
+ 
         const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/create';
         
         axios.post(uriPost, body, config)
         .then(function (request) {
             showMessage('Янги хужжат киритилди', 'success', setMainData)
+            let defValue = {...defaultDocumentFormItems} 
+            setMainData && setMainData('currentDocument', {...defValue})
         })
         .catch(function (error) {
             if (setMainData) {
@@ -97,6 +117,13 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
         <div className={styles.container}>
             <div className={styles.maydaBox}>
                 <div className={styles.label}>Сон</div>
+                <SelectReferenceInForm 
+                    label={'Махсулот'} 
+                    typeReference= {TypeReference.TMZ}
+                    visibile={true}
+                    currentItemId={currentDocument?.analiticId}
+                    type='analitic'
+                />
                 <input type='number' className={styles.input} onChange={(e) => setValue(e)}/>
                 <div className={styles.boxBtn} >
                     <Button 
@@ -108,19 +135,7 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
                 </div>
             </div>
             
-            {/* <DocValues setDefinedValues={setDefinedValues}/> */}
-            {/* <div className={styles.boxBtn}>
-                {
-                (currentDocument.deleted || notAdmins(mainData.user)) &&
-                   <>
-                    <Button className={styles.button} appearance='primary' onClick={() => 
-                        onSubmit( mainData, setMainData, definedValues)}>
-                            Саклаш
-                    </Button>
-                    <Button className={styles.button} appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
-                   </> 
-                }
-            </div> */}
+            
         </div>   
     )
 } 

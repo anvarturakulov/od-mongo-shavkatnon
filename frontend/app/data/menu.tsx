@@ -55,7 +55,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZUVALACHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.TANDIR]
             },
             { 
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',

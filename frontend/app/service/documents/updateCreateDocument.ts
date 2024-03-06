@@ -10,7 +10,7 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   let body: DocumentModel = {
     ...currentDocument,
   }
-
+console.log(body)
   delete body._id;
   if (isNewDocument && (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash)) {
     body.proveden = false

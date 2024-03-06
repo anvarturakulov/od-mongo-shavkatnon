@@ -75,9 +75,9 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 defValue.receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
                 defValue.senderId = definedItemIdForSender ? definedItemIdForSender : ''
 
-                if (contentName == DocumentType.SaleProd && mainData.user?.role == UserRoles.DELIVERY) {
-                    defValue.price = 3500;
-                }
+                // if (contentName == DocumentType.SaleProd && mainData.user?.role == UserRoles.DELIVERY) {
+                //     defValue.price = 3500;
+                // }
 
                 setMainData('currentDocument', {...defValue});
             }

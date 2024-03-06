@@ -19,19 +19,22 @@ export enum TypeTMZ {
 }
 
 export interface ReferenceModel {
-    _id?: string;
-    name: string;
-    typeReference: TypeReference;
-    typePartners?: TypePartners;
-    typeTMZ?: TypeTMZ;
-    unit?: string;
-    comment?: string;
-    deleted?: boolean;
-    delivery?: boolean;
-    filial?: boolean;
-    sklad?: boolean;
+    _id?: string
+    name: string
+    typeReference: TypeReference
+    typePartners?: TypePartners
+    typeTMZ?: TypeTMZ
+    unit?: string
+    comment?: string
+    deleted?: boolean
+    delivery?: boolean
+    filial?: boolean
+    sklad?: boolean
     un?: boolean
     clientForDeliveryId?: string
+    firstPrice?: number,
+    secondPrice?: number
+    thirdPrice?: number
 }
 
 export interface ReferenceBody {
@@ -46,6 +49,9 @@ export interface ReferenceBody {
     sklad: boolean,
     un: boolean,
     clientForDeliveryId: string
+    firstPrice: number,
+    secondPrice: number
+    thirdPrice: number
 }
 
 

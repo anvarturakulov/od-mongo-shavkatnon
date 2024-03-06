@@ -54,4 +54,16 @@ export class CreateDocumentDto {
 
   @IsBoolean()
   proveden?: boolean
+
+  @IsString()
+  @IsOptional()
+  firstWorkerId?: string
+
+  @IsString()
+  @IsOptional()
+  secondWorkerId?: string
+
+  @IsString()
+  @IsOptional()
+  thirdWorkerId?: string
 }

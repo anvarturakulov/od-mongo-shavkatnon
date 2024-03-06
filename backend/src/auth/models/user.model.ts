@@ -21,6 +21,9 @@ export class User {
   @Prop()
   storageId: string;
 
+  @Prop()
+  tandirId: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -13,6 +13,7 @@ import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
+import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
@@ -56,7 +57,19 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
             if (type == 'sender' && id) currentItem.senderId = id
             if (type == 'receiver' && id) currentItem.receiverId = id
-            if (type == 'analitic' && id) currentItem.analiticId = id
+            if (type == 'analitic' && id) {
+                currentItem.analiticId = id
+                if (user?.role == UserRoles.DELIVERY) {
+                    let price = getPropertySubconto(data, id).thirdPrice
+                    if (price) {
+                        currentItem.price = price
+                        currentItem.total = price * currentItem.count
+                    }
+                }
+            }
+            if (type == 'firstWorker' && id) currentItem.firstWorkerId = id
+            if (type == 'secondWorker' && id) currentItem.secondWorkerId = id
+            if (type == 'thirdWorker' && id) currentItem.thirdWorkerId = id
 
             if ( setMainData ) {
                 setMainData('currentDocument', {...currentItem})

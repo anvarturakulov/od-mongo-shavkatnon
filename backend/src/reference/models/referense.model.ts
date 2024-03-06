@@ -42,6 +42,15 @@ export class Reference {
   @Prop()
   clientForDeliveryId?: Types.ObjectId
 
+  @Prop()
+  firstPrice?: number
+
+  @Prop()
+  secondPrice?: number
+  
+  @Prop()
+  thirdPrice?: number
+
 }
 
 export const ReferenceSchema = SchemaFactory.createForClass(Reference);

@@ -35,7 +35,7 @@ export const saveItemId = (storageId: string | undefined, type: 'reciever' | 'se
 }
 
 export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
-  if (role && (role == UserRoles.ZUVALACHI || (role == UserRoles.ELAKCHI && contentName == DocumentType.ComeHalfstuff))) {
+  if (role && (role == UserRoles.TANDIR || (role == UserRoles.ELAKCHI && contentName == DocumentType.ComeHalfstuff))) {
     return storageIdFromUser
   }
   if (storageIdFromUser && role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
@@ -95,7 +95,7 @@ export const visibilityTotalValueInDocument = (contentName: string, user: User |
   ]
 
   if (user) {
-    if (user.role == UserRoles.HAMIRCHI || user.role == UserRoles.ZUVALACHI) return false
+    if (user.role == UserRoles.HAMIRCHI || user.role == UserRoles.TANDIR) return false
 
     if (documents.includes(contentName)) return false
   }
@@ -109,6 +109,19 @@ export const visibilityCashFromPartnerValueInDocument = (contentName: string, us
   const documents = [
     `${DocumentType.SaleProd}`,
     `${DocumentType.ComeCashFromPartners}`
+  ]
+
+  if (user) {
+    if (documents.includes(contentName)) return true
+  }
+
+  return false
+}
+
+export const visibilityCommentValueInDocument = (contentName: string, user: User | undefined): boolean => {
+  const documents = [
+    `${DocumentType.MoveCash}`,
+    `${DocumentType.LeaveCash}`
   ]
 
   if (user) {

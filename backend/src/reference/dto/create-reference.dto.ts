@@ -1,4 +1,4 @@
-import { IsString, IsEnum, IsOptional, IsBoolean } from 'class-validator'
+import { IsString, IsEnum, IsOptional, IsBoolean, IsNumber } from 'class-validator'
 import { TypeReference, TypePartners, TypeTMZ } from '../../interfaces/reference.interface';
 
 export class CreateReferenceDto {
@@ -47,4 +47,17 @@ export class CreateReferenceDto {
   @IsOptional()
   @IsString()
   clientForDeliveryId: string  
+  
+  @IsOptional()
+  @IsNumber()
+  firstPrice?: number
+
+  @IsOptional()
+  @IsNumber()
+  secondPrice?: number
+
+  @IsOptional()
+  @IsNumber()
+  thirdPrice?: number
+
 }

@@ -7,7 +7,7 @@ export enum UserRoles {
   GLBUX = 'GLBUX',
   ELAKCHI = 'ELAKCHI',
   HAMIRCHI = 'HAMIRCHI',
-  ZUVALACHI = 'ZUVALACHI',
+  TANDIR = 'TANDIR',
   HEADSECTION = 'HEADSECTION',
   DELIVERY = 'DELIVERY',
   SELLER = 'SELLER',
@@ -32,5 +32,9 @@ export class AuthDto {
   @IsString()
   @IsOptional()
   storageId: string;
+
+  @IsString()
+  @IsOptional()
+  tandirId: string;
 
 }

@@ -9,7 +9,8 @@ import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentFor
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { SelectReferenceInForm } from '../selects/selectReferenceInForm/selectReferenceInForm';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './docValuesOptions';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityCommentValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './docValuesOptions';
+import { TypeReference } from '@/app/interfaces/reference.interface';
 
 export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
     
@@ -85,11 +86,38 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     <div>{currentDocument?.values.balance}</div>
                 } */}
 
+                {
+                    contentName == DocumentType.ComeProduct &&
+                    <>
+                        <SelectReferenceInForm 
+                            label={'Ёпувчи исми'} 
+                            typeReference= {TypeReference.WORKERS}
+                            visibile={true}
+                            currentItemId={currentDocument?.firstWorkerId}
+                            type='firstWorker'
+                        />
+                        <SelectReferenceInForm 
+                            label={'Биринчи зувалачи исми'} 
+                            typeReference= {TypeReference.WORKERS}
+                            visibile={options.analiticIsVisible}
+                            currentItemId={currentDocument?.secondWorkerId}
+                            type='secondWorker'
+                        />
+                        <SelectReferenceInForm 
+                            label={'Иккинчи зувалачи исми'} 
+                            typeReference= {TypeReference.WORKERS}
+                            visibile={options.analiticIsVisible}
+                            currentItemId={currentDocument?.thirdWorkerId}
+                            type='thirdWorker'
+                        />
+                    </>
+                }
+
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
                 <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>
                 <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
                 {/* <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/> */}
-                <InputInForm nameControl='comment' type='text' label='Изох'/>
+                <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
             </div>
         </>
         

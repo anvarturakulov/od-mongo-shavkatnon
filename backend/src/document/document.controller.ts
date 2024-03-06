@@ -21,15 +21,22 @@ export class DocumentController {
   private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, messageInDeleting?: string) => {
     const user = await this.userService.findUserByName(dto.user);
 
-    let sender, receiver, analitic
+    let sender, receiver, analitic, firstWorker, secondWorker, thirdWorker
     if (dto.senderId) sender = await this.referenceService.findById(dto.senderId);
     if (dto.receiverId) receiver = await this.referenceService.findById(dto.receiverId);
     if (dto.analiticId) analitic = await this.referenceService.findById(dto.analiticId);
+    if (dto.firstWorkerId) firstWorker = await this.referenceService.findById(dto.firstWorkerId);
+    if (dto.secondWorkerId) secondWorker = await this.referenceService.findById(dto.secondWorkerId);
+    if (dto.thirdWorkerId) thirdWorker = await this.referenceService.findById(dto.thirdWorkerId);
 
+    console.log(firstWorker, secondWorker, thirdWorker)
     let references: ReferencesForTelegramMessage = {
       sender,
       receiver,
-      analitic
+      analitic,
+      firstWorker,
+      secondWorker,
+      thirdWorker,
     }
     sendMessageToChanel(dto, user, references, newDocument, messageInDeleting)
   }

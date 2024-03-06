@@ -57,6 +57,15 @@ export class Document {
   @Prop()
   proveden?: boolean
 
+  @Prop()
+  firstWorkerId: Types.ObjectId
+
+  @Prop()
+  secondWorkerId: Types.ObjectId
+
+  @Prop()
+  thirdWorkerId: Types.ObjectId
+
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

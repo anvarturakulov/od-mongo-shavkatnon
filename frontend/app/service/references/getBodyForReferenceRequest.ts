@@ -1,4 +1,5 @@
 import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
+import { stat } from 'fs';
 
 export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: TypeReference) => {
   let newReq = {
@@ -33,7 +34,10 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
         ...newReq,
         typeTMZ: state.typeTMZ,
         unit: state.unit,
-        un: state.un
+        un: state.un,
+        firstPrice: state.firstPrice,
+        secondPrice: state.secondPrice,
+        thirdPrice: state.thirdPrice
       };
     case TypeReference.WORKERS:
       return {

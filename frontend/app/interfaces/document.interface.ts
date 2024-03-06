@@ -44,7 +44,10 @@ export interface DocumentModel {
     total: number,
     cashFromPartner: number,
     comment?: string,
-    proveden?: boolean
+    proveden?: boolean,
+    firstWorkerId: string,
+    secondWorkerId: string,
+    thirdWorkerId: string,
 };
 
 export interface OptionsForDocument {

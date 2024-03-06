@@ -5,9 +5,8 @@ export const getPropertySubconto = (data: any, subcontoId: string) => {
   if (data && data.length > 0) {
    elem = data.find((item: ReferenceModel) => item._id == subcontoId)
   }
+
   return {
-    name: elem?.name,
-    unit: elem?.unit,
-    sklad: elem?.sklad
+    ...elem
   }
 }

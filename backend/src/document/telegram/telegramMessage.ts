@@ -22,7 +22,10 @@ enum TelegramChanelsIds {
 export type ReferencesForTelegramMessage = {
   sender: Reference | undefined,
   receiver: Reference | undefined,
-  analitic: Reference | undefined
+  analitic: Reference | undefined,
+  firstWorker: Reference | undefined,
+  secondWorker: Reference | undefined,
+  thirdWorker: Reference | undefined,
 }
 
 export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -36,15 +39,22 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   let date = dateDoc ? `Сана --- ${dateDoc}` : ''
   let doc = getDescriptionDocument(body.documentType) ? `Хужжат тури --- ${ getDescriptionDocument(body.documentType) }`: '';
 
-  let receiver = references.receiver?.name ? `Олувчи-- - ${references.receiver.name}` : ''
-  let analitic = references.analitic?.name ? `Аналитика-- - ${references.analitic.name}` : ''
-  let sender = references.sender?.name ? `Жунатувчи-- - ${ references.sender.name }` : ''
-  
+  let receiver = references.receiver?.name ? `Олувчи -- - ${references.receiver.name}` : ''
+  let analitic = references.analitic?.name ? `Аналитика -- - ${references.analitic.name}` : ''
+  let sender = references.sender?.name ? `Жунатувчи -- - ${ references.sender.name }` : ''
+  let firstWorker = references.firstWorker?.name ? `Ёпувчи -- - ${references.firstWorker.name}` : ''
+  let secondWorker = references.secondWorker?.name ? `Зувалачи 1 -- - ${references.secondWorker.name}` : ''
+  let thirdWorker = references.thirdWorker?.name ? `Зувалачи 2-- - ${references.thirdWorker.name}` : ''
+
+  console.log(firstWorker, secondWorker, thirdWorker )
+
   let count = body.count > 0 ? `Сон --- ${ numberValue(body.count) }`: ''
   let price = body.price > 0 ? `Нарх --- ${numberValue(body.price)}` : ''
   let total = body.total > 0 ? `Сумма --- ${numberValue(body.total)}` : ''
   let cashFromPartner = body.cashFromPartner > 0 ? `Хамкордан олинган пул --- ${numberValue(body.cashFromPartner)}` : ''
-  let comment = body.comment ? `Изох: ${body.comment}`: ''
+  let comment = body.comment ? `Изох: ${body.comment} ${firstWorker} ${secondWorker} ${thirdWorker}`: ''
+  if (!comment) comment = `Изох: ${firstWorker} ${secondWorker} ${thirdWorker}`
+  
   
   
   return ( 
@@ -72,7 +82,7 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
   let firstChadId = ''
 
-  if (user && user.role != null && user.role == UserRoles.ZUVALACHI || user.role == UserRoles.HAMIRCHI ) {
+  if (user && user.role != null && user.role == UserRoles.TANDIR || user.role == UserRoles.HAMIRCHI ) {
     firstChadId = TelegramChanelsIds.Production
   }
   
