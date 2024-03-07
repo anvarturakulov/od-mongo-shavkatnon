@@ -60,7 +60,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
             if (type == 'analitic' && id) {
                 currentItem.analiticId = id
                 if (user?.role == UserRoles.DELIVERY) {
-                    let price = getPropertySubconto(data, id).thirdPrice
+                    let price = getPropertySubconto(data, id).firstPrice
                     if (price) {
                         currentItem.price = price
                         currentItem.total = price * currentItem.count
