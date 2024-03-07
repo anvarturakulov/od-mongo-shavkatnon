@@ -26,7 +26,7 @@
 
 .box{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 3fr;
     align-items: center;
     gap: 5px;
     margin-bottom: 5px;

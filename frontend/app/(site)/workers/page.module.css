@@ -6,9 +6,10 @@
 }
 
 .box{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr;
-    justify-content: left;
+    justify-content: left; */
+    width: 100%;
 }
 
 .box{
