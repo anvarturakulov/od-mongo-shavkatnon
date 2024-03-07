@@ -151,7 +151,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <RefreshPanel/>
                     <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
                     {   
-                        user.role != UserRoles.SELLER &&
+                        user.role == UserRoles.HEADSECTION &&
                         <Section data={data} sectionType='delivery'/>
                     }
                 </>
