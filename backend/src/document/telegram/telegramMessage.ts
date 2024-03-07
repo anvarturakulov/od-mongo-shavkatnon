@@ -102,8 +102,9 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) firstChadId = TelegramChanelsIds.GlBux
   
   let secondChatId = TelegramChanelsIds.All
-  
-  bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument, messageInDeleting));
+  if (firstChadId) {
+    bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument, messageInDeleting));
+  }
   bot.sendMessage(secondChatId, prepareCheck(body, references, newDocument, messageInDeleting)); 
   
 }

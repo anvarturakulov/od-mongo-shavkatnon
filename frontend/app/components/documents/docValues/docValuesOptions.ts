@@ -44,6 +44,11 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
   if (role && role == UserRoles.HAMIRCHI) {
     return "659d1ff7523a48fdeb6ada6d"
   }
+
+  if (contentName == DocumentType.ComeMaterial) {
+    return storageIdFromUser
+  } 
+
   return ''
 }
 
@@ -53,7 +58,8 @@ export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageId
     role &&
     role !== UserRoles.ADMIN &&
     role !== UserRoles.HEADCOMPANY &&
-    contentName != DocumentType.ComeCashFromPartners
+    contentName != DocumentType.ComeCashFromPartners &&
+    contentName != DocumentType.ComeMaterial
   ) return storageIdFromUser
 
   return ''
