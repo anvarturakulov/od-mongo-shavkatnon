@@ -86,7 +86,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     <div>{currentDocument?.values.balance}</div>
                 } */}
 
-                {
+                {/* {
                     contentName == DocumentType.ComeProduct &&
                     <>
                         <SelectReferenceInForm 
@@ -111,7 +111,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                             type='thirdWorker'
                         />
                     </>
-                }
+                } */}
 
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
                 <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>

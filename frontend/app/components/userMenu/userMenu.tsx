@@ -21,8 +21,8 @@ import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import Journal from '../documents/journal/journal';
 import MiniJournal from '../documents/miniJournal/miniJournal';
+import { DefinedTandirWorkers } from '../documents/definedTandirWorkers/definedTandirWorkers';
 
 const div = 1;
 
@@ -30,7 +30,8 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
     const {mainData, setMainData} = useAppContext()
-    const { user } = mainData;
+    const [tandirworkers, setTandirWorkers] = useState<boolean>(false)
+    const { user, contentName } = mainData;
     
     const role = mainData.user?.role;
     let storageIdFromUser = mainData.user?.storageId
@@ -68,8 +69,15 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 let num = getRandomID()
                 let dateDoc = new Date();
                 let dateStr = dateDoc.toISOString().split('T')[0]
+
                 defValue.docNumber = num;
-                defValue.date = Date.parse(dateStr)
+                if (role == UserRoles.TANDIR || role == UserRoles.HAMIRCHI) {
+                    let dateNowPlussedInNumber = Date.now() + 36000000
+                    defValue.date = dateNowPlussedInNumber
+                } else {
+                    defValue.date = Date.parse(dateStr)
+                }
+
                 defValue.documentType = contentName
 
                 let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
@@ -77,9 +85,9 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 defValue.receiverId = definedItemIdForReceiver ? definedItemIdForReceiver : ''
                 defValue.senderId = definedItemIdForSender ? definedItemIdForSender : ''
 
-                // if (contentName == DocumentType.SaleProd && mainData.user?.role == UserRoles.DELIVERY) {
-                //     defValue.price = 3500;
-                // }
+                defValue.firstWorkerId = mainData.definedTandirWorkers.firstWorker
+                defValue.secondWorkerId = mainData.definedTandirWorkers.secondWorker
+                defValue.thirdWorkerId = mainData.definedTandirWorkers.thirdWorker
 
                 setMainData('currentDocument', {...defValue});
             }
@@ -102,9 +110,9 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
     }
 
     useEffect(()=> {
-       setMenu(menuData) 
+       setMenu(menuData)
     },[menuData])
-
+    
     return (
         <>
             {menu.map((item, i) => (
@@ -130,10 +138,23 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 
             ))}
 
+            
+            
+            {
+                user?.role == UserRoles.TANDIR &&
+                <button className={styles.btnForTandir} onClick={()=> setTandirWorkers(state => !state)}>Бугунги ходимлар руйхати</button>
+            }
+
+
+            {
+                tandirworkers &&
+                <DefinedTandirWorkers/>
+            }
+
             <div className={styles.journalBox}>
                 { mainData.mainPage && <MiniJournal/> }
             </div>
-
+            
             {
                 (
                     user?.role == UserRoles.HEADSECTION ||
@@ -194,9 +215,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 </>
             }
 
-            
-
-            
             <IntervalWindow/>
         </>
     )

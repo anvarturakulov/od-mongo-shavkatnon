@@ -16,7 +16,12 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
     const role = mainData.user?.role;
     const isAdminOrHeadCompany = role && adminAndHeadCompany.includes(role)
     
-    let dateDoc = currentDocument.date>0 ? new Date(currentDocument.date) : new Date();
+    let dateNowInNumber = Date.now();
+
+    let dateDoc = currentDocument.date>0 ? 
+        new Date(currentDocument.date) : 
+        new Date();
+
     let currentVal = dateDoc.toISOString().split('T')[0]
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata) => {

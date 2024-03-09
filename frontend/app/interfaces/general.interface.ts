@@ -44,7 +44,7 @@ export interface BodyForLogin {
     password: string,
 }
 
-export interface TandirWorkers {
+export interface DefinedTandirWorkers {
     firstWorker: string,
     secondWorker: string,
     thirdWorker: string,
