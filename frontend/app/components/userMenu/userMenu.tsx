@@ -151,10 +151,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 <DefinedTandirWorkers/>
             }
 
-            <div className={styles.journalBox}>
-                { mainData.mainPage && <MiniJournal/> }
-            </div>
-            
             {
                 (
                     user?.role == UserRoles.HEADSECTION ||
@@ -166,6 +162,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <Mayda/>
                 </>
             }
+
+            <div className={styles.journalBox}>
+                { <MiniJournal/> }
+            </div>
 
             {
                 (

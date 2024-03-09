@@ -12,7 +12,7 @@ export class ReportService {
     private readonly documentService: DocumentService) { }
   
   async getEntrysJournal() {
-    let result = await this.documentService.getAllDocuments()
+    let result = await this.documentService.getAllDocuments(true)
     return prepareEntrysJournal(result);
   }
 

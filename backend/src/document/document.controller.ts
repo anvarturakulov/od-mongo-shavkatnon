@@ -58,9 +58,9 @@ export class DocumentController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('getAll/')
+  @Get('getAll')
   async getAllDocuments() {
-    return this.documentService.getAllDocuments()
+    return this.documentService.getAllDocuments(false)
   }
 
   @UseGuards(JwtAuthGuard)

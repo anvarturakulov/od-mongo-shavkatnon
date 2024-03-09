@@ -23,8 +23,9 @@ export class DocumentService {
     return this.documentModel.find({ documentType }).exec()
   }
 
-  async getAllDocuments(): Promise<Document[]> {
-    return this.documentModel.find({deleted: !true, proveden: true}).exec()
+  async getAllDocuments(toEntryJournal: boolean): Promise<Document[]> {
+    if (toEntryJournal) return this.documentModel.find({ deleted: !true, proveden: true }).exec()
+    else return this.documentModel.find({deleted: !true} ).exec()
   }
 
   async findById(id: string) {
@@ -38,7 +39,7 @@ export class DocumentService {
     }
     const state = document.deleted ? false : true
     return this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
-    
+
   }
 
   async setProvodka(id: string) {

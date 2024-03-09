@@ -29,11 +29,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     const dashboardUsers = role && dashboardUsersList.includes(role);
 
     const token = user?.access_token;
-    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
+    // let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
-    if (!contentName) {
-        url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
-    }
+    // if (contentName) {
+    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
+    // }
 
     const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
 

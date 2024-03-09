@@ -10,23 +10,20 @@ import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { getNameReference } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 
 export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX.Element {
     
-    let currentVal = (new Date()).toISOString().split('T')[0]
-    let today = Date.parse(currentVal)
+    
+
 
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
     const userName = user?.name
 
     const token = user?.access_token;
-    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
-    
-    if (!contentName) {
-        url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
-    }
+    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
 
     const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
 
@@ -39,6 +36,28 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
         setMainData && setMainData('updateDataForDocumentJournal', false);
     }, [mainData.showDocumentWindow, mainData.updateDataForDocumentJournal])
 
+    let currentVal: string, today: number
+
+    currentVal = (new Date()).toISOString().split('T')[0]
+    today = Date.parse(currentVal)
+
+    if (user?.role == UserRoles.TANDIR || user?.role == UserRoles.HAMIRCHI) {
+        let dateNowPlussedInNumber = Date.now() + 36000000
+        currentVal = (new Date(dateNowPlussedInNumber)).toISOString().split('T')[0]
+        console.log('NY'+currentVal)
+        today = Date.parse(currentVal)
+    } 
+    console.log('joriy'+currentVal)
+    
+    useEffect(()=> {
+        // console.log('documents')
+        // console.log(documents)
+    }, [documents])
+    // new Date(currentDocument.date) : 
+    //     new Date();
+
+    // let currentVal = dateDoc.toISOString().split('T')[0]
+    
 
     return (
         <>
