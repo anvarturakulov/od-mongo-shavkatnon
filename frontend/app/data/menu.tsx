@@ -43,7 +43,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ELAKCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ELAKCHI, UserRoles.HAMIRCHI]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
@@ -78,7 +78,7 @@ export const MenuData:Array<MenuItem> = [
             { 
                 title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)',
                 type: 'document', active: false,
-                roles: []
+                roles: [UserRoles.ADMIN]
                 // [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX]
             },
             { 

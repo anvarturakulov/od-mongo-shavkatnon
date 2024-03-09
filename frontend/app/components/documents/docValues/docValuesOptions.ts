@@ -74,8 +74,6 @@ export const visibilityPriceValueInDocument = (contentName: string, user: User |
     `${DocumentType.ComeProduct}`,
     `${DocumentType.MoveHalfstuff}`,
     `${DocumentType.MoveProd}`,
-    `${DocumentType.MoveMaterial}`,
-    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.LeaveProd}`,
 
@@ -94,10 +92,8 @@ export const visibilityTotalValueInDocument = (contentName: string, user: User |
     `${DocumentType.ComeCashFromPartners}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.LeaveProd}`,
-    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.MoveHalfstuff}`,
     `${DocumentType.MoveProd}`,
-    `${DocumentType.MoveMaterial}`,
   ]
 
   if (user) {
