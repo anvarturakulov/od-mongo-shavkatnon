@@ -41,7 +41,7 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
   if (storageIdFromUser && role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
     return storageIdFromUser
   }
-  if (role && role == UserRoles.HAMIRCHI) {
+  if (role && role == UserRoles.HAMIRCHI && contentName == DocumentType.LeaveHalfstuff) {
     return "659d1ff7523a48fdeb6ada6d"
   }
 
