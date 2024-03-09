@@ -22,7 +22,7 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
 
   const actionWithMainData = (mes: string) => {
     if (setMainData) {
-      showMessage(`${body.docNumber} ракамли - ${body.documentType} - ${mes}`, 'success', setMainData)
+      showMessage(`${mes}`, 'success', setMainData)
       setMainData('clearControlElements', true);
       setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);

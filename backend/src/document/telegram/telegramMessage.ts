@@ -42,9 +42,9 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   let receiver = references.receiver?.name ? `Олувчи -- - ${references.receiver.name}` : ''
   let analitic = references.analitic?.name ? `Аналитика -- - ${references.analitic.name}` : ''
   let sender = references.sender?.name ? `Жунатувчи -- - ${ references.sender.name }` : ''
-  let firstWorker = references.firstWorker?.name ? `Ёпувчи -- - ${references.firstWorker.name}` : ''
-  let secondWorker = references.secondWorker?.name ? `Зувалачи 1 -- - ${references.secondWorker.name}` : ''
-  let thirdWorker = references.thirdWorker?.name ? `Зувалачи 2-- - ${references.thirdWorker.name}` : ''
+  let firstWorker = references.firstWorker?.name ? `( Ёпувчи -- - ${references.firstWorker.name}` : ''
+  let secondWorker = references.secondWorker?.name ? `Зувалачи бир -- - ${references.secondWorker.name}` : ''
+  let thirdWorker = references.thirdWorker?.name ? `Зувалачи икки -- - ${references.thirdWorker.name} )` : ''
 
   console.log(firstWorker, secondWorker, thirdWorker )
 

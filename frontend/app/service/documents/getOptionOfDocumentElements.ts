@@ -34,11 +34,11 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     if (documentsForComeProductHalfstuff.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Ишлаб чикарувчи булим'
-        senderIsVisible = true
+        senderIsVisible = false
         
         receiverType = TypeReference.STORAGES
         receiverLabel = 'Кабул килувчи булим'
-        recieverIsVisible = true
+        recieverIsVisible = false
 
         analiticType = TypeReference.TMZ
         analiticLabel = 'Товар моддий бойлик'

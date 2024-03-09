@@ -123,7 +123,11 @@ export const visibilityCashFromPartnerValueInDocument = (contentName: string, us
 export const visibilityCommentValueInDocument = (contentName: string, user: User | undefined): boolean => {
   const documents = [
     `${DocumentType.MoveCash}`,
-    `${DocumentType.LeaveCash}`
+    `${DocumentType.LeaveCash}`,
+    `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.LeaveHalfstuff}`,
+    `${DocumentType.ComeProduct}`
+
   ]
 
   if (user) {

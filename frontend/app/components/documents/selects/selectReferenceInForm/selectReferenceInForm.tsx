@@ -14,6 +14,7 @@ import { query } from '@/app/service/reports/querys/query';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
+import { definedTandirWorkers } from './helper';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
@@ -171,7 +172,10 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                             value={item.name}
                             data-type={item.typeReference} 
                             data-id={item._id}
-                            selected={item._id == definedItemId || item._id == currentItemId} 
+                            selected={
+                                item._id == definedItemId || 
+                                item._id == currentItemId || 
+                                definedTandirWorkers(item._id, mainData, type) } 
                             >
                                 {item.name}
                         </option>  

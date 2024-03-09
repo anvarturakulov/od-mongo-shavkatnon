@@ -1,5 +1,5 @@
 import { DocumentModel } from '../interfaces/document.interface';
-import { ContentType, MessageType, User } from '../interfaces/general.interface';
+import { ContentType, MessageType, TandirWorkers, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 import { EntryItem, ReportOptions } from '../interfaces/report.interface';
 
@@ -25,6 +25,8 @@ export interface Maindata {
   reportOption: ReportOptions,
   showIntervalWindow: boolean,
   showMayda: boolean,
+  tandirWorkers: TandirWorkers | undefined
+  
 }
 
 export interface IAppContext {

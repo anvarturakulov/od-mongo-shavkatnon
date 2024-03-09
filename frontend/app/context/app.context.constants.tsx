@@ -1,4 +1,5 @@
 import { DocumentModel, DocumentType } from '../interfaces/document.interface'
+import { TandirWorkers } from '../interfaces/general.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
@@ -25,6 +26,12 @@ export const defaultDocumentFormItems:DocumentModel = {
     firstWorkerId: '',
     secondWorkerId: '',
     thirdWorkerId: ''
+}
+
+export const defaultTandirWorkers: TandirWorkers = {
+    firstWorker: '',
+    secondWorker: '',
+    thirdWorker: '',
 }
 
 export const defaultReportOptions: ReportOptions =  {
@@ -59,5 +66,6 @@ export const defaultMainData: Maindata = {
     currentReference: undefined,
     reportOption: {...defaultReportOptions},
     showIntervalWindow: false,
-    showMayda: false
+    showMayda: false,
+    tandirWorkers: defaultTandirWorkers
   }

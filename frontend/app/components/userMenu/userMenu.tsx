@@ -21,6 +21,8 @@ import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import Journal from '../documents/journal/journal';
+import MiniJournal from '../documents/miniJournal/miniJournal';
 
 const div = 1;
 
@@ -128,6 +130,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 
             ))}
 
+            <div className={styles.journalBox}>
+                { mainData.mainPage && <MiniJournal/> }
+            </div>
+
             {
                 (
                     user?.role == UserRoles.HEADSECTION ||
@@ -187,6 +193,8 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <Section data={data} sectionType='delivery' currentSection ={storageIdFromUser}/>
                 </>
             }
+
+            
 
             
             <IntervalWindow/>

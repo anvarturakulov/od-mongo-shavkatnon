@@ -16,7 +16,7 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
 
     useEffect(() => {
         if (mainData.showMessageWindow) {
-            setTimeout(()=>setMainData && setMainData('showMessageWindow', false), 12000)
+            setTimeout(()=>setMainData && setMainData('showMessageWindow', false), 2000)
         }
     }, [mainData.showMessageWindow])
 
@@ -31,12 +31,12 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
                      })}
                      onClick={() => setMainData && setMainData('showMessageWindow', false)}
                      >
-                    {   
+                    {/* {   
                         messageType != 'success' ? 
                             <ErrorIcon className={styles.icon}/>
                             :
                             <SmileIcon className={styles.icon}/>
-                    }
+                    } */}
                     
                     <div>
                         <div className={styles.label}>{label}</div>
