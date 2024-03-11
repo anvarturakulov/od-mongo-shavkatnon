@@ -15,9 +15,6 @@ import { UserRoles } from '@/app/interfaces/general.interface';
 
 export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX.Element {
     
-    
-
-
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
     const userName = user?.name
@@ -40,24 +37,12 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
 
     currentVal = (new Date()).toISOString().split('T')[0]
     today = Date.parse(currentVal)
+    let startDate = today
+    let endDate = today +86399999
 
-    if (user?.role == UserRoles.TANDIR || user?.role == UserRoles.HAMIRCHI) {
-        let dateNowPlussedInNumber = Date.now() + 36000000
-        currentVal = (new Date(dateNowPlussedInNumber)).toISOString().split('T')[0]
-        console.log('NY'+currentVal)
-        today = Date.parse(currentVal)
-    } 
-    console.log('joriy'+currentVal)
-    
     useEffect(()=> {
-        // console.log('documents')
-        // console.log(documents)
-    }, [documents])
-    // new Date(currentDocument.date) : 
-    //     new Date();
 
-    // let currentVal = dateDoc.toISOString().split('T')[0]
-    
+    }, [documents])
 
     return (
         <>
@@ -68,10 +53,8 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                         <tbody className={styles.tbody}>
                             {documents && documents.length>0 && 
                             documents
-                            .filter((item:DocumentModel, key: number) => (item.date >= today && item.date <= today))
+                            .filter((item:DocumentModel, key: number) => (item.date >= startDate && item.date <= endDate))
                             .filter((item:DocumentModel, key: number) => {
-                                // let x
-                                // if (item.user == 'Xasan' && user?.name == 'Xasan') let x= 1
                                 return (item.user == user?.name)
                             })
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
@@ -90,7 +73,8 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                                         </td>
                                         <td>{`${getNameReference(references,item.receiverId)}`}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
-                                        <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
+                                        {/* <td className={styles.rowDate}>{secondsToDateString(item.date)}</td> */}
+                                        <td className={styles.rowDate}>{item.date}</td>
                                         <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total ? item.total:item.comment}</td>
                                         <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.count ? `(${item.count})`: ''}`}</td>
                                     </tr>

@@ -72,7 +72,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
 
                 defValue.docNumber = num;
                 if (role == UserRoles.TANDIR || role == UserRoles.HAMIRCHI) {
-                    let dateNowPlussedInNumber = Date.now() + 36000000
+                    let dateNowPlussedInNumber = Date.now() + 14400000
                     defValue.date = dateNowPlussedInNumber
                 } else {
                     defValue.date = Date.parse(dateStr)
@@ -99,7 +99,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     startReport: false,
                 }
                 setMainData('reportOption', { ...newReportOptions });
-
             }
 
         };
@@ -189,7 +188,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     user?.role == UserRoles.ELAKCHI ||
                     user?.role == UserRoles.GLBUX ||
                     user?.role == UserRoles.HEADSECTION ||
-                    user?.role == UserRoles.HAMIRCHI ||
                     user?.role == UserRoles.ZAMGLBUX
                 ) 
                 && 

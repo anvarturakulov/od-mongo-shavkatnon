@@ -3,8 +3,6 @@ import styles from './inputForData.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { useEffect } from 'react';
-import { setDateForDocument } from '@/app/service/documents/setDateForDocument';
 import { adminAndHeadCompany } from '@/app/interfaces/general.interface';
 
 
@@ -16,8 +14,6 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
     const role = mainData.user?.role;
     const isAdminOrHeadCompany = role && adminAndHeadCompany.includes(role)
     
-    let dateNowInNumber = Date.now();
-
     let dateDoc = currentDocument.date>0 ? 
         new Date(currentDocument.date) : 
         new Date();

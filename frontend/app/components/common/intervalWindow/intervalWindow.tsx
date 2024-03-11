@@ -4,25 +4,25 @@ import { Button } from '../button/Button';
 import { useState } from 'react';
 import { Interval } from '@/app/interfaces/document.interface';
 import { useAppContext } from '@/app/context/app.context';
-import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 
 export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Element => {
-  let dateStart='', dateEnd=''
+  let dateStart=0, dateEnd=0
   if (typeof window !== 'undefined') {
-    dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
-    dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
+    let valueStart = localStorage.getItem('dateStartToInterval')
+    let valueEnd = localStorage.getItem('dateEndToInterval')
+    dateStart =  valueStart != null ? +valueStart : 0;
+    dateEnd = valueEnd ? +valueEnd : 0;
   }
 
   const {mainData, setMainData} = useAppContext();
-  
   const [interval, setInterval] = useState<Interval>({dateStart, dateEnd})
 
   const saveData = (interval: Interval, setMainData: Function | undefined) => {
     const {dateStart, dateEnd} = interval
 
-    if (Date.parse(dateStart) <= Date.parse(dateEnd)) {
-      localStorage.setItem('dateStartToInterval', dateStart);
-      localStorage.setItem('dateEndToInterval', dateEnd); 
+    if (dateStart <= dateEnd) {
+      localStorage.setItem('dateStartToInterval', dateStart.toString());
+      localStorage.setItem('dateEndToInterval', dateEnd.toString()); 
       setMainData && setMainData('showIntervalWindow', false);
       setMainData && setMainData('updateDataForDocumentJournal', false);  
     }
@@ -43,12 +43,12 @@ export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Elemen
         if (id == 'dateStart') {
           newInterval = {
             ...interval,
-            dateStart: value
+            dateStart: new Date(value).toISOString().split('T')[0]
           }
         } else {
           newInterval = {
             ...interval,
-            dateEnd: value
+            dateEnd: new Date(value).toISOString().split('T')[0]
           }
         }
         setInterval(newInterval)

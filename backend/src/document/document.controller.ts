@@ -45,10 +45,10 @@ export class DocumentController {
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
-    if (dto.proveden) {
+    let newDoc = this.documentService.createDocument(dto);
+    if ( (await newDoc).user && (await newDoc).proveden) {
       this.sendMessage(dto, true)
     }
-    this.documentService.createDocument(dto);
   };
 
   @UseGuards(JwtAuthGuard)
@@ -90,11 +90,13 @@ export class DocumentController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async patch(@Param('id', IdValidationPipe) id: string, @Body() dto: CreateDocumentDto) {
-    this.sendMessage(dto, false)
     const updatedDocument = await this.documentService.updateById(id, dto);
     if (!updatedDocument) {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
-    }
+    } 
+    
+    if (updatedDocument) this.sendMessage(dto, false)
+    
     return updatedDocument;
   }
 
@@ -110,7 +112,7 @@ export class DocumentController {
     if (!docForProvodka) {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
     }
-    this.sendMessage(newDto, true)
+    if (docForProvodka) this.sendMessage(newDto, true)
     return docForProvodka;
   }
 

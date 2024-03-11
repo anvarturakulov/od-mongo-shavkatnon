@@ -70,8 +70,8 @@ export interface OptionsForDocument {
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'
 
 export interface Interval {
-    dateStart: string,
-    dateEnd: string
+    dateStart: number,
+    dateEnd: number
 }
 
 export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner'

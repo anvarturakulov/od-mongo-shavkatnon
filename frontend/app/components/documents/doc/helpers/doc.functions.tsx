@@ -75,6 +75,7 @@ export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined )
         ...currentDocument,
     }
     
+    
     if (!validateBody(body)) {
         showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
     } else {

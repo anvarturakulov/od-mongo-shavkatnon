@@ -20,20 +20,23 @@ import { dashboardUsersList } from '@/app/interfaces/general.interface';
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
-    let dateStart = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
-    let dateEnd = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
-   
+    let dateStartInString = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
+    let dateEndInString = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
+    
+    let dateStartInNumber = Date.parse(dateStartInString)
+    let dateEndInNumber = Date.parse(dateEndInString) +86399999
+    
     const {mainData, setMainData} = useAppContext();
     const { contentName, user, showDocumentWindow } = mainData;
     const role = mainData.user?.role;
     const dashboardUsers = role && dashboardUsersList.includes(role);
 
     const token = user?.access_token;
-    // let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
+    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
-    // if (contentName) {
+    if (contentName) {
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
-    // }
+    }
 
     const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
 
@@ -74,7 +77,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                         <tbody className={styles.tbody}>
                             {documents && documents.length>0 && 
                             documents
-                            .filter((item:DocumentModel, key: number) => (item.date >= Date.parse(dateStart) && item.date <= Date.parse(dateEnd)))
+                            .filter((item:DocumentModel, key: number) => (item.date >= dateStartInNumber && item.date <= dateEndInNumber))
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                             .map((item:DocumentModel, key: number) => (
                                 <>

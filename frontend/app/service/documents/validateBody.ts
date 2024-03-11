@@ -3,7 +3,7 @@ import { DocumentModel, DocumentType } from "../../interfaces/document.interface
 export const validateBody = (body: DocumentModel): Boolean => {
   let { date, docNumber, documentType } = body
 
-  let { analiticId, senderId, receiverId, total, count } = body
+  let { analiticId, senderId, receiverId, total, count,firstWorkerId, secondWorkerId, thirdWorkerId } = body
   // console.log(senderId)
   if (!date || !docNumber || !documentType) return false
 
@@ -27,6 +27,29 @@ export const validateBody = (body: DocumentModel): Boolean => {
     } 
   }
 
+  const documentsToTotal = [
+    `${DocumentType.ComeMaterial}`,
+    `${DocumentType.LeaveMaterial}`,
+    `${DocumentType.MoveMaterial}`,
+    `${DocumentType.SaleProd}`,
+  ]
+
+  if (documentsToTotal.includes(documentType)) {
+    if ( !total ) {
+      return false
+    }
+  }
+
+  const documentsComeProduct = [
+    `${DocumentType.ComeProduct}`,
+  ]
+
+  if (documentsComeProduct.includes(documentType)) {
+    if (!firstWorkerId || !secondWorkerId || !thirdWorkerId) {
+      return false
+    }
+  }
+
   const documentsForCashFromPartners = [
     `${DocumentType.ComeCashFromPartners}`,
     `${DocumentType.MoveCash}`,
@@ -42,7 +65,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashLeave.includes(documentType)) {
-    if (!senderId || !analiticId) return false
+    if (!senderId || !analiticId || !total) return false
   }
 
   return true
