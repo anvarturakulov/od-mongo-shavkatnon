@@ -27,8 +27,8 @@ export const CashItem = ({className, data, currentSectionId, title, ...props }: 
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentSectionId, true, startDateFromStorage, endDateFromStorage);
 
-    if ((PDSUM-PKSUM+TRADEINCOME+MOVEINCOME-CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER+
-      PDSUM-PKSUM+TDSUM-TKSUM) == 0 ) return <></>
+    if ( !(PDSUM-PKSUM) && !(TRADEINCOME+MOVEINCOME) && !(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER) 
+        && !(PDSUM-PKSUM+TDSUM-TKSUM)) return <></>
     return (
        <>
         <tbody>
