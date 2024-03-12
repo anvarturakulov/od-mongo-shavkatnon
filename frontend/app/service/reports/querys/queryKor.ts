@@ -16,9 +16,10 @@ export const queryKor = (
 
   const { reportOption } = mainData;
   let { startDate, endDate, entrys } = reportOption;
+  endDate = endDate + 86399999
   
   let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard));
+  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard)) + 86399999;
 
 
   let flagFirstSubconoto = true

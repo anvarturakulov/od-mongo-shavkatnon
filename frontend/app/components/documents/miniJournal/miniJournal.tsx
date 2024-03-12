@@ -73,8 +73,8 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                                         </td>
                                         <td>{`${getNameReference(references,item.receiverId)}`}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
-                                        {/* <td className={styles.rowDate}>{secondsToDateString(item.date)}</td> */}
-                                        <td className={styles.rowDate}>{item.date}</td>
+                                        <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
+                                        {/* <td className={styles.rowDate}>{item.date}</td> */}
                                         <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total ? item.total:item.comment}</td>
                                         <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.count ? `(${item.count})`: ''}`}</td>
                                     </tr>

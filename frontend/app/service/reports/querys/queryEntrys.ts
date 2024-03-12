@@ -11,7 +11,10 @@ export const queryEntrys = (
 ): Array<EntryItem> => {
 
   const { reportOption } = mainData;
-  const { startDate, endDate, entrys } = reportOption;
+  let { startDate, endDate, entrys } = reportOption;
+  
+  endDate = endDate + 86399999
+
   let { firstReferenceId } = reportOption;
 
   if (bodyByFirstSunconto && fixedReferencyId) {

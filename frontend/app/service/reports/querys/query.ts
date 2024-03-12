@@ -17,11 +17,13 @@ export const query = (
   
 
   let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard));
+  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard)) + 86399999;
 
   const { reportOption } = mainData;
   let { startDate, endDate, entrys } = reportOption;
 
+  endDate = endDate + 86399999
+  
   let { firstReferenceId } = reportOption;
 
   if (bodyByFirstSunconto && fixedReferencyId) {
