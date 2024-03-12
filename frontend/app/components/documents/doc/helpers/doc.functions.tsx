@@ -68,20 +68,7 @@ export const cancelSubmit = (setMainData: Function | undefined, mainData: Mainda
     }
 }
 
-export const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
-    const {currentDocument, } = mainData;
-    
-    let body: DocumentModel = {
-        ...currentDocument,
-    }
-    
-    
-    if (!validateBody(body)) {
-        showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
-    } else {
-        updateCreateDocument(mainData, setMainData);
-    }
-}
+
 
 export const secondsToDateString = (seconds: number): String => {
     return new Date(seconds).toLocaleDateString('ru-RU')

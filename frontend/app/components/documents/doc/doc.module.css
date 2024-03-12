@@ -43,11 +43,6 @@
     border: 0.6px dotted var(--black-300);
 }
 
-.button{
-    display: inline-block;
-    font-size: 20px;
-}
-
 .boxBtn{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -84,5 +79,22 @@
     margin-left: 20px;
 }
 
+.notVisible{
+    display: none;
+}
+
+.button{
+    display: inline-block;
+    padding: 10px 0px;
+    width: 150px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--black-600);
+}
 
 

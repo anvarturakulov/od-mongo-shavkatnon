@@ -24,7 +24,7 @@
     border: 1px solid var(--white);
 }
 
-.green {
-    background-color: green;
+.disabled {
+    background-color: red;
     color: #fff;
 }

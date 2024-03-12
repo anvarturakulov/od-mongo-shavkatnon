@@ -1,19 +1,25 @@
 'use client'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DocProps } from './doc.props';
 import styles from './doc.module.css';
 import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
-import { cancelSubmit, onSubmit, saveUser } from './helpers/doc.functions';
+import { cancelSubmit, saveUser } from './helpers/doc.functions';
 import { isAdmins } from '@/app/service/common/users';
-import { DocumentType } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { Maindata } from '@/app/context/app.context.interfaces';
+import { validateBody } from '@/app/service/documents/validateBody';
+import { showMessage } from '@/app/service/common/showMessage';
+import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
+import cn from 'classnames'
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { contentTitle, currentDocument, isNewDocument, contentName } = mainData;
+    const [disabled, setDisabled] = useState<boolean>(!isNewDocument)
 
     useEffect(() => {
         if (!currentDocument.user) {
@@ -23,6 +29,22 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
     },[])
+
+    const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
+        const {currentDocument} = mainData;
+        setDisabled(true)
+        let body: DocumentModel = {
+            ...currentDocument,
+        }
+        
+        if (!validateBody(body)) {
+            showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
+            setDisabled(false)
+        } else {
+            updateCreateDocument(mainData, setMainData);
+            setDisabled(true)
+        }
+    }
 
     return (
         <div className={styles.docBox}>
@@ -42,10 +64,14 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                     ) 
                     &&
                    <>
-                    <Button className={styles.button} appearance='primary' onClick={() => 
-                        onSubmit( mainData, setMainData)}>
+                    <button 
+                        className={styles.button} 
+                        // appearance='primary'
+                        disabled = {disabled} 
+                        onClick={() => onSubmit( mainData, setMainData)}
+                        >
                             Саклаш
-                    </Button>
+                    </button>
                     
                     <Button className={styles.button} appearance='ghost' onClick={() => cancelSubmit(setMainData, mainData)}>Бекор килиш</Button>
                    </>

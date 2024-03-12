@@ -28,7 +28,6 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('isNewDocument', false);
       setMainData('currentDocument', { ...defaultDocumentFormItems });
       setMainData('mainPage', true);
-      // if (mainData.user?.role != UserRoles.HEADCOMPANY && mainData.user?.role != UserRoles.ADMIN) setMainData('mainPage', true)
     }
   }
 
@@ -36,10 +35,9 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/document/' + currentDocument._id;
 
   if (isNewDocument) {
-
     axios.post(uriPost, body, config)
       .then(function (request) {
-        actionWithMainData('янги хужжати киритилди')
+          actionWithMainData('янги хужжати киритилди')
       })
       .catch(function (error) {
         if (setMainData) {
@@ -51,10 +49,12 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       axios.patch(uriPatch, body, config)
         .then(function () {
           actionWithMainData('хужжат янгиланди')
+          return true
         })
         .catch(function (error) {
           if (setMainData) {
             showMessage(error.message, 'error', setMainData)
+            return false
           }
         });
     };
