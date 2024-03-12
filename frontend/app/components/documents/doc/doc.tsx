@@ -7,15 +7,20 @@ import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
 import { cancelSubmit, onSubmit, saveUser } from './helpers/doc.functions';
 import { isAdmins } from '@/app/service/common/users';
+import { DocumentType } from '@/app/interfaces/document.interface';
+import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { contentTitle, currentDocument, isNewDocument } = mainData;
-    
+    const { contentTitle, currentDocument, isNewDocument, contentName } = mainData;
+
     useEffect(() => {
         if (!currentDocument.user) {
             saveUser(setMainData, mainData)
+        }
+        if (contentName == DocumentType.MoveMaterial || contentName == DocumentType.LeaveMaterial) {
+            getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
     },[])
 

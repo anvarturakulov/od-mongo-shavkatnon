@@ -17,7 +17,7 @@ export function TBody ({ listSecondSubconts, data, schet, className, ...props}:T
         listSecondSubconts && 
         listSecondSubconts.map((item: string, key) => {
         
-        const MPRICE = query(schet, TypeQuery.MPRICE, item, mainData);
+        // const MPRICE = query(schet, TypeQuery.MPRICE, item, mainData);
         const PDSUM = query(schet, TypeQuery.PDSUM, item, mainData);
         const PDKOL = query(schet, TypeQuery.PDKOL, item, mainData);
         const PKSUM = query(schet, TypeQuery.PKSUM, item, mainData);
@@ -27,7 +27,7 @@ export function TBody ({ listSecondSubconts, data, schet, className, ...props}:T
         const TKSUM = query(schet, TypeQuery.TKSUM, item, mainData);
         const TKKOL = query(schet, TypeQuery.TKKOL, item, mainData);
         
-        if (!MPRICE && !PDSUM && !PDKOL && !PKSUM && !PKKOL 
+        if (!PDSUM && !PDKOL && !PKSUM && !PKKOL 
             && !TDSUM  && !TDKOL  && !TKSUM  && !TKKOL ) return <></>
         
         return (

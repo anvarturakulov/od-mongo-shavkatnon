@@ -9,13 +9,6 @@ export const getEntrysJournal = (setMainData: Function | undefined, mainData: Ma
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
-  const actionWithMainData = (mes: string) => {
-    if (setMainData) {
-      
-      showMessage(`${contentName} буйича - ${mes}`, 'success', setMainData)
-    }
-  }
-
   const url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
 
   axios.get(url, config)

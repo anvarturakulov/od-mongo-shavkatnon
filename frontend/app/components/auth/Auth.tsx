@@ -75,7 +75,7 @@ export default function Auth() {
               onChange={(val:any) => setCapVal(val)}
             />
             <Button 
-              disabled={!capVal} 
+              // disabled={!capVal} 
               className={cn(styles.button, {
                [styles.disabledBtn]: !capVal  
             })} 

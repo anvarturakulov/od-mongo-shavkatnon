@@ -34,9 +34,10 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
             let currentItem = {...currentDocument};
             let id = target[target.selectedIndex].getAttribute('data-id');
             let typeDocumentForReference = getTypeDocumentForReference(contentName);
-        
+
             if ( typeDocumentForLeaveTMZ(contentName) && id ) {
-                let schet
+                let schet = undefined
+                console.log('shu erga kirayapti')
 
                 if (typeDocumentForReference == 'MATERIAL') {
                     schet = Schet.S10
@@ -52,6 +53,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 
                 if (schet && ( currentItem.documentType == DocumentType.MoveMaterial || currentItem.documentType == DocumentType.LeaveMaterial)) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
+                    console.log('price-',currentItem.price)
                     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }

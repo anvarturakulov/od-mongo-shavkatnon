@@ -120,8 +120,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
             </div>
         </>
-        
-
     )
 }
 
