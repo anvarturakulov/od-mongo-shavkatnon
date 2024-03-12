@@ -101,7 +101,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
     switch (documentType) {
       case DocumentType.ComeCashFromPartners:
         return {
-          debet: item.date > 86400000 ? Schet.S50 : Schet.S00,
+          debet: item.date > 86400001 ? Schet.S50 : Schet.S00,
           kredit: Schet.S40,
           ...MoveCashObj
         };
@@ -116,14 +116,14 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       case DocumentType.ComeMaterial:
         return {
           debet: Schet.S10,
-          kredit: item.date > 86400000 ? Schet.S40 : Schet.S00,
+          kredit: item.date > 86400001 ? Schet.S40 : Schet.S00,
           ...leaveComeTMZObj
         };
 
       case DocumentType.ComeProduct:
         return {
           debet: Schet.S28,
-          kredit: item.date > 86400000 ? Schet.S20 : Schet.S00,
+          kredit: item.date > 86400001 ? Schet.S20 : Schet.S00,
           ...leaveComeTMZObj,
         };
 
@@ -197,7 +197,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       case DocumentType.MoveCash:
         return {
           debet: Schet.S50,
-          kredit: Schet.S50,
+          kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
           ...MoveCashObj,
         };
 
