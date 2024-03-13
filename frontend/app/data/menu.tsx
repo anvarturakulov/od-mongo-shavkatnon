@@ -25,7 +25,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ELAKCHI, UserRoles.HEADSECTION]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.HEADSECTION]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
@@ -37,13 +37,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeHalfstuff, description:'Я.Т.М ишлаб чикариш', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ELAKCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ELAKCHI, UserRoles.HAMIRCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.HAMIRCHI]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',

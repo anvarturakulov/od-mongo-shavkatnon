@@ -19,7 +19,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { contentTitle, currentDocument, isNewDocument, contentName } = mainData;
-    const [disabled, setDisabled] = useState<boolean>(!isNewDocument)
+    const [disabled, setDisabled] = useState<boolean>(false)
 
     useEffect(() => {
         if (!currentDocument.user) {
