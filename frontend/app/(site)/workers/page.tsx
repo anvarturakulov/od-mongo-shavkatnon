@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import UserMenu from '@/app/components/userMenu/userMenu';
 import ReportWindow from '@/app/components/reports/reportWindow/reportWindow';
-import Journal from '@/app/components/documents/journal/journal';
+import Journal from '@/app/components/journals/journal/journal';
 import { Message } from '@/app/components/common/message/message';
 
 export default function Users() {

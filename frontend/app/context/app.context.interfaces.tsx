@@ -25,7 +25,8 @@ export interface Maindata {
   reportOption: ReportOptions,
   showIntervalWindow: boolean,
   showMayda: boolean,
-  definedTandirWorkers: DefinedTandirWorkers
+  definedTandirWorkers: DefinedTandirWorkers,
+  updateHamirJournal: boolean
 }
 
 export interface IAppContext {

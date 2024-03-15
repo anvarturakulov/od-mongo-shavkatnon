@@ -17,9 +17,7 @@ import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { definedTandirWorkers } from './helper';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
-    
     const {mainData, setMainData} = useAppContext();
-
     const { user, contentName } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;

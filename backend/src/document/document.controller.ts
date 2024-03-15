@@ -6,7 +6,7 @@ import { DocumentType } from 'src/interfaces/document.interface';
 import { IdValidationPipe } from 'src/pipes/ad-validation.pipe';
 import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { AuthService } from 'src/auth/auth.service';
-import { ReferencesForTelegramMessage, sendMessageToChanel } from './telegram/telegramMessage';
+import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
 import { ReferenceService } from 'src/reference/reference.service';
 
 @Controller('document')
@@ -46,7 +46,7 @@ export class DocumentController {
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
     let newDoc = this.documentService.createDocument(dto);
-    if ( (await newDoc).user && (await newDoc).proveden) {
+    if ((await newDoc).user && (await newDoc).proveden) {
       this.sendMessage(dto, true)
     }
   };
@@ -93,10 +93,10 @@ export class DocumentController {
     const updatedDocument = await this.documentService.updateById(id, dto);
     if (!updatedDocument) {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
-    } 
-    
+    }
+
     if (updatedDocument) this.sendMessage(dto, false)
-    
+
     return updatedDocument;
   }
 

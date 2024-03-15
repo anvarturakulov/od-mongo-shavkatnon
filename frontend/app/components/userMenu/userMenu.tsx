@@ -21,7 +21,7 @@ import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import MiniJournal from '../documents/miniJournal/miniJournal';
+import MiniJournal from '../journals/miniJournal/miniJournal';
 import { DefinedTandirWorkers } from '../documents/definedTandirWorkers/definedTandirWorkers';
 
 const div = 1;

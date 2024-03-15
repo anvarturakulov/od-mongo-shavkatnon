@@ -3,7 +3,7 @@ import styles from './referenceJournal.module.css'
 import cn from 'classnames';
 import IcoTrash from './ico/trash.svg'
 import { useEffect, useRef, useState } from 'react';
-import { Reference } from '../reference/reference';
+import { Reference } from '../../references/reference/reference';
 import { ReferenceModel } from '../../../interfaces/reference.interface';
 import useSWR from 'swr';
 import { ReferenceJournalProps } from './referenceJournal.props';
@@ -12,7 +12,7 @@ import Header from '../../common/header/header';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemReference, getReference } from './helpers/reference.functions';
-import { getNameReference } from '../../documents/journal/helpers/journal.functions';
+import { getNameReference } from '../journal/helpers/journal.functions';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     

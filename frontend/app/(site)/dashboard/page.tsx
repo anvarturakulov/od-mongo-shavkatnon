@@ -2,12 +2,12 @@
 import { Htag } from '@/app/components';
 import styles from './page.module.css';
 import ReportWindow from '@/app/components/reports/reportWindow/reportWindow';
-import ReferenceJournal from '@/app/components/references/referenceJournal/referenceJournal';
+import ReferenceJournal from '@/app/components/journals/referenceJournal/referenceJournal';
 import { useAppContext } from '@/app/context/app.context';
 import { Message } from '@/app/components/common/message/message';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
-import Journal from '@/app/components/documents/journal/journal';
+import Journal from '@/app/components/journals/journal/journal';
 import { IntervalWindow } from '@/app/components/common/intervalWindow/intervalWindow';
 import TopBox from '@/app/components/common/topBox/topBox';
 import { Information } from '@/app/components/information/information';
