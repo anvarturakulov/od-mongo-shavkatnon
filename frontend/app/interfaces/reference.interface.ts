@@ -22,14 +22,15 @@ export interface ReferenceModel {
     _id?: string
     name: string
     typeReference: TypeReference
-    typePartners?: TypePartners
-    typeTMZ?: TypeTMZ
+    typePartners?: TypePartners | undefined
+    typeTMZ?: TypeTMZ | undefined
     unit?: string
     comment?: string
     deleted?: boolean
     delivery?: boolean
     filial?: boolean
     sklad?: boolean
+    buxgalter?: boolean
     un?: boolean
     clientForDeliveryId?: string
     firstPrice?: number,
@@ -37,22 +38,7 @@ export interface ReferenceModel {
     thirdPrice?: number
 }
 
-export interface ReferenceBody {
-    name: string;
-    typeReference: TypeReference;
-    typePartners: string;
-    typeTMZ: string;
-    unit: string;
-    comment: string;
-    delivery: boolean,
-    filial: boolean,
-    sklad: boolean,
-    un: boolean,
-    clientForDeliveryId: string
-    firstPrice: number,
-    secondPrice: number
-    thirdPrice: number
-}
+
 
 
 

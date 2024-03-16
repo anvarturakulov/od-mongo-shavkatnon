@@ -26,7 +26,8 @@ export interface Maindata {
   showIntervalWindow: boolean,
   showMayda: boolean,
   definedTandirWorkers: DefinedTandirWorkers,
-  updateHamirJournal: boolean
+  updateHamirJournal: boolean,
+  currentStorageIdInHamirsJournal: string
 }
 
 export interface IAppContext {

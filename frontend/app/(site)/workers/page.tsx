@@ -10,11 +10,13 @@ import UserMenu from '@/app/components/userMenu/userMenu';
 import ReportWindow from '@/app/components/reports/reportWindow/reportWindow';
 import Journal from '@/app/components/journals/journal/journal';
 import { Message } from '@/app/components/common/message/message';
+import { UserRoles } from '@/app/interfaces/general.interface';
+import Hamirs from '@/app/components/journals/hamirs/hamirs';
 
 export default function Users() {
   
   const {mainData} = useAppContext()
-  const {contentType, contentTitle} = mainData
+  const {contentType, contentTitle, user} = mainData
   
   useEffect(() => {
     if (mainData.user == undefined) {
@@ -29,12 +31,31 @@ export default function Users() {
           mainData.mainPage &&
           <TopBox/>
         }
+        
         {
           mainData.mainPage &&
+          (user?.role != UserRoles.TANDIR && user?.role != UserRoles.HAMIRCHI) && 
+          
           <div className={styles.box}>
             <UserMenu menuData={MenuData}/>
           </div>
         }
+        {
+          mainData.mainPage &&
+          user?.role == UserRoles.HAMIRCHI &&
+          <Hamirs/>
+        }
+
+        {/* {
+          user?.role == UserRoles.TANDIR &&
+          <button className={styles.btnForTandir} onClick={()=> setTandirWorkers(state => !state)}>Бугунги ходимлар руйхати</button>
+        }
+
+
+        {
+            tandirworkers &&
+            <DefinedTandirWorkers/>
+        } */}
         
 
         <div className={styles.journalBox}>

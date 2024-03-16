@@ -68,5 +68,6 @@ export const defaultMainData: Maindata = {
     showIntervalWindow: false,
     showMayda: false,
     definedTandirWorkers: defaultTandirWorkers,
-    updateHamirJournal: false
+    updateHamirJournal: false,
+    currentStorageIdInHamirsJournal: ''
   }

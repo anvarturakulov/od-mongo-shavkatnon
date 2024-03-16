@@ -139,16 +139,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
 
             
             
-            {
-                user?.role == UserRoles.TANDIR &&
-                <button className={styles.btnForTandir} onClick={()=> setTandirWorkers(state => !state)}>Бугунги ходимлар руйхати</button>
-            }
-
-
-            {
-                tandirworkers &&
-                <DefinedTandirWorkers/>
-            }
+            
 
             {
                 (

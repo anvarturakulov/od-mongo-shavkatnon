@@ -21,7 +21,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
     const { user, contentName } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
-    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    const { data , mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: TypeForSelectInForm) => {
 

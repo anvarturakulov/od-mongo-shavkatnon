@@ -4,7 +4,7 @@ import { ReferenceProps } from './reference.props';
 import styles from './reference.module.css';
 import cn from 'classnames';
 import { Button} from '@/app/components';
-import { ReferenceBody, TypePartners, TypeReference, TypeTMZ } from '../../../interfaces/reference.interface';
+import { ReferenceModel, TypePartners, TypeReference, TypeTMZ } from '../../../interfaces/reference.interface';
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
 import { Select } from './helpers/reference.components';
@@ -22,28 +22,30 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     const { contentName } = mainData;
     const typeReference = getTypeReference( contentName );
     
-    const defaultBody: ReferenceBody = {
+    const defaultBody: ReferenceModel = {
         name: '',
         typeReference,
-        typePartners: '',
-        typeTMZ: '',
+        typePartners: undefined,
+        typeTMZ: undefined,
         unit: '',
         comment: '',
         delivery: false,
         filial: false,
         sklad: false,
+        buxgalter: false,
         un: false,
         clientForDeliveryId: '',
         firstPrice:0,
         secondPrice:0,
-        thirdPrice:0
+        thirdPrice:0,
+        deleted: false
     }
 
-    const [body, setBody] = useState<ReferenceBody>(defaultBody) 
+    const [body, setBody] = useState<ReferenceModel>(defaultBody) 
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>) => {
         let target = e.currentTarget
-        setBody(state => {
+        setBody((state:ReferenceModel) => {
             return {
                 ...state,
                 [target.id]: target.value
@@ -52,7 +54,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     }
 
     const setCheckbox = (checked: boolean, id: string) => {
-        setBody(state => {
+        setBody((state:ReferenceModel) => {
             return {
                 ...state,
                 [`${id}`]: checked
@@ -61,7 +63,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     }
 
     const setClientForDeliveryId = (id: string) => {
-        setBody(state => {
+        setBody((state:ReferenceModel) => {
             return {
                 ...state,
                 clientForDeliveryId: id
@@ -78,21 +80,23 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         
         if (currentReference != undefined) {
             const { typePartners, typeTMZ, unit, comment } = currentReference
-            let newBody = {
+            let newBody: ReferenceModel = {
                 name: currentReference.name,
                 typeReference: getTypeReferenceByTitle(currentReference.typeReference),
-                typePartners: typePartners ? typePartners: '',
-                typeTMZ: typeTMZ ? typeTMZ : '',
-                unit: unit ? unit : '',
-                comment: comment ? comment : '' ,
-                delivery: currentReference.delivery ? true : false,
-                filial: currentReference.filial ? true : false,
-                sklad: currentReference.sklad ? true : false,
-                un: currentReference.un ? true : false,
-                clientForDeliveryId: currentReference.clientForDeliveryId ? currentReference.clientForDeliveryId : '',
-                firstPrice: currentReference.firstPrice ? currentReference.firstPrice : 0,
-                secondPrice: currentReference.secondPrice ? currentReference.secondPrice : 0,
-                thirdPrice: currentReference.thirdPrice ? currentReference.thirdPrice : 0
+                typePartners: typePartners,
+                typeTMZ: typeTMZ,
+                unit: unit,
+                comment: comment ,
+                delivery: currentReference.delivery,
+                filial: currentReference.filial,
+                sklad: currentReference.sklad,
+                buxgalter: currentReference.buxgalter, 
+                un: currentReference.un ,
+                clientForDeliveryId: currentReference.clientForDeliveryId,
+                firstPrice: currentReference.firstPrice,
+                secondPrice: currentReference.secondPrice ,
+                thirdPrice: currentReference.thirdPrice,
+                deleted: false
             }
             setBody(newBody)
         }
@@ -151,32 +155,37 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                         <CheckBoxForReference label='Ун' setCheckbox={setCheckbox} checked={body.un} id={'un'}/>
                     }
 
+                    {
+                        ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                        body.typeReference == TypeReference.TMZ &&
+                        <CheckBoxForReference label='Бухгалтер' setCheckbox={setCheckbox} checked={body.buxgalter} id={'buxgalter'}/>
+                    }
                     
                 </div>
 
                 {
-                        ( 
-                            mainData.user?.role == UserRoles.ADMIN || 
-                            mainData.user?.role == UserRoles.HEADCOMPANY 
-                        ) &&
-                        body.typeReference == TypeReference.TMZ &&
-                        body.typeTMZ == TypeTMZ.PRODUCT &&
+                    ( 
+                        mainData.user?.role == UserRoles.ADMIN || 
+                        mainData.user?.role == UserRoles.HEADCOMPANY 
+                    ) &&
+                    body.typeReference == TypeReference.TMZ &&
+                    body.typeTMZ == TypeTMZ.PRODUCT &&
 
-                        <div className={styles.priceBox}>
-                            <div>
-                                <div>Биринчи нарх</div>
-                                <input value={body.firstPrice} type="number" id='firstPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                            </div>
-                            <div>
-                                <div>Иккинчи нарх</div>
-                                <input value={body.secondPrice} type="number" id='secondPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                            </div>
-                            <div>
-                                <div>Учинчи нарх</div>
-                                <input value={body.thirdPrice} type="number" id='thirdPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                            </div>
+                    <div className={styles.priceBox}>
+                        <div>
+                            <div>Биринчи нарх</div>
+                            <input value={body.firstPrice} type="number" id='firstPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
                         </div>
-                    }
+                        <div>
+                            <div>Иккинчи нарх</div>
+                            <input value={body.secondPrice} type="number" id='secondPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                        </div>
+                        <div>
+                            <div>Учинчи нарх</div>
+                            <input value={body.thirdPrice} type="number" id='thirdPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                        </div>
+                    </div>
+                }
                 
                 {
                     ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 

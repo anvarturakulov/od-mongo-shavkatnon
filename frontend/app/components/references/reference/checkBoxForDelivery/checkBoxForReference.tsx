@@ -1,8 +1,6 @@
 import { checkBoxForReferenceProps } from './checkBoxForReference.props';
 import styles from './checkBoxForReference.module.css';
 import cn from 'classnames';
-import { useAppContext } from '@/app/context/app.context';
-import { ReferenceBody } from '@/app/interfaces/reference.interface';
 
 export const CheckBoxForReference = ({ className, checked, setCheckbox, label, id, ...props }: checkBoxForReferenceProps): JSX.Element => {
     

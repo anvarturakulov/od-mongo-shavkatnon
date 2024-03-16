@@ -1,17 +1,18 @@
 'use client'
-import styles from './miniJournal.module.css'
+import styles from './hamirs.module.css'
 import { HamirsProps } from './hamirs.props'
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import cn from 'classnames';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { HamirModel } from '@/app/interfaces/hamir.interface';
-import { User } from '@/app/interfaces/general.interface';
-import { createHamirsForDayByUser } from '../../../service/documents/hamirs';
+import { createHamirsForDayByUser } from '@/app/service/documents/hamirs';
+import { SelectForHamirs } from './selectForHamirs/selectForHamirs';
 
-export default function MiniJournal({ className, ...props} : HamirsProps ):JSX.Element {
+
+export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
@@ -32,14 +33,14 @@ export default function MiniJournal({ className, ...props} : HamirsProps ):JSX.E
 
     const createHamirs = (date: number, userName: string | undefined) => {
         if (date && userName) {
-            createHamirsForDayByUser(date);
+            // createHamirsForDayByUser(date);
         } 
     }
 
     return (
         <>
             <div className={styles.title}>Хамирлар руйхати</div>
-            
+            <SelectForHamirs label='булим'/>
             <button onClick={() => createHamirs(dateNowPlussedInNumber, userName)}>Янги кун учун хамирларни тулдириш</button>
             {
                 <div className={styles.container} >
