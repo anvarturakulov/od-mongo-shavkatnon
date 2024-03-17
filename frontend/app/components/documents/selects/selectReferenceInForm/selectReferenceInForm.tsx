@@ -35,7 +35,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
             if ( typeDocumentForLeaveTMZ(contentName) && id ) {
                 let schet = undefined
-                console.log('shu erga kirayapti')
+                // console.log('shu erga kirayapti')
 
                 if (typeDocumentForReference == 'MATERIAL') {
                     schet = Schet.S10
@@ -51,7 +51,6 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 
                 if (schet && ( currentItem.documentType == DocumentType.MoveMaterial || currentItem.documentType == DocumentType.LeaveMaterial)) {
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    console.log('price-',currentItem.price)
                     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
                 }
             }
@@ -62,15 +61,12 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 currentItem.analiticId = id
                 if (user?.role == UserRoles.DELIVERY) {
                     let price = getPropertySubconto(data, id).firstPrice
-                    if (price) {
+                    if (price && currentItem.count) {
                         currentItem.price = price
                         currentItem.total = price * currentItem.count
                     }
                 }
             }
-            if (type == 'firstWorker' && id) currentItem.firstWorkerId = id
-            if (type == 'secondWorker' && id) currentItem.secondWorkerId = id
-            if (type == 'thirdWorker' && id) currentItem.thirdWorkerId = id
 
             if ( setMainData ) {
                 setMainData('currentDocument', {...currentItem})

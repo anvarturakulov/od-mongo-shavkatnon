@@ -7,7 +7,7 @@ export interface SelectReferenceInFormProps extends DetailedHTMLProps<SelectHTML
     label: string,
     typeReference: TypeReference,
     visibile?: boolean,
-    currentItemId: string,
+    currentItemId: string | undefined,
     type: TypeForSelectInForm,
     definedItemId?: string
 }

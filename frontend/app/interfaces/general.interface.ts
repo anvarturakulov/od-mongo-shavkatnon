@@ -36,7 +36,8 @@ export interface User {
     role: UserRoles,
     name: string,
     storageId: string,
-    tandirId: string
+    tandirId: string,
+    productId: string 
 }
 
 export interface BodyForLogin {
@@ -45,9 +46,9 @@ export interface BodyForLogin {
 }
 
 export interface DefinedTandirWorkers {
-    firstWorker: string,
-    secondWorker: string,
-    thirdWorker: string,
+    firstWorker: string | null,
+    secondWorker: string | null,
+    thirdWorker: string | null,
 }
 
 export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX];

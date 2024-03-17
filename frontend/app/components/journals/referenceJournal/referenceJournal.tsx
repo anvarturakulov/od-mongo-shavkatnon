@@ -12,7 +12,7 @@ import Header from '../../common/header/header';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemReference, getReference } from './helpers/reference.functions';
-import { getNameReference } from '../journal/helpers/journal.functions';
+import { getNameReference } from '../helpers/journal.functions';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     

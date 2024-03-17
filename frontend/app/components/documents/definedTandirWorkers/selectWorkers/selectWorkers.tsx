@@ -24,9 +24,9 @@ export const SelectWorkers = ({ label, currentItemId, type, className, ...props 
             let currentValue = {...definedTandirWorkers};
             let id = target[target.selectedIndex].getAttribute('data-id');
             
-            if (type == 'firstWorker' && id) currentValue.firstWorker = id
-            if (type == 'secondWorker' && id) currentValue.secondWorker = id
-            if (type == 'thirdWorker' && id) currentValue.thirdWorker = id
+            if (type == 'firstWorker') currentValue.firstWorker = id
+            if (type == 'secondWorker') currentValue.secondWorker = id
+            if (type == 'thirdWorker') currentValue.thirdWorker = id
 
             if ( setMainData ) {
                 setMainData('definedTandirWorkers', {...currentValue})

@@ -24,6 +24,18 @@ export class Hamir {
   @Prop()
   proveden: boolean
 
+  @Prop()
+  firstWorker: string
+
+  @Prop()
+  secondWorker: string
+
+  @Prop()
+  thirdWorker: string
+
+  @Prop()
+  fromHamirchi: boolean
+
 }
 
 export const HamirSchema = SchemaFactory.createForClass(Hamir);

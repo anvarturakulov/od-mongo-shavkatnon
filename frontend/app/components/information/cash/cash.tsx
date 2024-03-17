@@ -77,7 +77,12 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
                 </thead>
                 {
                     data && data.length > 0 &&
-                    data.filter((item: any) => item?.typeReference == TypeReference.STORAGES  )
+                    data
+                    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+                    .filter((item: any) => {
+                        if (item.buxgalter || item.filial || item.delivery) return true
+                        return false
+                    })
                     .map((item: ReferenceModel, key: number) => {
                         return <CashItem 
                             key={key}

@@ -1,7 +1,7 @@
-import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { stat } from 'fs';
 
-export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: TypeReference) => {
+export const getBodyForReferenceRequest = (state: ReferenceModel, typeReference: TypeReference) => {
   let newReq = {
     name: state.name,
     comment: state.comment,
@@ -27,7 +27,8 @@ export const getBodyForReferenceRequest = (state: ReferenceBody, typeReference: 
         ...newReq,
         delivery: state.delivery,
         filial: state.filial,
-        sklad: state.sklad
+        sklad: state.sklad,
+        buxgalter: state.buxgalter,
       };
     case TypeReference.TMZ:
       return {

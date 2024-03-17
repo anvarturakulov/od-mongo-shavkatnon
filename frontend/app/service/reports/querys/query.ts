@@ -157,9 +157,9 @@ export const query = (
       })
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
 
-      console.log('totalSumma -', totalSumma)
-      console.log('totalCount -', totalCount)
-      console.log(newEntrys)
+      // console.log('totalSumma -', totalSumma)
+      // console.log('totalCount -', totalCount)
+      // console.log(newEntrys)
       
       return totalCount ? +(totalSumma / totalCount).toFixed(2) : 0;
 

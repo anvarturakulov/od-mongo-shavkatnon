@@ -7,10 +7,10 @@ import useSWR from 'swr';
 import cn from 'classnames';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { getNameReference } from './helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
+import { getNameReference } from '../helpers/journal.functions';
 
 
 export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX.Element {

@@ -2,11 +2,7 @@
     width: 100%;
     margin: 0 auto;
     user-select: none;
-}
-
-.title{
-    margin-bottom: 10px;
-    font-size: 14px!important;
+    margin-top: 20px;
 }
 
 .table {
@@ -18,21 +14,20 @@
 
 .table td,
 .table th {
-    border: 1px dotted #ddd;
+    border-left: 0.1px dotted #ddd;
     text-align: left;
-    padding: 5px 7px;
-    font-size: 13px;
+    padding: 10px 7px;
+    text-align: center;
 }
 
 .table tr:nth-child(even) {
     background-color: #f5f5f5;
+    
 }
 
 .table tr {
     margin: 5px 0;
-    border: 1px solid #e6e6e6;
-    display: grid!important;
-    grid-template-columns: 1fr 1fr 1fr;
+    border: 0.5px solid #e6e6e6;
 }
 
 .table tr:hover {
@@ -51,6 +46,11 @@
     width: 100%;
 }
 
+.table thead {
+    width: calc(100% - 1.1em);
+    position: relative;
+}
+
 .table tbody {
     display: block;
     max-height: 400px;
@@ -58,13 +58,58 @@
     overflow-x: hidden;
 }
 
+.table thead th:last-child:after {
+    content: ' ';
+    position: absolute;
+    width: 1.1em;
+    height: 40px;
+    right: -1.1em;
+    top: 0;
+}
 .proveden {
-    background-color: green;
+    background-color: green!important;
     color: #fff;
 }
 
 .title{
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 23px;
+    margin: 10px 0px;
+    margin-bottom: 20px;
+}
+
+.button{
+    padding: 10px;
+    margin-right: 10px;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
+}
+
+.action{
+    width: 100px;
+}
+
+.sendBtn{
+    padding: 10px;
+    font-weight: 600;
+    margin: 0 auto;
+    color: var(--white);
+    background-color: var(--primary);
+    font-weight: 600;
+    border-radius: 10px 0px 10px 10px;
+    cursor: pointer;
+}
+
+.order{
+    color: blue;
+    font-weight: 500;
+}
+
+.box{
+    margin-top: 20px;
+}
+
+.notVisible{
+    display: none;
 }
 

@@ -1,11 +1,10 @@
-import { ReferenceBody, TypeReference } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import axios from 'axios';
 import { showMessage } from '../common/showMessage';
 import { getBodyForReferenceRequest } from './getBodyForReferenceRequest';
 
 export const updateCreateReference = (
-  body: ReferenceBody,
-  id: string | undefined,
+  body: ReferenceModel,
   typeReference: TypeReference,
   isNewReference: boolean,
   setMainData: Function | undefined,
@@ -22,6 +21,9 @@ export const updateCreateReference = (
       setMainData('isNewReference', false);
     }
   }
+
+  const id = body._id;
+  delete body._id;
 
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/create';
   const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/' + id;

@@ -137,10 +137,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 
             ))}
 
-            
-            
-            
-
             {
                 (
                     user?.role == UserRoles.HEADSECTION ||

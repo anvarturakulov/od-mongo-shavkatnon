@@ -81,22 +81,12 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         if (currentReference != undefined) {
             const { typePartners, typeTMZ, unit, comment } = currentReference
             let newBody: ReferenceModel = {
-                name: currentReference.name,
+                ...currentReference,
                 typeReference: getTypeReferenceByTitle(currentReference.typeReference),
                 typePartners: typePartners,
                 typeTMZ: typeTMZ,
                 unit: unit,
                 comment: comment ,
-                delivery: currentReference.delivery,
-                filial: currentReference.filial,
-                sklad: currentReference.sklad,
-                buxgalter: currentReference.buxgalter, 
-                un: currentReference.un ,
-                clientForDeliveryId: currentReference.clientForDeliveryId,
-                firstPrice: currentReference.firstPrice,
-                secondPrice: currentReference.secondPrice ,
-                thirdPrice: currentReference.thirdPrice,
-                deleted: false
             }
             setBody(newBody)
         }
@@ -105,110 +95,109 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
     const {isNewReference, showReferenceWindow, user} = mainData
 
     return (
-            <div className={cn(styles.referenceBox, 
-                {[styles.newReference] : isNewReference},
-                {[styles.boxClose] : !showReferenceWindow})}>
-                <div className={styles.nameBox}>
-                    <div>Номи</div>
-                    <input value={body.name} type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                </div>
-                {
-                    typeReference == TypeReference.PARTNERS && 
-                    Select(typePartnersList, body, 'Хамкор тури', 'typePartners', changeElements)
-                }
- 
-                {
-                    typeReference == TypeReference.TMZ && 
-                    <div className={styles.box}> 
-                        {
-                            Select(typeTMZList, body, 'ТМБ тури', 'typeTMZ', changeElements)
-                        }
-                        <div>
-                            <div>Улчов бирлиги</div>
-                            <input value={body.unit} type="text" id='unit' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                        </div>
+        <div className={cn(styles.referenceBox, 
+            {[styles.newReference] : isNewReference},
+            {[styles.boxClose] : !showReferenceWindow})}>
+            <div className={styles.nameBox}>
+                <div>Номи</div>
+                <input value={body.name} type="text" id='name' className={styles.input} onChange={(e)=>changeElements(e)}/>
+            </div>
+            {
+                typeReference == TypeReference.PARTNERS && 
+                Select(typePartnersList, body, 'Хамкор тури', 'typePartners', changeElements)
+            }
+
+            {
+                typeReference == TypeReference.TMZ && 
+                <div className={styles.box}> 
+                    {
+                        Select(typeTMZList, body, 'ТМБ тури', 'typeTMZ', changeElements)
+                    }
+                    <div>
+                        <div>Улчов бирлиги</div>
+                        <input value={body.unit} type="text" id='unit' className={styles.input} onChange={(e)=>changeElements(e)}/>
                     </div>
-                }
-
-                <div className={styles.checkBoxs}>
-                    {
-                        mainData.user?.role == UserRoles.ADMIN && 
-                        body.typeReference == TypeReference.STORAGES &&
-                        <CheckBoxForReference label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery} id={'delivery'}/>
-                    }
-
-                    {
-                        mainData.user?.role == UserRoles.ADMIN && 
-                        body.typeReference == TypeReference.STORAGES &&
-                        <CheckBoxForReference label='Филиал' setCheckbox={setCheckbox} checked={body.filial} id={'filial'}/>
-                    }
-
-                    {
-                        mainData.user?.role == UserRoles.ADMIN && 
-                        body.typeReference == TypeReference.STORAGES &&
-                        <CheckBoxForReference label='Склад' setCheckbox={setCheckbox} checked={body.sklad} id={'sklad'}/>
-                    }
-
-                    {
-                        ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
-                        body.typeReference == TypeReference.TMZ &&
-                        <CheckBoxForReference label='Ун' setCheckbox={setCheckbox} checked={body.un} id={'un'}/>
-                    }
-
-                    {
-                        ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
-                        body.typeReference == TypeReference.TMZ &&
-                        <CheckBoxForReference label='Бухгалтер' setCheckbox={setCheckbox} checked={body.buxgalter} id={'buxgalter'}/>
-                    }
-                    
                 </div>
+            }
+
+            <div className={styles.checkBoxs}>
+                {
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    body.typeReference == TypeReference.STORAGES &&
+                    <CheckBoxForReference label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery} id={'delivery'}/>
+                }
 
                 {
-                    ( 
-                        mainData.user?.role == UserRoles.ADMIN || 
-                        mainData.user?.role == UserRoles.HEADCOMPANY 
-                    ) &&
-                    body.typeReference == TypeReference.TMZ &&
-                    body.typeTMZ == TypeTMZ.PRODUCT &&
-
-                    <div className={styles.priceBox}>
-                        <div>
-                            <div>Биринчи нарх</div>
-                            <input value={body.firstPrice} type="number" id='firstPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                        </div>
-                        <div>
-                            <div>Иккинчи нарх</div>
-                            <input value={body.secondPrice} type="number" id='secondPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                        </div>
-                        <div>
-                            <div>Учинчи нарх</div>
-                            <input value={body.thirdPrice} type="number" id='thirdPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
-                        </div>
-                    </div>
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    body.typeReference == TypeReference.STORAGES &&
+                    <CheckBoxForReference label='Филиал' setCheckbox={setCheckbox} checked={body.filial} id={'filial'}/>
                 }
-                
+
+                {
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    body.typeReference == TypeReference.STORAGES &&
+                    <CheckBoxForReference label='Склад' setCheckbox={setCheckbox} checked={body.sklad} id={'sklad'}/>
+                }
+
                 {
                     ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
-                    (body.typePartners == TypePartners.CLIENTS) &&
-                    <SelectForReferences label='Клиент сохиби' typeReference={TypeReference.STORAGES} currentItemId={mainData.currentReference?.clientForDeliveryId} setClientForDeliveryId={setClientForDeliveryId}/>
+                    body.typeReference == TypeReference.TMZ &&
+                    <CheckBoxForReference label='Ун' setCheckbox={setCheckbox} checked={body.un} id={'un'}/>
                 }
 
-                <div>
-                    <div>Изох</div>
-                    <input value={body.comment} type="text" id='comment' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                {
+                    ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                    body.typeReference == TypeReference.STORAGES &&
+                    <CheckBoxForReference label='Бухгалтер' setCheckbox={setCheckbox} checked={body.buxgalter} id={'buxgalter'}/>
+                }
+                
+            </div>
+
+            {
+                ( 
+                    mainData.user?.role == UserRoles.ADMIN || 
+                    mainData.user?.role == UserRoles.HEADCOMPANY 
+                ) &&
+                body.typeReference == TypeReference.TMZ &&
+                body.typeTMZ == TypeTMZ.PRODUCT &&
+
+                <div className={styles.priceBox}>
+                    <div>
+                        <div>Биринчи нарх</div>
+                        <input value={body.firstPrice} type="number" id='firstPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                    </div>
+                    <div>
+                        <div>Иккинчи нарх</div>
+                        <input value={body.secondPrice} type="number" id='secondPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                    </div>
+                    <div>
+                        <div>Учинчи нарх</div>
+                        <input value={body.thirdPrice} type="number" id='thirdPrice' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                    </div>
                 </div>
-               
-            <div className={styles.boxBtn}>
-                <Button appearance='primary' onClick={() => 
-                    onSubmit(body, 
-                             mainData.currentReference?._id, 
-                             typeReference, 
-                             isNewReference,
-                             setMainData,
-                             user?.access_token)}
-                    >Саклаш</Button>
-                <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
-            </div> 
-        </div>   
+            }
+            
+            {
+                ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                (body.typePartners == TypePartners.CLIENTS) &&
+                <SelectForReferences label='Клиент сохиби' typeReference={TypeReference.STORAGES} currentItemId={mainData.currentReference?.clientForDeliveryId} setClientForDeliveryId={setClientForDeliveryId}/>
+            }
+
+            <div>
+                <div>Изох</div>
+                <input value={body.comment} type="text" id='comment' className={styles.input} onChange={(e)=>changeElements(e)}/>
+            </div>
+            
+        <div className={styles.boxBtn}>
+            <Button appearance='primary' onClick={() => 
+                onSubmit(body,
+                            typeReference, 
+                            isNewReference,
+                            setMainData,
+                            user?.access_token)}
+                >Саклаш</Button>
+            <Button appearance='ghost' onClick={() => cancelSubmit(setMainData)}>Бекор килиш</Button>
+        </div> 
+    </div>   
     )
 } 

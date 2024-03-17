@@ -1,9 +1,10 @@
-import { IsString, IsBoolean, IsNumber } from 'class-validator';
+import { IsString, IsBoolean, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateHamirDto {
   @IsNumber()
   date: number;
-
+  
+  @IsOptional()
   @IsNumber()
   order?: number;
 
@@ -18,5 +19,20 @@ export class CreateHamirDto {
 
   @IsBoolean()
   proveden: boolean = false
+
+  @IsOptional()
+  @IsString()
+  firstWorker: string
+
+  @IsOptional()
+  @IsString()
+  secondWorker: string
+
+  @IsOptional()
+  @IsString()
+  thirdWorker: string
+
+  @IsBoolean()
+  fromHamirchi: boolean
 
 }

@@ -15,11 +15,7 @@ export class HamirService {
     return newHamir.save()
   }
 
-  async getAllHamirs(): Promise<Hamir[]> {
-    return this.hamirModel.find().exec()
-  }
-
-  async getHamirsForDate(date: string): Promise<Hamir[]> {
+  async getAllHamirsForDate(date: string): Promise<Hamir[]> {
     
     let dateStartInNumber = Date.parse(date)
     let dateEndInNumber = Date.parse(date) + 86399999
@@ -30,8 +26,22 @@ export class HamirService {
     })
   }
 
-  async findById(id: string) {
-    return this.hamirModel.findById(id).exec();
+  async getHamirsByUserToDate(dto: CreateHamirDto): Promise<Hamir[]> {
+
+    let date = new Date(dto.date);
+    let dateStr = date.toISOString().split('T')[0]
+
+    let dateStartInNumber = Date.parse(dateStr)
+    let dateEndInNumber = Date.parse(dateStr) + 86399999
+
+    let hamirs = this.hamirModel.find().exec()
+    return (await hamirs).filter((item: Hamir) => {
+      return (
+        (item.date >= dateStartInNumber && item.date <= dateEndInNumber)
+        && item.user == dto.user
+        && String(item.sectionId) == dto.sectionId
+        )
+    })
   }
 
   async setProvodka(id: string) {
@@ -42,7 +52,5 @@ export class HamirService {
     return this.hamirModel.updateOne({ _id: id }, { $set: { proveden: true } })
   }
 
-  async updateById(id: string, dto: CreateHamirDto) {
-    return this.hamirModel.updateOne({ _id: id }, { $set: dto })
-  }
+  
 }

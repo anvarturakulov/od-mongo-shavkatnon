@@ -11,7 +11,7 @@ import Header from '../../common/header/header';
 import { Doc } from '../../documents/doc/doc';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from './helpers/journal.functions';
+import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from '../helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';

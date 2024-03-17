@@ -47,17 +47,18 @@ export class AuthService {
       throw new UnauthorizedException(WRONG_PASSWORD_ERROR);
     }
 
-    return { email: user.email, role: user.role, name: user.name, storageId: user.storageId }
+    return { email: user.email, role: user.role, name: user.name, storageId: user.storageId, productId: user.productId }
   }
 
-  async login(email: string, role: UserRoles, name: string, storageId: string) {
+  async login(email: string, role: UserRoles, name: string, storageId: string, productId: string) {
     const payload = { email };
     return {
       email,
       role,
       access_token: await this.jwtService.signAsync(payload),
       name,
-      storageId
+      storageId,
+      productId,
     }
   }
 }

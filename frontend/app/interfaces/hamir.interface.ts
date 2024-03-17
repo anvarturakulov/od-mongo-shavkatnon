@@ -5,5 +5,9 @@ export interface HamirModel {
   user: string
   sectionId: string
   analiticId: string
-  proveden: boolean
+  proveden: boolean,
+  firstWorker?: string | null,
+  secondWorker?: string | null,
+  thirdWorker?: string | null,
+  fromHamirchi: boolean
 }

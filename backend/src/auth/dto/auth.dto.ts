@@ -37,4 +37,8 @@ export class AuthDto {
   @IsOptional()
   tandirId: string;
 
+  @IsString()
+  @IsOptional()
+  productId: string;
+
 }

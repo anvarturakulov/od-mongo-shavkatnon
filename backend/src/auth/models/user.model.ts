@@ -24,6 +24,9 @@ export class User {
   @Prop()
   tandirId: string;
 
+  @Prop()
+  productId: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
