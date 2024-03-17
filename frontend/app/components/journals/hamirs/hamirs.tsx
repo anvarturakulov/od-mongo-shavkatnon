@@ -9,18 +9,19 @@ import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { HamirModel } from '@/app/interfaces/hamir.interface';
 import { createHamirsForDayByUser } from '@/app/service/documents/createHamirsForDayByUser';
-import { SelectForHamirs } from './selectForHamirs/selectForHamirs';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getNameReference } from '../helpers/journal.functions';
 import { TypeReference } from '@/app/interfaces/reference.interface';
 import { changeStatusHamir } from '@/app/service/documents/changeStatusHamir';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 
 export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
-    const { contentName, user } = mainData;
-    const userName = user?.name
+    const { user } = mainData;
+    const userName = user?.name;
+    let tandir = user?.role == UserRoles.TANDIR
     
     let dateNowPlussedInNumber = Date.now() + 14400000
     let dateNowPlussedInString = new Date(dateNowPlussedInNumber);
@@ -30,7 +31,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/hamir/getForDate/'+dateStr;
     const { data : hamirs, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
     
-    const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+TypeReference.STORAGES;
+    const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll';
     const { data : references, mutate: mutateReferences } = useSWR(urlReferences, (urlReferences) => getDataForSwr(urlReferences, token));
 
     useEffect(() => {
@@ -39,7 +40,19 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
     }, [mainData.updateHamirJournal])
 
     const createHamirs = (date: number, userName: string | undefined, mainData: Maindata, setMainData: Function | undefined) => {
+        const {firstWorker, secondWorker, thirdWorker} = mainData.definedTandirWorkers
+
+        let question = `Бугунги хамирларни -
+        ${getNameReference(references, firstWorker)},
+        ${getNameReference(references, secondWorker)},
+        ${getNameReference(references, thirdWorker)} 
+        ларга тулдирайми. Бугунги ходимларни кейин узгартириш кийин`;
+
         if (date && userName) {
+            if (user?.role == UserRoles.TANDIR) {
+                if (!confirm(question)) return
+            } 
+
             createHamirsForDayByUser(date, mainData, setMainData);
             setMainData && setMainData('updateHamirJournal', true)
         } 
@@ -57,11 +70,26 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         }).length
     }
 
-    const sendHamir = (item: HamirModel, mainDate: Maindata, setMainData: Function | undefined) => {
-        if (confirm(`${item.order} - хамирни цехга бердингизми`)) {
-            changeStatusHamir(item, mainData, setMainData)
-            setMainData && setMainData('updateHamirJournal', true)
+    const sendHamir = (e:React.FormEvent<HTMLButtonElement>, item: HamirModel, mainDate: Maindata, setMainData: Function | undefined) => {
+        const { user } = mainData;
+
+        if (user?.role == UserRoles.HAMIRCHI) {
+            if (confirm(`${item.order} - хамирни цехга бердингизми`)) {
+                changeStatusHamir(item, mainData, setMainData)
+                setMainData && setMainData('updateHamirJournal', true)
+            }
         }
+
+        if (user?.role == UserRoles.TANDIR) {
+            let target = e.currentTarget;
+            let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
+            if ( count>0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
+                item.zuvala = count;
+                changeStatusHamir(item, mainData, setMainData)
+                setMainData && setMainData('updateHamirJournal', true)
+            }
+        }
+
     }
     return (
         <>
@@ -69,12 +97,23 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
             {
                 <div className={styles.container} >
                     <table className={styles.table}>
-                        <thead className={styles.thead}>
+                        <thead className={cn(styles.thead, {
+                            [styles.theadWithTandir]: tandir
+                        })}>
                             <tr key='0'>
-                                <th key='2' className={styles.date}>Сана</th>
+                                <th key='2' className={cn(styles.date,{
+                                    [styles.width50]: tandir
+                                })}>Сана</th>
                                 <th key='4' className={styles.order}>Хамир тартиби</th>
-                                <th key='5' className={styles.section} >Булим</th>
-                                <th key='6' className={styles.action}>Амал</th>
+                                {
+                                    !tandir &&
+                                    <th key='5' className={styles.section} >Булим</th>
+                                }
+                                
+                                {
+                                    !tandir &&
+                                    <th key='6' className={styles.action}>Амал</th>
+                                }
                             </tr>
                         </thead>
                         <tbody className={styles.tbody}>
@@ -101,16 +140,25 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                         key={key} 
                                         className={cn(styles.trRow, {
                                                 [styles.proveden]: item.proveden,
+                                                [styles.bigTr]: tandir
                                             })}>
                                         <td className={styles.date}>{secondsToDateString(item.date)}</td>
                                         <td className={styles.order}>{`-- ${item.order} --` }</td>
-                                        <td className={styles.section}>{getNameReference(references,item.sectionId)}</td>
-                                        
+                                        {
+                                            !tandir &&
+                                            <td className={styles.section}>{getNameReference(references,item.sectionId)}</td>
+                                        }
+                                        {
+                                            tandir &&
+                                            <td>
+                                                <input className={styles.count} type='number'/>    
+                                            </td>
+                                        }
                                         <td className={styles.action}>
                                             <button className={cn(styles.sendBtn, {
                                                                 [styles.notVisible]: item.proveden,
                                                               })}
-                                                    onClick={() => sendHamir(item, mainData, setMainData)}
+                                                    onClick={(e) => sendHamir(e, item, mainData, setMainData)}
                                             >Жунатиш</button>
                                         </td>
                                     </tr>

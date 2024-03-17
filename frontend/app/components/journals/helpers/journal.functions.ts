@@ -22,7 +22,7 @@ export const getDocument = async (
 
 }
 
-export const getNameReference = (references: any, id: string | undefined): String => {
+export const getNameReference = (references: any, id: string | undefined | null): String => {
   if (references && references.length > 0) {
     return references.filter((item: ReferenceModel) => item._id == id)[0]?.name
   }
@@ -53,5 +53,6 @@ export const setProvodkaToDoc = (id: string | undefined, token: string | undefin
 }
 
 export const getTotalValueForDocument = (document: DocumentModel): number => {
+  
   return document.total;
 }

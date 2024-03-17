@@ -34,6 +34,9 @@ export class Hamir {
   thirdWorker: string
 
   @Prop()
+  zuvala: number
+
+  @Prop()
   fromHamirchi: boolean
 
 }

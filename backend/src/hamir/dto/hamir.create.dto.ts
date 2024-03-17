@@ -32,6 +32,11 @@ export class CreateHamirDto {
   @IsString()
   thirdWorker: string
 
+  @IsOptional()
+  @IsString()
+  zuvala: number
+
+
   @IsBoolean()
   fromHamirchi: boolean
 

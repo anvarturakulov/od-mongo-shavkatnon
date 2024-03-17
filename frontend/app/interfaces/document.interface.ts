@@ -41,13 +41,13 @@ export interface DocumentModel {
     count?: number,
     balance?: number,
     price?: number,
-    total?: number,
+    total: number,
     cashFromPartner?: number,
     comment?: string,
     proveden?: boolean,
-    firstWorkerId?: string,
-    secondWorkerId?: string,
-    thirdWorkerId?: string,
+    firstWorkerId?: string | null,
+    secondWorkerId?: string | null,
+    thirdWorkerId?: string | null,
 };
 
 export interface OptionsForDocument {

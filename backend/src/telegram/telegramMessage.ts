@@ -45,7 +45,7 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   let secondWorker = references.secondWorker?.name ? `Зувалачи бир -- - ${references.secondWorker.name}` : ''
   let thirdWorker = references.thirdWorker?.name ? `Зувалачи икки -- - ${references.thirdWorker.name} )` : ''
 
-  let count = body.count > 0 ? `Сон --- ${numberValue(body.count)}` : ''
+  let count = body.count > 0 ? `Сон --- ${numberValue(body.count)} та` : ''
   let price = body.price > 0 ? `Нарх --- ${numberValue(body.price)}` : ''
   let total = body.total > 0 ? `Сумма --- ${numberValue(body.total)}` : ''
   let cashFromPartner = body.cashFromPartner > 0 ? `Хамкордан олинган пул --- ${numberValue(body.cashFromPartner)}` : ''

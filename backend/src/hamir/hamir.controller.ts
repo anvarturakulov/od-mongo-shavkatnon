@@ -48,9 +48,9 @@ export class HamirController {
   @Post('create')
   async create(@Body() dto: CreateHamirDto) {
     let hamirs = await this.hamirService.getHamirsByUserToDate(dto)
-
+    let countHamir = dto.fromHamirchi ? 51 : 26
     if (dto.sectionId != '' && dto.analiticId != '' && !hamirs.length) {
-      for (let i = 1; i < 51; i++) {
+      for (let i = 1; i < countHamir; i++) {
         let newDto = { ...dto };
         newDto.order = i;
         let newHamir = this.hamirService.createHamir(newDto);
@@ -72,7 +72,7 @@ export class HamirController {
     if (!hamirForProvodka) {
       throw new NotFoundException(HAMIR_NOT_FOUND_ERROR);
     }
-
+    
     let newDoc = this.documentService.createDocument(dto);
     if ((await newDoc).user && (await newDoc).proveden) {
       this.sendMessage(dto, true)

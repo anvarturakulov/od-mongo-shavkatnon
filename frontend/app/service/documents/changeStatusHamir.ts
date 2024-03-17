@@ -4,14 +4,16 @@ import { showMessage } from '../common/showMessage';
 import axios from 'axios';
 import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { getRandomID } from './getRandomID';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 // in this function we change status for this hamir doc and
 // create new doc LeaveHalfStuff based on this hamir doc
 
 export const changeStatusHamir = (item: HamirModel, mainData: Maindata, setMainData: Function | undefined) => {
-  const { user, currentStorageIdInHamirsJournal } = mainData
+  const { user } = mainData
+  const { firstWorker, secondWorker, thirdWorker} = mainData.definedTandirWorkers
 
-  let newDoc: DocumentModel = {
+  let defaultDocForHalfstuff: DocumentModel = {
     date: item.date,
     docNumber: getRandomID(),
     documentType: DocumentType.LeaveHalfstuff,
@@ -22,9 +24,32 @@ export const changeStatusHamir = (item: HamirModel, mainData: Maindata, setMainD
     analiticId: item.analiticId,
     count: 1,
     balance: 0,
+    total:0,
     proveden: true,
-    comment: item.order+' - хамир'
+    comment: item.order+' - хамир',
+
   }
+
+  let defaultDocForProduct: DocumentModel = {
+    date: item.date,
+    docNumber: getRandomID(),
+    documentType: DocumentType.ComeProduct,
+    deleted: false,
+    user: user?.name ? user?.name : '',
+    senderId: item.sectionId,
+    receiverId: item.sectionId,
+    analiticId: item.analiticId,
+    count: item.zuvala,
+    balance: 0,
+    total: 0,
+    proveden: true,
+    comment: item.order + ' - хамир',
+    firstWorkerId: item.firstWorker,
+    secondWorkerId: item.secondWorker,
+    thirdWorkerId: item.thirdWorker
+  }
+
+  let newDoc = user?.role == UserRoles.HAMIRCHI ? {...defaultDocForHalfstuff} : {...defaultDocForProduct} 
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
