@@ -151,7 +151,11 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                         {
                                             tandir &&
                                             <td>
-                                                <input className={styles.count} type='number'/>    
+                                                <input className={cn(styles.count, {
+                                                    [styles.disabledInput]: item.proveden
+                                                })} type='number'
+                                                value={item.zuvala} disabled={item.proveden}
+                                                />    
                                             </td>
                                         }
                                         <td className={styles.action}>

@@ -68,11 +68,11 @@ export class HamirController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async patchSetProvodka(@Param('id', IdValidationPipe) id: string, @Body() dto: CreateDocumentDto) {
-    const hamirForProvodka = await this.hamirService.setProvodka(id);
+    const hamirForProvodka = await this.hamirService.setProvodka(id, dto.count);
     if (!hamirForProvodka) {
       throw new NotFoundException(HAMIR_NOT_FOUND_ERROR);
     }
-    
+
     let newDoc = this.documentService.createDocument(dto);
     if ((await newDoc).user && (await newDoc).proveden) {
       this.sendMessage(dto, true)

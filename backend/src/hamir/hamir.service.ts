@@ -44,12 +44,12 @@ export class HamirService {
     })
   }
 
-  async setProvodka(id: string) {
+  async setProvodka(id: string, count: number) {
     const hamir: CreateHamirDto = await this.hamirModel.findOne({ _id: id })
     if (hamir.proveden) {
       throw new NotFoundException('Проведен булган хамирни узгартириш');
     }
-    return this.hamirModel.updateOne({ _id: id }, { $set: { proveden: true } })
+    return this.hamirModel.updateOne({ _id: id }, { $set: { proveden: true, zuvala: count } })
   }
 
   

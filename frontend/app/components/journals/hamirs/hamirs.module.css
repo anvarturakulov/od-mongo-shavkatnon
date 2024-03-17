@@ -133,3 +133,7 @@
     width: 100px;
     font-size: 18px;
 }
+
+.disabledInput{
+    background: yellow;
+}
