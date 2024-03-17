@@ -1,15 +1,15 @@
-import { ReferenceBody } from '@/app/interfaces/reference.interface';
+import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { DataForSelect } from './reference.constants'
 import styles from '../reference.module.css';
 
-export const  Select = (list: Array<DataForSelect>, body: ReferenceBody,label: string, typeString: string, changeElement: Function) => {
+export const  Select = (list: Array<DataForSelect>, body: ReferenceModel,label: string, typeString: string, changeElement: Function) => {
     
   let currentValue = ''
-  if (typeString == 'typeTMZ') {
+  if (typeString == 'typeTMZ' && body.typeTMZ) {
     currentValue = body.typeTMZ
   }
 
-  if (typeString == 'typePartners') {
+  if (typeString == 'typePartners' && body.typePartners) {
     currentValue = body.typePartners
   }
   

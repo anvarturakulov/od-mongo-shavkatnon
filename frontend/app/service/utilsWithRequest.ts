@@ -1,2 +1,2 @@
-import { ReferenceBody, TypeReference } from '../interfaces/reference.interface';
+import { TypeReference } from '../interfaces/reference.interface';
 

@@ -3,6 +3,6 @@ import { TandirWorkersType } from '../../selects/selectReferenceInForm/helper';
 
 export interface SelectReferenceInFormProps extends DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
     label: string,
-    currentItemId: string,
+    currentItemId: string | null,
     type: TandirWorkersType,
 }
