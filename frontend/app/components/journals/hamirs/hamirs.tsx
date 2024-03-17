@@ -23,7 +23,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
     const userName = user?.name;
     let tandir = user?.role == UserRoles.TANDIR
     
-    let dateNowPlussedInNumber = Date.now() + 14400000
+    let dateNowPlussedInNumber = Date.now() + 32400000
     let dateNowPlussedInString = new Date(dateNowPlussedInNumber);
     let dateStr = dateNowPlussedInString.toISOString().split('T')[0]
 

@@ -46,14 +46,14 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
                 <div className={styles.timer}>
                     {getTime()}
                 </div>
-                <DateIco 
+                {/* <DateIco 
                     className={styles.ico}
                     onClick={(mainData: Maindata) => {
                         if (setMainData) {
                             setMainData('showIntervalWindow', true);
                             }
                         }}
-                />
+                /> */}
                 <Button appearance='ghost' onClick={(e) => refreshReport(mainData, setMainData)}>Янгилаш</Button>
             </div>
        </>

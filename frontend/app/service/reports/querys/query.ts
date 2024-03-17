@@ -36,8 +36,14 @@ export const query = (
   // console.log('newEntrys', newEntrys)
 
   if (forDashboard) {
-    startDate = startDateFromStorage;
-    endDate = endDateFromStorage;
+    let dateNowInNumber = Date.now();
+    let dateNowInString = new Date(dateNowInNumber);
+    let dateStr = dateNowInString.toISOString().split('T')[0];
+
+    startDate = Date.parse(dateStr);
+    endDate = Date.parse(dateStr) + 86399999;
+    // startDate = startDateFromStorage;
+    // endDate = endDateFromStorage;
   }
 
   switch (typequery) {
