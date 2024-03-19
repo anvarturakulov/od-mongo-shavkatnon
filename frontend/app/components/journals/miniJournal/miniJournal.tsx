@@ -11,13 +11,14 @@ import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDo
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { getNameReference } from '../helpers/journal.functions';
+import { setProvodkaByReciever } from './helpers/miniJournal.functions';
 
 
 export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
-    const userName = user?.name
+    
 
     const token = user?.access_token;
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
@@ -40,10 +41,6 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
     let startDate = today
     let endDate = today +86399999
 
-    useEffect(()=> {
-
-    }, [documents])
-
     return (
         <>
             <div className={styles.title}>Хужжатлар руйхати</div>
@@ -55,7 +52,10 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                             documents
                             .filter((item:DocumentModel, key: number) => (item.date >= startDate && item.date <= endDate))
                             .filter((item:DocumentModel, key: number) => {
-                                return (item.user == user?.name)
+                                return (
+                                    item.user == user?.name || 
+                                    item.receiverId == user?.storageId 
+                                )
                             })
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                             .map((item:DocumentModel, key: number) => (
@@ -65,6 +65,7 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                                         className={cn(className, {
                                                 [styles.deleted]: item.deleted,
                                                 [styles.trRow]: 1,
+                                                
                                             })}>
                                         <td className={cn(styles.documentType, {
                                             [styles.proveden]: item.proveden
@@ -74,9 +75,16 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                                         <td>{`${getNameReference(references,item.receiverId)}`}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
                                         <td className={styles.rowDate}>{secondsToDateString(item.date)}</td>
-                                        {/* <td className={styles.rowDate}>{item.date}</td> */}
                                         <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total ? item.total:item.comment}</td>
                                         <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.count ? `(${item.count})`: ''}`}</td>
+                                        {
+                                            !item.proveden &&
+                                            item.receiverId == user?.storageId &&
+                                            <td><button 
+                                                className={cn(styles.receiveBtn)}
+                                                onClick={()=>setProvodkaByReciever(item._id, item.proveden,setMainData,mainData)}
+                                                >Кабул килиш</button></td>
+                                        }
                                     </tr>
                                 </>    
                             ))}

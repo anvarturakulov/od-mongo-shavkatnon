@@ -11,8 +11,9 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
     ...currentDocument,
   }
 // console.log(body)
+  let docsForNoProveden: Array<string> = [DocumentType.LeaveCash, DocumentType.MoveCash, DocumentType.MoveMaterial, DocumentType.MoveProd]
   delete body._id;
-  if (isNewDocument && (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash)) {
+  if (isNewDocument && docsForNoProveden.includes(contentName)) {
     body.proveden = false
   } 
   

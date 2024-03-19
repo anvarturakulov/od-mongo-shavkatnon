@@ -29,8 +29,9 @@
 }
 
 .table tr {
-    margin: 5px 0;
-    border: 1px solid #e6e6e6;
+    margin: 10px 0px;
+    
+    border: 2px solid #4e4d4d;
     display: grid!important;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -95,4 +96,10 @@
 
 .newElement{
     margin-bottom: 20px;
+}
+
+.receiveBtn{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }

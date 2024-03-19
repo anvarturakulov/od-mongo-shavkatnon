@@ -30,3 +30,8 @@
 .bottomTitle{
     margin-top: 15px;
 }
+
+.value span{
+    color: blue;
+    /* font-size: 14px; */
+}

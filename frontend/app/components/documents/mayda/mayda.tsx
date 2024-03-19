@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MaydaProps } from './mayda.props';
 import styles from './mayda.module.css';
 import { Button, SelectReferenceInForm } from '@/app/components';
@@ -15,6 +15,7 @@ import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
+import { CheckBoxInTable } from '../inputs/checkBoxInForm/checkBoxInForm';
 
 export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     
@@ -86,9 +87,28 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
             ...newDocument,
             analiticId: mainData.currentDocument.analiticId,
             count,
-            total
+            total,
         }
 
+        if (currentDocument.isWorker) {
+            if (!currentDocument.receiverId) {
+                showMessage('Ходимни танланг', 'error', setMainData)
+                return
+            } else {
+                body.receiverId = currentDocument.receiverId
+            }
+        } 
+            
+        if ( !body.analiticId ) {
+            showMessage('Махсулотни танланг', 'error', setMainData)
+            return
+        }
+
+        if ( !body.total ) {
+            showMessage('Махсулот суммаси йук', 'error', setMainData)
+            return
+        }
+        console.log(body)
         const { user } = mainData
         delete body._id;
   
@@ -124,6 +144,16 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
                     currentItemId={currentDocument?.analiticId}
                     type='analitic'
                 />
+                <div className={styles.workersBox}>
+                    <CheckBoxInTable label = 'Ходим' id={'worker'}/>
+                    <SelectReferenceInForm 
+                        label={''} 
+                        typeReference= {TypeReference.WORKERS}
+                        visibile={currentDocument.isWorker}
+                        currentItemId={currentDocument?.receiverId}
+                        type='receiver'
+                    />
+                </div>
                 <input type='number' className={styles.input} onChange={(e) => setValue(e)}/>
                 <div className={styles.boxBtn} >
                     <Button 

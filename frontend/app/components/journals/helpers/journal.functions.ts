@@ -1,5 +1,5 @@
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { DocumentModel } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 import { getDocumentById } from '@/app/service/documents/getDocumentById';
@@ -42,12 +42,16 @@ export const setProvodkaToDoc = (id: string | undefined, token: string | undefin
   if (proveden != undefined && proveden == false) {
 
     let yes = confirm('Хужжатга провдка берамизми')
-    const { user } = mainData
+    const { user, contentName } = mainData
 
-    if (yes && (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY || user?.role == UserRoles.GLBUX)) {
-      setProvodkaToDocument(id, setMainData, token, mainData)
+    if (
+        yes && 
+        (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY) || 
+        (user?.role == UserRoles.GLBUX && contentName == DocumentType.LeaveCash)
+    ){
+      setProvodkaToDocument(id, setMainData, mainData)
     } else {
-      alert('Узр. Факат админ ва бош хисобчи ушбу хужжатга проводка бера олади хукукига эга')
+      alert('Узр. Сиз ушбу хужжатга проводка бера олмайсиз')
     }
   }
 }

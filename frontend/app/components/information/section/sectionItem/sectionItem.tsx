@@ -18,18 +18,37 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
       endDateFromStorage = localStorage.getItem('dateEndToInterval');
     }
 
+    let idForBuxanka = '65e7048b5c54490bbc335ca2';
+
     const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PDKOLbux = query(Schet.S28, TypeQuery.PDKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    
     const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PKKOLbux = query(Schet.S28, TypeQuery.PKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+
 
     const OBKOLD2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLD2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);
+    
     const OBKOLD2820 = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLD2820bux = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
     
     const OBKOLK2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLK2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);
+    
     const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLK2028bux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
+    
+
     const OBKOLK4028 = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLK4028bux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
    
     const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TDKOLbux = query(Schet.S28, TypeQuery.TDKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    
     const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+
 
     const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
@@ -47,40 +66,61 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
             <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
             <div className={styles.row}>
                 <div className={styles.title}>Кун бошига колдик нони</div>
-                <div className={styles.value}>{numberValue(PDKOL-PKKOL)}</div>
+                <div className={styles.value}>
+                    {numberValue(PDKOL-PKKOL)}
+                    <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
+                </div>
             </div>
             {
                 OBKOLD2820 != 0 &&
                 <div className={styles.row}>
                     <div className={styles.title}>Ишлаб. чик. кирим</div>
-                    <div className={styles.value}>{numberValue(OBKOLD2820)}</div>
+                    <div className={styles.value}>
+                        {numberValue(OBKOLD2820)}
+                        <span> ({numberValue(OBKOLD2820bux)})</span>
+                    </div>
                 </div>
             }
             
             <div className={styles.row}>
                 <div className={styles.title}>Ички силжиш. кирим</div>
-                <div className={styles.value}>{numberValue(OBKOLD2828)}</div>
+                <div className={styles.value}>
+                    {numberValue(OBKOLD2828)}
+                    <span> ({numberValue(OBKOLD2828bux)})</span>
+                </div>
             </div>
             
             <div className={styles.row}>
                 <div className={styles.title}>Сотилган нон</div>
-                <div className={styles.value}>{numberValue(OBKOLK4028)}</div>
+                <div className={styles.value}>
+                    {numberValue(OBKOLK4028)}
+                    <span> ({numberValue(OBKOLK4028bux)})</span>
+                </div>
             </div>
             {
                 OBKOLK2028 != 0 &&
                 <div className={styles.row}>
                     <div className={styles.title}>Брак(истем.) нон</div>
-                    <div className={styles.value}>{numberValue(OBKOLK2028)}</div>
+                    <div className={styles.value}>
+                        {numberValue(OBKOLK2028)}
+                        <span> ({numberValue(OBKOLK2028bux)})</span>
+                    </div>
                 </div>
             }
             <div className={styles.row}>
                 <div className={styles.title}>Ички сил. чиким</div>
-                <div className={styles.value}>{numberValue(OBKOLK2828)}</div>
+                <div className={styles.value}>
+                    {numberValue(OBKOLK2828)}
+                    <span> ({numberValue(OBKOLK2828bux)})</span>
+                </div>
             </div>
 
             <div className={styles.row}>
                 <div className={styles.title}>Зиммасидаги колдик нон</div>
-                <div className={styles.value}>{numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}</div>
+                <div className={styles.value}>
+                    {numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}
+                    <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
+                </div>
             </div>
 
             <Htag tag='h2' className={cn(styles.h2, styles.bottomTitle)}>Пул буйича</Htag>
