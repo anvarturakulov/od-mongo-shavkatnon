@@ -38,7 +38,6 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
     
     const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
     const OBKOLK2028bux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
-    
 
     const OBKOLK4028 = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
     const OBKOLK4028bux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
@@ -73,7 +72,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                     <div className={styles.row}>
                         <div className={styles.title}>Кун бошига колдик нони</div>
                         <div className={styles.value}>
-                            {numberValue(PDKOL-PKKOL)}
+                            {numberValue(PDKOL-PKKOL-(PDKOLbux-PKKOLbux))}
                             <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
                         </div>
                     </div>
@@ -82,7 +81,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                         <div className={styles.row}>
                             <div className={styles.title}>Ишлаб. чик. кирим</div>
                             <div className={styles.value}>
-                                {numberValue(OBKOLD2820)}
+                                {numberValue(OBKOLD2820-OBKOLD2820bux)}
                                 <span> ({numberValue(OBKOLD2820bux)})</span>
                             </div>
                         </div>
@@ -91,7 +90,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                     <div className={styles.row}>
                         <div className={styles.title}>Ички силжиш. кирим</div>
                         <div className={styles.value}>
-                            {numberValue(OBKOLD2828)}
+                            {numberValue(OBKOLD2828-OBKOLD2828bux)}
                             <span> ({numberValue(OBKOLD2828bux)})</span>
                         </div>
                     </div>
@@ -99,7 +98,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                     <div className={styles.row}>
                         <div className={styles.title}>Сотилган нон</div>
                         <div className={styles.value}>
-                            {numberValue(OBKOLK4028)}
+                            {numberValue(OBKOLK4028-OBKOLK4028bux)}
                             <span> ({numberValue(OBKOLK4028bux)})</span>
                         </div>
                     </div>
@@ -108,7 +107,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                         <div className={styles.row}>
                             <div className={styles.title}>Брак(истем.) нон</div>
                             <div className={styles.value}>
-                                {numberValue(OBKOLK2028)}
+                                {numberValue(OBKOLK2028-OBKOLK2028bux)}
                                 <span> ({numberValue(OBKOLK2028bux)})</span>
                             </div>
                         </div>
@@ -116,7 +115,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                     <div className={styles.row}>
                         <div className={styles.title}>Ички сил. чиким</div>
                         <div className={styles.value}>
-                            {numberValue(OBKOLK2828)}
+                            {numberValue(OBKOLK2828-OBKOLK2828bux)}
                             <span> ({numberValue(OBKOLK2828bux)})</span>
                         </div>
                     </div>
@@ -124,7 +123,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                     <div className={styles.row}>
                         <div className={styles.title}>Зиммасидаги колдик нон</div>
                         <div className={styles.value}>
-                            {numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}
+                            {numberValue(PDKOL - PKKOL + TDKOL - TKKOL - (PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux))}
                             <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
                         </div>
                     </div>

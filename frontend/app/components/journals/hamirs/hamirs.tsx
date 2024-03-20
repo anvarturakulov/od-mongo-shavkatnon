@@ -54,7 +54,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
             } 
 
             createHamirsForDayByUser(date, mainData, setMainData);
-            setMainData && setMainData('updateHamirJournal', true)
+            setMainData && setMainData('updateHamirJournal', true);
         } 
     }
 

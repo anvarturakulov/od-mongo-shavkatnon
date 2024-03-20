@@ -9,7 +9,7 @@ import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
 import { TandirWorkersType } from '../../selects/selectReferenceInForm/helper';
 
-export const SelectWorkers = ({ label, currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
+export const SelectWorkers = ({ label, currentItemId, type, visible, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
@@ -34,7 +34,8 @@ export const SelectWorkers = ({ label, currentItemId, type, className, ...props 
         }
         
     }
-    
+    if (!visible) return <></>
+
     return (
         <div className={styles.box}>
             {label !='' && <div className={styles.label}>{label}</div>}

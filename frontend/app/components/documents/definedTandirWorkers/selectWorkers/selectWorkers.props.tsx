@@ -5,4 +5,5 @@ export interface SelectReferenceInFormProps extends DetailedHTMLProps<SelectHTML
     label: string,
     currentItemId: string | null,
     type: TandirWorkersType,
+    visible: boolean,
 }

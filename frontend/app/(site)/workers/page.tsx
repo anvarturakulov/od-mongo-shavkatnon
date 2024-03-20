@@ -48,12 +48,10 @@ export default function Users() {
           ( user?.role == UserRoles.HAMIRCHI ||
             user?.role == UserRoles.TANDIR ) 
           &&
-          <Hamirs/>
-        }
-
-        {
-          user?.role == UserRoles.TANDIR &&
-          <button className={styles.btnForTandir} onClick={()=> setTandirWorkers(state => !state)}>Бугунги ходимлар руйхати</button>
+          <>
+            <Hamirs/>
+            <button className={styles.btnForTandir} onClick={()=> setTandirWorkers(state => !state)}>Бугунги ходимлар руйхати</button>
+          </>
         }
 
         {

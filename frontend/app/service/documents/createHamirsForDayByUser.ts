@@ -6,30 +6,36 @@ import { UserRoles } from '@/app/interfaces/general.interface';
 
 export const createHamirsForDayByUser = (date: number, mainData: Maindata, setMainData: Function | undefined) => {
   const { user, currentStorageIdInHamirsJournal, definedTandirWorkers } = mainData
-
+  
   let body: HamirModel = {
     date,
     sectionId: user?.storageId ? user.storageId : '',
     analiticId: user?.productId ? user.productId : '',
     proveden: false,
     user : user?.name ? user.name : '',
-    fromHamirchi: user?.role == UserRoles.HAMIRCHI ? true : false
+    fromHamirchi: user?.role == UserRoles.HAMIRCHI ? true : false,
+    firstWorker: definedTandirWorkers.firstWorker,
   }
 
   if (user?.role == UserRoles.TANDIR) {
     body = {
       ...body,
-      firstWorker: definedTandirWorkers.firstWorker,
       secondWorker: definedTandirWorkers.secondWorker,
       thirdWorker: definedTandirWorkers.thirdWorker
     } 
   }
+
   console.log(body);
   if ((user?.role == UserRoles.TANDIR) && (
     !body.firstWorker || !body.secondWorker || !body.thirdWorker )) {
       showMessage(`Ходимлар танланмаган`, 'error', setMainData)
       return
     }
+
+  if ((user?.role == UserRoles.HAMIRCHI) && !body.firstWorker ) {
+    showMessage(`Ходим танланмаган`, 'error', setMainData)
+    return
+  }
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }

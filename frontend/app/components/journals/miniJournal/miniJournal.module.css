@@ -14,6 +14,7 @@
     width: 100%;
     border: 1px solid #f9f9f9;
     margin-bottom: 10px;
+    padding-right: 25px;
 }
 
 .table td,
@@ -30,7 +31,6 @@
 
 .table tr {
     margin: 10px 0px;
-    
     border: 2px solid #4e4d4d;
     display: grid!important;
     grid-template-columns: 1fr 1fr 1fr;
@@ -54,7 +54,7 @@
 
 .table tbody {
     display: block;
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
