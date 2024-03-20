@@ -27,7 +27,8 @@ export const changeStatusHamir = (item: HamirModel, mainData: Maindata, setMainD
     total:0,
     proveden: true,
     comment: item.order+' - хамир',
-    price: 0
+    price: 0,
+    firstWorkerId: item.firstWorker
 
   }
 
