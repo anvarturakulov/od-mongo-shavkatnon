@@ -156,7 +156,6 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             {
                 (
                     user?.role == UserRoles.HEADSECTION ||
-                    user?.role == UserRoles.ZAMGLBUX ||
                     user?.role == UserRoles.SELLER
                 ) 
                 &&
@@ -185,8 +184,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             }
 
             {
-                user?.role == UserRoles.GLBUX &&
+                ( user?.role == UserRoles.GLBUX ||
+                user?.role == UserRoles.ZAMGLBUX ) &&
                 <>
+                    <Section data={data} sectionType='buxgalter'/>
                     <Section data={data} sectionType='filial'/>
                     <Section data={data} sectionType='delivery'/>
                 </>

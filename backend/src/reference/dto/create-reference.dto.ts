@@ -42,6 +42,10 @@ export class CreateReferenceDto {
 
   @IsOptional()
   @IsBoolean()
+  buxgalter?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
   un?: boolean;
 
   @IsOptional()

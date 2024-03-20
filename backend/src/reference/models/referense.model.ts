@@ -37,6 +37,9 @@ export class Reference {
   sklad?: boolean
 
   @Prop()
+  buxgalter: boolean
+
+  @Prop()
   un?: boolean
 
   @Prop()

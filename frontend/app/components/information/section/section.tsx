@@ -5,7 +5,11 @@ import { SectionItem } from './sectionItem/sectionItem';
 import { ReferenceModel } from '@/app/interfaces/reference.interface';
 
 export const Section = ({className, data, sectionType, currentSection, ...props }: SectionProps) :JSX.Element => {
-    let title = sectionType == 'delivery' ? 'ЮК ЕТКАЗУВЧИЛАР' : 'ФИЛИАЛ'  
+    let title 
+    if (sectionType == 'delivery') title = 'ЮК ЕТКАЗУВЧИЛАР'
+    if (sectionType == 'filial') title = 'ЦЕХЛАР'
+    if (sectionType == 'buxgalter') title = 'БУХГАЛТЕРЛАР'
+      
     return (
        <>
             <div className={styles.title}>{title}</div>
@@ -15,6 +19,7 @@ export const Section = ({className, data, sectionType, currentSection, ...props 
                     data.filter((item: any) => {
                         if (sectionType == 'delivery') return item?.delivery
                         if (sectionType == 'filial') return item?.filial
+                        if (sectionType == 'buxgalter') return item?.buxgalter
                     })
                     .filter((item: ReferenceModel) => {
                         if (currentSection) return item._id == currentSection

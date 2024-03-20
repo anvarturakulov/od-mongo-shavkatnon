@@ -63,65 +63,73 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
        <>
           <div className={styles.item}>
             <Htag tag='h1'>{title}</Htag>
-            <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
-            <div className={styles.row}>
-                <div className={styles.title}>Кун бошига колдик нони</div>
-                <div className={styles.value}>
-                    {numberValue(PDKOL-PKKOL)}
-                    <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
-                </div>
-            </div>
-            {
-                OBKOLD2820 != 0 &&
-                <div className={styles.row}>
-                    <div className={styles.title}>Ишлаб. чик. кирим</div>
-                    <div className={styles.value}>
-                        {numberValue(OBKOLD2820)}
-                        <span> ({numberValue(OBKOLD2820bux)})</span>
-                    </div>
-                </div>
-            }
             
-            <div className={styles.row}>
-                <div className={styles.title}>Ички силжиш. кирим</div>
-                <div className={styles.value}>
-                    {numberValue(OBKOLD2828)}
-                    <span> ({numberValue(OBKOLD2828bux)})</span>
-                </div>
-            </div>
-            
-            <div className={styles.row}>
-                <div className={styles.title}>Сотилган нон</div>
-                <div className={styles.value}>
-                    {numberValue(OBKOLK4028)}
-                    <span> ({numberValue(OBKOLK4028bux)})</span>
-                </div>
-            </div>
             {
-                OBKOLK2028 != 0 &&
-                <div className={styles.row}>
-                    <div className={styles.title}>Брак(истем.) нон</div>
-                    <div className={styles.value}>
-                        {numberValue(OBKOLK2028)}
-                        <span> ({numberValue(OBKOLK2028bux)})</span>
-                    </div>
-                </div>
-            }
-            <div className={styles.row}>
-                <div className={styles.title}>Ички сил. чиким</div>
-                <div className={styles.value}>
-                    {numberValue(OBKOLK2828)}
-                    <span> ({numberValue(OBKOLK2828bux)})</span>
-                </div>
-            </div>
+                sectionType != 'buxgalter'
+                &&
 
-            <div className={styles.row}>
-                <div className={styles.title}>Зиммасидаги колдик нон</div>
-                <div className={styles.value}>
-                    {numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}
-                    <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
-                </div>
-            </div>
+                <>
+                    <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
+                    <div className={styles.row}>
+                        <div className={styles.title}>Кун бошига колдик нони</div>
+                        <div className={styles.value}>
+                            {numberValue(PDKOL-PKKOL)}
+                            <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
+                        </div>
+                    </div>
+                    {
+                        OBKOLD2820 != 0 &&
+                        <div className={styles.row}>
+                            <div className={styles.title}>Ишлаб. чик. кирим</div>
+                            <div className={styles.value}>
+                                {numberValue(OBKOLD2820)}
+                                <span> ({numberValue(OBKOLD2820bux)})</span>
+                            </div>
+                        </div>
+                    }
+                    
+                    <div className={styles.row}>
+                        <div className={styles.title}>Ички силжиш. кирим</div>
+                        <div className={styles.value}>
+                            {numberValue(OBKOLD2828)}
+                            <span> ({numberValue(OBKOLD2828bux)})</span>
+                        </div>
+                    </div>
+                    
+                    <div className={styles.row}>
+                        <div className={styles.title}>Сотилган нон</div>
+                        <div className={styles.value}>
+                            {numberValue(OBKOLK4028)}
+                            <span> ({numberValue(OBKOLK4028bux)})</span>
+                        </div>
+                    </div>
+                    {
+                        OBKOLK2028 != 0 &&
+                        <div className={styles.row}>
+                            <div className={styles.title}>Брак(истем.) нон</div>
+                            <div className={styles.value}>
+                                {numberValue(OBKOLK2028)}
+                                <span> ({numberValue(OBKOLK2028bux)})</span>
+                            </div>
+                        </div>
+                    }
+                    <div className={styles.row}>
+                        <div className={styles.title}>Ички сил. чиким</div>
+                        <div className={styles.value}>
+                            {numberValue(OBKOLK2828)}
+                            <span> ({numberValue(OBKOLK2828bux)})</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.row}>
+                        <div className={styles.title}>Зиммасидаги колдик нон</div>
+                        <div className={styles.value}>
+                            {numberValue(PDKOL - PKKOL + TDKOL - TKKOL)}
+                            <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
+                        </div>
+                    </div>
+                </>
+            }
 
             <Htag tag='h2' className={cn(styles.h2, styles.bottomTitle)}>Пул буйича</Htag>
             <div className={styles.row}>
@@ -137,13 +145,11 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                 <div className={styles.title}>Пул силжиш</div>
                 <div className={styles.value}>{numberValue(MOVEOUT)}</div>
             </div>
-            {
-                sectionType == 'filial' &&
-                <div className={styles.row}>
-                    <div className={styles.title}>Пул сарфлади</div>
-                    <div className={styles.value}>{numberValue(TKSUM-MOVEOUT)}</div>
-                </div>
-            }
+           
+            <div className={styles.row}>
+                <div className={styles.title}>Пул сарфлади</div>
+                <div className={styles.value}>{numberValue(TKSUM-MOVEOUT)}</div>
+            </div>
             
             <div className={styles.row}>
                 <div className={styles.title}>Охирги карзи</div>
