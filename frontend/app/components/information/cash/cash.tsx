@@ -54,8 +54,6 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, false, '', true);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, false, '', true);
 
-    
-    
     return (
        <>
             <div className={styles.title}>КАССА</div>
@@ -80,7 +78,7 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
                     data
                     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
                     .filter((item: any) => {
-                        if (item.buxgalter || item.filial || item.delivery) return true
+                        if ( item.buxgalter || item.filial || item.delivery ) return true
                         return false
                     })
                     .map((item: ReferenceModel, key: number) => {
