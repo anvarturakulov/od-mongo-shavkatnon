@@ -138,6 +138,14 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
                     return true
                 })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'receiver' && 
+                        ( contentName == DocumentType.ComeMaterial ))
+                        {
+                            return ( item.typePartners == TypePartners.SUPPLIERS ) 
+                        }
+                    return true
+                })
                 .filter ((item: ReferenceModel) => {
                     if (
                             contentName == DocumentType.SaleProd 
