@@ -108,7 +108,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         </td>
                                         <td className={styles.rowAction}>
                                             <IcoSave className={styles.icoSave}
-                                            onClick = {() => setProvodkaToDoc(item._id, token, item.proveden ,setMainData, mainData)}
+                                            onClick = {() => setProvodkaToDoc(item._id, token, item.proveden ,setMainData, mainData, item.receiverId)}
                                             />
                                         </td>
                                     </tr>

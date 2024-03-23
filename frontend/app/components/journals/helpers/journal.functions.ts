@@ -38,7 +38,7 @@ export const deleteItemDocument = (id: string | undefined, token: string | undef
   }
 }
 
-export const setProvodkaToDoc = (id: string | undefined, token: string | undefined, proveden: boolean | undefined, setMainData: Function | undefined, mainData: Maindata) => {
+export const setProvodkaToDoc = (id: string | undefined, token: string | undefined, proveden: boolean | undefined, setMainData: Function | undefined, mainData: Maindata, receiverId: string | undefined) => {
   if (proveden != undefined && proveden == false) {
 
     let yes = confirm('Хужжатга провдка берамизми')
@@ -46,8 +46,9 @@ export const setProvodkaToDoc = (id: string | undefined, token: string | undefin
 
     if (
         yes && 
-        (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY) || 
-        (user?.role == UserRoles.GLBUX && contentName == DocumentType.LeaveCash)
+        ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) || 
+        ( user?.role == UserRoles.GLBUX && contentName == DocumentType.LeaveCash ) ||
+        ( user?.storageId == receiverId)
     ){
       setProvodkaToDocument(id, setMainData, mainData)
     } else {
