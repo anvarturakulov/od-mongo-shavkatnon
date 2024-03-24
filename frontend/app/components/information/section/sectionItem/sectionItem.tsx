@@ -66,7 +66,6 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
             {
                 sectionType != 'buxgalter'
                 &&
-
                 <>
                     <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
                     <div className={styles.row}>
@@ -76,16 +75,14 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                             <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
                         </div>
                     </div>
-                    {
-                        OBKOLD2820 != 0 &&
-                        <div className={styles.row}>
-                            <div className={styles.title}>Ишлаб. чик. кирим</div>
-                            <div className={styles.value}>
-                                {numberValue(OBKOLD2820-OBKOLD2820bux)}
-                                <span> ({numberValue(OBKOLD2820bux)})</span>
-                            </div>
+
+                    <div className={styles.row}>
+                        <div className={styles.title}>Ишлаб. чик. кирим</div>
+                        <div className={styles.value}>
+                            {numberValue(OBKOLD2820-OBKOLD2820bux)}
+                            <span> ({numberValue(OBKOLD2820bux)})</span>
                         </div>
-                    }
+                    </div>
                     
                     <div className={styles.row}>
                         <div className={styles.title}>Ички силжиш. кирим</div>
@@ -102,16 +99,13 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                             <span> ({numberValue(OBKOLK4028bux)})</span>
                         </div>
                     </div>
-                    {
-                        OBKOLK2028 != 0 &&
-                        <div className={styles.row}>
-                            <div className={styles.title}>Брак(истем.) нон</div>
-                            <div className={styles.value}>
-                                {numberValue(OBKOLK2028-OBKOLK2028bux)}
-                                <span> ({numberValue(OBKOLK2028bux)})</span>
-                            </div>
+                    <div className={styles.row}>
+                        <div className={styles.title}>Брак(истем.) нон</div>
+                        <div className={styles.value}>
+                            {numberValue(OBKOLK2028-OBKOLK2028bux)}
+                            <span> ({numberValue(OBKOLK2028bux)})</span>
                         </div>
-                    }
+                    </div>
                     <div className={styles.row}>
                         <div className={styles.title}>Ички сил. чиким</div>
                         <div className={styles.value}>

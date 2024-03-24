@@ -3,6 +3,7 @@ import { User } from '../auth/models/user.model';
 import { UserRoles } from '../auth/dto/auth.dto';
 import { getDescriptionDocument } from '../data/menu';
 import { Reference } from 'src/reference/models/referense.model';
+import { DocumentType } from 'src/interfaces/document.interface';
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -36,14 +37,15 @@ const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegram
   let dateDoc = new Date(body.date).toLocaleDateString('ru-RU')
   let user = body.user ? `Ходим --- ${body.user}` : ''
   let date = dateDoc ? `Сана --- ${dateDoc}` : ''
+  let hodim = body.documentType == DocumentType.LeaveHalfstuff ? 'Хамирчи': 'Ёпувчи';
   let doc = getDescriptionDocument(body.documentType) ? `Хужжат тури --- ${getDescriptionDocument(body.documentType)}` : '';
 
   let receiver = references.receiver?.name ? `Олувчи -- - ${references.receiver.name}` : ''
   let analitic = references.analitic?.name ? `Аналитика -- - ${references.analitic.name}` : ''
   let sender = references.sender?.name ? `Жунатувчи -- - ${references.sender.name}` : ''
-  let firstWorker = references.firstWorker?.name ? `( Ёпувчи -- - ${references.firstWorker.name}` : ''
-  let secondWorker = references.secondWorker?.name ? `Зувалачи бир -- - ${references.secondWorker.name}` : ''
-  let thirdWorker = references.thirdWorker?.name ? `Зувалачи икки -- - ${references.thirdWorker.name} )` : ''
+  let firstWorker = references.firstWorker?.name ? `( ${hodim} --- ${references.firstWorker.name}` : ''
+  let secondWorker = references.secondWorker?.name ? `Зувалачи бир --- ${references.secondWorker.name}` : ''
+  let thirdWorker = references.thirdWorker?.name ? `Зувалачи икки --- ${references.thirdWorker.name} )` : ''
 
   let count = body.count > 0 ? `Сон --- ${numberValue(body.count)} та` : ''
   let price = body.price > 0 ? `Нарх --- ${numberValue(body.price)}` : ''

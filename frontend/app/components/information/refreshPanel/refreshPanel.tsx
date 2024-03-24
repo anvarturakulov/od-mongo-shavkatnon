@@ -16,6 +16,7 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     let interval: any;
 
     const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
+        setMainData && setMainData('updateDataForDocumentJournal', true)
         getEntrysJournal(setMainData, mainData);
         clearInterval(interval);
         setSeconts(0)

@@ -29,7 +29,6 @@ export class DocumentController {
     if (dto.secondWorkerId) secondWorker = await this.referenceService.findById(dto.secondWorkerId);
     if (dto.thirdWorkerId) thirdWorker = await this.referenceService.findById(dto.thirdWorkerId);
 
-    // console.log(firstWorker, secondWorker, thirdWorker)
     let references: ReferencesForTelegramMessage = {
       sender,
       receiver,
