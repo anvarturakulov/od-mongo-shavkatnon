@@ -46,6 +46,7 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
   }
 
   if (contentName == DocumentType.ComeMaterial) {
+    console.log(storageIdFromUser)
     return storageIdFromUser
   } 
 
