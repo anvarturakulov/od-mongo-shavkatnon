@@ -24,7 +24,7 @@ export default function Auth() {
   
   const {mainData, setMainData} = useAppContext();
   const [body, setBody] = useState<BodyForLogin>(defaultBody)
-  const [capVal, setCapVal] = useState(null);
+  const [capVal, setCapVal] = useState<boolean>(false);
 
   const changeElements = (e: React.FormEvent<HTMLInputElement>) => {
       let target = e.currentTarget
@@ -61,6 +61,10 @@ export default function Auth() {
 
   }, [mainData.user])
 
+  const changeVal = () => {
+    setCapVal(val => !val)
+  }
+
   return (
     <>
         <div className={styles.container}>
@@ -71,18 +75,15 @@ export default function Auth() {
             <Input value={body.password} placeholder='Password' type='password' label='' id='password' onChange={(e)=>changeElements(e)}/>
             <ReCAPTCHA
               sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_KEY ? process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_KEY : ' '}
-              // sitekey='6LdI74MpAAAAADgpyyFOkMrau7shqdny27Ocl0DZ'
-              onChange={(val:any) => setCapVal(val)}
+              onChange={() => changeVal()}
             />
-            <Button 
+            <button 
               disabled={!capVal} 
-              className={cn(styles.button, {
-               [styles.disabledBtn]: !capVal  
-            })} 
-              appearance='primary' 
+              className={styles.button} 
+              // appearance='primary' 
               onClick={() => onSubmit(body, setMainData)}>
                 Кириш
-              </Button>
+              </button>
             </div>
             <Image
             src={ImgBread}

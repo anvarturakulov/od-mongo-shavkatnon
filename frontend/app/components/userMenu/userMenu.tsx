@@ -162,10 +162,10 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 <>
                     <RefreshPanel/>
                     <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
-                    {   
+                    {/* {   
                         user.role == UserRoles.HEADSECTION &&
                         <Section data={data} sectionType='delivery'/>
-                    }
+                    } */}
                 </>
             }
 
@@ -178,7 +178,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 ) 
                 && 
                 <>
-                    <RefreshPanel/>
+                    {/* <RefreshPanel/> */}
                     <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
                 </>
             }
