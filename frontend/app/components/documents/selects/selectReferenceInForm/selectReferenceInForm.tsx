@@ -35,8 +35,6 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
             if ( typeDocumentForLeaveTMZ(contentName) && id ) {
                 let schet = undefined
-                // console.log('shu erga kirayapti')
-
                 if (typeDocumentForReference == 'MATERIAL') {
                     schet = Schet.S10
                 }
@@ -116,13 +114,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     }
                 })
                 .filter((item: ReferenceModel)=> {
-                    if (user?.role == UserRoles.ELAKCHI) {
-                        if (item.typeReference == TypeReference.TMZ &&
-                            contentName == DocumentType.LeaveMaterial ) 
-                        {
-                            return item.un == true
-                        }
-                    } else if (user?.role == UserRoles.HEADSECTION) {
+                    if (user?.role == UserRoles.HEADSECTION) {
                         if (item.typeTMZ == 'MATERIAL') return !item.un
                     }
                     return true
@@ -158,15 +150,15 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                     return true
                 })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'sender' && 
-                        ( contentName == DocumentType.MoveHalfstuff || 
-                          contentName == DocumentType.LeaveHalfstuff ))
-                        {
-                            return (item.filial == true ) 
-                        }
-                    return true
-                })
+                // .filter((item: ReferenceModel) => {
+                //     if (type == 'sender' && 
+                //         ( contentName == DocumentType.MoveHalfstuff || 
+                //           contentName == DocumentType.LeaveHalfstuff ))
+                //         {
+                //             return (item.filial == true ) 
+                //         }
+                //     return true
+                // })
                 .sort(sortByName)
                 .filter(( item:ReferenceModel ) => !item.deleted )
                 .map(( item:ReferenceModel ) => (

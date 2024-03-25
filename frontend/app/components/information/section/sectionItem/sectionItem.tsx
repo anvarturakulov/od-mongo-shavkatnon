@@ -55,6 +55,7 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
+    const MOVEINN = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
     const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
     
     
@@ -129,18 +130,24 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
                 <div className={styles.title}>Бошлангич карзи</div>
                 <div className={styles.value}>{numberValue(PDSUM-PKSUM)}</div>
             </div>
+            
             <div className={styles.row}>
-                <div className={styles.title}>Махсулот сотди</div>
-                <div className={styles.value}>{numberValue(TDSUM)}</div>
+                <div className={styles.title}>Пул кирим (махс. сот)</div>
+                <div className={styles.value}>{numberValue(TDSUM-MOVEINN)}</div>
             </div>
 
             <div className={styles.row}>
-                <div className={styles.title}>Пул силжиш</div>
+                <div className={styles.title}>Пул силжиш кирим</div>
+                <div className={styles.value}>{numberValue(MOVEINN)}</div>
+            </div>
+
+            <div className={styles.row}>
+                <div className={styles.title}>Пул силжиш чиким</div>
                 <div className={styles.value}>{numberValue(MOVEOUT)}</div>
             </div>
            
             <div className={styles.row}>
-                <div className={styles.title}>Пул сарфлади</div>
+                <div className={styles.title}>Пул харажати</div>
                 <div className={styles.value}>{numberValue(TKSUM-MOVEOUT)}</div>
             </div>
             

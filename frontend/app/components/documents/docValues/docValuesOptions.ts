@@ -35,18 +35,20 @@ export const saveItemId = (storageId: string | undefined, type: 'reciever' | 'se
 }
 
 export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
-  if (role && (role == UserRoles.TANDIR || (role == UserRoles.ELAKCHI && contentName == DocumentType.ComeHalfstuff))) {
+  if (role && (role == UserRoles.TANDIR || contentName == DocumentType.ComeHalfstuff)) {
     return storageIdFromUser
   }
+
   if (storageIdFromUser && role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
     return storageIdFromUser
   }
+
   if (role && role == UserRoles.HAMIRCHI && contentName == DocumentType.LeaveHalfstuff) {
     return "659d1ff7523a48fdeb6ada6d"
   }
 
   if (contentName == DocumentType.ComeMaterial) {
-    console.log(storageIdFromUser)
+    // console.log(storageIdFromUser)
     return storageIdFromUser
   } 
 
@@ -54,6 +56,7 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
 }
 
 export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
+  
   if (
     storageIdFromUser &&
     role &&

@@ -2,8 +2,9 @@ import { DocumentModel, DocumentType } from "../../interfaces/document.interface
 
 export const validateBody = (body: DocumentModel): Boolean => {
   let { date, docNumber, documentType } = body
+  console.log(body)
 
-  let { analiticId, senderId, receiverId, total, count,firstWorkerId, secondWorkerId, thirdWorkerId } = body
+  let { analiticId, senderId, receiverId, total, count, firstWorkerId, secondWorkerId, thirdWorkerId } = body
   // console.log(senderId)
   if (!date || !docNumber || !documentType) return false
 
@@ -22,9 +23,10 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsWithAnalitic.includes(documentType)) {
+    console.log(senderId)
     if (!analiticId || !senderId || !receiverId || !count) {
       return false
-    } 
+    }
   }
 
   const documentsToTotal = [
@@ -35,7 +37,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsToTotal.includes(documentType)) {
-    if ( !total ) {
+    if (!total) {
       return false
     }
   }
@@ -56,7 +58,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsForCashFromPartners.includes(documentType)) {
-    if (receiverId && senderId && total) return true 
+    if (receiverId && senderId && total) return true
     else return false
   }
 

@@ -13,7 +13,6 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { validateBody } from '@/app/service/documents/validateBody';
 import { showMessage } from '@/app/service/common/showMessage';
 import { updateCreateDocument } from '@/app/service/documents/updateCreateDocument';
-import cn from 'classnames'
 
 export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     
@@ -66,8 +65,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                     &&
                    <>
                     <button 
-                        className={styles.button} 
-                        // appearance='primary'
+                        className={styles.button}
                         disabled = {disabled} 
                         onClick={() => onSubmit( mainData, setMainData)}
                         >
