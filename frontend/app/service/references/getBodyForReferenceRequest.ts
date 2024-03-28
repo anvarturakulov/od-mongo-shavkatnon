@@ -29,6 +29,7 @@ export const getBodyForReferenceRequest = (state: ReferenceModel, typeReference:
         filial: state.filial,
         sklad: state.sklad,
         buxgalter: state.buxgalter,
+        umumBulim: state.umumBulim
       };
     case TypeReference.TMZ:
       return {
@@ -43,6 +44,7 @@ export const getBodyForReferenceRequest = (state: ReferenceModel, typeReference:
     case TypeReference.WORKERS:
       return {
         ...newReq,
+        telegramId: state.telegramId
       };
     default:
       return {};

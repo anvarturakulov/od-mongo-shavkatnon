@@ -93,7 +93,12 @@ export const MenuData:Array<MenuItem> = [
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
-            // { title: DocumentType.ZpCalculate, description:'Иш хаки хисоби', type: 'document', active: false },
+            { 
+                title: DocumentType.ZpCalculate, description:'Иш хаки хисоби',
+                type: 'document', active: false,
+                roles: 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+            },
         ]
     },
     {

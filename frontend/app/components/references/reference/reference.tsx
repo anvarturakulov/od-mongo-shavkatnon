@@ -86,7 +86,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 typePartners: typePartners,
                 typeTMZ: typeTMZ,
                 unit: unit,
-                comment: comment ,
+                comment: comment,
             }
             setBody(newBody)
         }
@@ -125,6 +125,12 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     mainData.user?.role == UserRoles.ADMIN && 
                     body.typeReference == TypeReference.STORAGES &&
                     <CheckBoxForReference label='Юк ташувчи' setCheckbox={setCheckbox} checked={body.delivery} id={'delivery'}/>
+                }
+
+                {
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    body.typeReference == TypeReference.STORAGES &&
+                    <CheckBoxForReference label='Умумий булим' setCheckbox={setCheckbox} checked={body.umumBulim} id={'umumBulim'}/>
                 }
 
                 {
@@ -181,6 +187,14 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
                 (body.typePartners == TypePartners.CLIENTS) &&
                 <SelectForReferences label='Клиент сохиби' typeReference={TypeReference.STORAGES} currentItemId={mainData.currentReference?.clientForDeliveryId} setClientForDeliveryId={setClientForDeliveryId}/>
+            }
+
+            {
+                body.typeReference == TypeReference.WORKERS &&
+                <div>
+                    <div>Телеграм ID</div>
+                    <input value={body.telegramId} type="text" id='telegramId' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                </div>
             }
 
             <div>

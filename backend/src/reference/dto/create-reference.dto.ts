@@ -46,6 +46,10 @@ export class CreateReferenceDto {
 
   @IsOptional()
   @IsBoolean()
+  umumBulim?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
   un?: boolean;
 
   @IsOptional()
@@ -63,5 +67,9 @@ export class CreateReferenceDto {
   @IsOptional()
   @IsNumber()
   thirdPrice?: number
+
+  @IsOptional()
+  @IsString()
+  telegramId?: string
 
 }

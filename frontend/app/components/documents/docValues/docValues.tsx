@@ -21,9 +21,9 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
 
-    let docWithCash = (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash || contentName == DocumentType.ComeCashFromPartners );
+    let docWithCash = (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash || contentName == DocumentType.ComeCashFromPartners || contentName == DocumentType.ZpCalculate );
     
-    let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
+    let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
     let hasFounder = contentName == DocumentType.LeaveCash;
     

@@ -34,6 +34,9 @@ export class Reference {
   filial?: boolean
 
   @Prop()
+  umumBulim?: boolean
+
+  @Prop()
   sklad?: boolean
 
   @Prop()
@@ -53,6 +56,9 @@ export class Reference {
   
   @Prop()
   thirdPrice?: number
+
+  @Prop()
+  telegramId?: string
 
 }
 

@@ -24,7 +24,7 @@ export default function Auth() {
   
   const {mainData, setMainData} = useAppContext();
   const [body, setBody] = useState<BodyForLogin>(defaultBody)
-  const [capVal, setCapVal] = useState<boolean>(false);
+  const [capVal, setCapVal] = useState<boolean>(true);
 
   const changeElements = (e: React.FormEvent<HTMLInputElement>) => {
       let target = e.currentTarget
@@ -62,7 +62,7 @@ export default function Auth() {
   }, [mainData.user])
 
   const changeVal = () => {
-    setCapVal(val => !val)
+    // setCapVal(val => !val)
   }
 
   return (

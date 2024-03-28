@@ -29,13 +29,15 @@ export interface ReferenceModel {
     deleted?: boolean
     delivery?: boolean
     filial?: boolean
+    umumBulim?: boolean
     sklad?: boolean
     buxgalter?: boolean
     un?: boolean
     clientForDeliveryId?: string
     firstPrice?: number,
     secondPrice?: number
-    thirdPrice?: number
+    thirdPrice?: number,
+    telegramId?: string
 }
 
 

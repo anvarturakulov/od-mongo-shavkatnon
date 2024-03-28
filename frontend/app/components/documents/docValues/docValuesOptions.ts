@@ -80,7 +80,7 @@ export const visibilityPriceValueInDocument = (contentName: string, user: User |
     `${DocumentType.MoveProd}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.LeaveProd}`,
-
+    `${DocumentType.ZpCalculate}`
   ]
 
   if (user) {
@@ -130,8 +130,8 @@ export const visibilityCommentValueInDocument = (contentName: string, user: User
     `${DocumentType.LeaveCash}`,
     `${DocumentType.MoveHalfstuff}`,
     `${DocumentType.LeaveHalfstuff}`,
-    `${DocumentType.ComeProduct}`
-
+    `${DocumentType.ComeProduct}`,
+    `${DocumentType.ZpCalculate}`
   ]
 
   if (user) {

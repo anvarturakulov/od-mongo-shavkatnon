@@ -15,6 +15,7 @@ export const MenuData = [
     { title: DocumentType.ComeCashFromPartners, description:'Пул кирими (хамкорлар)'},
     { title: DocumentType.MoveCash, description:'Пул силжиши'},
     { title: DocumentType.LeaveCash, description:'Пул харажати'},
+    { title: DocumentType.ZpCalculate, description:'Иш хаки хисоблаш'},
 ]
 
 export const getDescriptionDocument = (name: string): string => {

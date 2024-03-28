@@ -63,8 +63,6 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticLabel = 'Товар моддий бойлик'
         analiticIsVisible = true
 
-        // cashFromPartnerLabel = 'Хамкор берган пул'
-        // cashFromPartnerVisible = true
     }
 
     const documentsForLeaveTMZ = [
@@ -120,8 +118,6 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         receiverLabel = 'Пулни кабул килувчи булим'
         recieverIsVisible = true
 
-        // cashFromPartnerLabel = 'Хамкор берган пул'
-        // cashFromPartnerVisible = true
     }
 
     const documentsForCashMove = [
@@ -165,9 +161,9 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         receiverLabel = 'Булим'
         recieverIsVisible = true
 
-        analiticType = TypeReference.TMZ
-        analiticLabel = '-----'
-        analiticIsVisible = false
+        analiticType = TypeReference.WORKERS
+        analiticLabel = 'Ходим'
+        analiticIsVisible = true
     }
 
     return {

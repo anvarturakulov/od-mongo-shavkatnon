@@ -126,16 +126,19 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                           contentName == DocumentType.MoveProd ||
                           contentName == DocumentType.MoveCash ))
                         {
-                            return (item.filial == true || item.sklad || item.delivery || item.buxgalter) 
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter) 
                         }
                     return true
                 })
                 .filter((item: ReferenceModel) => {
-                    if (type == 'sender' && 
-                        ( contentName == DocumentType.ComeMaterial ))
-                        {
-                            return ( item.typePartners == TypePartners.SUPPLIERS ) 
-                        }
+                    if (type == 'sender' && contentName == DocumentType.ComeMaterial) {
+                        return ( item.typePartners == TypePartners.SUPPLIERS ) 
+                    }
+
+                    if (type == 'sender' && contentName == DocumentType.LeaveCash) {
+                        return (item.filial || item.sklad || item.delivery || item.buxgalter) 
+                    }
+
                     return true
                 })
                 .filter ((item: ReferenceModel) => {
@@ -150,15 +153,13 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                     return true
                 })
-                // .filter((item: ReferenceModel) => {
-                //     if (type == 'sender' && 
-                //         ( contentName == DocumentType.MoveHalfstuff || 
-                //           contentName == DocumentType.LeaveHalfstuff ))
-                //         {
-                //             return (item.filial == true ) 
-                //         }
-                //     return true
-                // })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
+                        {
+                            return ( item.filial || item.umumBulim) 
+                        }
+                    return true
+                })
                 .sort(sortByName)
                 .filter(( item:ReferenceModel ) => !item.deleted )
                 .map(( item:ReferenceModel ) => (

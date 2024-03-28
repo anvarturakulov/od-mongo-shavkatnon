@@ -3,6 +3,7 @@ import { showMessage } from '../common/showMessage';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
+import { workersUsersList } from '@/app/interfaces/general.interface';
 
 export const updateCreateDocument = (mainData: Maindata, setMainData: Function | undefined) => {
   const { user, currentDocument, isNewDocument, contentName } = mainData
@@ -10,13 +11,13 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   let body: DocumentModel = {
     ...currentDocument,
   }
-// console.log(body)
+  // console.log(body)
   let docsForNoProveden: Array<string> = [DocumentType.LeaveCash, DocumentType.MoveCash, DocumentType.MoveMaterial, DocumentType.MoveProd]
   delete body._id;
   if (isNewDocument && docsForNoProveden.includes(contentName)) {
     body.proveden = false
-  } 
-  
+  }
+
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
@@ -28,7 +29,9 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
       setMainData('showDocumentWindow', false);
       setMainData('isNewDocument', false);
       setMainData('currentDocument', { ...defaultDocumentFormItems });
-      setMainData('mainPage', true);
+      if (user && workersUsersList.includes(user?.role)) {
+        setMainData('mainPage', true);
+      }
     }
   }
 
@@ -38,7 +41,7 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   if (isNewDocument) {
     axios.post(uriPost, body, config)
       .then(function (request) {
-          actionWithMainData('янги хужжати киритилди')
+        actionWithMainData('янги хужжати киритилди')
       })
       .catch(function (error) {
         if (setMainData) {

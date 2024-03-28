@@ -70,6 +70,14 @@ export const validateBody = (body: DocumentModel): Boolean => {
     if (!senderId || !analiticId || !total) return false
   }
 
+  const documentsForZpCalculate = [
+    `${DocumentType.ZpCalculate}`,
+  ]
+
+  if (documentsForZpCalculate.includes(documentType)) {
+    if (!receiverId || !analiticId || !total) return false
+  }
+
   return true
 
 }
