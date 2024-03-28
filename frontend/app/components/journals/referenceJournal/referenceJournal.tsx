@@ -13,6 +13,7 @@ import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemReference, getReference } from './helpers/reference.functions';
 import { getNameReference } from '../helpers/journal.functions';
+import { sortByName } from '@/app/service/references/sortByName';
 
 export default function ReferenceJournal({className, ...props}:ReferenceJournalProps):JSX.Element {
     
@@ -63,7 +64,11 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                         </tr>
                     </thead>
                     <tbody className={styles.tbody}>
-                        {data && data.length>0 && data.map((item:ReferenceModel, key:number) => (
+                        {data && 
+                        data.length>0 && 
+                        data
+                        .sort(sortByName)
+                        .map((item:ReferenceModel, key:number) => (
                             <>
                                 <tr 
                                     key={key+0} 
