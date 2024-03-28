@@ -27,6 +27,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     let dateEndInNumber = Date.parse(dateEndInString) +86399999
     
     const {mainData, setMainData} = useAppContext();
+    const [currentUser, setCurrentUser] = useState<string>('-');
+
     const { contentName, user, showDocumentWindow } = mainData;
     const role = mainData.user?.role;
     const dashboardUsers = role && dashboardUsersList.includes(role);
@@ -35,7 +37,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
     
     if (contentName) {
-    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
+        let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
     }
 
     const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
@@ -49,6 +51,13 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
         mutateReferences()
         setMainData && setMainData('updateDataForDocumentJournal', false);
     }, [mainData.showDocumentWindow, mainData.updateDataForDocumentJournal])
+
+    const changeCurrentUser = () => {
+        let userName = prompt('Фойдаланувчи номи ,');
+        if (userName) {
+            setCurrentUser(userName);
+        }
+    }   
 
     return (
         <>
@@ -69,7 +78,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                 <th key='6'>Олувчи</th>
                                 <th key='7'>Берувчи</th>
                                 <th key='8'>Изох</th>
-                                <th key='9'>Фойдаланувчи</th>
+                                <th key='9' onDoubleClick={changeCurrentUser}>Фойдаланувчи</th>
                                 <th key='10' className={styles.rowAction}>Амал</th>
                                 <th key='11' className={styles.rowAction}>Амал</th>
                             </tr>
@@ -79,6 +88,13 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             documents
                             .filter((item:DocumentModel, key: number) => (item.date >= dateStartInNumber && item.date <= dateEndInNumber))
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
+                            .filter((item:DocumentModel) => {
+                                if (currentUser != '-') {
+                                    return item.user.toLowerCase().includes(currentUser)
+                                } else {
+                                    return true
+                                }
+                            })
                             .map((item:DocumentModel, key: number) => (
                                 <>
                                     <tr 
