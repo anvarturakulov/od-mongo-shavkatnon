@@ -14,14 +14,10 @@ export const queryKor = (
   endStartForDashboard?: string | null,
 ): number => {
 
-  const { reportOption } = mainData;
+  const { reportOption, interval } = mainData;
   let { startDate, endDate, entrys } = reportOption;
   endDate = endDate + 86399999
   
-  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard)) + 86399999;
-
-
   let flagFirstSubconoto = true
   let flagSecondSubconto = true
 
@@ -31,15 +27,8 @@ export const queryKor = (
   let newEntrys = [...entrys]
 
   if (forDashboard) {
-    let dateNowInNumber = Date.now();
-    let dateNowInString = new Date(dateNowInNumber);
-    let dateStr = dateNowInString.toISOString().split('T')[0];
-
-    startDate = Date.parse(dateStr);
-    endDate = Date.parse(dateStr) + 86399999;
-
-    // startDate = startDateFromStorage;
-    // endDate = endDateFromStorage;
+    startDate = interval.dateStart;
+    endDate = interval.dateEnd;
   }
 
   switch (typequery) {

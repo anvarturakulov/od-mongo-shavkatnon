@@ -1,6 +1,5 @@
 'use client'
 import { InformationProps } from './information.props';
-import styles from './information.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
@@ -10,8 +9,8 @@ import { RefreshPanel } from './refreshPanel/refreshPanel';
 import { Sklad } from './sklad/sklad';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
-    const {mainData, setMainData} = useAppContext();
     
+    const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';

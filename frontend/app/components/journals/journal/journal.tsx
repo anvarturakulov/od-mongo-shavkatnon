@@ -16,17 +16,23 @@ import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDo
 import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 import { dashboardUsersList } from '@/app/interfaces/general.interface';
+import { dateNumberToString } from '@/app/service/common/converterForDates'
 
 
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
-    let dateStartInString = getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'));
-    let dateEndInString = getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'));
-    
-    let dateStartInNumber = Date.parse(dateStartInString)
-    let dateEndInNumber = Date.parse(dateEndInString) +86399999
-    
     const {mainData, setMainData} = useAppContext();
+    const {dateStart, dateEnd} = mainData.interval;
+    let dateStartForUrl = dateStart
+    let dateEndForUrl = dateEnd
+
+    if (!dateStart && !dateEnd) {
+        let now = Date.now()+18000000
+        let nowInstr = dateNumberToString(now)
+        dateStartForUrl = Date.parse(nowInstr)
+        dateEndForUrl = Date.parse(nowInstr) + 86399999
+    }
+    
     const [currentUser, setCurrentUser] = useState<string>('-');
 
     const { contentName, user, showDocumentWindow } = mainData;
@@ -34,9 +40,9 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     const dashboardUsers = role && dashboardUsersList.includes(role);
 
     const token = user?.access_token;
-    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byType/'+contentName;
+    let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byTypeForDate'+'?documentType='+contentName+'&dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
     
-    if (contentName) {
+    if (!contentName) {
         let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
     }
 
@@ -78,7 +84,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                 <th key='6'>Олувчи</th>
                                 <th key='7'>Берувчи</th>
                                 <th key='8'>Изох</th>
-                                <th key='9' onDoubleClick={changeCurrentUser}>Фойдаланувчи</th>
+                                <th key='9' onDoubleClick={changeCurrentUser}>{currentUser}</th>
                                 <th key='10' className={styles.rowAction}>Амал</th>
                                 <th key='11' className={styles.rowAction}>Амал</th>
                             </tr>
@@ -86,14 +92,13 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                         <tbody className={styles.tbody}>
                             {documents && documents.length>0 && 
                             documents
-                            .filter((item:DocumentModel, key: number) => (item.date >= dateStartInNumber && item.date <= dateEndInNumber))
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                             .filter((item:DocumentModel) => {
                                 if (currentUser != '-') {
                                     return item.user.toLowerCase().includes(currentUser)
-                                } else {
-                                    return true
-                                }
+                                } 
+                                return true
+                                
                             })
                             .map((item:DocumentModel, key: number) => (
                                 <>

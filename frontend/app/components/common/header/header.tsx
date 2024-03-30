@@ -8,10 +8,13 @@ import cn from 'classnames';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull'
 import { dateToStr } from '@/app/service/reports/dateToStr'
+import { dateNumberToString } from '@/app/service/common/converterForDates'
 
 export default function Header({ windowFor ,className, ...props }: HeaderProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext()
+    const {dateStart, dateEnd} = mainData.interval
+
     const {contentType, contentName, contentTitle, showReferenceWindow, isNewReference, showDocumentWindow, isNewDocument } = mainData 
     const strFirst =  
         contentType == 'document' ? 
@@ -23,8 +26,8 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
 
     const strSecond =  contentType == 'document' ? 'буйича хужжатлар руйхати' : 'руйхати'
 
-    let dateStart = dateToStr(Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateStartToInterval'))));
-    let dateEnd = dateToStr(Date.parse(getDateFromStorageExceptNull(localStorage.getItem('dateEndToInterval'))));
+    let dateStartInStr = dateNumberToString(dateStart)
+    let dateEndInStr = dateNumberToString(dateEnd)
 
     return (
         <>
@@ -36,8 +39,7 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
                         >{contentTitle} { ( showReferenceWindow || showDocumentWindow ) ? strFirst : strSecond }
                     </div>
                     {
-                        windowFor == 'document' &&
-                        <div>{`оралик сана: ${dateStart} дан ${dateEnd} гача`}</div>
+                        <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                     }
                     <div>
                         {( showReferenceWindow || showDocumentWindow )? 

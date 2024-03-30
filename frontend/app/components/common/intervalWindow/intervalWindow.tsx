@@ -4,27 +4,26 @@ import { Button } from '../button/Button';
 import { useState } from 'react';
 import { Interval } from '@/app/interfaces/document.interface';
 import { useAppContext } from '@/app/context/app.context';
+import { dateNumberToString } from '@/app/service/common/converterForDates';
 
 export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Element => {
-  let dateStart=0, dateEnd=0
-  if (typeof window !== 'undefined') {
-    let valueStart = localStorage.getItem('dateStartToInterval')
-    let valueEnd = localStorage.getItem('dateEndToInterval')
-    dateStart =  valueStart != null ? +valueStart : 0;
-    dateEnd = valueEnd ? +valueEnd : 0;
-  }
-
+  
   const {mainData, setMainData} = useAppContext();
-  const [interval, setInterval] = useState<Interval>({dateStart, dateEnd})
+  const [interval, setInterval] = useState<Interval>({...mainData.interval})
 
   const saveData = (interval: Interval, setMainData: Function | undefined) => {
     const {dateStart, dateEnd} = interval
+    const newInterval = {
+      dateStart,
+      dateEnd
+    }
 
     if (dateStart <= dateEnd) {
-      localStorage.setItem('dateStartToInterval', dateStart.toString());
-      localStorage.setItem('dateEndToInterval', dateEnd.toString()); 
-      setMainData && setMainData('showIntervalWindow', false);
-      setMainData && setMainData('updateDataForDocumentJournal', false);  
+      if (setMainData) {
+        setMainData('interval', {...newInterval})
+        setMainData('showIntervalWindow', false);
+        setMainData('updateDataForDocumentJournal', false);  
+      }
     }
     else {
       alert('Сана киритишда хатолик')
@@ -35,23 +34,28 @@ export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Elemen
     setMainData && setMainData('showIntervalWindow', false);   
   }
 
+  let currentDateStart = dateNumberToString(interval.dateStart)
+  let currentDateEnd = dateNumberToString(interval.dateEnd)
+
   const changeElements = (e: React.FormEvent<HTMLInputElement>, setInterval: Function , interval:Interval) => {
         let target = e.currentTarget;
         let value = target.value;
         let id = target.id;
         let newInterval;
+
         if (id == 'dateStart') {
           newInterval = {
             ...interval,
-            dateStart: new Date(value).toISOString().split('T')[0]
+            dateStart: Date.parse(value)
           }
         } else {
           newInterval = {
             ...interval,
-            dateEnd: new Date(value).toISOString().split('T')[0]
+            dateEnd: Date.parse(value) + 86399999
           }
         }
         setInterval(newInterval)
+
     }
 
   return (
@@ -63,14 +67,14 @@ export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Elemen
                 type='date' 
                 className={styles.input} 
                 id='dateStart' 
-                value={interval.dateStart}
+                value={currentDateStart}
                 onChange={(e) => changeElements(e, setInterval, interval)}
               />
               <input 
                 type='date' 
                 className={styles.input} 
                 id='dateEnd' 
-                value={interval.dateEnd}
+                value={currentDateEnd}
                 onChange={(e) => changeElements(e, setInterval, interval)}
               />
               <div className={styles.btnBox}>

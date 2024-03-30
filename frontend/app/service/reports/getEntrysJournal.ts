@@ -2,14 +2,33 @@ import { ReportOptions } from '@/app/interfaces/report.interface';
 import { showMessage } from '../common/showMessage';
 import axios from 'axios';
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { dateNumberToString } from '../common/converterForDates';
 
-export const getEntrysJournal = (setMainData: Function | undefined, mainData: Maindata, endDate?: number) => {
+export const getEntrysJournal = (
+  setMainData: Function | undefined, 
+  mainData: Maindata, 
+  forInterval?: boolean,
+  endDate?: number,
+  ) => {
   const { user, contentName } = mainData
+  const { dateStart, dateEnd } = mainData.interval;
+  let dateStartForUrl = dateStart
+  let dateEndForUrl = dateEnd
+
+  if (!dateStart && !dateEnd) {
+    let now = Date.now() + 18000000
+    let nowInstr = dateNumberToString(now)
+    dateStartForUrl = Date.parse(nowInstr)
+    dateEndForUrl = Date.parse(nowInstr) + 86399999
+  }
+
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
+  let url: string
 
-  const url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
+  if (!forInterval) url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
+  else url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrysForDate'+'?dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
 
   axios.get(url, config)
     .then(function (response) {
@@ -17,6 +36,7 @@ export const getEntrysJournal = (setMainData: Function | undefined, mainData: Ma
         
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
+        console.log(newEntrys)
 
         let newReportOptions: ReportOptions = {
             ...reportOption,

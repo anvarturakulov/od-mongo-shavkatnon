@@ -26,7 +26,6 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
     const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const PKKOLbux = query(Schet.S28, TypeQuery.PKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
 
-
     const OBKOLD2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
     const OBKOLD2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);
     
@@ -47,7 +46,6 @@ export const SectionItem = ({className, data, currentId, title, sectionType,  ..
     
     const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-
 
     const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
     const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);

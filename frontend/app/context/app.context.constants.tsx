@@ -1,4 +1,4 @@
-import { DocumentModel, DocumentType } from '../interfaces/document.interface'
+import { DocumentModel, DocumentType, Interval } from '../interfaces/document.interface'
 import { DefinedTandirWorkers } from '../interfaces/general.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
@@ -45,6 +45,11 @@ export const defaultReportOptions: ReportOptions =  {
     oborotType: OborotType.S20,
 }
 
+export const defaultInterval:Interval = {
+    dateStart: 0,
+    dateEnd: 0
+}
+
 export const defaultMainData: Maindata = {
     activeMenuKey: '',
     contentType: 'document',
@@ -69,5 +74,6 @@ export const defaultMainData: Maindata = {
     showMayda: false,
     definedTandirWorkers: defaultTandirWorkers,
     updateHamirJournal: false,
-    currentStorageIdInHamirsJournal: ''
+    currentStorageIdInHamirsJournal: '',
+    interval: defaultInterval
   }

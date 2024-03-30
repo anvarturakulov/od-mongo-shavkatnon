@@ -1,4 +1,4 @@
-import { DocumentModel } from '../interfaces/document.interface';
+import { DocumentModel, Interval } from '../interfaces/document.interface';
 import { ContentType, MessageType, DefinedTandirWorkers, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 import { EntryItem, ReportOptions } from '../interfaces/report.interface';
@@ -27,7 +27,8 @@ export interface Maindata {
   showMayda: boolean,
   definedTandirWorkers: DefinedTandirWorkers,
   updateHamirJournal: boolean,
-  currentStorageIdInHamirsJournal: string
+  currentStorageIdInHamirsJournal: string,
+  interval: Interval
 }
 
 export interface IAppContext {

@@ -14,7 +14,6 @@ export interface ReportOptions {
     entrys: Array<EntryItem>,
     startReport: boolean,
     oborotType: OborotType,
-
 }
 
 export enum Schet {

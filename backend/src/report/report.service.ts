@@ -16,5 +16,10 @@ export class ReportService {
     return prepareEntrysJournal(result);
   }
 
+  async getEntrysJournalForDate(dateStart: number, dateEnd: number) {
+    let result = await this.documentService.getForDateDocument(dateStart, dateEnd )
+    return prepareEntrysJournal(result);
+  }
+
 
 }

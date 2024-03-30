@@ -23,9 +23,17 @@ export class DocumentService {
     return this.documentModel.find({ documentType }).exec()
   }
 
+  async getByTypeForDateDocument(documentType, dateStart: number, dateEnd: number): Promise<Document[]> {
+    return this.documentModel.find({ documentType, date: {$gte: dateStart, $lte: dateEnd} }).exec()
+  }
+
+  async getForDateDocument(dateStart: number, dateEnd: number): Promise<Document[]> {
+    return this.documentModel.find({ date: { $gte: dateStart, $lte: dateEnd } }).exec()
+  }
+
   async getAllDocuments(toEntryJournal: boolean): Promise<Document[]> {
     if (toEntryJournal) return this.documentModel.find({ deleted: !true, proveden: true }).exec()
-    else return this.documentModel.find({deleted: !true} ).exec()
+    else return this.documentModel.find({ deleted: !true }).exec()
   }
 
   async findById(id: string) {

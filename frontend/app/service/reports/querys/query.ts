@@ -10,16 +10,11 @@ export const query = (
   bodyByFirstSunconto?: boolean,
   fixedReferencyId?: string,
   forDashboard?: boolean,
-  dateStartForDashboard?: string | null,
-  endStartForDashboard?: string | null,
 
 ): number => {
 
-
-  let startDateFromStorage = Date.parse(getDateFromStorageExceptNull(dateStartForDashboard));
-  let endDateFromStorage = Date.parse(getDateFromStorageExceptNull(endStartForDashboard)) + 86399999;
-
   const { reportOption } = mainData;
+  const { interval } = mainData
   let { startDate, endDate, entrys } = reportOption;
 
   endDate = endDate + 86399999
@@ -36,12 +31,12 @@ export const query = (
   // console.log('newEntrys', newEntrys)
 
   if (forDashboard) {
-    let dateNowInNumber = Date.now();
-    let dateNowInString = new Date(dateNowInNumber);
-    let dateStr = dateNowInString.toISOString().split('T')[0];
+    // let dateNowInNumber = Date.now();
+    // let dateNowInString = new Date(dateNowInNumber);
+    // let dateStr = dateNowInString.toISOString().split('T')[0];
 
-    startDate = Date.parse(dateStr);
-    endDate = Date.parse(dateStr) + 86399999;
+    startDate = interval.dateStart;
+    endDate = interval.dateEnd;
     // startDate = startDateFromStorage;
     // endDate = endDateFromStorage;
   }

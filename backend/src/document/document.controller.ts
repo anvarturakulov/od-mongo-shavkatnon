@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Patch, Post, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { CreateDocumentDto } from './dto/document.create.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -8,6 +8,7 @@ import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { AuthService } from 'src/auth/auth.service';
 import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
 import { ReferenceService } from 'src/reference/reference.service';
+import { Request } from 'express';
 
 @Controller('document')
 export class DocumentController {
@@ -54,6 +55,17 @@ export class DocumentController {
   @Get('byType/:documentType')
   async getByTypeDocument(@Param('documentType',) documentType: DocumentType) {
     return this.documentService.getByTypeDocument(documentType)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('byTypeForDate')
+  async getByTypeForDateDocument(@Req() request: Request) {
+    let documentType = request.query?.documentType
+    let dateStart = +request.query?.dateStart
+    let dateEnd = +request.query?.dateEnd
+    // console.log(documentType, dateStart, dateEnd )
+
+    return this.documentService.getByTypeForDateDocument(documentType, dateStart, dateEnd)
   }
 
   @UseGuards(JwtAuthGuard)
