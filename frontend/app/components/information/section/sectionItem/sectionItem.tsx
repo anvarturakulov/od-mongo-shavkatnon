@@ -12,49 +12,45 @@ import { queryKor } from '@/app/service/reports/querys/queryKor';
 export const SectionItem = ({className, data, currentId, title, sectionType,  ...props }: SectionItemProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext()
-    let startDateFromStorage, endDateFromStorage
-    if (typeof window !== 'undefined') {
-      startDateFromStorage = localStorage.getItem('dateStartToInterval');
-      endDateFromStorage = localStorage.getItem('dateEndToInterval');
-    }
+    
 
     let idForBuxanka = '65e7048b5c54490bbc335ca2';
 
-    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const PDKOLbux = query(Schet.S28, TypeQuery.PDKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PDKOL = query(Schet.S28, TypeQuery.PDKOL, null, mainData, true, currentId, true);
+    const PDKOLbux = query(Schet.S28, TypeQuery.PDKOL, idForBuxanka, mainData, true, currentId, true);
     
-    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const PKKOLbux = query(Schet.S28, TypeQuery.PKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PKKOL = query(Schet.S28, TypeQuery.PKKOL, null, mainData, true, currentId, true);
+    const PKKOLbux = query(Schet.S28, TypeQuery.PKKOL, idForBuxanka, mainData, true, currentId, true);
 
-    const OBKOLD2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
-    const OBKOLD2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLD2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, undefined, mainData, true);
+    const OBKOLD2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, currentId, idForBuxanka, mainData, true);
     
-    const OBKOLD2820 = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
-    const OBKOLD2820bux = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLD2820 = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, undefined, mainData, true);;
+    const OBKOLD2820bux = queryKor(Schet.S28, Schet.S20, TypeQuery.ODK, currentId, idForBuxanka, mainData, true);;
     
-    const OBKOLK2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
-    const OBKOLK2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);
+    const OBKOLK2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true);
+    const OBKOLK2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true);
     
-    const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
-    const OBKOLK2028bux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true);;
+    const OBKOLK2028bux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true);;
 
-    const OBKOLK4028 = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);;
-    const OBKOLK4028bux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true, startDateFromStorage, endDateFromStorage);;
+    const OBKOLK4028 = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, undefined, mainData, true);;
+    const OBKOLK4028bux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentId, idForBuxanka, mainData, true);;
    
-    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const TDKOLbux = query(Schet.S28, TypeQuery.TDKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TDKOL = query(Schet.S28, TypeQuery.TDKOL, null, mainData, true, currentId, true);
+    const TDKOLbux = query(Schet.S28, TypeQuery.TDKOL, idForBuxanka, mainData, true, currentId, true);
     
-    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, idForBuxanka, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, currentId, true);
+    const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, idForBuxanka, mainData, true, currentId, true);
 
-    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const PDSUM = query(Schet.S50, TypeQuery.PDSUM, null, mainData, true, currentId, true);
+    const PKSUM = query(Schet.S50, TypeQuery.PKSUM, null, mainData, true, currentId, true);
 
-    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
-    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true, startDateFromStorage, endDateFromStorage);
+    const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, true, currentId, true);
+    const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, true, currentId, true);
 
-    const MOVEINN = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
-    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true, startDateFromStorage, endDateFromStorage);
+    const MOVEINN = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentId, undefined, mainData, true);
+    const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true);
     
     
     return (

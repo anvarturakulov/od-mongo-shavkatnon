@@ -16,7 +16,7 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
 
     useEffect(() => {
         if (mainData.showMessageWindow) {
-            setTimeout(()=>setMainData && setMainData('showMessageWindow', false), 2000)
+            setTimeout(()=>setMainData && setMainData('showMessageWindow', false), 4000)
         }
     }, [mainData.showMessageWindow])
 

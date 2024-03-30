@@ -10,8 +10,6 @@ export const queryKor = (
   secondSubconto: string | undefined,
   mainData: Maindata,
   forDashboard? : boolean,
-  dateStartForDashboard?: string | null,
-  endStartForDashboard?: string | null,
 ): number => {
 
   const { reportOption, interval } = mainData;

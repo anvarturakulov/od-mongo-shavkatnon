@@ -10,7 +10,6 @@ export const query = (
   bodyByFirstSunconto?: boolean,
   fixedReferencyId?: string,
   forDashboard?: boolean,
-
 ): number => {
 
   const { reportOption } = mainData;
@@ -28,17 +27,10 @@ export const query = (
   let flag = (firstReferenceId == null || firstReferenceId.length == 0)
   let flagSubconto2 = (secondSubcontoId == null)
   let newEntrys = [...entrys]
-  // console.log('newEntrys', newEntrys)
 
   if (forDashboard) {
-    // let dateNowInNumber = Date.now();
-    // let dateNowInString = new Date(dateNowInNumber);
-    // let dateStr = dateNowInString.toISOString().split('T')[0];
-
     startDate = interval.dateStart;
     endDate = interval.dateEnd;
-    // startDate = startDateFromStorage;
-    // endDate = endDateFromStorage;
   }
 
   switch (typequery) {

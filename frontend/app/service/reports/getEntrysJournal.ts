@@ -6,29 +6,24 @@ import { dateNumberToString } from '../common/converterForDates';
 
 export const getEntrysJournal = (
   setMainData: Function | undefined, 
-  mainData: Maindata, 
-  forInterval?: boolean,
+  mainData: Maindata,
   endDate?: number,
   ) => {
+  
   const { user, contentName } = mainData
-  const { dateStart, dateEnd } = mainData.interval;
-  let dateStartForUrl = dateStart
-  let dateEndForUrl = dateEnd
-
-  if (!dateStart && !dateEnd) {
-    let now = Date.now() + 18000000
-    let nowInstr = dateNumberToString(now)
-    dateStartForUrl = Date.parse(nowInstr)
-    dateEndForUrl = Date.parse(nowInstr) + 86399999
-  }
+  
+  // if (endDate) {
+  //   let now = Date.now() + 18000000
+  //   let nowInstr = dateNumberToString(now)
+  //   dateStartForUrl = Date.parse(nowInstr)
+  //   dateEndForUrl = Date.parse(nowInstr) + 86399999
+  // }
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
-  let url: string
-
-  if (!forInterval) url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
-  else url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrysForDate'+'?dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
+  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
+  // else url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrysForDate'+'?dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
 
   axios.get(url, config)
     .then(function (response) {
