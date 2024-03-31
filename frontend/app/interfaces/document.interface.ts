@@ -75,3 +75,5 @@ export interface Interval {
 }
 
 export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner'
+
+export type NameDocs = 'sd' | 'ds'
