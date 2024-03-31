@@ -16,37 +16,14 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
         setMainData && setMainData('updateDataForDocumentJournal', true)
         getEntrysJournal(setMainData, mainData);
-        // line for deleting
-        // clearInterval(interval);
-        // setSeconts(0)
     }
     
-    // const [seconds, setSeconts] = useState(0);
-
-    // useEffect(() => {
-    //     const tick = (num: number) => setSeconts(seconds + num);
-    //     interval = setInterval(() => tick(1), 1000);
-    //     const cleanup = () => {
-    //         clearInterval(interval);
-    //     };
-    //     return cleanup;
-    // });
-
-    // const getTime= () => {
-    //     let secondsRemain = seconds % 60
-    //     let minutes = (seconds-secondsRemain) / 60
-    //     let hoursRemain = seconds % 3600
-    //     let hours = (seconds - hoursRemain) / 3600
-    //     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secondsRemain.toString().padStart(2, '0')}`;
-    // }
+    
     let dateStartInStr = dateNumberToString(dateStart)
     let dateEndInStr = dateNumberToString(dateEnd)
     return (
        <>
             <div className={styles.btnBox}>
-                {/* <div className={styles.timer}>
-                    {getTime()}
-                </div> */}
                 {
                     <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                 }
