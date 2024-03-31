@@ -25,7 +25,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             saveUser(setMainData, mainData)
         }
         if (contentName == DocumentType.MoveMaterial || contentName == DocumentType.LeaveMaterial) {
-            getEntrysJournal(setMainData, mainData, false, currentDocument.date);
+            getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
     },[])
 
