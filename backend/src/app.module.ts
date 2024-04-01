@@ -12,13 +12,13 @@ import { HamirModule } from './hamir/hamir.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    // MongooseModule.forRoot('mongodb://localhost:27017/karandash'),
-    MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash'),
+    MongooseModule.forRoot('mongodb://myUserAdmin:abc123@localhost:27017/karandash?authMechanism=DEFAULT&authSource=admin'),
+    // MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash'),
     // MongooseModule.forRoot('mongodb://admin:admin@localhost:27017/karandash?authMechanism=DEFAULT&authSource=admin'),
-    AuthModule, 
+    AuthModule,
     DocumentModule, ReferenceModule, ReportModule, HamirModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
