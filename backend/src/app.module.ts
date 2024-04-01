@@ -13,7 +13,7 @@ import { HamirModule } from './hamir/hamir.module';
   imports: [
     ConfigModule.forRoot(),
     // MongooseModule.forRoot('mongodb://localhost:27017/karandash'),
-    MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash')
+    MongooseModule.forRoot('mongodb+srv://anvar:SWSMFL5TDk3Jq9xg@cluster0.uoe1t.mongodb.net/karandash'),
     // MongooseModule.forRoot('mongodb://admin:admin@localhost:27017/karandash?authMechanism=DEFAULT&authSource=admin'),
     AuthModule, 
     DocumentModule, ReferenceModule, ReportModule, HamirModule
