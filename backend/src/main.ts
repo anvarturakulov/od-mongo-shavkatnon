@@ -6,9 +6,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: [
-      "https://softhome.uz",
-      "http://localhost:3000",
-      "http://localhost:3030",
+      "https://softhome1.uz",
+      "http://localhost:3040",
+      "http://localhost:3032",
     ],
   });
   console.log('I see')
