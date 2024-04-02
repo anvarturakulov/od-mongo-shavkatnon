@@ -1,8 +1,8 @@
 module.exports = {
   apps : [{
     name: "backend",
-    script: "./backend/dist/main.js",
-    cwd: "",
+    script: "node",
+    cwd: "./backend/dist/main.js",
     watch: true,
     env: {
       NODE_ENV: "production",
