@@ -11,6 +11,7 @@ async function bootstrap() {
       "http://localhost:3030",
     ],
   });
+  console.log('I see')
   await app.listen(3030);
 }
 bootstrap();
