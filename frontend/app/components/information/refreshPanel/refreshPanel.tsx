@@ -18,6 +18,9 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
         getEntrysJournal(setMainData, mainData);
     }
     
+    useEffect(()=> {
+        
+    }, [])
     
     let dateStartInStr = dateNumberToString(dateStart)
     let dateEndInStr = dateNumberToString(dateEnd)
