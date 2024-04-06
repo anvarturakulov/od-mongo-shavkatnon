@@ -25,7 +25,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.HEADSECTION]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',

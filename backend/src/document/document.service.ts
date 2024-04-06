@@ -28,10 +28,7 @@ export class DocumentService {
   }
 
   async getForDateDocument(dateStart: number, dateEnd: number): Promise<Document[]> {
-    console.log(Date.now())
     let ret = this.documentModel.find({ date: { $gte: dateStart, $lte: dateEnd } }).exec()
-    console.log(Date.now())
-    console.log((await ret).length)
     return ret
   }
 

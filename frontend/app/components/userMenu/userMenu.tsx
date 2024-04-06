@@ -173,8 +173,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 (
                     user?.role == UserRoles.ELAKCHI ||
                     user?.role == UserRoles.GLBUX ||
-                    user?.role == UserRoles.HEADSECTION ||
-                    user?.role == UserRoles.ZAMGLBUX
+                    user?.role == UserRoles.HEADSECTION
                 ) 
                 && 
                 <>
@@ -184,8 +183,17 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             }
 
             {
-                ( user?.role == UserRoles.GLBUX ||
-                user?.role == UserRoles.ZAMGLBUX ) &&
+                (user?.role == UserRoles.ZAMGLBUX ) 
+                && 
+                <>
+                    <RefreshPanel/>
+                    <Section data={data} sectionType='buxgalter' currentSection ={storageIdFromUser}/>
+                    <Sklad data={data} sectionType='sklad'/>
+                </>
+            }
+
+            {
+                ( user?.role == UserRoles.GLBUX) &&
                 <>
                     <Section data={data} sectionType='buxgalter'/>
                     <Section data={data} sectionType='filial'/>

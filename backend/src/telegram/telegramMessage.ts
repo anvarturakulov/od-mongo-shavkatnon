@@ -148,6 +148,7 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
     bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument, messageInDeleting));
   }
   bot.sendMessage(secondChatId, prepareCheck(body, references, newDocument, messageInDeleting));
+  // bot.sendDocument(secondChatId,)
 
   if (body.documentType == DocumentType.ZpCalculate 
     || ( body.documentType == DocumentType.LeaveCash && body.isWorker)) {

@@ -126,7 +126,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                           contentName == DocumentType.MoveProd ||
                           contentName == DocumentType.MoveCash ))
                         {
-                            return (item.filial || item.sklad || item.delivery || item.buxgalter) 
+                            return (item.filial) 
                         }
                     return true
                 })
