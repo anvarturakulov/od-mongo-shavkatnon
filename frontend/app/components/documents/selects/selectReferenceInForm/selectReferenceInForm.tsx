@@ -123,8 +123,14 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     if (type == 'receiver' && 
                         ( contentName == DocumentType.MoveHalfstuff || 
                           contentName == DocumentType.MoveMaterial ||
-                          contentName == DocumentType.MoveProd ||
-                          contentName == DocumentType.MoveCash ))
+                          contentName == DocumentType.MoveProd)
+                        {
+                            return (item.filial  || item.delivery) 
+                        }
+                    return true
+                })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'receiver' && contentName == DocumentType.MoveCash)
                         {
                             return (item.filial) 
                         }
