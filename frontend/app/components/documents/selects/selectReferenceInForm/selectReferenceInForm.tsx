@@ -125,7 +125,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                           contentName == DocumentType.MoveMaterial ||
                           contentName == DocumentType.MoveProd))
                         {
-                            return (item.filial  || item.delivery) 
+                            return (item.filial  || item.delivery || item.sklad) 
                         }
                     return true
                 })
