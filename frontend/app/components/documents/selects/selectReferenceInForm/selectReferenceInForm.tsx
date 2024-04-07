@@ -132,7 +132,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 .filter((item: ReferenceModel) => {
                     if (type == 'receiver' && contentName == DocumentType.MoveCash)
                         {
-                            return (item.filial) 
+                            return (item.filial || item.buxgalter) 
                         }
                     return true
                 })
