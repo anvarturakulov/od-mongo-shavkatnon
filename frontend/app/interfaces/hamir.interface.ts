@@ -9,6 +9,6 @@ export interface HamirModel {
   firstWorker?: string | null,
   secondWorker?: string | null,
   thirdWorker?: string | null,
-  zuvala: number,
+  zuvala?: number,
   fromHamirchi: boolean,
 }

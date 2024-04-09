@@ -25,8 +25,10 @@ export const ProductionItem = ({className, currentId, data, hamirs , title,  ...
             return (item.sectionId == currentId && item.proveden && item.zuvala && item.fromHamirchi)
         })
 
-        colNon = currentHamirs.reduce((acc:number, item: HamirModel) => acc + item.zuvala, 0)
-        
+        // colNon = currentHamirs.reduce((acc:number, item: HamirModel) => {acc + item.zuvala, 0)
+        currentHamirs.forEach((item:HamirModel) => {
+            if (item.zuvala) colNon += item.zuvala
+        });
         colHamirs = currentHamirs.length
         colZagatovka = currentZagatovka.length
         if (colHamirs) {
