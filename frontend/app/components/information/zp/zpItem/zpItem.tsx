@@ -28,27 +28,7 @@ const colHamirsByWorker = (workerId:string, sectionId:string, hamirs:Array<Hamir
 export const ZpItem = ({className, currentId, data, hamirs, title, ...props }: ZpItemProps) :JSX.Element => {
 
     const {mainData, setMainData} = useAppContext()
-    let currentHamirs, currentZagatovka, colHamirs, colZagatovka; 
-    let colNon = 0;
-    let zuvalaKPI = 0;
-
-    if (hamirs) {
-        currentHamirs = hamirs.filter((item: HamirModel) => {
-            return (item.sectionId == currentId && item.proveden && item.zuvala && !item.fromHamirchi)
-        })
-        currentZagatovka = hamirs.filter((item: HamirModel) => {
-            return (item.sectionId == currentId && item.proveden && item.zuvala && item.fromHamirchi)
-        })
-
-        colNon = currentHamirs.reduce((acc:number, item: HamirModel) => acc + item.zuvala, 0)
-        
-        colHamirs = currentHamirs.length
-        colZagatovka = currentZagatovka.length
-        if (colHamirs) {
-            zuvalaKPI = (colNon / colHamirs)
-        }
-    }
-
+    
     return (
        <>
         <div className={styles.item}>
