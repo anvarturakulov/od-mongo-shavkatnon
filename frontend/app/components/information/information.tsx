@@ -9,6 +9,7 @@ import { RefreshPanel } from './refreshPanel/refreshPanel';
 import { Sklad } from './sklad/sklad';
 import { Production } from './production/production';
 import { Zp } from './zp/zp';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     
@@ -21,13 +22,29 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
     return (
        <>
             <RefreshPanel/>
-            <Cash data={data}/>
-            <Section data={data} sectionType='buxgalter'/>
-            <Section data={data} sectionType='filial'/>
-            <Section data={data} sectionType='delivery'/>
-            <Sklad data={data} sectionType='sklad'/>
-            <Production data={data} />
-            <Zp data={data}/>
+            {
+                user?.role != UserRoles.ZAMGLBUX &&
+                <>
+                    <Cash data={data}/>
+                    <Section data={data} sectionType='buxgalter'/>
+                    <Section data={data} sectionType='filial'/>
+                    <Section data={data} sectionType='delivery'/>
+                    <Sklad data={data} sectionType='sklad'/>
+                    <Production data={data} />
+                    <Zp data={data}/>
+                </>
+            }
+
+            {
+                user?.role == UserRoles.ZAMGLBUX &&
+                <>
+                    <Section data={data} sectionType='buxgalter' currentSection={user.storageId}/>
+                    <Sklad data={data} sectionType='sklad'/>
+                </>
+
+            }
+            
+
        </>
     )
 } 

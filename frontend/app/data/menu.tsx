@@ -151,7 +151,7 @@ export const MenuData:Array<MenuItem> = [
                 title: ReportType.MatOborot, description:'ТМБ харакати',
                 type: 'report', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST, UserRoles.ZAMGLBUX]
             },
             { 
                 title: ReportType.Oborotka, description:'Умумий айланма',
