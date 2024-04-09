@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Req, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { HamirService } from './hamir.service';
 import { CreateHamirDto } from './dto/hamir.create.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -9,6 +9,7 @@ import { CreateDocumentDto } from 'src/document/dto/document.create.dto';
 import { ReferencesForTelegramMessage, sendMessageToChanel } from 'src/telegram/telegramMessage';
 import { ReferenceService } from 'src/reference/reference.service';
 import { AuthService } from 'src/auth/auth.service';
+import { Request } from 'express';
 
 @Controller('hamir')
 export class HamirController {
@@ -48,8 +49,6 @@ export class HamirController {
   @Post('create')
   async create(@Body() dto: CreateHamirDto) {
     let hamirs = await this.hamirService.getHamirsByUserToDate(dto)
-    // console.log(dto.firstWorker)
-    // console.log(dto)
     let countHamir = dto.fromHamirchi ? 51 : 26
     if (dto.sectionId != '' && dto.analiticId != '' && !hamirs.length) {
       for (let i = 1; i < countHamir; i++) {
@@ -65,6 +64,21 @@ export class HamirController {
   @Get('getForDate/:date')
   async getAllHamirsForDate(@Param('date') date: string) {
     return this.hamirService.getAllHamirsForDate(date)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('byTypeForDate')
+  async getByTypeForDateDocument(@Req() request: Request) {
+    let dateStart = +request.query?.dateStart
+    let dateEnd = +request.query?.dateEnd
+
+    return this.hamirService.getByTypeForDateHamir(dateStart, dateEnd)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('getAll')
+  async getAllHamirs() {
+    return this.hamirService.getAllHamirs()
   }
 
   @UseGuards(JwtAuthGuard)

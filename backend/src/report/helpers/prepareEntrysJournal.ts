@@ -14,7 +14,7 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
         let newItemForResults = { ...prepareEntry(item) }
         results.push(newItemForResults);
 
-      if (item.isWorker || item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
+      if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
           let newItemForResults = { ...prepareEntry(item, true) }
           results.push(newItemForResults);
         }

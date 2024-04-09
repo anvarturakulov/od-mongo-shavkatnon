@@ -1,4 +1,4 @@
-import { ReportOptions } from '@/app/interfaces/report.interface';
+import { ReportOptions, Schet } from '@/app/interfaces/report.interface';
 import { showMessage } from '../common/showMessage';
 import axios from 'axios';
 import { Maindata } from '@/app/context/app.context.interfaces';
@@ -31,7 +31,11 @@ export const getEntrysJournal = (
         
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
-        console.log(newEntrys)
+        
+        let newE = [...newEntrys.filter((item:any) => {
+          return (item.debet == Schet.S67 || item.kredit == Schet.S67)
+        })]
+        // console.log(newE)
 
         let newReportOptions: ReportOptions = {
             ...reportOption,

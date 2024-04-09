@@ -26,6 +26,15 @@ export class HamirService {
     })
   }
 
+  async getAllHamirs(): Promise<Hamir[]> {
+    let hamirs = this.hamirModel.find().exec()
+    return hamirs
+  }
+
+  async getByTypeForDateHamir(dateStart: number, dateEnd: number): Promise<Hamir[]> {
+    return this.hamirModel.find({ date: { $gte: dateStart, $lte: dateEnd } }).exec()
+  }
+
   async getHamirsByUserToDate(dto: CreateHamirDto): Promise<Hamir[]> {
 
     let date = new Date(dto.date);

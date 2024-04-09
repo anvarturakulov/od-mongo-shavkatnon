@@ -33,6 +33,8 @@ export const query = (
     endDate = interval.dateEnd;
   }
 
+  // console.log(startDate, endDate)
+
   switch (typequery) {
     case TypeQuery.PDKOL:
       return newEntrys.filter((item: EntryItem) => {

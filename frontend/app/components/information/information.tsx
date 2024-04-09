@@ -7,6 +7,8 @@ import { Section } from './section/section';
 import { Cash } from './cash/cash';
 import { RefreshPanel } from './refreshPanel/refreshPanel';
 import { Sklad } from './sklad/sklad';
+import { Production } from './production/production';
+import { Zp } from './zp/zp';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     
@@ -24,6 +26,8 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
             <Section data={data} sectionType='filial'/>
             <Section data={data} sectionType='delivery'/>
             <Sklad data={data} sectionType='sklad'/>
+            <Production data={data} />
+            <Zp data={data}/>
        </>
     )
 } 

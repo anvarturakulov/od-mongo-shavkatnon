@@ -104,7 +104,7 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
             showMessage('Махсулот суммаси йук', 'error', setMainData)
             return
         }
-        console.log(body)
+        // console.log(body)
         const { user } = mainData
         delete body._id;
   

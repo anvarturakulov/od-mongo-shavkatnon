@@ -17,6 +17,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
   if (item) {
     let documentType = item.documentType;
     let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
+    
     const leaveComeTMZObj = {
       debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
@@ -53,20 +54,11 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       summa: total,
     }
 
-    let leaveCashZp2050 = {
-      debetFirstSubcontoId: senderId.toString(),
-      debetSecondSubcontoId: '659e4610d738d99baa2fe4ef',
-      kreditFirstSubcontoId: senderId.toString(),
-      kreditSecondSubcontoId: analiticId.toString(),
-      count: 0,
-      summa: total,
-    }
-
-    let leaveCashZp6700 = {
+    let leaveCashZp6750 = {
       debetFirstSubcontoId: senderId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
       kreditFirstSubcontoId: senderId.toString(),
-      kreditSecondSubcontoId: '659e4610d738d99baa2fe4ef',
+      kreditSecondSubcontoId: analiticId.toString(),
       count: 0,
       summa: total,
     }
@@ -135,27 +127,12 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
             ...leaveCashObj4050
           };
         }
-        if (isWorker && !newEntry) {
+        if (isWorker) {
           return {
-            debet: Schet.S20,
+            debet: Schet.S67,
             kredit: Schet.S50,
-            ...leaveCashZp2050,
+            ...leaveCashZp6750,
           };
-        }
-        if (isWorker && newEntry) {
-          return {
-            debet: Schet.S67,
-            kredit: Schet.S00,
-            ...leaveCashZp6700,
-          }
-        }
-
-        if (isWorker && newEntry) {
-          return {
-            debet: Schet.S67,
-            kredit: Schet.S00,
-            ...leaveCashZp6700,
-          }
         }
 
         if (isFounder) {
@@ -256,7 +233,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
         // шу хужжатни проводкаси хакида кайта бир уйлаб куриш керак
         return {
           debet: Schet.S20,
-          kredit: Schet.S00,
+          kredit: Schet.S67,
           ...leaveComeTMZObj
         };
     }

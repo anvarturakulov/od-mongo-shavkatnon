@@ -78,7 +78,7 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
                     data
                     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
                     .filter((item: any) => {
-                        if (item.buxgalter) console.log(item.name)
+                        // if (item.buxgalter) console.log(item.name)
                         if ( item.buxgalter || item.filial || item.delivery ) return true
                         return false
                     })

@@ -25,7 +25,7 @@ export const createHamirsForDayByUser = (date: number, mainData: Maindata, setMa
     } 
   }
 
-  console.log(body);
+  // console.log(body);
   if ((user?.role == UserRoles.TANDIR) && (
     !body.firstWorker || !body.secondWorker || !body.thirdWorker )) {
       showMessage(`Ходимлар танланмаган`, 'error', setMainData)

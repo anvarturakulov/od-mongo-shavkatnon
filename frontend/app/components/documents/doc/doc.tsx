@@ -28,13 +28,13 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
 
-        let Data = new Date();
-        let Hour = Data.getHours();
-        let Minutes = Data.getMinutes();
-        let Seconds = Data.getSeconds();
+//         let Data = new Date();
+//         let Hour = Data.getHours();
+//         let Minutes = Data.getMinutes();
+//         let Seconds = Data.getSeconds();
 
-// Вывод
-        console.log("Текущее время: " + Hour + ":" + Minutes + ":" + Seconds);
+// // Вывод
+//         console.log("Текущее время: " + Hour + ":" + Minutes + ":" + Seconds);
     },[])
 
     const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
