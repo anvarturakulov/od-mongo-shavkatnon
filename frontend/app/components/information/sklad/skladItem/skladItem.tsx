@@ -46,7 +46,7 @@ export const SkladItem = ({className, data, currentId, title, sectionType,  ...p
                     return (
                         <div className={styles.row} key={key}>
                             <div className={styles.title}>{getPropertySubconto(data, item).name}</div>
-                            <div className={styles.value}>{numberValue(value)}</div>
+                            <div className={styles.value}>{numberValue(+value.toFixed(2))}</div>
                         </div>
                     )
                 })
