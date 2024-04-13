@@ -117,7 +117,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>
                 <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
                 {/* <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/> */}
-                <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
+                {/* <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/> */}
             </div>
         </>
     )

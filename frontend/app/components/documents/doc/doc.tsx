@@ -41,10 +41,10 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
         const {currentDocument} = mainData;
         setDisabled(true)
         let body: DocumentModel = {
-            ...currentDocument,
-            count: +(currentDocument.count.toFixed(3))
+            ...currentDocument
         }
         
+        console.log('count'+currentDocument.count)
         if (!validateBody(body)) {
             showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
             setDisabled(false)
