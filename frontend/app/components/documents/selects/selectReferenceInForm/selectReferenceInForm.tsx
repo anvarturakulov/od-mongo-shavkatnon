@@ -120,12 +120,17 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     return true
                 })
                 .filter((item: ReferenceModel) => {
-                    if (type == 'receiver' && 
-                        ( contentName == DocumentType.MoveHalfstuff || 
-                          contentName == DocumentType.MoveMaterial ||
-                          contentName == DocumentType.MoveProd))
+                    if ( contentName == DocumentType.MoveHalfstuff || 
+                          contentName == DocumentType.MoveMaterial )
                         {
-                            return (item.filial  || item.delivery || item.sklad) 
+                            return (item.filial  || item.sklad) 
+                        }
+                    return true
+                })
+                .filter((item: ReferenceModel) => {
+                    if ( contentName == DocumentType.MoveProd )
+                        {
+                            return ( item.filial  || item.delivery || item.sklad ) 
                         }
                     return true
                 })
