@@ -42,6 +42,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
         setDisabled(true)
         let body: DocumentModel = {
             ...currentDocument,
+            count: +(currentDocument.count.toFixed())
         }
         
         if (!validateBody(body)) {

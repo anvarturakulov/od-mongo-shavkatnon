@@ -33,7 +33,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
             
             newValues = {
                 ...currentDocument,
-                [`${nameControl}`]: (+value).toFixed(3),
+                [`${nameControl}`]: +value,
                 total : +(+value* currentDocument.count).toFixed(2)
             }
         }
