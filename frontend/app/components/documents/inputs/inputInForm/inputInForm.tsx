@@ -24,7 +24,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
             
             newValues = {
                 ...currentDocument,
-                [`${nameControl}`]: Number(value),
+                [`${nameControl}`]: Number(Number(value).toFixed(3)),
                 total : Number((Number(value) * currentDocument.price).toFixed(2))
             }
         }
