@@ -76,7 +76,7 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
                                     }
                                     }
                                 }} 
-                        />
+                            />
                         </>
                     }
                     </div>

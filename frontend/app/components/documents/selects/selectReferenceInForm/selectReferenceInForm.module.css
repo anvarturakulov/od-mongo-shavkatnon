@@ -1,15 +1,14 @@
 .select{
     display: block;
     padding: 5px 10px;
-    font-size: 20px;
-    line-height: 20px;
     width: 100%;
+    font-size: 20px;
     border: 0.6px dotted blue;
     background-color: #fff;
     padding: 10px 20px;
 }
 .option {
-    font-size: 14px;
+    font-size: 22px;
     color: blue;
 }
 
