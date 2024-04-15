@@ -27,7 +27,9 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
                 [`${nameControl}`]: Number(Number(value).toFixed(3)),
                 total : Number((Number(value) * currentDocument.price).toFixed(2))
             }
+            console.log('count'+newValues.count)
         }
+
 
         if ( nameControl=='price') {
             
