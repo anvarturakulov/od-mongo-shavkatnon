@@ -24,8 +24,8 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
             
             newValues = {
                 ...currentDocument,
-                [`${nameControl}`]: +value,
-                total : +(+value * currentDocument.price).toFixed(2)
+                [`${nameControl}`]: Number(value),
+                total : Number((Number(value) * currentDocument.price).toFixed(2))
             }
         }
 
@@ -33,15 +33,15 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
             
             newValues = {
                 ...currentDocument,
-                [`${nameControl}`]: +value,
-                total : +(+value* currentDocument.count).toFixed(2)
+                [`${nameControl}`]: Number(value),
+                total : Number((Number(value)* currentDocument.count).toFixed(2))
             }
         }
 
         if ( nameControl=='total' ) {
             newValues = {
                 ...currentDocument,
-                total : +value
+                total : Number(value)
             }
         }
         
@@ -55,7 +55,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
         if (nameControl=='cashFromPartner') {
             newValues = {
                 ...currentDocument,
-                [nameControl]: +value
+                [nameControl]: Number(value)
             }
         }
                 

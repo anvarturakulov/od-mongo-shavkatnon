@@ -1,5 +1,6 @@
 .numberValue{
     text-align: right !important;
+    font-size: 18px;
 }
 
 .tdNumber{
@@ -8,6 +9,7 @@
 
 .name{
     width: 20%;
+    font-size: 18px;
 }
 
 .trRow{
@@ -29,3 +31,4 @@
 .price{
     text-align: center !important;
 }
+
