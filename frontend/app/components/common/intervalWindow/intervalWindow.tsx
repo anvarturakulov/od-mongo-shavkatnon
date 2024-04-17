@@ -12,7 +12,7 @@ export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Elemen
   const [interval, setInterval] = useState<Interval>({...mainData.interval})
 
   const saveData = (interval: Interval, setMainData: Function | undefined) => {
-    const {dateStart, dateEnd} = interval
+    const {dateStart, dateEnd} = interval;
     const newInterval = {
       dateStart,
       dateEnd
@@ -33,10 +33,9 @@ export const IntervalWindow = ({className, ...props}: IntervalProps): JSX.Elemen
   const closeWindow = (setMainData: Function | undefined) => {
     setMainData && setMainData('showIntervalWindow', false);   
   }
-
   let currentDateStart = dateNumberToString(interval.dateStart)
   let currentDateEnd = dateNumberToString(interval.dateEnd)
-
+  
   const changeElements = (e: React.FormEvent<HTMLInputElement>, setInterval: Function , interval:Interval) => {
         let target = e.currentTarget;
         let value = target.value;

@@ -14,6 +14,7 @@ import { showMessage } from '@/app/service/common/showMessage'
 import ImgBread from './bread.jpg';
 import ReCAPTCHA from 'react-google-recaptcha'
 import cn from 'classnames';
+import { setTodayToInterval } from '@/app/service/reports/setTodayToInterval'
 
 const defaultBody: BodyForLogin = {
   login: '',
@@ -64,6 +65,10 @@ export default function Auth() {
   const changeVal = () => {
     setCapVal(val => !val)
   }
+
+  useEffect(()=> {
+    setTodayToInterval(setMainData);
+  }, [])
 
   return (
     <>

@@ -13,14 +13,15 @@ import { Message } from '@/app/components/common/message/message';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import Hamirs from '@/app/components/journals/hamirs/hamirs';
 import { DefinedTandirWorkers } from '@/app/components/documents/definedTandirWorkers/definedTandirWorkers';
+import { dateNumberToString } from '@/app/service/common/converterForDates';
+import { setTodayToInterval } from '@/app/service/reports/setTodayToInterval';
 
 export default function Users() {
   
-  const {mainData} = useAppContext();
+  const {mainData, setMainData} = useAppContext();
   const {contentType, contentTitle, user} = mainData;
   const [tandirworkers, setTandirWorkers] = useState<boolean>(false);
 
-  
   useEffect(() => {
     if (mainData.user == undefined) {
       redirect('/');
@@ -37,12 +38,15 @@ export default function Users() {
         
         {
           mainData.mainPage &&
-          (user?.role != UserRoles.TANDIR && user?.role != UserRoles.HAMIRCHI) && 
-          
-          <div className={styles.box}>
-            <UserMenu menuData={MenuData}/>
-          </div>
+          (
+            user?.role != UserRoles.TANDIR && 
+            user?.role != UserRoles.HAMIRCHI 
+          ) && 
+            <div className={styles.box}>
+              <UserMenu menuData={MenuData}/>
+            </div>
         }
+        
         {
           mainData.mainPage &&
           ( user?.role == UserRoles.HAMIRCHI ||

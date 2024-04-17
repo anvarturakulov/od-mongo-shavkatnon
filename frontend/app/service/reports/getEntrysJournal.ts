@@ -35,7 +35,6 @@ export const getEntrysJournal = (
         let newE = [...newEntrys.filter((item:any) => {
           return (item.debet == Schet.S67 || item.kredit == Schet.S67)
         })]
-        // console.log(newE)
 
         let newReportOptions: ReportOptions = {
             ...reportOption,

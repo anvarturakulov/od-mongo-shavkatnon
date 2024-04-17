@@ -11,7 +11,7 @@ import { dateNumberToString } from '@/app/service/common/converterForDates';
 
 export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
-    const {dateStart, dateEnd} = mainData.interval
+    const {dateStart, dateEnd} = mainData.interval;
 
     const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
         setMainData && setMainData('updateDataForDocumentJournal', true)
