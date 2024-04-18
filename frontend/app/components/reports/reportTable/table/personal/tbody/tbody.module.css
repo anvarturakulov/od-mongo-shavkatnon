@@ -38,3 +38,19 @@
 .price{
     text-align: center !important;
 }
+
+.plus{
+    cursor: pointer;
+    width: 30px;
+}
+
+.opened{
+    background-color: bisque;
+}
+
+
+.innerItems{
+    font-size: 12px;
+    padding: 2px 0px;
+    color: red;
+}

@@ -47,7 +47,23 @@ export const queryEntrys = (
             item.date <= endDate
           )
         })
+
+    case TypeQuery.AllEntrys:
+      return newEntrys.filter((item: EntryItem) => {
+        return (
+          (item.kredit == schet || item.debet == schet) &&
+          (
+            (flag || item.kreditFirstSubcontoId == firstReferenceId) ||
+            (flag || item.debetFirstSubcontoId == firstReferenceId)
+          ) &&
+          item.date >= startDate &&
+          item.date <= endDate
+        )
+      })
+    
     }
+
+    
   
   return []
 }

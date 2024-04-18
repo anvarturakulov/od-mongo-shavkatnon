@@ -27,6 +27,15 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       summa: total,
     }
 
+    const ZpCalculateObj = {
+      debetFirstSubcontoId: receiverId.toString(),
+      debetSecondSubcontoId: analiticId.toString(),
+      kreditFirstSubcontoId: analiticId.toString(),
+      kreditSecondSubcontoId: senderId.toString(),
+      count: count,
+      summa: total,
+    }
+
     const saleTMZObj = {
       debetFirstSubcontoId: receiverId?.toString(),
       debetSecondSubcontoId: analiticId.toString(),
@@ -55,8 +64,8 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
     }
 
     let leaveCashZp6750 = {
-      debetFirstSubcontoId: senderId.toString(),
-      debetSecondSubcontoId: analiticId.toString(),
+      debetFirstSubcontoId: analiticId.toString() ,
+      debetSecondSubcontoId: senderId.toString(),
       kreditFirstSubcontoId: senderId.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
       count: 0,
@@ -234,7 +243,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
         return {
           debet: Schet.S20,
           kredit: Schet.S67,
-          ...leaveComeTMZObj
+          ...ZpCalculateObj
         };
     }
   }

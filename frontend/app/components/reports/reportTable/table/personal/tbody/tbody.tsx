@@ -4,51 +4,103 @@ import cn from 'classnames';
 import { numberValue } from '@/app/service/common/converters'
 import { query } from '@/app/service/reports/querys/query'
 import { useAppContext } from '@/app/context/app.context';
-import { TypeQuery } from '@/app/interfaces/report.interface';
+import { EntryItem, Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { TbodyProps } from './tbody.props';
 import { queryEntrys } from '@/app/service/reports/querys/queryEntrys';
 import { showMessage } from '@/app/service/common/showMessage';
+import { useState } from 'react';
+import { secondsToDateString } from '@/app/components/documents/doc/helpers/doc.functions';
+
+const getSection = (data: any, item: EntryItem ): string => {
+  let id: string;
+  if (item.debet == Schet.S67) id = item.kreditFirstSubcontoId
+  else id = item.debetFirstSubcontoId
+
+  return getPropertySubconto(data, id).name
+}
+
+const getDebetSum = (item: EntryItem ): string => {
+  if (item.debet == Schet.S67) return numberValue(item.summa)
+  return ''
+}
+
+const getKreditSum = (item: EntryItem ): string => {
+  if (item.kredit == Schet.S67) return numberValue(item.summa)
+  return ''
+}
+
+
+
 
 export function TBody ({ bodyByFirstSunconto, fixedFirstSuncont, data, schet, className, ...props}:TbodyProps):JSX.Element {
   
   const { mainData, setMainData } = useAppContext();
+  const [showInners, setShowInners] = useState<boolean>(false)
 
-  const PDSUMTotal = query(schet, TypeQuery.PDSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  const PKSUMTotal = query(schet, TypeQuery.PKSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  const TDSUMTotal = query(schet, TypeQuery.TDSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  const TKSUMTotal = query(schet, TypeQuery.TKSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  const TDSUMEntrysGlobal = queryEntrys(schet, TypeQuery.TDSUMEntrys, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  const TKSUMEntrysGlobal = queryEntrys(schet, TypeQuery.TKSUMEntrys, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  const PDSUM = query(schet, TypeQuery.PDSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  const PKSUM = query(schet, TypeQuery.PKSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  const TDSUM = query(schet, TypeQuery.TDSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  const TKSUM = query(schet, TypeQuery.TKSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  const innerEntrys = queryEntrys(schet, TypeQuery.AllEntrys, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
+  console.log(innerEntrys)
+  const plus = showInners ? '-':'+';
+
+  if (!PDSUM &&  !PKSUM && !TDSUM && !TKSUM) return <></>
 
 
-  if (!PDSUMTotal &&  !PKSUMTotal && !TDSUMTotal && !TKSUMTotal) return <></>
         
   return (
     <>
       {
-        <tr className={styles.trRowMain} >
+        <tr className={cn(styles.trRowMain, {
+          [styles.opened]: showInners
+        })} >
           <tr>
-            <td className={styles.tdNumber}>{} </td>
+            <td 
+              className={styles.plus} 
+              onClick={() => setShowInners(showInners => !showInners)
+              }>
+                {plus}
+            </td>
             <td className={styles.comment}>{getPropertySubconto(data, fixedFirstSuncont).name}</td>
             <td className={styles.comment}>-</td>
             <td className={styles.comment}>-</td>
             <td className={styles.comment}>-</td>  
             <td className={styles.numberValue}>
-                {numberValue(0)}
+                {numberValue(PDSUM-PKSUM)}
             </td>
             <td className={styles.numberValue}>
-                {numberValue(0)}
+                {numberValue(TDSUM)}
             </td>
             <td className={styles.numberValue}>
-                {numberValue(0)}
+                {numberValue(TKSUM)}
             </td>
             <td className={styles.numberValue}>
-                {numberValue(0)}
+                {numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}
             </td>
           </tr>
         </tr>
       }
-
+      {
+        showInners && innerEntrys && innerEntrys.length >0 &&
+        innerEntrys
+        .map((item: EntryItem, index: number) => {
+          return (
+            <tr className={styles.innerItems}>
+              <td className={styles.plus}>{index+1}</td>
+              <td className={styles.comment}>-</td>
+              <td className={styles.comment}>{secondsToDateString(item.date)}</td>
+              <td className={styles.comment}>{getSection(data, item)}</td>
+              <td className={styles.comment}>{item.comment}</td>  
+              <td className={styles.numberValue}>-</td>
+              <td className={styles.numberValue}>{getDebetSum(item)}</td>
+              <td className={styles.numberValue}>{getKreditSum(item)}</td>
+              <td className={styles.numberValue}>-</td>
+            </tr>  
+          )
+          
+        })
+      }
       
     </>
   )

@@ -59,6 +59,7 @@ export enum TypeQuery {
     BALANCE = 'BALANCE',
     TDSUMEntrys = 'TDSUMEntrys',
     TKSUMEntrys = 'TKSUMEntrys',
+    AllEntrys = 'AllEntrys',
     ODS = 'ODS',
     OKS = 'OKS',
     ODK = 'ODK',
