@@ -86,7 +86,7 @@ export function TBody ({ bodyByFirstSunconto, fixedFirstSuncont, data, schet, cl
         innerEntrys
         .map((item: EntryItem, index: number) => {
           return (
-            <tr className={styles.innerItems}>
+            <tr className={styles.innerItems} key={index}>
               <td className={styles.plus}>{index+1}</td>
               <td className={styles.comment}>-</td>
               <td className={styles.comment}>{secondsToDateString(item.date)}</td>
