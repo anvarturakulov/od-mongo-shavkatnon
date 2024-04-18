@@ -3,6 +3,7 @@ import { DocumentType } from './document.interface';
 export enum ReportType {
     MatOborot = 'MatOborot',
     Oborotka = 'Oborotka',
+    Personal = 'Personal',
     AktSverka = 'AktSverka',
 }
 

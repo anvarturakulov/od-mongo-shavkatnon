@@ -51,7 +51,7 @@ export const Taking = ({className, data, currentSection, ...props }: TakingProps
                 {
                     data && data.length > 0 &&
                     data.filter((item: any) => {
-                        return (item.filial || item.delivery)
+                        return (item.filial)
                     })
                     .map((item: ReferenceModel, key: number) => {
                         return <TakingItem key={key} currentId= {item._id} data={data} hamirs = {hamirs} title={item.name}/>

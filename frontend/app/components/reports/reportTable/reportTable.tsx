@@ -14,6 +14,7 @@ import { dateToStr } from '@/app/service/reports/dateToStr';
 import Oborotka from './table/oborotka/oborotka';
 import { getSchetListFoSecondSunconts } from '@/app/service/reports/getSchetListFoSecondSunconts';
 import { getListFirstSubconts } from '@/app/service/reports/getListFirstSubconts';
+import Personal from './table/personal/personal';
 
 export default function ReportTable({ className, ...props} : ReportTableProps):JSX.Element {
     
@@ -70,6 +71,13 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
                     <Oborotka 
                         listFirstSubconts={listFirstSubconts}
                         listSecondSubconts={listSecondSubconts}
+                        data={data}
+                    />
+                }
+
+                {contentName == ReportType.Personal && 
+                    <Personal 
+                        listFirstSubconts={listFirstSubconts}
                         data={data}
                     />
                 }

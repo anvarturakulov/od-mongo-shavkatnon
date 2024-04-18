@@ -9,8 +9,8 @@ interface Result {
 
 export const getOptionsByReportType = (reportType:string, oborotType: OborotType):Result => {
     switch (reportType) {
-        case ReportType.AktSverka:
-            return {label:'Корхона', typeReference: TypeReference.PARTNERS}
+        case ReportType.Personal:
+            return {label:'Ходим', typeReference: TypeReference.WORKERS}
         case ReportType.MatOborot:
             return { label: 'Булим ёки цех', typeReference: TypeReference.STORAGES }
         case ReportType.Oborotka:

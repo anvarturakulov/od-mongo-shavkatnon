@@ -12,14 +12,14 @@ export const TakingItem = ({className, currentId, data, hamirs , title,  ...prop
     
     const {mainData, setMainData} = useAppContext()
 
-    const OBSUMD5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentId, undefined, mainData, true);
+    // const OBSUMD5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, currentId, undefined, mainData, true);
     const OBSUMK5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, currentId, undefined, mainData, true);
 
     return (
         <tbody>
             <tr>
                 <td className={styles.title}>{title}</td>
-                <td className={styles.value}>{numberValue(OBSUMK5050-OBSUMD5050)}</td>
+                <td className={styles.value}>{numberValue(OBSUMK5050)}</td>
             </tr>
         </tbody>
     )

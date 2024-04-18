@@ -160,7 +160,7 @@ export const MenuData:Array<MenuItem> = [
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
-                title: ReportType.AktSverka, description:'Хамкор билан солиштирма',
+                title: ReportType.Personal, description:'Ходимлар иш хакиси буйича хисобот',
                 type: 'report', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
