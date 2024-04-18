@@ -19,8 +19,8 @@ export const queryKor = (
   let flagFirstSubconoto = true
   let flagSecondSubconto = true
 
-  if (firstSubconto) flagFirstSubconoto = false
-  if (secondSubconto) flagSecondSubconto = false
+  if (Boolean(firstSubconto) == true) flagFirstSubconoto = false
+  if (Boolean(secondSubconto) == true) flagSecondSubconto = false
 
   let newEntrys = [...entrys]
 

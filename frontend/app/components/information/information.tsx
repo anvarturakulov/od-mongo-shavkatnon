@@ -10,6 +10,7 @@ import { Sklad } from './sklad/sklad';
 import { Production } from './production/production';
 import { Zp } from './zp/zp';
 import { UserRoles } from '@/app/interfaces/general.interface';
+import { Taking } from './taking/taking';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     
@@ -26,6 +27,7 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
                 user?.role != UserRoles.ZAMGLBUX &&
                 <>
                     <Cash data={data}/>
+                    <Taking data={data} />
                     <Section data={data} sectionType='buxgalter'/>
                     <Section data={data} sectionType='filial'/>
                     <Section data={data} sectionType='delivery'/>
