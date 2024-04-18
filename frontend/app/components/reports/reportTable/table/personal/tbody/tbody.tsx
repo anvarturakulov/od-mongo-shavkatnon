@@ -67,16 +67,16 @@ export function TBody ({ bodyByFirstSunconto, fixedFirstSuncont, data, schet, cl
             <td className={styles.comment}>-</td>
             <td className={styles.comment}>-</td>  
             <td className={styles.numberValue}>
-                {numberValue(PDSUM-PKSUM)}
-            </td>
-            <td className={styles.numberValue}>
-                {numberValue(TDSUM)}
+                {numberValue(PKSUM-PDSUM)}
             </td>
             <td className={styles.numberValue}>
                 {numberValue(TKSUM)}
             </td>
             <td className={styles.numberValue}>
-                {numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}
+                {numberValue(TDSUM)}
+            </td>
+            <td className={styles.numberValue}>
+                {numberValue(PKSUM-PDSUM+TKSUM-TDSUM)}
             </td>
           </tr>
         </tr>
@@ -93,8 +93,8 @@ export function TBody ({ bodyByFirstSunconto, fixedFirstSuncont, data, schet, cl
               <td className={styles.comment}>{getSection(data, item)}</td>
               <td className={styles.comment}>{item.comment}</td>  
               <td className={styles.numberValue}>-</td>
-              <td className={styles.numberValue}>{getDebetSum(item)}</td>
               <td className={styles.numberValue}>{getKreditSum(item)}</td>
+              <td className={styles.numberValue}>{getDebetSum(item)}</td>
               <td className={styles.numberValue}>-</td>
             </tr>  
           )

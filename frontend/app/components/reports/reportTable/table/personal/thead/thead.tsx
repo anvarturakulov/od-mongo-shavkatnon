@@ -12,8 +12,8 @@ export function Thead ({ className, ...props}:TheadProps ):JSX.Element {
           <th className={styles.name}>цех</th>
           <th className={styles.name}>изох</th>
           <th className={styles.name}>Колдик сумма</th>
-          <th className={styles.name}>Дебет</th>
-          <th className={styles.name}>Кредит</th>
+          <th className={styles.name}>Хисобланди</th>
+          <th className={styles.name}>Туланди</th>
           <th className={styles.name}>Колдик сумма</th>
         </tr>
       </thead>

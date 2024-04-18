@@ -153,7 +153,9 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   if (body.documentType == DocumentType.ZpCalculate 
     || ( body.documentType == DocumentType.LeaveCash && body.isWorker)) {
     try {
-      bot.sendMessage(references.analitic.telegramId, prepareCheckForZP(body, references, newDocument, messageInDeleting));
+      if (references.analitic.telegramId) {
+        bot.sendMessage(references.analitic.telegramId, prepareCheckForZP(body, references, newDocument, messageInDeleting));
+      }
     } catch {
 
     }
