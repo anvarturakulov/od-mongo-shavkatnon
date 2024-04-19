@@ -19,6 +19,22 @@ import { dashboardUsersList } from '@/app/interfaces/general.interface';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 
 
+interface FilterForJournal {
+    summa: string,
+    receiver: string,
+    sender: string,
+    comment: string,
+    user: string
+}
+    
+const defaultFilter: FilterForJournal = {
+    summa: 'Сумма',
+    receiver: 'Олувчи',
+    sender: 'Берувчи',
+    comment: 'Изох',
+    user: 'Фойдаланувчи'
+}
+
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
@@ -33,7 +49,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
         dateEndForUrl = Date.parse(nowInstr) + 86399999
     }
     
-    const [currentUser, setCurrentUser] = useState<string>('-');
+    const [filter, setFilter] = useState<FilterForJournal>(defaultFilter);
 
     const { contentName, user, showDocumentWindow } = mainData;
     const role = mainData.user?.role;
@@ -58,11 +74,43 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
         setMainData && setMainData('updateDataForDocumentJournal', false);
     }, [mainData.showDocumentWindow, mainData.updateDataForDocumentJournal])
 
-    const changeCurrentUser = () => {
-        let userName = prompt('Фойдаланувчи номи ,');
-        if (userName) {
-            setCurrentUser(userName);
+    const changeFilter = (target: string) => {
+        let title: string = '';
+        let defaulValue: string = '';
+        if (target == 'summa') {
+            title = 'Хужжат суммаси ?';
+            defaulValue = 'Сумма';
         }
+        if (target == 'receiver') {
+            title = 'Олувчи ?';
+            defaulValue = 'Олувчи';
+        }
+        if (target == 'sender') {
+            title = 'Берувчи ?';
+            defaulValue = 'Берувчи';
+        }
+        if (target == 'comment') {
+            title = 'Изох ?'; 
+            defaulValue = 'Изох';
+        }
+        if (target == 'user') {
+            title = 'Фойдаланувчи ?';
+            defaulValue = 'Фойдаланувчи';
+        }
+        
+        let currentValue;
+        if (target == 'summa') currentValue = Number(prompt(title))
+        else currentValue = prompt(title)
+        
+        if (currentValue == '') currentValue = defaulValue
+
+        setFilter(filter => {
+            let newObj = {...filter}
+            return {
+                ...newObj,
+                [target] : currentValue
+            }
+        })
     }   
 
     return (
@@ -80,11 +128,40 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                 <th key='1' className={styles.rowId}>Раками </th>
                                 <th key='2' className={styles.rowDate}>Сана</th>
                                 <th key='4'>Хужжат тури</th>
-                                <th key='5' className={styles.rowSumma}>Сумма</th>
-                                <th key='6'>Олувчи</th>
-                                <th key='7'>Берувчи</th>
-                                <th key='8'>Изох</th>
-                                <th key='9' onDoubleClick={changeCurrentUser}>{currentUser}</th>
+                                <th key='5' 
+                                    onDoubleClick={() => changeFilter('summa')} 
+                                    className={cn(styles.rowSumma, {
+                                        [styles.red]: filter.summa != 'Сумма'
+                                    })}
+                                    >{filter.summa}
+                                </th>
+                                <th key='6' 
+                                    onDoubleClick={() => changeFilter('receiver')}
+                                    className={cn(styles.longRow, {
+                                        [styles.red]: filter.receiver != 'Олувчи'
+                                    })}    
+                                    >{filter.receiver}
+                                </th>
+                                <th key='7' 
+                                    onDoubleClick={() => changeFilter('sender')}
+                                    className={cn(styles.longRow, {
+                                        [styles.red]: filter.sender != 'Берувчи'
+                                    })}
+                                    >{filter.sender}
+                                </th>
+                                <th key='8' 
+                                    onDoubleClick={() => changeFilter('comment')}
+                                    className={cn(styles.longRow, {
+                                        [styles.red]: filter.comment != 'Изох'
+                                    })}
+                                >{filter.comment}</th>
+                                <th key='9' 
+                                    onDoubleClick={() => changeFilter('user')}
+                                    className={cn(styles.longRow, {
+                                        [styles.red]: filter.user != 'Фойдаланувчи'
+                                    })}
+                                    >{filter.user}
+                                </th>
                                 <th key='10' className={styles.rowAction}>Амал</th>
                                 <th key='11' className={styles.rowAction}>Амал</th>
                             </tr>
@@ -94,11 +171,36 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             documents
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                             .filter((item:DocumentModel) => {
-                                if (currentUser != '-') {
-                                    return item.user.toLowerCase().includes(currentUser)
-                                } 
-                                return true
-                                
+                                const {user} = filter
+                                if (user != 'Фойдаланувчи') {
+                                    if (item.user.toLowerCase().includes(user)) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                const {comment} = filter
+                                if (comment != 'Изох') {
+                                    if (item.comment && (item.comment+getNameReference(references,item.analiticId)).toLowerCase().includes(comment)) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                const {sender} = filter
+                                const itemSender = getNameReference(references,item.senderId)
+                                if (sender != 'Берувчи') {
+                                    if (itemSender && itemSender.toLowerCase().includes(sender)) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                const {receiver} = filter
+                                const itemReceiver = getNameReference(references,item.receiverId)
+                                if (receiver != 'Олувчи') {
+                                    if (itemReceiver && itemReceiver.toLowerCase().includes(receiver)) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                const {summa} = filter
+                                if (summa != 'Сумма') {
+                                    if (item.total == +summa) return true
+                                } else return true
                             })
                             .map((item:DocumentModel, key: number) => (
                                 <>

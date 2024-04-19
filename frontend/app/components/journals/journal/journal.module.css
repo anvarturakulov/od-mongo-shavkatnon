@@ -169,3 +169,10 @@
 .newElement{
     margin-bottom: 20px;
 }
+
+.red {
+    color: red;
+    background-color: yellow;
+    text-transform: uppercase;
+    text-align: center!important;
+}

@@ -2,9 +2,6 @@ import { MessageProps } from "./message.props";
 import styles from './message.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
-import SmileIcon from './icons/smile.svg';
-import ErrorIcon from './icons/oops.svg';
-import { useEffect } from 'react';
 import { EntryItem } from '@/app/interfaces/report.interface';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 
@@ -13,12 +10,6 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
 
     const {messageType, message, showMessageWindow} = mainData
     const label = messageType == 'error' ? 'Хатолик' : 'Рахмат';
-
-    useEffect(() => {
-        if (mainData.showMessageWindow) {
-            setTimeout(()=>setMainData && setMainData('showMessageWindow', false), 4000)
-        }
-    }, [mainData.showMessageWindow])
 
     return (
         <>

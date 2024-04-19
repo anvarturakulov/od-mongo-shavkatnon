@@ -13,7 +13,6 @@ export const getListSecondSubconts = (entrys: Array<EntryItem>, arraySchet: Arra
     }
   })
 
-
   const mappedTwinsArray = filteredArray.map((item: EntryItem) => [item.debetSecondSubcontoId, item.kreditSecondSubcontoId])
   const arraySecondSubconts: Array<string> = []
   mappedTwinsArray.forEach((item)=> {
