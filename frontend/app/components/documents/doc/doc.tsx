@@ -21,6 +21,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     const [disabled, setDisabled] = useState<boolean>(false)
 
     useEffect(() => {
+        // console.log('contentName---'+contentName)
         if (!currentDocument.user) {
             saveUser(setMainData, mainData)
         }
@@ -28,23 +29,17 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
 
-//         let Data = new Date();
-//         let Hour = Data.getHours();
-//         let Minutes = Data.getMinutes();
-//         let Seconds = Data.getSeconds();
 
-// // Вывод
-//         console.log("Текущее время: " + Hour + ":" + Minutes + ":" + Seconds);
     },[])
 
     const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
         const {currentDocument} = mainData;
         setDisabled(true)
         let body: DocumentModel = {
-            ...currentDocument
+            ...currentDocument,
         }
         
-        console.log('count'+currentDocument.count)
+        console.log('body'+body)
         if (!validateBody(body)) {
             showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
             setDisabled(false)

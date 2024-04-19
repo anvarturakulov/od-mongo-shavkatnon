@@ -2,7 +2,7 @@ import { DocumentModel, DocumentType } from "../../interfaces/document.interface
 
 export const validateBody = (body: DocumentModel): Boolean => {
   let { date, docNumber, documentType } = body
-  console.log(body)
+  // console.log(body)
 
   let { analiticId, senderId, receiverId, total, count, firstWorkerId, secondWorkerId, thirdWorkerId } = body
   // console.log(senderId)
@@ -23,7 +23,7 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsWithAnalitic.includes(documentType)) {
-    console.log(senderId)
+    // console.log(senderId)
     if (!analiticId || !senderId || !receiverId || !count) {
       return false
     }

@@ -6,9 +6,8 @@ import CloseIco from './close.svg'
 import { useAppContext } from '@/app/context/app.context';
 import cn from 'classnames';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull'
-import { dateToStr } from '@/app/service/reports/dateToStr'
 import { dateNumberToString } from '@/app/service/common/converterForDates'
+import { setNewDocumentParams } from '@/app/service/documents/setNewDocumentParams'
 
 export default function Header({ windowFor ,className, ...props }: HeaderProps): JSX.Element {
     
@@ -28,6 +27,18 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
 
     let dateStartInStr = dateNumberToString(dateStart)
     let dateEndInStr = dateNumberToString(dateEnd)
+
+    const addNewElement = (setMainData: Function | undefined, mainData: Maindata) => {
+        if (setMainData) {
+            setMainData('clearControlElements', false);
+            // setMainData('clearControlElements', true);
+            setNewDocumentParams(setMainData, mainData)
+            setMainData(windowFor == 'reference' ? 'showReferenceWindow': 'showDocumentWindow' , true);
+            setMainData(windowFor == 'reference' ? 'isNewReference' : 'isNewDocument', true);
+            // if (!mainData.clearControlElements) {
+            // }
+        }
+    }
 
     return (
         <>
@@ -67,15 +78,7 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
                         />
                         <AddIco 
                             className={styles.ico}
-                            onClick={(mainData: Maindata) => {
-                                if (setMainData) {
-                                    setMainData('clearControlElements', false);
-                                    if (!mainData.clearControlElements) {
-                                        setMainData(windowFor == 'reference' ? 'showReferenceWindow': 'showDocumentWindow' , true);
-                                        setMainData(windowFor == 'reference' ? 'isNewReference' : 'isNewDocument', true);
-                                    }
-                                    }
-                                }} 
+                            onClick={() => addNewElement(setMainData, mainData)} 
                             />
                         </>
                     }
