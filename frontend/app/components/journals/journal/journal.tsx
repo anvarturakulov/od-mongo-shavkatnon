@@ -98,9 +98,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
             defaulValue = 'Фойдаланувчи';
         }
         
-        let currentValue;
-        if (target == 'summa') currentValue = Number(prompt(title))
-        else currentValue = prompt(title)
+        let currentValue = prompt(title);
         
         if (currentValue == '') currentValue = defaulValue
 
