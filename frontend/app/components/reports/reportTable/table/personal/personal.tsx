@@ -5,35 +5,40 @@ import { PersonalProps } from './personal.props';
 import { useAppContext } from '@/app/context/app.context';
 import { Schet } from '@/app/interfaces/report.interface';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
+import { sortByName } from '@/app/service/references/sortByName';
 
-function sortByName (a: string, b: string, data: any): Number {
-  let nameA = getPropertySubconto(data, a).name.toLocaleLowerCase()
-  let nameB = getPropertySubconto(data, b).name.toLocaleLowerCase()
-
-  if (nameA < nameB) return -1
-  if (nameA > nameB) return 1
-  return 0
-}
-
-export default function Personal({ className, listFirstSubconts, data, ...props} : PersonalProps):JSX.Element {
+export default function Personal({ className, data, ...props} : PersonalProps):JSX.Element {
     const { setMainData, mainData } = useAppContext()
     const { oborotType } = mainData.reportOption;
+    const { reportOption } = mainData;
+    const currentWorkerId = reportOption.firstReferenceId;
+    
     return (
         <>
           <table className={styles.table}>
               <Thead/>
               <tbody className={styles.tbody}>
                   {
-                  listFirstSubconts && 
-                  listFirstSubconts
-                //   .sort(sortByName)
-                  .map((item:string)=>{
+                  data && 
+                  data
+                  .filter((item: ReferenceModel) => {
+                    return item.typeReference = TypeReference.WORKERS
+                  })
+                  .filter((item: ReferenceModel) => {
+                    if (currentWorkerId) {
+                      if (item._id == currentWorkerId) return true
+                      else return false
+                    } return true
+                  })
+                  .sort(sortByName)
+                  .map((item:ReferenceModel)=>{
                       return (
                           <>
                             <TBody 
                                 data={data} 
                                 schet={Schet.S67}
-                                fixedFirstSuncont = {item}
+                                fixedFirstSuncont = {item._id}
                                 bodyByFirstSunconto = {true}
                             />
                           </>

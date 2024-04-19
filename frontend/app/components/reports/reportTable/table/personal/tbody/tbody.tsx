@@ -42,7 +42,6 @@ export function TBody ({ bodyByFirstSunconto, fixedFirstSuncont, data, schet, cl
   const TDSUM = query(schet, TypeQuery.TDSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
   const TKSUM = query(schet, TypeQuery.TKSUM, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
   const innerEntrys = queryEntrys(schet, TypeQuery.AllEntrys, null, mainData, bodyByFirstSunconto, fixedFirstSuncont);
-  console.log(innerEntrys)
   const plus = showInners ? '-':'+';
 
   if (!PDSUM &&  !PKSUM && !TDSUM && !TKSUM) return <></>

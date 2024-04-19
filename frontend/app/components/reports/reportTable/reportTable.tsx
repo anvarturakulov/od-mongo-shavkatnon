@@ -77,7 +77,6 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
 
                 {contentName == ReportType.Personal && 
                     <Personal 
-                        listFirstSubconts={listFirstSubconts}
                         data={data}
                     />
                 }
