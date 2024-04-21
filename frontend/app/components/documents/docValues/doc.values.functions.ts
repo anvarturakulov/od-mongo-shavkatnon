@@ -1,5 +1,5 @@
 import { Maindata } from '@/app/context/app.context.interfaces'
-import { DocumentModel, DocumentType, OptionsForDocument } from '@/app/interfaces/document.interface'
+import { DocTableItem, DocumentModel, DocumentType, OptionsForDocument } from '@/app/interfaces/document.interface'
 import { User, UserRoles } from '@/app/interfaces/general.interface'
 import { TypeReference } from '@/app/interfaces/reference.interface'
 
@@ -142,4 +142,14 @@ export const visibilityCommentValueInDocument = (contentName: string, user: User
   }
 
   return false
+}
+
+export const addItems = (setMainData: Function | undefined, mainData: Maindata, newItem: DocTableItem) => {
+
+  let newObj = { ...mainData.currentDocument };
+  newObj.tableItems?.push(newItem)
+
+  if (setMainData) {
+    setMainData('currentDocument', { ...newObj })
+  }
 }

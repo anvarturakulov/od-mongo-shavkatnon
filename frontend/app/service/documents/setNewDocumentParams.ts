@@ -1,9 +1,9 @@
 import { defaultDocumentFormItems } from '@/app/context/app.context.constants';
 import { getRandomID } from './getRandomID';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '@/app/components/documents/docValues/docValuesOptions';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '@/app/components/documents/docValues/doc.values.functions';
 
 export const setNewDocumentParams = ( setMainData: Function | undefined, mainData: Maindata ) => {
   const { user, contentName } = mainData;

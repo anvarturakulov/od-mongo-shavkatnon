@@ -6,7 +6,8 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     let senderType = TypeReference.STORAGES, senderLabel = '', senderIsVisible = false
     let receiverType = TypeReference.STORAGES, receiverLabel = '', recieverIsVisible = false  
     let analiticType = TypeReference.STORAGES , analiticLabel = '', analiticIsVisible = false
-    let cashFromPartnerLabel = '' , cashFromPartnerVisible = false
+    let cashFromPartnerLabel = '' , cashFromPartnerVisible = false;
+    let tableIsVisible = false;
 
     const documentsForComeMaterial = [
         `${DocumentType.ComeMaterial}`,
@@ -65,13 +66,12 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
     }
 
-    const documentsForLeaveTMZ = [
+    const documentsForLeaveProdAndHalfStuff = [
         `${DocumentType.LeaveProd}`,
-        `${DocumentType.LeaveMaterial}`,
         `${DocumentType.LeaveHalfstuff}`,
     ]
 
-    if (documentsForLeaveTMZ.includes(documentType)) {
+    if (documentsForLeaveProdAndHalfStuff.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Берувчи булим'
         senderIsVisible = true
@@ -84,6 +84,27 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticLabel = 'Товар моддий бойлик'
         analiticIsVisible = true
     }
+
+    const documentsForLeaveMaterial = [
+        `${DocumentType.LeaveMaterial}`,
+    ]
+
+    if (documentsForLeaveMaterial.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Берувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Чиким учун харажат тури'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'ЯТМ номи'
+        analiticIsVisible = true;
+
+        tableIsVisible = true;
+    }
+
 
     const documentsForMoveTMZ = [
         `${DocumentType.MoveProd}`,
@@ -177,6 +198,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticLabel,
         analiticIsVisible,
         cashFromPartnerLabel,
-        cashFromPartnerVisible
+        cashFromPartnerVisible,
+        tableIsVisible
     }
 }

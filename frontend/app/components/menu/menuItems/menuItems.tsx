@@ -9,7 +9,7 @@ import { useAppContext } from '@/app/context/app.context';
 import { defaultDocumentFormItems, defaultReportOptions } from '@/app/context/app.context.constants';
 import { getKeyEnum } from '@/app/service/common/getKeyEnum';
 import { ReportOptions } from '@/app/interfaces/report.interface';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../../documents/docValues/docValuesOptions';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../../documents/docValues/doc.values.functions';
 import { getRandomID } from '@/app/service/documents/getRandomID';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { setNewDocumentParams } from '@/app/service/documents/setNewDocumentParams';

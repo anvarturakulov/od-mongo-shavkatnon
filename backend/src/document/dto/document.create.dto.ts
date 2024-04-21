@@ -1,5 +1,23 @@
+import { Type } from 'class-transformer';
 import { IsString, IsEnum, IsOptional, IsBoolean, IsNumber, IsDateString, IsArray, ValidateNested } from 'class-validator';
 import { DocumentType } from '../../interfaces/document.interface';
+
+class DocTableItemDto {
+  @IsString()
+  referenceId: string;
+  
+  @IsNumber()
+  count: number;
+  
+  @IsNumber()
+  price: number;
+  
+  @IsNumber()
+  total: number;
+
+  @IsString()
+  comment: string;
+}
 
 export class CreateDocumentDto {
   @IsNumber()
@@ -66,4 +84,9 @@ export class CreateDocumentDto {
   @IsString()
   @IsOptional()
   thirdWorkerId?: string
+
+  @IsOptional()
+  @IsArray()
+  @Type(() => DocTableItemDto)
+  tableItems?: DocTableItemDto[];
 }

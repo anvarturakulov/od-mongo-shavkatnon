@@ -3,6 +3,15 @@ import { DefinedTandirWorkers } from '../interfaces/general.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
+export const defaultDocumentTableItem = {
+    referenceId: '',
+    count: 0,
+    price: 0,
+    total: 0,
+    comment: '',
+    balance: 0
+}
+
 export const defaultDocumentFormItems:DocumentModel = {
     _id: '',
     date: 0,
@@ -25,7 +34,8 @@ export const defaultDocumentFormItems:DocumentModel = {
     proveden: true,
     firstWorkerId: '',
     secondWorkerId: '',
-    thirdWorkerId: ''
+    thirdWorkerId: '',
+    tableItems: [defaultDocumentTableItem] // мы его не используем
 }
 
 export const defaultTandirWorkers: DefinedTandirWorkers = {
@@ -75,5 +85,5 @@ export const defaultMainData: Maindata = {
     definedTandirWorkers: defaultTandirWorkers,
     updateHamirJournal: false,
     currentStorageIdInHamirsJournal: '',
-    interval: defaultInterval
+    interval: defaultInterval,
   }

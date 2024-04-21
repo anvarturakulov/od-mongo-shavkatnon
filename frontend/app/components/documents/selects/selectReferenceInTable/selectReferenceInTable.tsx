@@ -2,35 +2,20 @@ import { SelectReferenceInTableProps } from './selectReferenceInTable.props';
 import styles from './selectReferenceInTable.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
-import { ReferenceModel, TypePartners, TypeReference } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
-import { DocumentType, DocumentTypeForReference } from '@/app/interfaces/document.interface';
+import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { sortByName } from '@/app/service/references/sortByName';
-import { getTypeReference } from '@/app/service/references/getTypeReference';
 
-export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceInTableProps): JSX.Element => {
+export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const { user, currentDocument, contentName } = mainData;
-
-    let typeReference = TypeReference.TMZ;
-    
-    if (currentDocument && currentDocument.isWorker) {
-        typeReference = TypeReference.WORKERS
-    }
-
-    if (currentDocument && currentDocument.isPartner) {
-        typeReference = TypeReference.PARTNERS
-    }
-
-    if (currentDocument && contentName == DocumentType.LeaveCash) {
-        typeReference = TypeReference.CHARGES
-    }
 
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
@@ -38,62 +23,47 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
     let typeDocumentForReference = getTypeDocumentForReference(contentName);
     
-    const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
         let target = e.currentTarget;
         let {currentDocument, contentName} = mainData;
 
-        if (currentDocument) {
+        if (currentDocument && currentDocument.tableItems) {
             
-            let currentItem = {...currentDocument};
+            let currentItem = {...currentDocument.tableItems[itemIndex]};
             let id = target[target.selectedIndex].getAttribute('data-id');
             let value = target.value;
 
             if (id != null) {
-                currentItem.analiticId = id
-            }
-            else {
-                currentItem.analiticId = ''               
+                currentItem.referenceId = id
+            } else {
+                currentItem.referenceId = ''                
             }
 
-            // if (value != null) {
-            //     currentItem.analiticName = value
-            // }
-
-            if ( typeDocumentForLeaveTMZ(contentName) && id ) {
+            if ( typeDocumentForLeaveTMZ(contentName) && id != null && !selectForReciever) {
                 let schet
-
-                if (typeDocumentForReference == 'MATERIAL') {
-                    schet = Schet.S10
-                }
-
-                if (typeDocumentForReference == 'HALFSTUFF') {
-                    schet = Schet.S21;
-                }
-
-                if (typeDocumentForReference == 'PRODUCT') {
-                    schet = Schet.S28    
-                }
-                
-                if (schet) {
-                    currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
-                }
+                schet = Schet.S10
+                currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
+                currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
             }
 
+            let newItems = [...currentDocument.tableItems]
+            newItems[itemIndex] = {...currentItem}
+            let newObj = {
+                ...currentDocument,
+                tableItems: [...newItems]
+            }
+            
             if ( setMainData ) {
-                setMainData('currentDocument', {...currentItem})
+                setMainData('currentDocument', {...newObj})
             }
         }
     }
 
-    let label = 'Харажатлар'
-
     return (
         <div className={styles.box}>
-            {label !='' && <div className={styles.label}>{label}</div>}
             <select
                 className={styles.select}
-                onChange={(e) => changeElements(e, setMainData, mainData, typeDocumentForReference)}
+                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, typeDocumentForReference)}
                 {...props}
             >
                 <option 
@@ -108,20 +78,7 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
 
                 {data && data.length>0 && 
                 data?.filter((item:ReferenceModel) => {
-                    if (typeReference != TypeReference.PARTNERS) {
-                        switch (typeDocumentForReference) {
-                            case 'MATERIAL':
-                                return item.typeTMZ == 'MATERIAL'
-                            case 'PRODUCT':
-                                return item.typeTMZ == 'PRODUCT'
-                            case 'HALFSTUFF':
-                                return item.typeTMZ == 'HALFSTUFF'
-                            case 'OTHER':
-                                return true
-                        }
-                    } else {
-                        return true
-                    }
+                    return item.typeTMZ == 'MATERIAL'
                 })
                 .sort(sortByName)
                 .filter((item:ReferenceModel) => !item.deleted)
@@ -131,7 +88,7 @@ export const SelectReferenceInTable = ({ className, ...props }: SelectReferenceI
                             value={item.name}
                             data-type={item.typeReference}
                             data-id={item._id}
-                            selected={item._id == currentDocument.analiticId}
+                            selected={item._id == currentItemId}
                             >
                                 {item.name}
                         </option>

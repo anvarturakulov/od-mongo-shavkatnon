@@ -1,27 +1,27 @@
 import { DocumentType, DocumentTypeForReference } from "../../interfaces/document.interface";
 
 export const getTypeDocumentForReference = (contentName: string) : DocumentTypeForReference => {
-  const documentsForMaterial = [
+  const documentsForMaterialWithOutLeave = [
     `${DocumentType.ComeMaterial}`,
-    `${DocumentType.SaleMaterial}`,
-    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.MoveMaterial}`,
+    `${DocumentType.SaleMaterial}`,
   ]
-
+  
   const documentsForProd = [
     `${DocumentType.ComeProduct}`,
     `${DocumentType.SaleProd}`,
     `${DocumentType.LeaveProd}`,
     `${DocumentType.MoveProd}`,
   ]
-
+  
   const documentsForHalfstuff = [
+    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.ComeHalfstuff}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.MoveHalfstuff}`,
   ]
 
-  if (documentsForMaterial.includes(contentName)) {
+  if (documentsForMaterialWithOutLeave.includes(contentName)) {
     return 'MATERIAL'
   }
 

@@ -9,8 +9,11 @@ import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentFor
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { SelectReferenceInForm } from '../selects/selectReferenceInForm/selectReferenceInForm';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityCommentValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './docValuesOptions';
+import { addItems, getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityCommentValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './doc.values.functions';
 import { TypeReference } from '@/app/interfaces/reference.interface';
+import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
+import { DocTable } from '../docTable/docTable';
+import AddIco from './ico/add.svg'
 
 export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
     
@@ -26,6 +29,8 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
     let hasFounder = contentName == DocumentType.LeaveCash;
+    
+    let defaultNewItemForTable = {...defaultDocumentTableItem}
     
     let documentIsSaleType = typeDocumentIsSale(contentName);
     let showBalance = typeDocumentForLeaveTMZ(contentName);
@@ -81,11 +86,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     type='analitic'
                 />
 
-                {/* { 
-                    showBalance &&                   
-                    <div>{currentDocument?.values.balance}</div>
-                } */}
-
                 {
                     contentName == DocumentType.ComeProduct &&
                     <>
@@ -114,10 +114,30 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                 }
 
                 <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
-                <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>
-                <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
+                
+                {
+                    !options.tableIsVisible &&
+                    <>
+                        <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>
+                        <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
+                        <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
+
+                    </>
+                }
+
+                {options.tableIsVisible && 
+                    <div className={cn(styles.add, {[styles.notView] : false == false})}>
+                        <AddIco onClick={() => addItems(setMainData, mainData ,defaultNewItemForTable)}/>
+                    </div>
+                }
                 {/* <InputInForm nameControl='cashFromPartner' type='number' label='Харидордан олинган пул' visible={visibilityCashFromPartnerValueInDocument(contentName, mainData.user)}/> */}
-                <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
+            
+                {options.tableIsVisible && 
+                    <DocTable 
+                        typeReference={TypeReference.TMZ}
+                        items={currentDocument.tableItems} 
+                />}
+
             </div>
         </>
     )

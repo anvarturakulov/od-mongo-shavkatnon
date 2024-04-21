@@ -10,7 +10,7 @@ import { ReportOptions } from '@/app/interfaces/report.interface';
 import { MenuItem } from '@/app/interfaces/menu.interface';
 import { ContentType, UserRoles } from '@/app/interfaces/general.interface';
 import { getRandomID } from '@/app/service/documents/getRandomID';
-import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../documents/docValues/docValuesOptions';
+import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../documents/docValues/doc.values.functions';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Section } from '../information/section/section';

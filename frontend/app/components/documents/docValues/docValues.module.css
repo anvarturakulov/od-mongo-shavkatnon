@@ -35,3 +35,11 @@
     display: grid;
     gap: 10px;
 }
+
+.add{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: blue;
+    fill: red;
+}

@@ -60,3 +60,4 @@ export const saveDocumentType = (setMainData: Function | undefined, mainData: Ma
       setMainData('currentDocument', {...newObj})
   }
 }
+

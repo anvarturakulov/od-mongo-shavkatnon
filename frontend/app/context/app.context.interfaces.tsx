@@ -1,4 +1,4 @@
-import { DocumentModel, Interval } from '../interfaces/document.interface';
+import { DocTableItem, DocumentModel, Interval } from '../interfaces/document.interface';
 import { ContentType, MessageType, DefinedTandirWorkers, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 import { EntryItem, ReportOptions } from '../interfaces/report.interface';
@@ -28,7 +28,7 @@ export interface Maindata {
   definedTandirWorkers: DefinedTandirWorkers,
   updateHamirJournal: boolean,
   currentStorageIdInHamirsJournal: string,
-  interval: Interval
+  interval: Interval,
 }
 
 export interface IAppContext {

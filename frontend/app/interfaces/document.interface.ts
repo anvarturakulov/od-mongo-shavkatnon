@@ -25,6 +25,16 @@ export enum DocumentType {
     Error = 'Error'
 }
 
+export interface DocTableItem {
+    referenceId: string,
+    count: number,
+    price: number,
+    total: number,
+    comment: string,
+    balance: number,
+}
+
+
 export interface DocumentModel {
     _id?: string,
     date: number,
@@ -48,6 +58,7 @@ export interface DocumentModel {
     firstWorkerId?: string | null,
     secondWorkerId?: string | null,
     thirdWorkerId?: string | null,
+    tableItems: Array<DocTableItem>,
 };
 
 export interface OptionsForDocument {
@@ -64,7 +75,9 @@ export interface OptionsForDocument {
     analiticIsVisible: boolean
 
     cashFromPartnerLabel: string,
-    cashFromPartnerVisible: boolean
+    cashFromPartnerVisible: boolean,
+
+    tableIsVisible: boolean
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'
