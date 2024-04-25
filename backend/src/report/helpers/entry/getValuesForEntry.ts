@@ -13,7 +13,7 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?: DocTableItem,): ResultgetValuesForEntry => {
+export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: boolean, tableItem?: DocTableItem,): ResultgetValuesForEntry => {
   if (item) {
     let documentType = item.documentType;
     let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
@@ -27,14 +27,26 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?
       summa: total,
     }
 
-    const leaveMaterial = {
+    let leaveMaterial = {
       debetFirstSubcontoId: receiverId.toString(),
-      debetSecondSubcontoId: (item.tableItems && item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+      debetSecondSubcontoId: '',
       kreditFirstSubcontoId: senderId.toString(),
-      kreditSecondSubcontoId: (item.tableItems && item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString(): '',
-      count: (item.tableItems && item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.count : 0,
-      summa: (item.tableItems && item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.total : 0,
+      kreditSecondSubcontoId: '',
+      count: 0,
+      summa: 0,
     }
+
+    if (hasTable) {
+      leaveMaterial = {
+        debetFirstSubcontoId: receiverId.toString(),
+        debetSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+        kreditFirstSubcontoId: senderId.toString(),
+        kreditSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+        count: (item.tableItems?.length && !newEntry) ? tableItem.count : 0,
+        summa: (item.tableItems?.length && !newEntry) ? tableItem.total : 0,
+      }
+    }
+    
 
     const ZpCalculateObj = {
       debetFirstSubcontoId: receiverId.toString(),
@@ -126,9 +138,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?
         };
 
       case DocumentType.ComeHalfstuff:
-        if (tableItem && !newEntry) {
-          // console.log(item.docNumber)
-          // leave mat to prod halfstuff
+        if (hasTable && tableItem && !newEntry) {
           return {
             debet: Schet.S20,
             kredit: Schet.S10,
@@ -173,7 +183,6 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?
         }
 
         if (isFounder) {
-          // console.log(item.senderId)
           return {
             debet: Schet.S66,
             kredit: Schet.S50,

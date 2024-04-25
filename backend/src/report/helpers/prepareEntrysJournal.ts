@@ -16,27 +16,26 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
       if ( hasDocumentTablePart(item.documentType)) {
         // if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
         //   item.tableItems.forEach((tableItem: DocTableItem) => {
-        //     // console.log(item)
-        //     let newItemForResults = { ...prepareEntry(item, false, tableItem) }
+        //     let newItemForResults = { ...prepareEntry(item, false, true, tableItem) }
         //     results.push(newItemForResults);
 
         //   })
         // }
 
       } else {
-        let newItemForResults = { ...prepareEntry(item, true) }
+        let newItemForResults = { ...prepareEntry(item, true, false) }
         results.push(newItemForResults);
 
         if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
-          let newItemForResults = { ...prepareEntry(item, true) }
+          let newItemForResults = { ...prepareEntry(item, false, false) }
           results.push(newItemForResults);
         }
       }
       
-      if (item.documentType == DocumentType.ComeHalfstuff && item?.tableItems) {
-        // let newItemForResults = { ...prepareEntry(item, true) }
+      if (item.documentType == DocumentType.ComeHalfstuff) {
+        // let newItemForResults = { ...prepareEntry(item, true, false) }
         // let total: number = 0;
-        // if (item.tableItems && item.tableItems != undefined || item.tableItems.length >0) {
+        // if (item?.tableItems && item.tableItems.length >0) {
         //   total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
         // }
         // newItemForResults.summa = total
