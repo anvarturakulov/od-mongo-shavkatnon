@@ -34,12 +34,12 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
       }
       
       if (item.documentType == DocumentType.ComeHalfstuff) {
-        console.log(item.docNumber)
         let newItemForResults = { ...prepareEntry(item, true) }
-        let total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
+        let total: number = 0;
+        if (item.tableItems && item.tableItems.length >0) {
+          total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
+        }
         newItemForResults.summa = total
-        console.log('Samarqand')
-        console.log(newItemForResults)
         results.push(newItemForResults);
       }
     }
