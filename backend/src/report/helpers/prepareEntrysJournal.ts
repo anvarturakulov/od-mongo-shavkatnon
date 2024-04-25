@@ -14,7 +14,7 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
     if (!item.deleted) {
         
       if (hasDocumentTablePart(item.documentType)) {
-        if ( item.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
+        if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
           item.tableItems.forEach((tableItem: DocTableItem) => {
             // console.log(item)
             let newItemForResults = { ...prepareEntry(item, false, tableItem) }
@@ -33,7 +33,7 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
         }
       }
       
-      if (item.documentType == DocumentType.ComeHalfstuff && item.tableItems) {
+      if (item.documentType == DocumentType.ComeHalfstuff && item?.tableItems) {
         let newItemForResults = { ...prepareEntry(item, true) }
         let total: number = 0;
         if (item.tableItems && item.tableItems != undefined || item.tableItems.length >0) {
