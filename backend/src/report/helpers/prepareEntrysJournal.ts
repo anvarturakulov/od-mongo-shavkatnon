@@ -13,15 +13,15 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
   documents.forEach((item: Document) => {
     if (!item.deleted) {
         
-      if (hasDocumentTablePart(item.documentType)) {
-        if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
-          item.tableItems.forEach((tableItem: DocTableItem) => {
-            // console.log(item)
-            let newItemForResults = { ...prepareEntry(item, false, tableItem) }
-            results.push(newItemForResults);
+      if ( hasDocumentTablePart(item.documentType)) {
+        // if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
+        //   item.tableItems.forEach((tableItem: DocTableItem) => {
+        //     // console.log(item)
+        //     let newItemForResults = { ...prepareEntry(item, false, tableItem) }
+        //     results.push(newItemForResults);
 
-          })
-        }
+        //   })
+        // }
 
       } else {
         let newItemForResults = { ...prepareEntry(item, true) }
@@ -34,13 +34,13 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
       }
       
       if (item.documentType == DocumentType.ComeHalfstuff && item?.tableItems) {
-        let newItemForResults = { ...prepareEntry(item, true) }
-        let total: number = 0;
-        if (item.tableItems && item.tableItems != undefined || item.tableItems.length >0) {
-          total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
-        }
-        newItemForResults.summa = total
-        results.push(newItemForResults);
+        // let newItemForResults = { ...prepareEntry(item, true) }
+        // let total: number = 0;
+        // if (item.tableItems && item.tableItems != undefined || item.tableItems.length >0) {
+        //   total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
+        // }
+        // newItemForResults.summa = total
+        // results.push(newItemForResults);
       }
     }
   })
