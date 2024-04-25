@@ -2,7 +2,7 @@ import { SelectReferenceProps } from './selectReference.props';
 import styles from './selectReference.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
-import { ReferenceModel } from '@/app/interfaces/reference.interface';
+import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
@@ -54,6 +54,14 @@ export const SelectReference = ({ label, visible, typeReference , className, ...
                 </>
                 {
                     data && data.length>0 && data
+                    .filter((item: ReferenceModel) => {
+                        if (item.typeReference == TypeReference.STORAGES) {
+                            if ( item.buxgalter || item.delivery ||
+                                item.sklad || item.filial) return true
+                            else return false
+                        }
+                        return true
+                    })
                     .sort(sortByName)
                     .map((item:ReferenceModel, key:number) => (
                     <>

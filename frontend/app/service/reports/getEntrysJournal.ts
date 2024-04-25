@@ -32,9 +32,9 @@ export const getEntrysJournal = (
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
         
-        let newE = [...newEntrys.filter((item:any) => {
-          return (item.debet == Schet.S67 || item.kredit == Schet.S67)
-        })]
+        // let newE = [...newEntrys.filter((item:any) => {
+        //   return (item.debet == Schet.S67 || item.kredit == Schet.S67)
+        // })]
 
         let newReportOptions: ReportOptions = {
             ...reportOption,
@@ -45,6 +45,7 @@ export const getEntrysJournal = (
           if (endDate && endDate >= 0) {
             newReportOptions.endDate = endDate;
           }
+        console.log('Анвар ака')
 
         setMainData('reportOption', { ...newReportOptions });
       }

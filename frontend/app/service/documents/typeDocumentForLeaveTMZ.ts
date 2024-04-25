@@ -11,6 +11,7 @@ export const typeDocumentForLeaveTMZ = (documentType: string): Boolean => {
     `${DocumentType.MoveProd}`,
     `${DocumentType.MoveMaterial}`,
     `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.ComeHalfstuff}`,
   ]
 
   if (documentsWithTypelLeaveTMZ.includes(documentType)) {

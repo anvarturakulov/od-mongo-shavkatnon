@@ -6,8 +6,6 @@ import { useAppContext } from '@/app/context/app.context';
 import { SelectReferenceInTable } from '../selects/selectReferenceInTable/selectReferenceInTable';
 import { DocTableItem, DocumentType } from '@/app/interfaces/document.interface';
 import { typeDocumentIsSale } from '@/app/service/documents/typeDocumentIsSale';
-import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
-import { TypeReference } from '@/app/interfaces/reference.interface';
 import { InputInTable } from '../inputs/inputInTable/inputInTable';
 
 export const DocTable = ({ typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
@@ -16,7 +14,6 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
     const {contentName, currentDocument} = mainData;
 
     const deleteItem = (index: number, setMainData: Function | undefined, items: Array<DocTableItem>) => {
-
         if ( setMainData && items.length>1 ) {
             let newItems = [...items.slice(0, index),...items.slice(index+1)]
             let newObj = {...mainData.currentDocument};
@@ -29,8 +26,7 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
     let hasWorkers = (contentName == DocumentType.LeaveCash || contentName == DocumentType.ZpCalculate)
     let hasPartners = contentName == DocumentType.LeaveCash;
     let documentIsSaleType = typeDocumentIsSale(contentName);
-    let showBalance = typeDocumentForLeaveTMZ(contentName);
-    
+    let showBalance = true;
 
     return (
         <>

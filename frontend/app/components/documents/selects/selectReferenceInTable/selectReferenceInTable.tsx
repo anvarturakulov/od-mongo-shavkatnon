@@ -15,7 +15,7 @@ import { sortByName } from '@/app/service/references/sortByName';
 export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
-    const { user, currentDocument, contentName } = mainData;
+    const { user, contentName } = mainData;
 
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;

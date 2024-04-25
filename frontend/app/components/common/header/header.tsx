@@ -9,7 +9,7 @@ import { Maindata } from '@/app/context/app.context.interfaces';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 import { setNewDocumentParams } from '@/app/service/documents/setNewDocumentParams'
 
-export default function Header({ windowFor ,className, ...props }: HeaderProps): JSX.Element {
+export default function Header({ windowFor ,className, count, total, ...props }: HeaderProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext()
     const {dateStart, dateEnd} = mainData.interval
@@ -49,6 +49,8 @@ export default function Header({ windowFor ,className, ...props }: HeaderProps):
                                     {[styles.newWindow] : (isNewReference|| isNewDocument)})}
                         >{contentTitle} { ( showReferenceWindow || showDocumentWindow ) ? strFirst : strSecond }
                     </div>
+                    
+                    
                     {
                         <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                     }

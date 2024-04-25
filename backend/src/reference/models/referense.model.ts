@@ -60,6 +60,9 @@ export class Reference {
   @Prop()
   telegramId?: string
 
+  @Prop()
+  norma?: number
+
 }
 
 export const ReferenceSchema = SchemaFactory.createForClass(Reference);

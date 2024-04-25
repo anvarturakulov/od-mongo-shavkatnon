@@ -37,7 +37,8 @@ export interface ReferenceModel {
     firstPrice?: number,
     secondPrice?: number
     thirdPrice?: number,
-    telegramId?: string
+    telegramId?: string,
+    norma?: number
 }
 
 

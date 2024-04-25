@@ -13,10 +13,12 @@ import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from '../helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
-import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType, Interval } from '@/app/interfaces/document.interface';
 import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 import { dashboardUsersList } from '@/app/interfaces/general.interface';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
+import Footer from '../../common/footer/footer'
+import { numberValue } from '@/app/service/common/converters'
 
 
 interface FilterForJournal {
@@ -35,10 +37,23 @@ const defaultFilter: FilterForJournal = {
     user: 'Фойдаланувчи'
 }
 
+const documentTotal = (item: DocumentModel) => {
+    if (
+        (item.documentType == DocumentType.LeaveMaterial ||
+        item.documentType == DocumentType.ComeHalfstuff) &&
+        item.tableItems?.length 
+    ) return item.tableItems.reduce((summa, item) => summa + item.total,0)
+
+    return numberValue(item.total)
+}
+
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const {dateStart, dateEnd} = mainData.interval;
+    // const [count, setCount] = useState<number>(0);
+    // const [total, setTotal] = useState<number>(0);
+
     let dateStartForUrl = dateStart
     let dateEndForUrl = dateEnd
 
@@ -111,9 +126,12 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
         })
     }   
 
+    let count:number = 0;
+    let total: number = 0;
+
     return (
         <>
-            {dashboardUsers && <Header windowFor='document'/>}  
+            {dashboardUsers && <Header windowFor='document' total={total} count={count}/>}  
             <div className={styles.newElement}>
                 {showDocumentWindow && <Doc/>}
             </div>
@@ -200,7 +218,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                     if (item.total == +summa) return true
                                 } else return true
                             })
-                            .map((item:DocumentModel, key: number) => (
+                            
+                            .map((item:DocumentModel, key: number) => {
+                                total += item.total;
+                                count += item.count;
+                                return (
                                 <>
                                     <tr 
                                         key={key} 
@@ -217,7 +239,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                             })}>
                                                 {getDescriptionDocument(item.documentType)}
                                         </td>
-                                        <td className={cn(styles.rowSumma, styles.tdSumma)}>{item.total}</td>
+                                        <td className={cn(styles.rowSumma, styles.tdSumma)}>{documentTotal(item)}</td>
                                         <td>{getNameReference(references,item.receiverId)}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
                                         <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.comment ? `(${item.comment})`: ''} ${item.count ? `(${item.count})`: ''}`}</td>
@@ -233,12 +255,16 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                             />
                                         </td>
                                     </tr>
-                                </>    
-                            ))}
+                                </> )   
+                            })
+                            }
                         </tbody>
                     </table>
                 </div>
             }
+
+            {dashboardUsers && <Footer windowFor='document' total={total} count={count}/>}  
+            
             
         </>
     )

@@ -1,4 +1,4 @@
-import { Document } from 'src/document/models/document.model';
+import { DocTableItem, Document } from 'src/document/models/document.model';
 import { Schet } from 'src/interfaces/report.interface';
 import { DocumentType } from 'src/interfaces/document.interface';
 
@@ -13,7 +13,7 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, newEntry?: boolean): ResultgetValuesForEntry => {
+export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?: DocTableItem,): ResultgetValuesForEntry => {
   if (item) {
     let documentType = item.documentType;
     let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
@@ -25,6 +25,15 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       kreditSecondSubcontoId: analiticId.toString(),
       count: count,
       summa: total,
+    }
+
+    const leaveMaterial = {
+      debetFirstSubcontoId: receiverId.toString(),
+      debetSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+      kreditFirstSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString(): '',
+      count: (item.tableItems?.length && !newEntry) ? tableItem.count : 0,
+      summa: (item.tableItems?.length && !newEntry) ? tableItem.total : 0,
     }
 
     const ZpCalculateObj = {
@@ -58,6 +67,15 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
       debetFirstSubcontoId: senderId.toString(),
       debetSecondSubcontoId: receiverId.toString(),
       kreditFirstSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: analiticId.toString(),
+      count: count,
+      summa: total,
+    }
+
+    const comeHalfstuff = {
+      debetFirstSubcontoId: senderId.toString(),
+      debetSecondSubcontoId: analiticId.toString(),
+      kreditFirstSubcontoId: receiverId.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
       count: count,
       summa: total,
@@ -108,12 +126,22 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
         };
 
       case DocumentType.ComeHalfstuff:
-        return {
-          debet: Schet.S21,
-          kredit: Schet.S20,
-          ...leaveComeTMZObj
-        };
-
+        if (tableItem && !newEntry) {
+          // console.log(item.docNumber)
+          // leave mat to prod halfstuff
+          return {
+            debet: Schet.S20,
+            kredit: Schet.S10,
+            ...leaveMaterial
+          };
+        } else {
+          return {
+            debet: Schet.S21,
+            kredit: Schet.S20,
+            ...comeHalfstuff
+          };
+        }
+        
       case DocumentType.ComeMaterial:
         return {
           debet: Schet.S10,
@@ -170,7 +198,7 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean): Resultget
         return {
           debet: Schet.S20,
           kredit: Schet.S10,
-          ...leaveTMZ,
+          ...leaveMaterial,
         };
 
       case DocumentType.LeaveProd:

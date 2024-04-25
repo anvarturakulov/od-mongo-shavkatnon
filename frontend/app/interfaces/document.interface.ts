@@ -77,7 +77,8 @@ export interface OptionsForDocument {
     cashFromPartnerLabel: string,
     cashFromPartnerVisible: boolean,
 
-    tableIsVisible: boolean
+    tableIsVisible: boolean,
+    countIsVisible: boolean
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'
@@ -87,6 +88,6 @@ export interface Interval {
     dateEnd: number
 }
 
-export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner'
+export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner' | 'balance'
 
 export type NameDocs = 'sd' | 'ds'

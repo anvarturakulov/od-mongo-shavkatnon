@@ -11,6 +11,8 @@ import { Production } from './production/production';
 import { Zp } from './zp/zp';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { Taking } from './taking/taking';
+import { Foyda } from './foyda/foyda';
+import { Norma } from './norma/norma';
 
 export const Information = ({className, ...props }: InformationProps) :JSX.Element => {
     
@@ -34,6 +36,8 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
                     <Sklad data={data} sectionType='sklad'/>
                     <Production data={data} />
                     <Zp data={data}/>
+                    <Foyda data={data}/>
+                    <Norma data={data}/>
                 </>
             }
 

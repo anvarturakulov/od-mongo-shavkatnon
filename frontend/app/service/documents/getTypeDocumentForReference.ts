@@ -25,9 +25,9 @@ export const getTypeDocumentForReference = (contentName: string) : DocumentTypeF
     return 'MATERIAL'
   }
 
-  // if (documentsForProd.includes(contentName)) {
-  //   return 'PRODUCT'
-  // }
+  if (documentsForProd.includes(contentName)) {
+    return 'PRODUCT'
+  }
 
   if (documentsForHalfstuff.includes(contentName)) {
     return 'HALFSTUFF'

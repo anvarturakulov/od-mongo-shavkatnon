@@ -1,4 +1,5 @@
 import { Maindata } from '@/app/context/app.context.interfaces';
+import { DocumentType } from '@/app/interfaces/document.interface';
 
 export type TandirWorkersType = 'firstWorker' | 'secondWorker' | 'thirdWorker'
 
@@ -11,3 +12,14 @@ export const definedTandirWorkers = (id: string|undefined, mainData: Maindata, t
 
   return false
 }
+
+export const documentsForPrice = [
+  `${DocumentType.LeaveMaterial}`, 
+  `${DocumentType.MoveMaterial}`,
+  `${DocumentType.LeaveHalfstuff}`, 
+  `${DocumentType.MoveHalfstuff}`,
+  `${DocumentType.MoveProd}`, 
+  `${DocumentType.LeaveProd}`,
+  `${DocumentType.SaleProd}`
+
+];

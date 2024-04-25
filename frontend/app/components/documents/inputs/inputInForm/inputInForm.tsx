@@ -78,6 +78,7 @@ export const InputInForm = ({visible, label, className, nameControl, isNewDocume
                 {...props}
                 onChange={(e) => changeElements(e, setMainData, mainData, nameControl)}
                 value={currentVal?currentVal:''}
+                disabled={nameControl == 'balance'}
             />
         </div>
     );

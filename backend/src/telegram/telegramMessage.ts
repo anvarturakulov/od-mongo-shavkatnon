@@ -124,7 +124,9 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
   let firstChadId = ''
 
-  if (user && user.role != null && user.role == UserRoles.TANDIR || user.role == UserRoles.HAMIRCHI) {
+  if (!user) return
+
+  if (user.role == UserRoles.TANDIR || user.role == UserRoles.HAMIRCHI) {
     firstChadId = TelegramChanelsIds.Production
   }
 

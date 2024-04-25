@@ -38,7 +38,8 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         firstPrice:0,
         secondPrice:0,
         thirdPrice:0,
-        deleted: false
+        deleted: false,
+        norma: 0
     }
 
     const [body, setBody] = useState<ReferenceModel>(defaultBody) 
@@ -187,6 +188,15 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
                 (body.typePartners == TypePartners.CLIENTS) &&
                 <SelectForReferences label='Клиент сохиби' typeReference={TypeReference.STORAGES} currentItemId={mainData.currentReference?.clientForDeliveryId} setClientForDeliveryId={setClientForDeliveryId}/>
+            }
+
+            {
+                ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
+                (body.typeReference == TypeReference.TMZ) && (body.typeTMZ = TypeTMZ.MATERIAL) &&
+                <>
+                <div>Норма</div>
+                <input value={body.norma} type="number" id='norma' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                </>
             }
 
             {

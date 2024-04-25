@@ -24,7 +24,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
 
-    let docWithCash = (contentName == DocumentType.LeaveCash || contentName == DocumentType.MoveCash || contentName == DocumentType.ComeCashFromPartners || contentName == DocumentType.ZpCalculate );
     
     let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
@@ -113,7 +112,8 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     </>
                 }
 
-                <InputInForm nameControl='count' type='number' label='Сон' visible={!docWithCash} />
+                <InputInForm nameControl='balance' type='number' label='Колдик' visible={options.countIsVisible} />
+                <InputInForm nameControl='count' type='number' label='Сон' visible={options.countIsVisible} />
                 
                 {
                     !options.tableIsVisible &&

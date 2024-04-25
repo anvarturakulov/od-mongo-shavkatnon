@@ -14,7 +14,7 @@ import { query } from '@/app/service/reports/querys/query';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
-import { definedTandirWorkers } from './helper';
+import { definedTandirWorkers, documentsForPrice } from './helper';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -24,7 +24,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
     const { data , mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: TypeForSelectInForm) => {
-
+        
         let {currentDocument, contentName} = mainData;
         
         if (currentDocument) {
@@ -33,7 +33,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
             let id = target[target.selectedIndex].getAttribute('data-id');
             let typeDocumentForReference = getTypeDocumentForReference(contentName);
 
-            if ( typeDocumentForLeaveTMZ(contentName) && id ) {
+            if ( typeDocumentForLeaveTMZ(contentName) && id && type != 'receiver') {
                 let schet = undefined
                 if (typeDocumentForReference == 'MATERIAL') {
                     schet = Schet.S10
@@ -47,9 +47,12 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     schet = Schet.S28    
                 }
                 
-                if (schet && ( currentItem.documentType == DocumentType.MoveMaterial || currentItem.documentType == DocumentType.LeaveMaterial)) {
+                if (schet && currentItem.documentType && documentsForPrice.includes(currentItem.documentType)) {
+                    
                     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
                     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
+                    console.log(currentDocument.senderId)
+                    console.log(id)
                 }
             }
 

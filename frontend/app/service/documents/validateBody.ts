@@ -1,19 +1,20 @@
 import { DocumentModel, DocumentType } from "../../interfaces/document.interface";
 
 export const validateBody = (body: DocumentModel): Boolean => {
-  let { date, docNumber, documentType } = body
-  // console.log(body)
 
-  let { analiticId, senderId, receiverId, total, count, firstWorkerId, secondWorkerId, thirdWorkerId } = body
-  // console.log(senderId)
+  let { 
+    date, docNumber, documentType,
+    analiticId, senderId, receiverId, 
+    total, count, 
+    firstWorkerId, secondWorkerId, thirdWorkerId,
+    tableItems, balance } = body
+
   if (!date || !docNumber || !documentType) return false
 
   const documentsWithAnalitic = [
     `${DocumentType.ComeMaterial}`,
     `${DocumentType.ComeProduct}`,
-    `${DocumentType.ComeHalfstuff}`,
     `${DocumentType.LeaveProd}`,
-    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.MoveProd}`,
     `${DocumentType.MoveMaterial}`,
@@ -23,7 +24,53 @@ export const validateBody = (body: DocumentModel): Boolean => {
   ]
 
   if (documentsWithAnalitic.includes(documentType)) {
-    // console.log(senderId)
+    if (!analiticId || !senderId || !receiverId || !count) {
+      return false
+    }
+  }
+
+  const documentsWithTableItems = [
+    `${DocumentType.LeaveMaterial}`,
+    `${DocumentType.ComeHalfstuff}`,
+  ]
+
+  if (documentsWithTableItems.includes(documentType)) {
+    let balanceNotEmpty = true
+    let countNotEmpty = true
+    let priceNotEmpty = true
+    let totalNotEmpty = true
+    
+    tableItems.forEach(item => {
+      if (item.balance <= 0) balanceNotEmpty = false
+      if (item.count <= 0) countNotEmpty = false
+      if (item.price <= 0) priceNotEmpty = false
+      if (item.total <= 0) totalNotEmpty = false
+    })
+
+    if (
+        !balanceNotEmpty || !countNotEmpty || 
+        !priceNotEmpty || !totalNotEmpty || 
+        !tableItems.length
+      ) {
+      return false
+    }
+  }
+
+  const documentsLeaveMaterial = [
+    `${DocumentType.LeaveMaterial}`,
+  ]
+
+  if (documentsLeaveMaterial.includes(documentType)) {
+    if (!senderId || !receiverId ) {
+      return false
+    }
+  }
+
+  const documentsComeHalfstuff = [
+    `${DocumentType.ComeHalfstuff}`,
+  ]
+
+  if (documentsComeHalfstuff.includes(documentType)) {
     if (!analiticId || !senderId || !receiverId || !count) {
       return false
     }
@@ -31,7 +78,6 @@ export const validateBody = (body: DocumentModel): Boolean => {
 
   const documentsToTotal = [
     `${DocumentType.ComeMaterial}`,
-    `${DocumentType.LeaveMaterial}`,
     `${DocumentType.MoveMaterial}`,
     `${DocumentType.SaleProd}`,
   ]
@@ -77,6 +123,20 @@ export const validateBody = (body: DocumentModel): Boolean => {
   if (documentsForZpCalculate.includes(documentType)) {
     if (!receiverId || !analiticId || !total) return false
   }
+
+  const documentsWithBalance = [
+    `${DocumentType.LeaveProd}`,
+    `${DocumentType.MoveProd}`,
+    `${DocumentType.LeaveHalfstuff}`,
+    `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.LeaveMaterial}`,
+    `${DocumentType.MoveMaterial}`,
+  ]
+
+  if (documentsWithBalance.includes(documentType)) {
+    if (balance && (count > balance || balance < 0) ) return false
+  }
+
 
   return true
 

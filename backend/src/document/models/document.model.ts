@@ -4,7 +4,7 @@ import { DocumentType } from '../../interfaces/document.interface';
 
 export type DocDocument = HydratedDocument<Document>;
 
-class DocTableItem {
+export class DocTableItem {
   @Prop()
   referenceId: Types.ObjectId;
   
@@ -16,6 +16,7 @@ class DocTableItem {
   
   @Prop()
   total: number;
+
 }
 
 @Schema()

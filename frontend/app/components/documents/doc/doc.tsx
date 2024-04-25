@@ -29,7 +29,6 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             getEntrysJournal(setMainData, mainData, currentDocument.date);
         }
 
-
     },[])
 
     const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {

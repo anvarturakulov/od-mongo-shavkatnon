@@ -72,4 +72,8 @@ export class CreateReferenceDto {
   @IsString()
   telegramId?: string
 
+  @IsOptional()
+  @IsNumber()
+  norma?: number
+
 }

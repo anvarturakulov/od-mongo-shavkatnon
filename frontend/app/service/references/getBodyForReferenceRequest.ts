@@ -39,7 +39,8 @@ export const getBodyForReferenceRequest = (state: ReferenceModel, typeReference:
         un: state.un,
         firstPrice: state.firstPrice,
         secondPrice: state.secondPrice,
-        thirdPrice: state.thirdPrice
+        thirdPrice: state.thirdPrice,
+        norma: state.norma
       };
     case TypeReference.WORKERS:
       return {

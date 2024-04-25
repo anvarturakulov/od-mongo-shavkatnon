@@ -8,6 +8,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     let analiticType = TypeReference.STORAGES , analiticLabel = '', analiticIsVisible = false
     let cashFromPartnerLabel = '' , cashFromPartnerVisible = false;
     let tableIsVisible = false;
+    let countIsVisible = true;
 
     const documentsForComeMaterial = [
         `${DocumentType.ComeMaterial}`,
@@ -27,12 +28,12 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticIsVisible = true
     }
 
-    const documentsForComeProductHalfstuff = [
+    const documentsForComeProduct = [
         `${DocumentType.ComeProduct}`,
         `${DocumentType.ComeHalfstuff}`,
     ]
 
-    if (documentsForComeProductHalfstuff.includes(documentType)) {
+    if (documentsForComeProduct.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Ишлаб чикарувчи булим'
         senderIsVisible = false
@@ -44,6 +45,26 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticType = TypeReference.TMZ
         analiticLabel = 'Товар моддий бойлик'
         analiticIsVisible = true
+    }
+
+    const documentsForComeHalfstuff = [
+        `${DocumentType.ComeHalfstuff}`,
+    ]
+
+    if (documentsForComeHalfstuff.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Берувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Чиким учун харажат тури'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'ЯТМ номи'
+        analiticIsVisible = true;
+
+        tableIsVisible = true;
     }
 
     const documetsForSaleTMZ = [
@@ -97,10 +118,6 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         receiverType = TypeReference.CHARGES
         receiverLabel = 'Чиким учун харажат тури'
         recieverIsVisible = true
-
-        analiticType = TypeReference.TMZ
-        analiticLabel = 'ЯТМ номи'
-        analiticIsVisible = true;
 
         tableIsVisible = true;
     }
@@ -187,6 +204,18 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticIsVisible = true
     }
 
+    const documentsCountNotVisibel = [
+        `${DocumentType.LeaveCash}`,
+        `${DocumentType.MoveCash}`,
+        `${DocumentType.ComeCashFromPartners}`,
+        `${DocumentType.ZpCalculate}`,
+        `${DocumentType.LeaveMaterial}`,
+    ]
+
+    if (documentsCountNotVisibel.includes(documentType)) {
+        countIsVisible = false
+    }
+
     return {
         senderType,
         senderLabel,
@@ -199,6 +228,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticIsVisible,
         cashFromPartnerLabel,
         cashFromPartnerVisible,
-        tableIsVisible
+        tableIsVisible,
+        countIsVisible,
     }
 }

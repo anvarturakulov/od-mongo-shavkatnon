@@ -15,6 +15,7 @@ export const query = (
   const { reportOption } = mainData;
   const { interval } = mainData
   let { startDate, endDate, entrys } = reportOption;
+  console.log(entrys)
 
   endDate = endDate + 86399999
 
@@ -32,8 +33,6 @@ export const query = (
     startDate = interval.dateStart;
     endDate = interval.dateEnd;
   }
-
-  // console.log(startDate, endDate)
 
   switch (typequery) {
     case TypeQuery.PDKOL:
@@ -151,10 +150,6 @@ export const query = (
         )
       })
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
-
-      // console.log('totalSumma -', totalSumma)
-      // console.log('totalCount -', totalCount)
-      // console.log(newEntrys)
       
       return totalCount ? +(totalSumma / totalCount).toFixed(2) : 0;
 
