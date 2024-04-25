@@ -14,13 +14,14 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
     if (!item.deleted) {
         
       if (hasDocumentTablePart(item.documentType)) {
+        if (item.tableItems || item.tableItems.length > 0) {
+          item.tableItems.forEach((tableItem: DocTableItem) => {
+            // console.log(item)
+            let newItemForResults = { ...prepareEntry(item, false, tableItem) }
+            results.push(newItemForResults);
 
-        item.tableItems.forEach((tableItem: DocTableItem) => {
-          // console.log(item)
-          let newItemForResults = { ...prepareEntry(item, false, tableItem) }
-          results.push(newItemForResults);
-
-        })
+          })
+        }
 
       } else {
         let newItemForResults = { ...prepareEntry(item, true) }
