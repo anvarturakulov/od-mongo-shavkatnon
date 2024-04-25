@@ -61,7 +61,8 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
         proveden: true,
         firstWorkerId: '',
         secondWorkerId: '',
-        thirdWorkerId: ''
+        thirdWorkerId: '',
+        tableItems: [],
     }   
     
     const cancelSubmit = (setMainData: Function | undefined) => {

@@ -28,7 +28,8 @@ export const changeStatusHamir = (item: HamirModel, mainData: Maindata, setMainD
     proveden: true,
     comment: item.order+' - хамир',
     price: 0,
-    firstWorkerId: item.firstWorker
+    firstWorkerId: item.firstWorker,
+    tableItems: [],
 
   }
 
@@ -49,7 +50,8 @@ export const changeStatusHamir = (item: HamirModel, mainData: Maindata, setMainD
     firstWorkerId: item.firstWorker,
     secondWorkerId: item.secondWorker,
     thirdWorkerId: item.thirdWorker,
-    price: 0
+    price: 0,
+    tableItems: []
   }
 
   let newDoc = user?.role == UserRoles.HAMIRCHI ? {...defaultDocForHalfstuff} : {...defaultDocForProduct} 
