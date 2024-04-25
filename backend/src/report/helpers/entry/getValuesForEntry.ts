@@ -29,9 +29,9 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?
 
     const leaveMaterial = {
       debetFirstSubcontoId: receiverId.toString(),
-      debetSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+      debetSecondSubcontoId: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
       kreditFirstSubcontoId: senderId.toString(),
-      kreditSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString(): '',
+      kreditSecondSubcontoId: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString(): '',
       count: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.count : 0,
       summa: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.total : 0,
     }
