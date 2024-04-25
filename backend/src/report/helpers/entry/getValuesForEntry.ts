@@ -32,8 +32,8 @@ export const getValuesForEntry = (item: Document, newEntry?: boolean, tableItem?
       debetSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
       kreditFirstSubcontoId: senderId.toString(),
       kreditSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString(): '',
-      count: (item.tableItems?.length && !newEntry) ? tableItem.count : 0,
-      summa: (item.tableItems?.length && !newEntry) ? tableItem.total : 0,
+      count: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.count : 0,
+      summa: (item.tableItems != undefined && item.tableItems?.length && !newEntry) ? tableItem.total : 0,
     }
 
     const ZpCalculateObj = {
