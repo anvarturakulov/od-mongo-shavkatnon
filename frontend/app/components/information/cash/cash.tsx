@@ -54,59 +54,71 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, false, '', true);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, false, '', true);
 
+    let [show, setShow] = useState<boolean>(true);
     return (
        <>
-            <div className={styles.title}>КАССА</div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <td>Цех</td>
-                        <td>Бошлангич кол.</td>
-                        <td>Савдо тушуми</td>
-                        <td>Ички кирим</td>
-                        <td>Жами кирим</td>
-                        <td>Харажат кил.</td>
-                        <td>Таъминотчига бер.</td>
-                        <td>Ички чиким</td>
-                        <td>Таъсисчига бер.</td>
-                        <td>Жами чиким</td>
-                        <td>Охирги кол.</td>
-                    </tr>
-                </thead>
-                {
-                    data && data.length > 0 &&
-                    data
-                    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
-                    .filter((item: any) => {
-                        // if (item.buxgalter) console.log(item.name)
-                        if ( item.buxgalter || item.filial || item.delivery ) return true
-                        return false
-                    })
-                    .map((item: ReferenceModel, key: number) => {
-                        return <CashItem 
-                            key={key}
-                            currentSectionId= {item._id} 
-                            data={data} 
-                            title={item.name}
-                            />
-                    })
-                }
-                <thead>
-                    <tr>
-                        <td>Жами</td>
-                        <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM)}</td>
-                        <td className={styles.totalTd}>{numberValue(TRADEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(MOVEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(TRADEINCOME+MOVEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(CHARGES)}</td>
-                        <td className={styles.totalTd}>{numberValue(FORPARTNERS)}</td>
-                        <td className={styles.totalTd}>{numberValue(MOVEOUT)}</td>
-                        <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
-                        <td className={styles.totalTd}>{numberValue(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER)}</td>
-                        <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}</td>
-                    </tr>
-                </thead>
-            </table>
+            <div className={styles.title}>
+                КАССА
+                <button 
+                    className={styles.button}
+                    onClick={()=> setShow(value => !value)}>
+                        OK
+                </button>
+            </div>
+            {
+                show &&
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <td>Цех</td>
+                            <td>Бошлангич кол.</td>
+                            <td>Савдо тушуми</td>
+                            <td>Ички кирим</td>
+                            <td>Жами кирим</td>
+                            <td>Харажат кил.</td>
+                            <td>Таъминотчига бер.</td>
+                            <td>Ички чиким</td>
+                            <td>Таъсисчига бер.</td>
+                            <td>Жами чиким</td>
+                            <td>Охирги кол.</td>
+                        </tr>
+                    </thead>
+                    {
+                        data && data.length > 0 &&
+                        data
+                        .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+                        .filter((item: any) => {
+                            // if (item.buxgalter) console.log(item.name)
+                            if ( item.buxgalter || item.filial || item.delivery ) return true
+                            return false
+                        })
+                        .map((item: ReferenceModel, key: number) => {
+                            return <CashItem 
+                                key={key}
+                                currentSectionId= {item._id} 
+                                data={data} 
+                                title={item.name}
+                                />
+                        })
+                    }
+                    <thead>
+                        <tr>
+                            <td>Жами</td>
+                            <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM)}</td>
+                            <td className={styles.totalTd}>{numberValue(TRADEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(MOVEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(TRADEINCOME+MOVEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(CHARGES)}</td>
+                            <td className={styles.totalTd}>{numberValue(FORPARTNERS)}</td>
+                            <td className={styles.totalTd}>{numberValue(MOVEOUT)}</td>
+                            <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
+                            <td className={styles.totalTd}>{numberValue(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER)}</td>
+                            <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}</td>
+                        </tr>
+                    </thead>
+                </table>
+            }
+            
        </>
     )
 } 

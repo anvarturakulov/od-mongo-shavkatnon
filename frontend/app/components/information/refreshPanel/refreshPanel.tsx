@@ -13,7 +13,7 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     const {mainData, setMainData} = useAppContext();
     const {dateStart, dateEnd} = mainData.interval;
 
-    const refreshReport = (mainData: Maindata, setMainData: Function | undefined) => {
+    const refreshReport = async (mainData: Maindata, setMainData: Function | undefined) => {
         setMainData && setMainData('updateDataForDocumentJournal', true)
         getEntrysJournal(setMainData, mainData);
     }

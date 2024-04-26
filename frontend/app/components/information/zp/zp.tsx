@@ -7,6 +7,7 @@ import { useAppContext } from '@/app/context/app.context';
 import { dateNumberToString } from '@/app/service/common/converterForDates';
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
+import { useState } from 'react';
 
 export const Zp = ({className, data, currentSection, ...props }: ZpProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext()
@@ -32,25 +33,37 @@ export const Zp = ({className, data, currentSection, ...props }: ZpProps) :JSX.E
     const { data : hamirs, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
     
     let idForBuxanka = '65e7048b5c54490bbc335ca2';
-
+    let [show, setShow] = useState<boolean>(false);
+    
     return (
        <>
-            <div className={styles.title}>{"ЦЕХДАГИ ХОДИМЛАР МАЪЛУМОТЛАРИ"}</div>
-            <div className={styles.itemsBox}>
-                {
-                    data && data.length > 0 &&
-                    data.filter((item: any) => {
-                        return item?.filial
-                    })
-                    .filter((item: ReferenceModel) => {
-                        if (currentSection) return item._id == currentSection
-                        else return true
-                    })
-                    .map((item: ReferenceModel, key: number) => {
-                        return <ZpItem key={key} currentId= {item._id} data={data} hamirs={hamirs} title={item.name}/>
-                    })
-                }
-            </div> 
+            <div className={styles.title}>
+                {"ЦЕХДАГИ ХОДИМЛАР МАЪЛУМОТЛАРИ"}
+                <button 
+                    className={styles.button}
+                    onClick={()=> setShow(value => !value)}>
+                        OK
+                </button>    
+            </div>
+            {
+                show &&
+                <div className={styles.itemsBox}>
+                    {
+                        data && data.length > 0 &&
+                        data.filter((item: any) => {
+                            return item?.filial
+                        })
+                        .filter((item: ReferenceModel) => {
+                            if (currentSection) return item._id == currentSection
+                            else return true
+                        })
+                        .map((item: ReferenceModel, key: number) => {
+                            return <ZpItem key={key} currentId= {item._id} data={data} hamirs={hamirs} title={item.name}/>
+                        })
+                    }
+                </div>
+            }
+             
             
        </>
     )

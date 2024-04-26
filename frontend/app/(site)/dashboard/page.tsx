@@ -11,6 +11,7 @@ import Journal from '@/app/components/journals/journal/journal';
 import { IntervalWindow } from '@/app/components/common/intervalWindow/intervalWindow';
 import TopBox from '@/app/components/common/topBox/topBox';
 import { Information } from '@/app/components/information/information';
+import { Spinner } from '@/app/components/common/spinner/spinner';
 
 export default function Dashboard() {
 

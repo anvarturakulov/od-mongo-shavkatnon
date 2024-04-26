@@ -3,9 +3,9 @@ import { DocumentController } from './document.controller';
 import { DocumentService } from './document.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Document, DocumentSchema } from './models/document.model';
-import { AuthService } from 'src/auth/auth.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { ReferenceModule } from 'src/reference/reference.module';
+import { ReportModule } from 'src/report/report.module';
 
 @Module({
   controllers: [DocumentController],
@@ -13,7 +13,7 @@ import { ReferenceModule } from 'src/reference/reference.module';
   imports: [
     MongooseModule.forFeature([{ name: Document.name, schema: DocumentSchema }]),
     AuthModule,
-    ReferenceModule
+    ReferenceModule,
   ],
   exports: [DocumentService, MongooseModule]
 })

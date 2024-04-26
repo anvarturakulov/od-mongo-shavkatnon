@@ -29,15 +29,21 @@ export const Information = ({className, ...props }: InformationProps) :JSX.Eleme
                 user?.role != UserRoles.ZAMGLBUX &&
                 <>
                     <Cash data={data}/>
-                    <Taking data={data} />
-                    <Section data={data} sectionType='buxgalter'/>
-                    <Section data={data} sectionType='filial'/>
-                    <Section data={data} sectionType='delivery'/>
-                    <Sklad data={data} sectionType='sklad'/>
-                    <Production data={data} />
-                    <Zp data={data}/>
-                    <Foyda data={data}/>
-                    <Norma data={data}/>
+                    {
+                        !mainData.loading &&
+                        <>
+                            <Taking data={data} />
+                            <Section data={data} sectionType='buxgalter'/>
+                            <Section data={data} sectionType='filial'/>
+                            <Section data={data} sectionType='delivery'/>
+                            <Sklad data={data} sectionType='sklad'/>
+                            <Production data={data} />
+                            <Zp data={data}/>
+                            <Foyda data={data}/>
+                            <Norma data={data}/>    
+                        </>
+                    }
+                    
                 </>
             }
 

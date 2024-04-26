@@ -12,8 +12,8 @@ export class ReportService {
     private readonly documentService: DocumentService) { }
   
   async getEntrysJournal() {
-    let result = await this.documentService.getAllDocuments(true)
-    return prepareEntrysJournal(result);
+    let result = await this.documentService.globalEntrys 
+    return result
   }
 
   async getEntrysJournalForDate(dateStart: number, dateEnd: number) {
@@ -21,5 +21,6 @@ export class ReportService {
     return prepareEntrysJournal(result);
   }
 
+  
 
 }

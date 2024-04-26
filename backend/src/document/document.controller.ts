@@ -6,8 +6,9 @@ import { DocumentType } from 'src/interfaces/document.interface';
 import { IdValidationPipe } from 'src/pipes/ad-validation.pipe';
 import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { AuthService } from 'src/auth/auth.service';
-import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
+import { ReportService } from 'src/report/report.service';
 import { ReferenceService } from 'src/reference/reference.service';
+import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
 import { Request } from 'express';
 
 @Controller('document')
@@ -82,10 +83,13 @@ export class DocumentController {
     if (!markedDoc) {
       throw new HttpException(DOCUMENT_NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);
     }
+
     const document = await this.documentService.findById(id);
+    
     let newDto = { ...JSON.parse(JSON.stringify(document)) }
     let messageIndeleting = newDto.deleted ? 'ЧЕК УЧИРИЛДИ' : 'ЧЕК ТИКЛАНДИ'
     this.sendMessage(newDto, false, messageIndeleting)
+    return markedDoc
   }
 
   @UseGuards(JwtAuthGuard)

@@ -2,14 +2,15 @@ import { DocTableItem, Document } from 'src/document/models/document.model';
 import { prepareEntry } from './entry/prepareEntry';
 import { DocumentType } from 'src/interfaces/document.interface';
 import { hasDocumentTablePart } from './hasDocumentTableType';
+import { EntryItem } from 'src/interfaces/report.interface';
 
 export interface DocumentWithId extends Document {
   _id: string
 }
 
-export const prepareEntrysJournal = (allDocuments: Array<Document>) => {
+export const prepareEntrysJournal = (allDocuments: Array<Document>):Array<EntryItem> => {
   let documents = [...allDocuments]
-  let results = []
+  let results: Array<EntryItem> = []
   documents.forEach((item: Document) => {
     if (!item.deleted) {
         

@@ -10,6 +10,7 @@ import { dateNumberToString } from '@/app/service/common/converterForDates';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import useSWR from 'swr';
 import { TakingProps } from './taking.props';
+import { useState } from 'react';
 
 export const Taking = ({className, data, currentSection, ...props }: TakingProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext()
@@ -36,36 +37,48 @@ export const Taking = ({className, data, currentSection, ...props }: TakingProps
     
     // const OBSUMD5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, undefined, undefined, mainData, true);
     // const OBSUMK5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, undefined, undefined, mainData, true);
+    let [show, setShow] = useState<boolean>(false);
     
     return (
        <>
-            <div className={styles.title}>{'ЦЕХ ВА ЮК ЕТКАЗИБ БЕРУВЧИЛАР ТОПШИРГАН ПУЛЛАРИ'}</div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <td>Булим</td>
-                        <td>Топширган пули</td>
-                    </tr>
-                </thead>
+            <div className={styles.title}>
+                {'ЦЕХ ВА ЮК ЕТКАЗИБ БЕРУВЧИЛАР ТОПШИРГАН ПУЛЛАРИ'}
+                <button 
+                    className={styles.button}
+                    onClick={()=> setShow(value => !value)}>
+                        OK
+                </button>    
+            </div>
+            {
+                show &&
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <td>Булим</td>
+                            <td>Топширган пули</td>
+                        </tr>
+                    </thead>
+                    
+                    {
+                        data && data.length > 0 &&
+                        data.filter((item: any) => {
+                            return (item.filial)
+                        })
+                        .map((item: ReferenceModel, key: number) => {
+                            return <TakingItem key={key} currentId= {item._id} data={data} hamirs = {hamirs} title={item.name}/>
+                        })
+                    }    
                 
-                {
-                    data && data.length > 0 &&
-                    data.filter((item: any) => {
-                        return (item.filial)
-                    })
-                    .map((item: ReferenceModel, key: number) => {
-                        return <TakingItem key={key} currentId= {item._id} data={data} hamirs = {hamirs} title={item.name}/>
-                    })
-                }    
+                    {/* <thead>
+                        <tr>
+                            <td>Жами</td>
+                            <td>-</td>
+                        </tr>
+                    </thead> */}
+                    
+                </table>
+            }
             
-                {/* <thead>
-                    <tr>
-                        <td>Жами</td>
-                        <td>-</td>
-                    </tr>
-                </thead> */}
-                
-            </table>
        </>
     )
 } 

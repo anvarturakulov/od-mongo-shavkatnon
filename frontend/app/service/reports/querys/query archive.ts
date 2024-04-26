@@ -1,7 +1,7 @@
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { EntryItem, Schet, TypeQuery } from '@/app/interfaces/report.interface';
 
-export const query = (
+export const queryArchive = (
   schet: Schet | Array<Schet>,
   typequery: TypeQuery,
   secondSubcontoId: string | null,

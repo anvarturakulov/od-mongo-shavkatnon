@@ -133,9 +133,9 @@ export const validateBody = (body: DocumentModel): Boolean => {
     `${DocumentType.MoveMaterial}`,
   ]
 
-  if (documentsWithBalance.includes(documentType)) {
-    if (balance && (count > balance || balance < 0) ) return false
-  }
+  // if (documentsWithBalance.includes(documentType)) {
+  //   if (balance && (count > balance || balance < 0) ) return false
+  // }
 
 
   return true

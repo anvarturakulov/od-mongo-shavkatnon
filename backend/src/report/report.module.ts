@@ -7,6 +7,7 @@ import { DocumentModule } from 'src/document/document.module';
 @Module({
   imports: [DocumentModule],
   controllers: [ReportController],
-  providers: [ReportService]
+  providers: [ReportService],
+  exports: [ReportService]
 })
 export class ReportModule {}

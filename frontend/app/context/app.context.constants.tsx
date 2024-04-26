@@ -86,4 +86,5 @@ export const defaultMainData: Maindata = {
     updateHamirJournal: false,
     currentStorageIdInHamirsJournal: '',
     interval: defaultInterval,
+    loading: false
   }

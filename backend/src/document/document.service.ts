@@ -5,18 +5,28 @@ import { Model } from 'mongoose';
 import { CreateDocumentDto } from './dto/document.create.dto';
 import { DocumentType } from 'src/interfaces/document.interface';
 import { DOCUMENT_IS_PROVEDEN, DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
-
+import { prepareEntrysJournal } from 'src/report/helpers/prepareEntrysJournal';
+import { EntryItem } from 'src/interfaces/report.interface';
 
 @Injectable()
 export class DocumentService {
 
   constructor(
-    @InjectModel(Document.name) private documentModel: Model<DocDocument>
+    @InjectModel(Document.name) private documentModel: Model<DocDocument>,
   ) { }
 
+  public globalEntrys: Array<EntryItem>
+
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
+    
     const newDocument = new this.documentModel(dto);
-    return newDocument.save()
+    
+    // run service to preparing Entrys journal
+    let result = await newDocument.save()
+    let res = await this.prepareEntrys();
+    
+    return result
+
   }
 
   async getByTypeDocument(documentType: DocumentType): Promise<Document[]> {
@@ -46,9 +56,15 @@ export class DocumentService {
     if (!document.date) {
       throw new NotFoundException(DOCUMENT_NOT_FOUND_ERROR);
     }
-    const state = document.deleted ? false : true
-    return this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
 
+    const state = document.deleted ? false : true
+    let result = await this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
+    
+    // run service to preparing Entrys journal
+    let res = this.prepareEntrys();
+    
+    return result
+    // return this.globalEntrys
   }
 
   async setProvodka(id: string) {
@@ -56,10 +72,25 @@ export class DocumentService {
     if (document.proveden) {
       throw new NotFoundException(DOCUMENT_IS_PROVEDEN);
     }
-    return this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
+    let result = await this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
+    // run service to preparing Entrys journal
+    this.prepareEntrys();
+    return result
+
   }
 
   async updateById(id: string, dto: CreateDocumentDto) {
-    return this.documentModel.updateOne({ _id: id }, { $set: dto })
+    
+    let result = await this.documentModel.updateOne({ _id: id }, { $set: dto })
+
+    // run service to preparing Entrys journal
+    this.prepareEntrys();
+    return result
+ 
+  }
+
+  async prepareEntrys() {
+    let result = await this.getAllDocuments(true)
+    this.globalEntrys = [...prepareEntrysJournal(result)];
   }
 }

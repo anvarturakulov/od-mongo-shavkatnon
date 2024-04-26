@@ -11,6 +11,7 @@ import { queryKor } from '@/app/service/reports/querys/queryKor';
 import { dateNumberToString } from '@/app/service/common/converterForDates';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import useSWR from 'swr';
+import { useState } from 'react';
 
 export const Production = ({className, data, currentSection, ...props }: ProductionProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext()
@@ -63,82 +64,94 @@ export const Production = ({className, data, currentSection, ...props }: Product
     
     const TKKOL = query(Schet.S28, TypeQuery.TKKOL, null, mainData, true, '', true);
     const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, idForBuxanka, mainData, true, '', true);
-
+    
+    let [show, setShow] = useState<boolean>(false);
     return (
        <>
-            <div className={styles.title}>{'ЦЕХЛАР'}</div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <td>Цех</td>
-                        <td>Килинган хамир сони</td>
-                        <td>Ишлатилган загатовка</td>
-                        <td>Бир дона хамирга нис зувала</td>
-                        <td>Колдик нон</td>
-                        <td>Ишлаб чик. нон</td>
-                        <td>Ички кирим силж.</td>
-                        <td>Сотилган нон</td>
-                        <td>Ички чиким силж.</td>
-                        <td>Брак нон ва истемол</td>
-                        <td>Колдик нон</td>
-                    </tr>
-                </thead>
+            <div className={styles.title}>
+                {'ЦЕХЛАР'}
+                <button 
+                    className={styles.button}
+                    onClick={()=> setShow(value => !value)}>
+                        OK
+                </button>
+            </div>
+            {
+                show &&
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <td>Цех</td>
+                            <td>Килинган хамир сони</td>
+                            <td>Ишлатилган загатовка</td>
+                            <td>Бир дона хамирга нис зувала</td>
+                            <td>Колдик нон</td>
+                            <td>Ишлаб чик. нон</td>
+                            <td>Ички кирим силж.</td>
+                            <td>Сотилган нон</td>
+                            <td>Ички чиким силж.</td>
+                            <td>Брак нон ва истемол</td>
+                            <td>Колдик нон</td>
+                        </tr>
+                    </thead>
+                    
+                    {
+                        data && data.length > 0 &&
+                        data.filter((item: any) => {
+                            return (item.filial)
+                        })
+                        .map((item: ReferenceModel, key: number) => {
+                            return <ProductionItem key={key} currentId= {item._id} data={data} hamirs = {hamirs} title={item.name}/>
+                        })
+                    }    
                 
-                {
-                    data && data.length > 0 &&
-                    data.filter((item: any) => {
-                        return (item.filial)
-                    })
-                    .map((item: ReferenceModel, key: number) => {
-                        return <ProductionItem key={key} currentId= {item._id} data={data} hamirs = {hamirs} title={item.name}/>
-                    })
-                }    
+                    {/* <thead>
+                        <tr>
+                            <td>Жами</td>
+                            <td className={styles.totalTd}>-</td>
+                            <td className={styles.totalTd}>-</td>
+                            <td className={styles.totalTd}>-</td>
+                            <td className={styles.totalTd}>
+                                {numberValue(PDKOL-PKKOL-(PDKOLbux-PKKOLbux))}
+                                <br/>
+                                <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(OBKOLD2820-OBKOLD2820bux)}
+                                <br/>
+                                <span> ({numberValue(OBKOLD2820bux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(OBKOLD2828-OBKOLD2828bux)}
+                                <br/>
+                                <span> ({numberValue(OBKOLD2828bux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(OBKOLK4028-OBKOLK4028bux)}
+                                <br/>
+                                <span> ({numberValue(OBKOLK4028bux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(OBKOLK2828-OBKOLK2828bux)}
+                                <br/>
+                                <span> ({numberValue(OBKOLK2828bux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(OBKOLK2028-OBKOLK2028bux)}
+                                <br/>
+                                <span> ({numberValue(OBKOLK2028bux)})</span>
+                            </td>
+                            <td className={styles.totalTd}>
+                                {numberValue(PDKOL - PKKOL + TDKOL - TKKOL - (PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux))}
+                                <br/>
+                                <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
+                            </td>
+                        </tr>
+                    </thead> */}
+                    
+                </table>
+            }
             
-                {/* <thead>
-                    <tr>
-                        <td>Жами</td>
-                        <td className={styles.totalTd}>-</td>
-                        <td className={styles.totalTd}>-</td>
-                        <td className={styles.totalTd}>-</td>
-                        <td className={styles.totalTd}>
-                            {numberValue(PDKOL-PKKOL-(PDKOLbux-PKKOLbux))}
-                            <br/>
-                            <span> ({numberValue(PDKOLbux-PKKOLbux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(OBKOLD2820-OBKOLD2820bux)}
-                            <br/>
-                            <span> ({numberValue(OBKOLD2820bux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(OBKOLD2828-OBKOLD2828bux)}
-                            <br/>
-                            <span> ({numberValue(OBKOLD2828bux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(OBKOLK4028-OBKOLK4028bux)}
-                            <br/>
-                            <span> ({numberValue(OBKOLK4028bux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(OBKOLK2828-OBKOLK2828bux)}
-                            <br/>
-                            <span> ({numberValue(OBKOLK2828bux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(OBKOLK2028-OBKOLK2028bux)}
-                            <br/>
-                            <span> ({numberValue(OBKOLK2028bux)})</span>
-                        </td>
-                        <td className={styles.totalTd}>
-                            {numberValue(PDKOL - PKKOL + TDKOL - TKKOL - (PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux))}
-                            <br/>
-                            <span> ({numberValue(PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux)})</span>
-                        </td>
-                    </tr>
-                </thead> */}
-                
-            </table>
        </>
     )
 } 

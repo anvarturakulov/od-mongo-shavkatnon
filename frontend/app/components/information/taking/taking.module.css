@@ -43,3 +43,11 @@
     color: blue;
     /* font-size: 14px; */
 }
+
+.button{
+  margin-left: 20px;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 700;
+}

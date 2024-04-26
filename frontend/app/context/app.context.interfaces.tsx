@@ -29,6 +29,7 @@ export interface Maindata {
   updateHamirJournal: boolean,
   currentStorageIdInHamirsJournal: string,
   interval: Interval,
+  loading: boolean
 }
 
 export interface IAppContext {

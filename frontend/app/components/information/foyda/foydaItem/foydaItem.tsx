@@ -22,7 +22,7 @@ export const FoydaItem = ({className, data, currentSectionId, title, ...props }:
     const saleCountBux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, currentSectionId, idForBuxanka, mainData, true);
     const sale = queryKor(Schet.S40, Schet.S28, TypeQuery.OKS, currentSectionId, undefined, mainData, true);
     
-    console.log(sale)
+    // console.log(sale)
     const saleCountWithMove = saleCount - moveOutCount + moveIncomeCount;
     
     const saleForMoveIncomeNon = (moveIncomeCount-moveIncomeCountBux) ? (moveIncomeCount-moveIncomeCountBux) : 0;

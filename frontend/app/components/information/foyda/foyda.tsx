@@ -54,61 +54,73 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, false, '', true);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, false, '', true);
 
+    let [show, setShow] = useState<boolean>(false);
     return (
        <>
-            <div className={styles.title}>ФOЙДА ХИСОБИ</div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <td >Цех</td>
-                        <td>Ишлаб чикар. нон сони</td>
-                        <td>Савдодаги нон сони</td>
-                        <td>Савдодага пул маблаги</td>
-                        <td>Ун харажати</td>
-                        <td>Хом ашёлар хараж.</td>
-                        <td>Иш хаки хараж.</td>
-                        <td>Кунлик пуллик хараж.</td>
-                        <td>Жорий фойда</td>
-                        <td>Фойда коэф (%)</td>
-                        <td>Ойлик пуллик хараж</td>
-                        <td>Соф фойда</td>
-                    </tr>
-                </thead>
-                {
-                    data && data.length > 0 &&
-                    data
-                    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
-                    .filter((item: ReferenceModel) => {
-                        // if (item.buxgalter) console.log(item.name)
-                        if ( item.filial || item.umumBulim ) return true
-                        return false
-                    })
-                    .map((item: ReferenceModel, key: number) => {
-                        return <FoydaItem 
-                            key={key}
-                            currentSectionId= {item._id} 
-                            data={data} 
-                            title={item.name}
-                            />
-                    })
-                }
-                <thead>
-                    <tr>
-                        <td>Жами</td>
-                        <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM)}</td>
-                        <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
-                        <td className={styles.totalTd}>{numberValue(TRADEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(MOVEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(TRADEINCOME+MOVEINCOME)}</td>
-                        <td className={styles.totalTd}>{numberValue(CHARGES)}</td>
-                        <td className={styles.totalTd}>{numberValue(FORPARTNERS)}</td>
-                        <td className={styles.totalTd}>{numberValue(MOVEOUT)}</td>
-                        <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
-                        <td className={styles.totalTd}>{numberValue(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER)}</td>
-                        <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}</td>
-                    </tr>
-                </thead>
-            </table>
+            <div className={styles.title}>
+                ФOЙДА ХИСОБИ
+                <button 
+                    className={styles.button}
+                    onClick={()=> setShow(value => !value)}>
+                        OK
+                </button>
+            </div>
+            {
+                show &&
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <td >Цех</td>
+                            <td>Ишлаб чикар. нон сони</td>
+                            <td>Савдодаги нон сони</td>
+                            <td>Савдодага пул маблаги</td>
+                            <td>Ун харажати</td>
+                            <td>Хом ашёлар хараж.</td>
+                            <td>Иш хаки хараж.</td>
+                            <td>Кунлик пуллик хараж.</td>
+                            <td>Жорий фойда</td>
+                            <td>Фойда коэф (%)</td>
+                            <td>Ойлик пуллик хараж</td>
+                            <td>Соф фойда</td>
+                        </tr>
+                    </thead>
+                    {
+                        data && data.length > 0 &&
+                        data
+                        .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+                        .filter((item: ReferenceModel) => {
+                            // if (item.buxgalter) console.log(item.name)
+                            if ( item.filial || item.umumBulim ) return true
+                            return false
+                        })
+                        .map((item: ReferenceModel, key: number) => {
+                            return <FoydaItem 
+                                key={key}
+                                currentSectionId= {item._id} 
+                                data={data} 
+                                title={item.name}
+                                />
+                        })
+                    }
+                    <thead>
+                        <tr>
+                            <td>Жами</td>
+                            <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM)}</td>
+                            <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
+                            <td className={styles.totalTd}>{numberValue(TRADEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(MOVEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(TRADEINCOME+MOVEINCOME)}</td>
+                            <td className={styles.totalTd}>{numberValue(CHARGES)}</td>
+                            <td className={styles.totalTd}>{numberValue(FORPARTNERS)}</td>
+                            <td className={styles.totalTd}>{numberValue(MOVEOUT)}</td>
+                            <td className={styles.totalTd}>{numberValue(FORFOUNDER)}</td>
+                            <td className={styles.totalTd}>{numberValue(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER)}</td>
+                            <td className={styles.totalTd}>{numberValue(PDSUM-PKSUM+TDSUM-TKSUM)}</td>
+                        </tr>
+                    </thead>
+                </table>
+            }
+            
        </>
     )
 } 

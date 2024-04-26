@@ -25,6 +25,8 @@ export const getEntrysJournal = (
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrys';
   // else url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/entrysForDate'+'?dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
 
+  setMainData && setMainData('loading', true);
+  
   axios.get(url, config)
     .then(function (response) {
       if (setMainData) {
@@ -56,5 +58,7 @@ export const getEntrysJournal = (
         showMessage(error.message, 'error', setMainData)
       }
     });
+
+  setMainData && setMainData('loading', false);
 
 }

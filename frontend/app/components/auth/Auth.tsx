@@ -63,7 +63,7 @@ export default function Auth() {
   }, [mainData.user])
 
   const changeVal = () => {
-    setCapVal(val => !val)
+    // setCapVal(val => !val)
   }
 
   useEffect(()=> {
@@ -83,7 +83,7 @@ export default function Auth() {
               onChange={() => changeVal()}
             />
             <button 
-              disabled={capVal}
+              disabled={!capVal}
               className={styles.button} 
               // appearance='primary' 
               onClick={() => onSubmit(body, setMainData)}>
