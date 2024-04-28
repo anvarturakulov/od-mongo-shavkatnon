@@ -65,8 +65,9 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
                     <div>{titleV}</div>
                 </div>
 
-                {contentName == ReportType.MatOborot && 
-                    <MatOborot listSecondSubconts={listSecondSubconts} data={data}/>
+                { 
+                    contentName == ReportType.MatOborot && 
+                    <MatOborot firstSubcontoId = {firstReferenceId} listSecondSubconts={listSecondSubconts} data={data}/>
                 }
 
                 {contentName == ReportType.Oborotka && 

@@ -5,16 +5,16 @@ import { MatOborotProps } from './matOborot.props';
 import { Schet } from '@/app/interfaces/report.interface';
 
 
-export default function MatOborot({ className, listSecondSubconts, data, ...props} : MatOborotProps):JSX.Element {
+export default function MatOborot({ className, firstSubcontoId, listSecondSubconts, data, ...props} : MatOborotProps):JSX.Element {
     
     return (
         <>
           <table className={styles.table}>
               <Thead/>
               <tbody className={styles.tbody}>
-                  <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S10}/>
-                  <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S21}/>
-                  <TBody listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S28}/>
+                  <TBody firstSubcontoId={firstSubcontoId} listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S10}/>
+                  <TBody firstSubcontoId={firstSubcontoId} listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S21}/>
+                  <TBody firstSubcontoId={firstSubcontoId} listSecondSubconts={listSecondSubconts} data={data} schet={Schet.S28}/>
               </tbody>
           </table>
         </>

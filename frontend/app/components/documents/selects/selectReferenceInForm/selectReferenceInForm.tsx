@@ -49,8 +49,8 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 
                 if (schet && currentItem.documentType && documentsForPrice.includes(currentItem.documentType)) {
                     
-                    currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                    currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
+                    currentItem.price = +query(mainData, schet, TypeQuery.MPRICE, '', id, false);
+                    currentItem.balance = +query(mainData, schet, TypeQuery.BALANCE, currentDocument.senderId, id, false );
                     console.log(currentDocument.senderId)
                     console.log(id)
                 }

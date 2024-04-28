@@ -7,7 +7,7 @@ import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { TbodyProps } from './tbody.props';
 import { getTitleBySchet } from '@/app/service/reports/getTitleBySchet';
 
-export function TBody ({ listSecondSubconts, data, schet, className, ...props}:TbodyProps):JSX.Element {
+export function TBody ({ firstSubcontoId, listSecondSubconts, data, schet, className, ...props}:TbodyProps):JSX.Element {
   
   const { mainData } = useAppContext();
   return (
@@ -16,16 +16,16 @@ export function TBody ({ listSecondSubconts, data, schet, className, ...props}:T
       {
         listSecondSubconts && 
         listSecondSubconts.map((item: string, key) => {
-        
-        const MPRICE = query(schet, TypeQuery.MPRICE, item, mainData);
-        const PDSUM = query(schet, TypeQuery.PDSUM, item, mainData);
-        const PDKOL = query(schet, TypeQuery.PDKOL, item, mainData);
-        const PKSUM = query(schet, TypeQuery.PKSUM, item, mainData);
-        const PKKOL = query(schet, TypeQuery.PKKOL, item, mainData);
-        const TDSUM = query(schet, TypeQuery.TDSUM, item, mainData);
-        const TDKOL = query(schet, TypeQuery.TDKOL, item, mainData);
-        const TKSUM = query(schet, TypeQuery.TKSUM, item, mainData);
-        const TKKOL = query(schet, TypeQuery.TKKOL, item, mainData);
+
+        const MPRICE = query(mainData, schet, TypeQuery.MPRICE, firstSubcontoId, item, false );
+        const PDSUM = query(mainData, schet, TypeQuery.PDSUM, firstSubcontoId, item, false);
+        const PDKOL = query(mainData, schet, TypeQuery.PDKOL, firstSubcontoId, item, false);
+        const PKSUM = query(mainData, schet, TypeQuery.PKSUM, firstSubcontoId, item, false);
+        const PKKOL = query(mainData, schet, TypeQuery.PKKOL, firstSubcontoId, item, false);
+        const TDSUM = query(mainData, schet, TypeQuery.TDSUM, firstSubcontoId, item, false);
+        const TDKOL = query(mainData, schet, TypeQuery.TDKOL, firstSubcontoId, item, false);
+        const TKSUM = query(mainData, schet, TypeQuery.TKSUM, firstSubcontoId, item, false);
+        const TKKOL = query(mainData, schet, TypeQuery.TKKOL, firstSubcontoId, item, false);
         
         if (!PDSUM && !PDKOL && !PKSUM && !PKKOL 
             && !TDSUM  && !TDKOL  && !TKSUM  && !TKKOL ) return <></>

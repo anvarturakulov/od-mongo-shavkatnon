@@ -11,15 +11,12 @@ export const updateCreateDocument = (mainData: Maindata, setMainData: Function |
   let body: DocumentModel = {
     ...currentDocument,
   }
-  console.log(body)
+  
   let docsForNoProveden: Array<string> = [DocumentType.MoveCash, DocumentType.MoveMaterial, DocumentType.MoveProd]
   delete body._id;
   if (isNewDocument && docsForNoProveden.includes(contentName)) {
     body.proveden = false
   }
-
-  console.log('body')
-  console.log(body)
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }

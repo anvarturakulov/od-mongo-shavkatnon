@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, now } from 'mongoose';
 import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
 import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
-
+import { query } from './helpers/querys/query';
+import { QueryObject } from 'src/interfaces/report.interface';
 
 @Injectable()
 export class ReportService {
@@ -21,6 +22,8 @@ export class ReportService {
     return prepareEntrysJournal(result);
   }
 
-  
+  async getQueryValue(queryReport: QueryObject) {
+    return query(queryReport, this.documentService.globalEntrys)
+  }
 
 }

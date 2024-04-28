@@ -41,3 +41,33 @@ export enum DEBETKREDIT {
     DEBET = 'DEBET',
     KREDIT = 'KREDIT'
 }
+
+export enum TypeQuery {
+    PDSUM = 'PDSUM',
+    PDKOL = 'PDKOL',
+    PKSUM = 'PKSUM',
+    PKKOL = 'PKKOL',
+    TDSUM = 'TDSUM',
+    TDKOL = 'TDKOL',
+    TKSUM = 'TKSUM',
+    TKKOL = 'TKKOL',
+    MPRICE = 'MPRICE',
+    BALANCE = 'BALANCE',
+    TDSUMEntrys = 'TDSUMEntrys',
+    TKSUMEntrys = 'TKSUMEntrys',
+    AllEntrys = 'AllEntrys',
+    ODS = 'ODS',
+    OKS = 'OKS',
+    ODK = 'ODK',
+    OKK = 'OKK',
+}
+
+
+export interface QueryObject {
+    typeQuery: string, 
+    schet: string, 
+    startDate: number, 
+    endDate: number, 
+    firstSubcontoId: string, 
+    secondSubcontoId: string
+}
