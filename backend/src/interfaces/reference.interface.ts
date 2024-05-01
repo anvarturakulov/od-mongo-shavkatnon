@@ -17,3 +17,26 @@ export enum TypeTMZ {
     PRODUCT = 'PRODUCT',
     HALFSTUFF = 'HALFSTUFF'
 }
+
+export interface ReferenceModel {
+    _id?: string
+    name: string
+    typeReference: TypeReference
+    typePartners?: TypePartners | undefined
+    typeTMZ?: TypeTMZ | undefined
+    unit?: string
+    comment?: string
+    deleted?: boolean
+    delivery?: boolean
+    filial?: boolean
+    umumBulim?: boolean
+    sklad?: boolean
+    buxgalter?: boolean
+    un?: boolean
+    clientForDeliveryId?: string
+    firstPrice?: number,
+    secondPrice?: number
+    thirdPrice?: number,
+    telegramId?: string,
+    norma?: number
+}

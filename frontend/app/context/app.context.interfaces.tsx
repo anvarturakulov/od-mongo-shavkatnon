@@ -29,7 +29,8 @@ export interface Maindata {
   updateHamirJournal: boolean,
   currentStorageIdInHamirsJournal: string,
   interval: Interval,
-  loading: boolean
+  loading: boolean,
+  informData: Array<any>,
 }
 
 export interface IAppContext {

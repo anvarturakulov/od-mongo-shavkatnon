@@ -4,7 +4,7 @@ import { ReportOptionsDto } from './dto/report.options.dto';
 import { REPORT_NOT_PREPARE } from './report.constants';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { Request } from 'express';
-import { QueryObject } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryObject } from 'src/interfaces/report.interface';
 
 
 @Controller('report')
@@ -40,6 +40,7 @@ export class ReportController {
   @UsePipes(new ValidationPipe())
   @Get('/query')
   async getQuery(@Req() request: Request) {
+    
     const queryObject: QueryObject = {
       typeQuery: `${request.query?.typeQuery}`,
       schet: `${request.query?.schet}`,
@@ -51,6 +52,25 @@ export class ReportController {
 
     const report = await this.reportService.getQueryValue(queryObject);
     
+    if (!report) {
+      throw new NotFoundException(REPORT_NOT_PREPARE);
+    }
+    return report;
+  }
+
+
+  // @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Get('/information')
+  async getInformation(@Req() request: Request) {
+    
+    const queryInformation: QueryInformation = {
+      startDate: +request.query?.startDate,
+      endDate: +request.query?.endDate,
+    }
+
+    const report = await this.reportService.getInformation(queryInformation);
+
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);
     }

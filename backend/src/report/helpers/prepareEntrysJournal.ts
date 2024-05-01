@@ -15,13 +15,13 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>):Array<EntryI
     if (!item.deleted) {
         
       if ( hasDocumentTablePart(item.documentType)) {
-        // if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
-        //   item.tableItems.forEach((tableItem: DocTableItem) => {
-        //     let newItemForResults = { ...prepareEntry(item, false, true, tableItem) }
-        //     results.push(newItemForResults);
+        if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
+          item.tableItems.forEach((tableItem: DocTableItem) => {
+            let newItemForResults = { ...prepareEntry(item, false, true, tableItem) }
+            results.push(newItemForResults);
 
-        //   })
-        // }
+          })
+        }
 
       } else {
         let newItemForResults = { ...prepareEntry(item, true, false) }
@@ -34,13 +34,13 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>):Array<EntryI
       }
       
       if (item.documentType == DocumentType.ComeHalfstuff) {
-        // let newItemForResults = { ...prepareEntry(item, true, false) }
-        // let total: number = 0;
-        // if (item?.tableItems && item.tableItems.length >0) {
-        //   total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
-        // }
-        // newItemForResults.summa = total
-        // results.push(newItemForResults);
+        let newItemForResults = { ...prepareEntry(item, true, false) }
+        let total: number = 0;
+        if (item?.tableItems && item.tableItems.length >0) {
+          total = item.tableItems.reduce((summa, item) => summa + item.total, 0);
+        }
+        newItemForResults.summa = total
+        results.push(newItemForResults);
       }
     }
   })

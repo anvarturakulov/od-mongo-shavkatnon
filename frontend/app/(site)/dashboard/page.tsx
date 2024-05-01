@@ -32,6 +32,7 @@ export default function Dashboard() {
         <div className={styles.content}>
 
           {mainData.mainPage && <Information/>}
+          {mainData.mainPage && <Information/>}
           
           <div className={styles.journalBox}>
             { !mainData.mainPage && contentType=='document' && <Journal/> }

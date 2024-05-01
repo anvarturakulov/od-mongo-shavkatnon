@@ -62,12 +62,16 @@ export enum TypeQuery {
     OKK = 'OKK',
 }
 
-
 export interface QueryObject {
     typeQuery: string, 
-    schet: string, 
+    schet: string,
     startDate: number, 
     endDate: number, 
     firstSubcontoId: string, 
-    secondSubcontoId: string
+    secondSubcontoId: string,
+}
+
+export interface QueryInformation {
+    startDate: number,
+    endDate: number,
 }

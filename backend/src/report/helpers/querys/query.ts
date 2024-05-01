@@ -1,8 +1,13 @@
-import { EntryItem, QueryObject, TypeQuery } from 'src/interfaces/report.interface';
+import { EntryItem, TypeQuery } from 'src/interfaces/report.interface';
 
-export const query = (queryObject: QueryObject, globalEntrys: Array<EntryItem> | undefined) => {
-  
-  let { typeQuery, schet, startDate, endDate, firstSubcontoId, secondSubcontoId } = queryObject;
+export const query = (
+  schet: string, 
+  typeQuery: string, 
+  startDate: number, 
+  endDate: number, 
+  firstSubcontoId: string, 
+  secondSubcontoId: string, 
+  globalEntrys: Array<EntryItem> | undefined) => {
   
   let newEntrys = globalEntrys?.length ? [...globalEntrys] : [] 
   
