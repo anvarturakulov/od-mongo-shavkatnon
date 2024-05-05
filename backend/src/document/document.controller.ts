@@ -77,11 +77,11 @@ export class DocumentController {
     return this.documentService.getAllDocuments(false)
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete('forDate')
   async deleteDocumentByDate(@Req() request: Request) {
-    let dateStart = +request.query?.dateStart
-    let dateEnd = +request.query?.dateEnd
+    let dateStart = 0
+    let dateEnd = 1714507200000
 
     return this.documentService.deleteDocumentByDate(dateStart, dateEnd)
   }
