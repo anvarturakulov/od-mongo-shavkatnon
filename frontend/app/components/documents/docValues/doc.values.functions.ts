@@ -66,7 +66,8 @@ export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageId
     role !== UserRoles.HEADCOMPANY &&
     contentName != DocumentType.ComeCashFromPartners &&
     contentName != DocumentType.ComeMaterial && 
-    contentName != DocumentType.LeaveMaterial
+    contentName != DocumentType.LeaveMaterial &&
+    contentName != DocumentType.LeaveHalfstuff 
   ) return storageIdFromUser
 
   return ''

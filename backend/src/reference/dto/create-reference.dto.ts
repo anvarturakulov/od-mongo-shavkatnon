@@ -76,4 +76,8 @@ export class CreateReferenceDto {
   @IsNumber()
   norma?: number
 
+  @IsOptional()
+  @IsBoolean()
+  longCharge?: boolean
+
 }

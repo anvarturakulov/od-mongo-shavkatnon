@@ -10,42 +10,26 @@ import { getListSecondSubconts } from '@/app/service/reports/getListSecondSubcon
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { UserRoles } from '@/app/interfaces/general.interface';
 
-export const SkladItem = ({className, data, currentId, title, sectionType,  ...props }: SkladItemProps) :JSX.Element => {
+export const SkladItem = ({className, item, ...props }: SkladItemProps) :JSX.Element => {
     
-    const {mainData, setMainData} = useAppContext()
-
-    let startDateFromStorage: string | undefined | null, endDateFromStorage : string | undefined | null
-
-    if (typeof window !== 'undefined') {
-      startDateFromStorage = localStorage.getItem('dateStartToInterval');
-      endDateFromStorage = localStorage.getItem('dateEndToInterval');
-    }
-    let listSecondSubconts
-    if (currentId) {
-        listSecondSubconts = getListSecondSubconts(mainData.reportOption.entrys, [Schet.S10, Schet.S21, Schet.S28], currentId);
-    }
-    let schetList = [Schet.S10,Schet.S21]
+    // if (currentId) {
+    //     listSecondSubconts = getListSecondSubconts(mainData.reportOption.entrys, [Schet.S10, Schet.S21, Schet.S28], currentId);
+    // }
     
-    if (mainData.user?.role == UserRoles.HAMIRCHI) schetList = [Schet.S21]
-
     return (
        <>
           <div className={styles.item}>
-            <Htag tag='h1'>{title}</Htag>
+            <Htag tag='h1'>{item?.section}</Htag>
             <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
             {
-                listSecondSubconts &&
-                listSecondSubconts.length &&
-                listSecondSubconts.map((item: string, key:number) => {
-                    const PDKOL = query(schetList, TypeQuery.PDKOL, item, mainData, true, currentId, true);
-                    const PKKOL = query(schetList, TypeQuery.PKKOL, item, mainData, true, currentId, true);
-                    const TDKOL = query(schetList, TypeQuery.TDKOL, item, mainData, true, currentId, true);
-                    const TKKOL = query(schetList, TypeQuery.TKKOL, item, mainData, true, currentId, true);
-                    const value = PDKOL - PKKOL + TDKOL - TKKOL
+                item?.items &&
+                item?.items.length &&
+                item?.items.map((element:any, key:number) => {
+                    const value = element?.value
                     if (value == 0) return <></>
                     return (
                         <div className={styles.row} key={key}>
-                            <div className={styles.title}>{getPropertySubconto(data, item).name}</div>
+                            <div className={styles.title}>{element?.name}</div>
                             <div className={styles.value}>{numberValue(+value)}</div>
                         </div>
                     )

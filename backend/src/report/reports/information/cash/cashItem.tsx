@@ -34,8 +34,10 @@ export const cashItem = (
       moveIncome: MOVEINCOME,
       allIncome: TRADEINCOME+MOVEINCOME,
       charges: CHARGES,
-      moveOut: MOVEOUT,
       forPartner: FORPARTNERS,
+      moveOut: MOVEOUT,
+      forFounder: FORFOUNDER,
+      allOut: CHARGES+ FORPARTNERS+MOVEOUT+FORFOUNDER,
       endBalans: PDSUM-PKSUM+TDSUM-TKSUM
     }
       

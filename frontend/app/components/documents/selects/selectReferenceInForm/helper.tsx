@@ -21,5 +21,4 @@ export const documentsForPrice = [
   `${DocumentType.MoveProd}`, 
   `${DocumentType.LeaveProd}`,
   `${DocumentType.SaleProd}`
-
 ];

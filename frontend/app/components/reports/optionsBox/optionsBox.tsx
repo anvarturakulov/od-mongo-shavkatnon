@@ -9,8 +9,9 @@ import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { showMessage } from '@/app/service/common/showMessage';
-import { ReportType } from '@/app/interfaces/report.interface';
+import { OborotType, ReportType } from '@/app/interfaces/report.interface';
 import { SelectOborot } from './components/selectOborot/selectOborot';
+import { getMatOborot } from '@/app/service/reports/getMatOborot';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {
@@ -23,9 +24,11 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
         
         const { reportOption } = mainData;
         const { startDate, endDate } = reportOption;
-
+        console.log(startDate)
+        console.log(endDate)
         if ( startDate != 0 && endDate != 0 ) {
-            getEntrysJournal(setMainData, mainData);
+            if (contentName == ReportType.MatOborot) getMatOborot(setMainData, mainData) 
+            else getEntrysJournal(setMainData, mainData);
         } else {
             showMessage('Санани тулдиринг', 'error', setMainData);
         }
@@ -34,6 +37,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
     return (
 
         <div className={styles.box}>
+            
             <div className={styles.title}>{`${contentTitle} буйича хисобот`}</div>
             <div className={styles.dataBox}>
                 <Input label='Бошлангич сана' type='date' id='startDate' onChange={(e)=> onChangeInputOptionsBox(e, setMainData, mainData)}/>
@@ -65,7 +69,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
             <button 
                 className={styles.button}
                 onClick={()=> showReport(setMainData, mainData)}>
-                Хисоботни шакллантириш +
+                Хисоботни шакллантириш
             </button>
 
         </div>

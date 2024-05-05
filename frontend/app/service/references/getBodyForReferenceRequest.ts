@@ -10,7 +10,8 @@ export const getBodyForReferenceRequest = (state: ReferenceModel, typeReference:
   switch (typeReference) {
     case TypeReference.CHARGES:
       return {
-        ...newReq
+        ...newReq,
+        longCharge: state.longCharge
       };
     case TypeReference.PARTNERS:
       return {

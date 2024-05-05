@@ -38,7 +38,8 @@ export interface ReferenceModel {
     secondPrice?: number
     thirdPrice?: number,
     telegramId?: string,
-    norma?: number
+    norma?: number,
+    longCharge?: boolean
 }
 
 

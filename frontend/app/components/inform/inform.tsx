@@ -13,45 +13,56 @@ import { UserRoles } from '@/app/interfaces/general.interface';
 import { Taking } from './taking/taking';
 import { Foyda } from './foyda/foyda';
 import { Norma } from './norma/norma';
+import { useEffect } from 'react';
+
+export const totalByKey = (key:string, data:any[]) => {
+    let total = 0;
+    data && data.length &&
+    data.forEach((item:any) => {
+        total += item[key]
+    })
+    return total
+}
+
 
 export const Inform = ({className, ...props }: InformationProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { user } = mainData;
-    const token = user?.access_token;
-    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
-    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    const { user, informData } = mainData;
+    
+    useEffect(()=>{
+    },[mainData.informData])
     
     return (
        <>
             <RefreshPanel/>
             {
                 user?.role != UserRoles.ZAMGLBUX &&
+                user?.role != UserRoles.GLBUX &&
+                  <>
+                    <Cash data={informData}/>
+                    <Foyda data={informData}/>
+                  </>
+            }
+            {
+                user?.role != UserRoles.ZAMGLBUX &&
                 <>
-                    <Cash data={data}/>
-                    {
-                        !mainData.loading &&
-                        <>
-                            <Taking data={data} />
-                            <Section data={data} sectionType='buxgalter'/>
-                            <Section data={data} sectionType='filial'/>
-                            <Section data={data} sectionType='delivery'/>
-                            <Sklad data={data} sectionType='sklad'/>
-                            <Production data={data} />
-                            <Zp data={data}/>
-                            <Foyda data={data}/>
-                            <Norma data={data}/>    
-                        </>
-                    }
-                    
+                    <Taking data={informData} />
+                    <Section data={informData} sectionType='buxgalter'/>
+                    <Section data={informData} sectionType='filial'/>
+                    <Section data={informData} sectionType='delivery'/>
+                    <Sklad data={informData}/>
+                    <Production data={informData} />
+                    {/* <Zp data={data}/> */}
+                    <Norma data={informData}/>    
                 </>
             }
 
             {
                 user?.role == UserRoles.ZAMGLBUX &&
                 <>
-                    <Section data={data} sectionType='buxgalter' currentSection={user.storageId}/>
-                    <Sklad data={data} sectionType='sklad'/>
+                    <Section data={informData} sectionType='buxgalter' currentSection={user.storageId}/>
+                    <Sklad data={informData}/>
                 </>
 
             }

@@ -47,7 +47,6 @@ export const getEntrysJournal = (
           if (endDate && endDate >= 0) {
             newReportOptions.endDate = endDate;
           }
-        console.log('Анвар ака')
 
         setMainData('reportOption', { ...newReportOptions });
       }

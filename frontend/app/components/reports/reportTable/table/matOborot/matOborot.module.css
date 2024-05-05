@@ -1,40 +1,43 @@
-.table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #f9f9f9;
-    margin-bottom: 10px;
-    position: relative;
+
+.title{
+    margin: 20px 0px;
+    font-weight: 700;
+    background: blue;
+    color: #fff;
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.13);
 }
 
 .table td,
 .table th {
-    border-left: 1px solid #ddd;
-    text-align: left;
-    padding: 10px 7px;
+    border: 0.5px dotted #ddd;
+    text-align: right;
+    padding: 7px;
+    font-weight: 400;
+    font-size: 14px;
+    max-width: 60px;
 }
 
-.table th {
-    text-align: center;
+.table{
+  width: 100%;
+}
+.table thead td {
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
 }
 
-.table tr:nth-child(even) {
-    background-color: #f3f3f3;
+.totalTd{
+  font-size: 14px!important;
+  font-weight: 500;
+  text-align: right!important;
 }
 
-.table th {
-    background-color: #337ab7;
-    color: #fff;
-    font-weight: normal;
+.button{
+  margin-left: 20px;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 700;
 }
-
-.table thead,
-.table tbody tr {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-}
-
-.table tbody {
-  display: block;
-}
-

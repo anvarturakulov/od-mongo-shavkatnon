@@ -11,44 +11,27 @@ import { MenuItem } from '@/app/interfaces/menu.interface';
 import { ContentType, UserRoles } from '@/app/interfaces/general.interface';
 import { getRandomID } from '@/app/service/documents/getRandomID';
 import { getDefinedItemIdForReceiver, getDefinedItemIdForSender } from '../documents/docValues/doc.values.functions';
-import useSWR from 'swr';
-import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { Section } from '../information/section/section';
-import { RefreshPanel } from '../information/refreshPanel/refreshPanel';
-import { Sklad } from '../information/sklad/sklad';
+import { Section } from '../inform/section/section';
+import { RefreshPanel } from '../inform/refreshPanel/refreshPanel';
+import { Sklad } from '../inform/sklad/sklad';
 import { IntervalWindow } from '../common/intervalWindow/intervalWindow';
 import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
-import { DocumentType } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import MiniJournal from '../journals/miniJournal/miniJournal';
-import { DefinedTandirWorkers } from '../documents/definedTandirWorkers/definedTandirWorkers';
-
-const div = 1;
 
 export default function UserMenu({menuData, className, ...props}:UserMenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
     const {mainData, setMainData} = useAppContext()
-    const [tandirworkers, setTandirWorkers] = useState<boolean>(false)
-    const { user, contentName } = mainData;
+    const { user, informData } = mainData;
+    
+    useEffect(()=>{
+        // console.log(mainData.informData)
+    },[mainData.informData])
     
     const role = mainData.user?.role;
     let storageIdFromUser = mainData.user?.storageId
-    const token = user?.access_token;
-    const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
-    const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-
-    const onClickItem = (e:any,currentTitle:string) => {
-        let newMenu = [...menu]
-        newMenu.map(item => {
-            if (item.title == currentTitle) {
-                return item.isOpened = !item.isOpened
-            }
-        })
-        
-        setMenu(newMenu)
-    }
 
     const onClickSubItem = (contentName: string, contentTitle: string, contentType: ContentType, mainData: Maindata) => {
         const keyItem = getKeyEnum(contentName, contentType)
@@ -161,24 +144,22 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 &&
                 <>
                     <RefreshPanel/>
-                    <Section data={data} sectionType='filial' currentSection ={storageIdFromUser}/>
+                    <Section data={informData} sectionType='filial' currentSection ={storageIdFromUser}/>
                     {   
                         user.role == UserRoles.HEADSECTION &&
-                        <Section data={data} sectionType='delivery'/>
+                        <Section data={informData} sectionType='delivery'/>
                     }
                 </>
             }
 
             {
-                (
-                    user?.role == UserRoles.ELAKCHI ||
+                ( 
                     user?.role == UserRoles.GLBUX ||
                     user?.role == UserRoles.HEADSECTION
-                ) 
-                && 
+                ) && 
                 <>
                     <RefreshPanel/>
-                    <Sklad data={data} sectionType='sklad' currentSection ={storageIdFromUser}/>
+                    <Sklad data={informData} currentSection ={storageIdFromUser}/>
                 </>
             }
 
@@ -187,17 +168,17 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 && 
                 <>
                     <RefreshPanel/>
-                    <Section data={data} sectionType='buxgalter' currentSection ={storageIdFromUser}/>
-                    <Sklad data={data} sectionType='sklad'/>
+                    <Section data={informData} sectionType='buxgalter' currentSection ={storageIdFromUser}/>
+                    <Sklad data={informData}/>
                 </>
             }
 
             {
                 ( user?.role == UserRoles.GLBUX) &&
                 <>
-                    <Section data={data} sectionType='buxgalter'/>
-                    <Section data={data} sectionType='filial'/>
-                    <Section data={data} sectionType='delivery'/>
+                    <Section data={informData} sectionType='buxgalter'/>
+                    <Section data={informData} sectionType='filial'/>
+                    <Section data={informData} sectionType='delivery'/>
                 </>
             }
 
@@ -205,7 +186,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                 user?.role == UserRoles.DELIVERY &&
                 <>
                     <RefreshPanel/>
-                    <Section data={data} sectionType='delivery' currentSection ={storageIdFromUser}/>
+                    <Section data={informData} sectionType='delivery' currentSection ={storageIdFromUser}/>
                 </>
             }
 

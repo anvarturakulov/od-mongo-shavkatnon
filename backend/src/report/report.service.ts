@@ -5,10 +5,11 @@ import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
 import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
 import { query } from './helpers/querys/query';
-import { QueryInformation, QueryObject } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryMatOtchet, QueryObject } from 'src/interfaces/report.interface';
 import { ReferenceService } from 'src/reference/reference.service';
 import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
+import { matOborot } from './reports/matOborot/matOborot';
 
 @Injectable()
 export class ReportService {
@@ -43,5 +44,14 @@ export class ReportService {
     return inform
     // return query(queryInformation, this.documentService.globalEntrys)
   }
+
+  async getMatOtchet(queryMatOtchet: QueryMatOtchet) {
+    let data = await this.referenceService.getAllReferences();
+    let { startDate, endDate, section } = queryMatOtchet;
+
+    let result = matOborot(data, startDate, endDate, section, this.documentService.globalEntrys)
+    return result
+  }
+
 
 }

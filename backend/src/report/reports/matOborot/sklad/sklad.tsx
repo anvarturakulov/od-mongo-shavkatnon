@@ -1,11 +1,12 @@
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
 import { EntryItem } from 'src/interfaces/report.interface';
-import { foydaItem } from './foydaItem';
+import { skladItem } from './skladItem';
 
-export const foyda = (
+export const sklad = (
     data: any,
     startDate: number,
     endDate: number,
+    section: string,
     globalEntrys: Array<EntryItem> | undefined ) => {
     
     let result = [];
@@ -14,19 +15,18 @@ export const foyda = (
     data.length > 0 &&
     data
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
-    .filter((item: any) => {
-        if ( item.filial || item.umumBulim ) return true
-        return false
-    })
+    // .filter((item: any) => {
+    //     if (section) return String(item._id) == section
+    // })
     .forEach((item: ReferenceModel) => {
-        let element = foydaItem(data, startDate, endDate, item._id, item.name, globalEntrys)
+        let element = skladItem(data, startDate, endDate, item._id, item.name, globalEntrys)
         if (Object.keys(element).length) {
             result.push(element)
         }
     })
     
     return {
-        reportType: 'FOYDA',
+        reportType: 'SKLAD',
         values : [...result]
     }
 } 

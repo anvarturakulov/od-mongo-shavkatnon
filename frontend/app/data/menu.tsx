@@ -13,19 +13,19 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeMaterial, description:'Хом ашё кирими', 
                 type: 'document', active: false, 
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
@@ -43,13 +43,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.HAMIRCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HAMIRCHI]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
@@ -61,7 +61,8 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.SELLER]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION,
+                 UserRoles.DELIVERY, UserRoles.SELLER]
             },
             { 
                 title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 
@@ -73,13 +74,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.SaleProd, description:'Махсулот сотуви',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.SELLER]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, 
+                 UserRoles.DELIVERY, UserRoles.SELLER]
             },
             { 
                 title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)',
                 type: 'document', active: false,
-                roles: [UserRoles.ADMIN]
-                // [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX]
+                roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.MoveCash, description:'Пул силжиши',
@@ -109,7 +110,7 @@ export const MenuData:Array<MenuItem> = [
                 title: TypeReference.TMZ, description:'Товар моддий бойликлар', 
                 type: 'reference', active:false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX]
             },
             { 
                 title: TypeReference.STORAGES, description:'Цех ва омборхоналар',
@@ -121,13 +122,13 @@ export const MenuData:Array<MenuItem> = [
                 title: TypeReference.PARTNERS, description:'Хамкорлар', 
                 type: 'reference', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX]
             },
             { 
                 title: TypeReference.WORKERS, description:'Ходимлар',
                 type: 'reference', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX]
             },
             { 
                 title: TypeReference.CHARGES, description:'Харажатлар',

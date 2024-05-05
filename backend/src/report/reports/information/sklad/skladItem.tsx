@@ -44,6 +44,7 @@ export const skladItem = (
     return ( 
         {
         section: title,
+        sectionId: currentSectionId,
         items: result
         }
     )

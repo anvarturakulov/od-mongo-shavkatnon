@@ -21,14 +21,12 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
     const [disabled, setDisabled] = useState<boolean>(false)
 
     useEffect(() => {
-        // console.log('contentName---'+contentName)
         if (!currentDocument.user) {
             saveUser(setMainData, mainData)
         }
-        if (contentName == DocumentType.MoveMaterial || contentName == DocumentType.LeaveMaterial) {
-            getEntrysJournal(setMainData, mainData, currentDocument.date);
-        }
-
+        // if (contentName == DocumentType.MoveMaterial || contentName == DocumentType.LeaveMaterial) {
+        //     getEntrysJournal(setMainData, mainData, currentDocument.date);
+        // }
     },[])
 
     const onSubmit = ( mainData: Maindata, setMainData: Function| undefined ) => {
@@ -38,7 +36,6 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
             ...currentDocument,
         }
         
-        console.log('body'+body)
         if (!validateBody(body)) {
             showMessage('Хужжатни тулдиришда хатолик бор.', 'error', setMainData);
             setDisabled(false)

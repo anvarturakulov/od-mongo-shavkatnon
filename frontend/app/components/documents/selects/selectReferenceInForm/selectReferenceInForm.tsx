@@ -10,11 +10,15 @@ import { sortByName } from '@/app/service/references/sortByName';
 import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
-import { query } from '@/app/service/reports/querys/query';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { definedTandirWorkers, documentsForPrice } from './helper';
+import { queryForOne } from '@/app/service/reports/querys/queryForOne';
+
+const getResultBuQuery = async () => {
+
+}
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -49,10 +53,10 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 
                 if (schet && currentItem.documentType && documentsForPrice.includes(currentItem.documentType)) {
                     
-                    currentItem.price = +query(mainData, schet, TypeQuery.MPRICE, '', id, false);
-                    currentItem.balance = +query(mainData, schet, TypeQuery.BALANCE, currentDocument.senderId, id, false );
-                    console.log(currentDocument.senderId)
-                    console.log(id)
+                    currentItem.price = +queryForOne(mainData, schet, TypeQuery.MPRICE, '', id, 1717113583000);
+                    currentItem.balance = +queryForOne(mainData, schet, TypeQuery.BALANCE, currentDocument.senderId, id, 1717113583000 );
+                    console.log(currentItem.balance)
+                    console.log(currentItem.price)
                 }
             }
 
@@ -116,12 +120,6 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         return true
                     }
                 })
-                .filter((item: ReferenceModel)=> {
-                    if (user?.role == UserRoles.HEADSECTION) {
-                        if (item.typeTMZ == 'MATERIAL') return !item.un
-                    }
-                    return true
-                })
                 .filter((item: ReferenceModel) => {
                     if ((type == 'receiver' || type == 'sender') && 
                          ( contentName == DocumentType.MoveHalfstuff || 
@@ -143,6 +141,13 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     if (type == 'receiver' && contentName == DocumentType.MoveCash)
                         {
                             return (item.filial || item.buxgalter) 
+                        }
+                    return true
+                })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'sender' && (contentName == DocumentType.LeaveMaterial || contentName == DocumentType.LeaveHalfstuff))
+                        {
+                            return (item.filial || item.sklad) 
                         }
                     return true
                 })
@@ -173,6 +178,13 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
                         {
                             return ( item.filial || item.umumBulim) 
+                        }
+                    return true
+                })
+                .filter((item: ReferenceModel) => {
+                    if (type == 'analitic' && typeReference == TypeReference.PARTNERS)
+                        {
+                            return item.typePartners == TypePartners.SUPPLIERS 
                         }
                     return true
                 })

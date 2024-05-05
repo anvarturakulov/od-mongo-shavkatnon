@@ -36,4 +36,8 @@
 
 // }
 
-export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+export const numberValue = (price: number | undefined): string => {
+  if (price != undefined) return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  else return ''
+
+};

@@ -14,7 +14,6 @@ import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from '../helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, DocumentType, Interval } from '@/app/interfaces/document.interface';
-import { getDateFromStorageExceptNull } from '@/app/service/documents/getDateFromStorageExceptNull';
 import { dashboardUsersList } from '@/app/interfaces/general.interface';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 import Footer from '../../common/footer/footer'
@@ -51,8 +50,6 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     
     const {mainData, setMainData} = useAppContext();
     const {dateStart, dateEnd} = mainData.interval;
-    // const [count, setCount] = useState<number>(0);
-    // const [total, setTotal] = useState<number>(0);
 
     let dateStartForUrl = dateStart
     let dateEndForUrl = dateEnd

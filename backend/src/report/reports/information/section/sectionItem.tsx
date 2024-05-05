@@ -58,6 +58,7 @@ export const sectionItem = (
   return (
     {
       section: title,
+      sectionId: currentSectionId,
       startBalansCountNon: PDKOL-PKKOL-(PDKOLbux-PKKOLbux),
       startBalansCountBux: PDKOLbux-PKKOLbux,
       prodCountNon: OBKOLD2820-OBKOLD2820bux,

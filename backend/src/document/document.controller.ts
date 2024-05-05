@@ -69,10 +69,21 @@ export class DocumentController {
     return this.documentService.getByTypeForDateDocument(documentType, dateStart, dateEnd)
   }
 
+  
+
   @UseGuards(JwtAuthGuard)
   @Get('getAll')
   async getAllDocuments() {
     return this.documentService.getAllDocuments(false)
+  }
+
+  // @UseGuards(JwtAuthGuard)
+  @Delete('forDate')
+  async deleteDocumentByDate(@Req() request: Request) {
+    let dateStart = +request.query?.dateStart
+    let dateEnd = +request.query?.dateEnd
+
+    return this.documentService.deleteDocumentByDate(dateStart, dateEnd)
   }
 
   @UseGuards(JwtAuthGuard)

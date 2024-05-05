@@ -2,8 +2,7 @@
 import { SectionProps } from './section.props';
 import styles from './section.module.css';
 import { SectionItem } from './sectionItem/sectionItem';
-import { ReferenceModel } from '@/app/interfaces/reference.interface';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export const Section = ({className, data, sectionType, currentSection, ...props }: SectionProps) :JSX.Element => {
     let title 
@@ -11,41 +10,35 @@ export const Section = ({className, data, sectionType, currentSection, ...props 
     if (sectionType == 'filial') title = 'ЦЕХЛАР'
     if (sectionType == 'buxgalter') title = 'БУХГАЛТЕРЛАР'
 
-    let [show, setShow] = useState<boolean>(false);
+    useEffect(()=> {
+        // console.log(data)
+    }, [data])
+    
+    let datas = data ? data.filter((item: any) => item?.reportType == `SECTION-${sectionType.toLocaleUpperCase()}`)[0]?.values : []
 
-      
     return (
        <>
             <div className={styles.title}>
                 {title}
-                <button 
-                    className={styles.button}
-                    onClick={()=> setShow(value => !value)}>
-                        OK
-                </button>
+                
             </div>
-            {
-                show &&
-                <div className={styles.itemsBox}>
-                    {
-                        data && data.length > 0 &&
-                        data.filter((item: any) => {
-                            if (sectionType == 'delivery') return item?.delivery
-                            if (sectionType == 'filial') return item?.filial
-                            if (sectionType == 'buxgalter') return item?.buxgalter
-                        })
-                        .filter((item: ReferenceModel) => {
-                            if (currentSection) return item._id == currentSection
-                            else return true
-                        })
-                        .map((item: ReferenceModel, key: number) => {
-                            return <SectionItem key={key} currentId= {item._id} data={data} title={item.name} sectionType = {sectionType}/>
-                        })
-                    }
-                </div>
-            }
-             
-            
+            <div className={styles.itemsBox}>
+                {
+                    datas && datas.length &&
+                    datas
+                    .filter((item:any) => {
+                        if (currentSection) return currentSection == item.sectionId
+                        return true
+                    })
+                    .map((element: any, key: number) => {
+                        return <SectionItem 
+                            key={key}
+                            item={element}
+                            sectionType={sectionType}
+                        />
+                    })
+                }  
+            </div>
        </>
     )
 } 

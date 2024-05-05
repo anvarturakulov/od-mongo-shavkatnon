@@ -31,6 +31,7 @@ export interface Maindata {
   interval: Interval,
   loading: boolean,
   informData: Array<any>,
+  matOborot: Array<any>,
 }
 
 export interface IAppContext {

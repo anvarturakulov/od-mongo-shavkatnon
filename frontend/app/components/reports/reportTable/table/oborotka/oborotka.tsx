@@ -6,7 +6,7 @@ import { useAppContext } from '@/app/context/app.context';
 import { getSchetForOborotType } from '@/app/service/reports/getSchetForOborotType';
 
 
-export default function MatOborot({ className, listFirstSubconts, listSecondSubconts, data, ...props} : OborotkaProps):JSX.Element {
+export default function Oborotka({ className, listFirstSubconts, listSecondSubconts, data, ...props} : OborotkaProps):JSX.Element {
     const { setMainData, mainData } = useAppContext()
     const { oborotType } = mainData.reportOption;
     return (

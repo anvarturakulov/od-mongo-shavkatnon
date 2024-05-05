@@ -87,5 +87,6 @@ export const defaultMainData: Maindata = {
     currentStorageIdInHamirsJournal: '',
     interval: defaultInterval,
     loading: false,
-    informData: []
+    informData: [],
+    matOborot: []
   }

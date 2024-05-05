@@ -75,3 +75,9 @@ export interface QueryInformation {
     startDate: number,
     endDate: number,
 }
+
+export interface QueryMatOtchet {
+    startDate: number,
+    endDate: number,
+    section: string,
+}

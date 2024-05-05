@@ -52,8 +52,9 @@ export const normaItem = (
     
     return ( 
         {
-        section: title,
-        items: result
+          section: title,
+          items: result,
+          countHamirs
         }
     )
     

@@ -61,7 +61,10 @@ export class Reference {
   telegramId?: string
 
   @Prop()
-  norma?: number
+  norma: number
+
+  @Prop()
+  longCharge?: boolean
 
 }
 

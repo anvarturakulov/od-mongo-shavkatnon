@@ -4,7 +4,7 @@ import { ReportOptionsDto } from './dto/report.options.dto';
 import { REPORT_NOT_PREPARE } from './report.constants';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { Request } from 'express';
-import { QueryInformation, QueryObject } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryMatOtchet, QueryObject } from 'src/interfaces/report.interface';
 
 
 @Controller('report')
@@ -70,6 +70,25 @@ export class ReportController {
     }
 
     const report = await this.reportService.getInformation(queryInformation);
+
+    if (!report) {
+      throw new NotFoundException(REPORT_NOT_PREPARE);
+    }
+    return report;
+  }
+
+  // @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Get('/matOborot')
+  async getMatOtchet(@Req() request: Request) {
+
+    const queryMatOtchet: QueryMatOtchet = {
+      startDate: +request.query?.startDate,
+      endDate: +request.query?.endDate,
+      section: String(request.query.section),
+    }
+
+    const report = await this.reportService.getMatOtchet(queryMatOtchet);
 
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);

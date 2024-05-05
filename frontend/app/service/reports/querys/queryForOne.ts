@@ -12,34 +12,26 @@ export const queryForOne = (
   typeQuery: TypeQuery,
   firstSubcontoId: string,
   secondSubcontoId: string,
-  forDashboard: boolean,
+  endDate: number,
 ): number => {
 
-  const { reportOption, interval, user } = mainData;
-
-  let startDate = reportOption?.startDate
-  let endDate = reportOption?.endDate
-
+  let { user } = mainData;
   endDate = endDate + 86399999
-
-  if (forDashboard) {
-    startDate = interval?.dateStart;
-    endDate = interval?.dateEnd;
-  }
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/query' +
     '?typeQuery=' + typeQuery + '&schet=' + schet +
-    '&startDate=' + startDate + '&endDate=' + endDate +
+    '&startDate=' + 0 + '&endDate=' + endDate +
     '&firstSubcontoId=' + firstSubcontoId + '&secondSubcontoId=' + secondSubcontoId;
 
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
-  let result;
+  let result = 0;
   axios.get(url, config)
     .then(function (request) {
-      result = request
+      result = +request.data
+      
     })
     .catch(function (error) {
       // if (setMainData) {
@@ -49,5 +41,5 @@ export const queryForOne = (
 
 
 
-  return 0
+  return result
 }

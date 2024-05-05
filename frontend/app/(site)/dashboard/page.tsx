@@ -12,6 +12,7 @@ import { IntervalWindow } from '@/app/components/common/intervalWindow/intervalW
 import TopBox from '@/app/components/common/topBox/topBox';
 import { Information } from '@/app/components/information/information';
 import { Spinner } from '@/app/components/common/spinner/spinner';
+import { Inform } from '@/app/components/inform/inform';
 
 export default function Dashboard() {
 
@@ -31,8 +32,8 @@ export default function Dashboard() {
         <TopBox/>
         <div className={styles.content}>
 
-          {mainData.mainPage && <Information/>}
-          {mainData.mainPage && <Information/>}
+          {/* {mainData.mainPage && <Information/>} */}
+          {mainData.mainPage && <Inform/>}
           
           <div className={styles.journalBox}>
             { !mainData.mainPage && contentType=='document' && <Journal/> }

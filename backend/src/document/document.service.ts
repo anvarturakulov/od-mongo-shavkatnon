@@ -93,4 +93,9 @@ export class DocumentService {
     let result = await this.getAllDocuments(true)
     this.globalEntrys = [...prepareEntrysJournal(result)];
   }
+
+  async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
+    this.documentModel.deleteMany({ date: { $gte: dateStart, $lte: dateEnd } }).exec()
+    return null
+  }
 }

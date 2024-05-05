@@ -58,13 +58,5 @@ export const information = (
     result.push(normaResult);
 
     return result
-    return (
-            {
-                // <Zp data={data}/>
-                // <Foyda data={data}/>
-                // <Norma data={data}/>    
-            }
-                    
-  
-    )
+    
 } 

@@ -39,7 +39,8 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         secondPrice:0,
         thirdPrice:0,
         deleted: false,
-        norma: 0
+        norma: 0,
+        longCharge: false,
     }
 
     const [body, setBody] = useState<ReferenceModel>(defaultBody) 
@@ -156,6 +157,12 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
                     body.typeReference == TypeReference.STORAGES &&
                     <CheckBoxForReference label='Бухгалтер' setCheckbox={setCheckbox} checked={body.buxgalter} id={'buxgalter'}/>
+                }
+
+                {
+                    mainData.user?.role == UserRoles.ADMIN && 
+                    body.typeReference == TypeReference.CHARGES &&
+                    <CheckBoxForReference label='Ойлик харажат' setCheckbox={setCheckbox} checked={body.longCharge} id={'longCharge'}/>
                 }
                 
             </div>

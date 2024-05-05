@@ -9,13 +9,13 @@ import { getListSecondSubconts } from '@/app/service/reports/getListSecondSubcon
 import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
-import MatOborot from './table/matOborot/matOborot';
 import { dateToStr } from '@/app/service/reports/dateToStr';
 import Oborotka from './table/oborotka/oborotka';
 import { getSchetListFoSecondSunconts } from '@/app/service/reports/getSchetListFoSecondSunconts';
 import { getListFirstSubconts } from '@/app/service/reports/getListFirstSubconts';
 import Personal from './table/personal/personal';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
+import { MatOborot } from './table/matOborot/matOborot';
 
 export default function ReportTable({ className, ...props} : ReportTableProps):JSX.Element {
     
@@ -67,7 +67,8 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
 
                 { 
                     contentName == ReportType.MatOborot && 
-                    <MatOborot firstSubcontoId = {firstReferenceId} listSecondSubconts={listSecondSubconts} data={data}/>
+                    // <MatOborot firstSubcontoId = {firstReferenceId} listSecondSubconts={listSecondSubconts} data={data}/>
+                    <MatOborot />
                 }
 
                 {contentName == ReportType.Oborotka && 
