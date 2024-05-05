@@ -38,7 +38,7 @@ export const MatOborotItem = ({className, item, section, ...props }: MatOborotIt
                 item?.items.length &&
                 item?.items.map((element:any, key:number) => {
                     return (
-                        <tr>
+                        <tr key={key}>
                           <td className={styles.number}>{key+1}</td>
                           <td id='itemName' className={styles.title}>{element?.name}</td>
                           <td>--</td>
