@@ -57,7 +57,6 @@ export const CheckBoxInTable = ({ className, id, label, ...props }: checkBoxInFo
                 currentValues.proveden = target.checked
             }
             
-            
             if ( setMainData ) {
                 setMainData('currentDocument', {...currentValues})
             }

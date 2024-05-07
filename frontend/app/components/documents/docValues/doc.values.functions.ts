@@ -39,20 +39,28 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
     return storageIdFromUser
   }
 
-  if (storageIdFromUser && role && role !== UserRoles.ADMIN && role !== UserRoles.HEADCOMPANY && contentName == DocumentType.ComeCashFromPartners) {
-    return storageIdFromUser
-  }
-
-  if (role && role == UserRoles.HAMIRCHI && contentName == DocumentType.LeaveHalfstuff) {
-    return "659d1ff7523a48fdeb6ada6d"
-  }
-
-  if (contentName == DocumentType.ComeMaterial) {
-    // console.log(storageIdFromUser)
-    return storageIdFromUser
-  } 
-
+  if (
+      storageIdFromUser && 
+      role && 
+      role !== UserRoles.ADMIN && 
+      role !== UserRoles.HEADCOMPANY &&
+      role !== UserRoles.GLBUX &&
+      role !== UserRoles.ZAMGLBUX && 
+      ( 
+        contentName == DocumentType.ComeCashFromPartners ||
+        contentName == DocumentType.LeaveCash
+      ) 
+  ) return storageIdFromUser
   
+
+  if (
+      role && 
+      role == UserRoles.HAMIRCHI && 
+      contentName == DocumentType.LeaveHalfstuff
+  ) return "659d1ff7523a48fdeb6ada6d"
+  
+
+  if (contentName == DocumentType.ComeMaterial) return storageIdFromUser
 
   return ''
 }
@@ -64,65 +72,15 @@ export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageId
     role &&
     role !== UserRoles.ADMIN &&
     role !== UserRoles.HEADCOMPANY &&
+    role !== UserRoles.GLBUX &&
     contentName != DocumentType.ComeCashFromPartners &&
     contentName != DocumentType.ComeMaterial && 
-    contentName != DocumentType.LeaveMaterial &&
     contentName != DocumentType.LeaveHalfstuff 
   ) return storageIdFromUser
 
   return ''
 }
 
-export const visibilityPriceValueInDocument = (contentName: string, user: User | undefined): boolean => {
-  const documents = [
-    `${DocumentType.ComeCashFromPartners}`,
-    `${DocumentType.LeaveCash}`,
-    `${DocumentType.MoveCash}`,
-    `${DocumentType.ComeHalfstuff}`,
-    `${DocumentType.ComeProduct}`,
-    `${DocumentType.MoveProd}`,
-    `${DocumentType.LeaveProd}`,
-    `${DocumentType.ZpCalculate}`
-  ]
-
-  if (user) {
-    if (documents.includes(contentName)) return false
-  }
-
-  return true
-}
-
-export const visibilityTotalValueInDocument = (contentName: string, user: User | undefined): boolean => {
-  const documents = [
-    `${DocumentType.ComeHalfstuff}`,
-    `${DocumentType.ComeCashFromPartners}`,
-    `${DocumentType.LeaveProd}`,
-    `${DocumentType.MoveProd}`,
-  ]
-
-  if (user) {
-    if (user.role == UserRoles.HAMIRCHI || user.role == UserRoles.TANDIR) return false
-
-    if (documents.includes(contentName)) return false
-  }
-
-
-  return true
-}
-
-
-export const visibilityCashFromPartnerValueInDocument = (contentName: string, user: User | undefined): boolean => {
-  const documents = [
-    `${DocumentType.SaleProd}`,
-    `${DocumentType.ComeCashFromPartners}`
-  ]
-
-  if (user) {
-    if (documents.includes(contentName)) return true
-  }
-
-  return false
-}
 
 export const visibilityCommentValueInDocument = (contentName: string, user: User | undefined): boolean => {
   const documents = [

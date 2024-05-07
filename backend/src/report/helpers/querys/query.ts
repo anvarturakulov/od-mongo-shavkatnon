@@ -5,8 +5,8 @@ export const query = (
   typeQuery: string, 
   startDate: number, 
   endDate: number, 
-  firstSubcontoId: string, 
-  secondSubcontoId: string, 
+  firstSubcontoId: string | undefined, 
+  secondSubcontoId: string | undefined, 
   globalEntrys: Array<EntryItem> | undefined) => {
   
   let newEntrys = globalEntrys?.length ? [...globalEntrys] : [] 

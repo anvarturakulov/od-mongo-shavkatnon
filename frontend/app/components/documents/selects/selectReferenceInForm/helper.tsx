@@ -12,13 +12,3 @@ export const definedTandirWorkers = (id: string|undefined, mainData: Maindata, t
 
   return false
 }
-
-export const documentsForPrice = [
-  `${DocumentType.LeaveMaterial}`, 
-  `${DocumentType.MoveMaterial}`,
-  `${DocumentType.LeaveHalfstuff}`, 
-  `${DocumentType.MoveHalfstuff}`,
-  `${DocumentType.MoveProd}`, 
-  `${DocumentType.LeaveProd}`,
-  `${DocumentType.SaleProd}`
-];

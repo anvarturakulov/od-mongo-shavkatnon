@@ -8,13 +8,78 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
     let analiticType = TypeReference.STORAGES , analiticLabel = '', analiticIsVisible = false
     let cashFromPartnerLabel = '' , cashFromPartnerVisible = false;
     let tableIsVisible = false;
+    let balansIsVisible = true;
+    
     let countIsVisible = true;
+    let countIsDisabled = false;
 
-    const documentsForComeMaterial = [
+    let priceIsVisible = true;
+    let priceIsDisabled = false;
+    
+    let totalIsVisible = true;
+    let totalIsDisabled = false;
+
+    const documentsComeMaterial = [
         `${DocumentType.ComeMaterial}`,
     ]
 
-    if (documentsForComeMaterial.includes(documentType)) {
+    const documentsComeProduct = [
+        `${DocumentType.ComeProduct}`,
+    ]
+
+    const documentsComeHalfstuff = [
+        `${DocumentType.ComeHalfstuff}`,
+    ]
+
+    const documentsSaleProd = [
+        `${DocumentType.SaleProd}`,
+    ]
+
+    const documentsSaleMaterial = [
+        `${DocumentType.SaleMaterial}`,
+    ]
+
+    const documentsLeaveProd = [
+        `${DocumentType.LeaveProd}`,
+    ]
+
+    const documentsLeaveMaterial = [
+        `${DocumentType.LeaveMaterial}`,
+    ]
+
+    const documentsLeaveHalfstuff = [
+        `${DocumentType.LeaveHalfstuff}`,
+    ]
+
+    const documentsMoveProd = [
+        `${DocumentType.MoveProd}`,
+    ]
+
+    const documentsMoveMaterial = [
+        `${DocumentType.MoveMaterial}`,
+    ]
+
+    const documentsMoveHalfstuff = [
+        `${DocumentType.MoveHalfstuff}`,
+    ]
+
+    const documentsComeCashFromPartners = [
+        `${DocumentType.ComeCashFromPartners}`,
+    ]
+
+    const documentsMoveCash = [
+        `${DocumentType.MoveCash}`,
+    ]
+
+    const documentsLeaveCash = [
+        `${DocumentType.LeaveCash}`,
+    ]
+
+    const documentsZpCalculate = [
+        `${DocumentType.ZpCalculate}`,
+    ]
+
+    if (documentsComeMaterial.includes(documentType)) {
         senderType = TypeReference.PARTNERS
         senderLabel = 'Таъминотчи'
         senderIsVisible = true
@@ -26,194 +91,260 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticType = TypeReference.TMZ
         analiticLabel = 'Товар моддий бойлик'
         analiticIsVisible = true
+
+        balansIsVisible = false;
     }
 
-    const documentsForComeProduct = [
-        `${DocumentType.ComeProduct}`,
-        `${DocumentType.ComeHalfstuff}`,
-    ]
-
-    if (documentsForComeProduct.includes(documentType)) {
+    if (documentsComeProduct.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Ишлаб чикарувчи булим'
-        senderIsVisible = false
-        
+        senderIsVisible = true
+
         receiverType = TypeReference.STORAGES
         receiverLabel = 'Кабул килувчи булим'
-        recieverIsVisible = false
+        recieverIsVisible = true
 
         analiticType = TypeReference.TMZ
         analiticLabel = 'Товар моддий бойлик'
         analiticIsVisible = true
+
+        priceIsVisible = false;
+        totalIsVisible = false;
+        balansIsVisible = false;
     }
 
-    const documentsForComeHalfstuff = [
-        `${DocumentType.ComeHalfstuff}`,
-    ]
-
-    if (documentsForComeHalfstuff.includes(documentType)) {
+    if (documentsComeHalfstuff.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Берувчи булим'
+        senderLabel = 'Ишлаб чикарувчи булим'
         senderIsVisible = true
 
-        receiverType = TypeReference.CHARGES
-        receiverLabel = 'Чиким учун харажат тури'
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи булим'
         recieverIsVisible = true
 
         analiticType = TypeReference.TMZ
-        analiticLabel = 'ЯТМ номи'
+        analiticLabel = 'Я.Т.М'
         analiticIsVisible = true;
 
+        priceIsVisible = false;
+        totalIsVisible = false;
+        balansIsVisible = false;
         tableIsVisible = true;
     }
 
-    const documetsForSaleTMZ = [
-        `${DocumentType.SaleProd}`,
-        `${DocumentType.SaleMaterial}`,
-    ]
-
-    if (documetsForSaleTMZ.includes(documentType)) {
+    if (documentsSaleProd.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Жунатувчи булим'
         senderIsVisible = true
-        
+
         receiverType = TypeReference.PARTNERS
-        receiverLabel = 'Сотиб олувчи'
+        receiverLabel = 'Мижоз'
         recieverIsVisible = true
 
         analiticType = TypeReference.TMZ
-        analiticLabel = 'Товар моддий бойлик'
+        analiticLabel = 'Тайёр махсулот'
         analiticIsVisible = true
 
+        totalIsDisabled = true;
     }
 
-    const documentsForLeaveProdAndHalfStuff = [
-        `${DocumentType.LeaveProd}`,
-        `${DocumentType.LeaveHalfstuff}`,
-    ]
-
-    if (documentsForLeaveProdAndHalfStuff.includes(documentType)) {
+    if (documentsSaleMaterial.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Берувчи булим'
+        senderLabel = 'Жунатувчи'
         senderIsVisible = true
-        
-        receiverType = TypeReference.CHARGES
-        receiverLabel = 'Чиким учун харажат тури'
+
+        receiverType = TypeReference.PARTNERS
+        receiverLabel = 'Мижоз'
         recieverIsVisible = true
 
         analiticType = TypeReference.TMZ
-        analiticLabel = 'Товар моддий бойлик'
+        analiticLabel = 'Хом ашё'
         analiticIsVisible = true
+
+        totalIsDisabled = true;
+        priceIsDisabled = true;
     }
 
-    const documentsForLeaveMaterial = [
-        `${DocumentType.LeaveMaterial}`,
-    ]
-
-    if (documentsForLeaveMaterial.includes(documentType)) {
-        senderType = TypeReference.STORAGES
-        senderLabel = 'Берувчи булим'
-        senderIsVisible = true
-
-        receiverType = TypeReference.CHARGES
-        receiverLabel = 'Чиким учун харажат тури'
-        recieverIsVisible = true
-
-        tableIsVisible = true;
-    }
-
-
-    const documentsForMoveTMZ = [
-        `${DocumentType.MoveProd}`,
-        `${DocumentType.MoveMaterial}`,
-        `${DocumentType.MoveHalfstuff}`,
-    ]
-
-    if (documentsForMoveTMZ.includes(documentType)) {
+    if (documentsLeaveProd.includes(documentType)) {
         senderType = TypeReference.STORAGES
         senderLabel = 'Жунатувчи булим'
         senderIsVisible = true
-        
+
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Харажат тури'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Тайёр махсулот'
+        analiticIsVisible = true
+
+        priceIsVisible = false;
+        totalIsVisible = false;
+    }
+
+    if (documentsLeaveMaterial.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Харажат тури'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Хом ашё'
+        analiticIsVisible = false
+
+        tableIsVisible = true
+
+        countIsVisible = false;
+        priceIsDisabled = true;
+        totalIsDisabled = true;
+        balansIsVisible = false;
+
+    }
+
+    if (documentsLeaveHalfstuff.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.CHARGES
+        receiverLabel = 'Харажат тури'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Я.Т.М'
+        analiticIsVisible = true
+
+        totalIsDisabled = true;
+        priceIsDisabled = true;
+    }
+
+    if (documentsMoveProd.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        senderIsVisible = true
+
         receiverType = TypeReference.STORAGES
         receiverLabel = 'Кабул килувчи булим'
         recieverIsVisible = true
 
         analiticType = TypeReference.TMZ
-        analiticLabel = 'Товар моддий бойлик'
+        analiticLabel = 'Тайёр махсулот'
         analiticIsVisible = true
+
+        priceIsVisible = false;
+        totalIsVisible = false;
     }
 
-    const documentsForCashFromPartners = [
-        `${DocumentType.ComeCashFromPartners}`,
-    ]
+    if (documentsMoveMaterial.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи килувчи булим'
+        senderIsVisible = true
 
-    if (documentsForCashFromPartners.includes(documentType)) {
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи булим'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Хом ашё'
+        analiticIsVisible = true
+
+        totalIsDisabled = true;
+        priceIsDisabled = true;
+    }
+
+    if (documentsMoveHalfstuff.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи булим'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Я.Т.М'
+        analiticIsVisible = true
+
+        priceIsDisabled = true;
+        totalIsDisabled = true;
+
+    }
+
+    if (documentsComeCashFromPartners.includes(documentType)) {
         senderType = TypeReference.PARTNERS
-        senderLabel = 'Пулни берган хамкор'
+        senderLabel = 'Хамкор'
         senderIsVisible = true
-        
+
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Пулни кабул килувчи булим'
+        receiverLabel = 'Кабул килувчи булим'
         recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = '-'
+        analiticIsVisible = false;
+
+        countIsVisible = false;
+        priceIsVisible = false;
+        balansIsVisible = false;
+    }
+
+    if (documentsMoveCash.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи булим'
+        senderIsVisible = true
+
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи булим'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = '-'
+        analiticIsVisible = false
+
+        countIsVisible = false;
+        priceIsVisible = false;
+        balansIsVisible = false;
 
     }
 
-    const documentsForCashMove = [
-        `${DocumentType.MoveCash}`,
-    ]
-
-    if (documentsForCashMove.includes(documentType)) {
+    if (documentsLeaveCash.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = 'Пулни берувчи булим'
+        senderLabel = 'Жунатувчи булим'
         senderIsVisible = true
-        
+
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Пулни кабул килувчи булим'
+        receiverLabel = 'Харажатни олувчи булим'
         recieverIsVisible = true
-    }
-
-    const documentsForCashLeave = [
-        `${DocumentType.LeaveCash}`,
-    ]
-
-    if (documentsForCashLeave.includes(documentType)) {
-        senderType = TypeReference.STORAGES
-        senderLabel = 'Пулни харажат килувчи булим'
-        senderIsVisible = true
 
         analiticType = TypeReference.CHARGES
         analiticLabel = 'Харажат тури'
         analiticIsVisible = true
+
+        priceIsVisible = false;
+        countIsVisible = false;
+        balansIsVisible = false;
+
     }
 
-    const documentsForZp = [
-        `${DocumentType.ZpCalculate}`,
-    ]
-
-    if (documentsForZp.includes(documentType)) {
+    if (documentsZpCalculate.includes(documentType)) {
         senderType = TypeReference.STORAGES
-        senderLabel = '-----'
+        senderLabel = '{fhf;fn ,ekbvb}'
         senderIsVisible = false
-        
+
         receiverType = TypeReference.STORAGES
-        receiverLabel = 'Булим'
+        receiverLabel = 'Харажатни олувчи булим'
         recieverIsVisible = true
 
         analiticType = TypeReference.WORKERS
         analiticLabel = 'Ходим'
-        analiticIsVisible = true
-    }
+        analiticIsVisible = true;
 
-    const documentsCountNotVisibel = [
-        `${DocumentType.LeaveCash}`,
-        `${DocumentType.MoveCash}`,
-        `${DocumentType.ComeCashFromPartners}`,
-        `${DocumentType.ZpCalculate}`,
-        `${DocumentType.LeaveMaterial}`,
-    ]
-
-    if (documentsCountNotVisibel.includes(documentType)) {
-        countIsVisible = false
+        priceIsVisible = false;
+        countIsVisible = false;
+        balansIsVisible = false;
     }
 
     return {
@@ -230,5 +361,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         cashFromPartnerVisible,
         tableIsVisible,
         countIsVisible,
+        priceIsVisible,
+        totalIsVisible,
+        priceIsDisabled,
+        totalIsDisabled,
+        balansIsVisible
     }
 }

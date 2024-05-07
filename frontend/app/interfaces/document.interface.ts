@@ -78,7 +78,12 @@ export interface OptionsForDocument {
     cashFromPartnerVisible: boolean,
 
     tableIsVisible: boolean,
-    countIsVisible: boolean
+    countIsVisible: boolean,
+    priceIsVisible: boolean,
+    totalIsVisible: boolean,
+    priceIsDisabled: boolean,
+    totalIsDisabled: boolean,
+    balansIsVisible: boolean,
 }
 
 export type DocumentTypeForReference = 'MATERIAL' | 'PRODUCT' | 'HALFSTUFF' | 'OTHER'

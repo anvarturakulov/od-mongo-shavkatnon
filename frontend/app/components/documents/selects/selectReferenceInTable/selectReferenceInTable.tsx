@@ -9,7 +9,6 @@ import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocu
 import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
 import { query } from '@/app/service/reports/querys/query';
 import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
-import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
@@ -39,12 +38,12 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
                 currentItem.referenceId = ''                
             }
 
-            if ( typeDocumentForLeaveTMZ(contentName) && id != null && !selectForReciever) {
-                let schet
-                schet = Schet.S10
-                currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-                currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
-            }
+            // if ( typeDocumentForPrice(contentName) && id != null && !selectForReciever) {
+            //     let schet
+            //     schet = Schet.S10
+            //     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
+            //     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
+            // }
 
             let newItems = [...currentDocument.tableItems]
             newItems[itemIndex] = {...currentItem}

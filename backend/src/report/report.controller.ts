@@ -52,14 +52,29 @@ export class ReportController {
 
     const report = await this.reportService.getQueryValue(queryObject);
     
-    if (!report) {
-      throw new NotFoundException(REPORT_NOT_PREPARE);
-    }
     return report;
   }
 
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Get('/priceAndBalance')
+  async getPriceAndBalance(@Req() request: Request) {
+
+    const queryObject: QueryObject = {
+      schet: `${request.query?.schet}`,
+      endDate: +request.query?.endDate,
+      firstSubcontoId: `${request.query?.firstSubcontoId}`,
+      secondSubcontoId: `${request.query?.secondSubcontoId}`
+    }
+
+    const report = await this.reportService.getPriceAndBalance(queryObject);
+
+    return report;
+  }
+
+
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/information')
   async getInformation(@Req() request: Request) {
@@ -77,7 +92,7 @@ export class ReportController {
     return report;
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/matOborot')
   async getMatOtchet(@Req() request: Request) {

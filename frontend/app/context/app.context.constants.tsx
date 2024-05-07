@@ -88,5 +88,5 @@ export const defaultMainData: Maindata = {
     interval: defaultInterval,
     loading: false,
     informData: [],
-    matOborot: []
+    matOborot: [],
   }

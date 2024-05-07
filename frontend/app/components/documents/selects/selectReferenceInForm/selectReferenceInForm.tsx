@@ -7,25 +7,19 @@ import { ReferenceModel, TypePartners, TypeReference } from '@/app/interfaces/re
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
-import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
-import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { DocumentType } from '@/app/interfaces/document.interface';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
-import { definedTandirWorkers, documentsForPrice } from './helper';
-import { queryForOne } from '@/app/service/reports/querys/queryForOne';
-
-const getResultBuQuery = async () => {
-
-}
+import { definedTandirWorkers } from './helper';
+import { docsDependentToBalance, docsDependentToMiddlePrice } from '../../doc/helpers/documentTypes';
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
     const { user, contentName } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
-    const { data , mutate } = useSWR(url, (url) => getDataForSwr(url, token));
+    const { data } = useSWR(url, (url) => getDataForSwr(url, token));
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: TypeForSelectInForm) => {
         
@@ -35,38 +29,22 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
             let target = e.currentTarget;
             let currentItem = {...currentDocument};
             let id = target[target.selectedIndex].getAttribute('data-id');
-            let typeDocumentForReference = getTypeDocumentForReference(contentName);
 
-            if ( typeDocumentForLeaveTMZ(contentName) && id && type != 'receiver') {
-                let schet = undefined
-                if (typeDocumentForReference == 'MATERIAL') {
-                    schet = Schet.S10
-                }
-
-                if (typeDocumentForReference == 'HALFSTUFF') {
-                    schet = Schet.S21;
-                }
-
-                if (typeDocumentForReference == 'PRODUCT') {
-                    schet = Schet.S28    
-                }
-                
-                if (schet && currentItem.documentType && documentsForPrice.includes(currentItem.documentType)) {
-                    
-                    currentItem.price = +queryForOne(mainData, schet, TypeQuery.MPRICE, '', id, 1717113583000);
-                    currentItem.balance = +queryForOne(mainData, schet, TypeQuery.BALANCE, currentDocument.senderId, id, 1717113583000 );
-                    console.log(currentItem.balance)
-                    console.log(currentItem.price)
-                }
+            if (type == 'sender' && id) {
+                currentItem.senderId = id
+                if (docsDependentToBalance.includes(contentName)) currentItem.balance = 0;
+                if (docsDependentToMiddlePrice.includes(contentName)) currentItem.price = 0;
             }
-
-            if (type == 'sender' && id) currentItem.senderId = id
-            if (type == 'receiver' && id) currentItem.receiverId = id
+            if (type == 'receiver' && id) currentItem.receiverId = id;
+              
             if (type == 'analitic' && id) {
                 currentItem.analiticId = id
+                
+                if (docsDependentToBalance.includes(contentName)) currentItem.balance = 0;
+                if (docsDependentToMiddlePrice.includes(contentName)) currentItem.price = 0;
+
                 if (user?.role == UserRoles.DELIVERY) {
                     let price = getPropertySubconto(data, id).firstPrice
-                    // console.log(price)
                     if (price) {
                         currentItem.price = price
                         currentItem.total = price * currentItem.count
@@ -82,7 +60,9 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
     }
     
     if (visibile == false) return <></>
+
     let typeDocumentForReference = getTypeDocumentForReference(contentName);
+ 
     return (
         <div className={styles.box}>
             {label !='' && <div className={styles.label}>{label}</div>}
@@ -120,49 +100,69 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         return true
                     }
                 })
-                .filter((item: ReferenceModel) => {
-                    if ((type == 'receiver' || type == 'sender') && 
-                         ( contentName == DocumentType.MoveHalfstuff || 
-                           contentName == DocumentType.MoveMaterial ))
-                        {
-                            return (item.filial  || item.sklad) 
-                        }
-                    return true
-                })
+                
                 .filter((item: ReferenceModel) => {
                     if ((type == 'receiver' || type == 'sender') &&
                         ( contentName == DocumentType.MoveProd ))
                         {
                             return ( item.filial  || item.delivery || item.sklad ) 
                         }
-                    return true
-                })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'receiver' && contentName == DocumentType.MoveCash)
+                    
+                    if ((type == 'receiver' || type == 'sender') && 
+                         ( contentName == DocumentType.MoveHalfstuff || 
+                           contentName == DocumentType.MoveMaterial ||
+                           contentName == DocumentType.ComeHalfstuff ||
+                           contentName == DocumentType.ComeProduct ))
                         {
-                            return (item.filial || item.buxgalter) 
+                            return (item.filial  || item.sklad) 
                         }
-                    return true
-                })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'sender' && (contentName == DocumentType.LeaveMaterial || contentName == DocumentType.LeaveHalfstuff))
-                        {
-                            return (item.filial || item.sklad) 
-                        }
-                    return true
-                })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'sender' && contentName == DocumentType.ComeMaterial) {
-                        return ( item.typePartners == TypePartners.SUPPLIERS ) 
-                    }
-
-                    if (type == 'sender' && contentName == DocumentType.LeaveCash) {
+                    
+                    if ((type == 'sender' || type == 'receiver') && ( 
+                        contentName == DocumentType.LeaveCash ||
+                        contentName == DocumentType.MoveCash )
+                    ) {
                         return (item.filial || item.sklad || item.delivery || item.buxgalter) 
                     }
 
-                    return true
-                })
-                .filter ((item: ReferenceModel) => {
+                    if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
+                        {
+                            return ( item.filial || item.umumBulim) 
+                        }
+                    
+                    if (type == 'receiver' && contentName == DocumentType.ComeCashFromPartners)
+                        {
+                            return (  item.buxgalter ) 
+                        }
+
+                    if (type == 'receiver' && contentName == DocumentType.ComeMaterial)
+                        {
+                            return ( item.filial  || item.sklad) 
+                        }
+                    
+                    if (type == 'sender' && 
+                        ( contentName == DocumentType.LeaveMaterial || 
+                          contentName == DocumentType.LeaveHalfstuff || 
+                          contentName == DocumentType.LeaveProd ||
+                          contentName == DocumentType.SaleMaterial
+                        ))
+                        {
+                            return (item.filial || item.sklad) 
+                        }
+                    
+                    if ( type == 'sender' && contentName == DocumentType.SaleProd) 
+                        {
+                            return (item.filial || item.delivery) 
+                        }
+
+                    if (type == 'sender' && ( contentName == DocumentType.ComeMaterial || contentName == DocumentType.ComeCashFromPartners)) {
+                        return ( item.typePartners == TypePartners.SUPPLIERS ) 
+                    }
+
+                    if (type == 'analitic' && typeReference == TypeReference.PARTNERS)
+                        {
+                            return item.typePartners == TypePartners.SUPPLIERS 
+                        }
+
                     if (
                             contentName == DocumentType.SaleProd 
                             && type == 'receiver'
@@ -174,20 +174,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                     return true
                 })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
-                        {
-                            return ( item.filial || item.umumBulim) 
-                        }
-                    return true
-                })
-                .filter((item: ReferenceModel) => {
-                    if (type == 'analitic' && typeReference == TypeReference.PARTNERS)
-                        {
-                            return item.typePartners == TypePartners.SUPPLIERS 
-                        }
-                    return true
-                })
+                
                 .sort(sortByName)
                 .filter(( item:ReferenceModel ) => !item.deleted )
                 .map(( item:ReferenceModel ) => (

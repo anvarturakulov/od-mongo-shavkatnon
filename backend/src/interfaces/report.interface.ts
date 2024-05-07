@@ -63,12 +63,12 @@ export enum TypeQuery {
 }
 
 export interface QueryObject {
-    typeQuery: string, 
+    typeQuery?: string, 
     schet: string,
-    startDate: number, 
+    startDate?: number, 
     endDate: number, 
-    firstSubcontoId: string, 
-    secondSubcontoId: string,
+    firstSubcontoId: string | undefined, 
+    secondSubcontoId: string | undefined,
 }
 
 export interface QueryInformation {

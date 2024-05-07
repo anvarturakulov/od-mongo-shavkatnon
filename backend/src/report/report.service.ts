@@ -5,7 +5,7 @@ import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
 import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
 import { query } from './helpers/querys/query';
-import { QueryInformation, QueryMatOtchet, QueryObject } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryMatOtchet, QueryObject, TypeQuery } from 'src/interfaces/report.interface';
 import { ReferenceService } from 'src/reference/reference.service';
 import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
@@ -33,6 +33,20 @@ export class ReportService {
     const { typeQuery, schet, startDate, endDate, firstSubcontoId, secondSubcontoId} = queryReport;
     
     return query(schet, typeQuery, startDate, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
+  }
+
+
+  async getPriceAndBalance(queryReport: QueryObject) {
+    const { schet, endDate, firstSubcontoId, secondSubcontoId } = queryReport;
+    let result = {
+      price: 0,
+      balance: 0
+    }
+
+    result.price = query(schet, TypeQuery.MPRICE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
+    result.balance = query(schet, TypeQuery.BALANCE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
+    console.log(result, secondSubcontoId, firstSubcontoId)
+    return result
   }
 
   async getInformation(queryInformation: QueryInformation) {

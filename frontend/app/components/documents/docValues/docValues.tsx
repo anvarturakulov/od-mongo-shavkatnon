@@ -4,16 +4,16 @@ import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { DocumentType, OptionsForDocument } from '@/app/interfaces/document.interface';
 import { CheckBoxInTable } from '../inputs/checkBoxInForm/checkBoxInForm';
-import { typeDocumentIsSale } from '@/app/service/documents/typeDocumentIsSale';
-import { typeDocumentForLeaveTMZ } from '@/app/service/documents/typeDocumentForLeaveTMZ';
 import { getOptionOfDocumentElements } from '@/app/service/documents/getOptionOfDocumentElements';
 import { InputInForm } from '../inputs/inputInForm/inputInForm';
 import { SelectReferenceInForm } from '../selects/selectReferenceInForm/selectReferenceInForm';
-import { addItems, getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCashFromPartnerValueInDocument, visibilityCommentValueInDocument, visibilityPriceValueInDocument, visibilityTotalValueInDocument } from './doc.values.functions';
+import { addItems, getDefinedItemIdForReceiver, getDefinedItemIdForSender, getLabelForAnalitic, getTypeReferenceForAnalitic, saveItemId, visibilityCommentValueInDocument } from './doc.values.functions';
 import { TypeReference } from '@/app/interfaces/reference.interface';
 import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { DocTable } from '../docTable/docTable';
 import AddIco from './ico/add.svg'
+import { getPriceAndBalance } from '@/app/service/documents/getPriceBalance';
+import { docsDependentToBalance, docsDependentToMiddlePrice, docsNotDependentToTotal } from '../doc/helpers/documentTypes';
 
 export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
     
@@ -30,9 +30,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     let hasFounder = contentName == DocumentType.LeaveCash;
     
     let defaultNewItemForTable = {...defaultDocumentTableItem}
-    
-    let documentIsSaleType = typeDocumentIsSale(contentName);
-    let showBalance = typeDocumentForLeaveTMZ(contentName);
     
     let definedItemIdForReceiver = getDefinedItemIdForReceiver(role, storageIdFromUser, contentName)
     let definedItemIdForSender = getDefinedItemIdForSender(role, storageIdFromUser, contentName)
@@ -71,10 +68,10 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                         <CheckBoxInTable label = 'Хамкор' id={'partner'}/> 
                     }
 
-                    { 
+                    {/* { 
                         hasFounder &&                   
                         <CheckBoxInTable label = 'Таъсисчи' id={'founder'}/> 
-                    }
+                    } */}
                 </div>
                 
                 <SelectReferenceInForm 
@@ -111,15 +108,57 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                         />
                     </>
                 }
-
-                <InputInForm nameControl='balance' type='number' label='Колдик' visible={options.countIsVisible} />
-                <InputInForm nameControl='count' type='number' label='Сон' visible={options.countIsVisible} />
+                {
+                    !options.tableIsVisible &&
+                    options.balansIsVisible &&
+                    <button 
+                        className={styles.btnLoad}
+                        onClick={() => 
+                            getPriceAndBalance(
+                                mainData,
+                                setMainData,
+                                currentDocument.senderId,
+                                currentDocument.analiticId,
+                                1,
+                                false
+                            )
+                        }
+                        >Колдик на нархларни юклаш</button>
+                }
+                
+                <InputInForm 
+                    nameControl='balance' 
+                    type='number' 
+                    label='Колдик' 
+                    visible={ options.balansIsVisible }
+                    disabled ={ true }
+                    />
+                
+                <InputInForm 
+                    nameControl='count' 
+                    type='number' 
+                    label='Сон' 
+                    visible={options.countIsVisible} 
+                    />
                 
                 {
                     !options.tableIsVisible &&
                     <>
-                        <InputInForm nameControl='price' type='number' label='Нарх' visible={visibilityPriceValueInDocument(contentName, mainData.user)} isNewDocument/>
-                        <InputInForm nameControl='total' type='number' label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} visible={visibilityTotalValueInDocument(contentName, mainData.user)}/>
+                        <InputInForm 
+                            nameControl='price' 
+                            type='number' 
+                            label='Нарх' 
+                            visible={options.priceIsVisible} 
+                            isNewDocument
+                            disabled ={options.priceIsDisabled}
+                            />
+                        <InputInForm 
+                            nameControl='total' 
+                            type='number' 
+                            label={contentName == DocumentType.SaleProd? 'Махсулот суммаси':'Сумма'} 
+                            visible={options.totalIsVisible}
+                            disabled={options.totalIsDisabled}
+                            />
                         <InputInForm nameControl='comment' type='text' label='Изох' visible={visibilityCommentValueInDocument(contentName, mainData.user)}/>
 
                     </>

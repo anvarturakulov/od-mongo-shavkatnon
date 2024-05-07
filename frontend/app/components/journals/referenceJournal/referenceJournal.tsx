@@ -78,7 +78,7 @@ export default function ReferenceJournal({className, ...props}:ReferenceJournalP
                                             [styles.trRow]: 1,
                                         })}   
                                 >
-                                    <td className={styles.rowId}>{key+1}</td>
+                                    <td className={styles.rowId}>{item._id}</td>
                                     <td className={cn(className, {
                                             [styles.name]: 1,
                                         })}
