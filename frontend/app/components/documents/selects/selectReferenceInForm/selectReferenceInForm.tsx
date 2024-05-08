@@ -162,6 +162,14 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         {
                             return item.typePartners == TypePartners.SUPPLIERS 
                         }
+                    if (type == 'analitic' && typeReference == TypeReference.CHARGES) {
+                        if (user?.role == UserRoles.HEADSECTION) {
+                            return !item.longCharge
+                        }
+                        if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) {
+                            return item.longCharge
+                        }
+                    }
 
                     if (
                             contentName == DocumentType.SaleProd 
