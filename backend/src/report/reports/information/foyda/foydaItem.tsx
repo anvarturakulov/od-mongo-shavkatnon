@@ -37,7 +37,8 @@ export const foydaItem = (
 
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
-
+  const brakCount = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  
   const moveOutCount = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const moveOutCountBux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
   const moveIncomeCount = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
@@ -45,12 +46,15 @@ export const foydaItem = (
   
   const saleCount = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const saleCountBux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
+  
   const sale = queryKor(Schet.S40, Schet.S28, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
-  const saleCountWithMove = saleCount - moveOutCount + moveIncomeCount;
+  const saleCountWithMove = productionCount - brakCount - moveOutCount + moveIncomeCount;
   
   const saleForMoveIncomeNon = (moveIncomeCount-moveIncomeCountBux) ? (moveIncomeCount-moveIncomeCountBux) : 0;
+  
   const saleForMoveIncomeBux =  moveIncomeCountBux ? moveIncomeCountBux : 0;
+  
   const saleWithMove = sale + saleForMoveIncomeNon*3500+saleForMoveIncomeBux*2000;
   
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
