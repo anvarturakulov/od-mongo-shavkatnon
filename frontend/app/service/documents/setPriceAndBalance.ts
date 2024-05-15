@@ -10,7 +10,8 @@ export const setPriceAndBalance = (
   firstSubcontoId: string,
   secondSubcontoId: string,
   endDate: number,
-  forTable: boolean 
+  forTable: boolean,
+  indexTableItem: number
 ) => {
 
   let { user, currentDocument, contentName } = mainData;
@@ -30,15 +31,19 @@ export const setPriceAndBalance = (
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
- 
   axios.get(url, config)
     .then(function (request) {
       let result = {...request.data};
+      console.log(url)
       console.log(result)
-      
-      currentItem.balance = +result?.balance;
-      if (docsDependentToMiddlePrice.includes(contentName)) {
-        currentItem.price = result?.price
+      if (!forTable) {
+        currentItem.balance = +result?.balance;
+        if (docsDependentToMiddlePrice.includes(contentName)) {
+          currentItem.price = result?.price
+        }
+      } else {
+        currentDocument.tableItems[indexTableItem].balance = +result?.balance;
+        currentDocument.tableItems[indexTableItem].price = +result?.price;
       }
 
       if (setMainData) {

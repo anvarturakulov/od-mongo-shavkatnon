@@ -9,6 +9,7 @@ export const Section = ({className, data, sectionType, currentSection, ...props 
     if (sectionType == 'delivery') title = 'ЮК ЕТКАЗУВЧИЛАР'
     if (sectionType == 'filial') title = 'ЦЕХЛАР'
     if (sectionType == 'buxgalter') title = 'БУХГАЛТЕРЛАР'
+    if (sectionType == 'founder') title = 'ТАЪСИСЧИЛАР'
 
     useEffect(()=> {
         // console.log(data)

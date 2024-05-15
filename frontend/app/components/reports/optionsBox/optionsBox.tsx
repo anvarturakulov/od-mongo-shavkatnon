@@ -9,7 +9,7 @@ import { onChangeInputOptionsBox } from './helpers/optionsBox.functions';
 import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { showMessage } from '@/app/service/common/showMessage';
-import { OborotType, ReportType } from '@/app/interfaces/report.interface';
+import { ReportType } from '@/app/interfaces/report.interface';
 import { SelectOborot } from './components/selectOborot/selectOborot';
 import { getMatOborot } from '@/app/service/reports/getMatOborot';
 

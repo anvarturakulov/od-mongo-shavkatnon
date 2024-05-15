@@ -12,7 +12,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
           <div className={styles.item}>
             <Htag tag='h1'>{item?.section}</Htag>
             {
-                sectionType != 'buxgalter'
+                ( sectionType != 'buxgalter' && sectionType != 'founder')
                 &&
                 <>
                     <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>

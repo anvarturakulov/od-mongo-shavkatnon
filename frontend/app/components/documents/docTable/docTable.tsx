@@ -7,6 +7,7 @@ import { SelectReferenceInTable } from '../selects/selectReferenceInTable/select
 import { DocTableItem, DocumentType } from '@/app/interfaces/document.interface';
 import { typeDocumentIsSale } from '@/app/service/documents/typeDocumentIsSale';
 import { InputInTable } from '../inputs/inputInTable/inputInTable';
+import { getPriceAndBalance } from '@/app/service/documents/getPriceBalance';
 
 export const DocTable = ({ typeReference, items,  className, ...props }: DocTableProps): JSX.Element => {
     
@@ -58,7 +59,7 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
                 <div className={styles.notColor}>____</div>
 
             </div>
-            {items && items.map((item: DocTableItem, index)  => (
+            {items && items.map((item: DocTableItem, index: number)  => (
                 <div key = {index} className={cn(styles.box, 
                 {
                     [styles.boxWithBalance]: showBalance,
@@ -72,7 +73,19 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
                         typeReference={typeReference}
                         currentItemId={item.referenceId}
                     />
-                    <button className={styles.btnBalance}>?</button>
+                    <button className={styles.btnBalance}
+                        onClick={() => {
+                            getPriceAndBalance(
+                                mainData,
+                                setMainData,
+                                currentDocument.senderId,
+                                currentDocument.tableItems[index].referenceId,
+                                currentDocument.date,
+                                true,
+                                index,
+                            )}
+                        }
+                    >?</button>
                     { 
                         showBalance &&                   
                         <div>{item.balance}</div>

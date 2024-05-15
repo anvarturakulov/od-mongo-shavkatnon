@@ -3,7 +3,7 @@ import { EntryItem } from 'src/interfaces/report.interface';
 import { sectionItem } from './sectionItem';
 
 export const section = (
-    sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER',
+    sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER' | 'FOUNDER',
     data: any,
     startDate: number,
     endDate: number,
@@ -19,6 +19,7 @@ export const section = (
         if (sectionType == 'DELIVERY') return item?.delivery
         if (sectionType == 'FILIAL') return item?.filial
         if (sectionType == 'BUXGALTER') return item?.buxgalter
+        if (sectionType == 'FOUNDER') return ( item?.shavkat || item?.maxsud)
         return false
     })
     .forEach((item: ReferenceModel) => {

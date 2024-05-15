@@ -217,16 +217,9 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                     <div>
                         <div>Директор</div>
                         <CheckBoxForReference label='Директор' setCheckbox={setCheckbox} checked={body.director} id={'director'}/>
-                    </div>
-                    <div>
-                        <div>Шавкат</div>
                         <CheckBoxForReference label='Шавкат' setCheckbox={setCheckbox} checked={body.shavkat} id={'shavkat'}/>
-                    </div>
-                    <div>
-                        <div>Махсуд</div>
                         <CheckBoxForReference label='Махсуд' setCheckbox={setCheckbox} checked={body.maxsud} id={'maxsud'}/>
                     </div>
-
                 </>
             }
 

@@ -67,10 +67,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                         <CheckBoxInTable label = 'Хамкор' id={'partner'}/> 
                     }
 
-                    {/* { 
-                        hasFounder &&                   
-                        <CheckBoxInTable label = 'Таъсисчи' id={'founder'}/> 
-                    } */}
                 </div>
                 
                 <SelectReferenceInForm 
@@ -112,14 +108,15 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     options.balansIsVisible &&
                     <button 
                         className={styles.btnLoad}
-                        onClick={() => 
+                        onClick={() =>  
                             getPriceAndBalance(
                                 mainData,
                                 setMainData,
                                 currentDocument.senderId,
                                 currentDocument.analiticId,
-                                1,
-                                false
+                                currentDocument.date,
+                                false,
+                                0
                             )
                         }
                         >Колдик на нархларни юклаш</button>

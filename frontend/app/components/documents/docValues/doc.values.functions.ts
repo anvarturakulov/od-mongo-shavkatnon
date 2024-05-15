@@ -38,13 +38,14 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
   if (role && (role == UserRoles.TANDIR || contentName == DocumentType.ComeHalfstuff)) {
     return storageIdFromUser
   }
-
+  
+  if (role && role == UserRoles.GLBUX && contentName == DocumentType.ZpCalculate) return ''
+  
   if (
       storageIdFromUser && 
       role && 
       role !== UserRoles.ADMIN && 
       role !== UserRoles.HEADCOMPANY &&
-      role !== UserRoles.GLBUX &&
       role !== UserRoles.ZAMGLBUX && 
       ( 
         contentName == DocumentType.ComeCashFromPartners ||
@@ -66,13 +67,14 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
 }
 
 export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
-  
+
+  if (role && role == UserRoles.GLBUX && contentName == DocumentType.LeaveMaterial) return ''
+
   if (
     storageIdFromUser &&
     role &&
     role !== UserRoles.ADMIN &&
     role !== UserRoles.HEADCOMPANY &&
-    role !== UserRoles.GLBUX &&
     contentName != DocumentType.ComeCashFromPartners &&
     contentName != DocumentType.ComeMaterial && 
     contentName != DocumentType.LeaveHalfstuff 

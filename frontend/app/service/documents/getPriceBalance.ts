@@ -2,6 +2,7 @@ import { Schet } from '@/app/interfaces/report.interface';
 import { getTypeDocumentForReference } from './getTypeDocumentForReference';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { setPriceAndBalance } from './setPriceAndBalance';
+import { getSchetForQuery } from './getSchetForQuery';
 
 export const getPriceAndBalance = (
   mainData: Maindata,
@@ -10,14 +11,15 @@ export const getPriceAndBalance = (
   secondSubcontoId: string,
   endDate: number,
   forTable: boolean,
+  indexTableItem: number,
 ) => {
 
   const { contentName } = mainData;
 
-  endDate = 1717113583000;
+  endDate = endDate + 86399999;
 
   let schet = undefined
-  let typeDocumentForReference = getTypeDocumentForReference(contentName);
+  let typeDocumentForReference = getSchetForQuery(contentName);
 
   if (typeDocumentForReference == 'MATERIAL') {
     schet = Schet.S10
@@ -30,7 +32,7 @@ export const getPriceAndBalance = (
   }
 
   if (schet) {
-    setPriceAndBalance(mainData, setMainData, schet, firstSubcontoId, secondSubcontoId, endDate, forTable)
+    setPriceAndBalance(mainData, setMainData, schet, firstSubcontoId, secondSubcontoId, endDate, forTable, indexTableItem)
   }
   
 }

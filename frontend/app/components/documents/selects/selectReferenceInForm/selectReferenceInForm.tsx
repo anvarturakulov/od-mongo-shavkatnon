@@ -23,7 +23,8 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata, type: TypeForSelectInForm) => {
         
-        let {currentDocument, contentName} = mainData;
+        let {currentDocument, contentName, user } = mainData;
+        let role = user?.role;
         
         if (currentDocument) {
             let target = e.currentTarget;
@@ -119,10 +120,15 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                     
                     if ((type == 'sender' || type == 'receiver') && ( 
                         contentName == DocumentType.LeaveCash ||
-                        contentName == DocumentType.MoveCash )
-                    ) {
-                        return (item.filial || item.sklad || item.delivery || item.buxgalter) 
+                        contentName == DocumentType.MoveCash ) ) {
+                        if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter  || item.maxsud || item.shavkat) 
+                        } else {
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter)
+                        }
                     }
+
+
 
                     if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
                         {

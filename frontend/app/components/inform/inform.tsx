@@ -59,6 +59,14 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
             }
 
             {
+                user?.role != UserRoles.ZAMGLBUX &&
+                user?.role != UserRoles.GLBUX &&
+                  <>
+                    <Section data={informData} sectionType='founder'/>
+                  </>
+            }
+
+            {
                 user?.role == UserRoles.ZAMGLBUX &&
                 <>
                     <Section data={informData} sectionType='buxgalter' currentSection={user.storageId}/>

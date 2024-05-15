@@ -61,3 +61,19 @@ export const getTotalValueForDocument = (document: DocumentModel): number => {
   
   return document.total;
 }
+
+export const isFounder = (references: any, id: string | undefined | null): boolean => {
+  if (references && references.length > 0) {
+    let item =  references.filter((item: ReferenceModel) => item._id == id)[0]
+    if (item?.shavkat || item?.maxsud) return true
+  }
+  return false
+}
+
+export const isDirector = (references: any, id: string | undefined | null): boolean => {
+  if (references && references.length > 0) {
+    let item = references.filter((item: ReferenceModel) => item._id == id)[0]
+    if (item?.director) return true
+  }
+  return false
+}

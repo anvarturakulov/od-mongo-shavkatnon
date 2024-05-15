@@ -42,6 +42,9 @@ export const information = (
     let sectionDelResult = section('DELIVERY', data, startDate, endDate, globalEntrys)
     result.push(sectionDelResult);
 
+    let sectionFounderResult = section('FOUNDER', data, startDate, endDate, globalEntrys)
+    result.push(sectionFounderResult);
+
     let skladResult = sklad(data, startDate, endDate, globalEntrys)
     result.push(skladResult);
 

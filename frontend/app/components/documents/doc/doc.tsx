@@ -8,7 +8,6 @@ import { InputForData } from '../inputs/inputForData/inputForData';
 import { cancelSubmit, saveUser } from './helpers/doc.functions';
 import { isAdmins } from '@/app/service/common/users';
 import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
-import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { validateBody } from '@/app/service/documents/validateBody';
 import { showMessage } from '@/app/service/common/showMessage';

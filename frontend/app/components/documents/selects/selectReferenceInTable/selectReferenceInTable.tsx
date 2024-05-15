@@ -5,10 +5,6 @@ import useSWR from 'swr';
 import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { getTypeDocumentForReference } from '@/app/service/documents/getTypeDocumentForReference';
-import { DocumentTypeForReference } from '@/app/interfaces/document.interface';
-import { query } from '@/app/service/reports/querys/query';
-import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
 import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceInTable = ({  selectForReciever , typeReference, itemIndexInTable, currentItemId, className, ...props }: SelectReferenceInTableProps): JSX.Element => {
@@ -20,9 +16,8 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-    let typeDocumentForReference = getTypeDocumentForReference(contentName);
     
-    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata, typeDocumentForReference:DocumentTypeForReference ) => {
+    const changeElements = (e: React.FormEvent<HTMLSelectElement>, itemIndex: number, setMainData: Function | undefined, mainData: Maindata) => {
         let target = e.currentTarget;
         let {currentDocument, contentName} = mainData;
 
@@ -37,13 +32,6 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
             } else {
                 currentItem.referenceId = ''                
             }
-
-            // if ( typeDocumentForPrice(contentName) && id != null && !selectForReciever) {
-            //     let schet
-            //     schet = Schet.S10
-            //     currentItem.price = +query(schet, TypeQuery.MPRICE, id, mainData);
-            //     currentItem.balance = +query(schet, TypeQuery.BALANCE, id, mainData, true, currentDocument.senderId );
-            // }
 
             let newItems = [...currentDocument.tableItems]
             newItems[itemIndex] = {...currentItem}
@@ -62,7 +50,7 @@ export const SelectReferenceInTable = ({  selectForReciever , typeReference, ite
         <div className={styles.box}>
             <select
                 className={styles.select}
-                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData, typeDocumentForReference)}
+                onChange={(e) => changeElements(e, itemIndexInTable, setMainData, mainData)}
                 {...props}
             >
                 <option 

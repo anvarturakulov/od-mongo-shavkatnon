@@ -11,10 +11,10 @@ import Header from '../../common/header/header';
 import { Doc } from '../../documents/doc/doc';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { deleteItemDocument, getDocument, getNameReference, setProvodkaToDoc } from '../helpers/journal.functions';
+import { deleteItemDocument, getDocument, getNameReference, isDirector, isFounder, setProvodkaToDoc } from '../helpers/journal.functions';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
 import { DocumentModel, DocumentType, Interval } from '@/app/interfaces/document.interface';
-import { dashboardUsersList } from '@/app/interfaces/general.interface';
+import { UserRoles, dashboardUsersList } from '@/app/interfaces/general.interface';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 import Footer from '../../common/footer/footer'
 import { numberValue } from '@/app/service/common/converters'
@@ -215,6 +215,16 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                     if (item.total == +summa) return true
                                 } else return true
                             })
+                            .filter((item:DocumentModel) => {
+                                if (role != UserRoles.ADMIN && role != UserRoles.HEADCOMPANY) {
+                                    if (isDirector(references, item.senderId)) return false
+                                    if ( isFounder(references, item.senderId) ||
+                                         isFounder(references, item.receiverId)
+                                    ) return false
+                                }
+                                return true
+                            })
+                            
                             
                             .map((item:DocumentModel, key: number) => {
                                 total += item.total;

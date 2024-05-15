@@ -39,18 +39,20 @@ export const validateBody = (body: DocumentModel): Boolean => {
     let countNotEmpty = true
     let priceNotEmpty = true
     let totalNotEmpty = true
+    let countOverBalance = true
     
     tableItems.forEach(item => {
       if (item.balance <= 0) balanceNotEmpty = false
       if (item.count <= 0) countNotEmpty = false
       if (item.price <= 0) priceNotEmpty = false
       if (item.total <= 0) totalNotEmpty = false
+      if (item.count > item.balance) countOverBalance = false
     })
 
     if (
         !balanceNotEmpty || !countNotEmpty || 
         !priceNotEmpty || !totalNotEmpty || 
-        !tableItems.length
+        !tableItems.length || !countOverBalance
       ) {
       return false
     }

@@ -5,8 +5,6 @@ import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { adminAndHeadCompany } from '@/app/interfaces/general.interface';
 
-
-
 export const InputForData = ({label, className, ...props }: InputForDataProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
