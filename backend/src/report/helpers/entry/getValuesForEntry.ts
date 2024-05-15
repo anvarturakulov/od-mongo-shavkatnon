@@ -85,9 +85,9 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
     }
 
     const comeHalfstuff = {
-      debetFirstSubcontoId: senderId.toString(),
+      debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
-      kreditFirstSubcontoId: receiverId.toString(),
+      kreditFirstSubcontoId: senderId.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
       count: count,
       summa: total,
