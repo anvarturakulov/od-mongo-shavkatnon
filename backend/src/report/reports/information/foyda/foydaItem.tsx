@@ -3,6 +3,7 @@ import { queryKor } from 'src/report/helpers/querys/queryKor';
 import { query } from 'src/report/helpers/querys/query';
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
 import { Document } from 'src/document/models/document.model';
+import { DocumentType } from 'src/interfaces/document.interface';
 
 export const foydaItem = ( 
   data: any,
@@ -30,7 +31,7 @@ export const foydaItem = (
 
   if (dosc && dosc.length > 0) {
     productionDocsCount = dosc.filter((item: Document) => {
-      return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId)
+      return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId && item.documentType == DocumentType.ComeProduct)
     }).length
   }
 
