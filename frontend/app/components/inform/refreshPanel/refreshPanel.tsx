@@ -53,7 +53,7 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
                         }}
                 />
                 <Button appearance='ghost' onClick={(e) => refreshReport(mainData, setMainData)}>Янгилаш</Button>
-                <Button appearance='ghost' onClick={(e) => deleteDocs()}>Удалить</Button>
+                {/* <Button appearance='ghost' onClick={(e) => deleteDocs()}>Удалить</Button> */}
             </div>
        </>
     )

@@ -77,14 +77,14 @@ export class DocumentController {
     return this.documentService.getAllDocuments(false)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Delete('forDate')
-  async deleteDocumentByDate(@Req() request: Request) {
-    let dateStart = 0
-    let dateEnd = 1715698800000
+  // @UseGuards(JwtAuthGuard)
+  // @Delete('forDate')
+  // async deleteDocumentByDate(@Req() request: Request) {
+  //   let dateStart = 0
+  //   let dateEnd = 1715698800000
 
-    return this.documentService.deleteDocumentByDate(dateStart, dateEnd)
-  }
+  //   return this.documentService.deleteDocumentByDate(dateStart, dateEnd)
+  // }
 
   @UseGuards(JwtAuthGuard)
   @Delete('markToDelete/:id')
