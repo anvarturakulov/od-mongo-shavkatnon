@@ -51,10 +51,11 @@ export class ReportService {
 
   async getInformation(queryInformation: QueryInformation) {
     let data = await this.referenceService.getAllReferences();
+    let productions = await this.documentService.getAllDocuments(true);
     let hamirs = await this.hamirService.getAllHamirs();
     let {startDate, endDate} = queryInformation;
     
-    let inform = information(data, startDate, endDate, this.documentService.globalEntrys, hamirs )
+    let inform = information(data, startDate, endDate, this.documentService.globalEntrys, productions )
     return inform
     // return query(queryInformation, this.documentService.globalEntrys)
   }

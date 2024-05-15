@@ -29,6 +29,7 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                     <tr>
                         <td >Цех</td>
                         <td>Ишлаб чикар. нон сони</td>
+                        <td>Хамир сони</td>
                         <td>Савдодаги нон сони</td>
                         <td>Савдодага пул маблаги</td>
                         <td>Ун харажати</td>

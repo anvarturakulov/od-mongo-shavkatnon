@@ -2,6 +2,7 @@ import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { queryKor } from 'src/report/helpers/querys/queryKor';
 import { query } from 'src/report/helpers/querys/query';
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
+import { Document } from 'src/document/models/document.model';
 
 export const foydaItem = ( 
   data: any,
@@ -9,7 +10,8 @@ export const foydaItem = (
   endDate: number,
   currentSectionId: string, 
   title: string, 
-  globalEntrys: Array<EntryItem> | undefined ) => {
+  globalEntrys: Array<EntryItem> | undefined,
+  dosc: Document[] ) => {
 
   let longeCharge:number = 0;
 
@@ -24,9 +26,17 @@ export const foydaItem = (
   })
 
 
+  let productionDocsCount = 0; 
+
+  if (dosc && dosc.length > 0) {
+    productionDocsCount = dosc.filter((item: Document) => {
+      return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId)
+    }).length
+  }
+
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  
+
   const moveOutCount = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const moveOutCountBux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
   const moveIncomeCount = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
@@ -55,6 +65,7 @@ export const foydaItem = (
   return (
     {
       section: title,
+      productionDocsCount,
       productionCount,
       saleCountWithMove,
       saleWithMove,

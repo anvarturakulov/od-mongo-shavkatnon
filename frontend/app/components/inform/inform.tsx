@@ -52,7 +52,7 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
                     <Section data={informData} sectionType='filial'/>
                     <Section data={informData} sectionType='delivery'/>
                     <Sklad data={informData}/>
-                    <Production data={informData} />
+                    {/* <Production data={informData} /> */}
                     {/* <Zp data={data}/> */}
                     <Norma data={informData}/>    
                 </>

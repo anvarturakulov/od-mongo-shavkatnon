@@ -5,25 +5,18 @@ import { cash } from './cash/cash';
 import { taking } from './taking/taking';
 import { section } from './section/section';
 import { sklad } from './sklad/sklad';
-import { HamirService } from 'src/hamir/hamir.service';
-import { production } from './production/production';
-import { Hamir } from 'src/hamir/models/hamir.model';
-import { zp } from './zp/zp';
+
 import { foyda } from './foyda/foyda';
 import { norma } from './norma/norma';
-// import { Sklad } from './sklad/sklad';
-// import { Production } from './production/production';
-// import { Zp } from './zp/zp';
-// import { Taking } from './taking/taking';
-// import { Foyda } from './foyda/foyda';
-// import { Norma } from './norma/norma';
+import { Document } from 'src/document/models/document.model';
+
 
 export const information = (
     data: any,
     startDate: number,
     endDate: number,
     globalEntrys: Array<EntryItem> | undefined,
-    hamirs: Hamir[]
+    docs: Document[]
     ) => {
     
     let result = [];
@@ -48,13 +41,13 @@ export const information = (
     let skladResult = sklad(data, startDate, endDate, globalEntrys)
     result.push(skladResult);
 
-    let productionResult = production(data, startDate, endDate, globalEntrys, hamirs)
-    result.push(productionResult);
+    // let productionResult = production(data, startDate, endDate, globalEntrys, hamirs)
+    // result.push(productionResult);
     
     // let zpResult = zp(data, startDate, endDate, globalEntrys, hamirs)
     // result.push(zpResult);
 
-    let foydaResult = foyda(data, startDate, endDate, globalEntrys)
+    let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs)
     result.push(foydaResult);
 
     let normaResult = norma(data, startDate, endDate, globalEntrys)

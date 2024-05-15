@@ -90,15 +90,15 @@ export const validateBody = (body: DocumentModel): Boolean => {
     }
   }
 
-  const documentsComeProduct = [
-    `${DocumentType.ComeProduct}`,
-  ]
+  // const documentsComeProduct = [
+  //   `${DocumentType.ComeProduct}`,
+  // ]
 
-  if (documentsComeProduct.includes(documentType)) {
-    if (!firstWorkerId || !secondWorkerId || !thirdWorkerId) {
-      return false
-    }
-  }
+  // if (documentsComeProduct.includes(documentType)) {
+  //   if (!firstWorkerId || !secondWorkerId || !thirdWorkerId) {
+  //     return false
+  //   }
+  // }
 
   const documentsForCashFromPartners = [
     `${DocumentType.ComeCashFromPartners}`,
