@@ -66,6 +66,15 @@ export class Reference {
   @Prop()
   longCharge?: boolean
 
+  @Prop()
+  director: boolean
+
+  @Prop()
+  shavkat: boolean
+
+  @Prop()
+  maxsud: boolean
+
 }
 
 export const ReferenceSchema = SchemaFactory.createForClass(Reference);

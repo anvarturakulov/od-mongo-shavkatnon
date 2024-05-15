@@ -41,6 +41,7 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
                 { hasPartners && <div>Хамкор</div> }
                 
                 <div>Номи</div>
+                <div> </div>
                 
                 { showBalance && <div>Колдик</div> }
                 
@@ -71,6 +72,7 @@ export const DocTable = ({ typeReference, items,  className, ...props }: DocTabl
                         typeReference={typeReference}
                         currentItemId={item.referenceId}
                     />
+                    <button className={styles.btnBalance}>?</button>
                     { 
                         showBalance &&                   
                         <div>{item.balance}</div>

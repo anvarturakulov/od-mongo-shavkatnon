@@ -41,6 +41,10 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         deleted: false,
         norma: 0,
         longCharge: false,
+        director: false,
+        shavkat: false,
+        maxsud: false,
+
     }
 
     const [body, setBody] = useState<ReferenceModel>(defaultBody) 
@@ -203,6 +207,26 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 <>
                 <div>Норма</div>
                 <input value={body.norma} type="number" id='norma' className={styles.input} onChange={(e)=>changeElements(e)}/>
+                </>
+            }
+
+            {
+                ( mainData.user?.role == UserRoles.ADMIN )  && 
+                (body.typeReference == TypeReference.STORAGES) &&
+                <>
+                    <div>
+                        <div>Директор</div>
+                        <CheckBoxForReference label='Директор' setCheckbox={setCheckbox} checked={body.director} id={'director'}/>
+                    </div>
+                    <div>
+                        <div>Шавкат</div>
+                        <CheckBoxForReference label='Шавкат' setCheckbox={setCheckbox} checked={body.shavkat} id={'shavkat'}/>
+                    </div>
+                    <div>
+                        <div>Махсуд</div>
+                        <CheckBoxForReference label='Махсуд' setCheckbox={setCheckbox} checked={body.maxsud} id={'maxsud'}/>
+                    </div>
+
                 </>
             }
 

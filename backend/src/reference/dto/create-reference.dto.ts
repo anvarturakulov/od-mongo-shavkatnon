@@ -78,6 +78,14 @@ export class CreateReferenceDto {
 
   @IsOptional()
   @IsBoolean()
-  longCharge?: boolean
+  director?: boolean
+
+  @IsOptional()
+  @IsBoolean()
+  shavkat?: boolean
+
+  @IsOptional()
+  @IsBoolean()
+  maxsud?: boolean
 
 }

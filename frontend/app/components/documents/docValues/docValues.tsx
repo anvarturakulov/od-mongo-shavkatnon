@@ -13,7 +13,6 @@ import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { DocTable } from '../docTable/docTable';
 import AddIco from './ico/add.svg'
 import { getPriceAndBalance } from '@/app/service/documents/getPriceBalance';
-import { docsDependentToBalance, docsDependentToMiddlePrice, docsNotDependentToTotal } from '../doc/helpers/documentTypes';
 
 export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
     
