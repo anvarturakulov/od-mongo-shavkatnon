@@ -128,8 +128,6 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
                     }
 
-
-
                     if (type == 'receiver' && contentName == DocumentType.ZpCalculate)
                         {
                             return ( item.filial || item.umumBulim) 
@@ -172,9 +170,9 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         if (user?.role == UserRoles.HEADSECTION) {
                             return !item.longCharge
                         }
-                        if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) {
-                            return item.longCharge
-                        }
+                        // if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) {
+                        //     return item.longCharge
+                        // }
                     }
 
                     if (
