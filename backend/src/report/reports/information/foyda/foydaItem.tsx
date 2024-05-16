@@ -92,10 +92,10 @@ export const foydaItem = (
   const zp = queryKor(Schet.S20, Schet.S67, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
   const currentCharges = zagatovka + materials + zp + currentPayment;
-  const currentEarning = sale - zagatovka - currentCharges;
+  const currentEarning = saleWithMove - currentCharges;
   const koefCurrentEarningToOneProduct = 0;
   const longPayment =  longeCharge;
-  const realEarning = sale - currentCharges - longPayment;
+  const realEarning = saleWithMove - currentCharges - longPayment;
 
   return (
     {

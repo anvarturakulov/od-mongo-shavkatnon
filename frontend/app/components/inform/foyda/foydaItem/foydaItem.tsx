@@ -1,11 +1,7 @@
 'use client'
 import { FoydaItemProps } from './foydaItem.props';
 import styles from './foydaItem.module.css';
-import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
-import { useAppContext } from '@/app/context/app.context';
-import { query } from '@/app/service/reports/querys/query';
 import { numberValue } from '@/app/service/common/converters';
-import { queryKor } from '@/app/service/reports/querys/queryKor';
 
 export const FoydaItem = ({className, item, ...props }: FoydaItemProps) :JSX.Element => {
     
