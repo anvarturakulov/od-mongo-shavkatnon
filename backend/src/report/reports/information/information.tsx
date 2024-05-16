@@ -9,6 +9,8 @@ import { sklad } from './sklad/sklad';
 import { foyda } from './foyda/foyda';
 import { norma } from './norma/norma';
 import { Document } from 'src/document/models/document.model';
+import { ReferenceService } from 'src/reference/reference.service';
+import { ReferenceDocument } from 'src/reference/models/referense.model';
 
 
 export const information = (
@@ -16,7 +18,8 @@ export const information = (
     startDate: number,
     endDate: number,
     globalEntrys: Array<EntryItem> | undefined,
-    docs: Document[]
+    docs: Document[],
+    deliverys: ReferenceDocument[]
     ) => {
     
     let result = [];
@@ -47,7 +50,7 @@ export const information = (
     // let zpResult = zp(data, startDate, endDate, globalEntrys, hamirs)
     // result.push(zpResult);
 
-    let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs)
+    let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs, deliverys)
     result.push(foydaResult);
 
     let normaResult = norma(data, startDate, endDate, globalEntrys)

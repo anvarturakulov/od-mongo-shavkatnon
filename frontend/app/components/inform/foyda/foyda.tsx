@@ -30,8 +30,9 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td >Цех</td>
                         <td>Ишлаб чикар. нон сони</td>
                         <td>Хамир сони</td>
-                        <td>Савдодаги нон сони</td>
-                        <td>Савдодага пул маблаги</td>
+                        <td>Цехдага сав. нон сони</td>
+                        <td>Юк етк. нон сони</td>
+                        <td>Умум савдо пули</td>
                         <td>Ун харажати</td>
                         <td>Хом ашёлар хараж.</td>
                         <td>Иш хаки хараж.</td>
@@ -57,7 +58,8 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td>Жами</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('productionCount', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('productionDocsCount', datas))}</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('saleCountWithMove', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('saleCountWithOutMove', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('countDeleviry', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('saleWithMove', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('zagatovka', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('materials', datas))}</td>

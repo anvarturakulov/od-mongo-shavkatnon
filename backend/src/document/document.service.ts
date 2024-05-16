@@ -7,15 +7,20 @@ import { DocumentType } from 'src/interfaces/document.interface';
 import { DOCUMENT_IS_PROVEDEN, DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { prepareEntrysJournal } from 'src/report/helpers/prepareEntrysJournal';
 import { EntryItem } from 'src/interfaces/report.interface';
+import { ReferenceModel } from 'src/interfaces/reference.interface';
+import { ReferenceService } from 'src/reference/reference.service';
+import { Reference, ReferenceDocument } from 'src/reference/models/referense.model';
 
 @Injectable()
 export class DocumentService {
 
   constructor(
     @InjectModel(Document.name) private documentModel: Model<DocDocument>,
+    private readonly referenceService: ReferenceService
   ) { }
 
   public globalEntrys: Array<EntryItem>
+  public deliverys: Array<ReferenceDocument>
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
     
@@ -91,6 +96,8 @@ export class DocumentService {
 
   async prepareEntrys() {
     let result = await this.getAllDocuments(true)
+    let deliverys = await this.referenceService.getDeliverys()
+    this.deliverys = [...deliverys]
     this.globalEntrys = [...prepareEntrysJournal(result)];
   }
 

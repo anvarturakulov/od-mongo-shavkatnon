@@ -53,9 +53,10 @@ export class ReportService {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
     let hamirs = await this.hamirService.getAllHamirs();
+    
     let {startDate, endDate} = queryInformation;
     
-    let inform = information(data, startDate, endDate, this.documentService.globalEntrys, productions )
+    let inform = information(data, startDate, endDate, this.documentService.globalEntrys, productions, this.documentService.deliverys )
     return inform
     // return query(queryInformation, this.documentService.globalEntrys)
   }
