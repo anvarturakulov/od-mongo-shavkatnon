@@ -17,16 +17,20 @@ export const materialItem = (
   const countComeHS = queryKor(Schet.S21, Schet.S23, TypeQuery.OKK, startDate, endDate, '', '', globalEntrys);
   const countLeaveHS = queryKor(Schet.S20, Schet.S21, TypeQuery.OKK, startDate, endDate, '', '', globalEntrys);
 
-  let count = queryKor(Schet.S20, Schet.S10, TypeQuery.OKK, startDate, endDate, '', String(materialId), globalEntrys);
-  let summa = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, '', String(materialId), globalEntrys);
+  let count = queryKor(Schet.S20, Schet.S10, TypeQuery.OKK, startDate, endDate, '', String(materialId), globalEntrys) +
+              queryKor(Schet.S23, Schet.S10, TypeQuery.OKK, startDate, endDate, '', String(materialId), globalEntrys);
+  let summa = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, '', String(materialId), globalEntrys) +
+              queryKor(Schet.S23, Schet.S10, TypeQuery.OKS, startDate, endDate, '', String(materialId), globalEntrys);
   
   if (un && countComeHS>0) {
-    let koef = countLeaveHS/countLeaveHS
+    let koef = countLeaveHS/countComeHS
+    // console.log(koef)
     if (koef <= 1) {
-      count = count * koef;
-      summa = summa * koef;
+      count = Math.round((count * koef) * 100) / 100;
+      summa = Math.round((summa * koef) * 100) / 100;
     }
   }
+  // console.log(title,count,summa )
 
   if (count == 0 && summa == 0) return {}
 

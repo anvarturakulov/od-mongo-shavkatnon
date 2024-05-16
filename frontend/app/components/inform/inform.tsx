@@ -14,6 +14,7 @@ import { Taking } from './taking/taking';
 import { Foyda } from './foyda/foyda';
 import { Norma } from './norma/norma';
 import { useEffect } from 'react';
+import { Material } from './material/material';
 
 export const totalByKey = (key:string, data:any[]) => {
     let total = 0;
@@ -52,9 +53,8 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
                     <Section data={informData} sectionType='filial'/>
                     <Section data={informData} sectionType='delivery'/>
                     <Sklad data={informData}/>
-                    {/* <Production data={informData} /> */}
-                    {/* <Zp data={data}/> */}
-                    <Norma data={informData}/>    
+                    <Norma data={informData}/> 
+                    <Material data={informData}/>  
                 </>
             }
 
