@@ -8,30 +8,34 @@ export const materialItem = (
   data: any,
   startDate: number,
   endDate: number,
-  materialId: string, 
   title: string, 
+  materialId: string, 
+  un: boolean,
   globalEntrys: Array<EntryItem> | undefined ) => {    
 
-    let result = []
-    const value = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, '', String(materialId), globalEntrys);
-    
-    if (value == 0) return {}
+  const idZagatovka27 = '659ce9a8523a48fdeb6ad92f';
+  const countComeHS = queryKor(Schet.S21, Schet.S23, TypeQuery.OKK, startDate, endDate, '', '', globalEntrys);
+  const countLeaveHS = queryKor(Schet.S20, Schet.S21, TypeQuery.OKK, startDate, endDate, '', '', globalEntrys);
 
-    let element = {
-      name: title,
-      value: value
+  let count = queryKor(Schet.S20, Schet.S10, TypeQuery.OKK, startDate, endDate, '', String(materialId), globalEntrys);
+  let summa = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, '', String(materialId), globalEntrys);
+  
+  if (un && countComeHS>0) {
+    let koef = countLeaveHS/countLeaveHS
+    if (koef <= 1) {
+      count = count * koef;
+      summa = summa * koef;
     }
+  }
+
+  if (count == 0 && summa == 0) return {}
+
+  let element = {
+    title,
+    count,
+    summa
+  }
     
-    if (Object.keys(element).length) {
-        result.push(element)
-    }
-    
-    return ( 
-        {
-        // section: title,
-        // sectionId: currentSectionId,
-        // items: result
-        }
-    )
+  return element
     
 } 

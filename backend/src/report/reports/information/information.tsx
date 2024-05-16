@@ -11,6 +11,7 @@ import { norma } from './norma/norma';
 import { Document } from 'src/document/models/document.model';
 import { ReferenceService } from 'src/reference/reference.service';
 import { ReferenceDocument } from 'src/reference/models/referense.model';
+import { material } from './material/material';
 
 
 export const information = (
@@ -55,6 +56,9 @@ export const information = (
 
     let normaResult = norma(data, startDate, endDate, globalEntrys)
     result.push(normaResult);
+
+    let materialResult = material(data, startDate, endDate, globalEntrys)
+    result.push(materialResult);
 
     return result
     

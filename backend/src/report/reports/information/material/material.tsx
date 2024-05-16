@@ -15,7 +15,7 @@ export const material = (
     data
     .filter((item: any) => item?.typeReference == TypeReference.TMZ)
     .forEach((item: ReferenceModel) => {
-        let element = materialItem(data, startDate, endDate, item._id, item.name, globalEntrys)
+        let element = materialItem(data, startDate, endDate, item.name, item._id, item.un, globalEntrys)
         if (Object.keys(element).length) {
             result.push(element)
         }

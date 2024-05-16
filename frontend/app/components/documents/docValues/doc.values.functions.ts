@@ -68,7 +68,13 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
 
 export const getDefinedItemIdForSender = (role: UserRoles | undefined, storageIdFromUser: string | undefined, contentName: string) => {
 
-  if (role && role == UserRoles.GLBUX && contentName == DocumentType.LeaveMaterial) return ''
+  if (
+    role && 
+    (role == UserRoles.GLBUX || role == UserRoles.ZAMGLBUX) && (
+      contentName == DocumentType.LeaveMaterial ||
+      contentName == DocumentType.LeaveHalfstuff
+    )) return ''
+  
 
   if (
     storageIdFromUser &&

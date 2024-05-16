@@ -140,14 +140,14 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.ComeHalfstuff:
         if (hasTable && tableItem && !newEntry) {
           return {
-            debet: Schet.S20,
+            debet: Schet.S23,
             kredit: Schet.S10,
             ...leaveMaterial
           };
         } else {
           return {
             debet: Schet.S21,
-            kredit: Schet.S20,
+            kredit: Schet.S23,
             ...comeHalfstuff
           };
         }
