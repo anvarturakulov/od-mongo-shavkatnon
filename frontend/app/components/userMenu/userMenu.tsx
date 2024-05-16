@@ -19,6 +19,7 @@ import { Mayda } from '../documents/mayda/mayda';
 import { Button } from '..';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import MiniJournal from '../journals/miniJournal/miniJournal';
+import { Norma } from '../inform/norma/norma';
 
 export default function UserMenu({menuData, className, ...props}:UserMenuProps):JSX.Element {
     
@@ -170,6 +171,7 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                     <RefreshPanel/>
                     <Section data={informData} sectionType='buxgalter' currentSection ={storageIdFromUser}/>
                     <Sklad data={informData}/>
+                    <Norma data={informData}/>
                 </>
             }
 

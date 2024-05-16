@@ -14,12 +14,11 @@ import Oborotka from './table/oborotka/oborotka';
 import { getSchetListFoSecondSunconts } from '@/app/service/reports/getSchetListFoSecondSunconts';
 import { getListFirstSubconts } from '@/app/service/reports/getListFirstSubconts';
 import Personal from './table/personal/personal';
-import { getEntrysJournal } from '@/app/service/reports/getEntrysJournal';
 import { MatOborot } from './table/matOborot/matOborot';
 
 export default function ReportTable({ className, ...props} : ReportTableProps):JSX.Element {
     
-    const {mainData, setMainData} = useAppContext();
+    const {mainData} = useAppContext();
     const {reportOption, contentName, contentTitle} = mainData;
     const {startDate, startReport, endDate, entrys, firstReferenceId, oborotType} = reportOption;
 
@@ -28,8 +27,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
 
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
-    // const { data:entrys1, mutate:mutate1} = useSWR('Anvar', () => getEntrysJournal( setMainData, mainData) )
-
+    
     const componentRef = useRef<HTMLInputElement>(null)
 
     const handlePrint = useReactToPrint({

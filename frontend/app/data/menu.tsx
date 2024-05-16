@@ -49,7 +49,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',

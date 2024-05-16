@@ -71,6 +71,7 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
                 <>
                     <Section data={informData} sectionType='buxgalter' currentSection={user.storageId}/>
                     <Sklad data={informData}/>
+                    <Norma data={informData}/>
                 </>
 
             }
