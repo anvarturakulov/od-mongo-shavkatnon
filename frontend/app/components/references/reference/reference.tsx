@@ -215,10 +215,18 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
                 (body.typeReference == TypeReference.STORAGES) &&
                 <>
                     <div>
-                        <div>Директор</div>
                         <CheckBoxForReference label='Директор' setCheckbox={setCheckbox} checked={body.director} id={'director'}/>
-                        <CheckBoxForReference label='Шавкат' setCheckbox={setCheckbox} checked={body.shavkat} id={'shavkat'}/>
                         <CheckBoxForReference label='Махсуд' setCheckbox={setCheckbox} checked={body.maxsud} id={'maxsud'}/>
+                    </div>
+                </>
+            }
+
+            {
+                ( mainData.user?.role == UserRoles.ADMIN )  && 
+                (body.typeReference == TypeReference.CHARGES || body.typeReference == TypeReference.STORAGES) &&
+                <>
+                    <div>
+                        <CheckBoxForReference label='Шавкат' setCheckbox={setCheckbox} checked={body.shavkat} id={'shavkat'}/>
                     </div>
                 </>
             }

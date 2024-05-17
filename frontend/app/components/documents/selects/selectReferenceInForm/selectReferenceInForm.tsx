@@ -16,7 +16,7 @@ import { docsDependentToBalance, docsDependentToMiddlePrice } from '../../doc/he
 
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
-    const { user, contentName } = mainData;
+    const { user, contentName, currentDocument } = mainData;
     const token = user?.access_token;
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/byType/'+typeReference;
     const { data } = useSWR(url, (url) => getDataForSwr(url, token));
@@ -170,9 +170,14 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         if (user?.role == UserRoles.HEADSECTION) {
                             return !item.longCharge
                         }
-                        // if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) {
-                        //     return item.longCharge
-                        // }
+                        if (
+                            currentDocument.senderId == '6645f381d8cc46842f33e9e9' || 
+                            currentDocument.senderId == '6645f4e1d8cc46842f33ea2b' ||
+                            currentDocument.senderId == '664455bbadb82fe6d06df149'
+
+                        )
+                            return item.shavkat
+
                     }
 
                     if (
