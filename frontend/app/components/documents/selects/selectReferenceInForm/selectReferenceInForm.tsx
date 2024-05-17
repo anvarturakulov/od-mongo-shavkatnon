@@ -177,6 +177,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                         )
                             return item.shavkat
+                        else return !item.shavkat
 
                     }
 
