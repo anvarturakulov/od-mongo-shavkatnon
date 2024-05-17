@@ -24,8 +24,8 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
         
         const { reportOption } = mainData;
         const { startDate, endDate } = reportOption;
-        console.log(startDate)
-        console.log(endDate)
+        // console.log(startDate)
+        // console.log(endDate)
         if ( startDate != 0 && endDate != 0 ) {
             if (contentName == ReportType.MatOborot) getMatOborot(setMainData, mainData) 
             else getEntrysJournal(setMainData, mainData);

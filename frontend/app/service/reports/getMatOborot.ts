@@ -20,7 +20,7 @@ export const getMatOborot = (
   axios.get(url, config)
     .then(function (response) {
       if (setMainData) {
-        console.log(response.data);
+        // console.log(response.data);
         let newReportOptions: ReportOptions = {
           ...reportOption,
           startReport: true,

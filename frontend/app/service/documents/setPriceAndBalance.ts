@@ -34,8 +34,8 @@ export const setPriceAndBalance = (
   axios.get(url, config)
     .then(function (request) {
       let result = {...request.data};
-      console.log(url)
-      console.log(result)
+      // console.log(url)
+      // console.log(result)
       if (!forTable) {
         currentItem.balance = +result?.balance;
         if (docsDependentToMiddlePrice.includes(contentName)) {

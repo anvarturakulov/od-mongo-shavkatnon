@@ -28,7 +28,13 @@ export type ReferencesForTelegramMessage = {
   thirdWorker: Reference | undefined,
 }
 
-export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+// export const numberValue = (price: number): string => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+export const numberValue = (price: number): string => {
+  let newPrice = Math.round(price * 10) / 10;
+  return newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+};
+
 
 const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string) => {
 

@@ -36,8 +36,15 @@
 
 // }
 
-export const numberValue = (price: number | undefined): string => {
-  if (price != undefined) return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-  else return ''
+// export const numberValue = (price: number | undefined): string => {
+//   if (price != undefined) return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+//   else return ''
+  
+// };
 
+export const numberValue = (price: number | undefined): string => {
+  if (price != undefined) {
+    let newPrice = Math.round(price * 10) / 10;
+    return newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  } else return ''
 };
