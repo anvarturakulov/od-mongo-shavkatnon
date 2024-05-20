@@ -133,6 +133,11 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                             return ( item.filial || item.umumBulim) 
                         }
                     
+                    if (type == 'receiver' && contentName == DocumentType.ServicesFromPartners)
+                        {
+                            return item.filial 
+                        }
+
                     if (type == 'receiver' && contentName == DocumentType.ComeCashFromPartners)
                         {
                             return (  item.buxgalter ) 
@@ -160,6 +165,12 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                     if (type == 'sender' && ( contentName == DocumentType.ComeMaterial || contentName == DocumentType.ComeCashFromPartners)) {
                         return ( item.typePartners == TypePartners.SUPPLIERS ) 
+                    }
+
+                    if (type == 'sender' && typeReference == TypeReference.CHARGES &&
+                        contentName == DocumentType.ServicesFromPartners
+                    ) {
+                        return !item.longCharge
                     }
 
                     if (type == 'analitic' && typeReference == TypeReference.PARTNERS)

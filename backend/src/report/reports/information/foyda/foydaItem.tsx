@@ -23,7 +23,8 @@ export const foydaItem = (
   title: string, 
   globalEntrys: Array<EntryItem> | undefined,
   docs: Document[],
-  deliverys: ReferenceDocument[] ) => {
+  deliverys: ReferenceDocument[],
+  zpUmumBulim: number ) => {
 
   let longeCharge:number = 0;
 
@@ -39,12 +40,17 @@ export const foydaItem = (
 
 
   let productionDocsCount = 0;
+  let productionAllDocsCount = 0;
   let countOutToDelivery = 0;
   let countIncomeFromDelivery = 0; 
   
 
   if (docs && docs.length > 0) {
     
+    productionAllDocsCount = docs.filter((item: Document) => {
+      return (item.date>= startDate && item.date <= endDate && item.documentType == DocumentType.ComeProduct)
+    }).length
+
     productionDocsCount = docs.filter((item: Document) => {
       return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId && item.documentType == DocumentType.ComeProduct)
     }).length
@@ -71,7 +77,7 @@ export const foydaItem = (
 
   // console.log('countOutToDelivery-',countOutToDelivery)
   // console.log('countIncomeFromDelivery-',countIncomeFromDelivery)
-
+  
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const brakCount = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
@@ -90,8 +96,14 @@ export const foydaItem = (
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const zp = queryKor(Schet.S20, Schet.S67, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  let addingZp = 0;
+  addingZp = productionAllDocsCount>0 ? zpUmumBulim * productionDocsCount / productionAllDocsCount : 0; 
+  
+  const services = queryKor(Schet.S20, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  console.log(services);
   const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
-  const currentCharges = zagatovka + materials + zp + currentPayment;
+  
+  const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services;
   const currentEarning = saleWithMove - currentCharges;
   const koefCurrentEarningToOneProduct = 0;
   const longPayment =  longeCharge;
@@ -100,6 +112,8 @@ export const foydaItem = (
   return (
     {
       section: title,
+      sectionId: currentSectionId,
+      productionAllDocsCount,
       productionDocsCount,
       productionCount,
       saleCountWithOutMove,
@@ -108,6 +122,8 @@ export const foydaItem = (
       zagatovka,
       materials,
       zp,
+      addingZp,
+      services,
       currentPayment,
       currentEarning,
       koefCurrentEarningToOneProduct,

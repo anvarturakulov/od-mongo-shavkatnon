@@ -79,6 +79,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         `${DocumentType.ZpCalculate}`,
     ]
 
+    const ServicesFromPartners = [
+        `${DocumentType.ServicesFromPartners}`,
+    ]
+
     if (documentsComeMaterial.includes(documentType)) {
         senderType = TypeReference.PARTNERS
         senderLabel = 'Таъминотчи'
@@ -340,6 +344,24 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
         analiticType = TypeReference.WORKERS
         analiticLabel = 'Ходим'
+        analiticIsVisible = true;
+
+        priceIsVisible = false;
+        countIsVisible = false;
+        balansIsVisible = false;
+    }
+
+    if (ServicesFromPartners.includes(documentType)) {
+        senderType = TypeReference.CHARGES
+        senderLabel = 'Харажат тури'
+        senderIsVisible = true
+
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Харажатни олувчи булим'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.PARTNERS
+        analiticLabel = 'Корхона'
         analiticIsVisible = true;
 
         priceIsVisible = false;

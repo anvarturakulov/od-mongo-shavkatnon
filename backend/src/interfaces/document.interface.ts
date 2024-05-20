@@ -20,6 +20,8 @@ export enum DocumentType {
     LeaveCash = 'LeaveCash',
     ZpCalculate = 'ZpCalculate',
 
+    ServicesFromPartners = 'ServicesFromPartners',
+
     Error = 'Error'
 }
 

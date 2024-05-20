@@ -100,6 +100,12 @@ export const MenuData:Array<MenuItem> = [
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
             },
+            { 
+                title: DocumentType.ServicesFromPartners, description:'Корхоналар хизмати',
+                type: 'document', active: false,
+                roles: 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+            },
         ]
     },
     {

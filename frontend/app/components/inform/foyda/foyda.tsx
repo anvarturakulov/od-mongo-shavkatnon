@@ -2,12 +2,7 @@
 import { FoydaProps } from './foyda.props';
 import { FoydaItem } from './foydaItem/foydaItem';
 import styles from './foyda.module.css';
-import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { useEffect, useState } from 'react';
-import { query } from '@/app/service/reports/querys/query';
-import { Schet, TypeQuery } from '@/app/interfaces/report.interface';
-import { queryKor } from '@/app/service/reports/querys/queryKor';
-import { useAppContext } from '@/app/context/app.context';
 import { numberValue } from '@/app/service/common/converters';
 import { totalByKey } from '../inform';
 
@@ -36,6 +31,8 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td>Ун харажати</td>
                         <td>Хом ашёлар хараж.</td>
                         <td>Иш хаки хараж.</td>
+                        <td>Бошкарув иш хаки</td>
+                        <td>Коммунал ва бошка хараж.</td>
                         <td>Кунлик пуллик хараж.</td>
                         <td>Жорий фойда</td>
                         <td>Фойда коэф (%)</td>
@@ -64,6 +61,8 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td className={styles.totalTd}>{numberValue(totalByKey('zagatovka', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('materials', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('zp', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('addingZp', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('services', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('currentPayment', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('currentEarning', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('koefCurrentEarningToOneProduct', datas))}</td>

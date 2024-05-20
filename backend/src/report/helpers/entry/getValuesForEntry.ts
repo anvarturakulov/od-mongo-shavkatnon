@@ -47,12 +47,20 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       }
     }
     
-
     const ZpCalculateObj = {
       debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
       kreditFirstSubcontoId: analiticId.toString(),
       kreditSecondSubcontoId: senderId.toString(),
+      count: count,
+      summa: total,
+    }
+  
+    const ServicesFromPartnersObj = {
+      debetFirstSubcontoId: receiverId.toString(),
+      debetSecondSubcontoId: senderId.toString(),
+      kreditFirstSubcontoId: analiticId.toString(),
+      kreditSecondSubcontoId: receiverId.toString(),
       count: count,
       summa: total,
     }
@@ -281,6 +289,14 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S20,
           kredit: Schet.S67,
           ...ZpCalculateObj
+        };
+      
+      case DocumentType.ServicesFromPartners:
+        console.log('-*-')
+        return {
+          debet: Schet.S20,
+          kredit: Schet.S40,
+          ...ServicesFromPartnersObj
         };
     }
   }
