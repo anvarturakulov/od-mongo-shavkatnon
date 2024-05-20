@@ -100,7 +100,7 @@ export const foydaItem = (
   addingZp = productionAllDocsCount>0 ? zpUmumBulim * productionDocsCount / productionAllDocsCount : 0; 
   
   const services = queryKor(Schet.S20, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  console.log(services);
+  
   const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
   
   const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services;
