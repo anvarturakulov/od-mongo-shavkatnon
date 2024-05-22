@@ -127,7 +127,7 @@ export const query = (
         )
       })
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
-      return totalCount ? +(totalSumma / totalCount).toFixed(2) : 0;
+      return totalCount ? +(totalSumma / totalCount).toFixed(5) : 0;
 
     case TypeQuery.BALANCE:
       let countLeave = newEntrys.filter((item: EntryItem) => {

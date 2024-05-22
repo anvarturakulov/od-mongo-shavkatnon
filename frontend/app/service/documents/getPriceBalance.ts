@@ -16,7 +16,7 @@ export const getPriceAndBalance = (
 
   const { contentName } = mainData;
   endDate = endDate + 10000;
-  console.log('Anvar', endDate)
+  // console.log('Anvar', endDate)
 
   let schet = undefined
   let typeDocumentForReference = getSchetForQuery(contentName);
