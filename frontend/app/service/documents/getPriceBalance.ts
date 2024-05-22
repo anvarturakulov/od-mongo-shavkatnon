@@ -15,7 +15,7 @@ export const getPriceAndBalance = (
 ) => {
 
   const { contentName } = mainData;
-
+  console.log('Anvar', endDate)
   endDate = endDate + 86399999;
 
   let schet = undefined

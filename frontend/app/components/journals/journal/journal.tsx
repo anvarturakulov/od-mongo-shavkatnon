@@ -250,7 +250,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         <td>{getNameReference(references,item.receiverId)}</td>
                                         <td>{getNameReference(references,item.senderId)}</td>
                                         <td>{`${getNameReference(references,item.analiticId)? getNameReference(references,item.analiticId): ''} ${item.comment ? `(${item.comment})`: ''} ${item.count ? `(${item.count})`: ''}`}</td>
-                                        <td>{item.user}</td>
+                                        <td>{item.user + item.date}</td>
                                         <td className={styles.rowAction}>
                                             <IcoTrash className={styles.icoTrash}
                                             onClick = {() => deleteItemDocument(item._id, token, setMainData, mainData)}
