@@ -110,7 +110,7 @@ export const query = (
         return (
           item.debet == schet &&
           item.kredit != schet &&
-          // item.debetFirstSubcontoId == firstReferenceId &&
+          item.debetFirstSubcontoId == firstSubcontoId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date <= endDate
         )
@@ -121,7 +121,7 @@ export const query = (
         return (
           item.debet == schet &&
           item.kredit != schet &&
-          // item.debetFirstSubcontoId == firstReferenceId &&
+          item.debetFirstSubcontoId == firstSubcontoId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date <= endDate
         )
