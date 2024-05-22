@@ -112,7 +112,7 @@ export const query = (
           item.kredit != schet &&
           item.debetFirstSubcontoId == firstSubcontoId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
-          item.date <= endDate
+          item.date < endDate
         )
       })
         .reduce((acc, item: EntryItem) => acc + item.summa, 0)
@@ -123,7 +123,7 @@ export const query = (
           item.kredit != schet &&
           item.debetFirstSubcontoId == firstSubcontoId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
-          item.date <= endDate
+          item.date < endDate
         )
       })
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
