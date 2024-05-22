@@ -105,11 +105,19 @@ export const query = (
         .reduce((acc, item: EntryItem) => acc + item.summa, 0)
 
     case TypeQuery.MPRICE:
-      let totalSumma = newEntrys.filter((item: EntryItem) => {
-
+      
+      let summaL = newEntrys.filter((item: EntryItem) => {
+        return (
+          item.kredit == schet &&
+          item.kreditFirstSubcontoId == firstSubcontoId &&
+          item.kreditSecondSubcontoId == secondSubcontoId &&
+          item.date < endDate
+        )
+      })
+        .reduce((acc, item: EntryItem) => acc + item.summa, 0)
+      let summaC = newEntrys.filter((item: EntryItem) => {
         return (
           item.debet == schet &&
-          item.kredit != schet &&
           item.debetFirstSubcontoId == firstSubcontoId &&
           item.debetSecondSubcontoId == secondSubcontoId &&
           item.date < endDate
@@ -126,6 +134,7 @@ export const query = (
         )
       })
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
+
       let countC = newEntrys.filter((item: EntryItem) => {
         return (
           item.debet == schet &&
@@ -137,6 +146,9 @@ export const query = (
         .reduce((acc, item: EntryItem) => acc + item.count, 0)
       
       let totalCount = countC - countL;
+      let totalSumma = summaC - summaL;
+      // console.log('totalSum', totalSumma );
+      // console.log('totalCount', totalCount)
       
       return totalCount ? +(totalSumma / totalCount).toFixed(5) : 0;
 
