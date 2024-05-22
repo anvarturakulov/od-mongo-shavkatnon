@@ -18,8 +18,6 @@ export const setPriceAndBalance = (
 
   let currentItem = { ...currentDocument }
 
-  endDate = endDate + 86399999;
-
   if (!firstSubcontoId) firstSubcontoId='';
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/priceAndBalance' +
