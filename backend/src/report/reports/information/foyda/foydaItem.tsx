@@ -87,6 +87,7 @@ export const foydaItem = (
 
 
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
+  
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const brakCount = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
@@ -97,9 +98,9 @@ export const foydaItem = (
   
   const countDeleviry = (countOutToDelivery-countIncomeFromDelivery) <= 0 ? 0 : (countOutToDelivery-countIncomeFromDelivery)   
   
-  const saleCountWithOutMove = productionCount - brakCount - moveOutCount + moveIncomeCount;
+  const saleCountWithOutMove = startCount + productionCount - brakCount - moveOutCount + moveIncomeCount - endCount;
   
-  const saleWithMove = sale +countDeleviry * 3500 + startCount - endCount;
+  const saleWithMove = sale +countDeleviry * 3500;
   
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
