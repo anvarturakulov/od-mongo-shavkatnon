@@ -47,6 +47,7 @@ export const getDefinedItemIdForReceiver = (role: UserRoles | undefined, storage
       role !== UserRoles.ADMIN && 
       role !== UserRoles.HEADCOMPANY &&
       role !== UserRoles.ZAMGLBUX && 
+      role !== UserRoles.GLBUX && 
       ( 
         contentName == DocumentType.ComeCashFromPartners ||
         contentName == DocumentType.LeaveCash

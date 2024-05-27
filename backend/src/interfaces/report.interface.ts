@@ -61,6 +61,8 @@ export enum TypeQuery {
     OKS = 'OKS',
     ODK = 'ODK',
     OKK = 'OKK',
+    OK = 'OK',
+    OS = 'OS'
 }
 
 export interface QueryObject {

@@ -12,11 +12,6 @@ export const queryKor = (
 
   let newEntrys = globalEntrys?.length ? [...globalEntrys] : [] 
   
-  // firstSubcontoId = String(firstSubcontoId);
-  // secondSubcontoId = String(secondSubcontoId);
-  // console.log(debet, kredit, typeQuery, startDate, endDate, firstSubcontoId, secondSubcontoId)
-  // endDate = endDate + 86399999
-
   switch (typeQuery) {
     case TypeQuery.ODS:
       return newEntrys.filter((item: EntryItem) => {

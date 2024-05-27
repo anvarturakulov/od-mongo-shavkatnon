@@ -18,6 +18,7 @@ import { UserRoles, dashboardUsersList } from '@/app/interfaces/general.interfac
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 import Footer from '../../common/footer/footer'
 import { numberValue } from '@/app/service/common/converters'
+import { CheckBoxInFooter } from '../helpers/checkBoxInFooter/checkBoxInFooter'
 
 
 interface FilterForJournal {
@@ -50,6 +51,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     
     const {mainData, setMainData} = useAppContext();
     const {dateStart, dateEnd} = mainData.interval;
+    const { journalChechboxs } = mainData;
 
     let dateStartForUrl = dateStart
     let dateEndForUrl = dateEnd
@@ -184,11 +186,27 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             documents
                             .sort((a:DocumentModel, b:DocumentModel) => a.date - b.date)
                             .filter((item:DocumentModel) => {
+                                if (journalChechboxs.charges ) {
+                                    if (!item.isWorker && !item.isPartner) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                if (journalChechboxs.workers ) {
+                                    if (item.isWorker) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
+                                if (journalChechboxs.partners ) {
+                                    if (item.isPartner) return true
+                                } else return true
+                            })
+                            .filter((item:DocumentModel) => {
                                 const {user} = filter
                                 if (user != 'Фойдаланувчи') {
                                     if (item.user.toLowerCase().includes(user)) return true
                                 } else return true
                             })
+                            
                             .filter((item:DocumentModel) => {
                                 const {comment} = filter
                                 if (comment != 'Изох') {
@@ -269,8 +287,18 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                     </table>
                 </div>
             }
-
-            {dashboardUsers && <Footer windowFor='document' total={total} count={count}/>}  
+            <div className={styles.footer}>
+                {dashboardUsers && <Footer windowFor='document' total={total} count={count}/>} 
+            {
+                contentName == DocumentType.LeaveCash &&
+                <div className={styles.checkboxs}>
+                    <CheckBoxInFooter id='charges' label='Харажат'/>
+                    <CheckBoxInFooter id='workers' label='Иш хаки'/>
+                    <CheckBoxInFooter id='partners' label='Таъминотчи'/>
+                </div>
+                
+            }
+            </div>
             
             
         </>

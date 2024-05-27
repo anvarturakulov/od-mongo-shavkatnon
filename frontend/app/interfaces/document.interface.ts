@@ -98,3 +98,9 @@ export interface Interval {
 export type NameControl = 'count' | 'price' | 'total' | 'comment' | 'cashFromPartner' | 'balance'
 
 export type NameDocs = 'sd' | 'ds'
+
+export interface JournalCheckboxs {
+    charges: boolean,
+    workers: boolean,
+    partners: boolean,
+}

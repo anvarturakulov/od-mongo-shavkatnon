@@ -321,7 +321,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
         receiverType = TypeReference.STORAGES
         receiverLabel = 'Харажатни олувчи булим'
-        recieverIsVisible = false
+        recieverIsVisible = true
 
         analiticType = TypeReference.CHARGES
         analiticLabel = 'Харажат тури'

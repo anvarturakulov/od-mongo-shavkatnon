@@ -1,6 +1,7 @@
 
 import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { queryKor } from 'src/report/helpers/querys/queryKor';
+import { queryKorFull } from 'src/report/helpers/querys/queryKorFull';
 
 export const takingItem = ( 
   startDate: number,
@@ -8,8 +9,9 @@ export const takingItem = (
   currentSectionId: string, 
   title: string, 
   globalEntrys: Array<EntryItem> | undefined ) => {    
-
-    const OBSUMK5050 = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  
+    const glBuxId = '65d877b707d829e2595d11c0';
+    const OBSUMK5050 = queryKorFull(Schet.S50, Schet.S50, TypeQuery.OS, startDate, endDate, glBuxId, '', String(currentSectionId), '', globalEntrys);
     if (!OBSUMK5050) return {}
     return ( 
         {

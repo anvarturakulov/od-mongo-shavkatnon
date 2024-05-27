@@ -2,7 +2,7 @@ import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interfac
 import { EntryItem } from 'src/interfaces/report.interface';
 import { foydaItem } from './foydaItem';
 import { Document } from 'src/document/models/document.model';
-import {  ReferenceDocument } from 'src/reference/models/referense.model';
+import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { zpItemToFoyda } from './zpItemToFoyda';
 
 export const foyda = (
@@ -26,10 +26,10 @@ export const foyda = (
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
     .filter((item: any) => {
         if ( item.filial ) return true
-        return false
+        return false;
     })
     .forEach((item: ReferenceModel) => {
-        let element = foydaItem(data, startDate, endDate, item._id, item.name, globalEntrys, docs, deliverys, zpUmumBulim)
+        let element = foydaItem(data, startDate, endDate, item._id, item.name, globalEntrys, docs, deliverys, zpUmumBulim);
         if (Object.keys(element).length) {
             result.push(element)
         }

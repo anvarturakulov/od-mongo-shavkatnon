@@ -1,4 +1,4 @@
-import { DocumentModel, DocumentType, Interval } from '../interfaces/document.interface'
+import { DocumentModel, DocumentType, Interval, JournalCheckboxs } from '../interfaces/document.interface'
 import { DefinedTandirWorkers } from '../interfaces/general.interface'
 import { OborotType, ReportOptions } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
@@ -60,6 +60,12 @@ export const defaultInterval:Interval = {
     dateEnd: 0
 }
 
+export const defaultJournalCheckbox:JournalCheckboxs = {
+    charges: false,
+    workers: false,
+    partners: false
+}
+
 export const defaultMainData: Maindata = {
     activeMenuKey: '',
     contentType: 'document',
@@ -89,4 +95,5 @@ export const defaultMainData: Maindata = {
     loading: false,
     informData: [],
     matOborot: [],
+    journalChechboxs: defaultJournalCheckbox,
   }
