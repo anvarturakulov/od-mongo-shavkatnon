@@ -26,11 +26,16 @@ export const SkladItem = ({className, item, ...props }: SkladItemProps) :JSX.Ele
                 item?.items.length &&
                 item?.items.map((element:any, key:number) => {
                     const value = element?.value
+                    const price = element?.price
+                    const valueSum = element?.valueSum
+
                     if (value == 0) return <></>
                     return (
                         <div className={styles.row} key={key}>
                             <div className={styles.title}>{element?.name}</div>
                             <div className={styles.value}>{numberValue(+value)}</div>
+                            <div className={styles.value}>{numberValue(+price)}</div>
+                            <div className={styles.value}>{numberValue(+valueSum)}</div>
                         </div>
                     )
                 })

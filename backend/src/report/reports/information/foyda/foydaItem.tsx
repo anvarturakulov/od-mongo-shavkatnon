@@ -34,7 +34,7 @@ export const foydaItem = (
     return item.typeReference == TypeReference.CHARGES && item.longCharge
   })
   .forEach((item: ReferenceModel) => {
-    console.log(item.name)
+    // console.log(item.name)
     longeCharge += queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), String(item._id), globalEntrys)
   })
 
@@ -110,7 +110,7 @@ export const foydaItem = (
   
   const services = queryKor(Schet.S20, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
-  const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
+  const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
   
   const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services;
   const currentEarning = saleWithMove - currentCharges;

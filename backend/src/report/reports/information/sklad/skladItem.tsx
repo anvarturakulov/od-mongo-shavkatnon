@@ -27,13 +27,27 @@ export const skladItem = (
                     query(Schet.S21, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
       const TKKOL = query(Schet.S10, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
                     query(Schet.S21, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);;
+      const PDSUM = query(Schet.S10, TypeQuery.PDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.PDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const PKSUM = query(Schet.S10, TypeQuery.PKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.PKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const TDSUM = query(Schet.S10, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const TKSUM = query(Schet.S10, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);;
+      
       
       const value = PDKOL - PKKOL + TDKOL - TKKOL
+      const valueSum = PDSUM - PKSUM + TDSUM - TKSUM
+      const price = value ? valueSum / value : 0;
+
       if (value == 0) return {}
 
       let element = {
         name: item.name,
-        value: value
+        value,
+        valueSum,
+        price,
       }
       
       if (Object.keys(element).length) {
