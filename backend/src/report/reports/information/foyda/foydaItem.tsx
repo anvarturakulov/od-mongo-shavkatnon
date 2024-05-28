@@ -102,7 +102,8 @@ export const foydaItem = (
   
   const saleWithMove = sale + countDeleviry * 3500 
                             + (endCount-startCount)*3500 
-                            - (moveIncomeCount-countIncomeFromDelivery)*3500;
+                            - (moveIncomeCount-countIncomeFromDelivery)*3500
+                            + (moveOutCount - countOutToDelivery )*3500;
   
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
