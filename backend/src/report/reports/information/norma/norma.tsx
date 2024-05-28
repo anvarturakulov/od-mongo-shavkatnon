@@ -14,6 +14,7 @@ export const norma = (
     data.length > 0 &&
     data
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+    .filter((item: any) => !item?.deleted)
     .filter((item: any) => {
         if ( item.sklad ) return true
         return false
