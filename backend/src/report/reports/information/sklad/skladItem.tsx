@@ -27,19 +27,20 @@ export const skladItem = (
                     query(Schet.S21, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
       const TKKOL = query(Schet.S10, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
                     query(Schet.S21, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);;
-      const PDSUM = query(Schet.S10, TypeQuery.PDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
-                    query(Schet.S21, TypeQuery.PDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
-      const PKSUM = query(Schet.S10, TypeQuery.PKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
-                    query(Schet.S21, TypeQuery.PKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
-      const TDSUM = query(Schet.S10, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
-                    query(Schet.S21, TypeQuery.TDKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);
-      const TKSUM = query(Schet.S10, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys)+
-                    query(Schet.S21, TypeQuery.TKKOL, startDate, endDate, currentSectionId, item._id, globalEntrys);;
+      const PDSUM = query(Schet.S10, TypeQuery.PDSUM, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.PDSUM, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const PKSUM = query(Schet.S10, TypeQuery.PKSUM, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.PKSUM, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const TDSUM = query(Schet.S10, TypeQuery.TDSUM, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.TDSUM, startDate, endDate, currentSectionId, item._id, globalEntrys);
+      const TKSUM = query(Schet.S10, TypeQuery.TKSUM, startDate, endDate, currentSectionId, item._id, globalEntrys)+
+                    query(Schet.S21, TypeQuery.TKSUM, startDate, endDate, currentSectionId, item._id, globalEntrys);;
       
       
       const value = PDKOL - PKKOL + TDKOL - TKKOL
       const valueSum = PDSUM - PKSUM + TDSUM - TKSUM
       const price = value ? valueSum / value : 0;
+      const bag = item.un ? value / 50 : 0
 
       if (value == 0) return {}
 
@@ -48,6 +49,7 @@ export const skladItem = (
         value,
         valueSum,
         price,
+        bag
       }
       
       if (Object.keys(element).length) {

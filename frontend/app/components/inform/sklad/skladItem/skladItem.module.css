@@ -8,7 +8,7 @@
 
 .row{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 3fr 2fr 1fr 2fr 3fr ;
     gap: 10px;
     padding: 5px;
     border-bottom: 0.5px dotted #000;
@@ -25,6 +25,11 @@
 
 .value {
     text-align: right;
+    font-size: 14px;
+}
+
+.value span {
+    color: blue;
 }
 
 .bottomTitle{
