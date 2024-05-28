@@ -35,7 +35,7 @@ export const foydaItem = (
   })
   .forEach((item: ReferenceModel) => {
     console.log(item.name)
-    longeCharge += queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), String(item._id), globalEntrys)
+    longeCharge += queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), String(item._id), globalEntrys)
   })
 
 
