@@ -8,7 +8,7 @@ import cn from 'classnames';
 import { secondsToDateString } from '../../documents/doc/helpers/doc.functions';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { getDescriptionDocument } from '@/app/service/documents/getDescriptionDocument';
-import { DocumentModel, Interval } from '@/app/interfaces/document.interface';
+import { DocumentModel, DocumentType, Interval } from '@/app/interfaces/document.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { getNameReference } from '../helpers/journal.functions';
 import { setProvodkaByReciever } from './helpers/miniJournal.functions';
@@ -80,6 +80,7 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                                         {
                                             !item.proveden &&
                                             item.receiverId == user?.storageId &&
+                                            item.documentType != DocumentType.LeaveCash &&
                                             <td><button 
                                                 className={cn(styles.receiveBtn)}
                                                 onClick={()=>setProvodkaByReciever(item._id, item.proveden,setMainData,mainData)}

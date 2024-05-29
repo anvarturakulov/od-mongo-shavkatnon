@@ -18,7 +18,7 @@ export const section = (
     .filter((item: any) => {
         if (sectionType == 'DELIVERY') return item?.delivery
         if (sectionType == 'FILIAL') return item?.filial
-        if (sectionType == 'BUXGALTER') return item?.buxgalter
+        if (sectionType == 'BUXGALTER') return (item?.buxgalter || item?.director)
         if (sectionType == 'FOUNDER') return ( item?.shavkat || item?.maxsud)
         return false
     })
