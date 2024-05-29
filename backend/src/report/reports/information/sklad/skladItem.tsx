@@ -39,8 +39,9 @@ export const skladItem = (
       
       const value = PDKOL - PKKOL + TDKOL - TKKOL
       const valueSum = PDSUM - PKSUM + TDSUM - TKSUM
-      const price = value ? valueSum / value : 0;
       const bag = item.un ? value / 50 : 0
+      let price = value ? valueSum / value : 0;
+      price = item.un ? price * 50 : price
 
       if (value == 0) return {}
 
