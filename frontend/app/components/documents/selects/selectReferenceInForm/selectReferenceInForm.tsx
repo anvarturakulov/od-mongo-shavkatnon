@@ -123,6 +123,8 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         contentName == DocumentType.MoveCash ) ) {
                         if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
                             return (item.filial || item.sklad || item.delivery || item.buxgalter  || item.maxsud || item.shavkat) 
+                        } else if (user?.role == UserRoles.GLBUX) {
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter || item.director)
                         } else {
                             return (item.filial || item.sklad || item.delivery || item.buxgalter)
                         }
@@ -179,7 +181,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
                     if (type == 'analitic' && typeReference == TypeReference.CHARGES) {
                         if (user?.role == UserRoles.HEADSECTION) {
-                            return !item.longCharge
+                            return !item.longCharge && !item.shavkat
                         }
                         if (
                             currentDocument.senderId == '6645f381d8cc46842f33e9e9' || 

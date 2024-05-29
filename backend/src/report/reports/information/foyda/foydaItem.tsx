@@ -85,7 +85,6 @@ export const foydaItem = (
   const startCount = PDKOL-PKKOL;
   const endCount = startCount+TDKOL-TKKOL;
 
-
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
   
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
