@@ -10,17 +10,17 @@ import useSWR from 'swr';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { dateToStr } from '@/app/service/reports/dateToStr';
-import Oborotka from './table/oborotka/oborotka';
 import { getSchetListFoSecondSunconts } from '@/app/service/reports/getSchetListFoSecondSunconts';
 import { getListFirstSubconts } from '@/app/service/reports/getListFirstSubconts';
 import Personal from './table/personal/personal';
 import { MatOborot } from './table/matOborot/matOborot';
+import { Oborotka } from './table/oborotka/oborotka';
 
 export default function ReportTable({ className, ...props} : ReportTableProps):JSX.Element {
     
     const {mainData} = useAppContext();
     const {reportOption, contentName, contentTitle} = mainData;
-    const {startDate, startReport, endDate, entrys, firstReferenceId, oborotType} = reportOption;
+    const {startDate, startReport, endDate, entrys, firstReferenceId, schet} = reportOption;
 
     const { user } = mainData;
     const token = user?.access_token;
@@ -36,7 +36,7 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
     })
     let listFirstSubconts: Array<string> | undefined
 
-    let schetList: Array<Schet> = getSchetListFoSecondSunconts(contentName, oborotType)
+    let schetList: Array<Schet> = getSchetListFoSecondSunconts(contentName, schet)
     
     if (firstReferenceId == null || firstReferenceId == '') {
         listFirstSubconts = getListFirstSubconts(entrys, schetList);
@@ -65,16 +65,12 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
 
                 { 
                     contentName == ReportType.MatOborot && 
-                    // <MatOborot firstSubcontoId = {firstReferenceId} listSecondSubconts={listSecondSubconts} data={data}/>
                     <MatOborot />
                 }
 
-                {contentName == ReportType.Oborotka && 
-                    <Oborotka 
-                        listFirstSubconts={listFirstSubconts}
-                        listSecondSubconts={listSecondSubconts}
-                        data={data}
-                    />
+                {
+                    contentName == ReportType.Oborotka && 
+                    <Oborotka />
                 }
 
                 {contentName == ReportType.Personal && 

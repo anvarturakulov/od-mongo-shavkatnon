@@ -5,11 +5,12 @@ import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
 import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
 import { query } from './helpers/querys/query';
-import { QueryInformation, QueryMatOtchet, QueryObject, TypeQuery } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka, TypeQuery } from 'src/interfaces/report.interface';
 import { ReferenceService } from 'src/reference/reference.service';
 import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
 import { matOborot } from './reports/matOborot/matOborot';
+import { oborotkaAll } from './reports/oborotkaAll/oborotkaAll';
 
 @Injectable()
 export class ReportService {
@@ -45,7 +46,7 @@ export class ReportService {
 
     result.price = query(schet, TypeQuery.MPRICE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
     result.balance = query(schet, TypeQuery.BALANCE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
-    console.log(result, secondSubcontoId, firstSubcontoId)
+    
     return result
   }
 
@@ -67,6 +68,14 @@ export class ReportService {
     let { startDate, endDate, section } = queryMatOtchet;
 
     let result = matOborot(data, startDate, endDate, section, this.documentService.globalEntrys)
+    return result
+  }
+
+  async getOborotka(queryOborotka: QueryOborotka) {
+    let data = await this.referenceService.getAllReferences();
+    let { startDate, endDate, schet } = queryOborotka;
+
+    let result = oborotkaAll(data, startDate, endDate, schet, this.documentService.globalEntrys)
     return result
   }
 

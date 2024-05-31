@@ -4,7 +4,7 @@ import { ReportOptionsDto } from './dto/report.options.dto';
 import { REPORT_NOT_PREPARE } from './report.constants';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { Request } from 'express';
-import { QueryInformation, QueryMatOtchet, QueryObject } from 'src/interfaces/report.interface';
+import { QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka } from 'src/interfaces/report.interface';
 
 
 @Controller('report')
@@ -74,7 +74,7 @@ export class ReportController {
   }
 
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/information')
   async getInformation(@Req() request: Request) {
@@ -111,7 +111,23 @@ export class ReportController {
     return report;
   }
 
+  // @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Get('/oborotka')
+  async getOborotka(@Req() request: Request) {
 
+    const queryOborotka: QueryOborotka = {
+      startDate: +request.query?.startDate,
+      endDate: +request.query?.endDate,
+      schet: String(request.query.schet),
+    }
 
+    const report = await this.reportService.getOborotka(queryOborotka);
+
+    if (!report) {
+      throw new NotFoundException(REPORT_NOT_PREPARE);
+    }
+    return report;
+  }
 
 }

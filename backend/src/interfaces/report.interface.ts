@@ -84,3 +84,9 @@ export interface QueryMatOtchet {
     endDate: number,
     section: string,
 }
+
+export interface QueryOborotka {
+    startDate: number,
+    endDate: number,
+    schet: string,
+}

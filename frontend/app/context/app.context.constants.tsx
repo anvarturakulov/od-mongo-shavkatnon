@@ -1,6 +1,6 @@
 import { DocumentModel, DocumentType, Interval, JournalCheckboxs } from '../interfaces/document.interface'
 import { DefinedTandirWorkers } from '../interfaces/general.interface'
-import { OborotType, ReportOptions } from '../interfaces/report.interface'
+import { ReportOptions, Schet } from '../interfaces/report.interface'
 import { Maindata } from './app.context.interfaces'
 
 export const defaultDocumentTableItem = {
@@ -52,7 +52,7 @@ export const defaultReportOptions: ReportOptions =  {
     showReport: false,
     entrys: [],
     startReport: false,
-    oborotType: OborotType.S20,
+    schet: Schet.S20,
 }
 
 export const defaultInterval:Interval = {
@@ -95,5 +95,6 @@ export const defaultMainData: Maindata = {
     loading: false,
     informData: [],
     matOborot: [],
+    oborotka: [],
     journalChechboxs: defaultJournalCheckbox,
   }

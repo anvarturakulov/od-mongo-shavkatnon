@@ -13,7 +13,7 @@ export interface ReportOptions {
     showReport: boolean,
     entrys: Array<EntryItem>,
     startReport: boolean,
-    oborotType: OborotType,
+    schet: Schet,
 }
 
 export enum Schet {
@@ -27,7 +27,7 @@ export enum Schet {
     S40 = 'S40', // СЧЕТА К ПОЛУЧЕНИЮ И СЧЕТА К ОПЛАТЕ ПОСТАВЩИКАМ И ПОДРЯДЧИКАМ
     S50 = 'S50', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ В КАССЕ
     S51 = 'S51', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ НА РАСЧЕТНОМ СЧЕТЕ
-    S66 = 'S66', // СЧЕТА УЧЕТА ЗАРОБОТНОЙ ПЛАТЫ СОТРУДНИКОВ
+    S66 = 'S66', // УЧРИДИТЕЛИ
     S67 = 'S67', // СЧЕТА УЧЕТА ЗАРОБОТНОЙ ПЛАТЫ СОТРУДНИКОВ
 }
 
@@ -73,4 +73,5 @@ export enum OborotType {
     S50 = 'Касса', // СЧЕТА УЧЕТА ДЕНЕЖНЫХ СРЕДСТВ В КАССЕ
     S67 = 'Ходимлар иш хакиси'
 } 
+
 

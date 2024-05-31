@@ -3,9 +3,7 @@ import { MatOborotProps } from './matOborot.props';
 import { MatOborotItem } from './matOborotItem/matOborotItem';
 import styles from './matOborot.module.css';
 import { useEffect, useState } from 'react';
-import { numberValue } from '@/app/service/common/converters';
 import { useAppContext } from '@/app/context/app.context';
-import { totalByKey } from '@/app/components/inform/inform';
 
 
 export const MatOborot = ({className, ...props }: MatOborotProps) :JSX.Element => {

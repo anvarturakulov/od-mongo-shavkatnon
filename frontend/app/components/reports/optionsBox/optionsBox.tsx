@@ -12,22 +12,22 @@ import { showMessage } from '@/app/service/common/showMessage';
 import { ReportType } from '@/app/interfaces/report.interface';
 import { SelectOborot } from './components/selectOborot/selectOborot';
 import { getMatOborot } from '@/app/service/reports/getMatOborot';
+import { getOborotka } from '@/app/service/reports/getOborotka';
 
 
 export default function OptionsBox({ className, ...props }: OptionsBoxProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const {contentName, contentTitle, reportOption} = mainData;
-    const result = getOptionsByReportType(contentName, reportOption.oborotType);
+    const result = getOptionsByReportType(contentName, reportOption.schet);
 
     const showReport = ( setMainData: Function | undefined, mainData: Maindata ) => {
         
         const { reportOption } = mainData;
         const { startDate, endDate } = reportOption;
-        // console.log(startDate)
-        // console.log(endDate)
         if ( startDate != 0 && endDate != 0 ) {
-            if (contentName == ReportType.MatOborot) getMatOborot(setMainData, mainData) 
+            if (contentName == ReportType.MatOborot) getMatOborot(setMainData, mainData)
+            if (contentName == ReportType.Oborotka) getOborotka(setMainData, mainData) 
             else getEntrysJournal(setMainData, mainData);
         } else {
             showMessage('Санани тулдиринг', 'error', setMainData);
@@ -38,7 +38,7 @@ export default function OptionsBox({ className, ...props }: OptionsBoxProps): JS
 
         <div className={styles.box}>
             
-            <div className={styles.title}>{`${contentTitle} буйича хисобот`}</div>
+            <div className={styles.title}>{`${contentTitle} буйича хисобот88`}</div>
             <div className={styles.dataBox}>
                 <Input label='Бошлангич сана' type='date' id='startDate' onChange={(e)=> onChangeInputOptionsBox(e, setMainData, mainData)}/>
                 <Input label='Охирги сана' type='date' id='endDate' onChange={(e) => onChangeInputOptionsBox(e, setMainData, mainData)} />

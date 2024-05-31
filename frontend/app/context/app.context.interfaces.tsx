@@ -32,6 +32,7 @@ export interface Maindata {
   loading: boolean,
   informData: Array<any>,
   matOborot: Array<any>,
+  oborotka: Array<any>,
   journalChechboxs: JournalCheckboxs,
 }
 

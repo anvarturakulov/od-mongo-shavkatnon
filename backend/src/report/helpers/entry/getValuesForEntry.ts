@@ -38,8 +38,8 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
 
     if (hasTable) {
       leaveMaterial = {
-        debetFirstSubcontoId: receiverId.toString(),
-        debetSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
+        debetFirstSubcontoId: senderId.toString(),
+        debetSecondSubcontoId: receiverId.toString(),
         kreditFirstSubcontoId: senderId.toString(),
         kreditSecondSubcontoId: (item.tableItems?.length && !newEntry) ? tableItem.referenceId?.toString() : '',
         count: (item.tableItems?.length && !newEntry) ? tableItem.count : 0,
@@ -51,7 +51,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
       kreditFirstSubcontoId: analiticId.toString(),
-      kreditSecondSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: receiverId.toString(),
       count: count,
       summa: total,
     }

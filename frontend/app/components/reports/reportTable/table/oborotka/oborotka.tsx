@@ -1,45 +1,57 @@
-import styles from './oborotka.module.css'
-import { Thead } from './thead/thead';
-import { TBody } from './tbody/tbody';
+'use client'
 import { OborotkaProps } from './oborotka.props';
+import { OborotkaItem } from './oborotkaItem/oborotkaItem';
+import styles from './oborotka.module.css';
+import { useEffect, useState } from 'react';
 import { useAppContext } from '@/app/context/app.context';
-import { getSchetForOborotType } from '@/app/service/reports/getSchetForOborotType';
 
 
-export default function Oborotka({ className, listFirstSubconts, listSecondSubconts, data, ...props} : OborotkaProps):JSX.Element {
+export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => {
     const { setMainData, mainData } = useAppContext()
-    const { oborotType } = mainData.reportOption;
-    return (
-        <>
-          <table className={styles.table}>
-              <Thead/>
-              <tbody className={styles.tbody}>
-                  {listFirstSubconts && listFirstSubconts.map((item:string)=>{
-                      return (
-                          <>
-                            <TBody 
-                                listSecondSubconts={listSecondSubconts}
-                                data={data} 
-                                schet={getSchetForOborotType(oborotType)}
-                                fixedFirstSuncont = {item}
-                                bodyByFirstSunconto = {true}
-                            />
-                          </>
-                      )
-                  })}
+    const { oborotka, reportOption } = mainData
+    const { firstReferenceId } = reportOption
 
-                  {
-                  listFirstSubconts == undefined &&
-                        <TBody 
-                            listSecondSubconts={listSecondSubconts}
-                            data={data} 
-                            schet={getSchetForOborotType(oborotType)}
-                            fixedFirstSuncont = {'45'}
-                            bodyByFirstSunconto = {false}
+    useEffect(()=> {
+        console.log(oborotka)
+    }, [oborotka])
+    
+    let datas = oborotka ? oborotka[0]?.values : []
+
+    return (
+       <>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <td >№</td>
+                        <td className={styles.titleName}>Номи</td>
+                        <td className={styles.titleValue}>Колдик сумма</td>
+                        <td className={styles.titleValue}>Колдик сон</td>
+                        <td className={styles.titleValue}>Дебет сумма</td>
+                        <td className={styles.titleValue}>Дебет сон</td>
+                        <td className={styles.titleValue}>Кредит сумма</td>
+                        <td className={styles.titleValue}>Кредит сон</td>
+                        <td className={styles.titleValue}>Колдик сумма</td>
+                        <td className={styles.titleValue}>Колдик сон</td>
+                    </tr>
+                </thead>
+                {
+                    datas && datas.length &&
+                    datas
+                    .filter((item:any) => {
+                        if (firstReferenceId) return item.sectionId == firstReferenceId
+                        return true
+                    })
+                    .map((element: any, key: number) => {
+                        // if (!element?.items.length) return <></>
+                        return <OborotkaItem 
+                            key={key}
+                            item={element}
                         />
-                  }
-              </tbody>
-          </table>
-        </>
+                    })
+                }
+                
+            </table>
+       </>
     )
-}
+} 
+

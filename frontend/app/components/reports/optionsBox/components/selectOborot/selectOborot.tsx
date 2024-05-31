@@ -2,26 +2,32 @@ import { SelectOborotProps } from './selectOborot.props';
 import styles from './selectOborot.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { OborotType } from '@/app/interfaces/report.interface';
+import { Schet } from '@/app/interfaces/report.interface';
 
 export const SelectOborot = ({ label, visible , className, ...props }: SelectOborotProps): JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
 
     const OborotTypeData = [
-        { title: OborotType.S20 },
-        { title: OborotType.S40 },
-        { title: OborotType.S50 },
+        { title: 'Харажатлар', schet: Schet.S20 },
+        { title: 'Хом ашё', schet: Schet.S10 },
+        { title: '21 счет', schet: Schet.S21 },
+        { title: '23 счет', schet: Schet.S23 },
+        { title: 'Тайёр махсулот', schet: Schet.S28 },
+        { title: 'Хамкорлар', schet: Schet.S40 },
+        { title: 'Касса', schet: Schet.S50 },
+        { title: 'Таъсисчилар', schet: Schet.S66 },
+        { title: 'Ходимлар иш хакиси', schet: Schet.S67 },
     ]
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
         let target = e.currentTarget;
         let {reportOption} = mainData;
-        let dataType = target[target.selectedIndex].getAttribute('data-type')
+        let dataSchet = target[target.selectedIndex].getAttribute('data-schet')
         
         let newObj = {
             ...reportOption,
-            oborotType: dataType,
+            schet: dataSchet,
         }
         
         if (setMainData) {
@@ -45,7 +51,7 @@ export const SelectOborot = ({ label, visible , className, ...props }: SelectObo
                     <>
                         <option 
                             value={item.title}
-                            data-type={item.title}    
+                            data-schet={item.schet}   
                             >
                                 {item.title}
                         </option>

@@ -147,9 +147,7 @@ export const query = (
       
       let totalCount = countC - countL;
       let totalSumma = summaC - summaL;
-      // console.log('totalSum', totalSumma );
-      // console.log('totalCount', totalCount)
-      
+ 
       return totalCount ? +(totalSumma / totalCount).toFixed(5) : 0;
 
     case TypeQuery.BALANCE:
