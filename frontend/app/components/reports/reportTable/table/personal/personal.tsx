@@ -10,7 +10,7 @@ import { sortByName } from '@/app/service/references/sortByName';
 
 export default function Personal({ className, data, ...props} : PersonalProps):JSX.Element {
     const { setMainData, mainData } = useAppContext()
-    const { oborotType } = mainData.reportOption;
+    const { schet } = mainData.reportOption;
     const { reportOption } = mainData;
     const currentWorkerId = reportOption.firstReferenceId;
     
