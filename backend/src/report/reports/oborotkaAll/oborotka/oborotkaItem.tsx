@@ -72,6 +72,7 @@ export const oborotkaItem = (
 
     let element = {
       name: getName(data, firstSubcontoId),
+      sectionId: firstSubcontoId,
       PDSUM,
       PDKOL,
       PKSUM,

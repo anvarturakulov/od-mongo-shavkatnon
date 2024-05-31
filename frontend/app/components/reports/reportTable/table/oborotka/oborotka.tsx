@@ -12,11 +12,10 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
     const { firstReferenceId } = reportOption
 
     useEffect(()=> {
-        console.log(oborotka)
+        // console.log(oborotka)
     }, [oborotka])
     
     let datas = oborotka ? oborotka[0]?.values : []
-
     return (
        <>
             <table className={styles.table}>
