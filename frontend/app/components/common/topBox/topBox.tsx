@@ -5,7 +5,7 @@ import {TopBoxProps} from './topBox.props';
 import Menu from '../../menu/menu';
 import { Htag } from '../htag/Htag';
 import { useAppContext } from '@/app/context/app.context';
-import User from './user/user';
+import User from './userTopBox/userTopBox';
 import { UserRoles, dashboardUsersList } from '@/app/interfaces/general.interface';
 
 export default function TopBox({className, ...props}:TopBoxProps):JSX.Element {

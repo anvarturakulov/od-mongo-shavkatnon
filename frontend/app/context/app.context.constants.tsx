@@ -97,4 +97,8 @@ export const defaultMainData: Maindata = {
     matOborot: [],
     oborotka: [],
     journalChechboxs: defaultJournalCheckbox,
+    showUserWindow: false,
+    isNewUser: false,
+    currentUser: undefined,
+    updateDataForUserJournal: false,
   }

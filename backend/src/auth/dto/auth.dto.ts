@@ -41,4 +41,8 @@ export class AuthDto {
   @IsOptional()
   productId: string;
 
+  @IsBoolean()
+  @IsOptional()
+  deleted?: boolean
+
 }

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { AuthDto, UserRoles } from './dto/auth.dto';
 import { User, UserDocument } from './models/user.model';
@@ -60,5 +60,26 @@ export class AuthService {
       storageId,
       productId,
     }
+  }
+
+  async markToDelete(id: string) {
+   const user = await this.userModel.findOne({_id: id})
+    if (!user?.name) {
+      throw new NotFoundException(USER_NOT_FOUND_ERROR);
+    }
+    const state = user.deleted ? false : true
+    return this.userModel.updateOne({ _id: id }, { $set: { deleted: state} })
+  }
+ 
+  async getAllUsers(): Promise<UserDocument[]> {
+    return this.userModel.find().exec()
+  }
+
+  async findById(id: string) {
+    return this.userModel.findById(id).exec();
+  }
+
+  async updateById(id: string, dto: AuthDto) {
+    return this.userModel.updateOne({ _id: id }, { $set: dto })
   }
 }

@@ -27,6 +27,9 @@ export class User {
   @Prop()
   productId: string;
 
+  @Prop()
+  deleted?: boolean;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

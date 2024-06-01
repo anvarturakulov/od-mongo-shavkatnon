@@ -13,6 +13,7 @@ import TopBox from '@/app/components/common/topBox/topBox';
 import { Information } from '@/app/components/information/information';
 import { Spinner } from '@/app/components/common/spinner/spinner';
 import { Inform } from '@/app/components/inform/inform';
+import UserJournal from '@/app/components/journals/userJournal/userJournal';
 
 export default function Dashboard() {
 
@@ -41,6 +42,10 @@ export default function Dashboard() {
 
           <div className={styles.journalBox}>
             { contentType=='reference' && <ReferenceJournal/> }
+          </div>
+
+          <div className={styles.journalBox}>
+            { contentType=='servis' && <UserJournal/> }
           </div>
 
           <div className={styles.journalBox}>

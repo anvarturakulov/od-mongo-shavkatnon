@@ -2,6 +2,7 @@ import { DocumentModel, Interval, JournalCheckboxs } from '../interfaces/documen
 import { ContentType, MessageType, DefinedTandirWorkers, User } from '../interfaces/general.interface';
 import { ReferenceModel } from '../interfaces/reference.interface';
 import { EntryItem, ReportOptions } from '../interfaces/report.interface';
+import { UserModel } from '../interfaces/user.interface';
 
 export interface Maindata {
   activeMenuKey: string,
@@ -34,6 +35,10 @@ export interface Maindata {
   matOborot: Array<any>,
   oborotka: Array<any>,
   journalChechboxs: JournalCheckboxs,
+  showUserWindow: boolean,
+  isNewUser: boolean,
+  currentUser: UserModel | undefined,
+  updateDataForUserJournal: boolean,
 }
 
 export interface IAppContext {

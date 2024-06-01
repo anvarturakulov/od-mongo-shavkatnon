@@ -50,7 +50,6 @@ export default function Header({ windowFor ,className, count, total, ...props }:
                         >{contentTitle} { ( showReferenceWindow || showDocumentWindow ) ? strFirst : strSecond }
                     </div>
                     
-                    
                     {
                         <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                     }
@@ -60,7 +59,6 @@ export default function Header({ windowFor ,className, count, total, ...props }:
                             className={styles.ico}
                             onClick={() => {
                                 if (setMainData) {
-
                                     setMainData('clearControlElements', true);
                                     setMainData(windowFor == 'reference' ? 'showReferenceWindow':'showDocumentWindow', false);
                                     setMainData(windowFor == 'reference' ? 'isNewReference': 'isNewDocument' , false);                                    
