@@ -49,6 +49,7 @@ export interface DocumentModel {
     isWorker?: boolean,
     isPartner?: boolean,
     isFounder?: boolean,
+    isCash?: boolean,
     analiticId: string,
     count: number,
     balance?: number,

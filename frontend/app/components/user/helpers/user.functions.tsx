@@ -17,10 +17,13 @@ export const onSubmitUser = (
     isNewReference: boolean, 
     setMainData: Function| undefined,
     token: string | undefined) => {
+    
     if (body.role == undefined) {
         showMessage('Фойдаланувчи турини танланг', 'error', setMainData);
         return
     }
+
+    console.log(body)
     
     if (body.name.trim().length != 0) {
         updateCreateUser(body, isNewReference, setMainData, token);

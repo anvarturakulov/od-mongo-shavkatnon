@@ -51,6 +51,9 @@ export class CreateDocumentDto {
   @IsBoolean()
   isFounder: boolean
 
+  @IsBoolean()
+  isCash: boolean
+
   @IsString()
   analiticId: string
 

@@ -25,6 +25,7 @@ export const defaultDocumentFormItems:DocumentModel = {
     isWorker: false,
     isPartner: false,
     isFounder: false,
+    isCash: false,
     count: 0,
     balance: 0,
     price: 0,

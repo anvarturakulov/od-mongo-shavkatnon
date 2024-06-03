@@ -118,15 +118,32 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                             return (item.filial  || item.sklad) 
                         }
                     
-                    if ((type == 'sender' || type == 'receiver') && ( 
-                        contentName == DocumentType.LeaveCash ||
-                        contentName == DocumentType.MoveCash ) ) {
+                    if ((type == 'receiver') && 
+                        contentName == DocumentType.LeaveCash) {
+                        if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
+                            return (item.filial || item.maxsud || item.shavkat || item.umumBulim || item.director) 
+                        } else if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) {
+                            return (item.filial || item.umumBulim )
+                        } else {
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter || item.umumBulim)
+                        }
+                    }
+
+                    if ((type == 'sender') && 
+                        contentName == DocumentType.LeaveCash) {
+                        if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
+                          return (item.filial || item.buxgalter || item.maxsud || item.shavkat || item.director) 
+                        } 
+                    }
+
+                    if ((type == 'sender' || type == 'receiver') && 
+                        contentName == DocumentType.MoveCash) {
                         if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
                             return (item.filial || item.sklad || item.delivery || item.buxgalter  || item.maxsud || item.shavkat) 
                         } else if (user?.role == UserRoles.GLBUX) {
                             return (item.filial || item.sklad || item.delivery || item.buxgalter || item.director)
                         } else {
-                            return (item.filial || item.sklad || item.delivery || item.buxgalter)
+                            return ((item.filial || item.sklad || item.delivery || item.buxgalter) && !item.director)
                         }
                     }
 

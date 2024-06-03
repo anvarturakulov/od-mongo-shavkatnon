@@ -37,6 +37,11 @@ export const createHamirsForDayByUser = (date: number, mainData: Maindata, setMa
     return
   }
 
+  if (user?.productId == '' ) {
+    showMessage(`Ходимда productId йук`, 'error', setMainData)
+    return
+  }
+  console.log(user?.productId)
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
@@ -54,6 +59,7 @@ export const createHamirsForDayByUser = (date: number, mainData: Maindata, setMa
   axios.post(uriPost, body, config)
     .then(function (request) {
       actions('')
+      
     })
     .catch(function (error) {
       if (setMainData) {

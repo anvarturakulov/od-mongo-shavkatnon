@@ -21,6 +21,10 @@ export const CheckBoxInTable = ({ className, id, label, ...props }: checkBoxInFo
             currentVal = currentDocument['isFounder']
         }
 
+        if (id == 'cash') {
+            currentVal = currentDocument['isCash']
+        }
+
         if (id == 'proveden') {
             currentVal = currentDocument['proveden']
         }
@@ -53,9 +57,14 @@ export const CheckBoxInTable = ({ className, id, label, ...props }: checkBoxInFo
                 }
             }
 
+            if (id == 'cash') {
+                currentValues.isCash = target.checked
+            }
+
             if (id == 'proveden') {
                 currentValues.proveden = target.checked
             }
+
             
             if ( setMainData ) {
                 setMainData('currentDocument', {...currentValues})

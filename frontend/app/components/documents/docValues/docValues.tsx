@@ -27,6 +27,7 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
     let hasFounder = contentName == DocumentType.LeaveCash;
+    let hasCash = contentName == DocumentType.MoveCash;
     
     let defaultNewItemForTable = {...defaultDocumentTableItem}
     
@@ -65,6 +66,11 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
                     { 
                         hasPartners &&                   
                         <CheckBoxInTable label = 'Хамкор' id={'partner'}/> 
+                    }
+
+                    { 
+                        hasCash &&                   
+                        <CheckBoxInTable label = 'Накд пул' id={'cash'}/> 
                     }
 
                 </div>

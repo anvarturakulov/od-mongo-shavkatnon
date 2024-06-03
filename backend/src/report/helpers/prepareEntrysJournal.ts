@@ -17,24 +17,24 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>):Array<EntryI
       if ( hasDocumentTablePart(item.documentType)) {
         if ( item?.tableItems && item.tableItems != undefined || item.tableItems.length > 0 ) {
           item.tableItems.forEach((tableItem: DocTableItem) => {
-            let newItemForResults = { ...prepareEntry(item, false, true, tableItem) }
+            let newItemForResults = { ...prepareEntry(item, false, true, tableItem, false) }
             results.push(newItemForResults);
 
           })
         }
 
       } else {
-        let newItemForResults = { ...prepareEntry(item, true, false) }
+        let newItemForResults = { ...prepareEntry(item, true, false, undefined, item.isCash) }
         results.push(newItemForResults);
 
         if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
-          let newItemForResults = { ...prepareEntry(item, false, false) }
+          let newItemForResults = { ...prepareEntry(item, false, false, undefined, false) }
           results.push(newItemForResults);
         }
       }
       
       if (item.documentType == DocumentType.ComeHalfstuff) {
-        let newItemForResults = { ...prepareEntry(item, true, false) }
+        let newItemForResults = { ...prepareEntry(item, true, false, undefined, false) }
         let total: number = 0;
         if (item?.tableItems && item.tableItems.length >0) {
           total = item.tableItems.reduce((summa, item) => summa + item.total, 0);

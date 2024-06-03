@@ -52,7 +52,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
             if (user?.role == UserRoles.TANDIR) {
                 if (!confirm(question)) return
             } 
-
+            
             createHamirsForDayByUser(date, mainData, setMainData);
             setMainData && setMainData('updateHamirJournal', true);
         } 
@@ -93,7 +93,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
     }
     return (
         <>
-            <div className={styles.title}>Хамирлар руйхати</div>
+            <div className={styles.title}>{`Хамирлар руйхати${user?.productId}`}</div>
             {
                 <div className={styles.container} >
                     <table className={styles.table}>

@@ -64,7 +64,7 @@ export default function ReferenceJournal({className, ...props}:UserJournalProps)
                                             [styles.name]: 1,
                                         })}
                                     >{item.name}</td>
-                                    <td className={styles.types}>{item.role}</td>
+                                    <td className={styles.types}>{item.productId}</td>
                                     <td className={styles.rowAction}>
                                         <IcoTrash 
                                             // className={styles.icoTrash}

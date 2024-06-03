@@ -13,7 +13,7 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: boolean, tableItem?: DocTableItem,): ResultgetValuesForEntry => {
+export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: boolean, tableItem: DocTableItem | undefined, isCash: boolean): ResultgetValuesForEntry => {
   if (item) {
     let documentType = item.documentType;
     let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
@@ -36,7 +36,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: 0,
     }
 
-    if (hasTable) {
+    if (hasTable && tableItem) {
       leaveMaterial = {
         debetFirstSubcontoId: senderId.toString(),
         debetSecondSubcontoId: receiverId.toString(),
@@ -230,6 +230,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S50,
           kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
           ...MoveCashObj,
+          debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
         };
 
       case DocumentType.MoveHalfstuff:

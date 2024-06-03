@@ -52,6 +52,9 @@ export class Document {
   isFounder: boolean
 
   @Prop()
+  isCash: boolean
+
+  @Prop()
   analiticId: Types.ObjectId
 
   @Prop()

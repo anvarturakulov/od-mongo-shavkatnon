@@ -51,6 +51,7 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
         isWorker: false,
         isPartner: false,
         isFounder: false,
+        isCash: false,
         analiticId: analiticId,
         count: 0,
         balance: 0,
