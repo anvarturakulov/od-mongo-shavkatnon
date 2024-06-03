@@ -50,7 +50,7 @@ export class HamirController {
   async create(@Body() dto: CreateHamirDto) {
     let hamirs = await this.hamirService.getHamirsByUserToDate(dto)
     let countHamir = dto.fromHamirchi ? 51 : 26
-    console.log(dto)
+    dto.analiticId = '659d2778630ca82ec3dcadf8';
     if (dto.sectionId != '' && dto.analiticId != '' && !hamirs.length) {
       for (let i = 1; i < countHamir; i++) {
         let newDto = { ...dto };
