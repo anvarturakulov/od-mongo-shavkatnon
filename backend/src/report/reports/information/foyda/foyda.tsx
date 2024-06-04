@@ -18,14 +18,14 @@ export const foyda = (
     if (data && data.length>0) {
         let arrUmumBulim = data.filter((item: any) => item.umumBulim)
         zpUmumBulim = zpItemToFoyda(startDate, endDate, arrUmumBulim[0]._id, globalEntrys)
-    }   
+    }
 
     data && 
     data.length > 0 &&
     data
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
     .filter((item: any) => {
-        if ( item.filial ) return true
+        if ( item.filial || item.umumBulim ) return true
         return false;
     })
     .forEach((item: ReferenceModel) => {
