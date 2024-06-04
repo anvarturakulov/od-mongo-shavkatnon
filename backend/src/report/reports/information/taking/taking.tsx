@@ -15,7 +15,7 @@ export const taking = (
     data
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
     .filter((item: any) => {
-        if ( item.filial ) return true
+        if ( item.filial || item.delivery) return true
         return false
     })
     .forEach((item: ReferenceModel) => {

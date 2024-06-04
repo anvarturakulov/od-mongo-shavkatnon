@@ -24,7 +24,9 @@ export const foydaItem = (
   globalEntrys: Array<EntryItem> | undefined,
   docs: Document[],
   deliverys: ReferenceDocument[],
-  zpUmumBulim: number ) => {
+  zpUmumBulim: number,
+  longeChargeUmumBulim: number, 
+  currentPaymentUmumBulim: number ) => {
 
   let longeCharge:number = 0;
 
@@ -75,8 +77,7 @@ export const foydaItem = (
 
   }
 
-  // console.log('countOutToDelivery-',countOutToDelivery)
-  // console.log('countIncomeFromDelivery-',countIncomeFromDelivery)
+
   const PDKOL = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
   const PKKOL = query(Schet.S28, TypeQuery.PKKOL, startDate, endDate, currentSectionId, '', globalEntrys)
   const TDKOL = query(Schet.S28, TypeQuery.TDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
@@ -107,18 +108,20 @@ export const foydaItem = (
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const zp = queryKor(Schet.S20, Schet.S67, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  let addingZp = 0;
-  addingZp = productionAllDocsCount>0 ? zpUmumBulim * productionDocsCount / productionAllDocsCount : 0; 
-  
+
+  const addingZp = productionAllDocsCount>0 ? zpUmumBulim * productionDocsCount / productionAllDocsCount : 0; 
+  const addingLongeCharge = productionAllDocsCount>0 ? longeChargeUmumBulim * productionDocsCount / productionAllDocsCount : 0;
+  const addingCurrentPayment = productionAllDocsCount>0 ? currentPaymentUmumBulim * productionDocsCount / productionAllDocsCount : 0;
+
   const services = queryKor(Schet.S20, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
   const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
   
-  const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services;
+  const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services + addingCurrentPayment;
   const currentEarning = saleWithMove - currentCharges;
   const koefCurrentEarningToOneProduct = 0;
   const longPayment =  longeCharge;
-  const realEarning = saleWithMove - currentCharges - longPayment;
+  const realEarning = saleWithMove - currentCharges - longPayment - addingLongeCharge;
 
   return (
     {
@@ -135,9 +138,11 @@ export const foydaItem = (
       zp,
       addingZp,
       services,
+      addingCurrentPayment,
       currentPayment,
       currentEarning,
       koefCurrentEarningToOneProduct,
+      addingLongeCharge,
       longPayment,
       realEarning
     }
