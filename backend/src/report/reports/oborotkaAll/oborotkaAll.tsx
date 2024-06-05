@@ -13,12 +13,10 @@ const getSubcontosList = (entrys: Array<EntryItem> | undefined, schet: string) =
         if (item.debet == schet) {
             firstList.add(item.debetFirstSubcontoId)
             secondList.add(item.debetSecondSubcontoId)
-            if (item.debetFirstSubcontoId == '') console.log(item.summa)
         }
         if (item.kredit == schet) {
             firstList.add(item.kreditFirstSubcontoId)
             secondList.add(item.kreditSecondSubcontoId)
-            
         }
     })
     return {

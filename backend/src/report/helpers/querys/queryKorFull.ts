@@ -22,7 +22,8 @@ export const queryKorFull = (
           item.debet == debet &&
           item.kredit == kredit &&
           ( debetFirstSubcontoId =='' || item.debetFirstSubcontoId == debetFirstSubcontoId ) &&
-          ( debetSecondSubcontoId =='' || item.debetSecondSubcontoId == debetSecondSubcontoId ) &&
+          ( debetSecondSubcontoId =='' || item.debetSecondSubcontoId == debetSecondSubcontoId 
+            || (debetSecondSubcontoId == 'cash' && item.count == -1)) &&
           ( kreditFirstSubcontoId =='' || item.kreditFirstSubcontoId == kreditFirstSubcontoId ) &&
           ( kreditSecondSubcontoId =='' || item.kreditSecondSubcontoId == kreditSecondSubcontoId ) &&
           

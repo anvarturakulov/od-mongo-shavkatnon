@@ -1,7 +1,6 @@
 
 import { ReferenceModel, TypeReference, TypeTMZ } from 'src/interfaces/reference.interface';
 import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
-import { query } from 'src/report/helpers/querys/query';
 import { queryForOborotka } from './queryForOborotka';
 
 const getName = (data: any, id:string): string => {
@@ -33,7 +32,6 @@ export const oborotkaItem = (
     
     if ( !PDSUM && !PKSUM && !TDSUM && !TKSUM) return {}
     
-    
     let subResults = []
     
     secondList &&
@@ -51,8 +49,7 @@ export const oborotkaItem = (
       
       const subTKSUM = queryForOborotka(schet, TypeQuery.TKSUM, startDate, endDate, firstSubcontoId, secondSubcontoId, globalEntrys);
       const subTKKOL = queryForOborotka(schet, TypeQuery.TKKOL, startDate, endDate, firstSubcontoId, secondSubcontoId, globalEntrys);
-      
-      
+            
       if (subPDSUM || subPKSUM || subTDSUM || subTKSUM || subPDKOL || subPKKOL || subTDKOL || subTKKOL) {
         let subElement = {
           name: getName(data, secondSubcontoId),

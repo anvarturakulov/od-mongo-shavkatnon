@@ -230,7 +230,8 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S50,
           kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
           ...MoveCashObj,
-          debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
+          count: isCash ? -1 : 0
+          // debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
         };
 
       case DocumentType.MoveHalfstuff:
