@@ -56,7 +56,7 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
                         <td className={styles.totalTd}>{numberValue(totalByKey('moveOut', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('forFounder', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('allOut', datas))}</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('startBalans', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('endBalans', datas))}</td>
                     </tr>
                 </thead>
             </table>
