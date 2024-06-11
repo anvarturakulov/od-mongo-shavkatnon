@@ -14,7 +14,7 @@ export const SelectOborot = ({ label, visible , className, ...props }: SelectObo
         { title: '21 счет', schet: Schet.S21 },
         { title: '23 счет', schet: Schet.S23 },
         { title: 'Тайёр махсулот', schet: Schet.S28 },
-        { title: 'Хамкорлар', schet: Schet.S40 },
+        { title: 'Таъминотчи ва хамкорлар', schet: Schet.S60 },
         { title: 'Касса', schet: Schet.S50 },
         { title: 'Таъсисчилар', schet: Schet.S66 },
         { title: 'Ходимлар иш хакиси', schet: Schet.S67 },

@@ -49,7 +49,7 @@ export const Cash = ({className, data, ...props }: CashProps) :JSX.Element => {
     const MOVEINCOME = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, '', undefined, mainData, true);
     const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, '', undefined, mainData, true);
     const CHARGES = queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, '', undefined, mainData, true);
-    const FORPARTNERS = queryKor(Schet.S40, Schet.S50, TypeQuery.OKS, '', undefined, mainData, true);
+    const FORPARTNERS = queryKor(Schet.S60, Schet.S50, TypeQuery.OKS, '', undefined, mainData, true);
     const FORFOUNDER = queryKor(Schet.S66, Schet.S50, TypeQuery.OKS, '', undefined, mainData, true);
     const TDSUM = query(Schet.S50, TypeQuery.TDSUM, null, mainData, false, '', true);
     const TKSUM = query(Schet.S50, TypeQuery.TKSUM, null, mainData, false, '', true);

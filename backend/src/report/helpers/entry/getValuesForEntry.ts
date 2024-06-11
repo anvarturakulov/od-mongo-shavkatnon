@@ -110,7 +110,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: total,
     }
 
-    let leaveCashObj4050 = {
+    let leaveCashObj6050 = {
       debetFirstSubcontoId: analiticId.toString(),
       debetSecondSubcontoId: senderId.toString(),
       kreditFirstSubcontoId: senderId.toString(),
@@ -141,7 +141,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.ComeCashFromPartners:
         return {
           debet: item.date > 86400001 ? Schet.S50 : Schet.S00,
-          kredit: Schet.S40,
+          kredit: Schet.S60,
           ...MoveCashObj
         };
 
@@ -163,7 +163,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.ComeMaterial:
         return {
           debet: Schet.S10,
-          kredit: item.date > 86400001 ? Schet.S40 : Schet.S00,
+          kredit: item.date > 86400001 ? Schet.S60 : Schet.S00,
           ...leaveComeTMZObj
         };
 
@@ -177,9 +177,9 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.LeaveCash:
         if (isPartner) {
           return {
-            debet: Schet.S40,
+            debet: Schet.S60,
             kredit: Schet.S50,
-            ...leaveCashObj4050
+            ...leaveCashObj6050
           };
         }
         if (isWorker) {
@@ -258,14 +258,14 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.SaleMaterial:
         if (!newEntry) {
           return {
-            debet: Schet.S40,
+            debet: Schet.S60,
             kredit: Schet.S10,
             ...saleTMZObj
           };
         } else if (newEntry) {
           return {
             debet: Schet.S50,
-            kredit: Schet.S40,
+            kredit: Schet.S60,
             ...salePaymentObj
           };
         }
@@ -297,7 +297,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         console.log('-*-')
         return {
           debet: Schet.S20,
-          kredit: Schet.S40,
+          kredit: Schet.S60,
           ...ServicesFromPartnersObj
         };
     }

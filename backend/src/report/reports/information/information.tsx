@@ -9,7 +9,6 @@ import { sklad } from './sklad/sklad';
 import { foyda } from './foyda/foyda';
 import { norma } from './norma/norma';
 import { Document } from 'src/document/models/document.model';
-import { ReferenceService } from 'src/reference/reference.service';
 import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { material } from './material/material';
 

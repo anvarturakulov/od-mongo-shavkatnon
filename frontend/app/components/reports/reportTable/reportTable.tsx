@@ -60,6 +60,8 @@ export default function ReportTable({ className, ...props} : ReportTableProps):J
                     <div className={styles.organization}>{`'Шавкат Нон' хусусий корхонаси`}</div>
                     <div className={styles.title}>{`${contentTitle} хисоботи`}</div>
                     <div>{`Хисобот даври: ${dateToStr(startDate)} дан ${dateToStr(endDate)}`}</div>
+                    {/* <div>{`Хисобот даври: ${startDate} дан ${endDate}`}</div> */}
+                    
                     <div>{titleV}</div>
                 </div>
 

@@ -25,7 +25,7 @@ export const getOptionsByReportType = (reportType:string, schet: Schet):Result =
                     return { label: '23 счет', typeReference: TypeReference.STORAGES }
                 case Schet.S28:
                     return { label: 'Тайёр махсулот', typeReference: TypeReference.STORAGES }    
-                case Schet.S40:
+                case Schet.S60:
                     return { label: 'Хамкорлар', typeReference: TypeReference.PARTNERS }
                 case Schet.S50:
                     return { label: 'Касса', typeReference: TypeReference.STORAGES }

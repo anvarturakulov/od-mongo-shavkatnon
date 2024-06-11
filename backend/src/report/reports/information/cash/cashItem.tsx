@@ -19,7 +19,7 @@ export const cashItem = (
     queryKor(Schet.S20, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys) + 
     queryKor(Schet.S67, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
-  const FORPARTNERS = queryKor(Schet.S40, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const FORPARTNERS = queryKor(Schet.S60, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const FORFOUNDER = queryKor(Schet.S66, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const TDSUM = query( Schet.S50, TypeQuery.TDSUM,  startDate, endDate, currentSectionId, '', globalEntrys);
   const TKSUM = query( Schet.S50, TypeQuery.TKSUM, startDate, endDate, currentSectionId, '', globalEntrys);

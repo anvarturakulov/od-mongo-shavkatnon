@@ -111,7 +111,7 @@ export class ReportController {
     return report;
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/oborotka')
   async getOborotka(@Req() request: Request) {

@@ -113,7 +113,7 @@ export const foydaItem = (
   const addingLongeCharge = productionAllDocsCount>0 ? longeChargeUmumBulim * productionDocsCount / productionAllDocsCount : 0;
   const addingCurrentPayment = productionAllDocsCount>0 ? currentPaymentUmumBulim * productionDocsCount / productionAllDocsCount : 0;
 
-  const services = queryKor(Schet.S20, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const services = queryKor(Schet.S20, Schet.S60, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
   const currentPayment = queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys) - longeCharge;
   
