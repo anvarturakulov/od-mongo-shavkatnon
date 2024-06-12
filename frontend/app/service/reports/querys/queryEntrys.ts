@@ -13,7 +13,7 @@ export const queryEntrys = (
   const { reportOption } = mainData;
   let { startDate, endDate, entrys } = reportOption;
   
-  endDate = endDate + 86399999
+  endDate = endDate
 
   let { firstReferenceId } = reportOption;
 

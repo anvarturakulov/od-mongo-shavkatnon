@@ -16,7 +16,7 @@ export const queryForOne = (
 ): number => {
 
   let { user } = mainData;
-  endDate = endDate + 86399999
+  endDate = endDate
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/query' +
     '?typeQuery=' + typeQuery + '&schet=' + schet +

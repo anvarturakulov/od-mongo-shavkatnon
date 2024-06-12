@@ -14,7 +14,7 @@ export const queryKor = (
 
   const { reportOption, interval } = mainData;
   let { startDate, endDate, entrys } = reportOption;
-  endDate = endDate + 86399999
+  endDate = endDate
   
   let flagFirstSubconoto = true
   let flagSecondSubconto = true

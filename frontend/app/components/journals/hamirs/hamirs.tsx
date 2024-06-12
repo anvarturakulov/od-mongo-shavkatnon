@@ -83,7 +83,9 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         if (user?.role == UserRoles.TANDIR) {
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
-            if ( count>0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
+            if (count > 90) {
+                alert('Сон хато киритилди')
+            } else if ( count>0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
                 item.zuvala = count;
                 changeStatusHamir(item, mainData, setMainData)
                 setMainData && setMainData('updateHamirJournal', true)
