@@ -6,15 +6,13 @@ export const sectionItem = (
   startDate: number,
   endDate: number,
   currentSectionId: string, 
-  title: string, 
+  title: string,
+  sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER' | 'FOUNDER',
   globalEntrys: Array<EntryItem> | undefined ) => {
 
   
-  // const PDSUM = query( Schet.S50, TypeQuery.PDSUM, startDate, endDate, currentSectionId, '', globalEntrys);
-  // const PKSUM = query( Schet.S50, TypeQuery.PKSUM, startDate, endDate, currentSectionId, '', globalEntrys);
-  // const TRADEINCOME = queryKor(Schet.S50, Schet.S40, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
+  let schetCash = sectionType == 'FOUNDER' ? Schet.S66 : Schet.S50
 
   const PDKOL = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys);
   const PDKOLbux = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys);
@@ -43,17 +41,15 @@ export const sectionItem = (
   const TKKOL = query(Schet.S28, TypeQuery.TKKOL, startDate, endDate, currentSectionId, '', globalEntrys);
   const TKKOLbux = query(Schet.S28, TypeQuery.TKKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys);
 
-  const PDSUM = query(Schet.S50, TypeQuery.PDSUM, startDate, endDate, currentSectionId, '', globalEntrys);
-  const PKSUM = query(Schet.S50, TypeQuery.PKSUM, startDate, endDate, currentSectionId, '', globalEntrys);
+  const PDSUM = query(schetCash, TypeQuery.PDSUM, startDate, endDate, currentSectionId, '', globalEntrys);
+  const PKSUM = query(schetCash, TypeQuery.PKSUM, startDate, endDate, currentSectionId, '', globalEntrys);
 
-  const TDSUM = query(Schet.S50, TypeQuery.TDSUM, startDate, endDate, currentSectionId, '', globalEntrys);
-  const TKSUM = query(Schet.S50, TypeQuery.TKSUM, startDate, endDate, currentSectionId, '', globalEntrys);
+  const TDSUM = query(schetCash, TypeQuery.TDSUM, startDate, endDate, currentSectionId, '', globalEntrys);
+  const TKSUM = query(schetCash, TypeQuery.TKSUM, startDate, endDate, currentSectionId, '', globalEntrys);
 
-  const MOVEINN = queryKor(Schet.S50, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  const MOVEOUT = queryKor(Schet.S50, Schet.S50, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const MOVEINN = queryKor(schetCash, schetCash, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const MOVEOUT = queryKor(schetCash, schetCash, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
 
-  // if ( !(PDSUM-PKSUM) && !(TRADEINCOME+MOVEINCOME) && !(CHARGES+FORPARTNERS+MOVEOUT+FORFOUNDER) 
-  //     && !(PDSUM-PKSUM+TDSUM-TKSUM)) return {}
   
   return (
     {

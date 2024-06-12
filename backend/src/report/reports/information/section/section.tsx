@@ -23,7 +23,7 @@ export const section = (
         return false
     })
     .forEach((item: ReferenceModel) => {
-        let element = sectionItem(startDate, endDate, item._id, item.name, globalEntrys)
+        let element = sectionItem(startDate, endDate, item._id, item.name, sectionType ,globalEntrys)
         if (Object.keys(element).length) {
             result.push(element)
         }
