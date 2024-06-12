@@ -74,7 +74,7 @@ export class ReportController {
   }
 
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/information')
   async getInformation(@Req() request: Request) {

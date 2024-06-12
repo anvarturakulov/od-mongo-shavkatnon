@@ -11,6 +11,7 @@ import { norma } from './norma/norma';
 import { Document } from 'src/document/models/document.model';
 import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { material } from './material/material';
+import { financial } from './financial/financial';
 
 
 export const information = (
@@ -58,6 +59,9 @@ export const information = (
 
     let materialResult = material(data, startDate, endDate, globalEntrys)
     result.push(materialResult);
+
+    let financialResult = financial(data, startDate, endDate, globalEntrys)
+    result.push({'reportType': 'FINANCIAL', 'values': financialResult});
 
     return result
     

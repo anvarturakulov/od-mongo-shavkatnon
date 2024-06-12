@@ -36,7 +36,8 @@ export const defaultDocumentFormItems:DocumentModel = {
     firstWorkerId: '',
     secondWorkerId: '',
     thirdWorkerId: '',
-    tableItems: [defaultDocumentTableItem] // мы его не используем
+    tableItems: [defaultDocumentTableItem],
+    // мы его не используем
 }
 
 export const defaultTandirWorkers: DefinedTandirWorkers = {
@@ -102,4 +103,5 @@ export const defaultMainData: Maindata = {
     isNewUser: false,
     currentUser: undefined,
     updateDataForUserJournal: false,
+    currentFinancialInnerReportType: 'outZP',
   }

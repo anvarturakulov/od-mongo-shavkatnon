@@ -11,6 +11,7 @@ import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
 import { matOborot } from './reports/matOborot/matOborot';
 import { oborotkaAll } from './reports/oborotkaAll/oborotkaAll';
+import { financial } from './reports/information/financial/financial';
 
 @Injectable()
 export class ReportService {
@@ -53,14 +54,11 @@ export class ReportService {
   async getInformation(queryInformation: QueryInformation) {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
-    let hamirs = await this.hamirService.getAllHamirs();
     
     let {startDate, endDate} = queryInformation;
-    console.log('globalEntrys', this.documentService.globalEntrys)
     
     let inform = information(data, startDate, endDate, this.documentService.globalEntrys, productions, this.documentService.deliverys )
     return inform
-    // return query(queryInformation, this.documentService.globalEntrys)
   }
 
   async getMatOtchet(queryMatOtchet: QueryMatOtchet) {

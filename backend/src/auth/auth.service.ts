@@ -38,7 +38,7 @@ export class AuthService {
   // Promise<Pick<User, 'email' >>
   async validateUser(email: string, password: string) {
     const user = await this.findUser(email);
-    if (!user) {
+    if (!user || (user && user.deleted)) {
       throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
     }
 

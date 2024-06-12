@@ -39,6 +39,7 @@ export interface Maindata {
   isNewUser: boolean,
   currentUser: UserModel | undefined,
   updateDataForUserJournal: boolean,
+  currentFinancialInnerReportType: string,
 }
 
 export interface IAppContext {

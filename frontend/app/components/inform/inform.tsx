@@ -25,6 +25,15 @@ export const totalByKey = (key:string, data:any[]) => {
     return total
 }
 
+export const totalByKeyForFinancial = (key:string, data:any[]) => {
+    let total = 0;
+    data && data.length &&
+    data.forEach((item:any) => {
+        total += item[key]
+    })
+    return total
+}
+
 
 export const Inform = ({className, ...props }: InformationProps) :JSX.Element => {
     
