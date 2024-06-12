@@ -159,7 +159,10 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                     if (type == 'receiver' && contentName == DocumentType.ComeCashFromPartners)
                         {
-                            return (  item.buxgalter ) 
+                            if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {
+                              return (item.buxgalter || item.maxsud || item.shavkat) 
+                            } 
+                            return ( item.buxgalter ) 
                         }
 
                     if (type == 'receiver' && contentName == DocumentType.ComeMaterial)

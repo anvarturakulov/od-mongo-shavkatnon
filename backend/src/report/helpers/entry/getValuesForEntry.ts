@@ -149,6 +149,16 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
 
     switch (documentType) {
       case DocumentType.ComeCashFromPartners:
+        if (
+          founders && founders.length && 
+          founders.filter((item:FounderObject) => item.id == receiverId.toString()).length > 0
+        ) 
+          return {
+            debet: Schet.S66,
+            kredit: Schet.S00,
+            ...MoveCashObj,
+        };
+      
         return {
           debet: item.date > 86400001 ? Schet.S50 : Schet.S00,
           kredit: Schet.S60,

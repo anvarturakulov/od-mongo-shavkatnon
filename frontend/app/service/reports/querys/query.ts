@@ -15,7 +15,7 @@ export const query = (
   const { interval } = mainData
   let { startDate, endDate, entrys } = reportOption;
 
-  endDate = endDate + 86399999
+  // endDate = endDate + 86399999
 
   let { firstReferenceId } = reportOption;
 
