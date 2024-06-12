@@ -4,6 +4,7 @@ import styles from './financial.module.css';
 import { useEffect } from 'react';
 import { numberValue } from '@/app/service/common/converters';
 import { useAppContext } from '@/app/context/app.context';
+import { totalByKey } from '../inform';
 
 export const total = (key:string, data:any[]) => {
     return data ? data.filter((item: any) => item?.innerReportType == key)[0]?.total : 0
@@ -18,7 +19,8 @@ export const Financial = ({className, data, ...props }: FinancialProps) :JSX.Ele
     }, [data])
     
     let datas = data ? data.filter((item: any) => item?.reportType == 'FINANCIAL')[0]?.values : []
-    
+    let datasCash = data ? data.filter((item: any) => item?.reportType == 'CASH')[0]?.values : []
+
     let incomeSale = total('incomeSale', datas)
     let incomeOther = total('incomeOther', datas)
     let incomeAll = incomeSale + incomeOther
@@ -27,6 +29,8 @@ export const Financial = ({className, data, ...props }: FinancialProps) :JSX.Ele
     let outFounder = total('outFounder', datas)
     let outCharge = total('outCharge', datas)
     let outAll = outZP + outPartner + outFounder + outCharge;
+    let startBalans = totalByKey('startBalans', datasCash)
+    let endBalans = totalByKey('endBalans', datasCash)
 
     return (
        <>
@@ -40,7 +44,7 @@ export const Financial = ({className, data, ...props }: FinancialProps) :JSX.Ele
                     <thead>
                         <tr>
                             <td>Давр бошига колдик пуллар</td>
-                            <td className={styles.totalTd}>{numberValue(total('startBalans', datas))}</td>
+                            <td className={styles.totalTd}>{numberValue(startBalans)}</td>
                         </tr>
                         <tr>
                             <td>Пул кирими</td>
@@ -105,6 +109,14 @@ export const Financial = ({className, data, ...props }: FinancialProps) :JSX.Ele
                         <tr>
                             <td>Жами</td>
                             <td className={styles.totalTd}>{numberValue(outAll)}</td>
+                        </tr>
+                        <tr>
+                            <td>Бугунги тирик пулдан колди</td>
+                            <td className={styles.totalTd}>{numberValue(incomeAll-outAll)}</td>
+                        </tr>
+                        <tr>
+                            <td>Колган тирик ва утиб келувчи пул</td>
+                            <td className={styles.totalTd}>{numberValue(endBalans)}</td>
                         </tr>
                     </thead>
                 </table>

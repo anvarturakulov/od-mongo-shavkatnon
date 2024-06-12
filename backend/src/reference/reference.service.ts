@@ -24,6 +24,10 @@ export class ReferenceService {
     return this.referenceModel.find({ delivery: true }).exec()
   }
 
+  async getFounders(): Promise<ReferenceDocument[]> {
+    return this.referenceModel.find({ $or: [{maxsud: true }, {shavkat: true}]  }).exec()
+  }
+
   async getAllReferences(): Promise<Reference[]> {
     return this.referenceModel.find().exec()
   }

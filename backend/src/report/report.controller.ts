@@ -22,19 +22,19 @@ export class ReportController {
     return report;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @UsePipes(new ValidationPipe())
-  @Get('/entrysForDate')
-  async getForDate(@Req() request: Request) {
-    let dateStart = +request.query?.dateStart
-    let dateEnd = +request.query?.dateEnd
+  // @UseGuards(JwtAuthGuard)
+  // @UsePipes(new ValidationPipe())
+  // @Get('/entrysForDate')
+  // async getForDate(@Req() request: Request) {
+  //   let dateStart = +request.query?.dateStart
+  //   let dateEnd = +request.query?.dateEnd
     
-    const report = await this.reportService.getEntrysJournalForDate(dateStart, dateEnd );
-    if (!report) {
-      throw new NotFoundException(REPORT_NOT_PREPARE);
-    }
-    return report;
-  }
+  //   const report = await this.reportService.getEntrysJournalForDate(dateStart, dateEnd );
+  //   if (!report) {
+  //     throw new NotFoundException(REPORT_NOT_PREPARE);
+  //   }
+  //   return report;
+  // }
 
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())

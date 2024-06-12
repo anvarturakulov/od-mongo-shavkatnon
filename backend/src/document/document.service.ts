@@ -21,6 +21,7 @@ export class DocumentService {
 
   public globalEntrys: Array<EntryItem>
   public deliverys: Array<ReferenceDocument>
+  public founders: Array<ReferenceDocument>
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
     
@@ -97,8 +98,10 @@ export class DocumentService {
   async prepareEntrys() {
     let result = await this.getAllDocuments(true)
     let deliverys = await this.referenceService.getDeliverys()
+    let founders = await this.referenceService.getFounders()
+    this.founders = [...founders]
     this.deliverys = [...deliverys]
-    this.globalEntrys = [...prepareEntrysJournal(result)];
+    this.globalEntrys = [...prepareEntrysJournal(result, founders)];
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {

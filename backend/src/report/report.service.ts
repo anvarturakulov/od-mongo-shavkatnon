@@ -26,10 +26,10 @@ export class ReportService {
     return result
   }
 
-  async getEntrysJournalForDate(dateStart: number, dateEnd: number) {
-    let result = await this.documentService.getForDateDocument(dateStart, dateEnd)
-    return prepareEntrysJournal(result);
-  }
+  // async getEntrysJournalForDate(dateStart: number, dateEnd: number) {
+  //   let result = await this.documentService.getForDateDocument(dateStart, dateEnd)
+  //   return prepareEntrysJournal(result);
+  // }
 
   async getQueryValue(queryReport: QueryObject) {
     const { typeQuery, schet, startDate, endDate, firstSubcontoId, secondSubcontoId} = queryReport;

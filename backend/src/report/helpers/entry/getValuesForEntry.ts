@@ -1,6 +1,7 @@
 import { DocTableItem, Document } from 'src/document/models/document.model';
 import { Schet } from 'src/interfaces/report.interface';
 import { DocumentType } from 'src/interfaces/document.interface';
+import { FounderObject } from '../prepareEntrysJournal';
 
 export interface ResultgetValuesForEntry {
   debet: Schet,
@@ -13,7 +14,7 @@ export interface ResultgetValuesForEntry {
   summa: number,
 }
 
-export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: boolean, tableItem: DocTableItem | undefined, isCash: boolean): ResultgetValuesForEntry => {
+export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: boolean, tableItem: DocTableItem | undefined, isCash: boolean, founders: Array<FounderObject>): ResultgetValuesForEntry => {
   if (item) {
     let documentType = item.documentType;
     let { receiverId, senderId, analiticId, count, total, cashFromPartner, isPartner, isWorker, isFounder } = item
@@ -128,6 +129,15 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: total,
     }
 
+    let leaveCashFromFounder = {
+      debetFirstSubcontoId: senderId.toString(),
+      debetSecondSubcontoId: analiticId.toString(),
+      kreditFirstSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: analiticId.toString(),
+      count: 0,
+      summa: total,
+    }
+
     let MoveCashObj = {
       debetFirstSubcontoId: receiverId.toString(),
       debetSecondSubcontoId: senderId.toString(),
@@ -190,13 +200,15 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           };
         }
 
-        if (isFounder) {
+        if (
+          founders && founders.length && 
+          founders.filter((item:FounderObject) => item.id == senderId.toString()).length > 0
+        ) 
           return {
-            debet: Schet.S66,
-            kredit: Schet.S50,
-            ...leaveCashOther
-          };
-        }
+            debet: Schet.S00,
+            kredit: Schet.S66,
+            ...leaveCashFromFounder,
+        };
 
         return {
           debet: Schet.S20,
@@ -226,6 +238,17 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         };
 
       case DocumentType.MoveCash:
+        if (
+          founders && founders.length && 
+          founders.filter((item:FounderObject) => item.id == receiverId.toString()).length > 0
+        ) 
+          return {
+            debet: Schet.S66,
+            kredit: Schet.S50,
+            ...MoveCashObj,
+            count: isCash ? -1 : 0,
+        };
+
         return {
           debet: Schet.S50,
           kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
