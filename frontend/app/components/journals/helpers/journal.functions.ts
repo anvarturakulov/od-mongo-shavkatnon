@@ -47,7 +47,6 @@ export const setProvodkaToDoc = (id: string | undefined, token: string | undefin
     if (
         yes && 
         ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) || 
-        ( user?.role == UserRoles.GLBUX && contentName == DocumentType.LeaveCash ) ||
         ( user?.storageId == receiverId)
     ){
       setProvodkaToDocument(id, setMainData, mainData)
