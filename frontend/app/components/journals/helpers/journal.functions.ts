@@ -6,6 +6,7 @@ import { getDocumentById } from '@/app/service/documents/getDocumentById';
 import { markToDeleteDocument } from '@/app/service/documents/markToDeleteDocument';
 import { setProvodkaToDocument } from '@/app/service/documents/setProvodkaToDocument';
 import { markToDeleteReference } from '@/app/service/references/markToDeleteReference';
+import { dateToStr } from '@/app/service/reports/dateToStr';
 
 const deleteItem = (id: string | undefined, name: string, token: string | undefined, setMainData: Function | undefined) => {
   markToDeleteReference(id, name, setMainData, token)
@@ -29,9 +30,19 @@ export const getNameReference = (references: any, id: string | undefined | null)
   return 'Аникланмади'
 }
 
-export const deleteItemDocument = (id: string | undefined, token: string | undefined, setMainData: Function | undefined, mainData: Maindata) => {
-  const { user } = mainData
-  if (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY) {
+export const deleteItemDocument = (id: string | undefined, docDate: number| undefined,token: string | undefined, setMainData: Function | undefined, mainData: Maindata) => {
+  const { user, contentName } = mainData
+  if (docDate == undefined) docDate = 0
+  console.log(dateToStr(Date.now()))
+  console.log(dateToStr(docDate))
+
+  if (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY
+    || (
+      user?.role == UserRoles.GLBUX && 
+      (contentName == DocumentType.MoveCash || contentName == DocumentType.ZpCalculate) && 
+      ( dateToStr(Date.now()) == dateToStr(docDate))
+    )
+  ) {
     markToDeleteDocument(id, setMainData, token)
   } else {
     alert('Узр. Факат админлар учириш хукукига эга')

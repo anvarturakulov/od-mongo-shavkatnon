@@ -6,7 +6,7 @@ import { Button, DocValues, Info } from '@/app/components';
 import { useAppContext } from '@/app/context/app.context';
 import { InputForData } from '../inputs/inputForData/inputForData';
 import { cancelSubmit, saveUser } from './helpers/doc.functions';
-import { isAdmins } from '@/app/service/common/users';
+import { isAdmins, isGlBuxs } from '@/app/service/common/users';
 import { DocumentModel, DocumentType } from '@/app/interfaces/document.interface';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { validateBody } from '@/app/service/documents/validateBody';
@@ -59,7 +59,7 @@ export const Doc = ({className, ...props }: DocProps) :JSX.Element => {
                 {
                     ( 
                         isNewDocument || 
-                        (currentDocument.deleted && isAdmins(mainData.user))  
+                        (currentDocument.deleted && (isAdmins(mainData.user) || isGlBuxs(mainData.user)))  
                     ) 
                     &&
                    <>
