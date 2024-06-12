@@ -15,6 +15,7 @@ import { Foyda } from './foyda/foyda';
 import { Norma } from './norma/norma';
 import { useEffect } from 'react';
 import { Material } from './material/material';
+import { Financial } from './financial/financial';
 
 export const totalByKey = (key:string, data:any[]) => {
     let total = 0;
@@ -50,6 +51,7 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
                 user?.role != UserRoles.ZAMGLBUX &&
                 user?.role != UserRoles.GLBUX &&
                   <>
+                    <Financial data={informData}/>
                     <Cash data={informData}/>
                     <Foyda data={informData}/>
                   </>
