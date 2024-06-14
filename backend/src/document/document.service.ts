@@ -29,7 +29,7 @@ export class DocumentService {
     
     // run service to preparing Entrys journal
     let result = await newDocument.save()
-    let res = await this.prepareEntrys();
+    // let res = await this.prepareEntrys();
     
     return result
 
@@ -67,7 +67,7 @@ export class DocumentService {
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
     
     // run service to preparing Entrys journal
-    let res = this.prepareEntrys();
+    // let res = this.prepareEntrys();
     
     return result
     // return this.globalEntrys
@@ -80,7 +80,7 @@ export class DocumentService {
     }
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
     // run service to preparing Entrys journal
-    this.prepareEntrys();
+    // this.prepareEntrys();
     return result
 
   }
@@ -90,7 +90,7 @@ export class DocumentService {
     let result = await this.documentModel.updateOne({ _id: id }, { $set: dto })
 
     // run service to preparing Entrys journal
-    this.prepareEntrys();
+    // this.prepareEntrys();
     return result
  
   }

@@ -44,6 +44,7 @@ export class ReportService {
       price: 0,
       balance: 0
     }
+    let entrys = await this.documentService.prepareEntrys()
 
     result.price = query(schet, TypeQuery.MPRICE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
     result.balance = query(schet, TypeQuery.BALANCE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
@@ -54,6 +55,7 @@ export class ReportService {
   async getInformation(queryInformation: QueryInformation) {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
+    let entrys = await this.documentService.prepareEntrys()
     
     let {startDate, endDate} = queryInformation;
     
@@ -64,6 +66,7 @@ export class ReportService {
   async getMatOtchet(queryMatOtchet: QueryMatOtchet) {
     let data = await this.referenceService.getAllReferences();
     let { startDate, endDate, section } = queryMatOtchet;
+    let entrys = await this.documentService.prepareEntrys()
 
     let result = matOborot(data, startDate, endDate, section, this.documentService.globalEntrys)
     return result
@@ -72,6 +75,7 @@ export class ReportService {
   async getOborotka(queryOborotka: QueryOborotka) {
     let data = await this.referenceService.getAllReferences();
     let { startDate, endDate, schet } = queryOborotka;
+    let entrys = await this.documentService.prepareEntrys()
 
     let result = oborotkaAll(data, startDate, endDate, schet, this.documentService.globalEntrys)
     return result
