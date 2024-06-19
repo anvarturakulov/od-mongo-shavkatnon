@@ -19,53 +19,68 @@ export const information = (
     data: any,
     startDate: number,
     endDate: number,
+    reportType: string,
     globalEntrys: Array<EntryItem> | undefined,
     docs: Document[],
     deliverys: ReferenceDocument[]
     ) => {
     
     let result = [];
-    let cashResult = cash(data, startDate, endDate, globalEntrys)
-    result.push(cashResult);
-
-    let takingResult = taking(data, startDate, endDate, globalEntrys)
-    result.push(takingResult);
-
-    let givingResult = giving(data, startDate, endDate, globalEntrys)
-    result.push(givingResult);
-
-    let sectionBuxResult = section('BUXGALTER', data, startDate, endDate, globalEntrys)
-    result.push(sectionBuxResult);
-
-    let sectionFilResult = section('FILIAL', data, startDate, endDate, globalEntrys)
-    result.push(sectionFilResult);
-
-    let sectionDelResult = section('DELIVERY', data, startDate, endDate, globalEntrys)
-    result.push(sectionDelResult);
-
-    let sectionFounderResult = section('FOUNDER', data, startDate, endDate, globalEntrys)
-    result.push(sectionFounderResult);
-
-    let skladResult = sklad(data, startDate, endDate, globalEntrys)
-    result.push(skladResult);
+    
+    if (reportType == 'Financial') {
+        let financialResult = financial(data, startDate, endDate, globalEntrys)
+        result.push({'reportType': 'FINANCIAL', 'values': financialResult});
+    }
+    if (reportType == 'Foyda') {
+        let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs, deliverys)
+        result.push(foydaResult);
+    }
+    if (reportType == 'Cash') {
+        let cashResult = cash(data, startDate, endDate, globalEntrys)
+        result.push(cashResult);
+    }
+    if (reportType == 'Taking') {
+        let takingResult = taking(data, startDate, endDate, globalEntrys)
+        result.push(takingResult);
+    }
+    if (reportType == 'Giving') {
+        let givingResult = giving(data, startDate, endDate, globalEntrys)
+        result.push(givingResult);
+    }
+    if (reportType == 'Section-buxgalter') {
+        let sectionBuxResult = section('BUXGALTER', data, startDate, endDate, globalEntrys)
+        result.push(sectionBuxResult);
+    }
+    if (reportType == 'Section-filial') {
+        let sectionFilResult = section('FILIAL', data, startDate, endDate, globalEntrys)
+        result.push(sectionFilResult);
+    }
+    if (reportType == 'Section-delivery') {
+        let sectionDelResult = section('DELIVERY', data, startDate, endDate, globalEntrys)
+        result.push(sectionDelResult);
+    }
+    if (reportType == 'Sklad') {
+        let skladResult = sklad(data, startDate, endDate, globalEntrys)
+        result.push(skladResult);
+    }
+    if (reportType == 'Norma') {
+        let normaResult = norma(data, startDate, endDate, globalEntrys)
+        result.push(normaResult);
+    }
+    if (reportType == 'Material') {
+        let materialResult = material(data, startDate, endDate, globalEntrys)
+        result.push(materialResult); 
+    }
+    if (reportType == 'Section-founder') {
+        let sectionFounderResult = section('FOUNDER', data, startDate, endDate, globalEntrys)
+        result.push(sectionFounderResult);
+    }
 
     // let productionResult = production(data, startDate, endDate, globalEntrys, hamirs)
     // result.push(productionResult);
     
     // let zpResult = zp(data, startDate, endDate, globalEntrys, hamirs)
     // result.push(zpResult);
-
-    let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs, deliverys)
-    result.push(foydaResult);
-
-    let normaResult = norma(data, startDate, endDate, globalEntrys)
-    result.push(normaResult);
-
-    let materialResult = material(data, startDate, endDate, globalEntrys)
-    result.push(materialResult);
-
-    let financialResult = financial(data, startDate, endDate, globalEntrys)
-    result.push({'reportType': 'FINANCIAL', 'values': financialResult});
 
     return result
     

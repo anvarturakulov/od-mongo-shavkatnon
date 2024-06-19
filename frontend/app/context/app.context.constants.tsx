@@ -104,4 +104,5 @@ export const defaultMainData: Maindata = {
     currentUser: undefined,
     updateDataForUserJournal: false,
     currentFinancialInnerReportType: 'outZP',
+    dashboardCurrentReportType: 'TAKING',
   }

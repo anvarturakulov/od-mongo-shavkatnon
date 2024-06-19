@@ -8,6 +8,7 @@ import DateIco from './date.svg'
 import { dateNumberToString } from '@/app/service/common/converterForDates';
 import { getInformation } from '@/app/service/reports/getInformation';
 import axios from 'axios';
+import { SelectReportType } from './selectReportType/selectReportType';
 
 export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -41,6 +42,7 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     return (
        <>
             <div className={styles.btnBox}>
+                <SelectReportType/>
                 {
                     <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                 }

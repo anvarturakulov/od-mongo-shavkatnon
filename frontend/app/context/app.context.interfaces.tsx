@@ -40,6 +40,7 @@ export interface Maindata {
   currentUser: UserModel | undefined,
   updateDataForUserJournal: boolean,
   currentFinancialInnerReportType: string,
+  dashboardCurrentReportType: string,
 }
 
 export interface IAppContext {

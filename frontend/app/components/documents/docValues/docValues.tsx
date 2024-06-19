@@ -25,7 +25,6 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     
     let options: OptionsForDocument = getOptionOfDocumentElements(contentName)
 
-    
     let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
     let hasFounder = contentName == DocumentType.LeaveCash;

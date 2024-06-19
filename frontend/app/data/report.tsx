@@ -1,56 +1,66 @@
-export const ReportsData = [
-    {
-        TMZ: 'Нон',
-        TMZEd: 'дона',
-        Price: 3500,
-        SNDK: 150,
-        SNDS: 525000,
-        ODK: 500,
-        ODS: 1750000,
-        OKK: 450,
-        OKS: 1575000,
-        SKDK: 200,
-        SKDS: 700000
-    },
-    {
-        TMZ: 'Туз',
-        TMZEd: 'кг',
-        Price: 1200,
-        SNDK: 10,
-        SNDS: 12000,
-        ODK: 5,
-        ODS: 6000,
-        OKK: 3,
-        OKS: 3600,
-        SKDK: 12,
-        SKDS: 14400
-    },
-    {
-        TMZ: 'Козок ун',
-        TMZEd: 'кг',
-        Price: 4500,
-        SNDK: 7800,
-        SNDS: 35100000,
-        ODK: 10200,
-        ODS: 45900000,
-        OKK: 13500,
-        OKS: 60750000,
-        SKDK: 4500,
-        SKDS: 20250000
-    },
-    {
-        TMZ: 'Дурдона ун',
-        TMZEd: 'кг',
-        Price: 4700,
-        SNDK: 5960,
-        SNDS: 28012000,
-        ODK: 4440,
-        ODS: 20868000,
-        OKK: 5300,
-        OKS: 24910000,
-        SKDK: 5100,
-        SKDS: 23970000
-    }
-]
+import { UserRoles } from "../interfaces/general.interface";
+import { DashboardReportItem } from "../interfaces/report.interface";
 
-export const DeafultReportData = []
+export const DashboardReportData:Array<DashboardReportItem> = [
+    {
+        title: 'Умум. пул окими',
+        code: 'Financial',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+    },
+    {
+        title: 'Фойда хисоби',
+        code: 'Foyda',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+    },
+    {
+        title: 'Касса-жавобгар шахслар',
+        code: 'Cash',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+    },
+    {
+        title: 'Накд пул кирими',
+        code: 'Taking',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+    },
+    {
+        title: 'Накд пул харажати',
+        code: 'Giving',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+    },
+    {
+        title: 'Бухгалтерлар хисоби',
+        code: 'Section-buxgalter',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+    },
+    {
+        title: 'Филиаллар хисоби',
+        code: 'Section-filial',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.HEADSECTION]
+    },
+    {
+        title: 'Юк етказиб берувчилар хисоби',
+        code: 'Section-delivery',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.HEADSECTION, UserRoles.DELIVERY]
+    },
+    {
+        title: 'Омборхона',
+        code: 'Sklad',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+    },
+    {
+        title: 'Норма',
+        code: 'Norma',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+    },
+    {
+        title: 'Умум хом аше харажати',
+        code: 'Material',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+    },
+    {
+        title: 'Таъсисчилар',
+        code: 'Section-founder',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+    },
+           
+]

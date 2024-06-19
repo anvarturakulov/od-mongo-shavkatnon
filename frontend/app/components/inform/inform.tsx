@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { Material } from './material/material';
 import { Financial } from './financial/financial';
 import { Giving } from './giving/giving';
+import { getReportByType } from './helper';
 
 export const totalByKey = (key:string, data:any[]) => {
     let total = 0;
@@ -40,56 +41,16 @@ export const totalByKeyForFinancial = (key:string, data:any[]) => {
 export const Inform = ({className, ...props }: InformationProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { user, informData } = mainData;
+    const { informData, dashboardCurrentReportType } = mainData;
     
     useEffect(()=>{
     },[mainData.informData])
     
+    
     return (
        <>
             <RefreshPanel/>
-            {
-                user?.role != UserRoles.ZAMGLBUX &&
-                user?.role != UserRoles.GLBUX &&
-                  <>
-                    <Financial data={informData}/>
-                    <Foyda data={informData}/>
-                    <Cash data={informData}/>
-                  </>
-            }
-            {
-                user?.role != UserRoles.ZAMGLBUX &&
-                <>
-                    <Taking data={informData} />
-                    <Giving data={informData} />
-                    <Section data={informData} sectionType='buxgalter'/>
-                    <Section data={informData} sectionType='filial'/>
-                    <Section data={informData} sectionType='delivery'/>
-                    <Sklad data={informData}/>
-                    <Norma data={informData}/> 
-                    <Material data={informData}/>  
-                </>
-            }
-
-            {
-                user?.role != UserRoles.ZAMGLBUX &&
-                user?.role != UserRoles.GLBUX &&
-                  <>
-                    <Section data={informData} sectionType='founder'/>
-                  </>
-            }
-
-            {
-                user?.role == UserRoles.ZAMGLBUX &&
-                <>
-                    <Section data={informData} sectionType='buxgalter' currentSection={user.storageId}/>
-                    <Sklad data={informData}/>
-                    <Norma data={informData}/>
-                </>
-
-            }
-            
-
+            {getReportByType(dashboardCurrentReportType, informData)}
        </>
     )
 } 

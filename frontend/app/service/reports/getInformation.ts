@@ -8,13 +8,13 @@ export const getInformation = (
   endDate?: number,
   ) => {
   
-  const { user, interval } = mainData
+  const { user, interval, dashboardCurrentReportType } = mainData
   
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
-  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd;
+  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+dashboardCurrentReportType;
 
   axios.get(url, config)
     .then(function (response) {

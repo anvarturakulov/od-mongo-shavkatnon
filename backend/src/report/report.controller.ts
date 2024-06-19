@@ -82,6 +82,7 @@ export class ReportController {
     const queryInformation: QueryInformation = {
       startDate: +request.query?.startDate,
       endDate: +request.query?.endDate,
+      reportType: `${request.query?.reportType}`,
     }
 
     const report = await this.reportService.getInformation(queryInformation);

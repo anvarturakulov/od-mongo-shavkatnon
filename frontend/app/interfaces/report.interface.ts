@@ -1,3 +1,4 @@
+import { UserRoles } from "./general.interface";
 
 export enum ReportType {
     MatOborot = 'MatOborot',
@@ -75,4 +76,8 @@ export enum OborotType {
     S67 = 'Ходимлар иш хакиси'
 } 
 
-
+export interface DashboardReportItem {
+    title: string,
+    code: string,
+    roles: Array<UserRoles>
+}

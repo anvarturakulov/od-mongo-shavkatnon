@@ -78,6 +78,7 @@ export interface QueryObject {
 export interface QueryInformation {
     startDate: number,
     endDate: number,
+    reportType: string 
 }
 
 export interface QueryMatOtchet {

@@ -40,6 +40,7 @@ export const materialItem = (
     summa
   }
     
+  console.log('Materialga kirayapri')
   return element
     
 } 

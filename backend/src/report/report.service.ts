@@ -55,11 +55,12 @@ export class ReportService {
   async getInformation(queryInformation: QueryInformation) {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
+    // это строка собирает все проводки в один массив
     let entrys = await this.documentService.prepareEntrys()
     
-    let {startDate, endDate} = queryInformation;
+    let {startDate, endDate, reportType} = queryInformation;
     
-    let inform = information(data, startDate, endDate, this.documentService.globalEntrys, productions, this.documentService.deliverys )
+    let inform = information(data, startDate, endDate, reportType, this.documentService.globalEntrys, productions, this.documentService.deliverys )
     return inform
   }
 
