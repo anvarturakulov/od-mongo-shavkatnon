@@ -96,14 +96,14 @@ export class DocumentService {
   }
 
   async prepareEntrys() {
-    if (this.globalEntrys && this.globalEntrys?.length == 0) {
+    // if (this.globalEntrys && this.globalEntrys?.length == 0) {
       let result = await this.getAllDocuments(true)
       let founders = await this.referenceService.getFounders()
       let deliverys = await this.referenceService.getDeliverys()
       this.founders = [...founders]
       this.deliverys = [...deliverys]
       this.globalEntrys = [...prepareEntrysJournal(result, founders)];
-    } 
+    // } 
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
