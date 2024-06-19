@@ -19,7 +19,7 @@ export class DocumentService {
     private readonly referenceService: ReferenceService
   ) { }
 
-  public globalEntrys: Array<EntryItem>
+  public globalEntrys: Array<EntryItem> = []
   public deliverys: Array<ReferenceDocument>
   public founders: Array<ReferenceDocument>
 
@@ -101,7 +101,9 @@ export class DocumentService {
     let founders = await this.referenceService.getFounders()
     this.founders = [...founders]
     this.deliverys = [...deliverys]
-    this.globalEntrys = [...prepareEntrysJournal(result, founders)];
+    if (this.globalEntrys && this.globalEntrys?.length == 0) {
+      this.globalEntrys = [...prepareEntrysJournal(result, founders)];
+    } 
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {

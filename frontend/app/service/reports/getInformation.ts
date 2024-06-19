@@ -15,12 +15,13 @@ export const getInformation = (
   };
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+dashboardCurrentReportType;
-
+  console.log('zapros junatildi '+Date.now())
   axios.get(url, config)
     .then(function (response) {
       if (setMainData) {
         // console.log('Анвар ака')
         // console.log(response)
+        console.log('date keldi '+Date.now())
         setMainData('informData', [ ...response.data ]);
       }
       
