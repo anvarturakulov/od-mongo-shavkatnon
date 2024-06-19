@@ -96,12 +96,12 @@ export class DocumentService {
   }
 
   async prepareEntrys() {
-    let result = await this.getAllDocuments(true)
-    let deliverys = await this.referenceService.getDeliverys()
-    let founders = await this.referenceService.getFounders()
-    this.founders = [...founders]
-    this.deliverys = [...deliverys]
     if (this.globalEntrys && this.globalEntrys?.length == 0) {
+      let result = await this.getAllDocuments(true)
+      let founders = await this.referenceService.getFounders()
+      let deliverys = await this.referenceService.getDeliverys()
+      this.founders = [...founders]
+      this.deliverys = [...deliverys]
       this.globalEntrys = [...prepareEntrysJournal(result, founders)];
     } 
   }
