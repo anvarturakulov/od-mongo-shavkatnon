@@ -13,6 +13,7 @@ import { defaultDocumentTableItem } from '@/app/context/app.context.constants';
 import { DocTable } from '../docTable/docTable';
 import AddIco from './ico/add.svg'
 import { getPriceAndBalance } from '@/app/service/documents/getPriceBalance';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element => {
     
@@ -27,7 +28,10 @@ export const DocValues = ({ className, ...props }: DocValuesProps): JSX.Element 
     let hasWorkers = (contentName == DocumentType.LeaveCash )
     let hasPartners = contentName == DocumentType.LeaveCash;
     let hasFounder = contentName == DocumentType.LeaveCash;
-    let hasCash = contentName == DocumentType.MoveCash;
+    let hasCash = (
+        (contentName == DocumentType.MoveCash) ||
+        (contentName == DocumentType.LeaveCash && role == UserRoles.GLBUX)
+    );
     
     let defaultNewItemForTable = {...defaultDocumentTableItem}
     

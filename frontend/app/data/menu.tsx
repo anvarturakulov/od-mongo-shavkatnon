@@ -62,7 +62,7 @@ export const MenuData:Array<MenuItem> = [
                 type: 'document', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION,
-                 UserRoles.DELIVERY, UserRoles.SELLER]
+                 UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 

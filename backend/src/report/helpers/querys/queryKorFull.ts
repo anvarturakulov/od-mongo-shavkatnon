@@ -17,16 +17,16 @@ export const queryKorFull = (
   switch (typeQuery) {
     case TypeQuery.OS:
       return newEntrys.filter((item: EntryItem) => {
-
         return (
           item.debet == debet &&
           item.kredit == kredit &&
           ( debetFirstSubcontoId =='' || item.debetFirstSubcontoId == debetFirstSubcontoId ) &&
           ( debetSecondSubcontoId =='' || item.debetSecondSubcontoId == debetSecondSubcontoId 
+            // || item.count == -1) &&
             || (debetSecondSubcontoId == 'cash' && item.count == -1)) &&
           ( kreditFirstSubcontoId =='' || item.kreditFirstSubcontoId == kreditFirstSubcontoId ) &&
-          ( kreditSecondSubcontoId =='' || item.kreditSecondSubcontoId == kreditSecondSubcontoId ) &&
-          
+          ( kreditSecondSubcontoId =='' || item.kreditSecondSubcontoId == kreditSecondSubcontoId 
+            || (kreditSecondSubcontoId == 'cash' && item.count == -1)) &&
           item.date >= startDate &&
           item.date <= endDate
         )

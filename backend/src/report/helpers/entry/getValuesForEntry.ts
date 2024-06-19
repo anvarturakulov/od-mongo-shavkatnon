@@ -199,7 +199,8 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           return {
             debet: Schet.S60,
             kredit: Schet.S50,
-            ...leaveCashObj6050
+            ...leaveCashObj6050,
+            count: isCash ? -1 : 0,
           };
         }
         if (isWorker) {
@@ -207,6 +208,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
             debet: Schet.S67,
             kredit: Schet.S50,
             ...leaveCashZp6750,
+            count: isCash ? -1 : 0
           };
         }
 
@@ -224,6 +226,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S20,
           kredit: Schet.S50,
           ...leaveCashOther,
+          count: isCash ? -1 : 0,
         };
 
       case DocumentType.LeaveHalfstuff:
@@ -263,7 +266,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S50,
           kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
           ...MoveCashObj,
-          count: isCash ? -1 : 0
+          count: isCash ? -1 : 0,
           // debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
         };
 

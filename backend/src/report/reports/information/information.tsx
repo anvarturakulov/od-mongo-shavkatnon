@@ -12,6 +12,7 @@ import { Document } from 'src/document/models/document.model';
 import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { material } from './material/material';
 import { financial } from './financial/financial';
+import { giving } from './giving/giving';
 
 
 export const information = (
@@ -29,6 +30,9 @@ export const information = (
 
     let takingResult = taking(data, startDate, endDate, globalEntrys)
     result.push(takingResult);
+
+    let givingResult = giving(data, startDate, endDate, globalEntrys)
+    result.push(givingResult);
 
     let sectionBuxResult = section('BUXGALTER', data, startDate, endDate, globalEntrys)
     result.push(sectionBuxResult);
