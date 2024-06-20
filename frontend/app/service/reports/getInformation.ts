@@ -15,9 +15,9 @@ export const getInformation = (
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
-  if (user?.role == UserRoles.HEADCOMPANY || user?.role == UserRoles.ADMIN ) {
-    reportType =  'All'
-  }
+  // if (user?.role == UserRoles.HEADCOMPANY || user?.role == UserRoles.ADMIN ) {
+  //   reportType =  'All'
+  // }
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+reportType;
   console.log('zapros junatildi '+Date.now())
