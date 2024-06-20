@@ -44,6 +44,11 @@
   text-align: right!important;
 }
 
+.totalTdSame{
+  background-color: red;
+  color: #fff;
+  font-size: 20px!important;
+}
 
 .button{
   margin-left: 20px;

@@ -123,6 +123,12 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
                             <td className={styles.totalTd}>{numberValue(allKreditStart)}</td>
                             <td className={styles.totalTd}>{numberValue(allKreditEnd)}</td>
                         </tr>
+
+                        <tr>
+                            <td>ФАРК</td>
+                            <td className={styles.totalTdSame}>{numberValue(allDebitStart-allKreditStart)}</td>
+                            <td className={styles.totalTdSame}>{numberValue(allDebitEnd-allKreditEnd)}</td>
+                        </tr>
                     </thead>
                 </table>
                 </div>
