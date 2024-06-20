@@ -18,6 +18,7 @@ import { Material } from './material/material';
 import { Financial } from './financial/financial';
 import { Giving } from './giving/giving';
 import { getReportByType } from './helper';
+import { isAdmins } from '@/app/service/common/users';
 
 export const totalByKey = (key:string, data:any[]) => {
     let total = 0;
@@ -41,8 +42,9 @@ export const totalByKeyForFinancial = (key:string, data:any[]) => {
 export const Inform = ({className, ...props }: InformationProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { informData, dashboardCurrentReportType } = mainData;
-    
+    const { informData, dashboardCurrentReportType, user } = mainData;
+    let reportType = dashboardCurrentReportType;
+    if (isAdmins(user)) reportType = 'All'
     useEffect(()=>{
     },[mainData.informData])
     
@@ -50,7 +52,7 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
     return (
        <>
             <RefreshPanel/>
-            {getReportByType(dashboardCurrentReportType, informData)}
+            {getReportByType(reportType, informData)}
        </>
     )
 } 

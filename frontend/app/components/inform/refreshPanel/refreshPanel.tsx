@@ -9,10 +9,12 @@ import { dateNumberToString } from '@/app/service/common/converterForDates';
 import { getInformation } from '@/app/service/reports/getInformation';
 import axios from 'axios';
 import { SelectReportType } from './selectReportType/selectReportType';
+import { isAdmins } from '@/app/service/common/users';
 
 export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
     const {dateStart, dateEnd} = mainData.interval;
+    const { user } = mainData
 
     const refreshReport = async (mainData: Maindata, setMainData: Function | undefined) => {
         getInformation(setMainData, mainData);
@@ -42,7 +44,10 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     return (
        <>
             <div className={styles.btnBox}>
-                <SelectReportType/>
+                {
+                    !isAdmins(user) && 
+                    <SelectReportType/>
+                }
                 {
                     <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                 }

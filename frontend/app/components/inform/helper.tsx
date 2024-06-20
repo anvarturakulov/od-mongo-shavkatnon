@@ -9,6 +9,7 @@ import { Norma } from "./norma/norma"
 import { Material } from "./material/material"
 
 export const getReportByType = (dashboardCurrentReportType: string, informData: any) : JSX.Element => {
+    
     switch (dashboardCurrentReportType) {
         case 'Financial':
             return <Financial data={informData}/>
@@ -34,8 +35,27 @@ export const getReportByType = (dashboardCurrentReportType: string, informData: 
             return <Material data={informData}/> 
         case 'Section-founder':
             return <Section data={informData} sectionType='founder'/>
+        case 'All':
+            return ( 
+                <>
+                    <Foyda data={informData}/>
+                    <Cash data={informData}/>
+                    <Taking data={informData} />
+                    <Giving data={informData}/>
+                    <Financial data={informData}/>
+                    <Section data={informData} sectionType='buxgalter'/>
+                    <Section data={informData} sectionType='filial'/>
+                    <Section data={informData} sectionType='delivery'/>
+                    <Sklad data={informData}/>
+                    <Norma data={informData}/> 
+                    <Material data={informData}/> 
+                    <Section data={informData} sectionType='founder'/> 
+                </>
+            )
         default:
             return <></>
+        
     }
+
 
 }
