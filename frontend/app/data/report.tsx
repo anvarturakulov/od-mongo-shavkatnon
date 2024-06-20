@@ -8,6 +8,11 @@ export const DashboardReportData:Array<DashboardReportItem> = [
         roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
     },
     {
+        title: 'Дебитор кредитор',
+        code: 'DebitorKreditor',
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+    },
+    {
         title: 'Фойда хисоби',
         code: 'Foyda',
         roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN]

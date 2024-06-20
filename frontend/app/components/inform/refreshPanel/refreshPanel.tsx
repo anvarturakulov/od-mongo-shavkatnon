@@ -44,10 +44,10 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
     return (
        <>
             <div className={styles.btnBox}>
-                {
-                    !isAdmins(user) && 
+                {/* { */}
+                {/* !isAdmins(user) &&  */}
                     <SelectReportType/>
-                }
+                {/* } */}
                 {
                     <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
                 }

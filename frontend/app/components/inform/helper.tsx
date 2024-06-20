@@ -7,12 +7,15 @@ import { Giving } from "./giving/giving"
 import { Sklad } from "./sklad/sklad"
 import { Norma } from "./norma/norma"
 import { Material } from "./material/material"
+import { DebitorKreditor } from "./debitorKreditor/debitorKreditor"
 
 export const getReportByType = (dashboardCurrentReportType: string, informData: any) : JSX.Element => {
     
     switch (dashboardCurrentReportType) {
         case 'Financial':
             return <Financial data={informData}/>
+        case 'DebitorKreditor':
+            return <DebitorKreditor data={informData}/>
         case 'Foyda':
             return <Foyda data={informData}/>
         case 'Cash':
@@ -39,9 +42,11 @@ export const getReportByType = (dashboardCurrentReportType: string, informData: 
             return ( 
                 <>
                     <Foyda data={informData}/>
+                    <DebitorKreditor data={informData}/>
                     <Cash data={informData}/>
                     <Taking data={informData} />
                     <Giving data={informData}/>
+                    <DebitorKreditor data={informData}/>
                     <Financial data={informData}/>
                     <Section data={informData} sectionType='buxgalter'/>
                     <Section data={informData} sectionType='filial'/>

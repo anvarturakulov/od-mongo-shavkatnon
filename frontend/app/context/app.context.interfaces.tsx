@@ -41,6 +41,8 @@ export interface Maindata {
   updateDataForUserJournal: boolean,
   currentFinancialInnerReportType: string,
   dashboardCurrentReportType: string,
+  currentDKInnerReportId: string,
+  currentDKInnerArrayId: string,
 }
 
 export interface IAppContext {

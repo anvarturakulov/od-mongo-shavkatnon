@@ -13,6 +13,7 @@ import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { material } from './material/material';
 import { financial } from './financial/financial';
 import { giving } from './giving/giving';
+import { debitorKreditor } from './debitorKreditor/debitorKreditor';
 
 
 export const information = (
@@ -76,6 +77,10 @@ export const information = (
         result.push(sectionFounderResult);
     }
 
+    if (reportType == 'DebitorKreditor' || reportType == 'All') {
+        let debitorKreditorResult = debitorKreditor(data, startDate, endDate, globalEntrys)
+        result.push({'reportType': 'DEBITORKREDITOR', 'values': debitorKreditorResult});
+    }
     // let productionResult = production(data, startDate, endDate, globalEntrys, hamirs)
     // result.push(productionResult);
     

@@ -14,21 +14,20 @@ export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :J
     let TKKOL = totalByKey('TKKOL', item?.items)
     let TKSUM = totalByKey('TKSUM', item?.items)
 
+    let saldoStart = item?.PDSUM-item?.PKSUM
+    let saldoEnd = item?.PDSUM-item?.PKSUM+item?.TDSUM-item?.TKSUM
     return (
        <>
         <thead>
           <tr className={styles.sectionName}>
             <td></td>
             <td className={styles.title}>{item?.name}</td>
-            <td className={styles.totalTd}>{numberValue(item?.PDSUM-item?.PKSUM)}</td>
-            <td className={styles.totalTdKol}>{numberValue(item?.PDKOL-item?.PKKOL)}</td>
+            <td className={styles.totalTd}>{numberValue(saldoStart>0 ? saldoStart : 0)}</td>
+            <td className={styles.totalTd}>{numberValue(saldoStart<=0 ?(-1)*saldoStart:0)}</td>
             <td className={styles.totalTd}>{numberValue(item?.TDSUM)}</td>
-            <td className={styles.totalTdKol}>{numberValue(item?.TDKOL)}</td>
             <td className={styles.totalTd}>{numberValue(item?.TKSUM)}</td>
-            <td className={styles.totalTdKol}>{numberValue(item?.TKKOL)}</td>
-            <td className={styles.totalTd}>{numberValue(item?.PDSUM-item?.PKSUM+item?.TDSUM-item?.TKSUM)}</td>
-            <td className={styles.totalTdKol}>{numberValue(item?.PDKOL-item?.PKKOL+item?.TDKOL-item?.TKKOL)}</td>
-
+            <td className={styles.totalTd}>{numberValue(saldoEnd > 0 ? saldoEnd : 0)}</td>
+            <td className={styles.totalTd}>{numberValue(saldoEnd <= 0 ? (-1)*saldoEnd: 0)}</td>
           </tr>
         </thead>
         <tbody className={styles.tbody}>
@@ -36,19 +35,19 @@ export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :J
                 item?.subItems &&
                 item?.subItems.length &&
                 item?.subItems.map((element:any, key:number) => {
+                    let saldoStart = element?.subPDSUM-element?.subPKSUM
+                    let saldoEnd = element?.subPDSUM-element?.subPKSUM+element?.subTDSUM-element?.subTKSUM
                     return (
                         <tr key={key}>
                           <td className={styles.number}>{key+1}</td>
                           <td id='itemName' className={styles.title}>{element?.name}</td>
 
-                          <td>{numberValue(element?.subPDSUM-element?.subPKSUM)}</td>
-                          <td className={styles.count}>{numberValue(element?.subPDKOL-element?.subPKKOL)}</td>
+                          <td>{numberValue(saldoStart>0 ? saldoStart : 0)}</td>
+                          <td>{numberValue(saldoStart<=0 ?(-1)*saldoStart:0)}</td>
                           <td>{numberValue(element?.subTDSUM)}</td>
-                          <td className={styles.count}>{numberValue(element?.subTDKOL)}</td>
                           <td>{numberValue(element?.subTKSUM)}</td>
-                          <td className={styles.count}>{numberValue(element?.subTKKOL)}</td>
-                          <td>{numberValue(element?.subPDSUM-element?.subPKSUM+element?.subTDSUM-element?.subTKSUM)}</td>
-                          <td className={styles.count}>{numberValue(element?.subPDKOL-element?.subPKKOL+element?.subTDKOL-element?.subTKKOL)}</td>
+                          <td>{numberValue(saldoEnd > 0 ? saldoEnd : 0)}</td>
+                          <td>{numberValue(saldoEnd <= 0 ? (-1)*saldoEnd: 0)}</td>
                         </tr>
                     )
                 })

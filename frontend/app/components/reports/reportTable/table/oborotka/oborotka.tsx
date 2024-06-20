@@ -23,14 +23,12 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
                     <tr>
                         <td >№</td>
                         <td className={styles.titleName}>Номи</td>
-                        <td className={styles.titleValue}>Колдик сумма</td>
-                        <td className={styles.titleValue}>Колдик сон</td>
+                        <td className={styles.titleValue}>Колдик сумма +</td>
+                        <td className={styles.titleValue}>Колдик сумма -</td>
                         <td className={styles.titleValue}>Дебет сумма</td>
-                        <td className={styles.titleValue}>Дебет сон</td>
                         <td className={styles.titleValue}>Кредит сумма</td>
-                        <td className={styles.titleValue}>Кредит сон</td>
-                        <td className={styles.titleValue}>Колдик сумма</td>
-                        <td className={styles.titleValue}>Колдик сон</td>
+                        <td className={styles.titleValue}>Колдик сумма +</td>
+                        <td className={styles.titleValue}>Колдик сумма -</td>
                     </tr>
                 </thead>
                 {
