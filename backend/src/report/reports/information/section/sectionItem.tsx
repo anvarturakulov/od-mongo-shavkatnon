@@ -25,7 +25,7 @@ export const sectionItem = (
         String(item.senderId) == String(currentSectionId)  &&
         String(item.receiverId) == maydaSavdoReceiverId
       )
-    }).length
+    }).reduce((total, item:Document) => total + item.count, 0)
   }
   
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
