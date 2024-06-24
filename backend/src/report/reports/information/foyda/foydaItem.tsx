@@ -4,8 +4,7 @@ import { query } from 'src/report/helpers/querys/query';
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
 import { Document } from 'src/document/models/document.model';
 import { DocumentType } from 'src/interfaces/document.interface';
-import { ReferenceService } from 'src/reference/reference.service';
-import { Reference, ReferenceDocument } from 'src/reference/models/referense.model';
+import { ReferenceDocument } from 'src/reference/models/referense.model';
 
 const isDelivery = (deliverys:ReferenceDocument[],id:string) => {
   if (deliverys && deliverys.length) {

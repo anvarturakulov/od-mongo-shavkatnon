@@ -49,15 +49,15 @@ export const information = (
         result.push(givingResult);
     }
     if (reportType == 'Section-buxgalter' || reportType == 'All') {
-        let sectionBuxResult = section('BUXGALTER', data, startDate, endDate, globalEntrys)
+        let sectionBuxResult = section('BUXGALTER', data, startDate, endDate, docs,  globalEntrys )
         result.push(sectionBuxResult);
     }
     if (reportType == 'Section-filial' || reportType == 'All') {
-        let sectionFilResult = section('FILIAL', data, startDate, endDate, globalEntrys)
+        let sectionFilResult = section('FILIAL', data, startDate, endDate, docs, globalEntrys)
         result.push(sectionFilResult);
     }
     if (reportType == 'Section-delivery' || reportType == 'All') {
-        let sectionDelResult = section('DELIVERY', data, startDate, endDate, globalEntrys)
+        let sectionDelResult = section('DELIVERY', data, startDate, endDate, docs, globalEntrys)
         result.push(sectionDelResult);
     }
     if (reportType == 'Sklad' || reportType == 'All') {
@@ -73,7 +73,7 @@ export const information = (
         result.push(materialResult); 
     }
     if (reportType == 'Section-founder' || reportType == 'All') {
-        let sectionFounderResult = section('FOUNDER', data, startDate, endDate, globalEntrys)
+        let sectionFounderResult = section('FOUNDER', data, startDate, endDate, docs, globalEntrys)
         result.push(sectionFounderResult);
     }
 

@@ -1,12 +1,14 @@
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
 import { EntryItem } from 'src/interfaces/report.interface';
 import { sectionItem } from './sectionItem';
+import { Document } from 'src/document/models/document.model';
 
 export const section = (
     sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER' | 'FOUNDER',
     data: any,
     startDate: number,
     endDate: number,
+    docs: Document[],
     globalEntrys: Array<EntryItem> | undefined ) => {
     
     let result = [];
@@ -23,7 +25,7 @@ export const section = (
         return false
     })
     .forEach((item: ReferenceModel) => {
-        let element = sectionItem(startDate, endDate, item._id, item.name, sectionType ,globalEntrys)
+        let element = sectionItem(startDate, endDate, item._id, item.name, docs, sectionType ,globalEntrys)
         if (Object.keys(element).length) {
             result.push(element)
         }

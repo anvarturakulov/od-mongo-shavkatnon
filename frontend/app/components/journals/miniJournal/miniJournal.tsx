@@ -18,7 +18,6 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
     
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
-    
 
     const token = user?.access_token;
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';

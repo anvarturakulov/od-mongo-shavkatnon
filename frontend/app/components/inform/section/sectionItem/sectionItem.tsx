@@ -20,7 +20,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div className={styles.title}>Кун бошига колдик нони</div>
                         <div className={styles.value}>
                             {numberValue(item?.startBalansCountNon)}
-                            <span> ({numberValue(item?.startBalansCountBux)})</span>
+                            {/* <span> ({numberValue(item?.startBalansCountBux)})</span> */}
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div className={styles.title}>Ишлаб. чик. кирим</div>
                         <div className={styles.value}>
                             {numberValue(item?.prodCountNon)}
-                            <span> ({numberValue(item?.prodCountBux)})</span>
+                            {/* <span> ({numberValue(item?.prodCountBux)})</span> */}
                         </div>
                     </div>
                     
@@ -36,7 +36,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div className={styles.title}>Ички силжиш. кирим</div>
                         <div className={styles.value}>
                             {numberValue(item?.moveIncomeCountNon)}
-                            <span> ({numberValue(item?.moveIncomeCountBux)})</span>
+                            {/* <span> ({numberValue(item?.moveIncomeCountBux)})</span> */}
                         </div>
                     </div>
                     
@@ -44,21 +44,22 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div className={styles.title}>Сотилган нон</div>
                         <div className={styles.value}>
                             {numberValue(item?.saleCountNon)}
-                            <span> ({numberValue(item?.saleCountBux)})</span>
+                            <span> ({numberValue(item?.maydaSavdoCount)})</span>
+                            
                         </div>
                     </div>
                     <div className={styles.row}>
                         <div className={styles.title}>Брак(истем.) нон</div>
                         <div className={styles.value}>
                             {numberValue(item?.brakCountNon)}
-                            <span> ({numberValue(item?.brakCountBux)})</span>
+                            {/* <span> ({numberValue(item?.brakCountBux)})</span> */}
                         </div>
                     </div>
                     <div className={styles.row}>
                         <div className={styles.title}>Ички сил. чиким</div>
                         <div className={styles.value}>
                             {numberValue(item?.moveOutNon)}
-                            <span> ({numberValue(item?.moveOutBux)})</span>
+                            {/* <span> ({numberValue(item?.moveOutBux)})</span> */}
                         </div>
                     </div>
 
@@ -66,7 +67,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div className={styles.title}>Зиммасидаги колдик нон</div>
                         <div className={styles.value}>
                             {numberValue(item?.endBalansCountNon)}
-                            <span> ({numberValue(item?.endBlanasCountBux)})</span>
+                            {/* <span> ({numberValue(item?.endBlanasCountBux)})</span> */}
                         </div>
                     </div>
                 </>

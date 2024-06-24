@@ -1,15 +1,32 @@
 import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { queryKor } from 'src/report/helpers/querys/queryKor';
 import { query } from 'src/report/helpers/querys/query';
+import { Document } from 'src/document/models/document.model';
+import { DocumentType } from 'src/interfaces/document.interface';
 
 export const sectionItem = ( 
   startDate: number,
   endDate: number,
   currentSectionId: string, 
   title: string,
+  docs: Document[],
   sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER' | 'FOUNDER',
   globalEntrys: Array<EntryItem> | undefined ) => {
 
+  let maydaSavdoCount = 0;
+  const maydaSavdoReceiverId = '659d292d630ca82ec3dcae1c';
+
+  if (docs && docs.length > 0) {
+    maydaSavdoCount = docs.filter((item: Document) => {
+      return (
+        item.date>= startDate && 
+        item.date <= endDate && 
+        item.documentType == DocumentType.SaleProd &&
+        String(item.senderId) == String(currentSectionId)  &&
+        String(item.receiverId) == maydaSavdoReceiverId
+      )
+    }).length
+  }
   
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
   let schetCash = sectionType == 'FOUNDER' ? Schet.S66 : Schet.S50
@@ -63,6 +80,7 @@ export const sectionItem = (
       moveIncomeCountBux: OBKOLD2828bux,
       saleCountNon: OBKOLK4028-OBKOLK4028bux,
       saleCountBux: OBKOLK4028bux,
+      maydaSavdoCount,
       brakCountNon: OBKOLK2028-OBKOLK2028bux,
       brakCountBux: OBKOLK2028bux,
       moveOutNon: OBKOLK2828-OBKOLK2828bux,
@@ -74,7 +92,7 @@ export const sectionItem = (
       incomeFromMoveSumma: MOVEINN,
       outFromMoveSumma: MOVEOUT,
       chargesSumma: TKSUM-MOVEOUT,
-      endBalansSumma: PDSUM-PKSUM+TDSUM-TKSUM  
+      endBalansSumma: PDSUM-PKSUM+TDSUM-TKSUM
     }
       
   )

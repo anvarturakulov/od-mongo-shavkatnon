@@ -28,7 +28,6 @@ export const Mayda = ({className, ...props }: MaydaProps) :JSX.Element => {
     const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
     const { data, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
 
-
     let num = getRandomID()
     let dateDoc = new Date();
     let dateStr = dateDoc.toISOString().split('T')[0]
