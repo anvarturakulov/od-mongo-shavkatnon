@@ -43,6 +43,7 @@ export interface Maindata {
   dashboardCurrentReportType: string,
   currentDKInnerReportId: string,
   currentDKInnerArrayId: string,
+  uploadingDashboard: boolean,
 }
 
 export interface IAppContext {

@@ -42,17 +42,19 @@ export const totalByKeyForFinancial = (key:string, data:any[]) => {
 export const Inform = ({className, ...props }: InformationProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
-    const { informData, dashboardCurrentReportType, user } = mainData;
+    const { informData, dashboardCurrentReportType, user, uploadingDashboard } = mainData;
     let reportType = dashboardCurrentReportType;
     // if (isAdmins(user)) reportType = 'All'
     useEffect(()=>{
     },[mainData.informData])
     
-    
     return (
        <>
             <RefreshPanel/>
-            {getReportByType(reportType, informData)}
+            {
+                !uploadingDashboard &&
+                getReportByType(reportType, informData)
+            }
        </>
     )
 } 

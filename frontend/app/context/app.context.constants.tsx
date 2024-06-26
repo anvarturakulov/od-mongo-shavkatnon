@@ -107,4 +107,5 @@ export const defaultMainData: Maindata = {
     dashboardCurrentReportType: '',
     currentDKInnerReportId: '',
     currentDKInnerArrayId: '',
+    uploadingDashboard: false,
   }

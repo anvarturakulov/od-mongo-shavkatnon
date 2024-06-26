@@ -15,6 +15,7 @@ export const getInformation = (
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
 
+  setMainData && setMainData('uploadingDashboard', true)
   // if (user?.role == UserRoles.HEADCOMPANY || user?.role == UserRoles.ADMIN ) {
   //   reportType =  'All'
   // }
@@ -28,6 +29,7 @@ export const getInformation = (
         // console.log(response)
         console.log('date keldi '+Date.now())
         setMainData('informData', [ ...response.data ]);
+        setMainData && setMainData('uploadingDashboard', false)
       }
       
     })
