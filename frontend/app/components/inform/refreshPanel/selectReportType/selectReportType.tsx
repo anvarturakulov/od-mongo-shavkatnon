@@ -17,7 +17,7 @@ export const SelectReportType = ({ className, ...props }: SelectReportTypeProps)
 
         if ( setMainData ) {
             setMainData('dashboardCurrentReportType', dashboardCurrentReportType)
-            setMainData && setMainData('uploadingDashboard', true)
+            // setMainData && setMainData('uploadingDashboard', true)
         }
     }
  

@@ -20,12 +20,13 @@ import { Button } from '..';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import MiniJournal from '../journals/miniJournal/miniJournal';
 import { Norma } from '../inform/norma/norma';
+import LoadingIco from './ico/loading.svg'
 
 export default function UserMenu({menuData, className, ...props}:UserMenuProps):JSX.Element {
     
     const [menu, setMenu] = useState<Array<MenuItem>>([])
     const {mainData, setMainData} = useAppContext()
-    const { user, informData } = mainData;
+    const { user, informData, uploadingDashboard } = mainData;
     
     useEffect(()=>{
         // console.log(mainData.informData)
@@ -136,42 +137,37 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
             <div className={styles.journalBox}>
                 { <MiniJournal/> }
             </div>
+            <RefreshPanel/>
 
             {
-                (
-                    user?.role == UserRoles.HEADSECTION ||
-                    user?.role == UserRoles.SELLER
-                ) 
-                &&
+                !uploadingDashboard &&
                 <>
-                    <RefreshPanel/>
-                    <Section data={informData} sectionType='filial' currentSection ={storageIdFromUser}/>
-                    {   
-                        user.role == UserRoles.HEADSECTION &&
-                        <Section data={informData} sectionType='delivery'/>
+                    {
+                        (
+                            user?.role == UserRoles.HEADSECTION ||
+                            user?.role == UserRoles.SELLER
+                        ) 
+                        &&
+                        <>
+                            <Section data={informData} sectionType='filial' currentSection ={storageIdFromUser}/>
+                            {   
+                                user.role == UserRoles.HEADSECTION &&
+                                <Section data={informData} sectionType='delivery'/>
+                            }
+                        </>
+                    }
+                    {
+                        user?.role == UserRoles.DELIVERY &&
+                        <>
+                            <RefreshPanel/>
+                            <Section data={informData} sectionType='delivery' currentSection ={storageIdFromUser}/>
+                        </>
                     }
                 </>
             }
-
-            {/* {
-                ( 
-                    user?.role == UserRoles.GLBUX ||
-                    user?.role == UserRoles.HEADSECTION
-                ) && 
-                <>
-                    <RefreshPanel/>
-                    <Sklad data={informData} currentSection ={storageIdFromUser}/>
-                </>
-            } */}
-
-            
-
             {
-                user?.role == UserRoles.DELIVERY &&
-                <>
-                    <RefreshPanel/>
-                    <Section data={informData} sectionType='delivery' currentSection ={storageIdFromUser}/>
-                </>
+                uploadingDashboard &&
+                <LoadingIco/>
             }
 
             <IntervalWindow/>
