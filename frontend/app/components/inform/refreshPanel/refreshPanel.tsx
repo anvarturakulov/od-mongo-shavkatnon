@@ -43,24 +43,20 @@ export const RefreshPanel = ({className, ...props }: RefreshPanelProps) :JSX.Ele
 
     return (
        <>
-            <div className={styles.btnBox}>
-                {/* { */}
-                {/* !isAdmins(user) &&  */}
+            <div className={styles.box}>
+                <div className={styles.selectBox}>    
                     <SelectReportType/>
-                {/* } */}
-                {
-                    <div>{`оралик сана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
-                }
-                <DateIco 
-                    className={styles.ico}
-                    onClick={(mainData: Maindata) => {
-                        if (setMainData) {
-                            setMainData('showIntervalWindow', true);
-                            }
-                        }}
-                />
-                <Button appearance='ghost' onClick={(e) => refreshReport(mainData, setMainData)}>Янгилаш</Button>
-                {/* <Button appearance='ghost' onClick={(e) => deleteDocs()}>Удалить</Button> */}
+                    <DateIco 
+                        className={styles.ico}
+                        onClick={(mainData: Maindata) => {
+                            if (setMainData) {
+                                setMainData('showIntervalWindow', true);
+                                }
+                            }}
+                    />
+                </div>
+                <div>{`Cана: ${dateStartInStr} дан ${dateEndInStr} гача`}</div>
+                <Button className={styles.btn} appearance='ghost' onClick={(e) => refreshReport(mainData, setMainData)}>Янгилаш</Button>
             </div>
        </>
     )

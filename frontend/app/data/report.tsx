@@ -10,7 +10,7 @@ export const DashboardReportData:Array<DashboardReportItem> = [
     {
         title: 'Дебитор кредитор',
         code: 'DebitorKreditor',
-        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
     },
     {
         title: 'Фойда хисоби',

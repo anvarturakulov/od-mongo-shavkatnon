@@ -12,16 +12,28 @@ import { DocumentModel, DocumentType, Interval } from '@/app/interfaces/document
 import { UserRoles } from '@/app/interfaces/general.interface';
 import { getNameReference } from '../helpers/journal.functions';
 import { setProvodkaByReciever } from './helpers/miniJournal.functions';
+import { dateNumberToString } from '@/app/service/common/converterForDates';
 
 
 export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
     const { contentName, user } = mainData;
+    const {dateStart, dateEnd} = mainData.interval;
+
+    let dateStartForUrl = dateStart
+    let dateEndForUrl = dateEnd
+
+    if (!dateStart && !dateEnd) {
+        let now = Date.now()+18000000
+        let nowInstr = dateNumberToString(now)
+        dateStartForUrl = Date.parse(nowInstr)
+        dateEndForUrl = Date.parse(nowInstr) + 86399999
+    }
 
     const token = user?.access_token;
     let url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/getAll/';
-
+    // const url = process.env.NEXT_PUBLIC_DOMAIN+'/api/document/byTypeForDate'+'?documentType='+contentName+'&dateStart='+dateStartForUrl+'&dateEnd='+dateEndForUrl;
     const urlReferences = process.env.NEXT_PUBLIC_DOMAIN+'/api/reference/getAll/';
 
     const { data : documents, mutate } = useSWR(url, (url) => getDataForSwr(url, token));
@@ -33,12 +45,12 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
         setMainData && setMainData('updateDataForDocumentJournal', false);
     }, [mainData.showDocumentWindow, mainData.updateDataForDocumentJournal])
 
-    let currentVal: string, today: number
+    // let currentVal: string, today: number
 
-    currentVal = (new Date()).toISOString().split('T')[0]
-    today = Date.parse(currentVal)
-    let startDate = today
-    let endDate = today +86399999
+    // currentVal = (new Date()).toISOString().split('T')[0]
+    // today = Date.parse(currentVal)
+    // let startDate = today
+    // let endDate = today +86399999
 
     return (
         <>
@@ -49,7 +61,7 @@ export default function MiniJournal({ className, ...props}:MiniJournalProps):JSX
                         <tbody className={styles.tbody}>
                             {documents && documents.length>0 && 
                             documents
-                            .filter((item:DocumentModel, key: number) => (item.date >= startDate && item.date <= endDate))
+                            .filter((item:DocumentModel, key: number) => (item.date >= dateStartForUrl && item.date <= dateEndForUrl))
                             .filter((item:DocumentModel, key: number) => {
                                 return (
                                     item.user == user?.name || 

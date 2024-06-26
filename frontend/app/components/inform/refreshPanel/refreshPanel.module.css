@@ -1,10 +1,17 @@
-.btnBox{
-    display: flex;
+.box{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 10px;
-    /* float: right; */
     padding: 10px;
     margin-top: 5px;
+}
+
+@media (max-width: 500px) {
+    .box {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
 }
 
 .timer{
@@ -17,5 +24,17 @@
 .ico{
     width: 25px;
     height: 25px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
+}
+
+.selectBox{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn{
+    width: 100%;
 }
