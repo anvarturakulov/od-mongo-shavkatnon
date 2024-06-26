@@ -19,6 +19,7 @@ import { Financial } from './financial/financial';
 import { Giving } from './giving/giving';
 import { getReportByType } from './helper';
 import { isAdmins } from '@/app/service/common/users';
+import LoadingIco from './loading.svg';
 
 export const totalByKey = (key:string, data:any[]) => {
     let total = 0;
@@ -54,6 +55,10 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
             {
                 !uploadingDashboard &&
                 getReportByType(reportType, informData)
+            }
+            {
+                uploadingDashboard &&
+                LoadingIco
             }
        </>
     )
