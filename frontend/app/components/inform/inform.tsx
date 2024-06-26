@@ -58,7 +58,7 @@ export const Inform = ({className, ...props }: InformationProps) :JSX.Element =>
             }
             {
                 uploadingDashboard &&
-                LoadingIco
+                <LoadingIco/>
             }
        </>
     )
