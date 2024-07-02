@@ -260,31 +260,30 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         };
 
       case DocumentType.MoveCash:
-        if (
-          founders && founders.length && 
-          founders.filter((item:FounderObject) => item.id == receiverId.toString()).length > 0
-        ) {
-          if (newEntry) return {
-              debet: Schet.S66,
-              kredit: Schet.S50,
-              ...MoveCashObj,
-              count: isCash ? -1 : 0,
-            }
-           else return {
-              debet: Schet.S68,
-              kredit: Schet.S00,
-              ...MoveCashObj,
-              count: isCash ? -1 : 0,
-          }         
+        if (!newEntry) {
+          return {
+            debet: Schet.S68,
+            kredit: Schet.S00,
+            ...MoveCashObj,
+            count: isCash ? -1 : 0,
+          }
+        } else {
+          if (founders && founders.length && founders.filter((item:FounderObject) => item.id == receiverId.toString()).length > 0) 
+             return {
+                debet: Schet.S66,
+                kredit: Schet.S50,
+                ...MoveCashObj,
+                count: isCash ? -1 : 0,
+              }
+          else return {
+            debet: Schet.S50,
+            kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
+            ...MoveCashObj,
+            count: isCash ? -1 : 0,
+            // debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
+          };        
+          
         }
-
-        return {
-          debet: Schet.S50,
-          kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
-          ...MoveCashObj,
-          count: isCash ? -1 : 0,
-          // debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
-        };
 
       case DocumentType.MoveHalfstuff:
         return {
