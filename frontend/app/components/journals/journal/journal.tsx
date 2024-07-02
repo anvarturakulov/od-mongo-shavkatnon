@@ -245,8 +245,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             
                             
                             .map((item:DocumentModel, key: number) => {
-                                total += item.total;
-                                count += item.count;
+                                total += !item.deleted ? item.total : 0;
+                                count += !item.deleted ? item.count : 0;
                                 return (
                                 <>
                                     <tr 
