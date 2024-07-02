@@ -13,6 +13,9 @@ export const debitorKreditor = (
 
     let material = debitorKreditorInners(data, startDate, endDate, Schet.S10, TypeReference.TMZ, 'MATERIAL', globalEntrys)
     result.push(material);
+
+    let zagatovka = debitorKreditorInners(data, startDate, endDate, Schet.S21, TypeReference.TMZ, 'ZAGATOVKA', globalEntrys)
+    result.push(zagatovka);
     
     let filial = debitorKreditorInners(data, startDate, endDate, Schet.S50, TypeReference.STORAGES, 'FILIAL', globalEntrys)
     result.push(filial);
