@@ -4,7 +4,7 @@ import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { Schet } from '@/app/interfaces/report.interface';
 import { UserRoles } from '@/app/interfaces/general.interface';
-import { isAdmins } from '@/app/service/common/users';
+import { isAdmins, isGuest } from '@/app/service/common/users';
 
 export const SelectOborot = ({ label, visible , className, ...props }: SelectOborotProps): JSX.Element => {
     
@@ -22,7 +22,8 @@ export const SelectOborot = ({ label, visible , className, ...props }: SelectObo
         { title: 'Ходимлар иш хакиси', schet: Schet.S67 },
     ]
     
-    if (isAdmins(user)) oborotTypeData.push({ title: 'Таъсисчилар', schet: Schet.S66 })
+    if (isAdmins(user) || isGuest(user)) oborotTypeData.push({ title: 'Таъсисчилар', schet: Schet.S66 })
+    if (isAdmins(user)) oborotTypeData.push({ title: 'Хамёнлар', schet: Schet.S68 })
 
     const changeElements = (e: React.FormEvent<HTMLSelectElement>, setMainData: Function | undefined, mainData: Maindata) => {
         let target = e.currentTarget;

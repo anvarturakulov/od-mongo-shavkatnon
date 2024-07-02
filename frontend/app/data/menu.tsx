@@ -106,6 +106,12 @@ export const MenuData:Array<MenuItem> = [
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
             },
+            { 
+                title: DocumentType.TakeProfit, description:'Фойда таксимоти',
+                type: 'document', active: false,
+                roles: 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+            },
         ]
     },
     {

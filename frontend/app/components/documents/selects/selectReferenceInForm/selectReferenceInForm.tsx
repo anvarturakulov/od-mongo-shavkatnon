@@ -129,6 +129,10 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
                     }
 
+                    if (type == 'receiver' && contentName == DocumentType.TakeProfit) {
+                        return (item.maxsud || item.shavkat)
+                    }
+
                     if ((type == 'sender') && 
                         contentName == DocumentType.LeaveCash) {
                         if ( user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY ) {

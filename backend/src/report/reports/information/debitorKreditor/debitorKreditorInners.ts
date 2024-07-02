@@ -44,6 +44,7 @@ export const debitorKreditorInners = (
         if (reportId == 'DELIVERY') return item?.delivery
         if (reportId == 'FILIAL') return item?.filial
         if (reportId == 'BUXGALTER') return (item?.buxgalter || item?.director)
+        // if (reportId == 'FOUNDERS') return item?.
         return true
     })
     .forEach((item: ReferenceModel) => {

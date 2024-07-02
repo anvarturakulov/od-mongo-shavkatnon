@@ -29,7 +29,7 @@ export const sectionItem = (
   }
   
   let idForBuxanka = '65e7048b5c54490bbc335ca2';
-  let schetCash = sectionType == 'FOUNDER' ? Schet.S66 : Schet.S50
+  let schetCash = sectionType == 'FOUNDER' ? Schet.S68 : Schet.S50
 
   const PDKOL = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys);
   const PDKOLbux = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys);

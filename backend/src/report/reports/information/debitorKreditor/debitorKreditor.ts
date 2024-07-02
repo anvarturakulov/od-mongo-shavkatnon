@@ -26,6 +26,9 @@ export const debitorKreditor = (
     let partners = debitorKreditorInners(data, startDate, endDate, Schet.S60, TypeReference.PARTNERS, 'PARTNERS', globalEntrys)
     result.push(partners);
 
+    let founders = debitorKreditorInners(data, startDate, endDate, Schet.S66, TypeReference.STORAGES, 'FOUNDERS', globalEntrys)
+    result.push(founders);
+
     let workers = debitorKreditorInners(data, startDate, endDate, Schet.S67, TypeReference.WORKERS, 'WORKERS', globalEntrys)
     result.push(workers);
     

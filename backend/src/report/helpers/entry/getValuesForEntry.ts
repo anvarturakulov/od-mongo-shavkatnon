@@ -56,6 +56,15 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       count: count,
       summa: total,
     }
+
+    const TakeProfitObj = {
+      debetFirstSubcontoId: '',
+      debetSecondSubcontoId: '',
+      kreditFirstSubcontoId: receiverId.toString(),
+      kreditSecondSubcontoId: '',
+      count: count,
+      summa: total,
+    }
   
     const ServicesFromPartnersObj = {
       debetFirstSubcontoId: receiverId.toString(),
@@ -218,7 +227,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         ) 
           return {
             debet: Schet.S00,
-            kredit: Schet.S66,
+            kredit: Schet.S68,
             ...leaveCashFromFounder,
         };
 
@@ -254,13 +263,20 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         if (
           founders && founders.length && 
           founders.filter((item:FounderObject) => item.id == receiverId.toString()).length > 0
-        ) 
-          return {
-            debet: Schet.S66,
-            kredit: Schet.S50,
-            ...MoveCashObj,
-            count: isCash ? -1 : 0,
-        };
+        ) {
+          if (newEntry) return {
+              debet: Schet.S66,
+              kredit: Schet.S50,
+              ...MoveCashObj,
+              count: isCash ? -1 : 0,
+            }
+           else return {
+              debet: Schet.S68,
+              kredit: Schet.S00,
+              ...MoveCashObj,
+              count: isCash ? -1 : 0,
+          }         
+        }
 
         return {
           debet: Schet.S50,
@@ -327,6 +343,14 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           debet: Schet.S20,
           kredit: Schet.S67,
           ...ZpCalculateObj
+        };
+
+      case DocumentType.TakeProfit:
+        // шу хужжатни проводкаси хакида кайта бир уйлаб куриш керак
+        return {
+          debet: Schet.S00,
+          kredit: Schet.S66,
+          ...TakeProfitObj
         };
       
       case DocumentType.ServicesFromPartners:

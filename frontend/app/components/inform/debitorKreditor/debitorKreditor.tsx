@@ -47,7 +47,8 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
     let deliveryDebitStart = total('DELIVERY', datas, 'totalDebitStart')
     let partnersDebitStart = total('PARTNERS', datas, 'totalDebitStart')
     let workersDebitStart = total('WORKERS', datas, 'totalDebitStart')
-    let allDebitStart = materialDebitStart + filialDebitStart + buxgalterDebitStart + deliveryDebitStart + partnersDebitStart + workersDebitStart;
+    let foundersDebitStart = total('FOUNDERS', datas, 'totalDebitStart')
+    let allDebitStart = materialDebitStart + filialDebitStart + buxgalterDebitStart + deliveryDebitStart + partnersDebitStart + workersDebitStart + foundersDebitStart;
 
     let materialDebitEnd = total('MATERIAL', datas, 'totalDebitEnd')
     let filialDebitEnd = total('FILIAL', datas, 'totalDebitEnd')
@@ -55,7 +56,8 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
     let deliveryDebitEnd = total('DELIVERY', datas, 'totalDebitEnd')
     let partnersDebitEnd = total('PARTNERS', datas, 'totalDebitEnd')
     let workersDebitEnd = total('WORKERS', datas, 'totalDebitEnd')
-    let allDebitEnd = materialDebitEnd + filialDebitEnd + buxgalterDebitEnd + deliveryDebitEnd + partnersDebitEnd + workersDebitEnd;
+    let foundersDebitEnd = total('FOUNDERS', datas, 'totalDebitEnd')
+    let allDebitEnd = materialDebitEnd + filialDebitEnd + buxgalterDebitEnd + deliveryDebitEnd + partnersDebitEnd + workersDebitEnd + foundersDebitEnd;
 
     let materialKreditStart = total('MATERIAL', datas, 'totalKreditStart')
     let filialKreditStart = total('FILIAL', datas, 'totalKreditStart')
@@ -63,7 +65,8 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
     let deliveryKreditStart = total('DELIVERY', datas, 'totalKreditStart')
     let partnersKreditStart = total('PARTNERS', datas, 'totalKreditStart')
     let workersKreditStart = total('WORKERS', datas, 'totalKreditStart')
-    let allKreditStart = materialKreditStart + filialKreditStart + buxgalterKreditStart + deliveryKreditStart + partnersKreditStart + workersKreditStart;
+    let foundersKreditStart = total('FOUNDERS', datas, 'totalKreditStart')
+    let allKreditStart = materialKreditStart + filialKreditStart + buxgalterKreditStart + deliveryKreditStart + partnersKreditStart + workersKreditStart + foundersKreditStart;
 
     let materialKreditEnd = total('MATERIAL', datas, 'totalKreditEnd')
     let filialKreditEnd = total('FILIAL', datas, 'totalKreditEnd')
@@ -71,7 +74,8 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
     let deliveryKreditEnd = total('DELIVERY', datas, 'totalKreditEnd')
     let partnersKreditEnd = total('PARTNERS', datas, 'totalKreditEnd')
     let workersKreditEnd = total('WORKERS', datas, 'totalKreditEnd')
-    let allKreditEnd = materialKreditEnd + filialKreditEnd + buxgalterKreditEnd + deliveryKreditEnd + partnersKreditEnd + workersKreditEnd;
+    let foundersKreditEnd = total('FOUNDERS', datas, 'totalKreditEnd')
+    let allKreditEnd = materialKreditEnd + filialKreditEnd + buxgalterKreditEnd + deliveryKreditEnd + partnersKreditEnd + workersKreditEnd + foundersKreditEnd;
 
 
     return (
@@ -100,6 +104,7 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
                         { rowData('Доставщиклар', 'DELIVERY', 'innersDebitStart', 'innersDebitEnd',deliveryDebitStart, deliveryDebitEnd, setDebitKreditInnerData, setMainData)}
                         { rowData('Таъминотчилардаги аванслар', 'PARTNERS', 'innersDebitStart', 'innersDebitEnd', partnersDebitStart, partnersDebitEnd, setDebitKreditInnerData, setMainData)}
                         { rowData('Ходимлардаги аванслари', 'WORKERS', 'innersDebitStart', 'innersDebitEnd', workersDebitStart, workersDebitEnd, setDebitKreditInnerData, setMainData)}
+                        { rowData('Таъсисчиларнинг карзи', 'FOUNDERS', 'innersDebitStart', 'innersDebitEnd', foundersDebitStart, foundersDebitEnd, setDebitKreditInnerData, setMainData)}
                         <tr>
                             <td>Жами</td>
                             <td className={styles.totalTd}>{numberValue(allDebitStart)}</td>
@@ -116,8 +121,9 @@ export const DebitorKreditor = ({className, data, ...props }: DebitorKreditorPro
                         { rowData('Цехлар', 'FILIAL', 'innersKreditStart', 'innersKreditEnd', filialKreditStart, filialKreditEnd, setDebitKreditInnerData, setMainData)}
                         { rowData('Бухгалтер', 'BUXGALTER', 'innersKreditStart', 'innersKreditEnd', buxgalterKreditStart, buxgalterKreditEnd, setDebitKreditInnerData, setMainData)}
                         { rowData('Доставщик', 'DELIVERY', 'innersKreditStart', 'innersKreditEnd',deliveryKreditStart, deliveryKreditEnd, setDebitKreditInnerData, setMainData)}
-                        { rowData('Таъминотчилар', 'PARTNERS', 'innersKreditStart', 'innersKreditEnd', partnersKreditStart, partnersKreditEnd, setDebitKreditInnerData, setMainData)}
-                        { rowData('Ходимлар', 'WORKERS', 'innersKreditStart', 'innersKreditEnd', workersKreditStart, workersKreditEnd, setDebitKreditInnerData, setMainData)}
+                        { rowData('Таъминотчилардан карзимиз', 'PARTNERS', 'innersKreditStart', 'innersKreditEnd', partnersKreditStart, partnersKreditEnd, setDebitKreditInnerData, setMainData)}
+                        { rowData('Ходимлардан карзимиз', 'WORKERS', 'innersKreditStart', 'innersKreditEnd', workersKreditStart, workersKreditEnd, setDebitKreditInnerData, setMainData)}
+                        { rowData('Таъсисчилардан карзимиз', 'FOUNDERS', 'innersKreditStart', 'innersKreditEnd', foundersKreditStart, foundersKreditEnd, setDebitKreditInnerData, setMainData)}
                         <tr>
                             <td>Жами</td>
                             <td className={styles.totalTd}>{numberValue(allKreditStart)}</td>

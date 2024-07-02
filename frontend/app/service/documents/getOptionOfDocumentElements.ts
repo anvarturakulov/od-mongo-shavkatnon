@@ -79,6 +79,10 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         `${DocumentType.ZpCalculate}`,
     ]
 
+    const documentsTakeProfit = [
+        `${DocumentType.TakeProfit}`,
+    ]
+
     const ServicesFromPartners = [
         `${DocumentType.ServicesFromPartners}`,
     ]
@@ -345,6 +349,24 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticType = TypeReference.WORKERS
         analiticLabel = 'Ходим'
         analiticIsVisible = true;
+
+        priceIsVisible = false;
+        countIsVisible = false;
+        balansIsVisible = false;
+    }
+
+    if (documentsTakeProfit.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = '------'
+        senderIsVisible = false
+
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Фойдани олувчи таъсисчи'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.WORKERS
+        analiticLabel = '-----'
+        analiticIsVisible = false;
 
         priceIsVisible = false;
         countIsVisible = false;

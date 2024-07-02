@@ -5,6 +5,11 @@ export const isAdmins = (user: User | undefined): boolean => {
   return false
 }
 
+export const isGuest = (user: User | undefined): boolean => {
+  if (user && user.role == UserRoles.GUEST ) return true
+  return false
+}
+
 export const isGlBuxs = (user: User | undefined): boolean => {
   if (user && user.role == UserRoles.GLBUX) return true
   return false
