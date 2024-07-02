@@ -42,10 +42,10 @@ export const foyda = (
     data.length > 0 &&
     data
     .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
-    .filter((item: any) => {
-        if ( item.filial ) return true
-        return false;
-    })
+    // .filter((item: any) => {
+    //     if ( item.filial ) return true
+    //     return false;
+    // })
     .forEach((item: ReferenceModel) => {
         let element = foydaItem(data, startDate, endDate, item._id, item.name, globalEntrys, docs, deliverys, zpUmumBulim, longeChargeUmumBulim, currentPaymentUmumBulim);
         if (Object.keys(element).length) {
