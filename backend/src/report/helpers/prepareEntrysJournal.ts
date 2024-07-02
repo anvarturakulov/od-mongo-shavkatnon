@@ -43,9 +43,19 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>, founders:Arr
         let newItemForResults = { ...prepareEntry(item, true, false, undefined, item.isCash, filteredFounders) }
         results.push(newItemForResults);
 
-        if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial || item.documentType == DocumentType.MoveCash) {
+        if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
           let newItemForResults = { ...prepareEntry(item, false, false, undefined, false, filteredFounders) }
           results.push(newItemForResults);
+        }
+
+        if (item.documentType == DocumentType.MoveCash) {
+
+          if ( filteredFounders && filteredFounders.length && 
+            filteredFounders.filter((elem:FounderObject) => elem.id == item.receiverId.toString()).length > 0
+            ) {
+              let newItemForResults = { ...prepareEntry(item, false, false, undefined, false, filteredFounders) }
+              results.push(newItemForResults);
+            }
         }
       }
       
