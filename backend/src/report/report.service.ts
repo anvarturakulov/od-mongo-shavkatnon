@@ -85,7 +85,7 @@ export class ReportService {
   async getAnalitic(queryAnalitic: QueryAnalitic) {
     
     let { startDate, endDate, schet, firstSubcontoId, secondSubcontoId, dk } = queryAnalitic;
-    let entrys = await this.documentService.prepareEntrys()
+    // let entrys = await this.documentService.prepareEntrys()
     let globalEntrys = [...this.documentService.globalEntrys]
 
     let result = 
