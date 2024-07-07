@@ -9,7 +9,7 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext()
 
     const {messageType, message, showMessageWindow} = mainData
-    const label = messageType == 'error' ? 'Хатолик' : 'Рахмат';
+    const label = messageType == 'error' ? 'Хатолик' : messageType == 'success' ? 'Рахмат': '';
 
     return (
         <>
