@@ -20,12 +20,12 @@ export const getAnalitic = (
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/analitic' + '?startDate=' + startDate + '&endDate=' + endDate + '&schet=' + schet
   + '&firstSubcontoId=' + firstSubcontoId + '&secondSubcontoId=' + secondSubcontoId + '&dk=' + dk
   ;
-  console.log(url)
+  showMessage('Кутиб туринг', 'warm', setMainData)
   axios.get(url, config)
     .then(function (response) {
       if (setMainData) {
         // setMainData('analitic', [...response.data]);
-        showMessage([...response.data], 'warm', setMainData)
+        showMessage([...response.data], 'success', setMainData)
       }
 
     })
