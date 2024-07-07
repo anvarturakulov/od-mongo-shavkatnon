@@ -44,7 +44,7 @@ export class ReportService {
       price: 0,
       balance: 0
     }
-    let entrys = await this.documentService.prepareEntrys()
+    // let entrys = await this.documentService.prepareEntrys()
 
     result.price = query(schet, TypeQuery.MPRICE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
     result.balance = query(schet, TypeQuery.BALANCE, 0, endDate, firstSubcontoId, secondSubcontoId, this.documentService.globalEntrys)
@@ -56,7 +56,7 @@ export class ReportService {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
     // это строка собирает все проводки в один массив
-    let entrys = await this.documentService.prepareEntrys()
+    // let entrys = await this.documentService.prepareEntrys()
     
     let {startDate, endDate, reportType} = queryInformation;
     
@@ -67,7 +67,7 @@ export class ReportService {
   async getMatOtchet(queryMatOtchet: QueryMatOtchet) {
     let data = await this.referenceService.getAllReferences();
     let { startDate, endDate, section } = queryMatOtchet;
-    let entrys = await this.documentService.prepareEntrys()
+    // let entrys = await this.documentService.prepareEntrys()
 
     let result = matOborot(data, startDate, endDate, section, this.documentService.globalEntrys)
     return result
@@ -76,7 +76,7 @@ export class ReportService {
   async getOborotka(queryOborotka: QueryOborotka) {
     let data = await this.referenceService.getAllReferences();
     let { startDate, endDate, schet } = queryOborotka;
-    let entrys = await this.documentService.prepareEntrys()
+    // let entrys = await this.documentService.prepareEntrys()
 
     let result = oborotkaAll(data, startDate, endDate, schet, this.documentService.globalEntrys)
     return result

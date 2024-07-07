@@ -7,9 +7,8 @@ import { DocumentType } from 'src/interfaces/document.interface';
 import { DOCUMENT_IS_PROVEDEN, DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { prepareEntrysJournal } from 'src/report/helpers/prepareEntrysJournal';
 import { EntryItem } from 'src/interfaces/report.interface';
-import { ReferenceModel } from 'src/interfaces/reference.interface';
 import { ReferenceService } from 'src/reference/reference.service';
-import { Reference, ReferenceDocument } from 'src/reference/models/referense.model';
+import { ReferenceDocument } from 'src/reference/models/referense.model';
 
 @Injectable()
 export class DocumentService {
@@ -22,12 +21,12 @@ export class DocumentService {
   public globalEntrys: Array<EntryItem> = []
   public deliverys: Array<ReferenceDocument>
   public founders: Array<ReferenceDocument>
-  public hasChanges: boolean = true
+  public startEntrysProcess: boolean = false
+  public processIsActive: boolean= false
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
     
     const newDocument = new this.documentModel(dto);
-    this.hasChanges = true
     let result = await newDocument.save()
     
     return result
@@ -63,9 +62,11 @@ export class DocumentService {
     }
 
     const state = document.deleted ? false : true
-    this.hasChanges = true
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
-    
+    if (!this.startEntrysProcess) {
+      this.startEntrysProcess = true
+      let entrys = await this.prepareEntrys()
+    }
     return result
     
   }
@@ -75,7 +76,6 @@ export class DocumentService {
     if (document.proveden) {
       throw new NotFoundException(DOCUMENT_IS_PROVEDEN);
     }
-    this.hasChanges = true
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
     return result
 
@@ -83,21 +83,24 @@ export class DocumentService {
 
   async updateById(id: string, dto: CreateDocumentDto) {
     let result = await this.documentModel.updateOne({ _id: id }, { $set: dto })
-    this.hasChanges = true
     return result
   }
 
   async prepareEntrys() {
-    let result = await this.getAllDocuments(true)
-    let founders = await this.referenceService.getFounders()
-    let deliverys = await this.referenceService.getDeliverys()
-    this.founders = [...founders]
-    this.deliverys = [...deliverys]
-    if (this.hasChanges) {
-      this.globalEntrys = [...prepareEntrysJournal(result, founders)];
-      this.hasChanges = false
+    const process = async () => {
+      if (!this.processIsActive) {
+        this.processIsActive = true
+        let result = await this.getAllDocuments(true)
+        let founders = await this.referenceService.getFounders()
+        let deliverys = await this.referenceService.getDeliverys()
+        this.founders = [...founders]
+        this.deliverys = [...deliverys]
+        this.globalEntrys = [...prepareEntrysJournal(result, founders)];
+        this.processIsActive = false
+      }
     }
     
+    setInterval(process, 3000)
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
