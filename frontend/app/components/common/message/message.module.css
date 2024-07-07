@@ -1,5 +1,5 @@
 .messageBox{
-    position: absolute;
+    position: fixed;
     transform: translateX(600px);
     right: 0;
     bottom: 10px;
@@ -19,6 +19,7 @@
    max-height:300px;
    overflow-y: auto;
 }
+
 .showBox{
     transform: translateX(-10px);
     opacity: 100%;
@@ -26,6 +27,10 @@
     grid-template-columns: auto auto;
     gap: 5px;
     color: #000;
+}
+
+.success{
+    background-color: rgb(130, 229, 130);
 }
 
 .success{

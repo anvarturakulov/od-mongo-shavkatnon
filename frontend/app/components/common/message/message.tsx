@@ -18,6 +18,7 @@ export const Message = ({className, ...props}: MessageProps): JSX.Element => {
                     className={cn(styles.messageBox, className, {
                      [styles.error]: messageType == 'error',
                      [styles.success]: messageType == 'success',
+                     [styles.warm]: messageType == 'warm',
                      [styles.showBox]: showMessageWindow,
                      })}
                      onClick={() => setMainData && setMainData('showMessageWindow', false)}

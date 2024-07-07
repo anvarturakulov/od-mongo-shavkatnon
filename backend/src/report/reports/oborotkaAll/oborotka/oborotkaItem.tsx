@@ -53,6 +53,7 @@ export const oborotkaItem = (
       if (subPDSUM || subPKSUM || subTDSUM || subTKSUM || subPDKOL || subPKKOL || subTDKOL || subTKKOL) {
         let subElement = {
           name: getName(data, secondSubcontoId),
+          sectionId: secondSubcontoId,
           subPDSUM,
           subPDKOL,
           subPKSUM,

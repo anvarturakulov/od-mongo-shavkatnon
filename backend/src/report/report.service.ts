@@ -5,7 +5,7 @@ import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
 import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
 import { query } from './helpers/querys/query';
-import { QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka, TypeQuery } from 'src/interfaces/report.interface';
+import { EntryItem, QueryAnalitic, QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka, TypeQuery } from 'src/interfaces/report.interface';
 import { ReferenceService } from 'src/reference/reference.service';
 import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
@@ -82,5 +82,24 @@ export class ReportService {
     return result
   }
 
+  async getAnalitic(queryAnalitic: QueryAnalitic) {
+    
+    let { startDate, endDate, schet, firstSubcontoId, secondSubcontoId, dk } = queryAnalitic;
+    let entrys = await this.documentService.prepareEntrys()
+    let globalEntrys = [...this.documentService.globalEntrys]
+
+    let result = 
+      globalEntrys
+      .filter((entry: EntryItem) => {
+        return (entry.date >= startDate && entry.date <= endDate)
+      })
+      .filter((entry: EntryItem) => {
+        if (dk == 'debet') {
+          return (entry.debet >= schet && entry.debetFirstSubcontoId == firstSubcontoId && entry.debetSecondSubcontoId == secondSubcontoId)
+        }
+        else return (entry.kredit >= schet && entry.kreditFirstSubcontoId == firstSubcontoId && entry.kreditSecondSubcontoId == secondSubcontoId)
+    })
+    return result
+  }
 
 }

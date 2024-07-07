@@ -4,7 +4,7 @@ import { ReportOptionsDto } from './dto/report.options.dto';
 import { REPORT_NOT_PREPARE } from './report.constants';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { Request } from 'express';
-import { QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka } from 'src/interfaces/report.interface';
+import { QueryAnalitic, QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka } from 'src/interfaces/report.interface';
 
 
 @Controller('report')
@@ -124,6 +124,28 @@ export class ReportController {
     }
 
     const report = await this.reportService.getOborotka(queryOborotka);
+
+    if (!report) {
+      throw new NotFoundException(REPORT_NOT_PREPARE);
+    }
+    return report;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Get('/analitic')
+  async getAnalitic(@Req() request: Request) {
+
+    const queryAnalitic: QueryAnalitic = {
+      startDate: +request.query?.startDate,
+      endDate: +request.query?.endDate,
+      schet: String(request.query.schet),
+      firstSubcontoId: String(request.query.firstSubcontoId),
+      secondSubcontoId: String(request.query.secondSubcontoId),
+      dk: String(request.query.dk)
+    }
+
+    const report = await this.reportService.getAnalitic(queryAnalitic);
 
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);

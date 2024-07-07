@@ -3,8 +3,12 @@ import { OborotkaItemProps } from './oborotkaItem.props';
 import styles from './oborotkaItem.module.css';
 import { numberValue } from '@/app/service/common/converters';
 import { totalByKey } from '@/app/components/inform/inform';
+import { getAnalitic } from '@/app/service/reports/getAnalitic';
+import { useAppContext } from '@/app/context/app.context';
 
 export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :JSX.Element => {
+    
+    const {mainData, setMainData} = useAppContext();
     let PDKOL = totalByKey('PDKOL', item?.items)
     let PKKOL = totalByKey('PKKOL', item?.items);
     let PDSUM = totalByKey('PDSUM', item?.items)
@@ -44,8 +48,16 @@ export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :J
 
                           <td>{numberValue(saldoStart>0 ? saldoStart : 0)}</td>
                           <td>{numberValue(saldoStart<=0 ?(-1)*saldoStart:0)}</td>
-                          <td>{numberValue(element?.subTDSUM)}</td>
-                          <td>{numberValue(element?.subTKSUM)}</td>
+                          <td 
+                            onDoubleClick={() => getAnalitic(setMainData, mainData, item?.sectionId, element?.sectionId, 'debet')}
+                            >
+                              {numberValue(element?.subTDSUM)}
+                          </td>
+                          <td
+                            onDoubleClick={() => getAnalitic(setMainData, mainData, item?.sectionId, element?.sectionId, 'kredit')}
+                            >
+                              {numberValue(element?.subTKSUM)}
+                          </td>
                           <td>{numberValue(saldoEnd > 0 ? saldoEnd : 0)}</td>
                           <td>{numberValue(saldoEnd <= 0 ? (-1)*saldoEnd: 0)}</td>
                         </tr>

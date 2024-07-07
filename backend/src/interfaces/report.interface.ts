@@ -93,3 +93,12 @@ export interface QueryOborotka {
     endDate: number,
     schet: string,
 }
+
+export interface QueryAnalitic {
+    startDate: number,
+    endDate: number,
+    schet: string,
+    firstSubcontoId: string,
+    secondSubcontoId: string,
+    dk: string,
+}
