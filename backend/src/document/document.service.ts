@@ -95,7 +95,7 @@ export class DocumentService {
     this.deliverys = [...deliverys]
     if (this.hasChanges) {
       this.globalEntrys = [...prepareEntrysJournal(result, founders)];
-      this.hasChanges = true
+      this.hasChanges = false
     }
     
   }
