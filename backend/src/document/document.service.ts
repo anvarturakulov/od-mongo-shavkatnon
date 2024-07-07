@@ -22,14 +22,13 @@ export class DocumentService {
   public globalEntrys: Array<EntryItem> = []
   public deliverys: Array<ReferenceDocument>
   public founders: Array<ReferenceDocument>
+  public hasChanges: boolean = true
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
     
     const newDocument = new this.documentModel(dto);
-    
-    // run service to preparing Entrys journal
+    this.hasChanges = true
     let result = await newDocument.save()
-    // let res = await this.prepareEntrys();
     
     return result
 
@@ -64,13 +63,11 @@ export class DocumentService {
     }
 
     const state = document.deleted ? false : true
+    this.hasChanges = true
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
     
-    // run service to preparing Entrys journal
-    // let res = this.prepareEntrys();
-    
     return result
-    // return this.globalEntrys
+    
   }
 
   async setProvodka(id: string) {
@@ -78,39 +75,29 @@ export class DocumentService {
     if (document.proveden) {
       throw new NotFoundException(DOCUMENT_IS_PROVEDEN);
     }
+    this.hasChanges = true
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { proveden: true } })
-    // run service to preparing Entrys journal
-    // this.prepareEntrys();
     return result
 
   }
 
   async updateById(id: string, dto: CreateDocumentDto) {
-    
     let result = await this.documentModel.updateOne({ _id: id }, { $set: dto })
-
-    // run service to preparing Entrys journal
-    // this.prepareEntrys();
+    this.hasChanges = true
     return result
- 
   }
 
   async prepareEntrys() {
-    // if (this.globalEntrys && this.globalEntrys?.length == 0) {
-      let result = await this.getAllDocuments(true)
-      let founders = await this.referenceService.getFounders()
-      let deliverys = await this.referenceService.getDeliverys()
-      this.founders = [...founders]
-      this.deliverys = [...deliverys]
+    let result = await this.getAllDocuments(true)
+    let founders = await this.referenceService.getFounders()
+    let deliverys = await this.referenceService.getDeliverys()
+    this.founders = [...founders]
+    this.deliverys = [...deliverys]
+    if (this.hasChanges) {
       this.globalEntrys = [...prepareEntrysJournal(result, founders)];
-    // } else {
-    //   let founders = await this.referenceService.getFounders()
-    //   let deliverys = await this.referenceService.getDeliverys()
-    //   this.founders = [...founders]
-    //   this.deliverys = [...deliverys]
-    //   console.log(this.globalEntrys[59])
-    //   this.globalEntrys = Array(500000).fill(this.globalEntrys[60]);
-    // }
+      this.hasChanges = true
+    }
+    
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
