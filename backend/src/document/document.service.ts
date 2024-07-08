@@ -100,7 +100,7 @@ export class DocumentService {
       }
     }
     
-    setInterval(process, 3000)
+    setInterval(process, 5000)
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
