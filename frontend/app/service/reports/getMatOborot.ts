@@ -28,6 +28,7 @@ export const getMatOborot = (
 
         setMainData('reportOption', { ...newReportOptions });
         setMainData('matOborot', [...response.data]);
+        setMainData('uploadingDashboard', false);
       }
 
     })

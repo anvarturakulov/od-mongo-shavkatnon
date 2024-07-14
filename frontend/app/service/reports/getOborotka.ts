@@ -27,6 +27,7 @@ export const getOborotka = (
 
         setMainData('reportOption', { ...newReportOptions });
         setMainData('oborotka', [...response.data]);
+        setMainData('uploadingDashboard', false);
       }
 
     })

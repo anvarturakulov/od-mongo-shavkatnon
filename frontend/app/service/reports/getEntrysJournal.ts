@@ -49,6 +49,7 @@ export const getEntrysJournal = (
           }
 
         setMainData('reportOption', { ...newReportOptions });
+        setMainData('uploadingDashboard', false);
       }
       
     })
