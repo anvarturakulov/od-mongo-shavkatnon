@@ -123,7 +123,10 @@ export const foydaItem = (
   
   const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services + addingCurrentPayment;
   const currentEarning = saleWithMove - currentCharges;
-  const koefCurrentEarningToOneProduct = 0;
+  let koefCurrentEarningToOneProduct = 0;
+  if (productionDocsCount>0) {
+    koefCurrentEarningToOneProduct = (zagatovka  + materials) / productionDocsCount
+  }
   const longPayment =  longeCharge;
   const realEarning = saleWithMove - currentCharges - longPayment - addingLongeCharge;
 
