@@ -18,7 +18,7 @@ export default function ReportWindow({ className, ...props }: ReportWindowProps)
 
             { startReport && <ReportTable/> }
             
-            { !startReport && uploadingDashboard && <OptionsBox/> }
+            { !startReport && uploadingDashboard && <LoadingIco/> }
             
         </>
     )
