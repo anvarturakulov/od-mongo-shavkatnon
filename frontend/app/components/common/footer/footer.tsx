@@ -20,7 +20,7 @@ export default function Footer({ windowFor ,className, count, total, docCount, .
 
             {
                 docCount!=undefined && docCount>0 &&
-                <div>{`Сумма: ${numberValue(docCount)}`}</div>
+                <div>{`Хужжат сони: ${numberValue(docCount)}`}</div>
 
             }
 

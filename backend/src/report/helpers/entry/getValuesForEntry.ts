@@ -84,11 +84,29 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: total,
     }
 
+    const saleTMZ4028 = {
+      debetFirstSubcontoId: senderId.toString(),
+      debetSecondSubcontoId: receiverId?.toString(),
+      kreditFirstSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: analiticId.toString(),
+      count: count,
+      summa: total,
+    }
+
     const salePaymentObj = {
       debetFirstSubcontoId: senderId.toString(),
       debetSecondSubcontoId: analiticId.toString(),
       kreditFirstSubcontoId: receiverId?.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
+      count: count,
+      summa: total,
+    }
+
+    const salePayment4050 = {
+      debetFirstSubcontoId: senderId.toString(),
+      debetSecondSubcontoId: analiticId.toString(),
+      kreditFirstSubcontoId: senderId.toString(),
+      kreditSecondSubcontoId: receiverId?.toString(),
       count: count,
       summa: total,
     }
@@ -326,13 +344,13 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
           return {
             debet: Schet.S40,
             kredit: Schet.S28,
-            ...saleTMZObj
+            ...saleTMZ4028
           };
         } else if (newEntry) {
           return {
             debet: Schet.S50,
             kredit: Schet.S40,
-            ...salePaymentObj
+            ...salePayment4050
           };
         }
 

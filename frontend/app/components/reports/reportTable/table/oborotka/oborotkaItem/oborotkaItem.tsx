@@ -9,6 +9,7 @@ import { useAppContext } from '@/app/context/app.context';
 export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :JSX.Element => {
     
     const {mainData, setMainData} = useAppContext();
+    
     let PDKOL = totalByKey('PDKOL', item?.items)
     let PKKOL = totalByKey('PKKOL', item?.items);
     let PDSUM = totalByKey('PDSUM', item?.items)
@@ -29,7 +30,9 @@ export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :J
             <td className={styles.totalTd}>{numberValue(saldoStart>0 ? saldoStart : 0)}</td>
             <td className={styles.totalTd}>{numberValue(saldoStart<=0 ?(-1)*saldoStart:0)}</td>
             <td className={styles.totalTd}>{numberValue(item?.TDSUM)}</td>
+            <td className={styles.totalTd}>{numberValue(item?.TDKOL)}</td>
             <td className={styles.totalTd}>{numberValue(item?.TKSUM)}</td>
+            <td className={styles.totalTd}>{numberValue(item?.TKKOL)}</td>
             <td className={styles.totalTd}>{numberValue(saldoEnd > 0 ? saldoEnd : 0)}</td>
             <td className={styles.totalTd}>{numberValue(saldoEnd <= 0 ? (-1)*saldoEnd: 0)}</td>
           </tr>
@@ -53,10 +56,20 @@ export const OborotkaItem = ({className, item, ...props }: OborotkaItemProps) :J
                             >
                               {numberValue(element?.subTDSUM)}
                           </td>
+                          <td 
+                            onDoubleClick={() => getAnalitic(setMainData, mainData, item?.sectionId, element?.sectionId, 'debet')}
+                            >
+                              {numberValue(element?.subTDKOL)}
+                          </td>
                           <td
                             onDoubleClick={() => getAnalitic(setMainData, mainData, item?.sectionId, element?.sectionId, 'kredit')}
                             >
                               {numberValue(element?.subTKSUM)}
+                          </td>
+                          <td
+                            onDoubleClick={() => getAnalitic(setMainData, mainData, item?.sectionId, element?.sectionId, 'kredit')}
+                            >
+                              {numberValue(element?.subTKKOL)}
                           </td>
                           <td>{numberValue(saldoEnd > 0 ? saldoEnd : 0)}</td>
                           <td>{numberValue(saldoEnd <= 0 ? (-1)*saldoEnd: 0)}</td>
