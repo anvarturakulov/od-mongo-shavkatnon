@@ -2,7 +2,7 @@ import { numberValue } from '@/app/service/common/converters'
 import styles from './footer.module.css'
 import { FooterProps } from './footer.props'
 
-export default function Footer({ windowFor ,className, count, total, ...props }: FooterProps): JSX.Element {
+export default function Footer({ windowFor ,className, count, total, docCount, ...props }: FooterProps): JSX.Element {
     if (windowFor == 'reference') return <></>
     return (
         <div className={styles.box}>
@@ -15,6 +15,12 @@ export default function Footer({ windowFor ,className, count, total, ...props }:
             {
                 total!=undefined && total>0 &&
                 <div>{`Сумма: ${numberValue(total)}`}</div>
+
+            }
+
+            {
+                docCount!=undefined && docCount>0 &&
+                <div>{`Сумма: ${numberValue(docCount)}`}</div>
 
             }
 

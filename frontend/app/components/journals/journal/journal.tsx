@@ -127,6 +127,8 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
 
     let count:number = 0;
     let total: number = 0;
+    let docCount: number = 0;
+
 
     return (
         <>
@@ -247,6 +249,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             .map((item:DocumentModel, key: number) => {
                                 total += !item.deleted ? item.total : 0;
                                 count += !item.deleted ? item.count : 0;
+                                docCount = !item.deleted ? 1 : 0;
                                 return (
                                 <>
                                     <tr 
@@ -288,7 +291,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                 </div>
             }
             <div className={styles.footer}>
-                {dashboardUsers && <Footer windowFor='document' total={total} count={count}/>} 
+                {dashboardUsers && <Footer windowFor='document' total={total} count={count} docCount={docCount}/>} 
             {
                 contentName == DocumentType.LeaveCash &&
                 <div className={styles.checkboxs}>
