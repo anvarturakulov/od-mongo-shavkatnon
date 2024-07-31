@@ -33,6 +33,7 @@ export const getEntrysJournal = (
         
         const { reportOption } = mainData;
         const newEntrys = [...response.data];
+        console.log('newEntrys.len -- '+newEntrys.length)
         
         // let newE = [...newEntrys.filter((item:any) => {
         //   return (item.debet == Schet.S67 || item.kredit == Schet.S67)
