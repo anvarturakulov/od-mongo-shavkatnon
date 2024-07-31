@@ -18,6 +18,10 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
     }, [oborotka])
     
     let datas = oborotka ? oborotka[0]?.values : []
+    if (oborotka) {
+        console.log('start Time Data from Backend - ', oborotka[0]?.startTime)
+        console.log('end Time Data from Backend - ', oborotka[0]?.endTime)
+    }
     return (
        <>
             <table className={styles.table}>
