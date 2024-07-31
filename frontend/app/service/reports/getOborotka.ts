@@ -14,7 +14,7 @@ export const getOborotka = (
   const config = {
     headers: { Authorization: `Bearer ${user?.access_token}` }
   };
-  
+  console.log('start axios --', Date.now())
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/oborotka' + '?startDate=' + startDate + '&endDate=' + endDate + '&schet=' + schet;
   console.log(url)
   axios.get(url, config)
@@ -24,10 +24,11 @@ export const getOborotka = (
           ...reportOption,
           startReport: true,
         }
-
+        console.log('start put data to frontend memory --', Date.now())
         setMainData('reportOption', { ...newReportOptions });
         setMainData('oborotka', [...response.data]);
         setMainData('uploadingDashboard', false);
+        console.log('end put data to frontend memory --', Date.now())
       }
 
     })

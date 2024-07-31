@@ -12,7 +12,9 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
     const { firstReferenceId } = reportOption
 
     useEffect(()=> {
-        // console.log(oborotka)
+        if (oborotka) {
+            console.log('oborotka comed - ', Date.now())
+        }
     }, [oborotka])
     
     let datas = oborotka ? oborotka[0]?.values : []
@@ -42,6 +44,7 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
                     })
                     .map((element: any, key: number) => {
                         // if (!element?.items.length) return <></>
+                        if (key == 0) console.log('show items - ', Date.now())
                         return <OborotkaItem 
                             key={key}
                             item={element}
