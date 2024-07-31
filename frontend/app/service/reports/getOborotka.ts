@@ -26,7 +26,7 @@ export const getOborotka = (
         }
         console.log('start put data to frontend memory --', Date.now())
         setMainData('reportOption', { ...newReportOptions });
-        setMainData('oborotka', [...response.data]);
+        setMainData('oborotka', response.data);
         setMainData('uploadingDashboard', false);
         console.log('end put data to frontend memory --', Date.now())
       }

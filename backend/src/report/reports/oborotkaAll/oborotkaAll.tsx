@@ -39,8 +39,8 @@ export const oborotkaAll = (
     let skladResult = oborotka(data, subcontosList, startDate, endDate, schet, globalEntrys)
     result.push(skladResult);
         
-
-    return result
-    return subcontosList
+    return {...skladResult}
+    // return result
+    // return subcontosList
     
 } 

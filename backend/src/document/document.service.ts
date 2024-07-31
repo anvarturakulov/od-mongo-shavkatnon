@@ -97,6 +97,7 @@ export class DocumentService {
         this.deliverys = [...deliverys]
         this.globalEntrys = [...prepareEntrysJournal(result, founders)];
         this.processIsActive = false
+        console.log(Date.now())
       }
     }
     

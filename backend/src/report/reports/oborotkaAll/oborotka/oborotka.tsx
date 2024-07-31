@@ -33,7 +33,9 @@ export const oborotka = (
     
     return {
         reportType: 'OBOROTKA',
-        values : [...result]
+        values : [...result],
+        startTime: 0,
+        endTime: 0,
     }
 } 
 

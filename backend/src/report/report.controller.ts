@@ -122,13 +122,13 @@ export class ReportController {
       endDate: +request.query?.endDate,
       schet: String(request.query.schet),
     }
-    const statrTime = Date.now()
+    const startTime = Date.now()
 
     const report = await this.reportService.getOborotka(queryOborotka);
 
     const endTime = Date.now()
-    report[0].startTime = statrTime
-    report[0].endTime = endTime
+    if (report) report.startTime = startTime
+    report.endTime = endTime
 
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);

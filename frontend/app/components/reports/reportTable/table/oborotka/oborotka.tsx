@@ -17,10 +17,10 @@ export const Oborotka = ({className, ...props }: OborotkaProps) :JSX.Element => 
         }
     }, [oborotka])
     
-    let datas = oborotka ? oborotka[0]?.values : []
+    let datas = oborotka ? oborotka?.values : []
     if (oborotka) {
-        console.log('start Time Data from Backend - ', oborotka[0]?.startTime)
-        console.log('end Time Data from Backend - ', oborotka[0]?.endTime)
+        console.log('start Time Data from Backend - ', oborotka?.startTime)
+        console.log('end Time Data from Backend - ', oborotka?.endTime)
     }
     return (
        <>
