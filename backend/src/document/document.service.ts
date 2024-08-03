@@ -110,7 +110,7 @@ export class DocumentService {
       }
     }
     
-    setInterval(process, 5000)
+    setInterval(process, 8000)
   }
 
   async backupProcess() {
