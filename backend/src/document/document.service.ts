@@ -145,7 +145,7 @@ export class DocumentService {
       }
     }
     // backup()
-    setInterval(backup, 600000)
+    setInterval(backup, 86400000)
   }
 
   async deleteDocumentByDate(dateStart: number, dateEnd: number): Promise<Document[]> {
