@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, now } from 'mongoose';
+import { Model } from 'mongoose';
 import { DocDocument, Document } from '../document//models/document.model';
 import { DocumentService } from 'src/document/document.service';
-import { prepareEntrysJournal } from './helpers/prepareEntrysJournal';
 import { query } from './helpers/querys/query';
 import { EntryItem, QueryAnalitic, QueryInformation, QueryMatOtchet, QueryObject, QueryOborotka, TypeQuery } from 'src/interfaces/report.interface';
 import { ReferenceService } from 'src/reference/reference.service';
@@ -11,7 +10,6 @@ import { information } from './reports/information/information';
 import { HamirService } from 'src/hamir/hamir.service';
 import { matOborot } from './reports/matOborot/matOborot';
 import { oborotkaAll } from './reports/oborotkaAll/oborotkaAll';
-import { financial } from './reports/information/financial/financial';
 
 @Injectable()
 export class ReportService {

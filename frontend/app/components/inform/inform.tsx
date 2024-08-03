@@ -1,24 +1,9 @@
 'use client'
 import { InformationProps } from './inform.props';
 import { useAppContext } from '@/app/context/app.context';
-import useSWR from 'swr';
-import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { Section } from './section/section';
-import { Cash } from './cash/cash';
 import { RefreshPanel } from './refreshPanel/refreshPanel';
-import { Sklad } from './sklad/sklad';
-import { Production } from './production/production';
-import { Zp } from './zp/zp';
-import { UserRoles } from '@/app/interfaces/general.interface';
-import { Taking } from './taking/taking';
-import { Foyda } from './foyda/foyda';
-import { Norma } from './norma/norma';
 import { useEffect } from 'react';
-import { Material } from './material/material';
-import { Financial } from './financial/financial';
-import { Giving } from './giving/giving';
 import { getReportByType } from './helper';
-import { isAdmins } from '@/app/service/common/users';
 import LoadingIco from './loading.svg';
 
 export const totalByKey = (key:string, data:any[]) => {

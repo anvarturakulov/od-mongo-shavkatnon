@@ -1,4 +1,3 @@
-
 import { ReferenceModel, TypeReference, TypeTMZ } from 'src/interfaces/reference.interface';
 import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { queryForOborotka } from './queryForOborotka';

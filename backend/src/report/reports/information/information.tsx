@@ -5,7 +5,6 @@ import { cash } from './cash/cash';
 import { taking } from './taking/taking';
 import { section } from './section/section';
 import { sklad } from './sklad/sklad';
-
 import { foyda } from './foyda/foyda';
 import { norma } from './norma/norma';
 import { Document } from 'src/document/models/document.model';

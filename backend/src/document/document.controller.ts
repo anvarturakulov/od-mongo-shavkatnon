@@ -69,8 +69,6 @@ export class DocumentController {
     return this.documentService.getByTypeForDateDocument(documentType, dateStart, dateEnd)
   }
 
-  
-
   @UseGuards(JwtAuthGuard)
   @Get('getAll')
   async getAllDocuments() {
