@@ -28,7 +28,8 @@ export const cash = (
     
     return {
         reportType: 'CASH',
-        reportDateToBackup: endDate,
+        reportStartDateToBackup: startDate,
+        reportEndDateToBackup: endDate,
         values : [...result]
     }
 } 

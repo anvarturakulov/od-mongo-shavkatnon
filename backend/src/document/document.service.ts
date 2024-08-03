@@ -118,7 +118,7 @@ export class DocumentService {
       if (!this.backupProcessIsActive) {
         this.backupProcessIsActive = true
         
-        const startDate = Date.now()-1
+        const startDate = Date.now()-86400*1000
         const endDate =  Date.now()
         const reportType =  'All'
 
