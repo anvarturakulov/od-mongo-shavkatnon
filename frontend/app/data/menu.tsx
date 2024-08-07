@@ -176,7 +176,7 @@ export const MenuData:Array<MenuItem> = [
                 title: ReportType.Personal, description:'Ходимлар иш хакиси буйича хисобот',
                 type: 'report', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST, UserRoles.ZAMGLBUX]
             },
         ]
     },
