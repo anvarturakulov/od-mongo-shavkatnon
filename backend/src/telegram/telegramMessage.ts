@@ -170,3 +170,12 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
   }
 
 }
+
+export const messageProcessing = () => {
+  const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
+  bot.on('text', async msg => {
+    console.log(msg);
+    bot.sendMessage(msg.chat.id, msg.text);
+
+  })
+}

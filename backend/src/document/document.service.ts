@@ -12,6 +12,7 @@ import { ReferenceDocument } from 'src/reference/models/referense.model';
 import { ReportService } from 'src/report/report.service';
 import { information } from 'src/report/reports/information/information';
 import { writeFileSync } from 'fs';
+import { messageProcessing } from 'src/telegram/telegramMessage';
 const TelegramBot = require('node-telegram-bot-api');
 
 @Injectable()
@@ -29,6 +30,7 @@ export class DocumentService {
   public processIsActive: boolean= false
   public backupProcessIsActive; boolean = false
   public startBackupProcess: boolean = false
+  public startBotListining: boolean = false
 
 
   async createDocument(dto: CreateDocumentDto): Promise<Document> {
@@ -75,6 +77,11 @@ export class DocumentService {
     if (document.deleted && !this.startBackupProcess) {
       this.startBackupProcess = true
       let backup = await this.backupProcess()
+    }
+
+    if (!this.startBotListining) {
+      this.startBackupProcess = true
+
     }
 
     return result
@@ -152,4 +159,9 @@ export class DocumentService {
     this.documentModel.deleteMany({ date: { $gte: dateStart, $lte: dateEnd } }).exec()
     return null
   }
+
+  async botListining() {
+    messageProcessing()
+  }
+
 }

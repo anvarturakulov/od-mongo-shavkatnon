@@ -6,7 +6,6 @@ import { DocumentType } from 'src/interfaces/document.interface';
 import { IdValidationPipe } from 'src/pipes/ad-validation.pipe';
 import { DOCUMENT_NOT_FOUND_ERROR } from './document.constants';
 import { AuthService } from 'src/auth/auth.service';
-import { ReportService } from 'src/report/report.service';
 import { ReferenceService } from 'src/reference/reference.service';
 import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
 import { Request } from 'express';
