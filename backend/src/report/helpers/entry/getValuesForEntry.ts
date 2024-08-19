@@ -140,7 +140,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
 
     let leaveCashObj6050 = {
       debetFirstSubcontoId: analiticId.toString(),
-      debetSecondSubcontoId: senderId.toString(),
+      debetSecondSubcontoId: receiverId.toString(),
       kreditFirstSubcontoId: senderId.toString(),
       kreditSecondSubcontoId: analiticId.toString(),
       count: 0,
