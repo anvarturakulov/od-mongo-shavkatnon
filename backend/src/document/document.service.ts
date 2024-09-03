@@ -81,7 +81,7 @@ export class DocumentService {
 
     if (!this.startBotListining) {
       this.startBackupProcess = true
-
+      this.botListining()
     }
 
     return result
