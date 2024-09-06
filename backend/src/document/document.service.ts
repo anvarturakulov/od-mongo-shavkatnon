@@ -214,7 +214,7 @@ export class DocumentService {
       const now:number = Date.now()
 
       const queryWorker: QueryWorker = {
-        startDate: days ? days * 86400*1000 + 1: now, 
+        startDate: days ? now- (days * 86400*1000 + 1): now, 
         endDate: now, 
         workerId: `${worker[0]._id}`,
         name: worker ? worker[0].name: '',
