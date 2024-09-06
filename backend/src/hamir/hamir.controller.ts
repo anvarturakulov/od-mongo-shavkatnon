@@ -10,6 +10,7 @@ import { ReferencesForTelegramMessage, sendMessageToChanel } from 'src/telegram/
 import { ReferenceService } from 'src/reference/reference.service';
 import { AuthService } from 'src/auth/auth.service';
 import { Request } from 'express';
+import TelegramBot from 'node-telegram-bot-api';
 
 @Controller('hamir')
 export class HamirController {
@@ -21,28 +22,28 @@ export class HamirController {
 
   ) { }
 
-  private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, messageInDeleting?: string) => {
-    const user = await this.userService.findUserByName(dto.user);
+  // private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, bot: TelegramBot, messageInDeleting?: string, ) => {
+  //   const user = await this.userService.findUserByName(dto.user);
 
-    let sender, receiver, analitic, firstWorker, secondWorker, thirdWorker
-    if (dto.senderId) sender = await this.referenceService.findById(dto.senderId);
-    if (dto.receiverId) receiver = await this.referenceService.findById(dto.receiverId);
-    if (dto.analiticId) analitic = await this.referenceService.findById(dto.analiticId);
-    if (dto.firstWorkerId) firstWorker = await this.referenceService.findById(dto.firstWorkerId);
-    if (dto.secondWorkerId) secondWorker = await this.referenceService.findById(dto.secondWorkerId);
-    if (dto.thirdWorkerId) thirdWorker = await this.referenceService.findById(dto.thirdWorkerId);
+  //   let sender, receiver, analitic, firstWorker, secondWorker, thirdWorker
+  //   if (dto.senderId) sender = await this.referenceService.findById(dto.senderId);
+  //   if (dto.receiverId) receiver = await this.referenceService.findById(dto.receiverId);
+  //   if (dto.analiticId) analitic = await this.referenceService.findById(dto.analiticId);
+  //   if (dto.firstWorkerId) firstWorker = await this.referenceService.findById(dto.firstWorkerId);
+  //   if (dto.secondWorkerId) secondWorker = await this.referenceService.findById(dto.secondWorkerId);
+  //   if (dto.thirdWorkerId) thirdWorker = await this.referenceService.findById(dto.thirdWorkerId);
 
-    // console.log(firstWorker, secondWorker, thirdWorker)
-    let references: ReferencesForTelegramMessage = {
-      sender,
-      receiver,
-      analitic,
-      firstWorker,
-      secondWorker,
-      thirdWorker,
-    }
-    sendMessageToChanel(dto, user, references, newDocument, messageInDeleting)
-  }
+  //   // console.log(firstWorker, secondWorker, thirdWorker)
+  //   let references: ReferencesForTelegramMessage = {
+  //     sender,
+  //     receiver,
+  //     analitic,
+  //     firstWorker,
+  //     secondWorker,
+  //     thirdWorker,
+  //   }
+  //   sendMessageToChanel(dto, user, references, newDocument, messageInDeleting, bot)
+  // }
 
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -92,7 +93,7 @@ export class HamirController {
 
     let newDoc = this.documentService.createDocument(dto);
     if ((await newDoc).user && (await newDoc).proveden) {
-      this.sendMessage(dto, true)
+      // this.sendMessage(dto, true, this.documentService.bot)
     }
 
     return hamirForProvodka;

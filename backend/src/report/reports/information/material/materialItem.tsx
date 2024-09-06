@@ -1,7 +1,5 @@
 
-import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
 import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
-import { query } from 'src/report/helpers/querys/query';
 import { queryKor } from 'src/report/helpers/querys/queryKor';
 
 export const materialItem = ( 

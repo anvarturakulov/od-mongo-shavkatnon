@@ -9,6 +9,9 @@ import { AuthService } from 'src/auth/auth.service';
 import { ReferenceService } from 'src/reference/reference.service';
 import { ReferencesForTelegramMessage, sendMessageToChanel } from '../telegram/telegramMessage';
 import { Request } from 'express';
+// import TelegramBot from 'node-telegram-bot-api';
+import * as TelegramBot from 'node-telegram-bot-api';
+
 
 @Controller('document')
 export class DocumentController {
@@ -16,10 +19,13 @@ export class DocumentController {
     private readonly documentService: DocumentService,
     private readonly userService: AuthService,
     private readonly referenceService: ReferenceService,
+    // private readonly bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true })
   ) { }
-
-
-  private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, messageInDeleting?: string) => {
+  public bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true })
+  
+  
+  private sendMessage = async (dto: CreateDocumentDto, newDocument: boolean, messageInDeleting?: string,) => {
+    
     const user = await this.userService.findUserByName(dto.user);
 
     let sender, receiver, analitic, firstWorker, secondWorker, thirdWorker
@@ -38,15 +44,17 @@ export class DocumentController {
       secondWorker,
       thirdWorker,
     }
-    sendMessageToChanel(dto, user, references, newDocument, messageInDeleting)
+    sendMessageToChanel(dto, user, references, newDocument, messageInDeleting, this.bot)
   }
 
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
+    // const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
     let newDoc = this.documentService.createDocument(dto);
     if ((await newDoc).user && (await newDoc).proveden) {
+      // this.bot = bot
       this.sendMessage(dto, true)
     }
   };
@@ -86,7 +94,7 @@ export class DocumentController {
   @UseGuards(JwtAuthGuard)
   @Delete('markToDelete/:id')
   async delete(@Param('id', IdValidationPipe) id: string) {
-    const markedDoc = await this.documentService.markToDelete(id);
+    const markedDoc = await this.documentService.markToDelete(id, this.bot);
 
     if (!markedDoc) {
       throw new HttpException(DOCUMENT_NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);

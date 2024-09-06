@@ -102,3 +102,10 @@ export interface QueryAnalitic {
     secondSubcontoId: string,
     dk: string,
 }
+
+export interface QueryWorker {
+    startDate: number,
+    endDate: number,
+    workerId: string,
+    name: string
+}

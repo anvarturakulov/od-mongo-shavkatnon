@@ -2,10 +2,14 @@ import { CreateDocumentDto } from '../document/dto/document.create.dto';
 import { User } from '../auth/models/user.model';
 import { UserRoles } from '../auth/dto/auth.dto';
 import { getDescriptionDocument } from '../data/menu';
-import { Reference } from 'src/reference/models/referense.model';
+import { Reference, ReferenceDocument } from 'src/reference/models/referense.model';
 import { DocumentType } from 'src/interfaces/document.interface';
+import TelegramBot from 'node-telegram-bot-api';
+import { QueryWorker } from 'src/interfaces/report.interface';
+import { ReferenceService } from 'src/reference/reference.service';
+import { ReportService } from 'src/report/report.service';
 
-const TelegramBot = require('node-telegram-bot-api');
+// const TelegramBot = require('node-telegram-bot-api');
 
 enum TelegramChanelsIds {
   Production = '-1002006894052',
@@ -126,8 +130,8 @@ const prepareCheckForZP = (body: CreateDocumentDto, references: ReferencesForTel
   )
 }
 
-export const sendMessageToChanel = (body: CreateDocumentDto, user: User, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string) => {
-  const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
+export const sendMessageToChanel = (body: CreateDocumentDto, user: User, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string, bot: TelegramBot) => {
+  
   let firstChadId = ''
 
   if (!user) return
@@ -165,17 +169,27 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
         bot.sendMessage(references.analitic.telegramId, prepareCheckForZP(body, references, newDocument, messageInDeleting));
       }
     } catch {
-
     }
   }
-
 }
 
-export const messageProcessing = () => {
-  const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
-  bot.on('text', async msg => {
-    console.log(msg);
-    bot.sendMessage(msg.from.id, msg.text);
 
-  })
-}
+export const listiningBot = async(bot: TelegramBot, referenceService: ReferenceService, reportService: ReportService) => {
+  // bot.on('text', async msg => {
+  //   console.log(msg);
+  //   bot.sendMessage(msg.from.id, msg.text);
+  //   const worker:Array<ReferenceDocument> = await referenceService.getWorker(`${msg.from.id}`);
+  //   const now:number = Date.now()
+  //   const queryWorker: QueryWorker = {
+  //     startDate: now, 
+  //     endDate: now, 
+  //     workerId: worker.length>0 ? `${worker[0]._id}`: ''
+  //   }
+  //   const report = await reportService.getWorkerInformation(queryWorker);
+    
+  //   report.result.forEach(element => {
+  //     bot.sendMessage(msg.from.id, `Сизга ${element.date} санада:  ${element.summa} сум ${element.type}`);  
+  //   });
+  //   bot.sendMessage(msg.from.id, `Бугунги кунга сиз ${report.amount} сум ${report.amount>0? 'карзингиз бор': 'пулингиз бор'}`);
+  // })
+} 
