@@ -117,7 +117,7 @@ export class DocumentService {
       }
     }
     
-    setInterval(process, 300000)
+    setInterval(process, 8000)
   }
 
   async backupProcess(bot: TelegramBot) {
