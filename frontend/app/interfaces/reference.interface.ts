@@ -13,9 +13,9 @@ export enum TypePartners {
 }
 
 export enum TypeTMZ {
-    MATERIAL = 'MATERIAL',
     PRODUCT = 'PRODUCT',
-    HALFSTUFF = 'HALFSTUFF'
+    HALFSTUFF = 'HALFSTUFF',
+    MATERIAL = 'MATERIAL',
 }
 
 export interface ReferenceModel {

@@ -1,4 +1,4 @@
-import { DocumentType } from "../interfaces/document.interface";
+import { DocumentType } from '../interfaces/document.interface';
 
 export const MenuData = [
     { title: DocumentType.ComeMaterial, description:'Хом ашё кирими'},

@@ -13,6 +13,7 @@ export const getReferenceById = (
     const uri = process.env.NEXT_PUBLIC_DOMAIN + '/api/reference/' + id;
     axios.get(uri, config)
       .then(function (response) {
+        console.log(response.data)
         setMainData && setMainData('currentReference', response.data);
         setMainData && setMainData('showReferenceWindow', true);
       })

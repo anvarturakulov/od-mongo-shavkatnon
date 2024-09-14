@@ -26,6 +26,7 @@ export const  Select = (list: Array<DataForSelect>, body: ReferenceModel,label: 
               <>
                 <option
                   value={elem.name}
+                  defaultValue={elem.name}
                   selected = { elem.name == currentValue ? true : false}
                   // selected={false}
                 >

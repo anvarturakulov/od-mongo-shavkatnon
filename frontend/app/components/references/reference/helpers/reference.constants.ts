@@ -8,8 +8,8 @@ export const typePartnersList = [
 
 export const typeTMZList = [
   { name: '', title: 'ТМБ турини танланг' },
-  { name: TypeTMZ.MATERIAL, title: 'Материал' },
   { name: TypeTMZ.PRODUCT, title: 'Тайёр махсулот' },
+  { name: TypeTMZ.MATERIAL, title: 'Материал*' },
   { name: TypeTMZ.HALFSTUFF, title: 'Ярим тайёр махсулот' }
 ]
 

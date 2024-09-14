@@ -47,7 +47,7 @@ export default function MenuItems({menuData, className, ...props}:MenuItemsProps
             setMainData('showDocumentWindow', false);
             setMainData('isNewDocument', false);
             setMainData('clearControlElements', true);
-
+            console.log('Bosildi'+contentType+contentName)
             if (contentType == 'document') {
                 setNewDocumentParams(setMainData, mainData)
             }

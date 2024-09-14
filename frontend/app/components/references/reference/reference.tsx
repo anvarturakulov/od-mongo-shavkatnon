@@ -8,7 +8,7 @@ import { ReferenceModel, TypePartners, TypeReference, TypeTMZ } from '../../../i
 import { typePartnersList, typeTMZList } from './helpers/reference.constants';
 import { useAppContext } from '@/app/context/app.context';
 import { Select } from './helpers/reference.components';
-import { cancelSubmit, onSubmit } from './helpers/reference.functions';
+import { cancelSubmit, defineTypePartners, defineTypeTMZ, onSubmit } from './helpers/reference.functions';
 import { getTypeReference } from '@/app/service/references/getTypeReference';
 import { getTypeReferenceByTitle } from '@/app/service/references/getTypeReferenceByTitle';
 import { UserRoles } from '@/app/interfaces/general.interface';
@@ -18,10 +18,9 @@ import { SelectForReferences } from './selectForReferences/selectForReferences';
 export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
-    
     const { contentName } = mainData;
     const typeReference = getTypeReference( contentName );
-    
+
     const defaultBody: ReferenceModel = {
         name: '',
         typeReference,
@@ -44,19 +43,25 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         director: false,
         shavkat: false,
         maxsud: false,
-
     }
 
     const [body, setBody] = useState<ReferenceModel>(defaultBody) 
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>) => {
         let target = e.currentTarget
+        let value = target.value
+        let id = target.id
+        if (target.id == 'typeTMZ') value = defineTypeTMZ(value)
+        if (target.id == 'typePartners') value = defineTypePartners(value)
+        
+        console.log(`${body.typeTMZ} ${body.typePartners}`)
         setBody((state:ReferenceModel) => {
             return {
                 ...state,
-                [target.id]: target.value
+                [id]: value
             }
         })
+        console.log(id)
     }
 
     const setCheckbox = (checked: boolean, id: string) => {
@@ -81,11 +86,16 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
         setBody(defaultBody);
     }, [mainData.clearControlElements])
 
+    useEffect(()=> {
+        // setBody(defaultBody);
+    },[] )
+
     useEffect(() => {
         const {currentReference} = mainData
-        
         if (currentReference != undefined) {
             const { typePartners, typeTMZ, unit, comment } = currentReference
+            console.log('currentRef')
+            console.log(currentReference)
             let newBody: ReferenceModel = {
                 ...currentReference,
                 typeReference: getTypeReferenceByTitle(currentReference.typeReference),
@@ -203,7 +213,7 @@ export const Reference = ({ className, ...props }: ReferenceProps) :JSX.Element 
 
             {
                 ( mainData.user?.role == UserRoles.ADMIN || mainData.user?.role == UserRoles.HEADCOMPANY )  && 
-                (body.typeReference == TypeReference.TMZ) && (body.typeTMZ = TypeTMZ.MATERIAL) &&
+                (body.typeReference == TypeReference.TMZ) && (body.typeTMZ == TypeTMZ.MATERIAL) &&
                 <>
                 <div>Норма</div>
                 <input value={body.norma} type="number" id='norma' className={styles.input} onChange={(e)=>changeElements(e)}/>
