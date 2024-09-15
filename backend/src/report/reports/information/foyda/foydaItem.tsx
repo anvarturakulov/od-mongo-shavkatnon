@@ -103,6 +103,7 @@ export const foydaItem = (
   //                           + (endCount-startCount)*3500 
   //                           - (moveIncomeCount-countIncomeFromDelivery)*3500
   //                           + (moveOutCount - countOutToDelivery )*3500;
+  
   let d = countDeleviry > 0 ? countDeleviry : 0
   let i = (moveIncomeCount-countIncomeFromDelivery) > 0 ? (moveIncomeCount-countIncomeFromDelivery) : 0
   let o = (moveOutCount - countOutToDelivery ) > 0 ? (moveOutCount - countOutToDelivery ) : 0

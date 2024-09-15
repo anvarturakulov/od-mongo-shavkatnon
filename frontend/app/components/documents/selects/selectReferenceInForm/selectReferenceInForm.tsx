@@ -46,6 +46,9 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
 
                 if (user?.role == UserRoles.DELIVERY) {
                     let price = getPropertySubconto(data, id).firstPrice
+                    if (user?.name == 'Жонибек' || user?.name == 'Мусо') {
+                        price = getPropertySubconto(data, id).secondPrice
+                    }
                     if (price) {
                         currentItem.price = price
                         currentItem.total = price * currentItem.count
