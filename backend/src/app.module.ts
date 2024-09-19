@@ -12,10 +12,10 @@ import { HamirModule } from './hamir/hamir.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    // MongooseModule.forRoot('mongodb://127.0.0.1:27017/karandash?directConnection=true&serverSelectionTimeoutMS=2000'),
-    MongooseModule.forRoot(
-       'mongodb+srv://anvar:vqqaCNtEAjNUyUh5@cluster0.uoe1t.mongodb.net/',
-    ),
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/karandash?directConnection=true&serverSelectionTimeoutMS=2000'),
+    // MongooseModule.forRoot(
+    //    'mongodb+srv://anvar:vqqaCNtEAjNUyUh5@cluster0.uoe1t.mongodb.net/',
+    // ),
     AuthModule,
     DocumentModule,
     ReferenceModule,
