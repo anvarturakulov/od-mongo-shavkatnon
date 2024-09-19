@@ -132,7 +132,7 @@ export class DocumentService {
         let data = await this.referenceService.getAllReferences();
         let productions = await this.getAllDocuments(true);
 
-        let inform = information(data, startDate, endDate, reportType, this.globalEntrys, productions, this.deliverys)
+        let inform = information(data, startDate, endDate, reportType, '4000', this.globalEntrys, productions, this.deliverys)
 
         const JSONToFile = (obj, filename) => {
           writeFileSync(`${filename}.json`, JSON.stringify(obj, null, 2));

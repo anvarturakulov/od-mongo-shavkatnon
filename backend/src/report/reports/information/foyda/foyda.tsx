@@ -10,6 +10,7 @@ export const foyda = (
     data: any,
     startDate: number,
     endDate: number,
+    foydaPrice: string,
     globalEntrys: Array<EntryItem> | undefined,
     docs: Document[],
     deliverys: ReferenceDocument[] ) => {
@@ -47,7 +48,7 @@ export const foyda = (
         return false;
     })
     .forEach((item: ReferenceModel) => {
-        let element = foydaItem(data, startDate, endDate, item._id, item.name, globalEntrys, docs, deliverys, zpUmumBulim, longeChargeUmumBulim, currentPaymentUmumBulim);
+        let element = foydaItem(data, startDate, endDate, item._id, item.name, foydaPrice, globalEntrys, docs, deliverys, zpUmumBulim, longeChargeUmumBulim, currentPaymentUmumBulim);
         if (Object.keys(element).length) {
             result.push(element)
         }

@@ -20,6 +20,7 @@ export const information = (
     startDate: number,
     endDate: number,
     reportType: string,
+    foydaPrice: string,
     globalEntrys: Array<EntryItem> | undefined,
     docs: Document[],
     deliverys: ReferenceDocument[]
@@ -32,7 +33,7 @@ export const information = (
         result.push({'reportType': 'FINANCIAL', 'values': financialResult});
     }
     if (reportType == 'Foyda' || reportType == 'All') {
-        let foydaResult = foyda(data, startDate, endDate, globalEntrys, docs, deliverys)
+        let foydaResult = foyda(data, startDate, endDate, foydaPrice, globalEntrys, docs, deliverys)
         result.push(foydaResult);
     }
     if (reportType == 'Cash' || reportType == 'All') {

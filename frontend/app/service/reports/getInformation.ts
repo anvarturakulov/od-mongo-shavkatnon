@@ -6,6 +6,7 @@ import { UserRoles } from '@/app/interfaces/general.interface';
 export const getInformation = (
   setMainData: Function | undefined, 
   mainData: Maindata,
+  foydaPrice: string | null,
   endDate?: number,
   ) => {
   
@@ -20,7 +21,7 @@ export const getInformation = (
   //   reportType =  'All'
   // }
 
-  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+reportType;
+  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+reportType+'&foydaPrice='+foydaPrice;
   console.log('zapros junatildi '+Date.now())
   axios.get(url, config)
     .then(function (response) {

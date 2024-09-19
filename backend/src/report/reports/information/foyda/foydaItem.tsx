@@ -19,7 +19,8 @@ export const foydaItem = (
   startDate: number,
   endDate: number,
   currentSectionId: string, 
-  title: string, 
+  title: string,
+  foydaPrice: string,
   globalEntrys: Array<EntryItem> | undefined,
   docs: Document[],
   deliverys: ReferenceDocument[],
@@ -108,8 +109,11 @@ export const foydaItem = (
   let i = (moveIncomeCount-countIncomeFromDelivery) > 0 ? (moveIncomeCount-countIncomeFromDelivery) : 0
   let o = (moveOutCount - countOutToDelivery ) > 0 ? (moveOutCount - countOutToDelivery ) : 0
   
-  const saleWithMove = sale + d * 3500 - i*3500 + o * 3500;
+  let valueForSale = + foydaPrice
+  // const saleWithMove = sale + d * 3500 - i*3500 + o * 3500;
   
+  const saleWithMove = sale + (d - i + o) * valueForSale;
+
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const zp = queryKor(Schet.S20, Schet.S67, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
