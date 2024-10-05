@@ -21,10 +21,10 @@ export const FoydaItem = ({className, item, ...props }: FoydaItemProps) :JSX.Ele
               <td>{numberValue(item?.services)}</td>
               <td>{numberValue(item?.currentPayment)}</td>
               <td>{numberValue(item?.addingCurrentPayment)}</td>
-              <td>{numberValue(item?.koefCurrentEarningToOneProduct)}</td>
               <td>{numberValue(item?.longPayment)}</td>
               <td>{numberValue(item?.addingLongeCharge)}</td>
               <td>{numberValue(item?.realEarning)}</td>
+              <td>{numberValue(item?.koefCurrentEarningToOneProduct)}</td>
               <td>{numberValue(item?.currentEarning)}</td>
             </tr>
         </tbody>

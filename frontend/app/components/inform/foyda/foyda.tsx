@@ -34,11 +34,11 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td>Бошкарув иш хаки</td>
                         <td>Коммун ва бошка хараж.</td>
                         <td>Цех буйича кунлик пуллик хараж.</td>
-                        <td>Умумий кунлик хараж.</td>
-                        <td>Хом аше нормаси</td>
+                        <td>Умумдан келган кунлик хараж.</td>
                         <td>Цех буйича ойлик пуллик хараж</td>
-                        <td>Умумий ойлик пуллик хараж</td>
+                        <td>Умумдан келган ойлик пуллик хараж</td>
                         <td>Соф фойда</td>
+                        <td>Хом аше нормаси</td>
                         <td>1 та нонга нис. фойда</td>
                     </tr>
                 </thead>
@@ -67,11 +67,11 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td className={styles.totalTd}>{numberValue(totalByKey('services', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('currentPayment', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('addingCurrentPayment', datas))}</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('currentEarning', datas))}</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('koefCurrentEarningToOneProduct', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('longPayment', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('addingLongeCharge', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('realEarning', datas))}</td>
+                        <td className={styles.totalTd}>{numberValue(totalByKey('koefCurrentEarningToOneProduct', datas))}</td>
+                        <td className={styles.totalTd}></td>
                     </tr>
                 </thead>
             </table>
