@@ -20,6 +20,7 @@ const valueDK = (
     const valueEnd = PDSUM - PKSUM + TDSUM - TKSUM
 
     return type == 'start' ? valueStart : valueEnd
+    
 }
 
 export const debitorKreditorInners = (

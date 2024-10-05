@@ -134,6 +134,7 @@ export const foydaItem = (
   }
   const longPayment =  longeCharge;
   const realEarning = saleWithMove - currentCharges - longPayment - addingLongeCharge;
+  const currentEarningForOneElement = realEarning / (productionCount>0 ? productionCount : 1) 
 
   return (
     {
@@ -152,7 +153,7 @@ export const foydaItem = (
       services,
       addingCurrentPayment,
       currentPayment,
-      currentEarning,
+      currentEarning:currentEarningForOneElement,
       koefCurrentEarningToOneProduct,
       addingLongeCharge,
       longPayment,
