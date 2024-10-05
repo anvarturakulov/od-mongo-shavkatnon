@@ -70,7 +70,7 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td className={styles.totalTd}>{numberValue(totalByKey('longPayment', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('addingLongeCharge', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('realEarning', datas))}</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('koefCurrentEarningToOneProduct', datas))}</td>
+                        <td className={styles.totalTd}></td>
                         <td className={styles.totalTd}></td>
                     </tr>
                 </thead>
