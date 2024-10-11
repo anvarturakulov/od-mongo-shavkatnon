@@ -30,7 +30,7 @@ export const getInformation = (
       }
       if (setMainData && response.data?.user) {
         let activeUser = response.data.user
-        let message = `Хозир мен хисоботларни ${activeUser} учун тайёрлаяпман. Бироз кутиб туринг.`
+        let message = `Хозир мен ${activeUser} учун хисобот тайёрлаяпман. Бироз кутиб туринг.`
         setMainData && setMainData('uploadingDashboard', false)
         alert(message)
       }
