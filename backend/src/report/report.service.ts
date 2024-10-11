@@ -47,6 +47,7 @@ export class ReportService {
     let data = await this.referenceService.getAllReferences();
     let productions = await this.documentService.getAllDocuments(true);
     let {startDate, endDate, reportType, foydaPrice} = queryInformation;
+    let allEntrys = await this.documentService.prepareEntrys()
     let inform = information(data, startDate, endDate, reportType, foydaPrice, this.documentService.globalEntrys, productions, this.documentService.deliverys )
     return inform
   }
