@@ -11,8 +11,8 @@ import { QueryAnalitic, QueryInformation, QueryMatOtchet, QueryObject, QueryObor
 export class ReportController {
   constructor(
     private readonly reportService: ReportService,
-    private currentUserForInform: string,
   ) { }
+  currentUserForInform: string
   
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
