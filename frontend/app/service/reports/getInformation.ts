@@ -19,7 +19,8 @@ export const getInformation = (
   setMainData && setMainData('uploadingDashboard', true)
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd
-  +'&reportType='+reportType+'&foydaPrice='+foydaPrice+'?user='+user?.name;
+  +'&reportType='+reportType+'&foydaPrice='+foydaPrice+'&user='+user?.name;
+  console.log('name'+user?.name)
 
   axios.get(url, config)
     .then(function (response) {
@@ -27,9 +28,9 @@ export const getInformation = (
         setMainData('informData', [ ...response.data ]);
         setMainData && setMainData('uploadingDashboard', false)
       }
-      if (setMainData && !response.data?.user) {
+      if (setMainData && response.data?.user) {
         let activeUser = response.data.user
-        let message = `Хозир мен хисоботларни ${activeUser} учун тайёрлаяпман. Бироз кутиб туринг. Навбатга каранг`
+        let message = `Хозир мен хисоботларни ${activeUser} учун тайёрлаяпман. Бироз кутиб туринг.`
         setMainData && setMainData('uploadingDashboard', false)
         alert(message)
       }

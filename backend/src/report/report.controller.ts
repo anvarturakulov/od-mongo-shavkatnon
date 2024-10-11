@@ -12,7 +12,7 @@ export class ReportController {
   constructor(
     private readonly reportService: ReportService,
   ) { }
-  currentUserForInform: string
+  currentUserForInform: string = ''
   
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -79,7 +79,7 @@ export class ReportController {
 
     // выдаем активного пользователя кто хочет забрать отчет
     // и блокируем другого пользователя на получение отчета
-    if (this.currentUserForInform) {
+    if (this.currentUserForInform.length > 0) {
       return {
         user: this.currentUserForInform
       }
@@ -87,6 +87,7 @@ export class ReportController {
 
     // назначаем активного пользователья кто хочет забрать отчет
     this.currentUserForInform = `${request.query?.user}`
+    // console.log('currentUser---'+this.currentUserForInform)
     
     const report = await this.reportService.getInformation(queryInformation);
     
