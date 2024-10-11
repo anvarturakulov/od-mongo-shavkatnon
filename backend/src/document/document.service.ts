@@ -69,10 +69,10 @@ export class DocumentService {
 
     const state = document.deleted ? false : true
     let result = await this.documentModel.updateOne({ _id: id }, { $set: { deleted: state } })
-    // if (!this.startEntrysProcess) {
-    //   this.startEntrysProcess = true
-    //   let entrys = await this.prepareEntrys()
-    // }
+    if (!this.startEntrysProcess) {
+      this.startEntrysProcess = true
+      let entrys = await this.prepareEntrys()
+    }
 
     if (document.deleted && !this.startBackupProcess) {
       this.startBackupProcess = true
@@ -104,7 +104,7 @@ export class DocumentService {
   }
 
   async prepareEntrys() {
-    // const process = async () => {
+    const process = async () => {
       if (!this.processIsActive) {
         this.processIsActive = true
         let result = await this.getAllDocuments(true)
@@ -115,9 +115,9 @@ export class DocumentService {
         this.globalEntrys = [...prepareEntrysJournal(result, founders)];
         this.processIsActive = false
       }
-    // }
+    }
     
-    // setInterval(process, 8000)
+    setInterval(process, 12000)
   }
 
   async backupProcess(bot: TelegramBot) {
