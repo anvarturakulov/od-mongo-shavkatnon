@@ -9,7 +9,10 @@ import { QueryAnalitic, QueryInformation, QueryMatOtchet, QueryObject, QueryObor
 
 @Controller('report')
 export class ReportController {
-  constructor(private readonly reportService: ReportService) { }
+  constructor(
+    private readonly reportService: ReportService,
+    private currentUserForInform: string,
+  ) { }
   
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -22,19 +25,7 @@ export class ReportController {
     return report;
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @UsePipes(new ValidationPipe())
-  // @Get('/entrysForDate')
-  // async getForDate(@Req() request: Request) {
-  //   let dateStart = +request.query?.dateStart
-  //   let dateEnd = +request.query?.dateEnd
-    
-  //   const report = await this.reportService.getEntrysJournalForDate(dateStart, dateEnd );
-  //   if (!report) {
-  //     throw new NotFoundException(REPORT_NOT_PREPARE);
-  //   }
-  //   return report;
-  // }
+
 
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -74,7 +65,7 @@ export class ReportController {
   }
 
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Get('/information')
   async getInformation(@Req() request: Request) {
@@ -86,7 +77,21 @@ export class ReportController {
       foydaPrice: `${request.query?.foydaPrice}`,
     }
 
+    // выдаем активного пользователя кто хочет забрать отчет
+    // и блокируем другого пользователя на получение отчета
+    if (this.currentUserForInform) {
+      return {
+        user: this.currentUserForInform
+      }
+    }
+
+    // назначаем активного пользователья кто хочет забрать отчет
+    this.currentUserForInform = `${request.query?.user}`
+    
     const report = await this.reportService.getInformation(queryInformation);
+    
+    // так как сформировалься отчет, удаляем активного пользователя 
+    this.currentUserForInform = ''
 
     if (!report) {
       throw new NotFoundException(REPORT_NOT_PREPARE);

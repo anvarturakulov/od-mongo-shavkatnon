@@ -17,20 +17,21 @@ export const getInformation = (
   };
 
   setMainData && setMainData('uploadingDashboard', true)
-  // if (user?.role == UserRoles.HEADCOMPANY || user?.role == UserRoles.ADMIN ) {
-  //   reportType =  'All'
-  // }
 
-  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd+'&reportType='+reportType+'&foydaPrice='+foydaPrice;
-  console.log('zapros junatildi '+Date.now())
+  let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd
+  +'&reportType='+reportType+'&foydaPrice='+foydaPrice+'?user='+user?.name;
+
   axios.get(url, config)
     .then(function (response) {
-      if (setMainData) {
-        // console.log('Анвар ака')
-        // console.log(response)
-        console.log('date keldi '+Date.now())
+      if (setMainData && !response.data?.user) {
         setMainData('informData', [ ...response.data ]);
         setMainData && setMainData('uploadingDashboard', false)
+      }
+      if (setMainData && !response.data?.user) {
+        let activeUser = response.data.user
+        let message = `Хозир мен хисоботларни ${activeUser} учун тайёрлаяпман. Бироз кутиб туринг. Навбатга каранг`
+        setMainData && setMainData('uploadingDashboard', false)
+        alert(message)
       }
       
     })

@@ -51,10 +51,8 @@ export class DocumentController {
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateDocumentDto) {
-    // const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
     let newDoc = this.documentService.createDocument(dto);
     if ((await newDoc).user && (await newDoc).proveden) {
-      // this.bot = bot
       this.sendMessage(dto, true)
     }
   };
@@ -71,8 +69,6 @@ export class DocumentController {
     let documentType = request.query?.documentType
     let dateStart = +request.query?.dateStart
     let dateEnd = +request.query?.dateEnd
-    // console.log(documentType, dateStart, dateEnd )
-
     return this.documentService.getByTypeForDateDocument(documentType, dateStart, dateEnd)
   }
 
@@ -81,15 +77,6 @@ export class DocumentController {
   async getAllDocuments() {
     return this.documentService.getAllDocuments(false)
   }
-
-  // @UseGuards(JwtAuthGuard)
-  // @Delete('forDate')
-  // async deleteDocumentByDate(@Req() request: Request) {
-  //   let dateStart = 0
-  //   let dateEnd = 1715698800000
-
-  //   return this.documentService.deleteDocumentByDate(dateStart, dateEnd)
-  // }
 
   @UseGuards(JwtAuthGuard)
   @Delete('markToDelete/:id')
