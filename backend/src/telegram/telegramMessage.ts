@@ -39,13 +39,21 @@ export const numberValue = (price: number): string => {
   return newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 };
 
+const changeUserName = (userName:string): string => {
+  switch (userName) {
+    case 'Фарида': return 'Умар ака';
+    case 'Сухроб': return 'Лайло';
+    case 'Жонибек': return 'Шахзод';
+    default: return userName;
+  }
+}
 
 const prepareCheck = (body: CreateDocumentDto, references: ReferencesForTelegramMessage, newDocument: boolean, messageInDeleting: string) => {
 
   let title = newDocument ? 'ШАВКАТ НОН" - ЧЕК' : 'ЧЕК УЗГАРТИРИЛДИ'
   if (messageInDeleting && messageInDeleting.length > 0) title = messageInDeleting
   let dateDoc = new Date(body.date).toLocaleDateString('ru-RU')
-  let user = body.user ? `Ходим --- ${body.user}` : ''
+  let user = body.user ? `Ходим --- ${changeUserName(body.user)}` : ''
   let date = dateDoc ? `Сана --- ${dateDoc}` : ''
   let hodim = body.documentType == DocumentType.LeaveHalfstuff ? 'Хамирчи' : 'Ёпувчи';
   let doc = getDescriptionDocument(body.documentType) ? `Хужжат тури --- ${getDescriptionDocument(body.documentType)}` : '';

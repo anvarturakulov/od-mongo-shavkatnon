@@ -13,104 +13,104 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeMaterial, description:'Хом ашё кирими', 
                 type: 'document', active: false, 
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ComeHalfstuff, description:'Я.Т.М ишлаб чикариш', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.TANDIR, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.TANDIR, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',
                 type: 'document', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION,
-                 UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GLBUX]
+                 UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.SaleProd, description:'Махсулот сотуви',
                 type: 'document', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, 
-                 UserRoles.DELIVERY, UserRoles.SELLER]
+                 UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)',
                 type: 'document', active: false,
-                roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveCash, description:'Пул силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveCash, description:'Пул харажати',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ZpCalculate, description:'Иш хаки хисоби',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.ServicesFromPartners, description:'Корхоналар хизмати',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.TakeProfit, description:'Фойда таксимоти',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST]
             },
         ]
     },
