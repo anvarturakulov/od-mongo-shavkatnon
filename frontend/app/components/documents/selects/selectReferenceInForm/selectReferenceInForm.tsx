@@ -150,7 +150,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         } else if (user?.role == UserRoles.GLBUX) {
                             return (item.filial || item.sklad || item.delivery || item.buxgalter || item.director)
                         } else {
-                            return ((item.filial || item.sklad || item.delivery || item.buxgalter || item.maxsud || item.shavkat) && !item.director)
+                            return (item.filial || item.sklad || item.delivery || item.buxgalter || item.director)
                         }
                     }
 
