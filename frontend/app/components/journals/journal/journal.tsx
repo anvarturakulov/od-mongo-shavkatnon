@@ -274,7 +274,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                                         <td>{item.user}</td>
                                         <td className={styles.rowAction}>
                                             <IcoTrash className={styles.icoTrash}
-                                            onClick = {() => deleteItemDocument(item._id, item.date, token, setMainData, mainData)}
+                                            onClick = {() => deleteItemDocument(item._id, item.date, item.proveden, token, setMainData, mainData)}
                                             />
                                         </td>
                                         <td className={styles.rowAction}>

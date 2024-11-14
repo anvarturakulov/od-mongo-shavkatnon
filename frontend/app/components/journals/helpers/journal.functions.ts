@@ -30,18 +30,18 @@ export const getNameReference = (references: any, id: string | undefined | null)
   return 'Аникланмади'
 }
 
-export const deleteItemDocument = (id: string | undefined, docDate: number| undefined,token: string | undefined, setMainData: Function | undefined, mainData: Maindata) => {
+export const deleteItemDocument = (id: string | undefined, docDate: number| undefined, docProveden: boolean | undefined, token: string | undefined, setMainData: Function | undefined, mainData: Maindata) => {
   const { user, contentName } = mainData
   if (docDate == undefined) docDate = 0
-  console.log(dateToStr(Date.now()))
-  console.log(dateToStr(docDate))
 
-  if (user?.role == UserRoles.ADMIN || user?.role == UserRoles.HEADCOMPANY
-    || (
+  if (
+    user?.role == UserRoles.ADMIN || 
+    user?.role == UserRoles.HEADCOMPANY || 
+    (
       user?.role == UserRoles.GLBUX && 
-      (contentName == DocumentType.MoveCash || contentName == DocumentType.ZpCalculate) && 
-      ( dateToStr(Date.now()) == dateToStr(docDate))
-    )
+      ( contentName != DocumentType.LeaveCash || !docProveden ) && 
+      ( dateToStr(Date.now()) == dateToStr(docDate) )
+    )     
   ) {
     markToDeleteDocument(id, setMainData, token)
   } else {
