@@ -13,13 +13,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeMaterial, description:'Хом ашё кирими', 
                 type: 'document', active: false, 
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveMaterial, description:'Хом ашё силжиши', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveMaterial, description:'Хом ашё чикими',
@@ -37,13 +37,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeHalfstuff, description:'Я.Т.М ишлаб чикариш', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveHalfstuff, description:'Я.Т.М силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.LeaveHalfstuff, description:'Я.Т.М чикими',
@@ -55,7 +55,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.TANDIR, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.TANDIR, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.MoveProd, description:'Махсулот силжиши',
@@ -68,13 +68,13 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.LeaveProd, description:'Махсулот чикими (брак / истемол)', 
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, UserRoles.GUEST]
             },
             { 
                 title: DocumentType.SaleProd, description:'Махсулот сотуви',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, 
                  UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GUEST]
             },
             { 
