@@ -33,6 +33,11 @@ export const getNameReference = (references: any, id: string | undefined | null)
 export const deleteItemDocument = (id: string | undefined, docDate: number| undefined, docProveden: boolean | undefined, token: string | undefined, setMainData: Function | undefined, mainData: Maindata) => {
   const { user, contentName } = mainData
   if (docDate == undefined) docDate = 0
+  const oneDay = (24 * 60 * 60 * 1000)
+  const now = Date.now()
+  const remainTime = now % oneDay
+  const oneDayAgo = ( now - remainTime ) - oneDay - 1
+
 
   if (
     user?.role == UserRoles.ADMIN || 
@@ -40,7 +45,8 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
     (
       user?.role == UserRoles.GLBUX && 
       ( contentName != DocumentType.LeaveCash || !docProveden ) && 
-      ( dateToStr(Date.now()) == dateToStr(docDate) )
+      // ( dateToStr(Date.now()) == dateToStr(docDate) )
+      (oneDayAgo < docDate)
     )     
   ) {
     markToDeleteDocument(id, setMainData, token)
