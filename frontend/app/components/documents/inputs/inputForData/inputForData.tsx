@@ -3,7 +3,7 @@ import styles from './inputForData.module.css';
 import cn from 'classnames';
 import { useAppContext } from '@/app/context/app.context';
 import { Maindata } from '@/app/context/app.context.interfaces';
-import { adminAndHeadCompany } from '@/app/interfaces/general.interface';
+import { adminAndHeadCompany, UserRoles } from '@/app/interfaces/general.interface';
 
 export const InputForData = ({label, className, ...props }: InputForDataProps): JSX.Element => {
     
@@ -20,12 +20,23 @@ export const InputForData = ({label, className, ...props }: InputForDataProps): 
 
     const changeElements = (e: React.FormEvent<HTMLInputElement>, setMainData: Function | undefined, mainData: Maindata) => {
         let target = e.currentTarget;
+        const role = mainData.user?.role;
         let value = target.value;
         let {currentDocument} = mainData;
+        const valueDate = Date.parse(value)
+        
         let newObj = {
             ...currentDocument,
-            date: Date.parse(value),
+            date: valueDate,
         }
+
+        const oneDay = 24 * 60 * 60 * 1000
+        const now = Date.now()
+        const remainDate = now % oneDay
+        const startDateToday = now - remainDate
+        const yesterDay = startDateToday - oneDay
+
+        if (role == UserRoles.GLBUX && valueDate < yesterDay ) return
 
         if ( setMainData ) {
             setMainData('currentDocument', {...newObj})
