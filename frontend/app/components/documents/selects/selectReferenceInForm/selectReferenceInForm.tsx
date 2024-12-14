@@ -14,6 +14,7 @@ import { getPropertySubconto } from '@/app/service/reports/getPropertySubconto';
 import { definedTandirWorkers } from './helper';
 import { docsDependentToBalance, docsDependentToMiddlePrice } from '../../doc/helpers/documentTypes';
 
+
 export const SelectReferenceInForm = ({ label, typeReference, visibile=true , definedItemId ,currentItemId, type, className, ...props }: SelectReferenceInFormProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
     const { user, contentName, currentDocument } = mainData;
@@ -66,6 +67,13 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
     if (visibile == false) return <></>
 
     let typeDocumentForReference = getTypeDocumentForReference(contentName);
+    let flagDisabled = Boolean(definedItemId?.length)
+
+    if ( mainData.user?.role == UserRoles.GLBUX && 
+        currentDocument.documentType == DocumentType.ComeProduct
+    ) {
+        flagDisabled = false
+    }
  
     return (
         <div className={styles.box}>
@@ -74,7 +82,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                 className={cn(styles.select)}
                 {...props}
                 onChange={(e) => changeElements(e, setMainData, mainData, type)}
-                disabled = { Boolean(definedItemId?.length) }
+                disabled = { flagDisabled }
             >   
                 <>
                     <option 
