@@ -174,7 +174,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: total,
     }
 
-    let remaindDate = 1735671599;
+    let remaindDate = 1735671599000;
 
     switch (documentType) {
       case DocumentType.ComeCashFromPartners:
