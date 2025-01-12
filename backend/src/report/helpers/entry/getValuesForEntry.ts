@@ -174,6 +174,8 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       summa: total,
     }
 
+    let remaindDate = 1735671599;
+
     switch (documentType) {
       case DocumentType.ComeCashFromPartners:
         if (
@@ -187,7 +189,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         };
       
         return {
-          debet: item.date > 86400001 ? Schet.S50 : Schet.S00,
+          debet: item.date > remaindDate ? Schet.S50 : Schet.S00,
           kredit: Schet.S60,
           ...MoveCashObj
         };
@@ -210,13 +212,13 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.ComeMaterial:
         return {
           debet: Schet.S10,
-          kredit: item.date > 86400001 ? Schet.S60 : Schet.S00,
+          kredit: item.date > remaindDate ? Schet.S60 : Schet.S00,
           ...leaveComeTMZObj
         };
 
       case DocumentType.SaleHalfStuff:
         return {
-          debet: item.date > 86400001 ? Schet.S60 : Schet.S00,
+          debet: item.date > remaindDate ? Schet.S60 : Schet.S00,
           kredit: Schet.S21,
           ...leaveComeTMZObj
         };
@@ -224,14 +226,14 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.ComeProductImport:
         return {
           debet: Schet.S28,
-          kredit: item.date > 86400001 ? Schet.S60 : Schet.S00,
+          kredit: item.date > remaindDate ? Schet.S60 : Schet.S00,
           ...leaveComeTMZObj
         };
 
       case DocumentType.ComeProduct:
         return {
           debet: Schet.S28,
-          kredit: item.date > 86400001 ? Schet.S20 : Schet.S00,
+          kredit: item.date > remaindDate ? Schet.S20 : Schet.S00,
           ...leaveComeTMZObj,
         };
 
@@ -309,7 +311,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
               }
           else return {
             debet: Schet.S50,
-            kredit: item.date > 86400001 ? Schet.S50 : Schet.S00,
+            kredit: item.date > remaindDate ? Schet.S50 : Schet.S00,
             ...MoveCashObj,
             count: isCash ? -1 : 0,
             // debetSecondSubcontoId: isCash? 'cash': MoveCashObj.debetSecondSubcontoId
