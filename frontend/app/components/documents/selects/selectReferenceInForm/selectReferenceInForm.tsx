@@ -201,7 +201,11 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         }
 
                     if (type == 'sender' && ( contentName == DocumentType.ComeMaterial || contentName == DocumentType.ComeCashFromPartners || 
-                        contentName == DocumentType.SaleHalfStuff || contentName == DocumentType.ComeProductImport )) {
+                        contentName == DocumentType.ComeProductImport )) {
+                        return ( item.typePartners == TypePartners.SUPPLIERS ) 
+                    }
+
+                    if (type == 'receiver' && contentName == DocumentType.SaleHalfStuff ) {
                         return ( item.typePartners == TypePartners.SUPPLIERS ) 
                     }
 
