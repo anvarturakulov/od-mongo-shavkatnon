@@ -90,14 +90,6 @@ export default function Auth() {
                 Кириш
               </button>
             </div>
-            <Image
-            src={ImgBread}
-            layout='responsive'
-            width={448}
-            height={300}
-            alt='Рисунок главной страницы'
-            className={styles.image}
-            />
         </div>
         <Message/>
     </>
