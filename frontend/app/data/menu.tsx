@@ -51,6 +51,12 @@ export const MenuData:Array<MenuItem> = [
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
             },
+            {
+                title: DocumentType.SaleHalfStuff, description:'Я.Т.М сотуви',
+                type: 'document', active: false,
+                roles: 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+            },
             { 
                 title: DocumentType.ComeProduct, description:'Махсулот тайёрлаш',
                 type: 'document', active: false,
@@ -72,6 +78,13 @@ export const MenuData:Array<MenuItem> = [
             },
             { 
                 title: DocumentType.SaleProd, description:'Махсулот сотуви',
+                type: 'document', active: false,
+                roles: 
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, 
+                 UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.GUEST]
+            },
+            { 
+                title: DocumentType.ComeProductImport, description:'Махсулот сотиб олиш',
                 type: 'document', active: false,
                 roles: 
                 [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, 

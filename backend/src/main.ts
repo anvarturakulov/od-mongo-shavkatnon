@@ -6,13 +6,13 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: [
-      "https://softhome.uz",
-      "http://localhost:3000",
-      "http://localhost:3030",
+      "https://shavkatnon.softhome.uz",
+      "http://localhost:3001",
+      "http://localhost:3031",
     ],
   });
   // console.log('I see')
-  await app.listen(3030);
+  await app.listen(3031);
 }
 bootstrap();
 

@@ -87,6 +87,15 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         `${DocumentType.ServicesFromPartners}`,
     ]
 
+    const documentsSaleHalfStuff = [
+        `${DocumentType.SaleHalfStuff}`,
+    ]
+
+    const documentsComeProductImport = [
+        `${DocumentType.ComeProductImport}`,
+    ]
+
+    
     if (documentsComeMaterial.includes(documentType)) {
         senderType = TypeReference.PARTNERS
         senderLabel = 'Таъминотчи'
@@ -118,6 +127,22 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
         priceIsVisible = false;
         totalIsVisible = false;
+        balansIsVisible = false;
+    }
+
+    if (documentsComeProductImport.includes(documentType)) {
+        senderType = TypeReference.PARTNERS
+        senderLabel = 'Таъминотчи'
+        senderIsVisible = true
+        
+        receiverType = TypeReference.STORAGES
+        receiverLabel = 'Кабул килувчи булим'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'Махсулот'
+        analiticIsVisible = true
+
         balansIsVisible = false;
     }
 
@@ -167,6 +192,23 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
 
         analiticType = TypeReference.TMZ
         analiticLabel = 'Хом ашё'
+        analiticIsVisible = true
+
+        totalIsDisabled = true;
+        priceIsDisabled = true;
+    }
+
+    if (documentsSaleHalfStuff.includes(documentType)) {
+        senderType = TypeReference.STORAGES
+        senderLabel = 'Жунатувчи'
+        senderIsVisible = true
+
+        receiverType = TypeReference.PARTNERS
+        receiverLabel = 'Мижоз'
+        recieverIsVisible = true
+
+        analiticType = TypeReference.TMZ
+        analiticLabel = 'ЯТМ'
         analiticIsVisible = true
 
         totalIsDisabled = true;

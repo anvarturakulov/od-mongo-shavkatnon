@@ -5,9 +5,11 @@ export enum DocumentType {
     ComeMaterial = 'ComeMaterial',
     ComeProduct = 'ComeProduct',
     ComeHalfstuff = 'ComeHalfstuff',
+    ComeProductImport = 'ComeProductImport',
 
     SaleProd = 'SaleProd',
     SaleMaterial = 'SaleMaterial',
+    SaleHalfStuff = 'SaleHalfStuff',
 
     LeaveProd = 'LeaveProd',
     LeaveMaterial = 'LeaveMaterial',

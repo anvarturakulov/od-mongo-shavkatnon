@@ -12,6 +12,7 @@ export const getTypeDocumentForReference = (contentName: string) : DocumentTypeF
     `${DocumentType.SaleProd}`,
     `${DocumentType.LeaveProd}`,
     `${DocumentType.MoveProd}`,
+    `${DocumentType.ComeCashFromPartners}`,
   ]
   
   const documentsForHalfstuff = [
@@ -19,6 +20,7 @@ export const getTypeDocumentForReference = (contentName: string) : DocumentTypeF
     `${DocumentType.ComeHalfstuff}`,
     `${DocumentType.LeaveHalfstuff}`,
     `${DocumentType.MoveHalfstuff}`,
+    `${DocumentType.SaleHalfStuff}`,
   ]
 
   if (documentsForMaterialWithOutLeave.includes(contentName)) {
