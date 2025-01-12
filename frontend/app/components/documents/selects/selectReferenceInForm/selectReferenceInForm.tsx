@@ -200,7 +200,8 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                             return (item.filial || item.delivery) 
                         }
 
-                    if (type == 'sender' && ( contentName == DocumentType.ComeMaterial || contentName == DocumentType.ComeCashFromPartners)) {
+                    if (type == 'sender' && ( contentName == DocumentType.ComeMaterial || contentName == DocumentType.ComeCashFromPartners || 
+                        contentName == DocumentType.SaleHalfStuff || contentName == DocumentType.ComeProductImport )) {
                         return ( item.typePartners == TypePartners.SUPPLIERS ) 
                     }
 

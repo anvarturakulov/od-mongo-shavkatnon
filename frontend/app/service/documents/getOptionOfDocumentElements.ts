@@ -212,7 +212,7 @@ export const getOptionOfDocumentElements = (documentType: string): OptionsForDoc
         analiticIsVisible = true
 
         totalIsDisabled = true;
-        priceIsDisabled = true;
+        priceIsDisabled = false;
     }
 
     if (documentsLeaveProd.includes(documentType)) {
