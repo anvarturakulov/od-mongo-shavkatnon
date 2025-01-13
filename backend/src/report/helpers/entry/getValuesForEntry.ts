@@ -322,7 +322,7 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
       case DocumentType.MoveHalfstuff:
         return {
           debet: Schet.S21,
-          kredit: Schet.S21,
+          kredit: item.date > remaindDate ? Schet.S21 : Schet.S00,
           ...leaveComeTMZObj,
         };
 
