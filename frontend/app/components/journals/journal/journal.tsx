@@ -209,7 +209,7 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             .filter((item:DocumentModel) => {
                                 const {user} = filter
                                 if (user != 'Фойдаланувчи') {
-                                    if (item.user.toLowerCase().includes(user)) return true
+                                    if (item.user.toLowerCase().includes(user.toLocaleLowerCase())) return true
                                 } else return true
                             })
                             
