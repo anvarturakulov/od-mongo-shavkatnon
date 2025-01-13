@@ -216,21 +216,21 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             .filter((item:DocumentModel) => {
                                 const {comment} = filter
                                 if (comment != 'Изох') {
-                                    if (item.comment && (item.comment+getNameReference(references,item.analiticId)).toLowerCase().includes(comment)) return true
+                                    if (item.comment && (item.comment+getNameReference(references,item.analiticId)).toLowerCase().includes(comment.toLocaleLowerCase())) return true
                                 } else return true
                             })
                             .filter((item:DocumentModel) => {
                                 const {sender} = filter
                                 const itemSender = getNameReference(references,item.senderId)
                                 if (sender != 'Берувчи') {
-                                    if (itemSender && itemSender.toLowerCase().includes(sender)) return true
+                                    if (itemSender && itemSender.toLowerCase().includes(sender.toLocaleLowerCase())) return true
                                 } else return true
                             })
                             .filter((item:DocumentModel) => {
                                 const {receiver} = filter
                                 const itemReceiver = getNameReference(references,item.receiverId)
                                 if (receiver != 'Олувчи') {
-                                    if (itemReceiver && itemReceiver.toLowerCase().includes(receiver)) return true
+                                    if (itemReceiver && itemReceiver.toLowerCase().includes(receiver.toLocaleLowerCase())) return true
                                 } else return true
                             })
                             .filter((item:DocumentModel) => {
