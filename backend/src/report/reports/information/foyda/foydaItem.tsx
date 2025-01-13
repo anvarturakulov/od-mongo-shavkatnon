@@ -91,7 +91,7 @@ export const foydaItem = (
   const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const brakCount = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
-  const productionImportSumm = queryKor(Schet.S28, Schet.S60, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const productionImportSumm = queryKor(Schet.S28, Schet.S60, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
 
   const moveOutCount = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const moveIncomeCount = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
