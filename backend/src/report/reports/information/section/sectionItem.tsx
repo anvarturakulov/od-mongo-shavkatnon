@@ -46,6 +46,8 @@ export const sectionItem = (
   const OBKOLK2828 = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const OBKOLK2828bux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
   
+  const productionImportCol = queryKor(Schet.S28, Schet.S60, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+
   const OBKOLK2028 = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);;
   const OBKOLK2028bux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
 
@@ -76,7 +78,7 @@ export const sectionItem = (
       startBalansCountBux: PDKOLbux-PKKOLbux,
       prodCountNon: OBKOLD2820-OBKOLD2820bux,
       prodCountBux: OBKOLD2820bux,
-      moveIncomeCountNon: OBKOLD2828-OBKOLD2828bux,
+      moveIncomeCountNon: OBKOLD2828-OBKOLD2828bux+productionImportCol,
       moveIncomeCountBux: OBKOLD2828bux,
       saleCountNon: OBKOLK4028-OBKOLK4028bux,
       saleCountBux: OBKOLK4028bux,
