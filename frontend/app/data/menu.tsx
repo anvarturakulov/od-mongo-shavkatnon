@@ -87,8 +87,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ComeProductImport, description:'Махсулотнинг хамкордан кирими',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.GLBUX, 
-                UserRoles.GUEST, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST, UserRoles.ZAMGLBUX]
             },
             { 
                 title: DocumentType.ComeCashFromPartners, description:'Пул кирими (мижоз ва таъминотчи)',
