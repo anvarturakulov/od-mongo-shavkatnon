@@ -133,9 +133,13 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
     return (
         <>
             {dashboardUsers && <Header windowFor='document' total={total} count={count}/>}  
-            <div className={styles.newElement}>
-                {showDocumentWindow && <Doc/>}
-            </div>
+            <>
+                <div>{`comment${filter.comment}:receiver${filter.receiver}:sender${filter.sender}:summa${filter.summa}:user${filter.user}`}</div>
+                <div className={styles.newElement}>
+                    {showDocumentWindow && <Doc/>}
+                </div>
+            </>
+            
             {
                 dashboardUsers && 
                 <div className={styles.container} >
