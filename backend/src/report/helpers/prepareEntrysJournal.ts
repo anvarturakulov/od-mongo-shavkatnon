@@ -43,7 +43,7 @@ export const prepareEntrysJournal = (allDocuments: Array<Document>, founders:Arr
         let newItemForResults = { ...prepareEntry(item, true, false, undefined, item.isCash, filteredFounders) }
         results.push(newItemForResults);
 
-        if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial) {
+        if (item.documentType == DocumentType.SaleProd || item.documentType == DocumentType.SaleMaterial || item.documentType == DocumentType.SaleHalfStuff ) {
           let newItemForResults = { ...prepareEntry(item, false, false, undefined, false, filteredFounders) }
           results.push(newItemForResults);
         }

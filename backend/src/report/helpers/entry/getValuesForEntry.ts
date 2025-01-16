@@ -217,11 +217,19 @@ export const getValuesForEntry = (item: Document, newEntry: boolean, hasTable: b
         };
 
       case DocumentType.SaleHalfStuff:
-        return {
-          debet: item.date > remaindDate ? Schet.S60 : Schet.S00,
-          kredit: Schet.S21,
-          ...leaveComeTMZObj
-        };
+        if (!newEntry) {
+          return {
+            debet: Schet.S60,
+            kredit: Schet.S21,
+            ...leaveComeTMZObj
+          };
+        } else if (newEntry) {
+          return {
+            debet: Schet.S50,
+            kredit: Schet.S60,
+            ...salePaymentObj
+          };
+        }
       
       case DocumentType.ComeProductImport:
         return {
