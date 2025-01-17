@@ -52,6 +52,7 @@ export class AuthController {
       throw new NotFoundException(USER_NOT_FOUND_ERROR);
     }
     const newUser = {
+      _id: user._id,
       name: user.name, 
       login:user.email,
       password: user.passwordHash,
