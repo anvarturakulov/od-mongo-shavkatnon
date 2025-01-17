@@ -16,6 +16,7 @@ export const User = ({ className, ...props }: UserProps) :JSX.Element => {
     const {mainData, setMainData} = useAppContext();
     
     const defaultBody: UserModel = {
+        _id: '',
         login: '',
         password: '',
         role: UserRoles.HAMIRCHI,

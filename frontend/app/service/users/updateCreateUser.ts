@@ -22,12 +22,12 @@ export const updateCreateUser = (
     }
   }
 
+  console.log(body)
   const id = body._id;
   delete body._id;
-  console.log('body', body)
   const uriPost = process.env.NEXT_PUBLIC_DOMAIN + '/api/auth/register';
   const uriPatch = process.env.NEXT_PUBLIC_DOMAIN + '/api/auth/' + id;
-  console.log(body)
+  console.log('body', body, ' id - ', id, ' uriPath - ', uriPatch);
 
   if (isNewReference) {
     axios.post(uriPost, body, config)
