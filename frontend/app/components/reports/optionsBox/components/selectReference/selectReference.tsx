@@ -57,8 +57,8 @@ export const SelectReference = ({ label, visible, typeReference , className, ...
                     data && data.length>0 && data
                     .filter((item: ReferenceModel) => {
                         if (item.typeReference == TypeReference.STORAGES) {
+                            if ( user?.role == UserRoles.GLBUX && item.director) return false
                             if ( item.buxgalter || item.delivery || item.sklad || item.filial) return true
-                            if ( user?.role == UserRoles.GLBUX && !item.director) return true
                             else return false
                         }
 
