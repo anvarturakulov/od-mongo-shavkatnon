@@ -6,6 +6,7 @@ import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interf
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
+import { UserRoles } from '@/app/interfaces/general.interface';
 
 export const SelectReference = ({ label, visible, typeReference , className, ...props }: SelectReferenceProps): JSX.Element => {
     const {mainData, setMainData} = useAppContext();
@@ -56,10 +57,11 @@ export const SelectReference = ({ label, visible, typeReference , className, ...
                     data && data.length>0 && data
                     .filter((item: ReferenceModel) => {
                         if (item.typeReference == TypeReference.STORAGES) {
-                            if ( item.buxgalter || item.delivery ||
-                                item.sklad || item.filial) return true
+                            if ( item.buxgalter || item.delivery || item.sklad || item.filial) return true
+                            if ( user?.role == UserRoles.GLBUX && !item.director) return true
                             else return false
                         }
+
                         return true
                     })
                     .sort(sortByName)
