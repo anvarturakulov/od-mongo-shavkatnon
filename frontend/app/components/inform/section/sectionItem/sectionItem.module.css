@@ -16,10 +16,12 @@
 
 .rowCount{
     grid-template-columns: 2fr 1fr 1fr;
+    text-align: right;
 }
 
 .title{
     font-size: 15px;
+    text-align: left;
 }
 
 .h2{
