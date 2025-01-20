@@ -19,19 +19,19 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Кун бош. колдик</div>
                         <div>{numberValue(item?.startBalansCountNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.startBalansCountNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.startBalansCountBux)}</div>
                     </div>
 
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Ишл. чик. кирим</div>
                         <div>{numberValue(item?.prodCountNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.prodCountNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.prodCountBux)}</div>
                     </div>
                     
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Ички силж. кирим</div>
                         <div>{numberValue(item?.moveIncomeCountNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.moveIncomeCountNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.moveIncomeCountBux)}</div>
                     </div>
                     
                     <div className={cn(styles.row, styles.rowCount)}>
@@ -43,7 +43,7 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                             </span> 
                         </div>
                         <div className={styles.blueValues}>
-                            {numberValue(item?.saleCountNonBux)}
+                            {numberValue(item?.saleCountBux)}
                             <span>
                                 ({numberValue(item?.maydaSavdoCountBux)})
                             </span> 
@@ -52,18 +52,18 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Брак(истем.) нон</div>
                         <div>{numberValue(item?.brakCountNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.brakCountNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.brakCountBux)}</div>
                     </div>
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Ички сил. чиким</div>
                         <div>{numberValue(item?.moveOutNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.moveOutNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.moveOutBux)}</div>
                     </div>
 
                     <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Зимм. колдик нон</div>
                         <div>{numberValue(item?.endBalansCountNon)}</div>
-                        <div className={styles.blueValues}>{numberValue(item?.endBalansCountNonBux)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.endBalansCountBux)}</div>
                     </div>
                 </>
             }
