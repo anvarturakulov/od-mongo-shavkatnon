@@ -104,7 +104,7 @@ export const sectionItem = (
       moveOutNon: OBKOLK2828-OBKOLK2828bux,
       moveOutBux: OBKOLK2828bux,
       endBalansCountNon: PDKOL - PKKOL + TDKOL - TKKOL - (PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux),
-      endBlanasCountBux: PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux, 
+      endBalansCountBux: PDKOLbux - PKKOLbux + TDKOLbux - TKKOLbux, 
       startBalansSumma: PDSUM-PKSUM,
       incomeFromSaleSumma: TDSUM-MOVEINN,
       incomeFromMoveSumma: MOVEINN,
