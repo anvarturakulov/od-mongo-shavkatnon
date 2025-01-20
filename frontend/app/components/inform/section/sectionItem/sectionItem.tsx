@@ -16,59 +16,54 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                 &&
                 <>
                     <Htag tag='h2' className={styles.h2}>Сон буйича</Htag>
-                    <div className={styles.row}>
-                        <div className={styles.title}>Кун бошига колдик нони</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.startBalansCountNon)}
-                            {/* <span> ({numberValue(item?.startBalansCountBux)})</span> */}
-                        </div>
+                    <div className={cn(styles.row, styles.rowCount)}>
+                        <div className={styles.title}>Кун бош. колдик</div>
+                        <div>{numberValue(item?.startBalansCountNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.startBalansCountNonBux)}</div>
                     </div>
 
-                    <div className={styles.row}>
-                        <div className={styles.title}>Ишлаб. чик. кирим</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.prodCountNon)}
-                            {/* <span> ({numberValue(item?.prodCountBux)})</span> */}
-                        </div>
+                    <div className={cn(styles.row, styles.rowCount)}>
+                        <div className={styles.title}>Ишл. чик. кирим</div>
+                        <div>{numberValue(item?.prodCountNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.prodCountNonBux)}</div>
                     </div>
                     
-                    <div className={styles.row}>
-                        <div className={styles.title}>Ички силжиш. кирим</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.moveIncomeCountNon)}
-                            {/* <span> ({numberValue(item?.moveIncomeCountBux)})</span> */}
-                        </div>
+                    <div className={cn(styles.row, styles.rowCount)}>
+                        <div className={styles.title}>Ички силж. кирим</div>
+                        <div>{numberValue(item?.moveIncomeCountNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.moveIncomeCountNonBux)}</div>
                     </div>
                     
-                    <div className={styles.row}>
+                    <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Сотилган нон</div>
-                        <div className={styles.value}>
+                        <div>
                             {numberValue(item?.saleCountNon)}
-                            <span> ({numberValue(item?.maydaSavdoCount)})</span>
-                            
+                            <span>
+                                ({numberValue(item?.maydaSavdoCount)})
+                            </span> 
+                        </div>
+                        <div className={styles.blueValues}>
+                            {numberValue(item?.saleCountNonBux)}
+                            <span>
+                                ({numberValue(item?.maydaSavdoCountBux)})
+                            </span> 
                         </div>
                     </div>
-                    <div className={styles.row}>
+                    <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Брак(истем.) нон</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.brakCountNon)}
-                            {/* <span> ({numberValue(item?.brakCountBux)})</span> */}
-                        </div>
+                        <div>{numberValue(item?.brakCountNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.brakCountNonBux)}</div>
                     </div>
-                    <div className={styles.row}>
+                    <div className={cn(styles.row, styles.rowCount)}>
                         <div className={styles.title}>Ички сил. чиким</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.moveOutNon)}
-                            {/* <span> ({numberValue(item?.moveOutBux)})</span> */}
-                        </div>
+                        <div>{numberValue(item?.moveOutNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.moveOutNonBux)}</div>
                     </div>
 
-                    <div className={styles.row}>
-                        <div className={styles.title}>Зиммасидаги колдик нон</div>
-                        <div className={styles.value}>
-                            {numberValue(item?.endBalansCountNon)}
-                            {/* <span> ({numberValue(item?.endBlanasCountBux)})</span> */}
-                        </div>
+                    <div className={cn(styles.row, styles.rowCount)}>
+                        <div className={styles.title}>Зимм. колдик нон</div>
+                        <div>{numberValue(item?.endBalansCountNon)}</div>
+                        <div className={styles.blueValues}>{numberValue(item?.endBalansCountNonBux)}</div>
                     </div>
                 </>
             }

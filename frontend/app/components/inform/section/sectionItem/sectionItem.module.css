@@ -14,6 +14,10 @@
     border-bottom: 0.5px dotted #000;
 }
 
+.rowCount{
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
 .title{
     font-size: 15px;
 }
@@ -31,7 +35,11 @@
     margin-top: 15px;
 }
 
-.value span{
-    color: blue;
+.rowCount span{
+    color: red;
     /* font-size: 14px; */
+}
+
+.blueValues{
+    color: blue;
 }

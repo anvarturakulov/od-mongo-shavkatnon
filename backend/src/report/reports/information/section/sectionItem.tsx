@@ -13,11 +13,13 @@ export const sectionItem = (
   sectionType: 'DELIVERY' | 'FILIAL' | 'BUXGALTER' | 'FOUNDER',
   globalEntrys: Array<EntryItem> | undefined ) => {
 
-  let maydaSavdoCount = 0;
+  let maydaSavdoCountAll = 0;
+  let maydaSavdoCountBux = 0;
   const maydaSavdoReceiverId = '659d292d630ca82ec3dcae1c';
-
+  let idForBuxanka = '678dc6a8d32db54479bf5d79';
+  
   if (docs && docs.length > 0) {
-    maydaSavdoCount = docs.filter((item: Document) => {
+    maydaSavdoCountAll = docs.filter((item: Document) => {
       return (
         item.date>= startDate && 
         item.date <= endDate && 
@@ -27,8 +29,21 @@ export const sectionItem = (
       )
     }).reduce((total, item:Document) => total + item.count, 0)
   }
-  
-  let idForBuxanka = '65e7048b5c54490bbc335ca2';
+
+  if (docs && docs.length > 0) {
+    maydaSavdoCountBux = docs.filter((item: Document) => {
+      return (
+        item.date>= startDate && 
+        item.date <= endDate && 
+        item.documentType == DocumentType.SaleProd &&
+        String(item.senderId) == String(currentSectionId)  &&
+        String(item.analiticId) == idForBuxanka &&
+        String(item.receiverId) == maydaSavdoReceiverId
+      )
+    }).reduce((total, item:Document) => total + item.count, 0)
+  }
+  let maydaSavdoCount = maydaSavdoCountAll - maydaSavdoCountBux
+
   let schetCash = sectionType == 'FOUNDER' ? Schet.S68 : Schet.S50
 
   const PDKOL = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys);
@@ -83,6 +98,7 @@ export const sectionItem = (
       saleCountNon: OBKOLK4028-OBKOLK4028bux,
       saleCountBux: OBKOLK4028bux,
       maydaSavdoCount,
+      maydaSavdoCountBux,
       brakCountNon: OBKOLK2028-OBKOLK2028bux,
       brakCountBux: OBKOLK2028bux,
       moveOutNon: OBKOLK2828-OBKOLK2828bux,
