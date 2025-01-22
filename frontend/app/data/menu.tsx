@@ -110,7 +110,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.ZpCalculate, description:'Иш хаки хисоби',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.GUEST, UserRoles.ZP]
             },
             { 
                 title: DocumentType.ServicesFromPartners, description:'Корхоналар хизмати',

@@ -28,6 +28,7 @@ export enum UserRoles {
     DELIVERY = 'DELIVERY',
     SELLER = 'SELLER',
     GUEST = 'GUEST',
+    ZP = 'ZP'
 }
 
 export interface User {

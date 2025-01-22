@@ -39,13 +39,13 @@ export const SectionItem = ({className, item, sectionType, ...props }: SectionIt
                         <div>
                             {numberValue(item?.saleCountNon)}
                             <span>
-                                &nbsp;&nbsp;({numberValue(item?.maydaSavdoCount)})
+                                &nbsp;({numberValue(item?.maydaSavdoCount)})
                             </span> 
                         </div>
                         <div className={styles.blueValues}>
                             {numberValue(item?.saleCountBux)}
                             <span>
-                                &nbsp;&nbsp;({numberValue(item?.maydaSavdoCountBux)})
+                                &nbsp;({numberValue(item?.maydaSavdoCountBux)})
                             </span> 
                         </div>
                     </div>

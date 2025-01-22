@@ -41,13 +41,13 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
 
   if (
     user?.role == UserRoles.ADMIN || 
-    user?.role == UserRoles.HEADCOMPANY || 
-    (
-      user?.role == UserRoles.GLBUX && 
-      ( contentName != DocumentType.LeaveCash || !docProveden ) && 
-      // ( dateToStr(Date.now()) == dateToStr(docDate) )
-      (oneDayAgo < docDate)
-    )     
+    user?.role == UserRoles.HEADCOMPANY  
+    // (
+    //   user?.role == UserRoles.GLBUX && 
+    //   ( contentName != DocumentType.LeaveCash || !docProveden ) && 
+    //   // ( dateToStr(Date.now()) == dateToStr(docDate) )
+    //   (oneDayAgo < docDate)
+    // )     
   ) {
     markToDeleteDocument(id, setMainData, token)
   } else {
