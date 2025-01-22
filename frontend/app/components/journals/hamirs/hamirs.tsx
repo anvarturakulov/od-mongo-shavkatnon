@@ -14,6 +14,7 @@ import { getNameReference } from '../helpers/journal.functions';
 import { TypeReference } from '@/app/interfaces/reference.interface';
 import { changeStatusHamir } from '@/app/service/documents/changeStatusHamir';
 import { UserRoles } from '@/app/interfaces/general.interface';
+import { SelectReferenceForTandirs } from './selectReferenceForTandirs/selectReferenceForTandirs';
 
 
 export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Element {
@@ -83,10 +84,12 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         if (user?.role == UserRoles.TANDIR) {
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
+            let analiticId = target.parentNode?.parentNode?.querySelector('select')?.getAttribute('data-id') || '';
             if (count > 90) {
                 alert('Сон хато киритилди')
-            } else if ( count>0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
+            } else if ( count > 0 && analiticId.length > 0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
                 item.zuvala = count;
+                item.analiticId = analiticId;
                 changeStatusHamir(item, mainData, setMainData)
                 setMainData && setMainData('updateHamirJournal', true)
             }
@@ -102,20 +105,13 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                         <thead className={cn(styles.thead, {
                             [styles.theadWithTandir]: tandir
                         })}>
-                            <tr key='0'>
+                            <tr key='0' >
                                 <th key='2' className={cn(styles.date,{
                                     [styles.width50]: tandir
                                 })}>Сана</th>
                                 <th key='4' className={styles.order}>Хамир тартиби</th>
-                                {
-                                    !tandir &&
-                                    <th key='5' className={styles.section} >Булим</th>
-                                }
+                                <th key = '5'>Амал</th>
                                 
-                                {
-                                    !tandir &&
-                                    <th key='6' className={styles.action}>Амал</th>
-                                }
                             </tr>
                         </thead>
                         <tbody className={styles.tbody}>
@@ -146,10 +142,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                             })}>
                                         <td className={styles.date}>{secondsToDateString(item.date)}</td>
                                         <td className={styles.order}>{`-- ${item.order} --` }</td>
-                                        {
-                                            !tandir &&
-                                            <td className={styles.section}>{getNameReference(references,item.sectionId)}</td>
-                                        }
+                                       
                                         {
                                             tandir &&
                                             <td>
@@ -160,6 +153,10 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                                 />    
                                             </td>
                                         }
+                                        <td> 
+                                            <SelectReferenceForTandirs currentItemId={item.analiticId} disabled={item.proveden}/>
+                                        </td>
+
                                         <td className={styles.action}>
                                             <button className={cn(styles.sendBtn, {
                                                                 [styles.notVisible]: item.proveden,
