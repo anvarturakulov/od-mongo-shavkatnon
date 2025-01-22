@@ -42,7 +42,7 @@ export const foyda = (
     data && 
     data.length > 0 &&
     data
-    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+    .filter((item: any) => item?.typeReference == TypeReference.STORAGES && !item.deleted)
     .filter((item: any) => {
         if ( item.filial ) return true
         return false;
