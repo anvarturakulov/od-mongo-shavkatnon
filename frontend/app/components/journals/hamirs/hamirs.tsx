@@ -84,8 +84,9 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         if (user?.role == UserRoles.TANDIR) {
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
-            let analiticId = document.getElementById(`#${item.order} option:selected`)?.getAttribute('data-id') || '';
-            alert(analiticId)
+            let analiticId = target.parentNode?.parentNode?.querySelector(`#${item.order} option:selected`)?.getAttribute('data-id') || '';
+            console.log(target.parentNode?.parentNode?.querySelector(`#${item.order} option:selected`))
+            console.log(analiticId)
             if (count > 90) {
                 alert('Сон хато киритилди')
             } else if ( count > 0 && analiticId.length > 0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
