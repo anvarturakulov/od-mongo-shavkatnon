@@ -55,7 +55,10 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                 <thead>
                     <tr>
                         <td>Жами</td>
-                        <td className={styles.totalTd}>{numberValue(totalByKey('productionCount', datas))}</td>
+                        <td className={styles.totalTd}>
+                            {numberValue(totalByKey('productionCountAll', datas))}
+                            <span>{numberValue(totalByKey('productionCountBux', datas))}</span>
+                        </td>
                         <td className={styles.totalTd}>
                             {numberValue(totalByKey('productionDocsCountAll', datas))} <br/>
                             <span>({numberValue(totalByKey('productionDocsCountBux', datas))})</span>
