@@ -11,7 +11,7 @@ export const FoydaItem = ({className, item, ...props }: FoydaItemProps) :JSX.Ele
               <td className={styles.title}>{item?.section}</td>
               <td>
                 {numberValue(item?.productionCountAll)} <br/>
-                <span className={styles.span}>({numberValue(item?.productionBux)})</span>
+                <span className={styles.span}>({numberValue(item?.productionCountBux)})</span>
               </td>
               <td>{numberValue(item?.productionDocsCount)}</td>
               <td>
