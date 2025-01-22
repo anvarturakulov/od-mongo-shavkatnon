@@ -52,9 +52,7 @@ export class HamirController {
     let hamirs = await this.hamirService.getHamirsByUserToDate(dto)
     let countHamir = dto.fromHamirchi ? 51 : 31
     dto.analiticId = '659d2778630ca82ec3dcadf8';
-    if (dto.sectionId == '659ce0ab523a48fdeb6ad8cb') {
-      dto.analiticId = '678dc6a8d32db54479bf5d79';
-    }
+    
     if (dto.sectionId != '' && dto.analiticId != '' && !hamirs.length) {
       for (let i = 1; i < countHamir; i++) {
         let newDto = { ...dto };
