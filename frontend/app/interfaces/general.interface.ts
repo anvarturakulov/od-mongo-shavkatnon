@@ -52,6 +52,6 @@ export interface DefinedTandirWorkers {
     thirdWorker: string | null,
 }
 
-export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX, UserRoles.ZAMGLBUX];
+export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.ZP];
 export const workersUsersList = [UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.TANDIR] 
 export const adminAndHeadCompany = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GLBUX]
