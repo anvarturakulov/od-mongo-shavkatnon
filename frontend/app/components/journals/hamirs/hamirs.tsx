@@ -156,7 +156,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                             </td>
                                         }
                                         <td> 
-                                            <SelectReferenceForTandirs idForSelect={`${item.order}`} currentItemId={item.analiticId} disabled={item.proveden}/>
+                                            <SelectReferenceForTandirs idForSelect={`#${item.order}`} currentItemId={item.analiticId} disabled={item.proveden}/>
                                         </td>
 
                                         <td className={styles.action}>
