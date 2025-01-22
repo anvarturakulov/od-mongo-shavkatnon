@@ -84,7 +84,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         if (user?.role == UserRoles.TANDIR) {
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
-            let analiticId = document.getElementById(`${item.order} option:selected`)?.getAttribute('data-id') || '';
+            let analiticId = document.getElementById(`#${item.order} option:selected`)?.getAttribute('data-id') || '';
             alert(analiticId)
             if (count > 90) {
                 alert('Сон хато киритилди')
