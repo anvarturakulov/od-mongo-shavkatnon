@@ -156,7 +156,7 @@ export const foydaItem = (
   let valueForSale = + foydaPrice.first
   let valueForSaleBux = + foydaPrice.second
   const saleWithMove = sale + (d - i + o) * valueForSale;
-  const saleWithMoveBux = saleBux + (dBux - iBux + oBux) * valueForSale;
+  const saleWithMoveBux = saleBux + (dBux - iBux + oBux) * valueForSaleBux;
   const saleWithMoveAll = saleWithMove + saleWithMoveBux
 
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
