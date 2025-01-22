@@ -57,20 +57,20 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td>Жами</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('productionCount', datas))}</td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('productionDocsCountAll', datas)-totalByKey('productionDocsCountBux', datas))}
-                            ({numberValue(totalByKey('productionDocsCountBux', datas))})
+                            {numberValue(totalByKey('productionDocsCountAll', datas)-totalByKey('productionDocsCountBux', datas))} <br/>
+                            <span>({numberValue(totalByKey('productionDocsCountBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('saleCountWithOutMoveAll', datas)-totalByKey('saleCountWithOutMoveBux', datas))}
-                            ({numberValue(totalByKey('saleCountWithOutMoveBux', datas))})
+                            {numberValue(totalByKey('saleCountWithOutMoveAll', datas)-totalByKey('saleCountWithOutMoveBux', datas))} <br/>
+                            <span>({numberValue(totalByKey('saleCountWithOutMoveBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('countDeleviryAll', datas)-totalByKey('countDeleviryBux', datas))}
-                            ({numberValue(totalByKey('countDeleviryBux', datas))})
+                            {numberValue(totalByKey('countDeleviryAll', datas)-totalByKey('countDeleviryBux', datas))}<br/>
+                            <span>({numberValue(totalByKey('countDeleviryBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
                             {numberValue(totalByKey('saleWithMoveAll', datas)-totalByKey('saleWithMoveBux', datas))}
-                            ({numberValue(totalByKey('saleWithMoveBux', datas))})
+                            <span>({numberValue(totalByKey('saleWithMoveBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('zagatovka', datas))}</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('materials', datas))}</td>

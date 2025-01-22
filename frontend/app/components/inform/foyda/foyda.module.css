@@ -25,6 +25,10 @@
     max-width: 60px!important;
 }
 
+.table td span {
+  font-size: 12px;
+}
+
 .table{
   width: 100%;
 }
