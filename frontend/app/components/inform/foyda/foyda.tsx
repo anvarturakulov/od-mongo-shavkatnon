@@ -57,19 +57,19 @@ export const Foyda = ({className, data, ...props }: FoydaProps) :JSX.Element => 
                         <td>Жами</td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('productionCount', datas))}</td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('productionDocsCountAll', datas)-totalByKey('productionDocsCountBux', datas))} <br/>
+                            {numberValue(totalByKey('productionDocsCountAll', datas))} <br/>
                             <span>({numberValue(totalByKey('productionDocsCountBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('saleCountWithOutMoveAll', datas)-totalByKey('saleCountWithOutMoveBux', datas))} <br/>
+                            {numberValue(totalByKey('saleCountWithOutMoveAll', datas))} <br/>
                             <span>({numberValue(totalByKey('saleCountWithOutMoveBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('countDeleviryAll', datas)-totalByKey('countDeleviryBux', datas))}<br/>
+                            {numberValue(totalByKey('countDeleviryAll', datas))}<br/>
                             <span>({numberValue(totalByKey('countDeleviryBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>
-                            {numberValue(totalByKey('saleWithMoveAll', datas)-totalByKey('saleWithMoveBux', datas))}
+                            {numberValue(totalByKey('saleWithMoveAll', datas))}<br/>
                             <span>({numberValue(totalByKey('saleWithMoveBux', datas))})</span>
                         </td>
                         <td className={styles.totalTd}>{numberValue(totalByKey('zagatovka', datas))}</td>
