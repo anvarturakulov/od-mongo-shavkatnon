@@ -6,7 +6,7 @@ import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interf
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
 import { sortByName } from '@/app/service/references/sortByName';
 
-export const SelectReferenceForTandirs = ({  currentItemId, disabled, className, ...props }: SelectReferenceForTandirsProps): JSX.Element => {
+export const SelectReferenceForTandirs = ({ idForSelect, currentItemId, disabled, className, ...props }: SelectReferenceForTandirsProps): JSX.Element => {
 
     const {mainData, setMainData} = useAppContext();
     const { user } = mainData;
@@ -20,17 +20,9 @@ export const SelectReferenceForTandirs = ({  currentItemId, disabled, className,
             <select
                 className={styles.select}
                 {...props}
+                disabled = {disabled}
+                id = {idForSelect}
             >
-                <option 
-                    value={'NotSelected'}
-                    data-type={null}
-                    data-id={null}
-                    selected={true}
-                    className={styles.chooseMe}
-                >
-                    {'Танланг =>>>>'}
-                </option>
-
                 {data && data.length>0 && 
                 data?.filter((item:ReferenceModel) => {
                     return item.typeTMZ == 'PRODUCT'
@@ -44,7 +36,6 @@ export const SelectReferenceForTandirs = ({  currentItemId, disabled, className,
                             data-type={item.typeReference}
                             data-id={item._id}
                             selected={item._id == currentItemId}
-                            disabled = {disabled}
                             >
                                 {item.name}
                         </option>
