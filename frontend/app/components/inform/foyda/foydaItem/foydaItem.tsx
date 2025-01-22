@@ -11,20 +11,20 @@ export const FoydaItem = ({className, item, ...props }: FoydaItemProps) :JSX.Ele
               <td className={styles.title}>{item?.section}</td>
               <td>
                 {numberValue(item?.productionCountAll-item?.productionCountBux)} <br/>
-                <span>({numberValue(item?.productionBux)})</span>
+                <span className={styles.span}>({numberValue(item?.productionBux)})</span>
               </td>
               <td>{numberValue(item?.productionDocsCount)}</td>
               <td>
                 {numberValue(item?.saleCountWithOutMoveAll-item?.saleCountWithOutMoveBux)}<br/>
-                <span>({numberValue(item?.saleCountWithOutMoveBux)})</span>
+                <span className={styles.span}>({numberValue(item?.saleCountWithOutMoveBux)})</span>
               </td>
               <td>
                 {numberValue(item?.countDeleviryAll-item?.countDeleviryBux)}<br/>
-                <span>({numberValue(item?.countDeleviryBux)})</span>
+                <span className={styles.span}>({numberValue(item?.countDeleviryBux)})</span>
               </td>
               <td>
                 {numberValue(item?.saleWithMoveAll-item?.saleWithMoveBux)}<br/>
-                <span>({numberValue(item?.saleWithMoveBux)})</span>
+                <span className={styles.span}>({numberValue(item?.saleWithMoveBux)})</span>
               </td>
               <td>{numberValue(item?.zagatovka)}</td>
               <td >{numberValue(item?.materials)}</td>
