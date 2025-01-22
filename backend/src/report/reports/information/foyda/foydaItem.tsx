@@ -1,4 +1,4 @@
-import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
+import { EntryItem, FoydaPrice, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { queryKor } from 'src/report/helpers/querys/queryKor';
 import { query } from 'src/report/helpers/querys/query';
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
@@ -20,7 +20,7 @@ export const foydaItem = (
   endDate: number,
   currentSectionId: string, 
   title: string,
-  foydaPrice: string,
+  foydaPrice: FoydaPrice,
   globalEntrys: Array<EntryItem> | undefined,
   docs: Document[],
   deliverys: ReferenceDocument[],
@@ -28,24 +28,26 @@ export const foydaItem = (
   longeChargeUmumBulim: number, 
   currentPaymentUmumBulim: number ) => {
 
-  let longeCharge:number = 0;
-
-  data && data.length &&
-  data
-  .filter((item: ReferenceModel)=> {
-    return item.typeReference == TypeReference.CHARGES && item.longCharge
-  })
-  .forEach((item: ReferenceModel) => {
-    // console.log(item.name)
-    longeCharge += queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), String(item._id), globalEntrys)
-  })
-
-
-  let productionDocsCount = 0;
-  let productionAllDocsCount = 0;
-  let countOutToDelivery = 0;
-  let countIncomeFromDelivery = 0; 
-  
+    let longeCharge:number = 0;
+    
+    data && data.length &&
+    data
+    .filter((item: ReferenceModel)=> {
+      return item.typeReference == TypeReference.CHARGES && item.longCharge
+    })
+    .forEach((item: ReferenceModel) => {
+      // console.log(item.name)
+      longeCharge += queryKor(Schet.S20, Schet.S50, TypeQuery.ODS, startDate, endDate, String(currentSectionId), String(item._id), globalEntrys)
+    })
+    
+    
+    let productionDocsCount = 0;
+    let productionAllDocsCount = 0;
+    let countOutToDeliveryAll = 0;
+    let countOutToDeliveryBux = 0;
+    let countIncomeFromDeliveryAll = 0; 
+    let countIncomeFromDeliveryBux = 0; 
+    let idForBuxanka = '678dc6a8d32db54479bf5d79'
 
   if (docs && docs.length > 0) {
     
@@ -57,7 +59,7 @@ export const foydaItem = (
       return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId && item.documentType == DocumentType.ComeProduct)
     }).length
     
-    countOutToDelivery = docs.filter((item:Document) => {
+    countOutToDeliveryAll = docs.filter((item:Document) => {
       return (
         item.date>= startDate && 
         item.date <= endDate && 
@@ -66,7 +68,17 @@ export const foydaItem = (
         isDelivery(deliverys, String(item.receiverId)) )
     }).reduce((total, item:Document) => total + item.count, 0)
 
-    countIncomeFromDelivery = docs.filter((item:Document) => {
+    countOutToDeliveryBux = docs.filter((item:Document) => {
+      return (
+        item.date >= startDate && 
+        item.date <= endDate && 
+        item.documentType == DocumentType.MoveProd &&
+        String(item.senderId) == String(currentSectionId)  &&
+        String(item.analiticId) == String(idForBuxanka) &&
+        isDelivery(deliverys, String(item.receiverId)) )
+    }).reduce((total, item:Document) => total + item.count, 0)
+
+    countIncomeFromDeliveryAll = docs.filter((item:Document) => {
       return (
         item.date>= startDate && 
         item.date <= endDate && 
@@ -75,46 +87,77 @@ export const foydaItem = (
         isDelivery(deliverys, String(item.senderId)) )
     }).reduce((total, item:Document) => total + item.count, 0)
 
+    countIncomeFromDeliveryBux = docs.filter((item:Document) => {
+      return (
+        item.date>= startDate && 
+        item.date <= endDate && 
+        item.documentType == DocumentType.MoveProd &&
+        String(item.receiverId) == String(currentSectionId)  &&
+        String(item.analiticId) == String(idForBuxanka) &&
+        isDelivery(deliverys, String(item.senderId)) )
+    }).reduce((total, item:Document) => total + item.count, 0)
+
   }
 
+  const PDKOLAll = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
+  const PKKOLAll = query(Schet.S28, TypeQuery.PKKOL, startDate, endDate, currentSectionId, '', globalEntrys)
+  const TDKOLAll = query(Schet.S28, TypeQuery.TDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
+  const TKKOLAll = query(Schet.S28, TypeQuery.TKKOL, startDate, endDate, currentSectionId, '', globalEntrys)
 
-  const PDKOL = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
-  const PKKOL = query(Schet.S28, TypeQuery.PKKOL, startDate, endDate, currentSectionId, '', globalEntrys)
-  const TDKOL = query(Schet.S28, TypeQuery.TDKOL, startDate, endDate, currentSectionId, '', globalEntrys)
-  const TKKOL = query(Schet.S28, TypeQuery.TKKOL, startDate, endDate, currentSectionId, '', globalEntrys)
+  const PDKOLBux = query(Schet.S28, TypeQuery.PDKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys)
+  const PKKOLBux = query(Schet.S28, TypeQuery.PKKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys)
+  const TDKOLBux = query(Schet.S28, TypeQuery.TDKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys)
+  const TKKOLBux = query(Schet.S28, TypeQuery.TKKOL, startDate, endDate, currentSectionId, idForBuxanka, globalEntrys)
   
-  const startCount = PDKOL-PKKOL;
-  const endCount = startCount+TDKOL-TKKOL;
+  const startCountAll = PDKOLAll-PKKOLAll;
+  const endCountAll = startCountAll+TDKOLAll-TKKOLAll;
 
-  let idForBuxanka = '65e7048b5c54490bbc335ca2';
+  const startCountBux = PDKOLBux-PKKOLBux;
+  const endCountBux = startCountBux+TDKOLBux-TKKOLBux;
+
+  const productionCountAll = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const productionCountBux = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
   
-  const productionCount = queryKor(Schet.S28, Schet.S20, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  const brakCount = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const brakCountAll = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const brakCountBux = queryKor(Schet.S20, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
   
   const productionImportSumm = queryKor(Schet.S28, Schet.S60, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  
+  const moveOutCountAll = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const moveOutCountBux = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
+  
+  const moveIncomeCountAll = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const moveIncomeCountBux = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
 
-  const moveOutCount = queryKor(Schet.S28, Schet.S28, TypeQuery.OKK, startDate, endDate, String(currentSectionId), '', globalEntrys);
-  const moveIncomeCount = queryKor(Schet.S28, Schet.S28, TypeQuery.ODK, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const saleAll = queryKor(Schet.S40, Schet.S28, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const saleBux = queryKor(Schet.S40, Schet.S28, TypeQuery.OKS, startDate, endDate, String(currentSectionId), idForBuxanka, globalEntrys);
 
-  const sale = queryKor(Schet.S40, Schet.S28, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
+  const countDeleviryAll = (countOutToDeliveryAll-countIncomeFromDeliveryAll) <= 0 ? 0 : (countOutToDeliveryAll-countIncomeFromDeliveryAll)   
+  const countDeleviryBux = (countOutToDeliveryBux-countIncomeFromDeliveryBux) <= 0 ? 0 : (countOutToDeliveryBux-countIncomeFromDeliveryBux)   
   
-  const countDeleviry = (countOutToDelivery-countIncomeFromDelivery) <= 0 ? 0 : (countOutToDelivery-countIncomeFromDelivery)   
+
+  const saleCountWithOutMoveAll = startCountAll + productionCountAll - brakCountAll - moveOutCountAll + moveIncomeCountAll - endCountAll;
+  const saleCountWithOutMoveBux = startCountBux + productionCountBux - brakCountBux - moveOutCountBux + moveIncomeCountBux - endCountBux;
   
-  const saleCountWithOutMove = startCount + productionCount - brakCount - moveOutCount + moveIncomeCount - endCount;
+  let dAll = countDeleviryAll > 0 ? countDeleviryAll : 0
+  let iAll = (moveIncomeCountAll-countIncomeFromDeliveryAll) > 0 ? (moveIncomeCountAll-countIncomeFromDeliveryAll) : 0
+  let oAll = (moveOutCountAll - countOutToDeliveryAll ) > 0 ? (moveOutCountAll - countOutToDeliveryAll ) : 0
   
-  // const saleWithMove = sale + countDeleviry * 3500 
-  //                           + (endCount-startCount)*3500 
-  //                           - (moveIncomeCount-countIncomeFromDelivery)*3500
-  //                           + (moveOutCount - countOutToDelivery )*3500;
+  let dBux = countDeleviryBux > 0 ? countDeleviryBux : 0
+  let iBux = (moveIncomeCountBux-countIncomeFromDeliveryBux) > 0 ? (moveIncomeCountBux-countIncomeFromDeliveryBux) : 0
+  let oBux = (moveOutCountBux - countOutToDeliveryBux ) > 0 ? (moveOutCountBux - countOutToDeliveryBux ) : 0
   
-  let d = countDeleviry > 0 ? countDeleviry : 0
-  let i = (moveIncomeCount-countIncomeFromDelivery) > 0 ? (moveIncomeCount-countIncomeFromDelivery) : 0
-  let o = (moveOutCount - countOutToDelivery ) > 0 ? (moveOutCount - countOutToDelivery ) : 0
-  
-  let valueForSale = + foydaPrice
-  // const saleWithMove = sale + d * 3500 - i*3500 + o * 3500;
-  
+  let d = (dAll - dBux) > 0 ? (dAll - dBux) : 0
+  let i = (iAll - iBux) > 0 ? (iAll - iBux) : 0
+  let o = (oAll - oBux) > 0 ? (oAll - oBux) : 0
+  let sale = (saleAll - saleBux) > 0 ? (saleAll - saleBux) : 0
+
+
+  let valueForSale = + foydaPrice.first
+  let valueForSaleBux = + foydaPrice.second
   const saleWithMove = sale + (d - i + o) * valueForSale;
+  const saleWithMoveBux = saleBux + (dBux - iBux + oBux) * valueForSale;
+  const saleWithMoveAll = saleWithMove + saleWithMoveBux
 
   const zagatovka = queryKor(Schet.S20, Schet.S21, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
@@ -138,8 +181,8 @@ export const foydaItem = (
   const longPayment =  longeCharge;
   const realEarning = (saleWithMove - productionImportSumm) - currentCharges - longPayment - addingLongeCharge ;
   let currentEarningForOneElement = 0;
-  if (productionCount>0) {
-    currentEarningForOneElement = realEarning / productionCount 
+  if (productionCountAll>0) {
+    currentEarningForOneElement = 0 
   }
 
   return (
@@ -148,10 +191,14 @@ export const foydaItem = (
       sectionId: currentSectionId,
       productionAllDocsCount,
       productionDocsCount,
-      productionCount,
-      saleCountWithOutMove,
-      countDeleviry,
-      saleWithMove,
+      productionCountAll,
+      productionCountBux,
+      saleCountWithOutMoveAll,
+      saleCountWithOutMoveBux,
+      countDeleviryAll,
+      countDeleviryBux,
+      saleWithMoveAll,
+      saleWithMoveBux,
       zagatovka,
       materials,
       zp,

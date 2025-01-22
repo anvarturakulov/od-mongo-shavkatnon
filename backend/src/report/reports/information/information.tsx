@@ -1,5 +1,5 @@
 'use client'
-import { EntryItem } from 'src/interfaces/report.interface';
+import { EntryItem, FoydaPrice } from 'src/interfaces/report.interface';
 // import { Section } from './section/section';
 import { cash } from './cash/cash';
 import { taking } from './taking/taking';
@@ -20,7 +20,7 @@ export const information = (
     startDate: number,
     endDate: number,
     reportType: string,
-    foydaPrice: string,
+    foydaPrice: FoydaPrice,
     globalEntrys: Array<EntryItem> | undefined,
     docs: Document[],
     deliverys: ReferenceDocument[]

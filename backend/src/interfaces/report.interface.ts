@@ -80,7 +80,7 @@ export interface QueryInformation {
     startDate: number,
     endDate: number,
     reportType: string,
-    foydaPrice: string, 
+    foydaPrice: FoydaPrice, 
 }
 
 export interface QueryMatOtchet {
@@ -109,4 +109,9 @@ export interface QueryWorker {
     endDate: number,
     workerId: string,
     name: string
+}
+
+export interface FoydaPrice {
+    first: number,
+    second: number
 }

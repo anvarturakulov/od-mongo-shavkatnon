@@ -74,7 +74,10 @@ export class ReportController {
       startDate: +request.query?.startDate,
       endDate: +request.query?.endDate,
       reportType: `${request.query?.reportType}`,
-      foydaPrice: `${request.query?.foydaPrice}`,
+      foydaPrice: {
+        first: + request.query?.firstPrice,
+        second: + request.query?.secondPrice
+      }
     }
 
     // выдаем активного пользователя кто хочет забрать отчет

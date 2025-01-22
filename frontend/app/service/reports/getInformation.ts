@@ -6,7 +6,8 @@ import { UserRoles } from '@/app/interfaces/general.interface';
 export const getInformation = (
   setMainData: Function | undefined, 
   mainData: Maindata,
-  foydaPrice: string | null,
+  firstPrice: string | null,
+  secondPrice: string | null,
   endDate?: number,
   ) => {
   
@@ -19,7 +20,7 @@ export const getInformation = (
   setMainData && setMainData('uploadingDashboard', true)
 
   let url = process.env.NEXT_PUBLIC_DOMAIN + '/api/report/information'+'?startDate='+interval.dateStart+'&endDate='+interval.dateEnd
-  +'&reportType='+reportType+'&foydaPrice='+foydaPrice+'&user='+user?.name;
+  +'&reportType='+reportType+'&firstPrice='+firstPrice+'&secondPrice='+secondPrice+'&user='+user?.name;
   console.log('name'+user?.name)
 
   axios.get(url, config)

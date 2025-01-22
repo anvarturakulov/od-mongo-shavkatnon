@@ -1,5 +1,5 @@
 import { ReferenceModel, TypeReference } from 'src/interfaces/reference.interface';
-import { EntryItem, Schet, TypeQuery } from 'src/interfaces/report.interface';
+import { EntryItem, FoydaPrice, Schet, TypeQuery } from 'src/interfaces/report.interface';
 import { foydaItem } from './foydaItem';
 import { Document } from 'src/document/models/document.model';
 import { ReferenceDocument } from 'src/reference/models/referense.model';
@@ -10,7 +10,7 @@ export const foyda = (
     data: any,
     startDate: number,
     endDate: number,
-    foydaPrice: string,
+    foydaPrice: FoydaPrice,
     globalEntrys: Array<EntryItem> | undefined,
     docs: Document[],
     deliverys: ReferenceDocument[] ) => {
