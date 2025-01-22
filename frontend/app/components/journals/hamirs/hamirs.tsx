@@ -85,8 +85,10 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
             // let analiticId = target.parentNode?.parentNode?.querySelector('select') || '';
+            let select = target.parentNode?.parentNode?.querySelector('select')
+            let selectedElement = select?.querySelector('option:selected');
             let analiticId = ''
-            console.log(target.parentNode?.parentNode?.querySelector('select'))
+            console.log(selectedElement)
             console.log(analiticId)
             if (count > 90) {
                 alert('Сон хато киритилди')
