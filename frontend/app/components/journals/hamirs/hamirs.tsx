@@ -84,7 +84,8 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
         if (user?.role == UserRoles.TANDIR) {
             let target = e.currentTarget;
             let count = Number(target.parentNode?.parentNode?.querySelector('input')?.value);
-            let analiticId = document.getElementById('#analitic option:selected')?.getAttribute('data-id') || '';
+            let analiticId = document.getElementById(`${item.order} option:selected`)?.getAttribute('data-id') || '';
+            alert(analiticId)
             if (count > 90) {
                 alert('Сон хато киритилди')
             } else if ( count > 0 && analiticId.length > 0 && confirm(`${item.order} - хамирдан тандирга ${count} та зувала бердингизми`)) {
@@ -154,7 +155,7 @@ export default function Hamirs({ className, ...props} : HamirsProps ):JSX.Elemen
                                             </td>
                                         }
                                         <td> 
-                                            <SelectReferenceForTandirs idForSelect='analitic' currentItemId={item.analiticId} disabled={item.proveden}/>
+                                            <SelectReferenceForTandirs idForSelect={`${item.order}`} currentItemId={item.analiticId} disabled={item.proveden}/>
                                         </td>
 
                                         <td className={styles.action}>
