@@ -13,7 +13,7 @@ export const cash = (
     data && 
     data.length > 0 &&
     data
-    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+    .filter((item: any) => item?.typeReference == TypeReference.STORAGES && !item.deleted)
     .filter((item: any) => {
         if ( item.buxgalter || item.filial || item.delivery ) return true
         return false

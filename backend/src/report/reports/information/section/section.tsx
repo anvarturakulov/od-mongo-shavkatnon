@@ -16,7 +16,7 @@ export const section = (
     data && 
     data.length > 0 &&
     data
-    .filter((item: any) => item?.typeReference == TypeReference.STORAGES)
+    .filter((item: any) => item?.typeReference == TypeReference.STORAGES && !item.deleted)
     .filter((item: any) => {
         if (sectionType == 'DELIVERY') return item?.delivery
         if (sectionType == 'FILIAL') return item?.filial
