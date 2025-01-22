@@ -1,10 +1,9 @@
 import { SelectReferenceForTandirsProps } from './selectReferenceForTandirs.props';
-import styles from './selectReferenceInTable.module.css';
+import styles from './selectReferenceForTandirs.module.css';
 import { useAppContext } from '@/app/context/app.context';
 import useSWR from 'swr';
 import { ReferenceModel, TypeReference } from '@/app/interfaces/reference.interface';
 import { getDataForSwr } from '@/app/service/common/getDataForSwr';
-import { Maindata } from '@/app/context/app.context.interfaces';
 import { sortByName } from '@/app/service/references/sortByName';
 
 export const SelectReferenceForTandirs = ({  currentItemId, disabled, className, ...props }: SelectReferenceForTandirsProps): JSX.Element => {
