@@ -31,7 +31,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.SaleMaterial, description:'Хом ашё сотуви',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ZAMGLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.ZAMGLBUX, UserRoles.GLBUX]
             },
             { 
                 title: DocumentType.ComeHalfstuff, description:'Я.Т.М ишлаб чикариш', 
@@ -98,7 +98,7 @@ export const MenuData:Array<MenuItem> = [
                 title: DocumentType.MoveCash, description:'Пул силжиши',
                 type: 'document', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.HEADSECTION, UserRoles.DELIVERY, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST, UserRoles.KASSIR]
             },
             { 
                 title: DocumentType.LeaveCash, description:'Пул харажати',

@@ -28,7 +28,8 @@ export enum UserRoles {
     DELIVERY = 'DELIVERY',
     SELLER = 'SELLER',
     GUEST = 'GUEST',
-    ZP = 'ZP'
+    ZP = 'ZP',
+    KASSIR = 'KASSIR'
 }
 
 export interface User {
@@ -53,5 +54,5 @@ export interface DefinedTandirWorkers {
 }
 
 export const dashboardUsersList = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GUEST, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.ZP];
-export const workersUsersList = [UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.TANDIR] 
+export const workersUsersList = [UserRoles.DELIVERY, UserRoles.SELLER, UserRoles.ELAKCHI, UserRoles.HAMIRCHI, UserRoles.HEADSECTION, UserRoles.TANDIR, UserRoles.KASSIR] 
 export const adminAndHeadCompany = [UserRoles.ADMIN, UserRoles.HEADCOMPANY, UserRoles.GLBUX]

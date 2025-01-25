@@ -47,6 +47,21 @@ const documentTotal = (item: DocumentModel) => {
     return numberValue(item.total)
 }
 
+const totals = (item: DocumentModel) => {
+    let total = item.total;
+    let count = item.count;
+
+    if (( item.documentType == DocumentType.LeaveMaterial ||  item.documentType == DocumentType.ComeHalfstuff) 
+        && item.tableItems?.length ) {
+        let t = item.tableItems.reduce((summa, item) => summa + item.total,0)
+        let c = item.tableItems.reduce((summa, item) => summa + item.total,0)
+        total = t;
+        count = c;
+    }
+
+    return {t: total, c:count}
+}
+
 export default function Journal({ className, ...props}:JournalProps):JSX.Element {
     
     const {mainData, setMainData} = useAppContext();
@@ -251,9 +266,11 @@ export default function Journal({ className, ...props}:JournalProps):JSX.Element
                             
                             
                             .map((item:DocumentModel, key: number) => {
-                                total += !item.deleted ? item.total : 0;
-                                count += !item.deleted ? item.count : 0;
+                                let {t, c} = totals(item)
+                                total += !item.deleted ? t : 0;
+                                count += !item.deleted ? c : 0;
                                 docCount += !item.deleted ? 1 : 0;
+
                                 return (
                                 <>
                                     <tr 

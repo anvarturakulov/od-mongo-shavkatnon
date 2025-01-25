@@ -12,7 +12,8 @@ export enum UserRoles {
   DELIVERY = 'DELIVERY',
   SELLER = 'SELLER',
   GUEST = 'GUEST',
-  ZP = 'ZP'
+  ZP = 'ZP',
+  KASSIR = 'KASSIR'
 }
 
 export class AuthDto {
