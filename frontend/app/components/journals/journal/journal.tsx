@@ -42,7 +42,7 @@ const documentTotal = (item: DocumentModel) => {
         (item.documentType == DocumentType.LeaveMaterial ||
         item.documentType == DocumentType.ComeHalfstuff) &&
         item.tableItems?.length 
-    ) return item.tableItems.reduce((summa, item) => summa + item.total,0)
+    ) return numberValue(item.tableItems.reduce((summa, item) => summa + item.total,0))
 
     return numberValue(item.total)
 }
