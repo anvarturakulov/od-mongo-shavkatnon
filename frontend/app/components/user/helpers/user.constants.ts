@@ -15,6 +15,7 @@ export const userRolesList = [
   { name: UserRoles.TANDIR, title: 'TANDIR' },
   { name: UserRoles.ZAMGLBUX, title: 'ZAMGLBUX' },
   { name: UserRoles.ZP, title: 'ZP'},
+  { name: UserRoles.KASSIR, title: 'KASSIR'},
 ]
 
 export interface DataForUserSelect {
