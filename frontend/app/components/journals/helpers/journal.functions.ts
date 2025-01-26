@@ -41,7 +41,6 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
   console.log(dateToStr(docDate))
   console.log(dateToStr(Date.now()))
   let k = 0;
-   
 
   if (
     user?.role == UserRoles.ADMIN || 
@@ -54,7 +53,7 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
     // )
     ( 
       user?.role == UserRoles.ZP && 
-      contentName != DocumentType.ZpCalculate &&
+      contentName == DocumentType.ZpCalculate &&
       dateToStr(Date.now()) == dateToStr(docDate) 
     )
 
