@@ -189,7 +189,7 @@ export const foydaItem = (
   }
   
   const longPayment =  longeCharge;
-  const realEarning = (saleWithMove - productionImportSumm) - currentCharges - longPayment - addingLongeCharge ;
+  const realEarning = (saleWithMoveAll - productionImportSumm) - currentCharges - longPayment - addingLongeCharge ;
   let currentEarningForOneElement = 0;
   if (productionCountAll>0) {
     currentEarningForOneElement = 0 
