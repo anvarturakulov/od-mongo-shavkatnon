@@ -187,6 +187,8 @@ export const foydaItem = (
   if (productionDocsCountAll>0) {
     koefCurrentEarningToOneProduct = (zagatovka  + materials) / productionDocsCountAll
   }
+  // rokklslsl
+  let newItem = 0;
   
   const longPayment =  longeCharge;
   const realEarning = (saleWithMoveAll - productionImportSumm) - currentCharges - longPayment - addingLongeCharge ;
