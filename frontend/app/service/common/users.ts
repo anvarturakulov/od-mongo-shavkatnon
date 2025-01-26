@@ -11,6 +11,6 @@ export const isGuest = (user: User | undefined): boolean => {
 }
 
 export const isGlBuxs = (user: User | undefined): boolean => {
-  if (user && user.role == UserRoles.GLBUX) return true
+  if (user && (user.role == UserRoles.GLBUX || user.role == UserRoles.ZP)) return true
   return false
 }

@@ -37,10 +37,9 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
   const now = Date.now()
   const remainTime = now % oneDay
   const oneDayAgo = ( now - remainTime ) - oneDay - 1
-
-  console.log(dateToStr(docDate))
-  console.log(dateToStr(Date.now()))
-  let k = 0;
+  // console.log(dateToStr(docDate))
+  // console.log(dateToStr(Date.now()))
+  // let k = 0;
 
   if (
     user?.role == UserRoles.ADMIN || 
