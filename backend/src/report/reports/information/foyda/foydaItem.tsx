@@ -41,8 +41,9 @@ export const foydaItem = (
     })
     
     
-    let productionDocsCount = 0;
-    let productionAllDocsCount = 0;
+    let productionDocsCountAll = 0;
+    let productionDocsCountBux = 0;
+    let productionAllDocsCountByCompany = 0;
     let countOutToDeliveryAll = 0;
     let countOutToDeliveryBux = 0;
     let countIncomeFromDeliveryAll = 0; 
@@ -51,12 +52,21 @@ export const foydaItem = (
 
   if (docs && docs.length > 0) {
     
-    productionAllDocsCount = docs.filter((item: Document) => {
+    productionAllDocsCountByCompany = docs.filter((item: Document) => {
       return (item.date>= startDate && item.date <= endDate && item.documentType == DocumentType.ComeProduct)
     }).length
 
-    productionDocsCount = docs.filter((item: Document) => {
+    productionDocsCountAll = docs.filter((item: Document) => {
       return (item.date>= startDate && item.date <= endDate && String(item.senderId) == currentSectionId && item.documentType == DocumentType.ComeProduct)
+    }).length
+
+    productionDocsCountBux = docs.filter((item: Document) => {
+      return (
+          item.date>= startDate && 
+          item.date <= endDate &&
+          String(item.analiticId) == idForBuxanka && 
+          String(item.senderId) == currentSectionId &&
+          item.documentType == DocumentType.ComeProduct)
     }).length
     
     countOutToDeliveryAll = docs.filter((item:Document) => {
@@ -163,9 +173,9 @@ export const foydaItem = (
   const materials = queryKor(Schet.S20, Schet.S10, TypeQuery.OKS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   const zp = queryKor(Schet.S20, Schet.S67, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
 
-  const addingZp = productionAllDocsCount>0 ? zpUmumBulim * productionDocsCount / productionAllDocsCount : 0; 
-  const addingLongeCharge = productionAllDocsCount>0 ? longeChargeUmumBulim * productionDocsCount / productionAllDocsCount : 0;
-  const addingCurrentPayment = productionAllDocsCount>0 ? currentPaymentUmumBulim * productionDocsCount / productionAllDocsCount : 0;
+  const addingZp = productionAllDocsCountByCompany>0 ? zpUmumBulim * productionDocsCountAll / productionAllDocsCountByCompany : 0; 
+  const addingLongeCharge = productionAllDocsCountByCompany>0 ? longeChargeUmumBulim * productionDocsCountAll / productionAllDocsCountByCompany : 0;
+  const addingCurrentPayment = productionAllDocsCountByCompany>0 ? currentPaymentUmumBulim * productionDocsCountAll / productionAllDocsCountByCompany : 0;
 
   const services = queryKor(Schet.S20, Schet.S60, TypeQuery.ODS, startDate, endDate, String(currentSectionId), '', globalEntrys);
   
@@ -174,8 +184,8 @@ export const foydaItem = (
   const currentCharges = zagatovka + materials + zp + addingZp + currentPayment + services + addingCurrentPayment;
   const currentEarning = saleWithMove - currentCharges;
   let koefCurrentEarningToOneProduct = 0;
-  if (productionDocsCount>0) {
-    koefCurrentEarningToOneProduct = (zagatovka  + materials) / productionDocsCount
+  if (productionDocsCountAll>0) {
+    koefCurrentEarningToOneProduct = (zagatovka  + materials) / productionDocsCountAll
   }
   
   const longPayment =  longeCharge;
@@ -189,8 +199,9 @@ export const foydaItem = (
     {
       section: title,
       sectionId: currentSectionId,
-      productionAllDocsCount,
-      productionDocsCount,
+      productionAllDocsCountByCompany,
+      productionDocsCountAll,
+      productionDocsCountBux,
       productionCountAll,
       productionCountBux,
       saleCountWithOutMoveAll,
