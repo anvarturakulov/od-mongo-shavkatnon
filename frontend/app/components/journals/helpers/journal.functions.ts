@@ -38,6 +38,9 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
   const remainTime = now % oneDay
   const oneDayAgo = ( now - remainTime ) - oneDay - 1
 
+  console.log(dateToStr(docDate))
+  console.log(Date.now())
+   
 
   if (
     user?.role == UserRoles.ADMIN || 
@@ -48,7 +51,8 @@ export const deleteItemDocument = (id: string | undefined, docDate: number| unde
     //   // ( dateToStr(Date.now()) == dateToStr(docDate) )
     //   (oneDayAgo < docDate)
     // )
-    ( user?.role == UserRoles.ZP && 
+    ( 
+      user?.role == UserRoles.ZP && 
       contentName != DocumentType.ZpCalculate &&
       dateToStr(Date.now()) == dateToStr(docDate) 
     )
