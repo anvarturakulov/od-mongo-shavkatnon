@@ -73,7 +73,7 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
         flagDisabled = false
     }
  
-    if (type == 'receiver' && contentName == DocumentType.ServicesFromPartners) currentItemId = ''
+    if (type == 'sender' && contentName == DocumentType.ServicesFromPartners) currentItemId = ''
 
     return (
         <div className={styles.box}>
