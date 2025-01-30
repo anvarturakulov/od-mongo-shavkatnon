@@ -35,7 +35,7 @@ export const DashboardReportData:Array<DashboardReportItem> = [
     {
         title: 'Бухгалтерлар хисоби',
         code: 'Section-buxgalter',
-        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST]
+        roles: [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GLBUX, UserRoles.ZAMGLBUX, UserRoles.GUEST, UserRoles.KASSIR]
     },
     {
         title: 'Филиаллар хисоби',

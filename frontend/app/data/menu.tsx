@@ -146,7 +146,7 @@ export const MenuData:Array<MenuItem> = [
                 title: TypeReference.PARTNERS, description:'Хамкорлар', 
                 type: 'reference', active: false,
                 roles: 
-                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX]
+                [UserRoles.HEADCOMPANY, UserRoles.ADMIN, UserRoles.GUEST, UserRoles.GLBUX, UserRoles.ZP]
             },
             { 
                 title: TypeReference.WORKERS, description:'Ходимлар',
