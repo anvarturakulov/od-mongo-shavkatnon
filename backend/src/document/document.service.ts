@@ -208,8 +208,8 @@ export class DocumentService {
       if (msg.text.length > 0) {
         days = + (msg.text.slice(1, msg.text.length))
       }
-      console.log(msg);
-      bot.sendMessage(msg.from.id, msg.text);
+      // console.log(msg);
+      // bot.sendMessage(msg.from.id, msg.text);
       const worker = await this.referenceService.getWorker(`${msg.from.id}`);
       const now:number = Date.now()
 
