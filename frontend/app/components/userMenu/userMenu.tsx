@@ -163,6 +163,13 @@ export default function UserMenu({menuData, className, ...props}:UserMenuProps):
                             <Section data={informData} sectionType='delivery' currentSection ={storageIdFromUser}/>
                         </>
                     }
+                    {
+                        user?.role == UserRoles.KASSIR &&
+                        <>
+                            <RefreshPanel/>
+                            <Section data={informData} sectionType='buxgalter' currentSection ={storageIdFromUser}/>
+                        </>
+                    }
                 </>
             }
             {
