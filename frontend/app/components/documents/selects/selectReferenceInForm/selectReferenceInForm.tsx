@@ -209,11 +209,11 @@ export const SelectReferenceInForm = ({ label, typeReference, visibile=true , de
                         return ( item.typePartners == TypePartners.SUPPLIERS ) 
                     }
 
-                    // if (type == 'sender' && typeReference == TypeReference.CHARGES &&
-                    //     contentName == DocumentType.ServicesFromPartners
-                    // ) {
-                    //     return !item.longCharge
-                    // }
+                    if (type == 'sender' && typeReference == TypeReference.CHARGES &&
+                        contentName == DocumentType.ServicesFromPartners
+                    ) {
+                        return !item.longCharge
+                    }
 
                     if (type == 'analitic' && typeReference == TypeReference.PARTNERS)
                         {

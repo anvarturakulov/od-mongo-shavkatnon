@@ -145,33 +145,21 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
 
   if (!user) return
 
-  // if (user.role == UserRoles.TANDIR || user.role == UserRoles.HAMIRCHI) {
-  //   firstChadId = TelegramChanelsIds.Production
-  // }
-
-  // if (user.role == UserRoles.ELAKCHI) {
-  //   firstChadId = TelegramChanelsIds.MainSklad
-  // }
-
   if (body.documentType == DocumentType.ZpCalculate) firstChadId = TelegramChanelsIds.ZpChanel
 
   if (user.role == UserRoles.HEADSECTION || user.role == UserRoles.SELLER) {
     if (user.storageId == '659ce07f523a48fdeb6ad8c3') firstChadId = TelegramChanelsIds.Chashma
     if (user.storageId == '659ce094523a48fdeb6ad8c7') firstChadId = TelegramChanelsIds.Halqobod
     if (user.storageId == '659ce0ab523a48fdeb6ad8cb') firstChadId = TelegramChanelsIds.Konteyner
-    // if (user.storageId == '65d8ea57c94c5501899dcc39') firstChadId = TelegramChanelsIds.Samarkand
   }
 
   if (user?.role == UserRoles.DELIVERY) firstChadId = TelegramChanelsIds.Delivery
-
-  // if (user?.role == UserRoles.GLBUX || user?.role == UserRoles.ZAMGLBUX) firstChadId = TelegramChanelsIds.GlBux
 
   let secondChatId = TelegramChanelsIds.All
   if (firstChadId) {
     bot.sendMessage(firstChadId, prepareCheck(body, references, newDocument, messageInDeleting));
   }
   bot.sendMessage(secondChatId, prepareCheck(body, references, newDocument, messageInDeleting));
-  // bot.sendDocument(secondChatId,)
 
   if (body.documentType == DocumentType.ZpCalculate 
     || ( body.documentType == DocumentType.LeaveCash && body.isWorker)) {
@@ -186,21 +174,5 @@ export const sendMessageToChanel = (body: CreateDocumentDto, user: User, referen
 
 
 export const listiningBot = async(bot: TelegramBot, referenceService: ReferenceService, reportService: ReportService) => {
-  // bot.on('text', async msg => {
-  //   console.log(msg);
-  //   bot.sendMessage(msg.from.id, msg.text);
-  //   const worker:Array<ReferenceDocument> = await referenceService.getWorker(`${msg.from.id}`);
-  //   const now:number = Date.now()
-  //   const queryWorker: QueryWorker = {
-  //     startDate: now, 
-  //     endDate: now, 
-  //     workerId: worker.length>0 ? `${worker[0]._id}`: ''
-  //   }
-  //   const report = await reportService.getWorkerInformation(queryWorker);
-    
-  //   report.result.forEach(element => {
-  //     bot.sendMessage(msg.from.id, `Сизга ${element.date} санада:  ${element.summa} сум ${element.type}`);  
-  //   });
-  //   bot.sendMessage(msg.from.id, `Бугунги кунга сиз ${report.amount} сум ${report.amount>0? 'карзингиз бор': 'пулингиз бор'}`);
-  // })
+  
 } 
