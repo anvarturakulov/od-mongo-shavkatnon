@@ -145,7 +145,6 @@ export const foydaItem = (
   const countDeleviryAll = (countOutToDeliveryAll-countIncomeFromDeliveryAll) <= 0 ? 0 : (countOutToDeliveryAll-countIncomeFromDeliveryAll)   
   const countDeleviryBux = (countOutToDeliveryBux-countIncomeFromDeliveryBux) <= 0 ? 0 : (countOutToDeliveryBux-countIncomeFromDeliveryBux)   
   
-
   const saleCountWithOutMoveAll = startCountAll + productionCountAll - brakCountAll - moveOutCountAll + moveIncomeCountAll - endCountAll;
   const saleCountWithOutMoveBux = startCountBux + productionCountBux - brakCountBux - moveOutCountBux + moveIncomeCountBux - endCountBux;
   

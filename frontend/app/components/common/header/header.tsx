@@ -8,11 +8,13 @@ import cn from 'classnames';
 import { Maindata } from '@/app/context/app.context.interfaces';
 import { dateNumberToString } from '@/app/service/common/converterForDates'
 import { setNewDocumentParams } from '@/app/service/documents/setNewDocumentParams'
+import { UserRoles } from '@/app/interfaces/general.interface'
 
 export default function Header({ windowFor ,className, count, total, ...props }: HeaderProps): JSX.Element {
     
     const {mainData, setMainData} = useAppContext()
     const {dateStart, dateEnd} = mainData.interval
+    const {user} = mainData
 
     const {contentType, contentName, contentTitle, showReferenceWindow, isNewReference, showDocumentWindow, isNewDocument } = mainData 
     const strFirst =  
@@ -68,19 +70,23 @@ export default function Header({ windowFor ,className, count, total, ...props }:
                         />
                         :
                         <>
-                        <DateIco 
-                            className={styles.ico}
-                            onClick={(mainData: Maindata) => {
-                                if (setMainData) {
-                                    setMainData('showIntervalWindow', true);
-                                    }
-                                }}
-                        />
-                        <AddIco 
-                            className={styles.ico}
-                            onClick={() => addNewElement(setMainData, mainData)} 
-                            />
+                                <DateIco 
+                                    className={styles.ico}
+                                    onClick={(mainData: Maindata) => {
+                                        if (setMainData) {
+                                            setMainData('showIntervalWindow', true);
+                                            }
+                                        }}
+                                />
+                                {
+                                user?.role != UserRoles.GUEST &&
+                                <AddIco 
+                                    className={styles.ico}
+                                    onClick={() => addNewElement(setMainData, mainData)} 
+                                    />
+                                }
                         </>
+                        
                     }
                     </div>
                 </div>
