@@ -26,6 +26,9 @@ export default function Personal({ className, data, ...props} : PersonalProps):J
                     return item.typeReference = TypeReference.WORKERS
                   })
                   .filter((item: ReferenceModel) => {
+                    return item._id != '65e5dbfeab6db5236f924a85'
+                  })
+                  .filter((item: ReferenceModel) => {
                     if (currentWorkerId) {
                       if (item._id == currentWorkerId) return true
                       else return false
